@@ -115,7 +115,6 @@ class App extends Component {
         } 
       }
       axios.delete(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${id}`, authHeader)
-      // axios.delete(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${id}`, authHeader)
       .then(res => {
         this.props.history.push('/all-notes')
         this.props.getNotes();
@@ -138,11 +137,10 @@ class App extends Component {
       }
       return comparison;
     }
-
     newArr.sort(compare)
     this.props.sortNote(newArr)
   }
-
+ 
   sortByLetter = (e) => {
     let newArr = this.props.state.notes.slice()
     function compare(a, b){
@@ -264,13 +262,14 @@ const mapDispatchToProps = {
 
  const AppDiv = styled.div`
      ${'' /* border: 1px solid red; */}
+     background: black;
      display: flex;
      flex-direction: row;
      z-index: 0;
-     height: 100%;
+     height: 100vh;
      .right-display{
        ${'' /* border: 1px solid blue; */}
-       background-color: #F3F3F3;
+       background-color: black;
        width: 100%;
        display: flex;
        flex-direction: column;

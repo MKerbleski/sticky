@@ -54,7 +54,8 @@ const AllNotesDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
-  background-color: #F3F3F3;
+  background-color: black;
+  color: white;
   .sort {
     display: flex;
     flex-direction: row;

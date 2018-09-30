@@ -24,6 +24,7 @@ const NotePreview = (props) => (
                 <p>{props.note.textBody}</p>
                 <p>Index: {props.index}</p>
                 <p>userid: {props.note.userid}</p>
+                <p>parentid: {props.note.parentid}</p>
                 
               </div>
 
