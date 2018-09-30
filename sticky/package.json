@@ -1,5 +1,6 @@
 {
-  "name": "notes",
+  "name": "sticky",
+  "author": "Michael Kerbleski",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://mkerbleski.github.io/sticky/",
@@ -31,7 +32,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
+    "start": "set PORT=4444 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

@@ -6,8 +6,8 @@ import {
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import App from './App';
-import {Welcome} from './components'
+import App from '../sticky/src/App';
+import {Welcome} from '../sticky/src/components'
 
 const FirstAuth = () => {
     //if token go to app if not go to welcome
