@@ -60,7 +60,7 @@ class App extends Component {
   }
 
   deleteNote = (id) => {
-
+    //use this for actualy deleting notes
     if(localStorage.getItem('JWT')){
       const token = localStorage.getItem('JWT')
       const authHeader = {
@@ -90,7 +90,8 @@ class App extends Component {
       axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/notes/', (newNote), authHeader)
       .then(res => {
         this.props.history.push('/all-notes')
-        this.props.getNotes();
+        // this.props.getNotes();
+        //this is not necessary because it is called on a different route than /all notes
       }).catch(err => console.log(err.message))
     } else {
       console.log('need to include toekn in request')
@@ -108,6 +109,28 @@ class App extends Component {
       axios.put(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
       // axios.put(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
       .then(res => {
+        console.log("app111 get notes")
+        // this.props.getNotes();
+        //this functino is now only called outside of app so no need ot 'refresh' notes
+        this.props.history.push('/all-notes')
+      }).catch(err => console.log(err.message))
+    }else {
+      console.log('need to include toekn in request')
+    }
+  }
+
+  fakeDeleteNote = (noteEdit) => {
+    if(localStorage.getItem('JWT')){
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token,    
+        } 
+      }
+      axios.put(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
+      // axios.put(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
+      .then(res => {
+        console.log("app111 get notes")
         this.props.getNotes();
         this.props.history.push('/all-notes')
       }).catch(err => console.log(err.message))
@@ -130,7 +153,7 @@ class App extends Component {
         isDeleted: true, 
         id: source_id
       }
-      this.editNote(changes)
+      this.fakeDeleteNote(changes)
       //now I don't actually delete the note for reviving. In the trash can there can be an option to permenantly delete.
       // this.deleteNote(source_id)
       //will need to delete any children as well. 

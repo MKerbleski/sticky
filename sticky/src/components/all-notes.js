@@ -13,6 +13,7 @@ export default class AllNotes extends Component {
 
   componentDidMount(){
     if(localStorage.getItem('JWT')){
+      console.log("getNotes() at allnotes")
       this.props.getNotes();
     } else {
       this.props.history.push('/welcome/login')
