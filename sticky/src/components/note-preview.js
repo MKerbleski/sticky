@@ -27,15 +27,6 @@ const NotePreview = (props) => (
                 <p>parentid: {props.note.parentid}</p>
                 
               </div>
-
-              {/* <div className="tags">
-                {(props.note.tags) ?
-                  props.note.tags.map(tag => {
-                        return (<div key={tag}>{tag}</div>)
-                      }
-                  ) :
-                  null}
-              </div> */}
             </div>
         </Link>
       </NotePreviewDiv>
@@ -45,29 +36,20 @@ const NotePreview = (props) => (
 
 const sourceObj = {
   beginDrag(props) {
-    // console.log("beginDrag", props)
-    const { id, index } = props.note; //this return just 'green'
-    // console.log(id, index);
+    const { id, index } = props.note; 
     return ({
       id, index
     });
   },
-  //endDrag is called when dropped on a target
+
   endDrag(props, monitor) {
-    // console.log("endDrag", "props", props, "monitor", monitor.getDropResult())
     if (!monitor.didDrop()) {
-      // console.log('!didDrop')
       return;
     }
-    // const { onDrop } = props;
-    // console.log(monitor.getItem());
-    const  { id, index }  = monitor.getItem(); //returns just 'blue'
-    // console.log(props.color) // also returns just 'blue'
-    // console.log(monitor.getDropResult());
-    // const { shape } = monitor.getDropResult();
-    //gets props from the target
-    // console.log(id)
-    props.onDrop( id, index );//onDrop supplied by parent which attaches the color and shape to the props
+    const  { id, index }  = monitor.getItem(); 
+    const dropResult = monitor.getDropResult();
+    console.log(id, dropResult)
+    props.onDrop( id, dropResult.target );
   },
 };
 
@@ -76,7 +58,6 @@ const collect = (connect, monitor) => ({
   isDragging: monitor.isDragging(),
   isFoobar: true,
 });
-
 
 export default DragSource('item', sourceObj, collect)(NotePreview)
 

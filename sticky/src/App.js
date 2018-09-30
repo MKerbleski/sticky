@@ -29,7 +29,7 @@ import {
 class App extends Component {
   constructor(){
     super();
-    this.handleDrop = this.handleDrop.bind(this);
+    this.onDrop = this.onDrop.bind(this);
     this.state = {
       hideDetails: true,
     }
@@ -60,11 +60,24 @@ class App extends Component {
   }
 
   deleteNote = (id) => {
-    this.props.deleteNote(id);
+    if(localStorage.getItem('JWT')){
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token,    
+        } 
+      }
+      axios.delete(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${id}`, authHeader)
+      .then(res => {
+        this.props.history.push('/all-notes')
+        this.props.getNotes();
+      }).catch(err => console.log(err.message))
+    } else {
+     console.log('need to include a valid token in request')
+    }
   }
 
   newNote = (newNote) => {
-      // this.props.addNote(newNote);
       if(localStorage.getItem('JWT')){
         const token = localStorage.getItem('JWT')
         const authHeader = {
@@ -73,7 +86,6 @@ class App extends Component {
           } 
         }
       axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/notes/', (newNote), authHeader)
-      // axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/notes/', (newNote), authHeader)
       .then(res => {
         this.props.history.push('/all-notes')
         this.props.getNotes();
@@ -84,7 +96,6 @@ class App extends Component {
   }
 
   editNote = (noteEdit) => {
-    // this.props.editNote(noteEdit)//this is the redux one: 
     if(localStorage.getItem('JWT')){
       const token = localStorage.getItem('JWT')
       const authHeader = {
@@ -103,24 +114,15 @@ class App extends Component {
     }
   }
 
-  handleDrop(id){
+  onDrop(id, action){
     // console.log('handleDrop, id: ', id);
     //will delete from actions when uncommented
     // this.props.deleteNote(id)
-    if(localStorage.getItem('JWT')){
-      const token = localStorage.getItem('JWT')
-      const authHeader = {
-        headers: {
-          Authorization: token,    
-        } 
-      }
-      axios.delete(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${id}`, authHeader)
-      .then(res => {
-        this.props.history.push('/all-notes')
-        this.props.getNotes();
-      }).catch(err => console.log(err.message))
+    console.log(id, action)
+    if(action == "deleteBin"){
+      this.deleteNote(id)
     } else {
-     console.log('need to include a valid token in request')
+      console.log(id, 'not delete bin')
     }
   }
 
@@ -182,7 +184,7 @@ class App extends Component {
                         <AllNotes
                           sortByLetter={this.sortByLetter}
                           sortById={this.sortById}
-                          onDrop={this.handleDrop} 
+                          onDrop={this.onDrop} 
                           notes={this.props.state.notes}
                           username={this.props.state.username}
                           getNotes={this.props.getNotes} />

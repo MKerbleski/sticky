@@ -34,10 +34,10 @@ const specObj = {
 
   drop(props) {
     console.log('target props', props)//target props //square or circle
-    const { action, index } = props;
+    const { target } = props;
     return ({
-      action,
-      index
+      target,
+    
       //drop() must return undefined or an object that represents drop result
     });
   }
