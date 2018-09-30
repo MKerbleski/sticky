@@ -1,44 +1,37 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { DragSource } from 'react-dnd';
+import { DragSource, DropTarget } from 'react-dnd';
+import flow from 'lodash/flow';
 
-const NotePreview = (props) => (
-  props.connectDragSource(
-    <div className="startObject"
-      style={{
-        opacity: props.isDragging ? 0 : 1,
-      }}>
-      <NotePreviewDiv >
-        <Link
-          key={props.key}
-          index={props.index}
-          className="note-link"
-          id={props.layerOne.id}
-          to={`/all-notes/${props.layerOne.id}`}>
+const targetObj = {
+  drop(props, monitor) {
+      //so this somehow allows other items to be dropped in a nested child component
+              const hover =  monitor.isOver({shallow:true})
+             //  const hoverfalse =  monitor.isOver({shallow:false})
+ //              console.log(hover)
+ //              console.log(hoverfalse)
+ //    console.log(props)
+  if(hover){//this disables layer one droping if there is a nested child
 
-            <div key={props.index} className="note-preview">
-
-              <div className="notTags">
-                <h3>{props.layerOne.title}</h3>
-                <p>{props.layerOne.textBody}</p>
-                <p>Index: {props.index}</p>
-                <p>userid: {props.layerOne.userid}</p>
-                <p>parentid: {props.layerOne.parentid}</p>
-                
-              </div>
-            </div>
-        </Link>
-      </NotePreviewDiv>
-    </div>
-  )
-)
+     const targetId = props.layerOne.id;
+     const targetType = props.type;
+     console.log('targetId: ', targetId)
+     console.log('targetType: ', targetType)
+     return ({
+         targetId, targetType
+     });
+ }
+ },
+ hover(props, monitor){
+ }
+}
 
 const sourceObj = {
   beginDrag(props) {
-    const { id, index } = props.layerOne; 
+    const { source_id } = props.layerOne; 
     return ({
-      id, index
+      source_id
     });
   },
 
@@ -46,20 +39,93 @@ const sourceObj = {
     if (!monitor.didDrop()) {
       return;
     }
-    const  { id }  = monitor.getItem(); 
+    // const  { id }  = monitor.getItem(); 
+    const sourceId= props.layerOne.id
     const dropResult = monitor.getDropResult();
-    console.log(id, dropResult)
-    props.onDrop( id, dropResult.target );
+    console.log(sourceId, dropResult.targetId)
+    props.onDrop( sourceId, dropResult.targetType, dropResult.targetId  );
   },
 };
 
-const collect = (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging(),
-  isFoobar: true,
-});
+class NotePreview extends React.Component {
+  render(props){
+      // console.log(this.props.hover)
+      const {
+          connectDragSource, 
+          connectDropTarget, 
+      } = this.props
 
-export default DragSource('item', sourceObj, collect)(NotePreview)
+      if (this.props.layerOne){
+          return (
+              connectDragSource &&
+              connectDropTarget &&
+              connectDragSource(
+              connectDropTarget(
+                  <div className="startObject"
+                  // style={{
+                  //   opacity: props.isDragging ? 0 : 1,
+                  // }}
+                  >
+                    <NotePreviewDiv >
+                      <Link
+                        key={this.props.key}
+                        index={this.props.index}
+                        className="note-link"
+                        id={this.props.layerOne.id}
+                        to={`/all-notes/${this.props.layerOne.id}`}>
+
+                          <div key={this.props.index} className="note-preview">
+
+                            <div className="notTags">
+                              <h3>{this.props.layerOne.title}</h3>
+                              <p>{this.props.layerOne.textBody}</p>
+                              <p>Id: {this.props.layerOne.id}</p>
+                              <p>userid: {this.props.layerOne.userid}</p>
+                              <p>parentid: {this.props.layerOne.parentid}</p>
+                              
+                            </div>
+                            <div className="layerTwoContainer" style={{background: this.props.hover ? 'lightgreen' : null}}>
+                              {/* {this.props.allNotes.map(layerTwo => {
+                                  if (layerTwo.parent_id === this.props.layerOne.id){
+                                      return (
+                                          <div key={layerTwo.id} >
+                                              <LayerTwoTargetSource changeParent={this.props.changeParent} layerTwo={layerTwo} allNotes={this.props.allNotes} />
+                                          </div>
+                                      )
+                                  } else {
+                                      return null
+                                  }
+                              })} */}
+                          </div>                     
+                        </div>
+                      </Link>
+                    </NotePreviewDiv>        
+                  </div>
+                  )
+                  )
+              )
+      } else {
+          return (null)
+      }
+  }
+}
+
+export default flow(
+
+  DropTarget('item', targetObj, (connect, monitor) => ({
+      connectDropTarget: connect.dropTarget(),
+      highlighted: monitor.canDrop(),
+      hover: monitor.isOver({shallow:true}),
+      hoverFalse: monitor.isOver()
+  })), 
+  
+  DragSource('item', sourceObj, (connect, monitor) => ({
+      connectDragSource: connect.dragSource(),
+      isDragging: monitor.isDragging(),
+      isFoobar: true,
+  }))
+
+)(NotePreview);
 
 const NotePreviewDiv = styled.div`
   .note-preview {

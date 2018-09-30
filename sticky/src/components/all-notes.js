@@ -34,6 +34,7 @@ export default class AllNotes extends Component {
             if(layerOne.parent_id === null){
               return (
                 <NotePreview
+                  type="note"
                   onDrop={this.props.onDrop}
                   changeParent={this.changeParent}
                   key={layerOne.id}

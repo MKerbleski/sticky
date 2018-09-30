@@ -116,15 +116,17 @@ class App extends Component {
 
   
 
-  onDrop(source_id, action, target_id){
+  onDrop(source_id, type, target_id){
+    
     // console.log('handleDrop, id: ', id);
     //will delete from actions when uncommented
     // this.props.deleteNote(id)
-    console.log(source_id, action)
-    if(action === "deleteBin"){
+    console.log(source_id, type)
+    if(type === "deleteBin"){
       this.deleteNote(source_id)
-    } else {
-      console.log(source_id, 'not delete bin')
+    } else if (type === "note") {
+      console.log(source_id, type, target_id)
+      this.changeParent(source_id, target_id)
     }
   }
 

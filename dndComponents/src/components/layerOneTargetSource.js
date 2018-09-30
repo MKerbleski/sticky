@@ -106,6 +106,7 @@ export default flow(
     DragSource('item', sourceObj, (connect, monitor) => ({
         connectDragSource: connect.dragSource(),
         isDragging: monitor.isDragging(),
+        
     }))
 
 )(LayerOneTargetSource);
