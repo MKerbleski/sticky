@@ -14,17 +14,17 @@ const NotePreview = (props) => (
           key={props.key}
           index={props.index}
           className="note-link"
-          id={props.note.id}
-          to={`/all-notes/${props.note.id}`}>
+          id={props.layerOne.id}
+          to={`/all-notes/${props.layerOne.id}`}>
 
             <div key={props.index} className="note-preview">
 
               <div className="notTags">
-                <h3>{props.note.title}</h3>
-                <p>{props.note.textBody}</p>
+                <h3>{props.layerOne.title}</h3>
+                <p>{props.layerOne.textBody}</p>
                 <p>Index: {props.index}</p>
-                <p>userid: {props.note.userid}</p>
-                <p>parentid: {props.note.parentid}</p>
+                <p>userid: {props.layerOne.userid}</p>
+                <p>parentid: {props.layerOne.parentid}</p>
                 
               </div>
             </div>
@@ -36,7 +36,7 @@ const NotePreview = (props) => (
 
 const sourceObj = {
   beginDrag(props) {
-    const { id, index } = props.note; 
+    const { id, index } = props.layerOne; 
     return ({
       id, index
     });
@@ -46,7 +46,7 @@ const sourceObj = {
     if (!monitor.didDrop()) {
       return;
     }
-    const  { id, index }  = monitor.getItem(); 
+    const  { id }  = monitor.getItem(); 
     const dropResult = monitor.getDropResult();
     console.log(id, dropResult)
     props.onDrop( id, dropResult.target );

@@ -30,18 +30,19 @@ export default class AllNotes extends Component {
         </div>
 
         <div className="all-notes">
-          {this.props.notes.map((note, index) => {
-            // let url = decodeURI(note.title)
-            // would be cool to use title instead
-            //how to do that?
-            //------------------------------??----------------------
-            return (
-              <NotePreview
-                onDrop={this.props.onDrop}
-                key={index}
-                index={index}
-                note={note}
-              />)
+          {this.props.notes.map( layerOne => {
+            if(layerOne.parent_id === null){
+              return (
+                <NotePreview
+                  onDrop={this.props.onDrop}
+                  changeParent={this.changeParent}
+                  key={layerOne.id}
+                  layerOne={layerOne}
+                  allNote={this.props.notes}
+                />)
+            } else {
+              return null
+            }
           })}
         </div>
       </AllNotesDiv>

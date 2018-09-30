@@ -114,15 +114,17 @@ class App extends Component {
     }
   }
 
-  onDrop(id, action){
+  
+
+  onDrop(source_id, action, target_id){
     // console.log('handleDrop, id: ', id);
     //will delete from actions when uncommented
     // this.props.deleteNote(id)
-    console.log(id, action)
-    if(action == "deleteBin"){
-      this.deleteNote(id)
+    console.log(source_id, action)
+    if(action === "deleteBin"){
+      this.deleteNote(source_id)
     } else {
-      console.log(id, 'not delete bin')
+      console.log(source_id, 'not delete bin')
     }
   }
 
@@ -168,6 +170,15 @@ class App extends Component {
     this.props.history.push('/welcome')
   }
 
+  changeParent = (source_id, target_id) => {
+    console.log('change target', 'sourceId: ', source_id, 'targetId: ', target_id)
+
+    if(source_id !== target_id){
+        this.editNote({id: source_id, parent_id: target_id})
+        this.props.getNotes();
+    }
+  }
+
   render() {
     return (
       <AppDiv>
@@ -185,6 +196,7 @@ class App extends Component {
                           sortByLetter={this.sortByLetter}
                           sortById={this.sortById}
                           onDrop={this.onDrop} 
+                          changeParent={this.changeParent}
                           notes={this.props.state.notes}
                           username={this.props.state.username}
                           getNotes={this.props.getNotes} />
