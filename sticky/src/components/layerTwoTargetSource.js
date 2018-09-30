@@ -14,9 +14,10 @@ import LayerThreeSource from "./layerThreeSource"
   
             console.log(props.hover)
             const targetId = props.layerTwo.id;
+            const targetType = props.type
             console.log('L2-targetId: ', targetId)
             return ({
-                targetId
+                targetId, targetType
             });
 
     }
@@ -38,7 +39,7 @@ import LayerThreeSource from "./layerThreeSource"
         // console.log(childId, 'childId')
         const dropResult = monitor.getDropResult({shallow: true});
         console.log(dropResult, 'L@-dropResult')
-        props.changeParent(sourceId, dropResult.targetId);
+        props.onDrop(sourceId, dropResult.targetType, dropResult.targetId);
     },
   };
 

@@ -39,7 +39,7 @@ export default class AllNotes extends Component {
                   changeParent={this.changeParent}
                   key={layerOne.id}
                   layerOne={layerOne}
-                  allNote={this.props.notes}
+                  allNotes={this.props.notes}
                 />)
             } else {
               return null

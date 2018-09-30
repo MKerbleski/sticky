@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 
+import LayerTwoTargetSource from "./layerTwoTargetSource"
+
 const targetObj = {
   drop(props, monitor) {
       //so this somehow allows other items to be dropped in a nested child component
@@ -85,17 +87,21 @@ class NotePreview extends React.Component {
                               
                             </div>
                             <div className="layerTwoContainer" style={{background: this.props.hover ? 'lightgreen' : null}}>
-                              {/* {this.props.allNotes.map(layerTwo => {
+                              {this.props.allNotes.map(layerTwo => {
                                   if (layerTwo.parent_id === this.props.layerOne.id){
                                       return (
                                           <div key={layerTwo.id} >
-                                              <LayerTwoTargetSource changeParent={this.props.changeParent} layerTwo={layerTwo} allNotes={this.props.allNotes} />
+                                              <LayerTwoTargetSource 
+                                              type="note"
+                                              onDrop={this.props.onDrop} 
+                                              layerTwo={layerTwo} 
+                                              allNotes={this.props.allNotes} />
                                           </div>
                                       )
                                   } else {
                                       return null
                                   }
-                              })} */}
+                              })}
                           </div>                     
                         </div>
                       </Link>
