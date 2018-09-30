@@ -60,6 +60,7 @@ class App extends Component {
   }
 
   deleteNote = (id) => {
+
     if(localStorage.getItem('JWT')){
       const token = localStorage.getItem('JWT')
       const authHeader = {
@@ -67,6 +68,7 @@ class App extends Component {
           Authorization: token,    
         } 
       }
+      console.log(token, id, 'from app')
       axios.delete(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${id}`, authHeader)
       .then(res => {
         this.props.history.push('/all-notes')
@@ -114,16 +116,24 @@ class App extends Component {
     }
   }
 
-  
-
   onDrop(source_id, type, target_id){
-    
     // console.log('handleDrop, id: ', id);
     //will delete from actions when uncommented
     // this.props.deleteNote(id)
     console.log(source_id, type)
     if(type === "deleteBin"){
-      this.deleteNote(source_id)
+      //if has children 
+      //ask if want to delete children as well 
+      //if yes 
+      //if no different route
+      const changes = {
+        isDeleted: true, 
+        id: source_id
+      }
+      this.editNote(changes)
+      //now I don't actually delete the note for reviving. In the trash can there can be an option to permenantly delete.
+      // this.deleteNote(source_id)
+      //will need to delete any children as well. 
     } else if (type === "note") {
       console.log(source_id, type, target_id)
       this.changeParent(source_id, target_id)

@@ -14,10 +14,10 @@ import LayerThreeSource from "./layerThreeSource"
   
             console.log(props.hover)
             const targetId = props.layerTwo.id;
-            const targetType = props.type
+            const type = props.type
             console.log('L2-targetId: ', targetId)
             return ({
-                targetId, targetType
+                targetId, type
             });
 
     }
@@ -37,10 +37,11 @@ import LayerThreeSource from "./layerThreeSource"
         }
         const sourceId = props.layerTwo.id;
         // console.log(childId, 'childId')
+        
         const dropResult = monitor.getDropResult({shallow: true});
         console.log(dropResult, 'L@-dropResult')
-        props.onDrop(sourceId, dropResult.targetType, dropResult.targetId);
-    },
+        props.onDrop(sourceId, dropResult.type, dropResult.targetId);
+    }
   };
 
 
@@ -61,20 +62,22 @@ class LayerTwoTargetSource extends React.Component {
                 connectDragSource(
                 connectDropTarget(
                     <div>
-                        <LayerTwoDiv onClick={(e) => {
-                                        e.stopPropagation();
-                                    }} style={{background: this.props.hover ? 'lightgreen' : null}}>
+                        <LayerTwoDiv 
+                            type="note"
+                            onClick={(e) => {e.stopPropagation();}} 
+                            style={{background: this.props.hover ? 'lightgreen' : null}}>
                             <h2>{this.props.layerTwo.title}</h2>
                             <p>{this.props.layerTwo.text}</p>
-                            <div 
-                                className="layerThreeContainer" 
-                                
-                                >
+                            <div className="layerThreeContainer">
                                {this.props.allNotes.map(layerThree => {
                                     if (layerThree.parent_id === this.props.layerTwo.id){
                                         return (
                                             <div key={layerThree.id} >
-                                                <LayerThreeSource changeParent={this.props.changeParent} layerThree={layerThree} />
+                                                <LayerThreeSource 
+                                                    type="note"
+                                                    changeParent={this.props.changeParent} layerThree={layerThree} 
+                                                    onDrop={this.props.onDrop}
+                                                    />
                                             </div>
                                         )
                                     } else {

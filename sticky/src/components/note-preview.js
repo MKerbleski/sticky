@@ -17,11 +17,11 @@ const targetObj = {
   if(hover){//this disables layer one droping if there is a nested child
 
      const targetId = props.layerOne.id;
-     const targetType = props.type;
+     const type = props.type;
      console.log('targetId: ', targetId)
-     console.log('targetType: ', targetType)
+     console.log('targetType: ', type)
      return ({
-         targetId, targetType
+         targetId, type
      });
  }
  },
@@ -44,8 +44,8 @@ const sourceObj = {
     // const  { id }  = monitor.getItem(); 
     const sourceId= props.layerOne.id
     const dropResult = monitor.getDropResult();
-    console.log(sourceId, dropResult.targetId)
-    props.onDrop( sourceId, dropResult.targetType, dropResult.targetId  );
+    console.log(sourceId,  dropResult, dropResult.targetId)
+    props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
   },
 };
 
@@ -88,16 +88,14 @@ class NotePreview extends React.Component {
                             </div>
                             <div className="layerTwoContainer" style={{background: this.props.hover ? 'lightgreen' : null}}>
                               {this.props.allNotes.map(layerTwo => {
-                                  if (layerTwo.parent_id === this.props.layerOne.id){
-                                      return (
+                                  if (layerTwo.parent_id === this.props.layerOne.id){return (
                                           <div key={layerTwo.id} >
                                               <LayerTwoTargetSource 
-                                              type="note"
-                                              onDrop={this.props.onDrop} 
-                                              layerTwo={layerTwo} 
-                                              allNotes={this.props.allNotes} />
-                                          </div>
-                                      )
+                                                type="note"
+                                                onDrop={this.props.onDrop} 
+                                                layerTwo={layerTwo} 
+                                                allNotes={this.props.allNotes} />
+                                          </div>)
                                   } else {
                                       return null
                                   }
@@ -134,12 +132,14 @@ export default flow(
 )(NotePreview);
 
 const NotePreviewDiv = styled.div`
+  border: 1px solid blue;
+  width: 300px;
   .note-preview {
     border: 1px solid lightgray;
     background: white;
     ${'' /* background-color: #F3F3F3; */}
-    width: 200px;
-    height: 200px;
+    ${'' /* width: 200px;
+    height: 200px; */}
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;

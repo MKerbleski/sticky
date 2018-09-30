@@ -8,7 +8,7 @@ const LayerThreeSource = (props) => {
         return (
             props.connectDragSource(
                 <div> 
-                    <LayerThreeDiv style={{
+                    <LayerThreeDiv type="note" style={{
                          opacity: props.isDragging ? '0.25' : '1',
                          border: props.isDragging ? '1px dashed gray': '1px solid black',
                          color: props.didDrop ? "red" : "green"}}>
@@ -25,8 +25,9 @@ const LayerThreeSource = (props) => {
  const sourceObj = {
     beginDrag(props) {
         const {childId} = props.layerThree
+        const type = props.type
         return ({
-            childId //this gets sent to the drop item // is null in this example because react-dnd is overkill
+            childId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
         });
     },
 
@@ -39,7 +40,7 @@ const LayerThreeSource = (props) => {
         // console.log(childId, 'childId')
         const parentId = monitor.getDropResult();
         // console.log(parentId, 'parentId')
-        props.changeParent(childId, parentId.targetId);
+        props.onDrop(childId, parentId.type, parentId.targetId);
     },
   };
 

@@ -46,8 +46,8 @@ import LayerTwoTargetSource from "./layerTwoTargetSource"
         const sourceId = props.layerOne.id;
         // console.log(childId, 'childId')
         const dropResult = monitor.getDropResult();
-        // console.log(dropResult, 'dropResult')
-        props.changeParent(sourceId, dropResult.targetId);
+        console.log(dropResult, 'dropResult')
+        props.onDrop(sourceId, dropResult.type, dropResult.targetId);
     },
   };
 
@@ -75,7 +75,12 @@ class LayerOneTargetSource extends React.Component {
                                     if (layerTwo.parent_id === this.props.layerOne.id){
                                         return (
                                             <div key={layerTwo.id} >
-                                                <LayerTwoTargetSource changeParent={this.props.changeParent} layerTwo={layerTwo} allNotes={this.props.allNotes} />
+                                                <LayerTwoTargetSource 
+                                                    changeParent={this.props.changeParent} 
+                                                    layerTwo={layerTwo} 
+                                                    type="note"
+                                                    onDrop={this.props.onDrop}
+                                                    allNotes={this.props.allNotes} />
                                             </div>
                                         )
                                     } else {
@@ -127,7 +132,6 @@ const LayerOneDiv = styled.div`
         margin: 5px;
         display: flex;
         flex-direction: row;
-        
         flex-wrap: wrap;
         max-width: 100%;
     }

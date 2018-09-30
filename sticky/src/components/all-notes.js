@@ -69,6 +69,7 @@ const AllNotesDiv = styled.div`
     }
   }
   .all-notes {
+    border: 1px solid red;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
