@@ -11,14 +11,13 @@ import LayerThreeSource from "./layerThreeSource"
 
  const targetObj = {
      drop(props) {
-  
-            console.log(props.hover)
-            const targetId = props.layerTwo.id;
-            const type = props.type
-            console.log('L2-targetId: ', targetId)
-            return ({
-                targetId, type
-            });
+        console.log(props.hover)
+        const targetId = props.layerTwo.id;
+        const type = props.type
+        console.log('L2-targetId: ', targetId)
+        return ({
+            targetId, type
+        });
 
     }
   }

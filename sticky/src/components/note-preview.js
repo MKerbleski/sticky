@@ -9,7 +9,7 @@ import LayerTwoTargetSource from "./layerTwoTargetSource"
 const targetObj = {
   drop(props, monitor) {
       //so this somehow allows other items to be dropped in a nested child component
-              const hover =  monitor.isOver({shallow:true})
+    const hover =  monitor.isOver({shallow:true})
              //  const hoverfalse =  monitor.isOver({shallow:false})
  //              console.log(hover)
  //              console.log(hoverfalse)

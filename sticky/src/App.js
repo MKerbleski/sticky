@@ -107,10 +107,9 @@ class App extends Component {
         } 
       }
       axios.put(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
-      // axios.put(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
       .then(res => {
         console.log("app111 get notes")
-        // this.props.getNotes();
+        this.props.getNotes();
         //this functino is now only called outside of app so no need ot 'refresh' notes
         this.props.history.push('/all-notes')
       }).catch(err => console.log(err.message))
@@ -160,6 +159,10 @@ class App extends Component {
     } else if (type === "note") {
       console.log(source_id, type, target_id)
       this.changeParent(source_id, target_id)
+    } else if (type === "topBin"){
+
+      console.log(source_id, type, target_id)
+      this.editNote({id: source_id, parent_id: target_id})
     }
   }
 
