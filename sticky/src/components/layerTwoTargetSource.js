@@ -8,7 +8,6 @@ import flow from 'lodash/flow'
 // import SubNote from "./subNote"
 import LayerThreeSource from "./layerThreeSource"
 
-
  const targetObj = {
      drop(props) {
         console.log(props.hover)
@@ -38,7 +37,8 @@ import LayerThreeSource from "./layerThreeSource"
         // console.log(childId, 'childId')
         
         const dropResult = monitor.getDropResult({shallow: true});
-        console.log(dropResult, 'L@-dropResult')
+        console.log(dropResult, 'dropResult')
+        console.log(props, 'props')
         props.onDrop(sourceId, dropResult.type, dropResult.targetId);
     }
   };
@@ -46,7 +46,7 @@ import LayerThreeSource from "./layerThreeSource"
 
 class LayerTwoTargetSource extends React.Component {
     render(props){
-        console.log(this.props.hover)
+        // console.log(this.props.hover)
         // console.log(this.props.hoverShallow)
         // console.log(this.props.highlighted)
         const {

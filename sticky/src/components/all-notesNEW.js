@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import AllNotesBin from './allNotesBin.js'
 
-export default class AllNotes extends Component {
+export default class AllNotesNew extends Component {
   constructor(props){
     super(props);
     this.state = {

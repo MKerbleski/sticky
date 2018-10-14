@@ -18,9 +18,7 @@ const AllNotesBin = (props) => (
                 allNotes={props.allNotes}
             />)
         } else {
-            return <div>
-                <h1>loading... All Notes Bin</h1>
-                <img src="loadingGif" alt="spinning triangles"/></div>
+            return null
             }
         })}
     </div>
@@ -29,19 +27,24 @@ const AllNotesBin = (props) => (
 
 const targetObj = {
   hover(props, component){
+      console.log(props.hover, 'props.hover')
+      console.log(props.hoverFalse, 'props.hoverflase')
       if(props.hoverShallow){
           console.log('hoverShallow')
       }
-
   },
 
   drop(props, monitor) {
-      const hover = monitor.isOver({shallow:true})
-    console.log('target props', props, hover)
-    const { type } = props;
-    return ({
-      type,
-    });
+    const hover = monitor.isOver({shallow:false})
+    
+    if(hover){
+        console.log('target props', props, hover)
+        const { type } = props;
+        return ({
+            type,
+        });
+    }
+    
   }
 }
 

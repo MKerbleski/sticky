@@ -90,6 +90,7 @@ class NotePreview extends React.Component {
                             </div>
                             <div className="layerTwoContainer" style={{background: this.props.hover ? 'lightgreen' : null}}>
                               {this.props.allNotes.map(layerTwo => {
+                                {/* console.log(this.props) */}
                                   if (layerTwo.parent_id === this.props.layerOne.id){return (
                                           <div key={layerTwo.id} >
                                               <LayerTwoTargetSource 
@@ -136,6 +137,7 @@ export default flow(
 const NotePreviewDiv = styled.div`
   border: 1px solid blue;
   width: 300px;
+  margin: 10px 0;
   .note-preview {
     border: 1px solid lightgray;
     background: white;
@@ -150,7 +152,7 @@ const NotePreviewDiv = styled.div`
     color: black;
     .noteContent{
       border: 1px solid green;
-      width: 90%;
+      width: 95%;
       max-height: 150px;
       overflow: hidden;
       margin: 2% 0;
@@ -175,9 +177,10 @@ const NotePreviewDiv = styled.div`
     }
     .layerTwoContainer{
       border: 1px solid red;
-      width: 100%;
+      width: 95%;
       ${ center }
-      justify-content: space-around
+      justify-content: space-around;
+      background-color: lightgray;
     }
     .tags {
       border: 1px solid red;

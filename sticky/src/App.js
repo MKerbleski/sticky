@@ -9,6 +9,7 @@ import axios from 'axios';
 
 import {
   AllNotes,
+  AllNotesNEW,
   EditNote,
   DeleteNote,
   NewNote,
@@ -143,7 +144,7 @@ class App extends Component {
     // console.log('handleDrop, id: ', id);
     //will delete from actions when uncommented
     // this.props.deleteNote(id)
-    console.log(source_id, type)
+    console.log(source_id, type, target_id)
     if(type === "deleteBin"){
       //if has children 
       //ask if want to delete children as well 
@@ -160,9 +161,9 @@ class App extends Component {
     } else if (type === "note") {
       console.log(source_id, type, target_id)
       this.changeParent(source_id, target_id)
-    } else if (type === "topBin"){
+    } else if (type === "top"){
 
-      console.log(source_id, type, target_id)
+      console.log(source_id, type, target_id=null)
       this.editNote({id: source_id, parent_id: target_id})
     }
   }
@@ -323,7 +324,20 @@ const mapDispatchToProps = {
      ${'' /* border: 1px solid red; */}
       display: flex;
       flex-direction: column;
-     .bottom{
+      .all-notes {
+        border: 1px solid red;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: flex-start;
+        padding: 20px;
+        height: 90%;
+        .note-link{
+          text-decoration: none;
+        }
+      }
+     .bottom {
         background: black;
         display: flex;
         flex-direction: row;
