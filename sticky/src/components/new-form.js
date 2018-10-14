@@ -7,7 +7,7 @@ export default class NewForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      title: "",
+      // title: "",//commente out 
       textBody: "",
       //will need to add if public or private
     }
@@ -31,14 +31,14 @@ export default class NewForm extends Component {
     return (
       <NewNoteDiv>
         <form onSubmit={this.sendToApp}>
-          <input
+          {/* <input
             className="input"
             id="title"
             onChange={this.inputHandler}
             name='title'
             value={this.state.title}
             placeholder="Note Title"
-          >{this.value}</input>
+          >{this.value}</input> */}
           <textarea
             className="input"
             id="textBody"

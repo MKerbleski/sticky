@@ -5,7 +5,8 @@ import loadingGif from './../img/Triangles-6.2s-200px.gif'
 
 const AllNotesBin = (props) => (
   props.connectDropTarget(
-    <div className="all-notes">
+    <div className="all-notes" 
+     style={{background: props.hover ? 'lightgreen' : null}}>
         {props.allNotes.map( layerOne => {
         if(layerOne.parent_id === null){
             return (
@@ -27,8 +28,6 @@ const AllNotesBin = (props) => (
 
 const targetObj = {
   hover(props, component){
-      console.log(props.hover, 'props.hover')
-      console.log(props.hoverFalse, 'props.hoverflase')
       if(props.hoverShallow){
           console.log('hoverShallow')
       }

@@ -65,9 +65,10 @@ class LayerTwoTargetSource extends React.Component {
                             type="note"
                             onClick={(e) => {e.stopPropagation();}} 
                             style={{background: this.props.hover ? 'lightgreen' : null}}>
-                            <h3>{this.props.layerTwo.title}</h3>
-                            {/* <p>{this.props.layerTwo.text}</p> */}
+                            {/* <h3>{this.props.layerTwo.title}</h3> */}
+                            
                             <div className="layerThreeContainer">
+                            <p>{this.props.layerTwo.textBody}</p>
                                {this.props.allNotes.map(layerThree => {
                                     if (layerThree.parent_id === this.props.layerTwo.id){
                                         return (
@@ -113,7 +114,8 @@ export default flow(
 
 
 const LayerTwoDiv = styled.div`
-    border: 3px solid green;
+    border: 2px solid black;
+    border-radius: 50px;
     margin: 10px;
     padding: 10px;
     width: 100px;
@@ -128,9 +130,9 @@ const LayerTwoDiv = styled.div`
         margin: 0px;
     }
     .layerThreeContainer{
-        border: 1px solid red;
+        ${'' /* border: 1px solid red; */}
         height: 500px;
-        background: gray;
+        ${'' /* background: gray; */}
         display: flex;
         flex-direction: column;
         justify-content: space-around;

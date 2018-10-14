@@ -12,7 +12,7 @@ const LayerThreeSource = (props) => {
                          opacity: props.isDragging ? '0.25' : '1',
                          border: props.isDragging ? '1px dashed gray': '1px solid black',
                          color: props.didDrop ? "red" : "green"}}>
-                       <h6>{props.layerThree.title}</h6>
+                       <h6>{props.layerThree.textBody}</h6>
                     </LayerThreeDiv>
                 </div>
             )

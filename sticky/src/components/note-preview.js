@@ -69,6 +69,7 @@ class NotePreview extends React.Component {
                   // style={{
                   //   opacity: props.isDragging ? 0 : 1,
                   // }}
+                 
                   >
                     <NotePreviewDiv >
                       <Link
@@ -76,19 +77,20 @@ class NotePreview extends React.Component {
                         index={this.props.index}
                         className="note-link"
                         id={this.props.layerOne.id}
-                        to={`/all-notes/${this.props.layerOne.id}`}>
+                        to={`/all-notes/${this.props.layerOne.id}`}
+                        >
 
-                          <div key={this.props.index} className="note-preview">
+        
 
-                            <div className="noteContent">
-                              <h3>{this.props.layerOne.title}</h3>
-                              <p>content: {this.props.layerOne.textBody}  -- </p>
-                              <span>Id: {this.props.layerOne.id}  --  </span>
-                              <span>userid: {this.props.layerOne.userid}  --  </span>
-                              <span>parentid: {this.props.layerOne.parentid}  </span>
-                              
-                            </div>
-                            <div className="layerTwoContainer" style={{background: this.props.hover ? 'lightgreen' : null}}>
+                            
+                            <div className="layerTwoContainer"  style={{background: this.props.hover ? 'lightgreen' : null}}>
+                              <div className="noteContent">
+                                <h2>{this.props.layerOne.textBody}</h2>
+                                {/* <span>Id: {this.props.layerOne.id}  --  </span>
+                                <span>userid: {this.props.layerOne.userid}  --  </span>
+                                <span>parentid: {this.props.layerOne.parentid}  </span> */}
+                                
+                              </div>
                               {this.props.allNotes.map(layerTwo => {
                                 {/* console.log(this.props) */}
                                   if (layerTwo.parent_id === this.props.layerOne.id){return (
@@ -104,7 +106,6 @@ class NotePreview extends React.Component {
                                   }
                               })}
                           </div>                     
-                        </div>
                       </Link>
                     </NotePreviewDiv>        
                   </div>
@@ -135,22 +136,21 @@ export default flow(
 )(NotePreview);
 
 const NotePreviewDiv = styled.div`
-  border: 1px solid blue;
+  border: 5px solid blue;
+  padding: 10px;
   width: 300px;
-  margin: 10px 0;
-  .note-preview {
-    border: 1px solid lightgray;
-    background: white;
-    ${'' /* background-color: #F3F3F3; */}
-    ${'' /* width: 200px;
-    height: 200px; */}
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    color: black;
+  display: flex;
+  flex-direction: column;    
     .noteContent{
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      color: black;
+      width: 100%;
+      height: auto;
+      flex-wrap: wrap;
       border: 1px solid green;
       width: 95%;
       max-height: 150px;
@@ -199,7 +199,6 @@ const NotePreviewDiv = styled.div`
         padding: 4px;
       }
     }
-  }
 `;
 
 
