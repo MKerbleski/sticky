@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
+import { picture, solid, center } from './../styles/styl-utils.js'
+
 
 import LayerTwoTargetSource from "./layerTwoTargetSource"
 
@@ -78,12 +80,12 @@ class NotePreview extends React.Component {
 
                           <div key={this.props.index} className="note-preview">
 
-                            <div className="notTags">
+                            <div className="noteContent">
                               <h3>{this.props.layerOne.title}</h3>
-                              <p>{this.props.layerOne.textBody}</p>
-                              <p>Id: {this.props.layerOne.id}</p>
-                              <p>userid: {this.props.layerOne.userid}</p>
-                              <p>parentid: {this.props.layerOne.parentid}</p>
+                              <p>content: {this.props.layerOne.textBody}  -- </p>
+                              <span>Id: {this.props.layerOne.id}  --  </span>
+                              <span>userid: {this.props.layerOne.userid}  --  </span>
+                              <span>parentid: {this.props.layerOne.parentid}  </span>
                               
                             </div>
                             <div className="layerTwoContainer" style={{background: this.props.hover ? 'lightgreen' : null}}>
@@ -146,11 +148,11 @@ const NotePreviewDiv = styled.div`
     justify-content: space-between;
     align-items: center;
     color: black;
-    .notTags{
-      ${'' /* border: 1px solid green; */}
+    .noteContent{
+      border: 1px solid green;
       width: 90%;
       max-height: 150px;
-      overflow: auto;
+      overflow: hidden;
       margin: 2% 0;
       h3{
         ${'' /* border: 1px solid green; */}
@@ -171,8 +173,14 @@ const NotePreviewDiv = styled.div`
         font: roboto;
       }
     }
+    .layerTwoContainer{
+      border: 1px solid red;
+      width: 100%;
+      ${ center }
+      justify-content: space-around
+    }
     .tags {
-      ${'' /* border: 1px solid red; */}
+      border: 1px solid red;
       display: flex;
       flex-direction: row:
       flex-wrap: wrap;

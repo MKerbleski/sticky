@@ -13,6 +13,7 @@ export default class TopMenu extends Component {
     return (
       <TopMenuDiv>
         <h1>Sticky</h1>
+        <h3>{` Hello ${localStorage.getItem('username')},`}</h3>
         <div className="menu-item" onClick={this.props.logout} >Logout</div>
       </TopMenuDiv>
     );
@@ -35,7 +36,7 @@ const TopMenuDiv = styled.div`
   }
   .menu-item{
     ${'' /* border: 1px solid red; */}
-    width: 70%;
+    width: 10%;
     padding: 15px;
     text-align: center;
     text-decoration: none;

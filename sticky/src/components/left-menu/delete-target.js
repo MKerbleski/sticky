@@ -12,7 +12,7 @@ const DeleteTarget = (props) => (
         cursor: "default"
       }}
       >
-      Drag to Delete
+      Delete
     </div>
   )
 );

@@ -11,3 +11,12 @@ export function solid(){
         background-color: #031019
     `;
 }
+
+export function center(){
+    return `
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    `;
+}
