@@ -12,7 +12,7 @@ export function solid(){
     `;
 }
 
-export function flex(direction){
+export function flex(direction='row'){
     return `
         display: flex;
         flex-direction: ${direction};

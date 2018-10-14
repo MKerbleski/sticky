@@ -7,6 +7,8 @@ import axios from 'axios';
 import Login from './login';
 import Register from './register';
 import Header from './header';
+import { flex } from '../../styles/styl-utils.js'
+
 
 // import {
 //     createUser,
@@ -35,7 +37,7 @@ class Welcome extends Component{
         // console.log(this.props)
         return(
             <WelcomeDiv>
-                <Route path="/" component={Header} />
+                <Route path="/welcome" component={Header} />
                 <Route path="/welcome/login" render={() => {
                     return <Login failed={(this.props.state.failedLoginAttempt)? true : false} loginUser={this.loginUser2} />}} />
                 <Route path="/welcome/register" render={() => {
@@ -61,9 +63,14 @@ const WelcomeDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    background-image: url(https://picsum.photos/2000/2000);
+    width: 100%;
+    height: 100vh;
+    ${'' /* ${flex('column')} */}
     .links{
-        width: 100%;
-        height: 40px;
+        width: 75%;
+        ${'' /* height: 40px; */}
         ${'' /* border: 1px solid green; */}
         display: flex;
         flex-direction: row;
