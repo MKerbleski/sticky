@@ -72,8 +72,9 @@ class NotePreview extends React.Component {
                         index={this.props.index}
                         className="note-link"
                         id={this.props.layerOne.id}
-                        to={`/all-notes/${this.props.layerOne.id}`}>
-                            <div className="layerTwoContainer"  style={{background: this.props.hover ? 'lightgreen' : null}}>
+                        to={`/all-notes/${this.props.layerOne.id}`}
+                        style={{background: this.props.hover ? 'lightgreen' : null}}>
+                            {/* <div className="layerTwoContainer"  > */}
                               <div className="noteContent">
                                 <h2>{this.props.layerOne.textBody}</h2>
                                 {/* <span>Id: {this.props.layerOne.id}  --  </span>
@@ -95,7 +96,7 @@ class NotePreview extends React.Component {
                                       return null
                                   }
                               })}
-                          </div>                     
+                          {/* </div>                      */}
                       </Link>
                     </NotePreviewDiv>        
                   </div>
@@ -135,13 +136,12 @@ const NotePreviewDiv = styled.div`
     border: 1px solid green;
     ${ flex('column') }
     padding: 10px;
-    .layerTwoContainer{
-      border: 1px solid red;
-      width: 95%;
-      padding: 10px;
-      ${ flex('column') }
-      justify-content: space-around;
-      background-color: lightgray;
+    border: 1px solid red;
+    width: 95%;
+    padding: 10px;
+    ${ flex('column') }
+    justify-content: space-around;
+    background-color: lightgray;
       .noteContent{
       ${'' /* background: white; */}
       display: flex;
@@ -175,7 +175,7 @@ const NotePreviewDiv = styled.div`
         font-size: 14px;
         font: roboto;
       }
-    }
+
     }
     
     

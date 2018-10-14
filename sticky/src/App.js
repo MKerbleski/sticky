@@ -140,15 +140,20 @@ class App extends Component {
     }
   }
 
-  onDrop(source_id, type, target_id){
+  onDrop(source_id, type, target_id=null){
     // console.log('handleDrop, id: ', id);
     //will delete from actions when uncommented
     // this.props.deleteNote(id)
-    let target = this.getNoteDetails(target_id)
-    console.log(target)
-    if (target.parent_id == source_id){
-      alert('action not allowed')
-    }else {
+
+      
+    if(target_id){
+      let target = this.getNoteDetails(target_id)
+      console.log(target)
+      if (target.parent_id == source_id){
+        alert('action not allowed')
+      }
+    } 
+    
       console.log(source_id, type, target_id)
     if(type === "deleteBin"){
       //if has children 
@@ -170,7 +175,7 @@ class App extends Component {
 
       console.log(source_id, type, target_id=null)
       this.editNote({id: source_id, parent_id: target_id})
-    }
+    
     }
     
   }
