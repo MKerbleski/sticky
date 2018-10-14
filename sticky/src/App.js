@@ -144,7 +144,12 @@ class App extends Component {
     // console.log('handleDrop, id: ', id);
     //will delete from actions when uncommented
     // this.props.deleteNote(id)
-    console.log(source_id, type, target_id)
+    let target = this.getNoteDetails(target_id)
+    console.log(target)
+    if (target.parent_id == source_id){
+      alert('action not allowed')
+    }else {
+      console.log(source_id, type, target_id)
     if(type === "deleteBin"){
       //if has children 
       //ask if want to delete children as well 
@@ -166,6 +171,8 @@ class App extends Component {
       console.log(source_id, type, target_id=null)
       this.editNote({id: source_id, parent_id: target_id})
     }
+    }
+    
   }
 
   sortById = (e) => {

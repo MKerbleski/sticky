@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
-import { picture, solid, center } from './../styles/styl-utils.js'
+import { picture, solid, flex } from './../styles/styl-utils.js'
 
 
 import LayerTwoTargetSource from "./layerTwoTargetSource"
@@ -65,24 +65,14 @@ class NotePreview extends React.Component {
               connectDropTarget &&
               connectDragSource(
               connectDropTarget(
-                  <div className="startObject"
-                  // style={{
-                  //   opacity: props.isDragging ? 0 : 1,
-                  // }}
-                 
-                  >
+                  <div className="startObject">
                     <NotePreviewDiv >
                       <Link
                         key={this.props.key}
                         index={this.props.index}
                         className="note-link"
                         id={this.props.layerOne.id}
-                        to={`/all-notes/${this.props.layerOne.id}`}
-                        >
-
-        
-
-                            
+                        to={`/all-notes/${this.props.layerOne.id}`}>
                             <div className="layerTwoContainer"  style={{background: this.props.hover ? 'lightgreen' : null}}>
                               <div className="noteContent">
                                 <h2>{this.props.layerOne.textBody}</h2>
@@ -140,9 +130,20 @@ const NotePreviewDiv = styled.div`
   padding: 10px;
   width: 300px;
   display: flex;
-  flex-direction: column;    
-    .noteContent{
-      background: white;
+  flex-direction: column;  
+  .note-link{
+    border: 1px solid green;
+    ${ flex('column') }
+    padding: 10px;
+    .layerTwoContainer{
+      border: 1px solid red;
+      width: 95%;
+      padding: 10px;
+      ${ flex('column') }
+      justify-content: space-around;
+      background-color: lightgray;
+      .noteContent{
+      ${'' /* background: white; */}
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -175,13 +176,9 @@ const NotePreviewDiv = styled.div`
         font: roboto;
       }
     }
-    .layerTwoContainer{
-      border: 1px solid red;
-      width: 95%;
-      ${ center }
-      justify-content: space-around;
-      background-color: lightgray;
     }
+    
+    
     .tags {
       border: 1px solid red;
       display: flex;
@@ -199,6 +196,7 @@ const NotePreviewDiv = styled.div`
         padding: 4px;
       }
     }
+  }  
 `;
 
 

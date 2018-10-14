@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { picture, solid, center } from '../../styles/styl-utils.js'
+import { picture, solid, center, flex } from '../../styles/styl-utils.js'
 import DeleteTarget from './delete-target.js';
 
 
@@ -46,7 +46,7 @@ const LeftMenuDiv = styled.div`
     margin: 10px;
     font-size: 22px;
     border: 1px solid gray;
-    ${ center() }
+    ${ flex('row') }
     &:hover {
       cursor: pointer;
       text-decoration: underline;

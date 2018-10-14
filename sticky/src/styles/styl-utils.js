@@ -12,11 +12,12 @@ export function solid(){
     `;
 }
 
-export function center(){
+export function flex(direction){
     return `
         display: flex;
-        flex-direction: row;
+        flex-direction: ${direction};
         align-items: center;
         justify-content: center;
     `;
 }
+
