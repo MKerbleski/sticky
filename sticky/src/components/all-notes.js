@@ -56,8 +56,9 @@ const AllNotesDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
-  background-color: black;
+  background-color: #2a465c;
   color: white;
+  height: 100%;
   .sort {
     display: flex;
     flex-direction: row;
@@ -75,6 +76,7 @@ const AllNotesDiv = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    padding: 20px;
     .note-link{
       text-decoration: none;
     }

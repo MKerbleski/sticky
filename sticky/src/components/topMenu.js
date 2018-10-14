@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { picture, solid } from '../../styles/styl-utils.js'
-import DeleteTarget from './delete-target.js';
+import { picture, solid } from './../styles/styl-utils.js'
 
-
-export default class LeftMenu extends Component {
+export default class TopMenu extends Component {
   state = {
     allNotesSelected: false,
     createNoteSelected: false,
@@ -13,25 +11,22 @@ export default class LeftMenu extends Component {
 
   render(){
     return (
-      <LeftMenuDiv>
-        <Link className={this.state.allNotesSelected ? "current menu-item" : "menu-item"}  to="/all-notes" style={this.props}>View All Your Notes</Link>
-        <Link className="menu-item" to="/new-note">+ Create New Note</Link>
-        {/* <div className="menu-item" onClick={this.download} >Download CSV</div> */}
-        <DeleteTarget type='deleteBin' className="menu-item red" />
-        {/* <div  onClick={this.delete} to="/deleted-notes">Delete Item</div> */}
-      </LeftMenuDiv>
+      <TopMenuDiv>
+        <h1>Sticky</h1>
+        <div className="menu-item" onClick={this.props.logout} >Logout</div>
+      </TopMenuDiv>
     );
   };
 };
 
-const LeftMenuDiv = styled.div`
+const TopMenuDiv = styled.div`
   border: 1px solid lightgray;
   ${ solid() }
   color: white;
   height: auto;
-  width: 30%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   h1{
     ${'' /* border: 1px solid green; */}

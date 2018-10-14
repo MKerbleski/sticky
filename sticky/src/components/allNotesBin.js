@@ -1,6 +1,7 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
 import NotePreview from './note-preview.js';
+import loadingGif from './../img/Triangles-6.2s-200px.gif'
 
 const AllNotesBin = (props) => (
   props.connectDropTarget(
@@ -17,8 +18,10 @@ const AllNotesBin = (props) => (
                 allNotes={props.allNotes}
             />)
         } else {
-            return null
-        }
+            return <div>
+                <h1>loading... All Notes Bin</h1>
+                <img src="loadingGif" alt="spinning triangles"/></div>
+            }
         })}
     </div>
   )
@@ -26,11 +29,10 @@ const AllNotesBin = (props) => (
 
 const targetObj = {
   hover(props, component){
-
       if(props.hoverShallow){
           console.log('hoverShallow')
       }
-   
+
   },
 
   drop(props, monitor) {
