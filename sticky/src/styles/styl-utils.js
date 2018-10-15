@@ -20,4 +20,3 @@ export function flex(direction='row'){
         justify-content: center;
     `;
 }
-

@@ -16,7 +16,13 @@ import { flex } from '../../styles/styl-utils.js'
 //     } from '../../actions';
     
 class Welcome extends Component{
-    
+    constructor(props){
+        super(props);
+        this.state = {
+            entryNote: '',
+        }
+    }
+
     createUser = (newUser) => {
         axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/welcome/register/', newUser).then(res => {
             localStorage.setItem('JWT', res.data.token)
@@ -33,6 +39,14 @@ class Welcome extends Component{
         }).catch(err => {console.log(err.message)})
     }
 
+    inputHandler = (e) => {
+        e.preventDefault();
+        this.setState({
+            [e.target.name]: e.target.value
+        })        
+        
+    }
+
     render(props){
         // console.log(this.props)
         return(
@@ -42,6 +56,7 @@ class Welcome extends Component{
                     return <Login failed={(this.props.state.failedLoginAttempt)? true : false} loginUser={this.loginUser2} />}} />
                 <Route path="/welcome/register" render={() => {
                     return <Register failed={this.props.state.failedRegistrationAttempt} createUser={this.createUser} />}} />
+                <textarea type="text" name="entryNote" placeholder='have an idea? start typing...' onChange={this.inputHandler} value={this.state.entryNote} autofocus>{this.value}</textarea>
             </WelcomeDiv>
         )
     }
@@ -64,10 +79,20 @@ const WelcomeDiv = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-image: url(https://picsum.photos/2000/2000);
+    background-image: url(https://picsum.photos/1500/1500);
     width: 100%;
     height: 100vh;
     ${'' /* ${flex('column')} */}
+    textarea{
+        background: rgba(0,0,0,0.05);
+        border: none;
+        padding: 20px;
+        font-size: 20px;
+        color: white;
+        margin: 100px;
+        width: 400px;
+        height: 200px;
+    }
     .links{
         width: 75%;
         ${'' /* height: 40px; */}

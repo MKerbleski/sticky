@@ -26,6 +26,8 @@ const HeaderDiv = styled.div`
     justify-content: space-between;
     width: 100%;
     h1{
+        color: white;
+        stroke: black;
         width: 80%;
     }
     .links{
