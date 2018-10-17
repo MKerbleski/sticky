@@ -52,15 +52,19 @@ const sourceObj = {
 
 class NotePreview extends React.Component {
   
-  getFirstWord = (props) => {
-    let firstWord = this.props.layerOne.textBody.substr(0, this.props.layerOne.textBody.indexOf(" "));
-    let firstSen = this.props.layerOne.textBody.substr(0, this.props.layerOne.textBody.indexOf("."));
+  getFirstWord = (text) => {
+    let firstWord = text.substr(0, text.indexOf(" "));
     console.log(firstWord, 'word')
+    return firstWord
+  }
+  getFirstSen = (text) => {
+    let firstSen = text.substr(0, text.indexOf("."));
     console.log(firstSen, 'sen')
+    return firstSen
   }
   
   render(props){
-      console.log(this.getFirstWord())
+      // console.log(this.getFirstWord())
       const {
           connectDragSource, 
           connectDropTarget, 
