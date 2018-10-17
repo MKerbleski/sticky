@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
-import { picture, solid, flex } from './../styles/styl-utils.js'
+import { flex } from './../styles/styl-utils.js'
 
 import LayerTwoTargetSource from "./layerTwoTargetSource"
 
@@ -51,8 +51,16 @@ const sourceObj = {
 };
 
 class NotePreview extends React.Component {
+  
+  getFirstWord = (props) => {
+    let firstWord = this.props.layerOne.textBody.substr(0, this.props.layerOne.textBody.indexOf(" "));
+    let firstSen = this.props.layerOne.textBody.substr(0, this.props.layerOne.textBody.indexOf("."));
+    console.log(firstWord, 'word')
+    console.log(firstSen, 'sen')
+  }
+  
   render(props){
-      // console.log(this.props.hover)
+      console.log(this.getFirstWord())
       const {
           connectDragSource, 
           connectDropTarget, 
@@ -73,29 +81,27 @@ class NotePreview extends React.Component {
                         id={this.props.layerOne.id}
                         to={`/all-notes/${this.props.layerOne.id}`}
                         style={{background: this.props.hover ? 'lightgreen' : null}}>
-                            {/* <div className="layerTwoContainer"  > */}
-                              <div className="noteContent">
-                                <h2>{this.props.layerOne.textBody}</h2>
-                                {/* <span>Id: {this.props.layerOne.id}  --  </span>
-                                <span>userid: {this.props.layerOne.userid}  --  </span>
-                                <span>parentid: {this.props.layerOne.parentid}  </span> */}
-                                
-                              </div>
+                            <div className="noteContent">
+                              <h2>{this.props.layerOne.textBody}</h2>
+                              <span>Id: {this.props.layerOne.id}  --  </span>
+                              <span>parentid: {this.props.layerOne.parentid}  </span> 
+                            </div>
+                            <div className="layerTwoContainerA"  >
                               {this.props.allNotes.map(layerTwo => {
-                                {/* console.log(this.props) */}
                                   if (layerTwo.parent_id === this.props.layerOne.id){return (
-                                          <div className="layerTwoContainer" key={layerTwo.id} >
-                                              <LayerTwoTargetSource 
+                                          <div className="layerTwoContainer" key={layerTwo.id}>
+                                              <LayerTwoTargetSource  
                                                 type="note"
                                                 onDrop={this.props.onDrop} 
                                                 layerTwo={layerTwo} 
                                                 allNotes={this.props.allNotes} />
-                                          </div>)
+                                          </div>
+                                          )
                                   } else {
                                       return null
                                   }
                               })}
-                          {/* </div>                      */}
+                          </div>                     
                       </Link>
                     </NotePreviewDiv>        
                   </div>
@@ -178,6 +184,13 @@ const NotePreviewDiv = styled.div`
     }
     .layerTwoContainer{
       border: 1px solid red;
+      width: 40%;
+    }
+    .layerTwoContainerA{
+      border: 1px solid blue;
+      width: 100%;
+      ${flex()}
+      flex-wrap: wrap;
     }
     .tags {
       border: 1px solid red;

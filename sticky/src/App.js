@@ -339,7 +339,8 @@ const mapDispatchToProps = {
       display: flex;
       flex-direction: column;
       background-color:white;
-      background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)});
+      ${'' /* background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)}); */}
+      background-image: url(http://placeimg.com/1000/1000/arch/grayscale);
       .all-notes {
         ${'' /* border: 1px solid red; */}
         display: flex;
