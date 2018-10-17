@@ -8,10 +8,10 @@ export default class Header extends Component{
     render(props){
         return(
             <HeaderDiv>
-                    <h1>Stic.ky</h1>
-                    <div className="links">
-                        <Link to="/welcome/login" >Login</Link>
-                        <Link to="/welcome/register" >Register</Link>
+                    <h1 className="headerTitle">Stic.ky</h1>
+                    <div className="linkss">
+                        <Link className="headerLink" to="/welcome/login" >Login</Link>
+                        <Link className="headerLink" to="/welcome/register" >Register</Link>
                     </div>
             </HeaderDiv>
         )
@@ -25,14 +25,40 @@ const HeaderDiv = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    h1{
+    height: 0 auto;
+    padding: 0;
+    background-color: rgba(0,0,0,.25);
+    .headerTitle{
+        ${'' /* border: 1px solid green; */}
         color: white;
-        stroke: black;
-        width: 80%;
+        -webkit-text-stroke-width: .1px;
+        -webkit-text-stroke-color: white;
+        ${'' /* width: 80%; */}
+        font-size: 35px;
+        margin: 0;
+        margin-left: 20px;
     }
-    .links{
-        ${'' /* border: 1px solid red; */}
-        width: 50px;
+    .linkss{
+        ${'' /* border: 1px solid green; */}
+        ${'' /* width: 100px; */}
+        ${'' /* height: 100px; */}
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        .headerLink{
+            ${'' /* border: 1px solid blue; */}
+            padding: 15px;
+            width: 75px;
+            color: white;
+            ${'' /* background-color: rgba(0,0,0,.1); */}
+            text-decoration: none;
+            ${flex()}
+            :hover{
+                background-color: rgba(0,0,0,.3);
+            }
+        }
     }
 
 `;
