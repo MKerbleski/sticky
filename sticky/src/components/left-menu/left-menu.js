@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { picture, solid, center, flex, menu } from '../../styles/styl-utils.js'
+import { flex, menu } from '../../styles/styl-utils.js'
 import DeleteTarget from './delete-target.js';
 
 

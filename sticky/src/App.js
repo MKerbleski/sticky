@@ -9,14 +9,14 @@ import axios from 'axios';
 
 import {
   AllNotes,
-  AllNotesNEW,
+  // AllNotesNEW,
   EditNote,
   DeleteNote,
   NewNote,
   NoteDetails,
   LeftMenu,
   Welcome, 
-  TopMenu,
+  // TopMenu,
   Header
 } from './components';
 
@@ -150,7 +150,7 @@ class App extends Component {
     if(target_id){
       let target = this.getNoteDetails(target_id)
       console.log(target)
-      if (target.parent_id == source_id){
+      if (target.parent_id === +source_id){
         alert('action not allowed')
       }
     } 
@@ -339,8 +339,8 @@ const mapDispatchToProps = {
       display: flex;
       flex-direction: column;
       background-color:white;
-      ${'' /* background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)}); */}
-      background-image: url(http://placeimg.com/1000/1000/arch/grayscale);
+      background-image: url(https://picsum.photos/g/1500/1500?image=${1073});
+      ${'' /* background-image: url(http://placeimg.com/1000/1000/arch/grayscale); */}
       .all-notes {
         ${'' /* border: 1px solid red; */}
         display: flex;

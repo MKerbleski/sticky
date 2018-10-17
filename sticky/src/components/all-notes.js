@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import NotePreview from './note-preview.js';
+// import NotePreview from './note-preview.js';
 import { AllNotesBin } from './index';
 
 export default class AllNotes extends Component {
