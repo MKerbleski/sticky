@@ -14,11 +14,18 @@ export default class LeftMenu extends Component {
   render(){
     return (
       <LeftMenuDiv>
-        <Link className={this.state.allNotesSelected ? "current menu-item" : "menu-item"}  to="/all-notes" style={this.props}>All</Link>
-        <Link className="menu-item" to="/new-note">New</Link>
-        {/* <div className="menu-item" onClick={this.download} >Download CSV</div> */}
-        <DeleteTarget type='deleteBin' className="menu-item red" />
-        {/* <div  onClick={this.delete} to="/deleted-notes">Delete Item</div> */}
+        <div className='leftMenuTop'>
+          <Link className={this.state.allNotesSelected ? "current menu-item" : "menu-item"}  to="/all-notes" style={this.props}><i class="fab fa-stack-overflow"></i></Link>
+          <Link className="menu-item" to="/new-note"><i class="fas fa-plus-square"></i></Link>
+          <div className="menu-item"><i class="fas fa-tv"></i></div>
+          <div className="menu-item"><i class="fas fa-book-open"></i></div>
+        </div>
+        <div className="leftMenuBottom">
+          {/* <div className="menu-item" onClick={this.download} >Download CSV</div> */}
+          <DeleteTarget type='deleteBin' className="menu-item red" />
+          {/* <div  onClick={this.delete} to="/deleted-notes">Delete Item</div> */}
+          <div className="menu-item"><i class="fas fa-cogs"></i></div>
+        </div>
       </LeftMenuDiv>
     );
   };
@@ -29,24 +36,21 @@ const LeftMenuDiv = styled.div`
   ${'' /* ${ solid() } */}
   ${ menu() }
   color: white;
-  height: auto;
-  width: 15%;
+  height: 100%;
+  width: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   .menu-item{
     ${'' /* border: 1px solid red; */}
-    width: 40%;
     height: 50px;
-    padding: 15px;
     text-align: center;
     text-decoration: none;
     color: black;
-    background-color: #8d9ea5;
     font-weight: bold;
     margin: 10px;
     font-size: 22px;
-    border: 1px solid gray;
     ${ flex('row') }
     &:hover {
       cursor: pointer;

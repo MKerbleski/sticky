@@ -235,8 +235,9 @@ class App extends Component {
   render() {
     return (
       <AppDiv>
-
-        {localStorage.getItem('JWT') ? <Header logout={this.logout} /> : <Header logout={this.logout} />}
+        <div className="appTop">
+          <Header logout={this.logout} />
+        </div>
         
         <div className="bottom">
             {localStorage.getItem('JWT') ? <LeftMenu /> : null}
@@ -347,17 +348,20 @@ const mapDispatchToProps = {
         justify-content: space-around;
         align-items: flex-start;
         padding: 20px;
-        height: 90%;
+        height: 70%;
         .note-link{
           text-decoration: none;
         }
+      }
+      .top{
+        height: 5vh;
       }
      .bottom {
         ${'' /* background: black; */}
         display: flex;
         flex-direction: row;
         z-index: 0;
-        height: 100vh;
+        height: 93vh;
         .right-display{
           ${'' /* border: 1px solid blue; */}
           ${'' /* background-color: black; */}
@@ -365,6 +369,7 @@ const mapDispatchToProps = {
           display: flex;
           flex-direction: column;
           flex-wrap: wrap;
+          height: 90%;
         }
         .delete {
           ${'' /* border: 1px solid red; */}

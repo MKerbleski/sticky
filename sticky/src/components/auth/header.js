@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { flex } from '../../styles/styl-utils.js'
+import { flex, menu } from '../../styles/styl-utils.js'
 
 
 export default class Header extends Component{
@@ -34,12 +34,12 @@ const HeaderDiv = styled.div`
     width: 100%;
     height: 0 auto;
     padding: 0;
-    background-color: rgba(0,0,0,.25);
+    ${menu()}
     .headerTitle{
         ${'' /* border: 1px solid green; */}
-        color: white;
+        color: black;
         -webkit-text-stroke-width: .1px;
-        -webkit-text-stroke-color: white;
+        -webkit-text-stroke-color: black;
         ${'' /* width: 80%; */}
         font-size: 35px;
         margin: 0;
@@ -60,7 +60,7 @@ const HeaderDiv = styled.div`
             ${'' /* padding: 15px; */}
             height: 100%;
             width: 75px;
-            color: white;
+            color: black;
             ${'' /* background-color: rgba(0,0,0,.1); */}
             text-decoration: none;
             ${flex()}

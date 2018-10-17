@@ -6,13 +6,13 @@ const DeleteTarget = (props) => (
     <div
       className={"menu-item"}
       style={{
-        height: props.highlighted ? "200px" : null,
+        // height: props.highlighted ? "200px" : null,
         background: props.highlighted ? "red" : null,
         textDecoration: "none",
         cursor: "default"
       }}
       >
-      Delete
+      <i class="fas fa-trash-alt"></i>
     </div>
   )
 );
