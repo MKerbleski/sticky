@@ -6,9 +6,9 @@ export function picture(){
     `;
 }
 
-export function solid(){
+export function menu(){
     return `
-        background-color: #031019
+        background-color: rgba(0,0,0,.25);
     `;
 }
 

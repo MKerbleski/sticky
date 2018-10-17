@@ -5,7 +5,6 @@ import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import { picture, solid, flex } from './../styles/styl-utils.js'
 
-
 import LayerTwoTargetSource from "./layerTwoTargetSource"
 
 const targetObj = {

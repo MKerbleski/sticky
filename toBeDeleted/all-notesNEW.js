@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import AllNotesBin from './allNotesBin.js'
+import AllNotesBin from '../sticky/src/components/allNotesBin.js'
 
 export default class AllNotesNew extends Component {
   constructor(props){
@@ -62,6 +62,7 @@ const AllNotesDiv = styled.div`
   padding: 15px;
   ${'' /* background-color: gray; */}
   color: white;
+  overflow: hidden;
   .sort {
     display: flex;
     flex-direction: row;

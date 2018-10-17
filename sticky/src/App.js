@@ -353,14 +353,14 @@ const mapDispatchToProps = {
         }
       }
      .bottom {
-        background: black;
+        ${'' /* background: black; */}
         display: flex;
         flex-direction: row;
         z-index: 0;
         height: 100vh;
         .right-display{
           ${'' /* border: 1px solid blue; */}
-          background-color: black;
+          ${'' /* background-color: black; */}
           width: 100%;
           display: flex;
           flex-direction: column;

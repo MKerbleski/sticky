@@ -10,15 +10,15 @@ export default class Header extends Component{
             <HeaderDiv>
                     <h1 className="headerTitle">Stic.ky</h1>
                     {localStorage.getItem('username') ?
-                    <div className="linkss">
-                        <h3>{` Hello ${localStorage.getItem('username')},`}</h3>
-                        <div className="headerLink" onClick={this.props.logout} >Logout</div> 
-                    </div> :
+                        <div className="linkss">
+                            <h3>{` Hello ${localStorage.getItem('username')},`}</h3>
+                            <div className="headerLink" onClick={this.props.logout} >Logout</div> 
+                        </div> :
 
-                    <div className="linkss">
-                        <Link className="headerLink" to="/welcome/login" >Login</Link>
-                        <Link className="headerLink" to="/welcome/register" >Register</Link>
-                    </div>
+                        <div className="linkss">
+                            <Link className="headerLink" to="/welcome/login" >Login</Link>
+                            <Link className="headerLink" to="/welcome/register" >Register</Link>
+                        </div>
                     }
             </HeaderDiv>
         )

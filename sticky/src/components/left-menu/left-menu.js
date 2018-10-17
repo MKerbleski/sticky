@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { picture, solid, center, flex } from '../../styles/styl-utils.js'
+import { picture, solid, center, flex, menu } from '../../styles/styl-utils.js'
 import DeleteTarget from './delete-target.js';
 
 
@@ -25,8 +25,9 @@ export default class LeftMenu extends Component {
 };
 
 const LeftMenuDiv = styled.div`
-  border: 1px solid lightgray;
-  ${ solid() }
+  ${'' /* border: 1px solid lightgray; */}
+  ${'' /* ${ solid() } */}
+  ${ menu() }
   color: white;
   height: auto;
   width: 15%;

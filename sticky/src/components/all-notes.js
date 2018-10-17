@@ -58,7 +58,7 @@ const AllNotesDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
-  background-color: #2a465c;
+  ${'' /* background-color: #2a465c; */}
   color: white;
   height: 100%;
   .sort {
