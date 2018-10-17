@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import NotePreview from './note-preview.js';
-import AllNotesBin from './allNotesBin.js';
+import { AllNotesBin } from './index';
 
 export default class AllNotes extends Component {
   constructor(props){
@@ -32,23 +32,6 @@ export default class AllNotes extends Component {
         </div>
 
         <AllNotesBin type="top" onDrop={this.props.onDrop} allNotes={this.props.notes}/>
-        {/* <div className="all-notes">
-          {this.props.notes.map( layerOne => {
-            if(layerOne.parent_id === null){
-              return (
-                <NotePreview
-                  type="note"
-                  onDrop={this.props.onDrop}
-                  changeParent={this.changeParent}
-                  key={layerOne.id}
-                  layerOne={layerOne}
-                  allNotes={this.props.notes}
-                />)
-            } else {
-              return null
-            }
-          })}
-        </div> */}
       </AllNotesDiv>
     );
   }
@@ -73,7 +56,7 @@ const AllNotesDiv = styled.div`
     }
   }
   .all-notes {
-    border: 1px solid red;
+    ${'' /* border: 1px solid blue; */}
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

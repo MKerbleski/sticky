@@ -84,7 +84,7 @@ class NotePreview extends React.Component {
                               {this.props.allNotes.map(layerTwo => {
                                 {/* console.log(this.props) */}
                                   if (layerTwo.parent_id === this.props.layerOne.id){return (
-                                          <div key={layerTwo.id} >
+                                          <div className="layerTwoContainer" key={layerTwo.id} >
                                               <LayerTwoTargetSource 
                                                 type="note"
                                                 onDrop={this.props.onDrop} 
@@ -126,32 +126,33 @@ export default flow(
 )(NotePreview);
 
 const NotePreviewDiv = styled.div`
-  border: 5px solid blue;
+  ${'' /* border: 5px solid blue; */}
   padding: 10px;
   width: 300px;
+  height: auto;
   display: flex;
   flex-direction: column;  
   .note-link{
-    border: 1px solid green;
+    ${'' /* border: 1px solid green; */}
     ${ flex('column') }
+
     padding: 10px;
-    border: 1px solid red;
     width: 95%;
     padding: 10px;
-    ${ flex('column') }
     justify-content: space-around;
     background-color: lightgray;
       .noteContent{
-      ${'' /* background: white; */}
+      ${'' /* border: 1px solid green; */}
+
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
+
       color: black;
       width: 100%;
       height: auto;
       flex-wrap: wrap;
-      border: 1px solid green;
       width: 95%;
       max-height: 150px;
       overflow: hidden;
@@ -174,10 +175,10 @@ const NotePreviewDiv = styled.div`
         font-size: 14px;
         font: roboto;
       }
-
     }
-    
-    
+    .layerTwoContainer{
+      border: 1px solid red;
+    }
     .tags {
       border: 1px solid red;
       display: flex;
