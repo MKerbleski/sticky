@@ -6,4 +6,5 @@ export {default as EditNote} from './edit-note.js';
 export {default as DeleteNote} from './delete-note.js';
 export {default as LeftMenu} from './left-menu/left-menu.js';
 export {default as Welcome} from './auth/welcome.js';
-export {default as TopMenu} from './topMenu.js';
+// export {default as TopMenu} from '../../../toBeDeleted/topMenu.js';
+export {default as Header} from './auth/header.js';

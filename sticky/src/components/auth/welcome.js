@@ -28,7 +28,7 @@ class Welcome extends Component{
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
             this.props.history.push('/all-notes')
-        }).catch(err => {console.log(err.message)})
+        }).catch(err => {alert(err.message); console.log(err.message)})
     }
 
     loginUser2 = (creds) => {
@@ -51,11 +51,13 @@ class Welcome extends Component{
         // console.log(this.props)
         return(
             <WelcomeDiv>
-                <Route path="/welcome" component={Header} />
-                <Route path="/welcome/login" render={() => {
-                    return <Login failed={(this.props.state.failedLoginAttempt)? true : false} loginUser={this.loginUser2} />}} />
-                <Route path="/welcome/register" render={() => {
-                    return <Register failed={this.props.state.failedRegistrationAttempt} createUser={this.createUser} />}} />
+                {/* <Route path="/welcome" component={Header} /> */}
+                <div>
+                    <Route path="/welcome/login" render={() => {
+                        return <Login failed={(this.props.state.failedLoginAttempt)? true : false} loginUser={this.loginUser2} />}} />
+                    <Route path="/welcome/register" render={() => {
+                        return <Register failed={this.props.state.failedRegistrationAttempt} createUser={this.createUser} />}} />
+                </div>
                 <textarea type="text" name="entryNote" placeholder='have an idea? start typing...' onChange={this.inputHandler} value={this.state.entryNote} autofocus>{this.value}</textarea>
             </WelcomeDiv>
         )
@@ -99,17 +101,5 @@ const WelcomeDiv = styled.div`
             color: black;
             font-size: 35px;
         }
-    }
-    .links{
-        width: 75%;
-        ${'' /* height: 40px; */}
-        ${'' /* border: 1px solid green; */}
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-    }
-    Link{
-        padding: 10px;
     }
 `;

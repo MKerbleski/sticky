@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { picture, solid } from './../styles/styl-utils.js'
+import { picture, solid } from '../sticky/src/styles/styl-utils.js'
 
 export default class TopMenu extends Component {
   state = {
@@ -22,9 +22,9 @@ export default class TopMenu extends Component {
 
 const TopMenuDiv = styled.div`
   border: 1px solid lightgray;
-  ${ solid() }
+  ${'' /* ${ solid() } */}
   color: white;
-  height: auto;
+  height: 0 auto;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -41,7 +41,7 @@ const TopMenuDiv = styled.div`
     text-align: center;
     text-decoration: none;
     color: white;
-    background-color: #2AC0C4;
+    ${'' /* background-color: #2AC0C4; */}
     font-weight: bold;
     margin: 10px;
     border: 1px solid gray;
@@ -51,11 +51,11 @@ const TopMenuDiv = styled.div`
     }
   }
   .current {
-    background-color: orange;
+    ${'' /* background-color: orange; */}
   }
   .red {
-    background-color: red;
-    color: black;
+    ${'' /* background-color: red; */}
+    ${'' /* color: black; */}
     height: 200px;
   }
 `;

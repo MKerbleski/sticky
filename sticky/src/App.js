@@ -16,7 +16,8 @@ import {
   NoteDetails,
   LeftMenu,
   Welcome, 
-  TopMenu
+  TopMenu,
+  Header
 } from './components';
 
 import {
@@ -235,10 +236,10 @@ class App extends Component {
     return (
       <AppDiv>
 
-        {localStorage.getItem('JWT') ? <TopMenu logout={this.logout} /> : null}
+        {localStorage.getItem('JWT') ? <Header logout={this.logout} /> : <Header logout={this.logout} />}
         
         <div className="bottom">
-            {localStorage.getItem('JWT') ? <LeftMenu logout={this.logout} /> : null}
+            {localStorage.getItem('JWT') ? <LeftMenu /> : null}
 
             <div className="right-display">
             {localStorage.getItem('JWT') ?
@@ -336,6 +337,8 @@ const mapDispatchToProps = {
      ${'' /* border: 1px solid red; */}
       display: flex;
       flex-direction: column;
+      background-color:white;
+      background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)});
       .all-notes {
         border: 1px solid red;
         display: flex;

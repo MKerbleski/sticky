@@ -9,10 +9,17 @@ export default class Header extends Component{
         return(
             <HeaderDiv>
                     <h1 className="headerTitle">Stic.ky</h1>
+                    {localStorage.getItem('username') ?
+                    <div className="linkss">
+                        <h3>{` Hello ${localStorage.getItem('username')},`}</h3>
+                        <div className="headerLink" onClick={this.props.logout} >Logout</div> 
+                    </div> :
+
                     <div className="linkss">
                         <Link className="headerLink" to="/welcome/login" >Login</Link>
                         <Link className="headerLink" to="/welcome/register" >Register</Link>
                     </div>
+                    }
             </HeaderDiv>
         )
     }
@@ -37,11 +44,12 @@ const HeaderDiv = styled.div`
         font-size: 35px;
         margin: 0;
         margin-left: 20px;
+        
     }
     .linkss{
         ${'' /* border: 1px solid green; */}
         ${'' /* width: 100px; */}
-        ${'' /* height: 100px; */}
+        height: 30px;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -49,7 +57,8 @@ const HeaderDiv = styled.div`
         margin: 0;
         .headerLink{
             ${'' /* border: 1px solid blue; */}
-            padding: 15px;
+            ${'' /* padding: 15px; */}
+            height: 100%;
             width: 75px;
             color: white;
             ${'' /* background-color: rgba(0,0,0,.1); */}
