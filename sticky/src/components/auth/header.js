@@ -44,7 +44,6 @@ const HeaderDiv = styled.div`
         font-size: 35px;
         margin: 0;
         margin-left: 20px;
-        
     }
     .linkss{
         ${'' /* border: 1px solid green; */}

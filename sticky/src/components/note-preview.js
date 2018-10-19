@@ -55,12 +55,23 @@ class NotePreview extends React.Component {
   getFirstWord = (text) => {
     let firstWord = text.substr(0, text.indexOf(" "));
     console.log(firstWord, 'word')
-    return firstWord
+    if(firstWord.length > 0){
+      return firstWord
+    } else {
+      return text
+    }
   }
+
   getFirstSen = (text) => {
     let firstSen = text.substr(0, text.indexOf("."));
     console.log(firstSen, 'sen')
-    return firstSen
+    let firstWord = this.getFirstWord(text)
+    firstSen = firstSen.replace(firstWord, '')
+    if(firstSen.length > 0){
+      return firstSen
+    } else{
+      return this.getFirstWord(text)
+    }
   }
   
   render(props){
@@ -86,9 +97,8 @@ class NotePreview extends React.Component {
                         to={`/all-notes/${this.props.layerOne.id}`}
                         style={{background: this.props.hover ? 'lightgreen' : null}}>
                             <div className="noteContent">
-                              <h2>{this.props.layerOne.textBody}</h2>
-                              <span>Id: {this.props.layerOne.id}  --  </span>
-                              <span>parentid: {this.props.layerOne.parentid}  </span> 
+                              <h2>{this.getFirstWord(this.props.layerOne.textBody)}...</h2>
+                              <p>...{this.getFirstSen(this.props.layerOne.textBody)}</p> 
                             </div>
                             <div className="layerTwoContainerA"  >
                               {this.props.allNotes.map(layerTwo => {

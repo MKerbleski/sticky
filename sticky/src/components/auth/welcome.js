@@ -83,7 +83,7 @@ const WelcomeDiv = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)});
+    ${'' /* background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)}); */}
     width: 100%;
     height: 100vh;
     ${'' /* ${flex('column')} */}
