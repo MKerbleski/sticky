@@ -38,7 +38,7 @@ export default class AllNotes extends Component {
 }
 
 const AllNotesDiv = styled.div`
-${'' /* border: 1px solid green; */}
+border: 1px solid green;
   display: flex;
   flex-direction: column;
   padding: 15px;
@@ -65,7 +65,7 @@ ${'' /* border: 1px solid green; */}
     justify-content: space-around;
     align-items: flex-start;
     padding: 20px;
-    ${'' /* height: 90%; */}
+    height: 100%;
     .note-link{
       text-decoration: none;
     }
