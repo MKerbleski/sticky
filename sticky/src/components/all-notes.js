@@ -38,12 +38,14 @@ export default class AllNotes extends Component {
 }
 
 const AllNotesDiv = styled.div`
+${'' /* border: 1px solid green; */}
   display: flex;
   flex-direction: column;
   padding: 15px;
   ${'' /* background-color: #2a465c; */}
   color: black;
-  ${'' /* height: 90%; */}
+  height: 100%;
+  overflow: auto;
   .sort {
     display: flex;
     flex-direction: row;

@@ -13,7 +13,7 @@ const LayerThreeSource = (props) => {
                          border: props.isDragging ? '1px dashed gray': '1px solid black',
                         //  color: props.didDrop ? "red" : "green"
                         }}>
-                       <h6>{props.layerThree.textBody}</h6>
+                       <p>{props.getFirstWord(props.layerThree.textBody,1)}</p>
                     </LayerThreeDiv>
                 </div>
             )
@@ -54,11 +54,17 @@ const LayerThreeSource = (props) => {
 export default DragSource('item', sourceObj, collect)(LayerThreeSource);
 
 const LayerThreeDiv = styled.div`
-    background: lightgray;
-    margin: 10px;
-    padding: 10px;
-    max-height: 20px;
+    border: 1px solid green;
+    background: black;
+    color: white;
+    font-size: 10px;
+    ${'' /* margin: 10px; */}
+    ${'' /* padding: 10px; */}
+    max-height: 25px;
+    max-width: 25px;
+    border-radius: 50px;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 `;

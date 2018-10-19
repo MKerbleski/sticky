@@ -67,16 +67,17 @@ class LayerTwoTargetSource extends React.Component {
                             style={{background: this.props.hover ? 'lightgreen' : null}}>
                             {/* <h3>{this.props.layerTwo.title}</h3> */}
                             
-                            <div className="layerThreeContainer">
-                            <p>{this.props.layerTwo.textBody}</p>
+                            <h4>{this.props.getFirstWord(this.props.layerTwo.textBody)}</h4>
+                            <div className="layerThreeContainerAll">
                                {this.props.allNotes.map(layerThree => {
                                     if (layerThree.parent_id === this.props.layerTwo.id){
                                         return (
-                                            <div key={layerThree.id} >
+                                            <div className="layerThreeContainer" key={layerThree.id} >
                                                 <LayerThreeSource 
                                                     type="note"
                                                     changeParent={this.props.changeParent} layerThree={layerThree} 
                                                     onDrop={this.props.onDrop}
+                                                    getFirstWord={this.props.getFirstWord}
                                                     />
                                             </div>
                                         )
@@ -115,30 +116,36 @@ export default flow(
 
 const LayerTwoDiv = styled.div`
     border: 2px solid black;
-    border-radius: 50px;
+    border-radius: 20px;
     margin: 10px;
     padding: 10px;
-    width: 40%;
-    height: 100px;
+    ${'' /* height: 90px; */}
     background: white;
-
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    align-content: flex-start;
+    justify-content: flex-start;
     
     overflow: visible;
-    h3 {
-        border: 1px solid orange;
+    h4 {
+        ${'' /* border: 1px solid orange; */}
         margin: 0px;
     }
-    .layerThreeContainer{
+    .layerThreeContainerAll{
         ${'' /* border: 1px solid red; */}
-        height: 500px;
+        ${'' /* border: 1px solid green; */}
+        ${'' /* height: 500px; */}
         ${'' /* background: gray; */}
+        ${'' /* height: 90px; */}
         display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: space-around;
         ${'' /* overflow: hidden; */}
+        .layerThreeContainer{
+            ${'' /* border: 1px solid red; */}
+            height: 25px;
+        }
     }
 `;

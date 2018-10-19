@@ -339,6 +339,7 @@ const mapDispatchToProps = {
       display: flex;
       flex-direction: column;
       background-color:white;
+      height: 0 auto;
       ${'' /* background-image: url(https://picsum.photos/g/1500/1500?image=${1073}); */}
       ${'' /* background-image: url(http://placeimg.com/1000/1000/arch/grayscale); */}
       .all-notes {
@@ -349,7 +350,7 @@ const mapDispatchToProps = {
         justify-content: space-around;
         align-items: flex-start;
         padding: 20px;
-        height: 70%;
+        height: 0 auto;
         .note-link{
           text-decoration: none;
         }
@@ -362,7 +363,7 @@ const mapDispatchToProps = {
         display: flex;
         flex-direction: row;
         z-index: 0;
-        height: 93vh;
+        ${'' /* height: 93vh; */}
         .right-display{
           ${'' /* border: 1px solid blue; */}
           ${'' /* background-color: black; */}
@@ -370,7 +371,8 @@ const mapDispatchToProps = {
           display: flex;
           flex-direction: column;
           flex-wrap: wrap;
-          height: 90%;
+          height: 95vh;
+          overflow: auto;
         }
         .delete {
           ${'' /* border: 1px solid red; */}

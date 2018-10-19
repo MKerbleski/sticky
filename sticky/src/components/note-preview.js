@@ -52,8 +52,9 @@ const sourceObj = {
 
 class NotePreview extends React.Component {
   
-  getFirstWord = (text) => {
-    let firstWord = text.substr(0, text.indexOf(" "));
+  getFirstWord = (text, words=2) => {
+    // let firstWord = text.substr(0, text.indexOf(" "));
+    let firstWord = text.split(" ").slice(0,words).join(' ');
     console.log(firstWord, 'word')
     if(firstWord.length > 0){
       return firstWord
@@ -63,19 +64,22 @@ class NotePreview extends React.Component {
   }
 
   getFirstSen = (text) => {
-    let firstSen = text.substr(0, text.indexOf("."));
-    console.log(firstSen, 'sen')
+    // let firstSen = text.substr(0, text.indexOf("."));    
+    // or 
+    let firstSen = text
+
     let firstWord = this.getFirstWord(text)
     firstSen = firstSen.replace(firstWord, '')
-    if(firstSen.length > 0){
+
+    
+    if(firstSen !== firstWord){
       return firstSen
     } else{
-      return this.getFirstWord(text)
+      return null
     }
   }
   
   render(props){
-      // console.log(this.getFirstWord())
       const {
           connectDragSource, 
           connectDropTarget, 
@@ -97,10 +101,10 @@ class NotePreview extends React.Component {
                         to={`/all-notes/${this.props.layerOne.id}`}
                         style={{background: this.props.hover ? 'lightgreen' : null}}>
                             <div className="noteContent">
-                              <h2>{this.getFirstWord(this.props.layerOne.textBody)}...</h2>
-                              <p>...{this.getFirstSen(this.props.layerOne.textBody)}</p> 
+                              <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.textBody)}</h3>
+                              <p>{this.getFirstSen(this.props.layerOne.textBody)}</p> 
                             </div>
-                            <div className="layerTwoContainerA"  >
+                            <div className="layerTwoContainerAll"  >
                               {this.props.allNotes.map(layerTwo => {
                                   if (layerTwo.parent_id === this.props.layerOne.id){return (
                                           <div className="layerTwoContainer" key={layerTwo.id}>
@@ -108,7 +112,8 @@ class NotePreview extends React.Component {
                                                 type="note"
                                                 onDrop={this.props.onDrop} 
                                                 layerTwo={layerTwo} 
-                                                allNotes={this.props.allNotes} />
+                                                allNotes={this.props.allNotes}
+                                                getFirstWord={this.getFirstWord} />
                                           </div>
                                           )
                                   } else {
@@ -170,41 +175,41 @@ const NotePreviewDiv = styled.div`
       align-items: center;
 
       color: black;
-      width: 100%;
+      width: 250px;
       height: auto;
-      flex-wrap: wrap;
-      width: 95%;
-      max-height: 150px;
-      overflow: hidden;
+      ${'' /* flex-wrap: wrap; */}
+      max-height: 100px;
       margin: 2% 0;
-      h3{
+      .note-preview-title {
         ${'' /* border: 1px solid green; */}
-        margin: 10px 10px 5px 0;
+        margin: 0px 10px 5px 0;
         text-decoration: none;
-        border-bottom: 1px solid black;
+        text-align: left;
       }
       p {
         ${'' /* border: 1px solid blue; */}
         width: 95%;
-        height: 40%;
-        padding-bottom: 10px;
-        overflow: auto;
+        height: 46px;
         text-decoration: none;
         margin: 0;
         line-height: 23px;
         font-size: 14px;
         font: roboto;
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
     .layerTwoContainer{
-      border: 1px solid red;
-      width: 40%;
+      ${'' /* border: 1px solid red; */}
+      ${flex()}
     }
-    .layerTwoContainerA{
-      border: 1px solid blue;
+    .layerTwoContainerAll{
+      ${'' /* border: 1px solid blue; */}
       width: 100%;
       ${flex()}
       flex-wrap: wrap;
+      justify-content: space-around;
     }
     .tags {
       border: 1px solid red;

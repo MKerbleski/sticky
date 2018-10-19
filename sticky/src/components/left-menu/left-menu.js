@@ -36,7 +36,7 @@ const LeftMenuDiv = styled.div`
   ${'' /* ${ solid() } */}
   ${ menu() }
   color: white;
-  height: 100%;
+  height: 95vh;
   width: 5%;
   display: flex;
   flex-direction: column;
