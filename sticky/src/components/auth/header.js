@@ -34,7 +34,7 @@ const HeaderDiv = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    ${'' /* height: 0 auto; */}
+    height: 5vh;
     padding: 0;
     ${menu()}
     .headerTitle-link {

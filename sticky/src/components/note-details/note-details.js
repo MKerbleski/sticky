@@ -74,7 +74,7 @@ const NoteDetailsDiv = styled.div`
   padding: 25px;
   ${'' /* background-color: white; */}
   background-color: #F3F3F3;
-  height: 100vh;
+  ${'' /* height: 100vh; */}
   .noteDetails {
     background-color: white;
     border: 1px solid lightgray;

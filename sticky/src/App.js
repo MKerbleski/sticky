@@ -336,14 +336,18 @@ const mapDispatchToProps = {
  export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 
  const AppDiv = styled.div`
-     border: 1px solid red;
+     ${'' /* border: 1px solid red; */}
       display: flex;
       flex-direction: column;
       background-color:white;
-      height: 0 auto;
+      height: 100vh;
+      margin: 0;
+      box-sizing: border-box;
+
       ${'' /* background-image: url(https://picsum.photos/g/1500/1500?image=${1073}); */}
       ${'' /* background-image: url(http://placeimg.com/1000/1000/arch/grayscale); */}
       .all-notes {
+        box-sizing: border-box;
         ${'' /* border: 1px solid red; */}
         display: flex;
         flex-direction: row;
@@ -360,11 +364,13 @@ const mapDispatchToProps = {
         height: 5vh;
       }
      .bottom {
+        ${'' /* border: 1px solid blue; */}
         ${'' /* background: black; */}
         display: flex;
         flex-direction: row;
         z-index: 0;
-        ${'' /* height: 93vh; */}
+        box-sizing: border-box;
+        height: 95vh;
         .right-display{
           ${'' /* border: 1px solid blue; */}
           ${'' /* background-color: black; */}
@@ -372,13 +378,13 @@ const mapDispatchToProps = {
           display: flex;
           flex-direction: column;
           flex-wrap: wrap;
-          ${'' /* height: 93vh; */}
+          ${'' /* height: 94vh; */}
           overflow: auto;
         }
         .delete {
           ${'' /* border: 1px solid red; */}
           width: 100vw;
-          height: 100vh;
+          ${'' /* height: 100vh; */}
           background-color:rgba(215,215,215,0.5);
           position: fixed;
           z-index: 10;

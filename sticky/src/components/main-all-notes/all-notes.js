@@ -66,7 +66,7 @@ ${'' /* border: 1px solid green; */}
     justify-content: space-around;
     align-items: flex-start;
     padding: 20px;
-    height: 100%;
+    ${'' /* height: 100%; */}
     .note-link{
       text-decoration: none;
     }
