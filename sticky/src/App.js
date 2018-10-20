@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -145,7 +145,6 @@ class App extends Component {
     // console.log('handleDrop, id: ', id);
     //will delete from actions when uncommented
     // this.props.deleteNote(id)
-
       
     if(target_id){
       let target = this.getNoteDetails(target_id)
@@ -173,10 +172,8 @@ class App extends Component {
       console.log(source_id, type, target_id)
       this.changeParent(source_id, target_id)
     } else if (type === "top"){
-
       console.log(source_id, type, target_id=null)
       this.editNote({id: source_id, parent_id: target_id})
-    
     }
     
   }
@@ -235,6 +232,7 @@ class App extends Component {
   render() {
     return (
       <AppDiv>
+      
         <div className="appTop">
           <Header logout={this.logout} />
         </div>
@@ -247,7 +245,7 @@ class App extends Component {
                 <React.Fragment>
                     <Route
                         exact
-                        path="/all-notes"
+                        path="/all-notes" 
                         render={ () => {
                           return (
                             <AllNotes
@@ -310,7 +308,12 @@ class App extends Component {
                       null}
                   </React.Fragment> :
               
-              <Route path="/welcome" component={Welcome}></Route>}
+              <Route path="/welcome" render={() => {
+                return (
+                  <Welcome newNote={this.newNote} />
+                )
+              }}
+              ></Route>}
 
             </div>
         </div>

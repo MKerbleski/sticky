@@ -8,7 +8,9 @@ export default class Header extends Component{
     render(props){
         return(
             <HeaderDiv>
+                <Link to={localStorage.getItem('JWT') ? '/all-notes' : '/welcome'} className="headerTitle-link">
                     <h1 className="headerTitle">Stic.ky</h1>
+                </Link>
                     {localStorage.getItem('username') ?
                         <div className="linkss">
                             <h3>{` Hello ${localStorage.getItem('username')},`}</h3>
@@ -35,15 +37,26 @@ const HeaderDiv = styled.div`
     height: 0 auto;
     padding: 0;
     ${menu()}
-    .headerTitle{
-        ${'' /* border: 1px solid green; */}
-        color: black;
-        -webkit-text-stroke-width: .1px;
-        -webkit-text-stroke-color: black;
-        ${'' /* width: 80%; */}
-        font-size: 35px;
-        margin: 0;
-        margin-left: 20px;
+    .headerTitle-link {
+        text-decoration: none;
+        :active {
+            text-decoration: none;
+            }
+        :visited {
+            color: black;
+            text-decoration: none;
+        }
+        .headerTitle{
+            ${'' /* border: 1px solid green; */}
+            color: black;
+            -webkit-text-stroke-width: .1px;
+            -webkit-text-stroke-color: black;
+            ${'' /* width: 80%; */}
+            font-size: 35px;
+            margin: 0;
+            margin-left: 20px;
+            text-decoration: none;
+        }
     }
     .linkss{
         ${'' /* border: 1px solid green; */}

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import Login from './login';
@@ -50,30 +50,36 @@ class Welcome extends Component{
             })
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
-            this.props.history.push('/all-notes')
+            if(localStorage.getItem('textBody')){
+                this.props.newNote();
+            } else {
+                this.props.history.push('/all-notes')
+            }
         }).catch(err => {console.log(err.message)})
     }
-
+    
     inputHandler = (e) => {
         e.preventDefault();
         this.setState({
             [e.target.name]: e.target.value
         })        
     }
-
+    
     saveLocalNote = (e) => {
-        console.log(e.target.value)
+        console.log(this)
         e.preventDefault();
-        localStorage.setItem(`textBody - ${this.state.noteCount}`, this.state.entryNote)
+        localStorage.setItem(`textBody`, this.state.entryNote)
         this.setState({
             entryNote: '',
-            noteCount: this.state.noteCount + 1
         })
+        
+        this.props.history.push('/all-notes')
         alert('notes saved locally. please sign in or register to save note permenantly.')
+        // return <Redirect to='/login' />
     }
 
     render(props){
-        console.log(this.state)
+        console.log(this.props)
         return(
             <WelcomeDiv>
                 {/* <Route path="/welcome" component={Header} /> */}
@@ -91,9 +97,10 @@ class Welcome extends Component{
                 <Route exact path="/welcome/" render={() => {
                         return <form onSubmit={this.saveLocalNote}>
                             <textarea 
-                        type="text" 
-                        name="entryNote" placeholder='have an idea? start typing...' 
-                        onChange={this.inputHandler} value={this.state.entryNote} autoFocus>{this.value}</textarea>
+                                type="text" 
+                                name="entryNote" placeholder='have an idea? start typing...' 
+                                onChange={this.inputHandler} 
+                                value={this.state.entryNote} autoFocus>{this.value}</textarea>
                     <input type="submit" name="Save note" />
                 </form>
                         }} />
