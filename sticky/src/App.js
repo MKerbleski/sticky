@@ -275,7 +275,7 @@ class App extends Component {
 
                       <Route
                         exact={!this.state.deleteEnabled}
-                        path="/all-notes/:noteId"
+                        path="/note/:noteId"
                         render={ (note) => {
                           return (
                             <NoteDetails
@@ -285,7 +285,7 @@ class App extends Component {
 
                       <Route
                         exact
-                        path="/all-notes/:noteId/edit"
+                        path="/note/:noteId/edit"
                         render={ (note) => {
                           return (
                             <EditNote
@@ -298,7 +298,7 @@ class App extends Component {
                       {(this.state.deleteEnabled) ?
                           (<div className="delete">
                               <Route
-                                path="/all-notes/:noteId/delete"
+                                path="/note/:noteId/delete"
                                 render={ (note) => {
                                   return (
                                     <div>

@@ -98,7 +98,7 @@ class NotePreview extends React.Component {
                         index={this.props.index}
                         className="note-link"
                         id={this.props.layerOne.id}
-                        to={`/all-notes/${this.props.layerOne.id}`}
+                        to={`/note/${this.props.layerOne.id}`}
                         style={{background: this.props.hover ? 'lightgreen' : null}}>
                             <div className="noteContent">
                               <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.textBody)}</h3>
