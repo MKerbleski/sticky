@@ -64,26 +64,13 @@ class Welcome extends Component{
             [e.target.name]: e.target.value
         })        
     }
-    
-    saveLocalNote = (e) => {
-        e.preventDefault();
-        console.log(this)
-        localStorage.setItem(`textBody`, this.state.entryNote)
-        this.setState({
-            entryNote: '',
-        })
-        
-        // this.props.history.push('/all-notes')
-        alert('notes saved locally. please sign in or register to save note permenantly.')
-        // return <Redirect to='/login' />
-    }
 
     render(props){
         // console.log(this.props)
         return(
             <WelcomeDiv>
                 {/* <Route path="/welcome" component={Header} /> */}
-                <div className="sign-in">
+
                     <Route path="/welcome/login" render={() => {
                         return <Login failed={(this.props.state.failedLoginAttempt)? true : false} 
                         sendingData={this.state.sendingData}
@@ -92,20 +79,17 @@ class Welcome extends Component{
                         return <Register failed={this.props.state.failedRegistrationAttempt} 
                         sendingData={this.state.sendingData}
                         createUser={this.createUser} />}} />
-                </div>
-
-                <Route path="/welcome/" render={() => {
-                        return <form onSubmit={this.saveLocalNote}>
-                            <textarea 
-                                type="text" 
-                                name="entryNote" placeholder='have an idea? start typing...' 
-                                onChange={this.inputHandler} 
-                                value={this.state.entryNote} autoFocus>{this.value}</textarea>
-                    <input type="submit" name="Save note" />
-                </form>
+                    <Route exact path="/welcome/" render={() => {
+                        return <form onSubmit={this.props.saveLocalNote}>
+                                    <textarea 
+                                        type="text" 
+                                        name="entryNote" placeholder='have an idea? start typing...' 
+                                        onChange={this.inputHandler} 
+                                        value={this.state.entryNote} autoFocus>{this.value}</textarea>
+                                    <input type="submit" name="Save note" />
+                                </form>
                         }} />
 
-                
             </WelcomeDiv>
         )
     }
@@ -125,17 +109,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
 //379 dope picture
 
 const WelcomeDiv = styled.div`
-    ${'' /* border: 1px solid red; */}
+    border: 1px solid red;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     ${'' /* background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)}); */}
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     ${'' /* ${flex('column')} */}
     form{
+        border: 1px solid green;
+
         textarea{
+            ${'' /* border: 1px solid green; */}
             background: rgba(255,255,255,0.15);
             border: none;
             padding: 20px;
@@ -152,6 +139,6 @@ const WelcomeDiv = styled.div`
         }
     }
     .sign-in{
-        z-index: 100;
+        ${'' /* z-index: 100; */}
     }
 `;

@@ -196,6 +196,18 @@ class App extends Component {
     
   }
 
+  saveLocalNote = (e) => {
+    e.preventDefault();
+    console.log(this)
+    localStorage.setItem(`textBody`, this.state.entryNote)
+    this.setState({
+        entryNote: '',
+    })
+    this.props.history.push('/welcome/login')
+    alert('notes saved locally. please sign in or register to save note permenantly.')
+    // return <Redirect to='/login' />
+  }
+
   sortById = (e) => {
     let newArr = this.props.state.notes.slice()
     function compare(a, b){
@@ -310,12 +322,9 @@ class App extends Component {
                       null}
                   </React.Fragment> :
               
-              <Route path="/welcome/" render={ () => {
-                return (
-                  <Welcome newNote={this.newNote} />
-                )
-              }}
-              ></Route>}
+              <Route path="/welcome/" component={Welcome} />
+              
+              }
 
             </div>
         </div>
