@@ -38,30 +38,24 @@ class App extends Component {
     }
   }
 
+  changeParent = (source_id, target_id) => {
+    console.log('change target', 'sourceId: ', source_id, 'targetId: ', target_id)
+
+    if(source_id !== target_id){
+        this.editNote({id: source_id, parent_id: target_id})
+        this.props.getNotes();
+    }
+  }
+
   componentDidMount = () => {
     if(localStorage.getItem('JWT')){
       this.props.history.push('/all-notes')
     } else {
       this.props.history.push('/welcome/')
     }
+  
   }
-
-  getNoteDetails = (id) => {
-    return this.props.state.notes.find(note => {return note.id === +id})
-  }
-
-  disableDelete = () => {
-    this.setState({
-      deleteEnabled: false,
-    })
-  }
-
-  enableDelete = () => {
-    this.setState({
-      deleteEnabled: true,
-    })
-  }
-
+  
   deleteNote = (id) => {
     //use this for actualy deleting notes
     if(localStorage.getItem('JWT')){
@@ -82,25 +76,12 @@ class App extends Component {
     }
   }
 
-  newNote = (newNote) => {
-      if(localStorage.getItem('JWT')){
-        const token = localStorage.getItem('JWT')
-        const authHeader = {
-          headers: {
-            Authorization: token,    
-          } 
-        }
-      axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/notes/', (newNote), authHeader)
-      .then(res => {
-        this.props.history.push('/all-notes')
-        // this.props.getNotes();
-        //this is not necessary because it is called on a different route than /all notes
-      }).catch(err => console.log(err.message))
-    } else {
-      console.log('need to include toekn in request')
-    }
+  disableDelete = () => {
+    this.setState({
+      deleteEnabled: false,
+    })
   }
-
+  
   editNote = (noteEdit) => {
     if(localStorage.getItem('JWT')){
       const token = localStorage.getItem('JWT')
@@ -121,6 +102,12 @@ class App extends Component {
     }
   }
 
+  enableDelete = () => {
+    this.setState({
+      deleteEnabled: true,
+    })
+  }
+
   fakeDeleteNote = (noteEdit) => {
     if(localStorage.getItem('JWT')){
       const token = localStorage.getItem('JWT')
@@ -137,6 +124,37 @@ class App extends Component {
         this.props.history.push('/all-notes')
       }).catch(err => console.log(err.message))
     }else {
+      console.log('need to include toekn in request')
+    }
+  }
+  
+  getNoteDetails = (id) => {
+    return this.props.state.notes.find(note => {return note.id === +id})
+  }
+  
+  logout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem('JWT');
+    localStorage.removeItem('username');
+    this.props.clearNotes();
+    this.props.history.push('/welcome')
+  }
+
+  newNote = (newNote) => {
+      if(localStorage.getItem('JWT')){
+        const token = localStorage.getItem('JWT')
+        const authHeader = {
+          headers: {
+            Authorization: token,    
+          } 
+        }
+      axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/notes/', (newNote), authHeader)
+      .then(res => {
+        this.props.history.push('/all-notes')
+        // this.props.getNotes();
+        //this is not necessary because it is called on a different route than /all notes
+      }).catch(err => console.log(err.message))
+    } else {
       console.log('need to include toekn in request')
     }
   }
@@ -212,24 +230,8 @@ class App extends Component {
     this.props.sortNote(newArr)
   }
 
-  logout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem('JWT');
-    localStorage.removeItem('username');
-    this.props.clearNotes();
-    this.props.history.push('/welcome')
-  }
-
-  changeParent = (source_id, target_id) => {
-    console.log('change target', 'sourceId: ', source_id, 'targetId: ', target_id)
-
-    if(source_id !== target_id){
-        this.editNote({id: source_id, parent_id: target_id})
-        this.props.getNotes();
-    }
-  }
-
-  render() {
+  render(props) {
+    console.log(this.props)
     return (
       <AppDiv>
       
@@ -308,7 +310,7 @@ class App extends Component {
                       null}
                   </React.Fragment> :
               
-              <Route path="/welcome" render={() => {
+              <Route path="/welcome/" render={ () => {
                 return (
                   <Welcome newNote={this.newNote} />
                 )

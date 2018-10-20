@@ -50,11 +50,11 @@ class Welcome extends Component{
             })
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
-            if(localStorage.getItem('textBody')){
-                this.props.newNote();
-            } else {
+            // if(localStorage.getItem('textBody')){
+            //     this.props.newNote();
+            // } else {
                 this.props.history.push('/all-notes')
-            }
+            // }
         }).catch(err => {console.log(err.message)})
     }
     
@@ -66,20 +66,20 @@ class Welcome extends Component{
     }
     
     saveLocalNote = (e) => {
-        console.log(this)
         e.preventDefault();
+        console.log(this)
         localStorage.setItem(`textBody`, this.state.entryNote)
         this.setState({
             entryNote: '',
         })
         
-        this.props.history.push('/all-notes')
+        // this.props.history.push('/all-notes')
         alert('notes saved locally. please sign in or register to save note permenantly.')
         // return <Redirect to='/login' />
     }
 
     render(props){
-        console.log(this.props)
+        // console.log(this.props)
         return(
             <WelcomeDiv>
                 {/* <Route path="/welcome" component={Header} /> */}
@@ -94,7 +94,7 @@ class Welcome extends Component{
                         createUser={this.createUser} />}} />
                 </div>
 
-                <Route exact path="/welcome/" render={() => {
+                <Route path="/welcome/" render={() => {
                         return <form onSubmit={this.saveLocalNote}>
                             <textarea 
                                 type="text" 
