@@ -44,7 +44,7 @@ const DeleteNoteDiv = styled.div`
     ${'' /* border: 1px solid purple; */}
     background: white;
     padding: 40px 100px;
-    margin: 250px;
+    ${'' /* margin: 250px; */}
     height: 100vh;
     ${'' /* width: 500px; */}
     z-index: 10;

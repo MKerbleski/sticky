@@ -22,6 +22,7 @@ export default class AllNotes extends Component {
   }
 
   render(props) {    
+    console.log(this.props.notes)
     return (
       <AllNotesDiv>
         
@@ -30,8 +31,8 @@ export default class AllNotes extends Component {
             <button onClick={this.props.sortByLetter}>A->Z</button>
             <button onClick={this.props.sortById}>Id</button>
         </div>
-
-        <AllNotesBin type="top" onDrop={this.props.onDrop} allNotes={this.props.notes}/>
+        {this.props.notes.length > 0 ? 
+        <AllNotesBin type="top" onDrop={this.props.onDrop} allNotes={this.props.notes}/>: <h1>loading notes</h1>}
       </AllNotesDiv>
     );
   }
