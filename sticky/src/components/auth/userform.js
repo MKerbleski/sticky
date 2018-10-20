@@ -22,7 +22,7 @@ export default class UserForm extends Component{
         this.props.loginOrRegister(this.state)
     }
     
-    render(){
+    render(props){
         return(
             <UserFormDiv>
                 <form onSubmit={this.submit}>
@@ -47,7 +47,7 @@ export default class UserForm extends Component{
                         placeholder="password" 
                         onChange={this.inputHandler}
                         value={this.state.password}>{this.value}</input>
-                    <input type="submit" />
+                    {this.props.sendingData ? <p>sending credentials</p> : <input type="submit" />}
                 </form>
             </UserFormDiv>
         )

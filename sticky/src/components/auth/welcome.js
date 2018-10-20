@@ -20,19 +20,34 @@ class Welcome extends Component{
         super(props);
         this.state = {
             entryNote: '',
+            sendingData: false,
+            noteCount: 0
         }
     }
 
     createUser = (newUser) => {
+        this.setState({
+            sendingData: true
+        })
         axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/welcome/register/', newUser).then(res => {
+            this.setState({
+                sendingData: false
+            })
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
             this.props.history.push('/all-notes')
-        }).catch(err => {alert(err.message); console.log(err.message)})
+        }).catch(err => {alert(err.message); console.err(err.message)})
     }
 
     loginUser2 = (creds) => {
+        this.setState({
+            sendingData: false,
+            entryNote: ''
+        })
         axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/welcome/login', creds).then(res => {
+            this.setState({
+                sendingData: true
+            })
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
             this.props.history.push('/all-notes')
@@ -44,21 +59,46 @@ class Welcome extends Component{
         this.setState({
             [e.target.name]: e.target.value
         })        
-        
+    }
+
+    saveLocalNote = (e) => {
+        console.log(e.target.value)
+        e.preventDefault();
+        localStorage.setItem(`textBody - ${this.state.noteCount}`, this.state.entryNote)
+        this.setState({
+            entryNote: '',
+            noteCount: this.state.noteCount + 1
+        })
+        alert('notes saved locally. please sign in or register to save note permenantly.')
     }
 
     render(props){
-        // console.log(this.props)
+        console.log(this.state)
         return(
             <WelcomeDiv>
                 {/* <Route path="/welcome" component={Header} /> */}
-                <div>
+                <div className="sign-in">
                     <Route path="/welcome/login" render={() => {
-                        return <Login failed={(this.props.state.failedLoginAttempt)? true : false} loginUser={this.loginUser2} />}} />
+                        return <Login failed={(this.props.state.failedLoginAttempt)? true : false} 
+                        sendingData={this.state.sendingData}
+                        loginUser={this.loginUser2} />}} />
                     <Route path="/welcome/register" render={() => {
-                        return <Register failed={this.props.state.failedRegistrationAttempt} createUser={this.createUser} />}} />
+                        return <Register failed={this.props.state.failedRegistrationAttempt} 
+                        sendingData={this.state.sendingData}
+                        createUser={this.createUser} />}} />
                 </div>
-                <textarea type="text" name="entryNote" placeholder='have an idea? start typing...' onChange={this.inputHandler} value={this.state.entryNote} autofocus>{this.value}</textarea>
+
+                <Route exact path="/welcome/" render={() => {
+                        return <form onSubmit={this.saveLocalNote}>
+                            <textarea 
+                        type="text" 
+                        name="entryNote" placeholder='have an idea? start typing...' 
+                        onChange={this.inputHandler} value={this.state.entryNote} autoFocus>{this.value}</textarea>
+                    <input type="submit" name="Save note" />
+                </form>
+                        }} />
+
+                
             </WelcomeDiv>
         )
     }
@@ -87,19 +127,24 @@ const WelcomeDiv = styled.div`
     width: 100%;
     height: 100vh;
     ${'' /* ${flex('column')} */}
-    textarea{
-        background: rgba(255,255,255,0.15);
-        border: none;
-        padding: 20px;
-        font-size: 20px;
-        color: white;
-        margin: 100px;
-        width: 400px;
-        height: 200px;
-        ::placeholder{
-            color: #F0EFEF;
+    form{
+        textarea{
+            background: rgba(255,255,255,0.15);
+            border: none;
+            padding: 20px;
+            font-size: 20px;
             color: black;
-            font-size: 35px;
+            margin: 100px;
+            width: 400px;
+            height: 200px;
+            ::placeholder{
+                color: #F0EFEF;
+                color: black;
+                font-size: 35px;
+            }
         }
+    }
+    .sign-in{
+        z-index: 100;
     }
 `;

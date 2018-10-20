@@ -12,7 +12,7 @@ const DeleteTarget = (props) => (
         cursor: "default"
       }}
       >
-      <i class="fas fa-trash-alt"></i>
+      <i className="fas fa-trash-alt"></i>
     </div>
   )
 );

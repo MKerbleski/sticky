@@ -15,16 +15,16 @@ export default class LeftMenu extends Component {
     return (
       <LeftMenuDiv>
         <div className='leftMenuTop'>
-          <Link className={this.state.allNotesSelected ? "current menu-item" : "menu-item"}  to="/all-notes" style={this.props}><i class="fab fa-stack-overflow"></i></Link>
-          <Link className="menu-item" to="/new-note"><i class="fas fa-plus-square"></i></Link>
-          <div className="menu-item"><i class="fas fa-tv"></i></div>
-          <div className="menu-item"><i class="fas fa-book-open"></i></div>
+          <Link className={this.state.allNotesSelected ? "current menu-item" : "menu-item"}  to="/all-notes" style={this.props}><i className="fab fa-stack-overflow"></i></Link>
+          <Link className="menu-item" to="/new-note"><i className="fas fa-plus-square"></i></Link>
+          <div className="menu-item"><i className="fas fa-tv"></i></div>
+          <div className="menu-item"><i className="fas fa-book-open"></i></div>
         </div>
         <div className="leftMenuBottom">
           {/* <div className="menu-item" onClick={this.download} >Download CSV</div> */}
           <DeleteTarget type='deleteBin' className="menu-item red" />
           {/* <div  onClick={this.delete} to="/deleted-notes">Delete Item</div> */}
-          <div className="menu-item"><i class="fas fa-cogs"></i></div>
+          <div className="menu-item"><i className="fas fa-cogs"></i></div>
         </div>
       </LeftMenuDiv>
     );
