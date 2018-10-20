@@ -50,20 +50,51 @@ class Welcome extends Component{
             })
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
-            // if(localStorage.getItem('textBody')){
-            //     this.props.newNote();
-            // } else {
+            if(localStorage.getItem('textBody')){
+                this.newNote({textBody: localStorage.getItem('textBody')})
+            } else {
                 this.props.history.push('/all-notes')
-            // }
+            }
         }).catch(err => {console.log(err.message)})
     }
     
+    newNote = (newNote) => {
+        if(localStorage.getItem('JWT')){
+          const token = localStorage.getItem('JWT')
+          const authHeader = {
+            headers: {
+              Authorization: token,    
+            } 
+          }
+        axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/notes/', (newNote), authHeader)
+        .then(res => {
+          this.props.history.push('/all-notes')
+          // this.props.getNotes();
+          //this is not necessary because it is called on a different route than /all notes
+        }).catch(err => console.log(err.message))
+      } else {
+        console.log('need to include toekn in request')
+      }
+    }
+
     inputHandler = (e) => {
         e.preventDefault();
         this.setState({
             [e.target.name]: e.target.value
         })        
     }
+
+    saveLocalNote = (e) => {
+        e.preventDefault();
+        console.log(this)
+        localStorage.setItem(`textBody`, this.state.entryNote)
+        this.setState({
+            entryNote: '',
+        })
+        this.props.history.push('/welcome/login')
+        alert('notes saved locally. please sign in or register to save note permenantly.')
+        // return <Redirect to='/login' />
+      }
 
     render(props){
         // console.log(this.props)
@@ -80,7 +111,7 @@ class Welcome extends Component{
                         sendingData={this.state.sendingData}
                         createUser={this.createUser} />}} />
                     <Route exact path="/welcome/" render={() => {
-                        return <form onSubmit={this.props.saveLocalNote}>
+                        return <form onSubmit={this.saveLocalNote}>
                                     <textarea 
                                         type="text" 
                                         name="entryNote" placeholder='have an idea? start typing...' 
