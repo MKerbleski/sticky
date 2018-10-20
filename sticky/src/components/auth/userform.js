@@ -27,6 +27,7 @@ export default class UserForm extends Component{
             <UserFormDiv>
                 <form onSubmit={this.submit}>
                     <input 
+                        autoFocus
                         required
                         type="text"
                         name="username" 

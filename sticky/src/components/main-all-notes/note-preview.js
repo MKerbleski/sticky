@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
-import { flex } from './../styles/styl-utils.js'
+import { flex } from '../../styles/styl-utils.js'
 
 import LayerTwoTargetSource from "./layerTwoTargetSource"
 

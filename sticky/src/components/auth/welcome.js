@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import axios from 'axios';
 
 import Login from './login';
@@ -68,9 +68,10 @@ class Welcome extends Component{
           }
         axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/notes/', (newNote), authHeader)
         .then(res => {
-          this.props.history.push('/all-notes')
-          // this.props.getNotes();
-          //this is not necessary because it is called on a different route than /all notes
+            localStorage.removeItem('textBody')
+            this.props.history.push('/all-notes')
+            // this.props.getNotes();
+            //this is not necessary because it is called on a different route than /all notes
         }).catch(err => console.log(err.message))
       } else {
         console.log('need to include toekn in request')
@@ -140,18 +141,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
 //379 dope picture
 
 const WelcomeDiv = styled.div`
-    border: 1px solid red;
+    ${'' /* border: 1px solid red; */}
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     ${'' /* background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)}); */}
-    width: 100%;
+    ${'' /* width: 100%; */}
     height: 90vh;
     ${'' /* ${flex('column')} */}
     form{
-        border: 1px solid green;
-
+        ${'' /* border: 1px solid green; */}
         textarea{
             ${'' /* border: 1px solid green; */}
             background: rgba(255,255,255,0.15);

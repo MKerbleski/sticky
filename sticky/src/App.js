@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -336,7 +336,7 @@ const mapDispatchToProps = {
  export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 
  const AppDiv = styled.div`
-     ${'' /* border: 1px solid red; */}
+     border: 1px solid red;
       display: flex;
       flex-direction: column;
       background-color:white;
@@ -372,7 +372,7 @@ const mapDispatchToProps = {
           display: flex;
           flex-direction: column;
           flex-wrap: wrap;
-          height: 95vh;
+          ${'' /* height: 93vh; */}
           overflow: auto;
         }
         .delete {

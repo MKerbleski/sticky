@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NewForm from './new-form.js';
+import NewForm from './note-details/new-form.js';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 

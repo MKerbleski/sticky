@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 // import NotePreview from './note-preview.js';
-import { AllNotesBin } from './index';
+import { AllNotesBin } from '../index';
 
 export default class AllNotes extends Component {
   constructor(props){
@@ -45,7 +45,7 @@ ${'' /* border: 1px solid green; */}
   padding: 15px;
   ${'' /* background-color: #2a465c; */}
   color: black;
-  height: 100%;
+  ${'' /* height: 100%; */}
   overflow: auto;
   .sort {
     display: flex;
