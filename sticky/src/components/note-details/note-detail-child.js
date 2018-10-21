@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
-import { flex } from '../../styles/styl-utils.js'
+import { flex, start } from '../../styles/styl-utils.js'
 
 import LayerTwoTargetSource from "./note-detail-grand-child"
 
@@ -152,28 +152,28 @@ export default flow(
 
 const NoteDetailChildDiv = styled.div`
   ${'' /* border: 5px solid blue; */}
-  
-  padding: 10px;
-  width: 100px;
-  height: auto;
-  max-height: 200px;
+  ${start('pink')}
+  height: 99%;
+  ${'' /* height: auto; */}
+  ${'' /* max-height: 200px; */}
   display: flex;
   flex-direction: column;  
   justify-content: center;
   align-items: center;
   .note-link{
+    ${start('red')}
     ${'' /* border: 1px solid green; */}
     ${ flex('column') }
-
-    padding: 10px;
     width: 95%;
+    height: 100%;
     padding: 10px;
-    justify-content: space-around;
+    align-items: space-around;
+    justify-content: flex-start;
     background-color: ${props => props.color};
     ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
     background-color: white;
       .noteContent{
-      ${'' /* border: 1px solid green; */}
+      border: 1px solid green;
 
       display: flex;
       flex-direction: column;
@@ -214,26 +214,9 @@ const NoteDetailChildDiv = styled.div`
     .layerTwoContainerAll{
       border: 1px solid blue;
       width: 100%;
-      ${flex()}
+      ${flex('row')}
       flex-wrap: wrap;
       justify-content: space-around;
-    }
-    .tags {
-      border: 1px solid red;
-      display: flex;
-      flex-direction: row:
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      align-items: flex-end;
-      width: 90%;
-      bottom: 0;
-      overflow: hidden;
-      ${'' /* overflow: hidden; */}
-      div {
-        border: 1px solid lightgray;
-        margin: 2px;
-        padding: 4px;
-      }
     }
   }  
 `;

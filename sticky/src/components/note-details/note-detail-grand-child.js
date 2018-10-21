@@ -117,10 +117,8 @@ export default flow(
 const NoteDetailGrandChildDiv = styled.div`
     border: 2px solid black;
     border-radius: 20px;
-    margin: 10px;
-    padding: 10px;
     ${'' /* height: 90px; */}
-    background: white;
+    background: lightgrey;
     display: flex;
     flex-direction: column;
     align-content: flex-start;
