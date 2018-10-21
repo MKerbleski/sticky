@@ -287,6 +287,7 @@ class App extends Component {
                               onDrop={this.onDrop} 
                               changeParent={this.changeParent}
                               type="note"
+                              targetId={note.match.params.noteId}
                               />
                           )
                         }}></Route>

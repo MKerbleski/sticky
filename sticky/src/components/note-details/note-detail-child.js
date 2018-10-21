@@ -55,7 +55,7 @@ class NoteDetailChild extends React.Component {
   getFirstWord = (text, words=2) => {
     // let firstWord = text.substr(0, text.indexOf(" "));
     let firstWord = text.split(" ").slice(0,words).join(' ');
-    console.log(firstWord, 'word')
+    // console.log(firstWord, 'word')
     if(firstWord.length > 0){
       return firstWord
     } else {

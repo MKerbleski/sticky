@@ -57,9 +57,9 @@ const targetObj = {
     
     if(hover){
         console.log('target props', props, hover)
-        const { type, targetId } = props;
+        const { type } = props;
         return ({
-            type, targetId
+            type,
         });
     }
   }

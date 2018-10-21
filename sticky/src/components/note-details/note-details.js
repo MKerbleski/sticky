@@ -79,6 +79,8 @@ const mapDispatchToProps = {
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NoteDetails));
 
 const NoteDetailsDiv = styled.div`
+  display: flex;
+  justify-content: center;
   .note-detail {
     background-color: white;
     border: 1px solid lightgray;
@@ -148,12 +150,8 @@ const NoteDetailsDiv = styled.div`
         border: 1px solid green;
         height: 100px;
         width: 95%;
-        overflow: hidden;
-        
+        overflow: hidden;   
       }
-    }
-    
+    } 
   }
-  
-
 `;
