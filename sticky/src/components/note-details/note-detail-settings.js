@@ -7,7 +7,6 @@ export default class NoteDetailSettings extends Component{
         super(props);
         this.state = {
             note_color: '',
-            id: this.props.id
         };
     }
 
@@ -15,7 +14,8 @@ export default class NoteDetailSettings extends Component{
         event.preventDefault();
         console.log('input handler')
         this.setState({
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            id: this.props.id
         })
     }
 
@@ -26,6 +26,7 @@ export default class NoteDetailSettings extends Component{
     }
     
     render(props){
+        console.log(this.props.id)
         return(
             <NoteDetailSettingsDiv>
                 <form onSubmit={this.submit}>
@@ -43,6 +44,5 @@ const NoteDetailSettingsDiv = styled.div`
     form{
         display: flex;
         flex-direction: column;
-
     }
 `;

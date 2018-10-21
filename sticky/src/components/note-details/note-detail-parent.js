@@ -3,14 +3,12 @@ import { DropTarget } from 'react-dnd';
 import { NoteDetailSelf } from '../index.js';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import { flex } from '../../styles/styl-utils.js'
-
-
+import { flex, start } from '../../styles/styl-utils.js'
 
 const NoteDetailParent = (props) => (
     props.connectDropTarget(
     <div>
-        <NoteDetailParentDiv style={{background: props.hover ? 'lightgreen' : null}}>
+        <NoteDetailParentDiv color={props.parentColor} style={{background: props.hover ? 'lightgreen' : null}}>
             <div className="links">
               <div className="left-side-links">
                 <Link
@@ -35,6 +33,7 @@ const NoteDetailParent = (props) => (
               </div>
             </div>
             <NoteDetailSelf
+                
                 enableDelete={props.enableDelete} 
                 allNotes={props.allNotes}
                 note={props.note} 
@@ -79,7 +78,9 @@ const collect = (connect,  monitor) => ({
 export default DropTarget('item', targetObj, collect)(NoteDetailParent);
 
 const NoteDetailParentDiv = styled.div`
-    background: lightcoral;
+    background-color: ${props => props.color};
+    ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
+    background-color: white;
     border: 1px solid green;
     display: flex;
     flex-direction: column;
@@ -90,7 +91,13 @@ const NoteDetailParentDiv = styled.div`
     box-sizing: border-box;
     height: 95vh;
     overflow: auto;
-    
+    .NoteDetailSelf{
+        ${'' /* THIS IS ON NEXT PAGE */}
+        ${start('green')}
+        height: 100%;
+        background: black;
+        width: 90%;
+    }
     .links {
         display: flex;
         flex-direction: row;

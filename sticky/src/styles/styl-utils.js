@@ -14,7 +14,7 @@ export function menu(){
 
 export function bg(color){
     return `
-        background-color: rgba(0,0,0,.3);
+        background-color: ${color};
     `;
 }
 
@@ -25,4 +25,14 @@ export function flex(direction='row'){
         align-items: center;
         justify-content: center;
     `;
+}
+
+export function start(color){
+    return `
+    border: 1px solid ${color? color: null}
+    display: flex;
+    box-sizing: border-box;
+    padding: 1px;
+    margin: 1px;
+    `
 }

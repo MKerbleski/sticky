@@ -97,7 +97,7 @@ class App extends Component {
         console.log("app111 get notes", res)
         this.props.getNotes();
         //this functino is now only called outside of app so no need ot 'refresh' notes
-        this.props.history.push('/all-notes')
+        // this.props.history.push('/all-notes')
       }).catch(err => console.log(err.message))
     }else {
       console.log('need to include toekn in request')
@@ -143,6 +143,16 @@ class App extends Component {
         } else {
           return null
         }
+      } else {
+        return null
+      }
+  }
+  getParentColor = (id) => {
+      let parent_id = this.getParentId(id)
+      let parent =  this.props.state.notes.find(note => {return note.id === +parent_id})
+      console.log(parent)
+      if(parent){
+          return parent.note_color
       } else {
         return null
       }
@@ -291,19 +301,20 @@ class App extends Component {
 
                       <Route
                         exact={!this.state.deleteEnabled}
-                        path="/note/:noteId"
+                        path="/note/:note_id"
                         render={ (note) => {
                           console.log('note',note)
                           return (
                             <NoteDetailParent
                               enableDelete={this.enableDelete} 
                               allNotes={this.props.state.notes}
-                              note={this.getNoteDetails(note.match.params.noteId)} 
+                              note={this.getNoteDetails(note.match.params.note_id)} 
                               onDrop={this.onDrop} 
                               changeParent={this.changeParent}
                               type="note"
+                              parentColor={this.getParentColor(note.match.params.note_id)}
                               editNote={this.editNote}
-                              targetId={this.getParentId(note.match.params.noteId)}
+                              targetId={this.getParentId(note.match.params.note_id)}
                               />
                           )
                         }}></Route>

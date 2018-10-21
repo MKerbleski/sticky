@@ -92,7 +92,7 @@ class NotePreview extends React.Component {
               connectDragSource(
               connectDropTarget(
                   <div className="startObject">
-                    <NotePreviewDiv >
+                    <NotePreviewDiv color={this.props.layerOne.note_color} >
                       <Link
                         key={this.props.key}
                         index={this.props.index}
@@ -167,6 +167,7 @@ const NotePreviewDiv = styled.div`
     padding: 10px;
     justify-content: space-around;
     background-color: lightgray;
+    background-color: ${props => props.color};
       .noteContent{
       ${'' /* border: 1px solid green; */}
 

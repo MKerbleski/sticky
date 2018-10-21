@@ -91,8 +91,8 @@ class NoteDetailChild extends React.Component {
               connectDropTarget &&
               connectDragSource(
               connectDropTarget(
-                  <div className="startObject">
-                    <NoteDetailChildDiv >
+                  <div className="note-detail-child-container">
+                    <NoteDetailChildDiv color={this.props.color} >
                       <Link
                         key={this.props.key}
                         index={this.props.index}
@@ -152,12 +152,15 @@ export default flow(
 
 const NoteDetailChildDiv = styled.div`
   ${'' /* border: 5px solid blue; */}
+  
   padding: 10px;
   width: 100px;
   height: auto;
   max-height: 200px;
   display: flex;
   flex-direction: column;  
+  justify-content: center;
+  align-items: center;
   .note-link{
     ${'' /* border: 1px solid green; */}
     ${ flex('column') }
@@ -166,7 +169,9 @@ const NoteDetailChildDiv = styled.div`
     width: 95%;
     padding: 10px;
     justify-content: space-around;
-    background-color: lightblue;
+    background-color: ${props => props.color};
+    ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
+    background-color: white;
       .noteContent{
       ${'' /* border: 1px solid green; */}
 

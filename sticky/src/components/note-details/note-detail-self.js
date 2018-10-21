@@ -3,23 +3,20 @@ import { DropTarget } from 'react-dnd';
 // import { NoteDetails } from '../index.js';
 import styled from 'styled-components';
 // import {Link} from 'react-router-dom';
-// import { flex } from '../../styles/styl-utils.js'
+import { bg, start } from '../../styles/styl-utils.js'
 import { NoteDetailChild, NoteDetailSettings }from '../index.js';
 import ReactMarkdown from 'react-markdown';
 
 const NoteDetailSelf = (props) => (
   props.connectDropTarget(
-    <div>
+    <div className="NoteDetailSelf">
         {(props.note) ?
           (
-            <NoteDetailSelfDiv >
+            <NoteDetailSelfDiv color={props.note.note_color}>
             
             
             <div className="note-detail" style={{background: props.hover ? 'lightgreen' : null}}>
             
-            <div className="note-detail-settings">
-              <NoteDetailSettings id={props.note.id} editNote={props.editNote} />
-            </div>
             <div className="note-detail-main">
 
               <div className="note-detail-left">
@@ -39,20 +36,15 @@ const NoteDetailSelf = (props) => (
                             key={layerOne.id}
                             layerOne={layerOne}
                             allNotes={props.allNotes}
+                            color={layerOne.note_color}
                             className="note-detail-child"
                         />)
                     } else {
                         return null
                         }
                     })}
-                  <div className="note-detail-child">Child 1</div>
-                  <div className="note-detail-child">Child 2</div>
-                  <div className="note-detail-child">Child 3</div>
-                  <div className="note-detail-child">Child 4</div>
                 </div>
-              
               </div>
-
               <div className="note-detail-right">
                   <h5>media links</h5>
                   <iframe title='test' className="note-detail-media" src="https://www.youtube.com/embed/lJIrF4YjHfQ" frameBorder="0" allow="autoplay; encrypted-media" allowFullscreen></iframe>
@@ -61,6 +53,10 @@ const NoteDetailSelf = (props) => (
                   <div className="note-detail-media">Media 3</div>
                   <div className="note-detail-media">Media 4</div>
               </div>
+            </div>
+            <div className="note-detail-settings">
+              {/* <NoteDetailSettings id={props.note.id} editNote={props.editNote} /> */}
+              <i class="fas fa-cogs"></i>
             </div>
             </div>
 
@@ -102,41 +98,47 @@ export default DropTarget('item', targetObj, collect)(NoteDetailSelf);
 
 
 const NoteDetailSelfDiv = styled.div`
-  display: flex;
+  ${start('red')}
   justify-content: center;
+  height: 100%;
+  width: 100%;
   .note-detail {
-    background-color: white;
-    border: 1px solid lightgray;
-    width: 85%;
-    display: flex;
+    ${start('black')}
+    background-color: ${props => props.color};
+    ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
+    background-color: lightgray;
+    width: 100%;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    color: black;
-    padding: 10px;
+    padding: 5px;
     height: 100%;
     .note-detail-settings{
-      border: 1px solid blue;
+      ${start('blue')}
       width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
     }
     .note-detail-main{
-      border: 1px solid green;
-      display: flex;
+      ${start('green')}
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-start;
       width: 100%;
+      height: 100%;
       .note-detail-left{
-        border: 1px solid green;
+        ${start('pink')}
         width: 80%;
         margin: 5px;
         padding: 1px;
-        height: 95%;
-        display: flex;
+        height: 99%;
         flex-direction: column;
+        align-items: space-between;
         justify-content: space-between;
         .note-detail-body{
-          border: 1px solid blue;
+          ${start('blue')}
+          height: 50%;
           h4 {
             font-weight: bold;
             margin-bottom: 10px;
@@ -145,41 +147,30 @@ const NoteDetailSelfDiv = styled.div`
           p {
             line-height: 30px;
           }
-          .tags{
-            ${'' /* border: 1px solid lightgray; */}
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-            div{
-              margin: 3px;
-              padding: 5px;
-            }
-            .tag {
-              border: 1px solid lightgray;
-            }
-          }
         }
         .note-detail-children{
-          border: 1px solid purple;
-          display: flex;
+          ${start('purple')}
           flex-direction: row;
+          justify-content: safe space-around;
           overflow: auto;
+          height: 50%;
+          width: 100%;
           .note-detail-child{
-            border: 1px solid red;
+            margin: auto;
+            ${start('red')}
             margin: 3px;
-            display: flex;
             flex-direction: row;
-            width: 100px;
+            width: 25%;
           }
         }
       }
       .note-detail-right{
-        border: 1px solid red;
+        ${start('red')}
+        flex-direction: column;
         width: 20%;
         margin: 5px;
         overflow: auto;
-        height: 95%;
+        height: 99%;
         .note-detail-media{
           border: 1px solid green;
           height: 100px;
