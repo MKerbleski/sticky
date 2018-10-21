@@ -1,13 +1,14 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
-import { NoteDetails } from '../index.js';
+import { NoteDetailSelf } from '../index.js';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import { flex } from '../../styles/styl-utils.js'
 
 
+
 const NoteDetailParent = (props) => (
-  props.connectDropTarget(
+    props.connectDropTarget(
     <div>
         <NoteDetailParentDiv style={{background: props.hover ? 'lightgreen' : null}}>
             <div className="links">
@@ -33,12 +34,14 @@ const NoteDetailParent = (props) => (
                 >all notes</Link>
               </div>
             </div>
-            <NoteDetails 
+            <NoteDetailSelf
                 enableDelete={props.enableDelete} 
                 allNotes={props.allNotes}
                 note={props.note} 
                 onDrop={props.onDrop} 
                 changeParent={props.changeParent}
+                targetId={props.note.id}
+                type="note"
             />
         </NoteDetailParentDiv>
     </div>
@@ -53,7 +56,7 @@ const targetObj = {
   },
 
   drop(props, monitor) {
-    const hover = monitor.isOver({shallow:false})
+    const hover = monitor.isOver({shallow:true})
     
     if(hover){
         console.log('target props', props, hover)

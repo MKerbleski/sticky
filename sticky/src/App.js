@@ -13,7 +13,7 @@ import {
   EditNote,
   DeleteNote,
   NewNote,
-  NoteDetails,
+  // NoteDetails,
   LeftMenu,
   Welcome, 
   // TopMenu,
@@ -130,7 +130,21 @@ class App extends Component {
   }
   
   getNoteDetails = (id) => {
-    return this.props.state.notes.find(note => {return note.id === +id})
+      return this.props.state.notes.find(note => {return note.id === +id})
+  }
+  getParentId = (id) => {
+    
+      let notee =  this.props.state.notes.find(note => {return note.id === +id})
+      console.log(notee)
+      if(notee){
+        if(notee.parent_id){
+          return notee.parent_id
+        } else {
+          return null
+        }
+      } else {
+        return null
+      }
   }
   
   logout = (e) => {
@@ -190,7 +204,7 @@ class App extends Component {
     } else if (type === "note") {
       console.log(source_id, type, target_id)
       this.changeParent(source_id, target_id)
-    } else if (type === "top"){
+    } else if (type === "top" || target_id===null){
       console.log(source_id, type, target_id=null)
       this.editNote({id: source_id, parent_id: target_id})
     }
@@ -278,16 +292,16 @@ class App extends Component {
                         exact={!this.state.deleteEnabled}
                         path="/note/:noteId"
                         render={ (note) => {
+                          console.log('note',note)
                           return (
                             <NoteDetailParent
                               enableDelete={this.enableDelete} 
                               allNotes={this.props.state.notes}
-                              note={this.getNoteDetails
-                              (note.match.params.noteId)} 
+                              note={this.getNoteDetails(note.match.params.noteId)} 
                               onDrop={this.onDrop} 
                               changeParent={this.changeParent}
                               type="note"
-                              targetId={note.match.params.noteId}
+                              targetId={this.getParentId(note.match.params.noteId)}
                               />
                           )
                         }}></Route>
