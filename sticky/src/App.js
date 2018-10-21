@@ -17,7 +17,8 @@ import {
   LeftMenu,
   Welcome, 
   // TopMenu,
-  Header
+  Header,
+  NoteDetailParent
 } from './components';
 
 import {
@@ -278,13 +279,14 @@ class App extends Component {
                         path="/note/:noteId"
                         render={ (note) => {
                           return (
-                            <NoteDetails
+                            <NoteDetailParent
                               enableDelete={this.enableDelete} 
                               allNotes={this.props.state.notes}
                               note={this.getNoteDetails
                               (note.match.params.noteId)} 
                               onDrop={this.onDrop} 
                               changeParent={this.changeParent}
+                              type="note"
                               />
                           )
                         }}></Route>

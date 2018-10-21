@@ -17,29 +17,7 @@ class NoteDetails extends Component {
         {(this.props.note) ?
           (
             <NoteDetailsDiv>
-            <div className="links">
-              <div className="left-side-links">
-                <Link
-                  className="link"
-                  to={this.props.note.parent_id ? `/note/${this.props.note.parent_id}/` : `/all-notes/`}
-                >back to parent note</Link>
-              </div>
-              <div className="right-side-links">
-                <Link
-                  className="link"
-                  onClick={() => this.props.enableDelete()}
-                  to={`/note/${this.props.note.id}/delete`}
-                >delete</Link>
-                <Link
-                  className="link"
-                  to={`/note/${this.props.note.id}/edit`}
-                >edit</Link>
-                <Link
-                  className="link"
-                  to={`/all-notes/`}
-                >all notes</Link>
-              </div>
-            </div>
+            
             
             <div className="note-detail">
               <div className="note-detail-left">
@@ -101,39 +79,6 @@ const mapDispatchToProps = {
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NoteDetails));
 
 const NoteDetailsDiv = styled.div`
-  border: 1px solid green;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 25px;
-  ${'' /* background-color: white; */}
-  background-color: #F3F3F3;
-  box-sizing: border-box;
-  height: 95vh;
-  overflow: auto;
-  .note-detail-left{
-    border: 1px solid red;
-  }
-  .links {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    text-align: right;
-    .left-side-links{
-      ${'' /* border: 1px solid red; */}
-      width: 100%;
-      ${flex()}
-    }
-    ${'' /* border: 1px solid blue; */}
-    .link {
-      ${'' /* border: 1px solid red; */}
-      margin: 8px;
-      color: gray;
-      ${'' /* font-weight: bold */}
-    }
-  }
   .note-detail {
     background-color: white;
     border: 1px solid lightgray;
