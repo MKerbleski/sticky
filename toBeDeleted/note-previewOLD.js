@@ -40,7 +40,7 @@ const NotePreview = (props) => (
           index={props.index}
           className="note-link"
           id={props.layerOne.id}
-          to={`/all-notes/${props.layerOne.id}`}>
+          to={`/note/${props.layerOne.id}`}>
 
             <div key={props.index} className="note-preview">
 
@@ -143,7 +143,7 @@ const NotePreviewDiv = styled.div`
 //                 index={index}
 //                 className="note-link"
 //                 id={note.id}
-//                 to={`/all-notes/${note.id}`}>
+//                 to={`/note/${note.id}`}>
 //
 //                   <div key={index} className="note-preview">
 //

@@ -249,7 +249,7 @@ const NotePreviewDiv = styled.div`
 //                 index={index}
 //                 className="note-link"
 //                 id={note.id}
-//                 to={`/all-notes/${note.id}`}>
+//                 to={`/note/${note.id}`}>
 //
 //                   <div key={index} className="note-preview">
 //

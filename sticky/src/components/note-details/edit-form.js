@@ -75,7 +75,7 @@ export default class EditForm extends Component {
           <Link
             className="menu-item"
             onClick={this.sendToApp}
-            to={`/all-notes/${this.state.id}`}
+            to={`/note/${this.state.id}`}
           >Save</Link>
 
         </form>
