@@ -12,10 +12,10 @@ const NoteDetailSelf = (props) => (
     <div>
         {(props.note) ?
           (
-            <NoteDetailSelfDiv style={{background: props.hover ? 'lightgreen' : null}}>
+            <NoteDetailSelfDiv >
             
             
-            <div className="note-detail">
+            <div className="note-detail" style={{background: props.hover ? 'lightgreen' : null}}>
               <div className="note-detail-left">
                 <div className="note-detail-body">
                   {<ReactMarkdown>{props.note.textBody}</ReactMarkdown>}

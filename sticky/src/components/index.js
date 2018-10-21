@@ -12,7 +12,7 @@ export {default as AllNotesBin} from './main-all-notes/allNotesBin-target.js';
 
 export {default as NoteDetailParent} from './note-details/note-detail-parent.js';
 export {default as NoteDetailSelf} from './note-details/note-detail-self.js';
-export {default as NoteDetails} from './note-details/note-details.js';
+// export {default as NoteDetails} from '../../../toBeDeleted/note-details.js';
 export {default as NoteDetailChild} from './note-details/note-detail-child.js';
 export {default as NoteDetailGrandChild} from './note-details/note-detail-grand-child.js';
 export {default as NoteDetailGreatGrandChild} from './note-details/note-detail-great-grand-child.js';

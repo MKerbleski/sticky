@@ -5,8 +5,8 @@ import {connect} from 'react-redux';
 import { withRouter } from 'react-router';
 import ReactMarkdown from 'react-markdown';
 
-import { flex } from '../../styles/styl-utils.js'
-import { NoteDetailChild }from '../index.js';
+import { flex } from '../sticky/src/styles/styl-utils.js'
+import { NoteDetailChild }from '../sticky/src/components/index.js';
 
 
 class NoteDetails extends Component {
