@@ -264,7 +264,7 @@ class App extends Component {
 
                       <Route
                         exact
-                        path="/new-note"
+                        path="/new-note"//should change to new
                         render={ () => {
                           return (
                             <NewNote
@@ -279,7 +279,13 @@ class App extends Component {
                         render={ (note) => {
                           return (
                             <NoteDetails
-                              enableDelete={this.enableDelete} note={this.getNoteDetails(note.match.params.noteId)} />
+                              enableDelete={this.enableDelete} 
+                              allNotes={this.props.state.notes}
+                              note={this.getNoteDetails
+                              (note.match.params.noteId)} 
+                              onDrop={this.onDrop} 
+                              changeParent={this.changeParent}
+                              />
                           )
                         }}></Route>
 

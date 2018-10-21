@@ -4,25 +4,14 @@ import styled from 'styled-components';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router';
 import ReactMarkdown from 'react-markdown';
+
 import { flex } from '../../styles/styl-utils.js'
+import { NoteDetailChild }from '../index.js';
+
 
 class NoteDetails extends Component {
-  // getTags = () => {
-  //   if(this.props.note.tags.isArray){
-  //     (this.props.note.tags.map(tag => {
-  //         return (<div className="tag">{tag}</div>)
-  //       }
-  //   ))
-  // } else if (typeof this.props.note.tags == "string"){
-  //   (this.props.note.tags.split(',').map(tag => {
-  //   return <div className="tag">{tag}</div>
-  // }))
-  // } else {
-  //   return (<div className="noTags"> none </div>)
-  // }
-  // }
 
-  render() {
+  render(props) {
     return (
       <div>
         {(this.props.note) ?
@@ -33,7 +22,7 @@ class NoteDetails extends Component {
                 <Link
                   className="link"
                   to={this.props.note.parent_id ? `/note/${this.props.note.parent_id}/` : `/all-notes/`}
-                >to parent note (or all notes)</Link>
+                >back to parent note</Link>
               </div>
               <div className="right-side-links">
                 <Link
@@ -48,23 +37,45 @@ class NoteDetails extends Component {
                 <Link
                   className="link"
                   to={`/all-notes/`}
-                >back</Link>
+                >all notes</Link>
               </div>
             </div>
+            
             <div className="note-detail">
               <div className="note-detail-left">
                 <div className="note-detail-body">
                   {<ReactMarkdown>{this.props.note.textBody}</ReactMarkdown>}
+                  
                 </div>
+
                 <div className="note-detail-children">
+                {this.props.allNotes.map( layerOne => {
+                    if(layerOne.parent_id === this.props.note.id){
+                        return (
+                        <NoteDetailChild
+                            type="note"
+                            onDrop={this.props.onDrop}
+                            changeParent={this.props.changeParent}
+                            key={layerOne.id}
+                            layerOne={layerOne}
+                            allNotes={this.props.allNotes}
+                            className="note-detail-child"
+                        />)
+                    } else {
+                        return null
+                        }
+                    })}
                   <div className="note-detail-child">Child 1</div>
                   <div className="note-detail-child">Child 2</div>
                   <div className="note-detail-child">Child 3</div>
                   <div className="note-detail-child">Child 4</div>
                 </div>
+              
               </div>
+
               <div className="note-detail-right">
                   <h5>media links</h5>
+                  <iframe className="note-detail-media" src="https://www.youtube.com/embed/lJIrF4YjHfQ" frameBorder="0" allow="autoplay; encrypted-media" allowFullscreen></iframe>
                   <div className="note-detail-media">Media 1</div>
                   <div className="note-detail-media">Media 2</div>
                   <div className="note-detail-media">Media 3</div>
@@ -90,7 +101,7 @@ const mapDispatchToProps = {
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NoteDetails));
 
 const NoteDetailsDiv = styled.div`
-  ${'' /* border: 1px solid green; */}
+  border: 1px solid green;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,6 +110,7 @@ const NoteDetailsDiv = styled.div`
   background-color: #F3F3F3;
   box-sizing: border-box;
   height: 95vh;
+  overflow: auto;
   .note-detail-left{
     border: 1px solid red;
   }
@@ -132,10 +144,16 @@ const NoteDetailsDiv = styled.div`
     align-items: flex-start;
     color: black;
     padding: 10px;
+    height: 100%;
     .note-detail-left{
       border: 1px solid green;
       width: 80%;
       margin: 5px;
+      padding: 1px;
+      height: 95%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       .note-detail-body{
         border: 1px solid blue;
         h4 {
@@ -165,11 +183,13 @@ const NoteDetailsDiv = styled.div`
         border: 1px solid purple;
         display: flex;
         flex-direction: row;
+        overflow: auto;
         .note-detail-child{
           border: 1px solid red;
           margin: 3px;
           display: flex;
           flex-direction: row;
+          width: 100px;
         }
       }
     }
@@ -177,8 +197,14 @@ const NoteDetailsDiv = styled.div`
       border: 1px solid red;
       width: 20%;
       margin: 5px;
+      overflow: auto;
+      height: 95%;
       .note-detail-media{
         border: 1px solid green;
+        height: 100px;
+        width: 95%;
+        overflow: hidden;
+        
       }
     }
     
