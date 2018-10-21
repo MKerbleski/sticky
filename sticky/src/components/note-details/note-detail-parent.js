@@ -41,6 +41,7 @@ const NoteDetailParent = (props) => (
                 onDrop={props.onDrop} 
                 changeParent={props.changeParent}
                 targetId={props.note.id}
+                editNote={props.editNote}
                 type="note"
             />
         </NoteDetailParentDiv>

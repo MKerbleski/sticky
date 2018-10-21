@@ -12,6 +12,12 @@ export function menu(){
     `;
 }
 
+export function bg(color){
+    return `
+        background-color: rgba(0,0,0,.3);
+    `;
+}
+
 export function flex(direction='row'){
     return `
         display: flex;

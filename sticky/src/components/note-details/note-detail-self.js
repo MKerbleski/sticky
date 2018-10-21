@@ -4,7 +4,7 @@ import { DropTarget } from 'react-dnd';
 import styled from 'styled-components';
 // import {Link} from 'react-router-dom';
 // import { flex } from '../../styles/styl-utils.js'
-import { NoteDetailChild }from '../index.js';
+import { NoteDetailChild, NoteDetailSettings }from '../index.js';
 import ReactMarkdown from 'react-markdown';
 
 const NoteDetailSelf = (props) => (
@@ -16,6 +16,12 @@ const NoteDetailSelf = (props) => (
             
             
             <div className="note-detail" style={{background: props.hover ? 'lightgreen' : null}}>
+            
+            <div className="note-detail-settings">
+              <NoteDetailSettings id={props.note.id} editNote={props.editNote} />
+            </div>
+            <div className="note-detail-main">
+
               <div className="note-detail-left">
                 <div className="note-detail-body">
                   {<ReactMarkdown>{props.note.textBody}</ReactMarkdown>}
@@ -56,6 +62,8 @@ const NoteDetailSelf = (props) => (
                   <div className="note-detail-media">Media 4</div>
               </div>
             </div>
+            </div>
+
           </NoteDetailSelfDiv>
         ) :
         null}
@@ -71,7 +79,7 @@ const targetObj = {
   },
 
   drop(props, monitor) {
-    const hover = monitor.isOver({shallow:false})
+    const hover = monitor.isOver({shallow: false})
     
     if(hover){
         console.log('target props', props, hover)
@@ -101,72 +109,84 @@ const NoteDetailSelfDiv = styled.div`
     border: 1px solid lightgray;
     width: 85%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     color: black;
     padding: 10px;
     height: 100%;
-    .note-detail-left{
-      border: 1px solid green;
-      width: 80%;
-      margin: 5px;
-      padding: 1px;
-      height: 95%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      .note-detail-body{
-        border: 1px solid blue;
-        h4 {
-          font-weight: bold;
-          margin-bottom: 10px;
-          text-decoration: underline;
-        }
-        p {
-          line-height: 30px;
-        }
-        .tags{
-          ${'' /* border: 1px solid lightgray; */}
-          display: flex;
-          flex-direction: row;
-          justify-content: flex-start;
-          align-items: center;
-          div{
-            margin: 3px;
-            padding: 5px;
-          }
-          .tag {
-            border: 1px solid lightgray;
-          }
-        }
-      }
-      .note-detail-children{
-        border: 1px solid purple;
-        display: flex;
-        flex-direction: row;
-        overflow: auto;
-        .note-detail-child{
-          border: 1px solid red;
-          margin: 3px;
-          display: flex;
-          flex-direction: row;
-          width: 100px;
-        }
-      }
+    .note-detail-settings{
+      border: 1px solid blue;
+      width: 100%;
     }
-    .note-detail-right{
-      border: 1px solid red;
-      width: 20%;
-      margin: 5px;
-      overflow: auto;
-      height: 95%;
-      .note-detail-media{
+    .note-detail-main{
+      border: 1px solid green;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+      .note-detail-left{
         border: 1px solid green;
-        height: 100px;
-        width: 95%;
-        overflow: hidden;   
+        width: 80%;
+        margin: 5px;
+        padding: 1px;
+        height: 95%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .note-detail-body{
+          border: 1px solid blue;
+          h4 {
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-decoration: underline;
+          }
+          p {
+            line-height: 30px;
+          }
+          .tags{
+            ${'' /* border: 1px solid lightgray; */}
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            div{
+              margin: 3px;
+              padding: 5px;
+            }
+            .tag {
+              border: 1px solid lightgray;
+            }
+          }
+        }
+        .note-detail-children{
+          border: 1px solid purple;
+          display: flex;
+          flex-direction: row;
+          overflow: auto;
+          .note-detail-child{
+            border: 1px solid red;
+            margin: 3px;
+            display: flex;
+            flex-direction: row;
+            width: 100px;
+          }
+        }
       }
-    } 
+      .note-detail-right{
+        border: 1px solid red;
+        width: 20%;
+        margin: 5px;
+        overflow: auto;
+        height: 95%;
+        .note-detail-media{
+          border: 1px solid green;
+          height: 100px;
+          width: 95%;
+          overflow: hidden;   
+        }
+      } 
+    }
   }
 `;

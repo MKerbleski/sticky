@@ -84,6 +84,7 @@ class App extends Component {
   }
   
   editNote = (noteEdit) => {
+    console.log('editNote', noteEdit)
     if(localStorage.getItem('JWT')){
       const token = localStorage.getItem('JWT')
       const authHeader = {
@@ -93,7 +94,7 @@ class App extends Component {
       }
       axios.put(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
       .then(res => {
-        console.log("app111 get notes")
+        console.log("app111 get notes", res)
         this.props.getNotes();
         //this functino is now only called outside of app so no need ot 'refresh' notes
         this.props.history.push('/all-notes')
@@ -301,6 +302,7 @@ class App extends Component {
                               onDrop={this.onDrop} 
                               changeParent={this.changeParent}
                               type="note"
+                              editNote={this.editNote}
                               targetId={this.getParentId(note.match.params.noteId)}
                               />
                           )

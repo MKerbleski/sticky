@@ -35,6 +35,11 @@ class Welcome extends Component{
             })
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
+            if(localStorage.getItem('textBody')){
+                this.newNote({textBody: localStorage.getItem('textBody')})
+            } else {
+                this.props.history.push('/all-notes')
+            }
             this.props.history.push('/all-notes')
         }).catch(err => {alert(err.message); console.err(err.message)})
     }
