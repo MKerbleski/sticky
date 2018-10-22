@@ -17,23 +17,13 @@ const NoteDetailParent = (props) => (
                 >back to parent note</Link>
               </div>
               <div className="right-side-links">
-                <Link
-                  className="link"
-                  onClick={() => props.enableDelete()}
-                  to={`/note/${props.note.id}/delete`}
-                >delete</Link>
-                <Link
-                  className="link"
-                  to={`/note/${props.note.id}/edit`}
-                >edit</Link>
-                <Link
+                {/* <Link
                   className="link"
                   to={`/all-notes/`}
-                >all notes</Link>
+                >all notes</Link> */}
               </div>
             </div>
             <NoteDetailSelf
-                
                 enableDelete={props.enableDelete} 
                 allNotes={props.allNotes}
                 note={props.note} 

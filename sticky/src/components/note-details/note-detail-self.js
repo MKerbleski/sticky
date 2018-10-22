@@ -2,7 +2,7 @@ import React from 'react';
 import { DropTarget } from 'react-dnd';
 // import { NoteDetails } from '../index.js';
 import styled from 'styled-components';
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { bg, start } from '../../styles/styl-utils.js'
 import { NoteDetailChild, NoteDetailSettings }from '../index.js';
 import ReactMarkdown from 'react-markdown';
@@ -13,8 +13,6 @@ const NoteDetailSelf = (props) => (
         {(props.note) ?
           (
             <NoteDetailSelfDiv color={props.note.note_color}>
-            
-            
             <div className="note-detail" style={{background: props.hover ? 'lightgreen' : null}}>
             
             <div className="note-detail-main">
@@ -55,7 +53,16 @@ const NoteDetailSelf = (props) => (
             </div>
             <div className="note-detail-settings">
               {/* <NoteDetailSettings id={props.note.id} editNote={props.editNote} /> */}
-              <i class="fas fa-cogs"></i>
+              <Link
+                  className="link"
+                  onClick={() => props.enableDelete()}
+                  to={`/note/${props.note.id}/delete`}
+                >delete</Link>
+                <Link
+                  className="link"
+                  to={`/note/${props.note.id}/edit`}
+                >edit</Link>
+              <i className="fas fa-cogs"></i>
             </div>
             </div>
 
@@ -118,6 +125,15 @@ const NoteDetailSelfDiv = styled.div`
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
+      align-items: center;
+      .link, i{
+        margin: 0 10px;
+        text-decoration: none;
+        color: black;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
     }
     .note-detail-main{
       ${start('green')}

@@ -46,9 +46,6 @@ import LayerThreeSource from "./note-detail-great-grand-child"
 
 class NoteDetailGrandChild extends React.Component {
     render(props){
-        // console.log(this.props.hover)
-        // console.log(this.props.hoverShallow)
-        // console.log(this.props.highlighted)
         const {
             connectDragSource, 
             connectDropTarget, 
