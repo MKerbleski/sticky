@@ -149,13 +149,15 @@ const NoteDetailSelfDiv = styled.div`
         .note-detail-children{
           ${start('purple')}
           flex-direction: row;
-          justify-content: safe center;
+          justify-content: safe space-around;
           overflow: auto;
           height: 50%;
           .note-detail-child-container{
                ${'' /* this class is on the next page */}
                ${start('blue')}
-               background: black;
+               ${'' /* background: black; */}
+               min-width: 24%;
+               margin: 0 3px;
           }
         }
       }

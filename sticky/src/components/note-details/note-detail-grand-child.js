@@ -60,7 +60,7 @@ class NoteDetailGrandChild extends React.Component {
                 connectDropTarget &&
                 connectDragSource(
                 connectDropTarget(
-                    <div>
+                    <div className="layerTwoContainer">
                         <NoteDetailGrandChildDiv 
                             type="note"
                             onClick={(e) => {e.stopPropagation();}} 
@@ -72,14 +72,13 @@ class NoteDetailGrandChild extends React.Component {
                                {this.props.allNotes.map(layerThree => {
                                     if (layerThree.parent_id === this.props.layerTwo.id){
                                         return (
-                                            <div className="layerThreeContainer" key={layerThree.id} >
                                                 <LayerThreeSource 
+                                                    key={layerThree.id}
                                                     type="note"
                                                     changeParent={this.props.changeParent} layerThree={layerThree} 
                                                     onDrop={this.props.onDrop}
                                                     getFirstWord={this.props.getFirstWord}
                                                     />
-                                            </div>
                                         )
                                     } else {
                                         return null
@@ -116,34 +115,36 @@ export default flow(
 
 const NoteDetailGrandChildDiv = styled.div`
     border: 2px solid black;
-    border-radius: 20px;
+    border-radius: 5px;
     ${'' /* height: 90px; */}
     background: lightgrey;
     display: flex;
-    flex-direction: column;
-    align-content: flex-start;
-    justify-content: flex-start;
-    
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    width: 100%;
     overflow: visible;
     h4 {
-        ${'' /* border: 1px solid orange; */}
+        border: 1px solid orange;
         margin: 0px;
+        width: 100%;
+        color: black;
     }
     .layerThreeContainerAll{
-        ${'' /* border: 1px solid red; */}
-        ${'' /* border: 1px solid green; */}
+        width: 100%;
+        border: 1px solid green;
         ${'' /* height: 500px; */}
-        ${'' /* background: gray; */}
-        ${'' /* height: 90px; */}
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: center;
-        align-items: space-around;
+        justify-content: space-around;
+        align-items: center;
         ${'' /* overflow: hidden; */}
         .layerThreeContainer{
-            ${'' /* border: 1px solid red; */}
+            border: 1px solid red;
             height: 25px;
+            padding: 0 4px;
+            width: 25%;
         }
     }
 `;

@@ -107,14 +107,13 @@ class NoteDetailChild extends React.Component {
                             <div className="layerTwoContainerAll"  >
                               {this.props.allNotes.map(layerTwo => {
                                   if (layerTwo.parent_id === this.props.layerOne.id){return (
-                                          <div className="layerTwoContainer" key={layerTwo.id}>
                                               <LayerTwoTargetSource  
+                                                key={layerTwo.id}
                                                 type="note"
                                                 onDrop={this.props.onDrop} 
                                                 layerTwo={layerTwo} 
                                                 allNotes={this.props.allNotes}
                                                 getFirstWord={this.getFirstWord} />
-                                          </div>
                                           )
                                   } else {
                                       return null
@@ -153,6 +152,7 @@ export default flow(
 const NoteDetailChildDiv = styled.div`
   ${start('pink')}
   height: 99%;
+  width: 100%;
   display: flex;
   flex-direction: column;  
   justify-content: center;
@@ -169,18 +169,14 @@ const NoteDetailChildDiv = styled.div`
     background-color: ${props => props.color};
     ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
     background-color: white;
+    text-decoration: none;
       .noteContent{
-      border: 1px solid green;
-
-      display: flex;
+      ${start('green')}
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
       color: black;
-      width: 80px;
       height: auto;
-      ${'' /* flex-wrap: wrap; */}
-      max-height: 100px;
       margin: 2% 0;
       .note-preview-title {
         ${'' /* border: 1px solid green; */}
@@ -202,18 +198,19 @@ const NoteDetailChildDiv = styled.div`
         text-overflow: ellipsis;
       }
     }
-    .layerTwoContainer{
-      border: 1px solid red;
-      height: 50%;
-      width: 50%;
-      ${flex()}
-    }
     .layerTwoContainerAll{
       border: 1px solid blue;
       width: 100%;
       ${flex('row')}
       flex-wrap: wrap;
       justify-content: space-around;
+      .layerTwoContainer{
+        ${'' /* located on next page */}
+      border: 1px solid red;
+      width: 100%;
+      margin: 2px;
+      ${flex()}
+    }
     }
   }  
 `;

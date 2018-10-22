@@ -7,7 +7,7 @@ const LayerThreeSource = (props) => {
     if (props.layerThree){
         return (
             props.connectDragSource(
-                <div> 
+                <div className="layerThreeContainer"> 
                     <LayerThreeDiv type="note" style={{
                          opacity: props.isDragging ? '0.25' : '1',
                          border: props.isDragging ? '1px dashed gray': '1px solid black',
@@ -60,8 +60,7 @@ const LayerThreeDiv = styled.div`
     font-size: 10px;
     ${'' /* margin: 10px; */}
     ${'' /* padding: 10px; */}
-    max-height: 25px;
-    max-width: 25px;
+    max-height: 100%;
     border-radius: 50px;
     display: flex;
     flex-direction: row;
