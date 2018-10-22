@@ -37,7 +37,6 @@ const NoteDetailSelf = (props) => (
                             layerOne={layerOne}
                             allNotes={props.allNotes}
                             color={layerOne.note_color}
-                            className="note-detail-child"
                         />)
                     } else {
                         return null
@@ -128,10 +127,9 @@ const NoteDetailSelfDiv = styled.div`
       width: 100%;
       height: 100%;
       .note-detail-left{
-        ${start('pink')}
+        ${start('white')}
         width: 80%;
         margin: 5px;
-        padding: 1px;
         height: 99%;
         flex-direction: column;
         align-items: space-between;
@@ -151,20 +149,13 @@ const NoteDetailSelfDiv = styled.div`
         .note-detail-children{
           ${start('purple')}
           flex-direction: row;
-          justify-content: safe space-around;
+          justify-content: safe center;
           overflow: auto;
           height: 50%;
-          width: 100%;
-          .note-detail-child{
-            ${start('red')}
-            margin: 3px;
-            flex-direction: row;
-            width: 40%;
-            .note-detail-child-container{
-              ${'' /* this is on the next page */}
-              ${start('blue')}
-              background: black;
-            }
+          .note-detail-child-container{
+               ${'' /* this class is on the next page */}
+               ${start('blue')}
+               background: black;
           }
         }
       }
@@ -185,3 +176,12 @@ const NoteDetailSelfDiv = styled.div`
     }
   }
 `;
+
+// these do nothing
+// .note-detail-child{
+//             ${start('red')}
+//             margin: 3px;
+//             flex-direction: row;
+//             width: 40%;
+//            
+//           }

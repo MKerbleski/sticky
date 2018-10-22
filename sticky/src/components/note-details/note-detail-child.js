@@ -151,11 +151,8 @@ export default flow(
 )(NoteDetailChild);
 
 const NoteDetailChildDiv = styled.div`
-  ${'' /* border: 5px solid blue; */}
   ${start('pink')}
   height: 99%;
-  ${'' /* height: auto; */}
-  ${'' /* max-height: 200px; */}
   display: flex;
   flex-direction: column;  
   justify-content: center;
