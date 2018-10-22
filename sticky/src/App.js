@@ -7,24 +7,21 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import axios from 'axios';
 
+import { start } from './styles/styl-utils.js'
+
 import {
   AllNotes,
-  // AllNotesNEW,
   EditNote,
   DeleteNote,
   NewNote,
-  // NoteDetails,
   LeftMenu,
   Welcome, 
-  // TopMenu,
   Header,
-  NoteDetailParent
+  NoteDetailParent,
+  RightMenu
 } from './components';
 
 import {
-  // addNote,
-  // deleteNote,
-  // editNote,
   getNotes,
   sortNote,
   clearNotes,
@@ -133,6 +130,7 @@ class App extends Component {
   getNoteDetails = (id) => {
       return this.props.state.notes.find(note => {return note.id === +id})
   }
+  
   getParentId = (id) => {
     
       let notee =  this.props.state.notes.find(note => {return note.id === +id})
@@ -147,6 +145,7 @@ class App extends Component {
         return null
       }
   }
+
   getParentColor = (id) => {
       let parent_id = this.getParentId(id)
       let parent =  this.props.state.notes.find(note => {return note.id === +parent_id})
@@ -257,7 +256,6 @@ class App extends Component {
   }
 
   render(props) {
-    console.log(this.props)
     return (
       <AppDiv>
       
@@ -265,11 +263,11 @@ class App extends Component {
           <Header logout={this.logout} />
         </div>
         
-        <div className="bottom">
-            {localStorage.getItem('JWT') ? <LeftMenu /> : null}
+        {localStorage.getItem('JWT') ? 
 
-            <div className="right-display">
-            {localStorage.getItem('JWT') ?
+        <div className="app-bottom">
+            <LeftMenu />
+            <div className="center-display">
                 <React.Fragment>
                     <Route
                         exact
@@ -344,13 +342,14 @@ class App extends Component {
                               ></Route>
                           </div>) :
                       null}
-                  </React.Fragment> :
-              
+
+                </React.Fragment> 
+            </div> {/*   center-display    */}
+            <RightMenu />
+        </div> : 
               <Route path="/welcome/" component={Welcome} />
               }
-
-            </div>
-        </div>
+        
         
       </AppDiv>
     );//return
@@ -363,17 +362,13 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
   getNotes,
-  // addNote,
-  // deleteNote,
-  // editNote,
   sortNote,
   clearNotes,
 }
  export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 
  const AppDiv = styled.div`
-     ${'' /* border: 1px solid red; */}
-      display: flex;
+     ${start('red')}
       flex-direction: column;
       background-color:white;
       height: 100vh;
@@ -399,7 +394,7 @@ const mapDispatchToProps = {
       .top{
         height: 5vh;
       }
-     .bottom {
+     .app-bottom {
         ${'' /* border: 1px solid blue; */}
         ${'' /* background: black; */}
         display: flex;
@@ -407,7 +402,7 @@ const mapDispatchToProps = {
         z-index: 0;
         box-sizing: border-box;
         height: 95vh;
-        .right-display{
+        .center-display{
           ${'' /* border: 1px solid blue; */}
           ${'' /* background-color: black; */}
           width: 100%;
@@ -419,12 +414,12 @@ const mapDispatchToProps = {
         }
         .delete {
           ${'' /* border: 1px solid red; */}
+          display: flex;
           width: 100vw;
           ${'' /* height: 100vh; */}
           background-color:rgba(215,215,215,0.5);
           position: fixed;
           z-index: 10;
-          display: flex;
           justify-content: center;
           align-items: center;
         }
