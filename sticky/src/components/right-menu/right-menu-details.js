@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { flex, menu, start } from '../../styles/styl-utils.js'
-import {twitter, pocket, chrome, slack, rightArrow} from '../../img'
+import { menu, start } from '../../styles/styl-utils.js'
+// import {twitter, pocket, chrome, slack, rightArrow} from '../../img'
 
 export default class RightMenuDetails extends Component {
   constructor(props){

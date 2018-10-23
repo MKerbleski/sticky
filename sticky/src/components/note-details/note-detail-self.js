@@ -3,8 +3,8 @@ import { DropTarget } from 'react-dnd';
 // import { NoteDetails } from '../index.js';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import { bg, start } from '../../styles/styl-utils.js'
-import { NoteDetailChild, NoteDetailSettings }from '../index.js';
+import { start } from '../../styles/styl-utils.js'
+import { NoteDetailChild }from '../index.js';
 import ReactMarkdown from 'react-markdown';
 
 const NoteDetailSelf = (props) => (

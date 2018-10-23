@@ -18,7 +18,8 @@ import {
   Welcome, 
   Header,
   NoteDetailParent,
-  RightMenu
+  RightMenu,
+  Settings,
 } from './components';
 
 import {
@@ -329,6 +330,12 @@ class App extends Component {
                         }}
                       ></Route>
 
+                      <Route
+                        exact
+                        path="/settings"
+                        component={Settings}
+                      ></Route>
+
                       {(this.state.deleteEnabled) ?
                           (<div className="delete">
                               <Route
@@ -370,11 +377,10 @@ const mapDispatchToProps = {
  const AppDiv = styled.div`
      ${start('red')}
       flex-direction: column;
-      background-color:white;
+      background-color: white;
       height: 100vh;
       margin: 0;
       box-sizing: border-box;
-
       ${'' /* background-image: url(https://picsum.photos/g/1500/1500?image=${1073}); */}
       ${'' /* background-image: url(http://placeimg.com/1000/1000/arch/grayscale); */}
       .all-notes {

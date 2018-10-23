@@ -18,6 +18,7 @@ export {
     NoteDetailSettings,
     EditNote,
     DeleteNote,
+    Settings
 } from './note-details';
 
 export { 
@@ -27,6 +28,7 @@ export {
 export {
     LeftMenu
 } from './left-menu';
+
 export {default as NewNote} from './new-note.js';
 
 

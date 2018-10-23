@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { flex, menu, start } from '../../styles/styl-utils.js'
 import RightMenuDetails from './right-menu-details.js'
@@ -19,7 +19,7 @@ export default class RightMenu extends Component {
         selectedApp: e.target.name, 
         openDetails: true
       })
-    } else if (e.target.name == "rightArrow"){
+    } else if (e.target.name === "rightArrow"){
       this.setState({
         openDetails: false
       })
