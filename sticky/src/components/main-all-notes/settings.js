@@ -15,16 +15,19 @@ export default class Settings extends Component {
 
   pocketTokenRequest = (e) => {
       e.preventDefault();
-
-      let header = {
-          consumer_key: '81178-6329dec7e9395b38d4e0b3d3',
-          redirect_uri: 'http://localhost:4444/settings'
-      }
       console.log('this.pocketTokenRequest')
-      axios.get('https://getpocket.com/v3/oauth/request', header).then(res => 
+      let consumer_key = '81178-6329dec7e9395b38d4e0b3d3';
+      let redirect_uri = 'https://www.google.com'
+      let Header = {
+        'Host': 'getpocket.com',
+        'Content-Type': 'application/x-www-form-urlencoded', 
+        'Access-Control-Allow-Origin': 'http://localhost:4444',
+        'X-Accept': 'application/x-www-form-urlencoded'
+      }
+      axios.get(`https://getpocket.com/v3/oauth/request?consumer_key=${consumer_key}&redirect_uri=${redirect_uri}`, Header).then(res => 
         console.log(res)
       ).catch(err => 
-        console.log(err)
+        console.log(err.message)
         )   
   }
 
