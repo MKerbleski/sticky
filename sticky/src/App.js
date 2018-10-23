@@ -331,9 +331,12 @@ class App extends Component {
                       ></Route>
 
                       <Route
-                        exact
                         path="/settings"
-                        component={Settings}
+                        render={() => {
+                          return (
+                            <Settings />
+                          )
+                        }}
                       ></Route>
 
                       {(this.state.deleteEnabled) ?

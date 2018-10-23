@@ -12,10 +12,16 @@ export default class Settings extends Component {
   componentDidMount(){
   }
 
+  pocketTokenRequest = () => {
+
+  }
+
   render() {
     return (
        <SettingsDiv>
           <h1>settings</h1>
+          <h4>Connected Apps</h4>
+          <a href="www.google.com">Connect to Chrome</a>
         </SettingsDiv>
     );
   }
@@ -25,7 +31,6 @@ const SettingsDiv = styled.div`
   border: 1px solid green;
   display: flex;
   flex-direction: column;
-  background-color: #F3F3F3;
   padding: 25px;
   height: 100vh;
 `;

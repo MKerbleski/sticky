@@ -7,6 +7,7 @@ export {
     AllNotes, 
     AllNotesBin,
     NotePreview,
+    Settings,
 } from './main-all-notes';
 
 export {
@@ -18,7 +19,7 @@ export {
     NoteDetailSettings,
     EditNote,
     DeleteNote,
-    Settings
+
 } from './note-details';
 
 export { 
