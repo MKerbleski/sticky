@@ -25,16 +25,25 @@ export default class Settings extends Component {
         'X-Accept': 'application/x-www-form-urlencoded'
       }//I dont think this is doing anything now
       axios.get(`https://getpocket.com/v3/oauth/request?consumer_key=${consumer_key}&redirect_uri=${redirect_uri}`, Header).then(res => {
-        let pocketToken = res.data
-        pocketToken = pocketToken.slice(5);
-        console.log(pocketToken)
-        localStorage.setItem('pocketToken', res.data)
-
-        window.open(`https://getpocket.com/auth/authorize?request_token=${pocketToken}&redirect_uri=${redirect_uri}`)
+          let pocketToken = res.data
+          pocketToken = pocketToken.slice(5);
+          console.log(pocketToken)
+          localStorage.setItem('pocketToken', pocketToken)
+          window.open(`https://getpocket.com/auth/authorize?request_token=${pocketToken}&redirect_uri=${redirect_uri}`)
+        )
       }
       ).catch(err => 
         console.log(err.message)
         )   
+  }
+
+  getRealToken = () => {
+      axios.get(`https://getpocket.com/v3/oauth/authorize?consumer_key=${consumer_key}&code=${pocketToken}`).then(res => {
+        console.log(res.data)
+      }).catch(err => {
+        console.log(err)
+      }) //need to finish this
+
   }
 
   render() {
