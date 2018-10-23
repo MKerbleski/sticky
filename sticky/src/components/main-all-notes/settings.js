@@ -17,15 +17,21 @@ export default class Settings extends Component {
       e.preventDefault();
       console.log('this.pocketTokenRequest')
       let consumer_key = '81178-6329dec7e9395b38d4e0b3d3';
-      let redirect_uri = 'https://www.google.com'
+      let redirect_uri = 'http://localhost:4444'
       let Header = {
         'Host': 'getpocket.com',
         'Content-Type': 'application/x-www-form-urlencoded', 
         'Access-Control-Allow-Origin': 'http://localhost:4444',
         'X-Accept': 'application/x-www-form-urlencoded'
+      }//I dont think this is doing anything now
+      axios.get(`https://getpocket.com/v3/oauth/request?consumer_key=${consumer_key}&redirect_uri=${redirect_uri}`, Header).then(res => {
+        let pocketToken = res.data
+        pocketToken = pocketToken.slice(5);
+        console.log(pocketToken)
+        localStorage.setItem('pocketToken', res.data)
+
+        window.open(`https://getpocket.com/auth/authorize?request_token=${pocketToken}&redirect_uri=${redirect_uri}`)
       }
-      axios.get(`https://getpocket.com/v3/oauth/request?consumer_key=${consumer_key}&redirect_uri=${redirect_uri}`, Header).then(res => 
-        console.log(res)
       ).catch(err => 
         console.log(err.message)
         )   
