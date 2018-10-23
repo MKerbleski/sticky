@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 // import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 export default class Settings extends Component {
   constructor(props){
@@ -12,8 +13,19 @@ export default class Settings extends Component {
   componentDidMount(){
   }
 
-  pocketTokenRequest = () => {
+  pocketTokenRequest = (e) => {
+      e.preventDefault();
 
+      let header = {
+          consumer_key: '81178-6329dec7e9395b38d4e0b3d3',
+          redirect_uri: 'http://localhost:4444/settings'
+      }
+      console.log('this.pocketTokenRequest')
+      axios.get('https://getpocket.com/v3/oauth/request', header).then(res => 
+        console.log(res)
+      ).catch(err => 
+        console.log(err)
+        )   
   }
 
   render() {
@@ -21,7 +33,7 @@ export default class Settings extends Component {
        <SettingsDiv>
           <h1>settings</h1>
           <h4>Connected Apps</h4>
-          <a href="www.google.com">Connect to Chrome</a>
+          <button onClick={this.pocketTokenRequest}>Connect to Pocket</button>
         </SettingsDiv>
     );
   }
