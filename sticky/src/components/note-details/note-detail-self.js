@@ -44,7 +44,7 @@ const NoteDetailSelf = (props) => (
               </div>
               <div className="note-detail-right">
                   <h5>media links</h5>
-                  <iframe title='test' className="note-detail-media" src="https://www.youtube.com/embed/lJIrF4YjHfQ" frameBorder="0" allow="autoplay; encrypted-media" allowFullscreen></iframe>
+                  <iframe title='test' className="note-detail-media" src="https://www.youtube.com/embed/lJIrF4YjHfQ" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
                   <div className="note-detail-media">Media 1</div>
                   <div className="note-detail-media">Media 2</div>
                   <div className="note-detail-media">Media 3</div>
@@ -153,6 +153,7 @@ const NoteDetailSelfDiv = styled.div`
         .note-detail-body{
           ${start('blue')}
           height: 50%;
+          overflow: hidden;
           h4 {
             font-weight: bold;
             margin-bottom: 10px;

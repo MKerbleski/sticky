@@ -1,28 +1,51 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { flex, menu } from '../../styles/styl-utils.js'
+import { flex, menu, start } from '../../styles/styl-utils.js'
+import RightMenuDetails from './right-menu-details.js'
+import {twitter, pocket, chrome, slack, rightArrow} from '../../img'
 
 export default class RightMenu extends Component {
   state = {
-    allNotesSelected: false,
-    createNoteSelected: false,
+    selectedApp: '',
+    openDetails: false
+  }
+
+  eventHandler = (e) => {
+    e.preventDefault();
+    console.log('eventHandler', e.target.name)
+    if(!this.state.openDetails){
+      this.setState({
+        selectedApp: e.target.name, 
+        openDetails: true
+      })
+    } else if (e.target.name == "rightArrow"){
+      this.setState({
+        openDetails: false
+      })
+    } else {
+      this.setState({
+        selectedApp: e.target.name
+      })
+    }
+    console.log(this.state)
   }
 
   render(){
     return (
       <RightMenuDiv>
-        <div className='leftMenuTop'>
-          <Link className={this.state.allNotesSelected ? "current menu-item" : "menu-item"}  to="/all-notes" style={this.props}><i className="fab fa-stack-overflow"></i></Link>
-          <Link className="menu-item" to="/new-note"><i className="fas fa-plus-square"></i></Link>
-          <div className="menu-item"><i className="fas fa-tv"></i></div>
-          <div className="menu-item"><i className="fas fa-book-open"></i></div>
-        </div>
-        <div className="leftMenuBottom">
-          {/* <div className="menu-item" onClick={this.download} >Download CSV</div> */}
-          
-          {/* <div  onClick={this.delete} to="/deleted-notes">Delete Item</div> */}
-          <div className="menu-item"><i className="fas fa-cogs"></i></div>
+        {this.state.openDetails ?
+          <RightMenuDetails app={this.state.selectedApp} />
+          : null}
+        <div className="right-menu-preview">
+          <div className='rightMenuTop'>  
+            <img alt="chrome-logo" name="chrome" onClick={this.eventHandler} className="menu-item" src={chrome}></img>
+            <img alt="twitter-logo" name="twitter" onClick={this.eventHandler} className="menu-item" src={twitter}></img>
+            <img alt="slack-logo" name="slack" onClick={this.eventHandler} className="menu-item" src={slack}></img>
+            <img alt="pocket-logo" name="pocket" onClick={this.eventHandler} className="menu-item" src={pocket}></img>
+            {this.state.openDetails ? 
+            <img alt="rightArrow-logo" name="rightArrow" onClick={this.eventHandler} className="menu-item" src={rightArrow}></img> : null}
+          </div>
         </div>
       </RightMenuDiv>
     );
@@ -30,36 +53,30 @@ export default class RightMenu extends Component {
 };
 
 const RightMenuDiv = styled.div`
-  ${'' /* border: 1px solid lightgray; */}
-  ${'' /* ${ solid() } */}
+  ${start('black')}
+  border: 3px solid black;
+  margin: 3;
   ${ menu() }
-  color: white;
-  width: 5%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  .menu-item{
-    ${'' /* border: 1px solid red; */}
-    height: 50px;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    margin: 10px;
-    font-size: 22px;
-    ${ flex('row') }
+  flex-direction: row;
+  align-items: flex-start;
+  height: 100%;
+  .right-menu-preview{
+    ${start('blue')}
+    .menu-item{
+      ${ flex('row') }
+      text-align: center;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      font-size: 30px;
+      max-width: 30px;
+      overflow: hidden;
     &:hover {
       cursor: pointer;
       text-decoration: underline;
     }
   }
-  .current {
-    background-color: orange;
   }
-  .red {
-    background-color: red;
-    color: black;
-    height: 200px;
-  }
+  
 `;

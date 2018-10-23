@@ -22,7 +22,7 @@ export {
 
 export { 
     RightMenu,
-} from './right-menu/';
+} from './right-menu';
 
 export {
     LeftMenu
