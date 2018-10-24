@@ -8,6 +8,7 @@ export {
     AllNotesBin,
     NotePreview,
     Settings,
+    SettingsAuth,
 } from './main-all-notes';
 
 export {

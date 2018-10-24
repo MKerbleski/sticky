@@ -20,6 +20,7 @@ import {
   NoteDetailParent,
   RightMenu,
   Settings,
+  SettingsAuth,
 } from './components';
 
 import {
@@ -289,7 +290,7 @@ class App extends Component {
 
                       <Route
                         exact
-                        path="/new-note"//should change to new
+                        path="/#/new-note"//should change to new
                         render={ () => {
                           return (
                             <NewNote
@@ -338,6 +339,17 @@ class App extends Component {
                           )
                         }}
                       ></Route>
+
+                      <Route
+                        path="/auth"
+                        render={() => {
+                          return (
+                            <SettingsAuth consumer_key={this.state.consumer_key} pocketToken={this.state.pocketToken} />
+                          )
+                        }}
+                      ></Route>
+                      
+                      
 
                       {(this.state.deleteEnabled) ?
                           (<div className="delete">
