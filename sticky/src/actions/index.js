@@ -35,7 +35,7 @@ export const getNotes = () =>  {
           Authorization: token, 
         }
       }
-      axios.get('https://lambda-notes-backend-mjk.herokuapp.com/api/notes/all', authHeader)
+      axios.get('http://localhost:3333/api/notes/all', authHeader)
         .then(res => {
         dispatch({type: NOTES_RECIEVED, payload: res.data})
       })

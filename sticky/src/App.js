@@ -66,7 +66,7 @@ class App extends Component {
         } 
       }
       console.log(token, id, 'from app')
-      axios.delete(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${id}`, authHeader)
+      axios.delete(`http://localhost:3333/api/notes/${id}`, authHeader)
       .then(res => {
         this.props.history.push('/all-notes')
         this.props.getNotes();
@@ -91,7 +91,7 @@ class App extends Component {
           Authorization: token,    
         } 
       }
-      axios.put(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
+      axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
       .then(res => {
         console.log("app111 get notes", res)
         this.props.getNotes();
@@ -117,8 +117,8 @@ class App extends Component {
           Authorization: token,    
         } 
       }
-      axios.put(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
-      // axios.put(`https://lambda-notes-backend-mjk.herokuapp.com/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
+      axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
+      // axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
       .then(res => {
         console.log("app111 get notes")
         this.props.getNotes();
@@ -175,7 +175,7 @@ class App extends Component {
             Authorization: token,    
           } 
         }
-      axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/notes/', (newNote), authHeader)
+      axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
       .then(res => {
         this.props.history.push('/all-notes')
         // this.props.getNotes();

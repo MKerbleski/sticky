@@ -29,7 +29,7 @@ class Welcome extends Component{
         this.setState({
             sendingData: true
         })
-        axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/welcome/register/', newUser).then(res => {
+        axios.post('http://localhost:3333/api/welcome/register/', newUser).then(res => {
             this.setState({
                 sendingData: false
             })
@@ -49,7 +49,7 @@ class Welcome extends Component{
             sendingData: false,
             entryNote: ''
         })
-        axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/welcome/login', creds).then(res => {
+        axios.post('http://localhost:3333/api/welcome/login', creds).then(res => {
             this.setState({
                 sendingData: true
             })
@@ -71,7 +71,7 @@ class Welcome extends Component{
               Authorization: token,    
             } 
           }
-        axios.post('https://lambda-notes-backend-mjk.herokuapp.com/api/notes/', (newNote), authHeader)
+        axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
         .then(res => {
             localStorage.removeItem('textBody')
             this.props.history.push('/all-notes')
