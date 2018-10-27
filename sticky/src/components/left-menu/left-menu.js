@@ -6,9 +6,12 @@ import DeleteTarget from './delete-target.js';
 
 
 export default class LeftMenu extends Component {
-  state = {
-    allNotesSelected: false,
-    createNoteSelected: false,
+  constructor(props){
+    super(props);
+    this.state = {
+      allNotesSelected: false,
+      createNoteSelected: false,
+    }
   }
 
   render(){
@@ -24,7 +27,7 @@ export default class LeftMenu extends Component {
           {/* <div className="menu-item" onClick={this.download} >Download CSV</div> */}
           <DeleteTarget type='deleteBin' className="menu-item red" />
           {/* <div  onClick={this.delete} to="/deleted-notes">Delete Item</div> */}
-          <Link to="/settings/" className="menu-item"><i className="fas fa-cogs"></i></Link> 
+          <Link onClick={this.props.hideDetailMenu} to="/settings/" className="menu-item"><i className="fas fa-cogs"></i></Link> 
           {/* <div className="menu-item"></div> */}
         </div>
       </LeftMenuDiv>

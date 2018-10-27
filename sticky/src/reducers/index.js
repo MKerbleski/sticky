@@ -16,6 +16,8 @@ import {
   FAILED_LOGIN_ATTEMPT,
   FAILED_REGISTRATION_ATTEMPT,
   CLEAR_NOTES,
+  FETCHING_USER,
+  USER_RECIEVED
 } from '../actions';
 
 const initialState = {
@@ -68,6 +70,15 @@ export const reducer = (state = initialState, action) => {
         userCreated: true,
         username: action.payload.username,
         token: action.payload.token
+      })
+    case FETCHING_USER:
+      return Object.assign({}, state, {
+        fetchingUserInfo: true,
+      })
+    case USER_RECIEVED:
+      return Object.assign({}, state, {
+        fetchingUserInfo: false,
+        userData: action.payload
       })
     case FETCHING_NOTES:
       return Object.assign({}, state, {

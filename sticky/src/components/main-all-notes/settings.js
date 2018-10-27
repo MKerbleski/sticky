@@ -11,11 +11,51 @@ export default class Settings extends Component {
     super(props);
     this.state = {
       hello: false,
+      userData: []
     }
   }
 
   componentDidMount(){
+    this.setState({
+      userData:  this.props.getUser()
+    })
   }
+
+
+  connectSlack = (e) => {
+    e.preventDefault();
+    console.log('connect to slack')
+    let client_id = '465374768868.465546770546'
+    let scope = 'stars:read stars:write'
+    let username = localStorage.getItem('username')
+    let redirect_uri = `http://localhost:3333/api/auth/slack/${username}`
+    let codeRequestUrl = `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${username}`
+    window.open(codeRequestUrl)
+    //every second check and see if the user thing is true
+  }
+
+  render() {
+    return (
+       <SettingsDiv>
+          <h1>settings</h1>
+          <h4>Connected Apps</h4>
+          <button onClick={this.connectSlack}>Connect to Slack</button>
+        </SettingsDiv>
+    );
+  }
+}
+
+const SettingsDiv = styled.div`
+  border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  height: 100vh;
+`;
+
+
+
+
 
   // pocketTokenRequest = (consumer_key, redirect_uri) => {
   //     console.log('this.pocketTokenRequest')
@@ -60,34 +100,3 @@ export default class Settings extends Component {
   //   // await window.open()
 
   // }
-
-  connectSlack = (e) => {
-    e.preventDefault();
-    console.log('connect to slack')
-    let client_id = '465374768868.465546770546'
-    let scope = 'stars:read stars:write'
-    let username = localStorage.getItem('username')
-    let redirect_uri = `http://localhost:3333/api/auth/slack/${username}`
-    let codeRequestUrl = `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${username}`
-    console.log(codeRequestUrl)
-    window.open(codeRequestUrl)
-  }
-
-  render() {
-    return (
-       <SettingsDiv>
-          <h1>settings</h1>
-          <h4>Connected Apps</h4>
-          <button onClick={this.connectSlack}>Connect to Slack</button>
-        </SettingsDiv>
-    );
-  }
-}
-
-const SettingsDiv = styled.div`
-  border: 1px solid green;
-  display: flex;
-  flex-direction: column;
-  padding: 25px;
-  height: 100vh;
-`;

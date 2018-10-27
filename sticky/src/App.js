@@ -26,6 +26,7 @@ import {
 import {
   getNotes,
   sortNote,
+  getUser,
   clearNotes,
   } from './actions';
 
@@ -35,6 +36,7 @@ class App extends Component {
     this.onDrop = this.onDrop.bind(this);
     this.state = {
       hideDetails: true,
+      main: true, 
     }
   }
 
@@ -159,6 +161,18 @@ class App extends Component {
       }
   }
   
+  hideDetailMenu = () => {
+    this.setState({
+      main: false
+    })
+  }
+
+  showDetailMenu = () => {
+    this.setState({
+      main: true
+    })
+  }
+
   logout = (e) => {
     e.preventDefault();
     localStorage.removeItem('JWT');
@@ -268,7 +282,7 @@ class App extends Component {
         {localStorage.getItem('JWT') ? 
 
         <div className="app-bottom">
-            <LeftMenu />
+            <LeftMenu hideDetailMenu={this.hideDetailMenu} />
             <div className="center-display">
                 <React.Fragment>
                     <Route
@@ -283,14 +297,15 @@ class App extends Component {
                               changeParent={this.changeParent}
                               notes={this.props.state.notes}
                               username={this.props.state.username}
-                              getNotes={this.props.getNotes} />
+                              getNotes={this.props.getNotes}
+                              showDetailMenu={this.showDetailMenu} />
                           )
                         }}
                       ></Route>
 
                       <Route
                         exact
-                        path="/#/new-note"//should change to new
+                        path="/new-note"//should change to new
                         render={ () => {
                           return (
                             <NewNote
@@ -303,7 +318,6 @@ class App extends Component {
                         exact={!this.state.deleteEnabled}
                         path="/note/:note_id"
                         render={ (note) => {
-                          console.log('note',note)
                           return (
                             <NoteDetailParent
                               enableDelete={this.enableDelete} 
@@ -335,7 +349,7 @@ class App extends Component {
                         path="/settings"
                         render={() => {
                           return (
-                            <Settings />
+                            <Settings getUser={this.props.getUser} />
                           )
                         }}
                       ></Route>
@@ -349,8 +363,6 @@ class App extends Component {
                         }}
                       ></Route>
                       
-                      
-
                       {(this.state.deleteEnabled) ?
                           (<div className="delete">
                               <Route
@@ -367,7 +379,8 @@ class App extends Component {
 
                 </React.Fragment> 
             </div> {/*   center-display    */}
-            <RightMenu />
+            
+            {this.state.main ? <RightMenu /> : null}
         </div> : 
               <Route path="/welcome/" component={Welcome} />
               }
@@ -386,6 +399,7 @@ const mapDispatchToProps = {
   getNotes,
   sortNote,
   clearNotes,
+  getUser,
 }
  export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 

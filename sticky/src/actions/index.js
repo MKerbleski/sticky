@@ -1,22 +1,26 @@
 import axios from 'axios';
 
-export const FETCHING_NOTES = 'FETCHING_NOTES';
-export const NOTES_RECIEVED = 'NOTES_RECIEVED';
-export const ERROR = 'ERROR';
 export const ADDING_NOTE = 'ADDING_NOTE';
 export const NOTE_ADDED = 'NOTE_ADDED';
+export const FETCHING_NOTES = 'FETCHING_NOTES';
+export const NOTES_RECIEVED = 'NOTES_RECIEVED';
 export const DELETING_NOTE = 'DELETING_NOTE';
 export const NOTE_DELETED = 'NOTE_DELETED';
 export const EDITING_NOTE = 'EDITING_NOTE';
 export const NOTE_EDITED = 'NOTE_EDITED';
 export const SORT_NOTE = 'SORT_NOTE';
-export const SENDING_NEW_USERDATA = 'SENDING_NEW_USERDATA';
-export const USER_CREATED = 'USER_CREATED';
+export const CLEAR_NOTES = 'CLEAR_NOTES';
+
 export const SENDING_CREDENTIALS = 'SENDING_CREDENTIALS';
 export const CREDENTIALS_ACCEPTED = 'CREDENTIALS_ACCEPTED';
 export const FAILED_LOGIN_ATTEMPT = 'FAILED_LOGIN_ATTEMPT';
 export const FAILED_REGISTRATION_ATTEMPT = 'FAILED_REGISTRATION_ATTEMPT';
-export const CLEAR_NOTES = 'CLEAR_NOTES';
+export const SENDING_NEW_USERDATA = 'SENDING_NEW_USERDATA';
+export const USER_CREATED = 'USER_CREATED';
+export const FETCHING_USER = 'FETCHING_USER';
+export const USER_RECIEVED = 'USER_RECIEVED';
+
+export const ERROR = 'ERROR';
 
 export const clearNotes = () => {
   return function(dispatch){
@@ -38,6 +42,29 @@ export const getNotes = () =>  {
       axios.get('http://localhost:3333/api/notes/all', authHeader)
         .then(res => {
         dispatch({type: NOTES_RECIEVED, payload: res.data})
+      })
+        .catch(err => {
+        dispatch({type: ERROR, payload: err})
+      })
+    } else {
+      dispatch({type: ERROR, payload: 'there was no token found'})      
+    }
+  }
+}
+
+export const getUser = (username) =>  {
+  return function(dispatch){
+    if(localStorage.getItem('JWT')){
+      dispatch({type: FETCHING_USER});
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token, 
+        }
+      }
+      axios.get(`http://localhost:3333/api/user/settings`, authHeader)
+        .then(res => {
+        dispatch({type: USER_RECIEVED, payload: res.data})
       })
         .catch(err => {
         dispatch({type: ERROR, payload: err})

@@ -19,6 +19,7 @@ export default class AllNotes extends Component {
     } else {
       this.props.history.push('/welcome/login')
     }
+    this.props.showDetailMenu()
   }
 
   render(props) {    
