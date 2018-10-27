@@ -11,16 +11,9 @@ export default class Settings extends Component {
     super(props);
     this.state = {
       hello: false,
-      userData: []
+      user: this.props.user
     }
   }
-
-  componentDidMount(){
-    this.setState({
-      userData:  this.props.getUser()
-    })
-  }
-
 
   connectSlack = (e) => {
     e.preventDefault();
@@ -34,13 +27,29 @@ export default class Settings extends Component {
     //every second check and see if the user thing is true
   }
 
-  render() {
+  clickHandler = (e) => {
+    e.preventDefault();
+    console.log('but it doesnt do nothing right now')
+  }
+
+  render(props) {
+    console.log(this.props.user)
     return (
-       <SettingsDiv>
-          <h1>settings</h1>
-          <h4>Connected Apps</h4>
-          <button onClick={this.connectSlack}>Connect to Slack</button>
-        </SettingsDiv>
+      <SettingsDiv>
+            <h1>settings</h1>
+            {this.state.user ? 
+                  <div>
+                    <h4>Connected Apps</h4>
+                    {this.state.user.slack === "1" ? 
+                    (<h4>connected to slack!!! congradulations</h4>) :
+                    (<button onClick={this.connectSlack}>Connect to Slack</button>)}
+                    <p>username: <span>{this.state.user.username}</span></p>
+                    <p>first: <span>{this.state.user.first}</span></p>
+                    <p>last: <span>{this.state.user.last}</span></p>
+                    <p>connected apps: <span>{this.state.user.slack ? <span>slack<button onClick={this.clickHandler}>revoke access button goes here eventually </button></span>: null}</span></p>
+                  </div>
+                : <h6>loading...</h6>}
+          </SettingsDiv>
     );
   }
 }

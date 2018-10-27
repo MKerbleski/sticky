@@ -55,7 +55,7 @@ class App extends Component {
     } else {
       this.props.history.push('/welcome/')
     }
-  
+    this.props.getUser()//this is the only trigger that fetches user data, need a better place to put
   }
   
   deleteNote = (id) => {
@@ -349,7 +349,9 @@ class App extends Component {
                         path="/settings"
                         render={() => {
                           return (
-                            <Settings getUser={this.props.getUser} />
+                            <Settings 
+                              user={this.props.state.userData}
+                              getUser={this.props.getUser} />
                           )
                         }}
                       ></Route>
