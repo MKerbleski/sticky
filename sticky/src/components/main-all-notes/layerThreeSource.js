@@ -59,8 +59,6 @@ const LayerThreeDiv = styled.div`
     background: black;
     color: white;
     font-size: 10px;
-    ${'' /* margin: 10px; */}
-    ${'' /* padding: 10px; */}
     height: 20px;
     width: 20px;
     border-radius: 50px;

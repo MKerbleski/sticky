@@ -80,14 +80,13 @@ class NotePreview extends React.Component {
   }
 
   getLinksLength = (arr) => {
-    console.log(arr)
+    // console.log(arr)
     let len = arr.length
-    console.log(len)
+    // console.log(len)
     return len
   }
   
   render(props){
-    console.log(this.props)
       const {
           connectDragSource, 
           connectDropTarget, 

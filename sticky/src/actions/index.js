@@ -1,15 +1,18 @@
 import axios from 'axios';
 
 export const ADDING_NOTE = 'ADDING_NOTE';
-export const NOTE_ADDED = 'NOTE_ADDED';
 export const FETCHING_NOTES = 'FETCHING_NOTES';
-export const NOTES_RECIEVED = 'NOTES_RECIEVED';
 export const DELETING_NOTE = 'DELETING_NOTE';
-export const NOTE_DELETED = 'NOTE_DELETED';
 export const EDITING_NOTE = 'EDITING_NOTE';
+
+export const NOTE_ADDED = 'NOTE_ADDED';
+export const NOTES_RECIEVED = 'NOTES_RECIEVED';
+export const NOTE_DELETED = 'NOTE_DELETED';
 export const NOTE_EDITED = 'NOTE_EDITED';
+
 export const SORT_NOTE = 'SORT_NOTE';
-export const CLEAR_NOTES = 'CLEAR_NOTES';
+
+export const LOGOUT = 'LOGOUT';
 
 export const FETCHING_SLACK_STARS = 'FETCHING_SLACK_STARS';
 export const SLACK_STARS_RECIEVED = 'SLACK_STARS_RECIEVED';
@@ -28,9 +31,9 @@ export const FETCHING_LINKS = 'FETCHING_LINKS';
 
 export const ERROR = 'ERROR';
 
-export const clearNotes = () => {
+export const logout = () => {
   return function(dispatch){
-    dispatch({type: CLEAR_NOTES})
+    dispatch({type: LOGOUT})
   }
 }
 

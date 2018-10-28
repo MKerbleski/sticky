@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { flex, menu, start } from '../../styles/styl-utils.js'
 import RightMenuDetails from './right-menu-details.js'
@@ -13,11 +13,12 @@ export default class RightMenu extends Component {
 
   componentDidMount(){
     this.props.getSlackList()
+    // console.log(this.props)
   }
 
   eventHandler = (e) => {
     e.preventDefault();
-    console.log('eventHandler', e.target.name)
+    // console.log('eventHandler', e.target.name)
     if(!this.state.openDetails){
       this.setState({
         selectedApp: e.target.name, 
@@ -32,53 +33,58 @@ export default class RightMenu extends Component {
         selectedApp: e.target.name
       })
     }
-    console.log(this.state)
   }
 
   render(){
+    // console.log(this.props)
     return (
       <RightMenuDiv>
         {this.state.openDetails ?
           <RightMenuDetails 
-            // getSlackList={this.props.getSlackList} 
             slackStars={this.props.slackStars} 
             app={this.state.selectedApp} 
             onDrop={this.props.onDrop}
             />
-          : null}
-        <div className="right-menu-preview">
-          <div className='rightMenuTop'>  
-            <img alt="chrome-logo" name="chrome" onClick={this.eventHandler} className="menu-item" src={chrome}></img>
-            <img alt="twitter-logo" name="twitter" onClick={this.eventHandler} className="menu-item" src={twitter}></img>
-            <img alt="slack-logo" name="slack" onClick={this.eventHandler} className="menu-item" src={slack}></img>
-            <img alt="pocket-logo" name="pocket" onClick={this.eventHandler} className="menu-item" src={pocket}></img>
-            {this.state.openDetails ? 
-            <img alt="rightArrow-logo" name="rightArrow" onClick={this.eventHandler} className="menu-item" src={rightArrow}></img> : null}
-          </div>
-        </div>
+          : null
+        }
+        {this.props.slack ?
+            <div className="right-menu-preview">
+                {/* <div className='rightMenuTop'>   */}
+                  {/* <img alt="chrome-logo" name="chrome" onClick={this.eventHandler} className="menu-item" src={chrome}></img> */}
+                  {/* <img alt="twitter-logo" name="twitter" onClick={this.eventHandler} className="menu-item" src={twitter}></img> */}
+                  <img alt="slack-logo" name="slack" onClick={this.eventHandler} className="menu-item" src={slack}></img>
+                  {/* <img alt="pocket-logo" name="pocket" onClick={this.eventHandler} className="menu-item" src={pocket}></img> */}
+                  {this.state.openDetails ? 
+                  <img alt="rightArrow-logo" name="rightArrow" onClick={this.eventHandler} className="menu-item" src={rightArrow}></img> : null}
+                {/* </div> */}
+            </div> : <Link to='/settings'>?</Link>}
+        
       </RightMenuDiv>
-    );
-  };
-};
+    )
+  }
+}
 
 const RightMenuDiv = styled.div`
-  ${start('black')}
+  ${'' /* ${start('black')} */}
   border: 3px solid black;
-  margin: 3;
+  ${'' /* margin: 3; */}
   ${ menu() }
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   height: 100%;
   .right-menu-preview{
-    ${start('blue')}
+    ${'' /* ${start('blue')} */}
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     .menu-item{
       ${ flex('row') }
       text-align: center;
       text-decoration: none;
       color: black;
       font-weight: bold;
-      font-size: 30px;
+      font-size: 35px;
       max-width: 30px;
       overflow: hidden;
     &:hover {

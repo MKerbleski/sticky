@@ -15,7 +15,7 @@ import {
   CREDENTIALS_ACCEPTED,
   FAILED_LOGIN_ATTEMPT,
   FAILED_REGISTRATION_ATTEMPT,
-  CLEAR_NOTES,
+  LOGOUT,
   FETCHING_USER,
   USER_RECIEVED,
   SLACK_STARS_RECIEVED,
@@ -38,10 +38,13 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case CLEAR_NOTES: 
+    case LOGOUT: 
       return Object.assign({}, state, {
         notes: [],
-        userData: {}
+        links: [],
+        slackStars: [],
+        userData: {},
+        slackToken: null,
       })
     case FAILED_REGISTRATION_ATTEMPT:
       return Object.assign({}, state, {
@@ -84,7 +87,8 @@ export const reducer = (state = initialState, action) => {
     case USER_RECIEVED:
       return Object.assign({}, state, {
         fetchingUserInfo: false,
-        userData: action.payload
+        userData: action.payload,
+        slackToken: action.payload.slack
       })
     case FETCHING_LINKS:
       return Object.assign({}, state, {

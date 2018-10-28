@@ -9,12 +9,10 @@ const NoteDetailParent = (props) => (
     props.connectDropTarget(
     <div>
         <NoteDetailParentDiv color={props.parentColor} style={{background: props.hover ? 'lightgreen' : null}}>
-            {/* <div className="links"> */}
-                <Link
-                  className="link"
-                  to={props.note.parent_id ? `/note/${props.note.parent_id}/` : `/all-notes/`}
-                >back to parent note</Link>
-            {/* </div> */}
+            <Link
+                className="link"
+                to={props.note.parent_id ? `/note/${props.note.parent_id}/` : `/all-notes/`}
+            >back to parent note</Link>
             <NoteDetailSelf
                 enableDelete={props.enableDelete} 
                 allNotes={props.allNotes}

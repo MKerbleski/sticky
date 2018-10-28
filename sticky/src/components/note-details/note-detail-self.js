@@ -68,17 +68,16 @@ const NoteDetailSelf = (props) => (
 
               <div className="note-detail-settings">
                 <Link
-                    className="link"
+                    className="settings-link"
                     onClick={() => props.enableDelete()}
                     to={`/note/${props.note.id}/delete`}
                 >delete</Link>
                 <Link
-                  className="link"
+                  className="settings-link"
                   to={`/note/${props.note.id}/edit`}
                 >edit</Link>
                 <i className="fas fa-cogs"></i>
               </div>{/* note-detail-settings */}
-
           </NoteDetailSelfDiv>
         ) :
         null}
@@ -128,22 +127,6 @@ const NoteDetailSelfDiv = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   padding: 5px;
-  .note-detail-settings{
-    ${start('blue')}
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    .link, i{
-      margin: 0 10px;
-      text-decoration: none;
-      color: black;
-      &:hover{
-        text-decoration: underline;
-      }
-    }
-  }
   .note-detail-main{
     ${start('green')}
     flex-direction: row;
@@ -204,13 +187,20 @@ const NoteDetailSelfDiv = styled.div`
       }
     } 
   }
+  .note-detail-settings{
+    ${start('blue')}
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    .settings-link, i{
+      margin: 0 10px;
+      text-decoration: none;
+      color: black;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
 `;
-
-// these do nothing
-// .note-detail-child{
-//             ${start('red')}
-//             margin: 3px;
-//             flex-direction: row;
-//             width: 40%;
-//            
-//           }
