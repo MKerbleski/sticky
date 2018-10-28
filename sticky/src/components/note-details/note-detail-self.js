@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import { start } from '../../styles/styl-utils.js'
 import { NoteDetailChild }from '../index.js';
 import ReactMarkdown from 'react-markdown';
+import SlackNote from '../right-menu/slackNote.js';
 
 const NoteDetailSelf = (props) => (
   props.connectDropTarget(
@@ -43,12 +44,20 @@ const NoteDetailSelf = (props) => (
                 </div>
               </div>
               <div className="note-detail-right">
-                  <h5>media links</h5>
-                  <iframe title='test' className="note-detail-media" src="https://www.youtube.com/embed/lJIrF4YjHfQ" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+                  {props.allLinks ? 
+                      <div className="foo">
+                        <h5>media links</h5>
+                        {props.allLinks.map(link => {
+                          console.log(link);
+                              return <div className="note-detail-media">text: {link.slack_text}</div>
+                        })}
+                      </div>
+                  : <p>no links associated with this note</p>}
+                  {/* <iframe title='test' className="note-detail-media" src="https://www.youtube.com/embed/lJIrF4YjHfQ" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
                   <div className="note-detail-media">Media 1</div>
                   <div className="note-detail-media">Media 2</div>
                   <div className="note-detail-media">Media 3</div>
-                  <div className="note-detail-media">Media 4</div>
+                  <div className="note-detail-media">Media 4</div> */}
               </div>
             </div>
             <div className="note-detail-settings">
@@ -185,6 +194,12 @@ const NoteDetailSelfDiv = styled.div`
         margin: 5px;
         overflow: auto;
         height: 99%;
+        .foo{
+          border:1px solid blue;
+          .foobar{
+            border:1px solid green;
+          }
+        }
         .note-detail-media{
           border: 1px solid green;
           height: 100px;

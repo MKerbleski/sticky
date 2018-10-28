@@ -53,7 +53,6 @@ const sourceObj = {
 class NotePreview extends React.Component {
   
   getFirstWord = (text, words=2) => {
-    console.log(text)
     // let firstWord = text.substr(0, text.indexOf(" "));
     let firstWord = text.split(" ").slice(0,words).join(' ');
     // console.log(firstWord, 'word')
@@ -79,13 +78,20 @@ class NotePreview extends React.Component {
       return null
     }
   }
+
+  getLinksLength = (arr) => {
+    console.log(arr)
+    let len = arr.length
+    console.log(len)
+    return len
+  }
   
   render(props){
+    console.log(this.props)
       const {
           connectDragSource, 
           connectDropTarget, 
       } = this.props
-console.log(this.props.layerOne.textBody)
       if (this.props.layerOne){
           return (
               connectDragSource &&
@@ -104,6 +110,7 @@ console.log(this.props.layerOne.textBody)
                             <div className="noteContent">
                             {/* <h3>{this.props.layerOne.id}</h3> */}
                               <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.textBody)}</h3>
+                              <p>Links:{this.getLinksLength(this.props.allLinks)}</p>
                               <p>{this.getFirstSen(this.props.layerOne.textBody)}</p> 
                             </div>
                             <div className="layerTwoContainerAll"  >

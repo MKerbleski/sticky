@@ -15,6 +15,7 @@ export default class AllNotes extends Component {
   componentDidMount(){
     if(localStorage.getItem('JWT')){
       console.log("getNotes() at allnotes")
+      this.props.getLinks();
       this.props.getNotes();
     } else {
       this.props.history.push('/welcome/login')
@@ -23,7 +24,7 @@ export default class AllNotes extends Component {
   }
 
   render(props) {    
-    console.log(this.props.notes)
+    console.log(this.props)
     return (
       <AllNotesDiv>
         
@@ -33,7 +34,7 @@ export default class AllNotes extends Component {
             <button onClick={this.props.sortById}>Id</button>
         </div>
         {this.props.notes.length > 0 ? 
-        <AllNotesBin type="top" onDrop={this.props.onDrop} allNotes={this.props.notes}/>: <h1>loading notes</h1>}
+        <AllNotesBin type="top" onDrop={this.props.onDrop} allNotes={this.props.notes} allLinks={this.props.links} />: <h1>loading notes</h1>}
       </AllNotesDiv>
     );
   }

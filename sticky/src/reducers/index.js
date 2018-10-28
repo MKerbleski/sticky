@@ -26,6 +26,7 @@ import {
 
 const initialState = {
   notes: [],
+  links: [],
   addingNote: false,
   noteAdded: false,
   fetchingNotes: false,

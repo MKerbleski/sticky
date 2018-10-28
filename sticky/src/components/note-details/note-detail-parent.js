@@ -26,6 +26,7 @@ const NoteDetailParent = (props) => (
             <NoteDetailSelf
                 enableDelete={props.enableDelete} 
                 allNotes={props.allNotes}
+                allLinks={props.allLinks}
                 note={props.note} 
                 onDrop={props.onDrop} 
                 changeParent={props.changeParent}

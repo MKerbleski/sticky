@@ -8,10 +8,10 @@ const AllNotesBin = (props) => (
     <div className="all-notes" 
      style={{background: props.hover ? 'lightgreen' : null}}>
         {props.allNotes.map( layerOne => {
-            console.log(layerOne)
+            {/* console.log(layerOne) */}
         if(layerOne.parent_id === null){
             if(layerOne.isLink == false){
-                console.log(layerOne)
+                {/* console.log(layerOne) */}
                 return (
             <NotePreview
                 type="note"
@@ -20,6 +20,11 @@ const AllNotesBin = (props) => (
                 key={layerOne.id}
                 layerOne={layerOne}
                 allNotes={props.allNotes}
+                allLinks={props.allLinks.filter(link => {
+                    return (
+                        link.parent_id == layerOne.id
+                    )//returns links only liked to parent
+                })}
             />)
             } else {
                 console.log(layerOne)

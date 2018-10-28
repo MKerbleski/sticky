@@ -28,7 +28,8 @@ import {
   sortNote,
   getUser,
   clearNotes,
-  getSlackList
+  getSlackList,
+  getLinks,
   } from './actions';
 
 class App extends Component {
@@ -51,11 +52,12 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    if(localStorage.getItem('JWT')){
+    if (localStorage.getItem('JWT')){
       this.props.history.push('/all-notes')
     } else {
       this.props.history.push('/welcome/')
     }
+    this.props.getLinks()
   }
   
   deleteNote = (id) => {
@@ -305,8 +307,10 @@ class App extends Component {
                               onDrop={this.onDrop} 
                               changeParent={this.changeParent}
                               notes={this.props.state.notes}
+                              links={this.props.state.links}
                               username={this.props.state.username}
                               getNotes={this.props.getNotes}
+                              getLinks={this.props.getLinks}
                               showDetailMenu={this.showDetailMenu} />
                           )
                         }}
@@ -331,6 +335,7 @@ class App extends Component {
                             <NoteDetailParent
                               enableDelete={this.enableDelete} 
                               allNotes={this.props.state.notes}
+                              allLinks={this.props.state.links}
                               note={this.getNoteDetails(note.match.params.note_id)} 
                               onDrop={this.onDrop} 
                               changeParent={this.changeParent}
@@ -415,6 +420,7 @@ const mapDispatchToProps = {
   clearNotes,
   getUser,
   getSlackList,
+  getLinks,
 }
  export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 
