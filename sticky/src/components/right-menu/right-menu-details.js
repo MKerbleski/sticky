@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { menu, start } from '../../styles/styl-utils.js'
 // import {twitter, pocket, chrome, slack, rightArrow} from '../../img'
-import SlackNote from './slackNote.js'
+import SlackNote from './slack-note.js'
 
 export default class RightMenuDetails extends Component {
   constructor(props){

@@ -14,8 +14,14 @@ const LinkSource = (props) => {
                          border: props.isDragging ? '1px dashed gray': '1px solid black',
                         //  color: props.didDrop ? "red" : "green"
                         }}>
-                       <p>slack_text: {props.link.slack_text}</p>
-                       <a href={props.link.URL}>view in slack</a>
+                       <div className="slack-note-text">
+                        {props.link.slack_text}
+                    </div>
+                    <div className="slack-note-link">
+                        <a target="_blank" href={props.link.URL}>
+                            go to Slack
+                        </a>
+                    </div>
                     </LinkSourceDiv>
                 </div>
             )
@@ -56,10 +62,30 @@ const LinkSource = (props) => {
 export default DragSource('item', sourceObj, collect)(LinkSource);
 
 const LinkSourceDiv = styled.div`
-    border: 1px solid red;
+  border: 1px solid green;
+    font-size: 13px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
+    align-items: flex-end;
+    padding: 3px;
+    color: black;
+    margin-left: 28px ;
+    background: lightblue;
+    .slack-note-text{
+        ${'' /* border: 1px solid green; */}
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        overflow: hidden;
+        margin-bottom: 2px;
+    }
+    .slack-note-link{
+        ${'' /* border: 1px solid red; */}
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-end;
+
+    }
 `;

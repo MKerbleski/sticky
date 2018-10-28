@@ -109,10 +109,18 @@ class NotePreview extends React.Component {
                       >
                           <div className="note-content">
                               <div className="note-content-header">
-                                  <h3 className="note-content-title">{this.getFirstWord(this.props.layerOne.textBody)}</h3>
-                                  {this.getLinksLength(this.props.allLinks) > 0 ? <div className="note-content-link-count">{this.getLinksLength(this.props.allLinks)}</div>: null}
+                                  <h3 className="note-content-title">       
+                                      {this.getFirstWord(this.props.layerOne.textBody)}
+                                  </h3>
+                                  {this.getLinksLength(this.props.allLinks) > 0 ? 
+                                    <div className="note-content-link-count">
+                                        {this.getLinksLength(this.props.allLinks)}
+                                    </div> : null
+                                  }
                               </div>
-                              <p>{this.getFirstSen(this.props.layerOne.textBody)}</p> 
+                              <p>
+                                  {this.getFirstSen(this.props.layerOne.textBody)}
+                              </p> 
                           </div>
                             <div className="layerTwoContainerAll"  >
                               {this.props.allNotes.map(layerTwo => {

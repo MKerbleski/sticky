@@ -2,27 +2,29 @@ import styled from 'styled-components';
 import React from 'react';
 import {DragSource} from 'react-dnd';
 
-
 const SlackNote = (props) => {
     if (props.star){
         return (
             props.connectDragSource(
                 <div>
-
-                <SlackNoteDiv type="link" style={{
-                         opacity: props.isDragging ? '0.25' : '1',
-                         border: props.isDragging ? '1px dashed gray': '1px solid black',
-                        //  color: props.didDrop ? "red" : "green"
-                        }}>
-                        <a target="_blank" href={props.star.message.permalink}> view on Slack
+                    <SlackNoteDiv type="link" style={{
+                            opacity: props.isDragging ? '0.25' : '1',
+                            border: props.isDragging ? '1px dashed gray': '1px solid black',
+                    }}>
+                    <div className="slack-note-text">
+                        {props.star.message.text}
+                    </div>
+                    <div className="slack-note-link">
+                        <a target="_blank" href={props.star.message.permalink}>
+                            go to Slack
                         </a>
-                       <p>{props.star.message.text}</p>
+                    </div>
                     </SlackNoteDiv>
                 </div>
             )
         )
     } else {
-        return (null)
+        return null
     }
  }
 
@@ -68,15 +70,29 @@ export default DragSource('item', sourceObj, collect)(SlackNote);
 
 const SlackNoteDiv = styled.div`
     border: 1px solid green;
-    font-size: 10px;
-    ${'' /* margin: 10px; */}
-    ${'' /* padding: 10px; */}
+    font-size: 13px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid red;
-        padding: 3px;
-        color: black;
-        margin-left: 28px ;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 3px;
+    color: black;
+    margin-left: 28px ;
+    background: lightblue;
+    .slack-note-text{
+        ${'' /* border: 1px solid green; */}
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        overflow: hidden;
+        margin-bottom: 2px;
+    }
+    .slack-note-link{
+        ${'' /* border: 1px solid red; */}
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-end;
+
+    }
 `;

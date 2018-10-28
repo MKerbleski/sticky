@@ -66,13 +66,13 @@ export default class RightMenu extends Component {
 
 const RightMenuDiv = styled.div`
   ${'' /* ${start('black')} */}
-  border: 3px solid black;
+  border: 2px solid black;
   ${'' /* margin: 3; */}
   ${ menu() }
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 100%;
+  height: 99%;
   .right-menu-preview{
     ${'' /* ${start('blue')} */}
     display: flex;

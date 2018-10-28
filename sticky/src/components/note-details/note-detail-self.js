@@ -173,13 +173,14 @@ const NoteDetailSelfDiv = styled.div`
     .note-detail-right{
       ${start('red')}
       flex-direction: column;
-      background: lightblue;
+      background: gray;
+      color: white;
       width: 30%;
       margin: 5px;
       overflow: auto;
       height: 99%;
       .link-source-container{
-        border: 1px solid green;
+        ${'' /* border: 1px solid green; */}
         ${'' /* height: 100px; */}
         margin-bottom: 2px;
         width: 99%;
