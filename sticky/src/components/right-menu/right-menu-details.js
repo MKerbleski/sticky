@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { menu, start } from '../../styles/styl-utils.js'
 // import {twitter, pocket, chrome, slack, rightArrow} from '../../img'
+import SlackNote from './slackNote.js'
 
 export default class RightMenuDetails extends Component {
   constructor(props){
@@ -34,14 +35,18 @@ export default class RightMenuDetails extends Component {
         <div className="app-list">
             {this.state.slackStars.map(star => {
                 if(star.type === "message"){
-                    console.log(star, 'message')
+                    {/* console.log(star, 'message') */}
                     return (
-                        <div key={star.date_create} className="list-title">{star.message.text}</div>
+                        <SlackNote type="link" onDrop={this.props.onDrop} key={star.date_create} star={star}></SlackNote>
                     )
                 } else if (star.type === "channel") {
-                    console.log(star, 'not message')
+                    {/* console.log(star, 'not message') */}
                     return (
-                        <div key={star.date_create}>stared channel: {star.channel}</div>
+                        <div key={star.date_create} className="list-title">stared channel: {star.channel}</div>
+                    )
+                } else {
+                    return (
+                        <p>no data or failed to load</p>
                     )
                 }
             })}
@@ -65,12 +70,9 @@ const RightMenuDetailsDiv = styled.div`
 
   }
   .app-list{
-      overflow: auto;
-    .list-title{
-        border: 1px solid red;
-        padding: 3px;
-        color: black;
-        margin-left: 28px ;
+    overflow: auto;
+    .slack-card{
+       
     }
   }
 `;

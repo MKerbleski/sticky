@@ -235,6 +235,9 @@ class App extends Component {
     } else if (type === "top" || target_id===null){
       console.log(source_id, type, target_id=null)
       this.editNote({id: source_id, parent_id: target_id})
+    } else if (type === "link"){
+      this.editNote({id: source_id} )//need to make links into database object with a parent_id of the null or actually the slack folder would work well then either clone or move 
+      //the trickier part is that on load the api needs to make sure that it has the current list 
     }
     
   }
@@ -385,7 +388,10 @@ class App extends Component {
                 </React.Fragment> 
             </div> {/*   center-display    */}
             
-            {this.state.main ? <RightMenu getSlackList={this.props.getSlackList} slackStars={this.props.state.slackStars} /> : null}
+            {this.state.main ? <RightMenu 
+              getSlackList={this.props.getSlackList} 
+              slackStars={this.props.state.slackStars}
+              onDrop={this.onDrop} /> : null}
         </div> : 
               <Route path="/welcome/" component={Welcome} />
               }

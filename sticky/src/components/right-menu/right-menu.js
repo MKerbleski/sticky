@@ -42,7 +42,9 @@ export default class RightMenu extends Component {
           <RightMenuDetails 
             // getSlackList={this.props.getSlackList} 
             slackStars={this.props.slackStars} 
-            app={this.state.selectedApp} />
+            app={this.state.selectedApp} 
+            onDrop={this.props.onDrop}
+            />
           : null}
         <div className="right-menu-preview">
           <div className='rightMenuTop'>  
