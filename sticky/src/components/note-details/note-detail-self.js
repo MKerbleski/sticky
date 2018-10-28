@@ -49,7 +49,10 @@ const NoteDetailSelf = (props) => (
                         <h5>media links</h5>
                         {props.allLinks.map(link => {
                           console.log(link);
+                          if (link.parent_id == props.note.id){
+
                               return <div className="note-detail-media">text: {link.slack_text}</div>
+                          }
                         })}
                       </div>
                   : <p>no links associated with this note</p>}
