@@ -14,30 +14,38 @@ export default class RightMenuDetails extends Component {
   }
 
   componentDidMount(props){
-    var foo = [];
-    for (var i = 1; i <= 50; i++) {
-       foo.push(i + ` - note example`);
+    console.log(this)
+    if(this.state.logo === 'slack'){
+        console.log(this.props)
+        this.setState({
+            slackStars: this.props.slackStars
+        })
     }
-    this.setState({
-        fakeList: foo
-    })
   }
 
   render(props){
-      console.log(this.state)
     return (
       <RightMenuDetailsDiv>
         <div className="app-title">
             {/* <img name={this.props.app} onClick={this.eventHandler} className="menu-item" src={chrome}></img> */}
             <h4>{this.props.app}</h4>
         </div>
+        {this.state.slackStars ? 
         <div className="app-list">
-            {this.state.fakeList.map(title => {
-                return (
-                    <div key={title} className="list-title">{title}</div>
-                )
+            {this.state.slackStars.map(star => {
+                if(star.type === "message"){
+                    console.log(star, 'message')
+                    return (
+                        <div key={star.date_create} className="list-title">{star.message.text}</div>
+                    )
+                } else if (star.type === "channel") {
+                    console.log(star, 'not message')
+                    return (
+                        <div key={star.date_create}>stared channel: {star.channel}</div>
+                    )
+                }
             })}
-        </div>
+        </div> : <p>loading</p>}
       </RightMenuDetailsDiv>
     );
   };

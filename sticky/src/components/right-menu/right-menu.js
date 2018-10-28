@@ -8,7 +8,11 @@ import {twitter, pocket, chrome, slack, rightArrow} from '../../img'
 export default class RightMenu extends Component {
   state = {
     selectedApp: '',
-    openDetails: false
+    openDetails: false,
+  }
+
+  componentDidMount(){
+    this.props.getSlackList()
   }
 
   eventHandler = (e) => {
@@ -35,7 +39,10 @@ export default class RightMenu extends Component {
     return (
       <RightMenuDiv>
         {this.state.openDetails ?
-          <RightMenuDetails app={this.state.selectedApp} />
+          <RightMenuDetails 
+            // getSlackList={this.props.getSlackList} 
+            slackStars={this.props.slackStars} 
+            app={this.state.selectedApp} />
           : null}
         <div className="right-menu-preview">
           <div className='rightMenuTop'>  

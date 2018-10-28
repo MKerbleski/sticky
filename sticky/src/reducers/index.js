@@ -17,7 +17,9 @@ import {
   FAILED_REGISTRATION_ATTEMPT,
   CLEAR_NOTES,
   FETCHING_USER,
-  USER_RECIEVED
+  USER_RECIEVED,
+  SLACK_STARS_RECIEVED,
+  FETCHING_SLACK_STARS,
 } from '../actions';
 
 const initialState = {
@@ -101,6 +103,15 @@ export const reducer = (state = initialState, action) => {
         addingNote: false,
         noteAdded: true,
         status: action.payload,
+      })
+    case SLACK_STARS_RECIEVED:
+      return Object.assign({}, state, {
+        slackStars: action.payload.items,
+        gettingSlackStars: false
+      })
+    case FETCHING_SLACK_STARS:
+      return Object.assign({}, state, {
+        gettingSlackStars: true
       })
     case DELETING_NOTE:
       return Object.assign({}, state, {

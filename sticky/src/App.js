@@ -28,6 +28,7 @@ import {
   sortNote,
   getUser,
   clearNotes,
+  getSlackList
   } from './actions';
 
 class App extends Component {
@@ -273,6 +274,7 @@ class App extends Component {
   }
 
   render(props) {
+    console.log(this.props)
     return (
       <AppDiv>
       
@@ -383,7 +385,7 @@ class App extends Component {
                 </React.Fragment> 
             </div> {/*   center-display    */}
             
-            {this.state.main ? <RightMenu /> : null}
+            {this.state.main ? <RightMenu getSlackList={this.props.getSlackList} slackStars={this.props.state.slackStars} /> : null}
         </div> : 
               <Route path="/welcome/" component={Welcome} />
               }
@@ -403,6 +405,7 @@ const mapDispatchToProps = {
   sortNote,
   clearNotes,
   getUser,
+  getSlackList,
 }
  export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 
