@@ -21,7 +21,7 @@ export default class Settings extends Component {
     let client_id = '465374768868.465546770546'
     let scope = 'stars:read stars:write'
     let username = localStorage.getItem('username')
-    let redirect_uri = `http://localhost:3333/api/auth/slack/${username}`
+    let redirect_uri = `http://localhost:3333/api/slack/auth/${username}`
     let codeRequestUrl = `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${username}`
     window.open(codeRequestUrl)
     //every second check and see if the user thing is true
@@ -46,7 +46,9 @@ export default class Settings extends Component {
                     <p>username: <span>{this.state.user.username}</span></p>
                     <p>first: <span>{this.state.user.first}</span></p>
                     <p>last: <span>{this.state.user.last}</span></p>
-                    <p>connected apps: <span>{this.state.user.slack ? <span>slack<button onClick={this.clickHandler}>revoke access button goes here eventually </button></span>: null}</span></p>
+                    <p>connected apps: <span>{this.state.user.slack ? <span>slack
+                    {/* <button onClick={this.clickHandler}>revoke access button goes here eventually </button> */}
+                    </span>: null}</span></p>
                   </div>
                 : <h6>loading...</h6>}
           </SettingsDiv>
