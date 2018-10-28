@@ -106,13 +106,15 @@ class NotePreview extends React.Component {
                         className="note-link"
                         id={this.props.layerOne.id}
                         to={`/note/${this.props.layerOne.id}`}
-                        style={{background: this.props.hover ? 'lightgreen' : null}}>
-                            <div className="noteContent">
-                            {/* <h3>{this.props.layerOne.id}</h3> */}
-                              <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.textBody)}</h3>
-                              <p>Links:{this.getLinksLength(this.props.allLinks)}</p>
+                        style={{background: this.props.hover ? 'lightgreen' : null}}
+                      >
+                          <div className="note-content">
+                              <div className="note-content-header">
+                                  <h3 className="note-content-title">{this.getFirstWord(this.props.layerOne.textBody)}</h3>
+                                  {this.getLinksLength(this.props.allLinks) > 0 ? <div className="note-content-link-count">{this.getLinksLength(this.props.allLinks)}</div>: null}
+                              </div>
                               <p>{this.getFirstSen(this.props.layerOne.textBody)}</p> 
-                            </div>
+                          </div>
                             <div className="layerTwoContainerAll"  >
                               {this.props.allNotes.map(layerTwo => {
                                   if (layerTwo.parent_id === this.props.layerOne.id){
@@ -120,7 +122,7 @@ class NotePreview extends React.Component {
                                             <div className="layerTwoContainer" key={layerTwo.id}>
                                                 <LayerTwoTargetSource  
                                                   type="note"
-                                                  onDrop={this.props.onDrop} 
+                                                  onDrop={this.props.onDrop}
                                                   layerTwo={layerTwo} 
                                                   allNotes={this.props.allNotes}
                                                   getFirstWord={this.getFirstWord} />
@@ -177,7 +179,7 @@ const NotePreviewDiv = styled.div`
     justify-content: space-around;
     background-color: lightgray;
     background-color: ${props => props.color};
-      .noteContent{
+      .note-content{
       ${'' /* border: 1px solid green; */}
 
       display: flex;
@@ -191,11 +193,28 @@ const NotePreviewDiv = styled.div`
       ${'' /* flex-wrap: wrap; */}
       max-height: 100px;
       margin: 2% 0;
-      .note-preview-title {
-        ${'' /* border: 1px solid green; */}
-        margin: 0px 10px 5px 0;
-        text-decoration: none;
-        text-align: left;
+      .note-content-header{
+        ${'' /* border: 1px solid pink; */}
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+          .note-content-title {
+            ${'' /* border: 1px solid green; */}
+            margin: 0px 10px 5px 0;
+            text-decoration: none;
+            text-align: left;
+          }
+          .note-content-link-count {
+            border: .5px solid black;
+            border-radius: 50px;
+            height: 20px;
+            width: 20px;
+            text-align: center;
+            background: lightblue;
+          }
+
       }
       p {
         ${'' /* border: 1px solid blue; */}

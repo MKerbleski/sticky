@@ -9,16 +9,12 @@ const NoteDetailParent = (props) => (
     props.connectDropTarget(
     <div>
         <NoteDetailParentDiv color={props.parentColor} style={{background: props.hover ? 'lightgreen' : null}}>
-            <div className="links">
-              <div className="left-side-links">
+            {/* <div className="links"> */}
                 <Link
                   className="link"
                   to={props.note.parent_id ? `/note/${props.note.parent_id}/` : `/all-notes/`}
                 >back to parent note</Link>
-              </div>
-              <div className="right-side-links">
-              </div>
-            </div>
+            {/* </div> */}
             <NoteDetailSelf
                 enableDelete={props.enableDelete} 
                 allNotes={props.allNotes}
@@ -72,37 +68,25 @@ const NoteDetailParentDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    ${'' /* padding: 25px; */}
-    ${'' /* background-color: white; */}
-    ${'' /* background-color: #F3F3F3; */}
     box-sizing: border-box;
     height: 94vh;
     overflow: auto;
-    .NoteDetailSelf{
+    .note-detail-self-container{
         ${'' /* THIS IS ON NEXT PAGE */}
         ${start('green')}
         height: 100%;
         background: black;
         width: 90%;
     }
-    .links {
+    .link {
+        ${'' /* border: 1px solid red; */}
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         padding: 15px;
-        text-align: right;
-        .left-side-links{
-        ${'' /* border: 1px solid red; */}
-        width: 100%;
-        ${flex()}
-        }
-        ${'' /* border: 1px solid blue; */}
-        .link {
-        ${'' /* border: 1px solid red; */}
         margin: 8px;
         color: gray;
-        ${'' /* font-weight: bold */}
-        }
+        width: 100%;
     }
 `;

@@ -13,7 +13,8 @@ const LayerThreeSource = (props) => {
                          border: props.isDragging ? '1px dashed gray': '1px solid black',
                         //  color: props.didDrop ? "red" : "green"
                         }}>
-                       <p>{props.getFirstWord(props.layerThree.textBody,1)}</p>
+                       <p>...</p>
+                       {/* <p>{props.getFirstWord(props.layerThree.textBody,1)}</p> */}
                     </LayerThreeDiv>
                 </div>
             )
@@ -60,8 +61,8 @@ const LayerThreeDiv = styled.div`
     font-size: 10px;
     ${'' /* margin: 10px; */}
     ${'' /* padding: 10px; */}
-    max-height: 25px;
-    max-width: 25px;
+    height: 20px;
+    width: 20px;
     border-radius: 50px;
     display: flex;
     flex-direction: row;
