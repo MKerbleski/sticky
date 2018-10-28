@@ -36,6 +36,7 @@ export const reducer = (state = initialState, action) => {
     case CLEAR_NOTES: 
       return Object.assign({}, state, {
         notes: [],
+        userData: {}
       })
     case FAILED_REGISTRATION_ATTEMPT:
       return Object.assign({}, state, {

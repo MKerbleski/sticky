@@ -55,7 +55,6 @@ class App extends Component {
     } else {
       this.props.history.push('/welcome/')
     }
-    this.props.getUser()//this is the only trigger that fetches user data, need a better place to put
   }
   
   deleteNote = (id) => {
@@ -178,6 +177,8 @@ class App extends Component {
     localStorage.removeItem('JWT');
     localStorage.removeItem('username');
     this.props.clearNotes();
+    console.log(this.props, 'this.props.state.user')
+    this.props.state.userData = null
     this.props.history.push('/welcome')
   }
 
