@@ -17,10 +17,6 @@ const NoteDetailParent = (props) => (
                 >back to parent note</Link>
               </div>
               <div className="right-side-links">
-                {/* <Link
-                  className="link"
-                  to={`/all-notes/`}
-                >all notes</Link> */}
               </div>
             </div>
             <NoteDetailSelf
@@ -76,11 +72,11 @@ const NoteDetailParentDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 25px;
+    ${'' /* padding: 25px; */}
     ${'' /* background-color: white; */}
     ${'' /* background-color: #F3F3F3; */}
     box-sizing: border-box;
-    height: 95vh;
+    height: 94vh;
     overflow: auto;
     .NoteDetailSelf{
         ${'' /* THIS IS ON NEXT PAGE */}

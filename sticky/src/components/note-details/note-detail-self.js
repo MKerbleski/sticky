@@ -6,7 +6,8 @@ import {Link} from 'react-router-dom';
 import { start } from '../../styles/styl-utils.js'
 import { NoteDetailChild }from '../index.js';
 import ReactMarkdown from 'react-markdown';
-import SlackNote from '../right-menu/slackNote.js';
+
+import LinkSource from './linkSource.js';
 
 const NoteDetailSelf = (props) => (
   props.connectDropTarget(
@@ -48,19 +49,21 @@ const NoteDetailSelf = (props) => (
                       <div className="foo">
                         <h5>media links</h5>
                         {props.allLinks.map(link => {
-                          console.log(link);
                           if (link.parent_id == props.note.id){
-
-                              return <div className="note-detail-media">text: {link.slack_text}</div>
+                              return (
+                                <div  
+                                  key={link.id} className="link-source-container">
+                                  <LinkSource 
+                                      link={link} 
+                                      type='note'
+                                      onDrop={props.onDrop}>
+                                      text: {link.slack_text}
+                                  </LinkSource>
+                                </div>)
                           }
                         })}
                       </div>
                   : <p>no links associated with this note</p>}
-                  {/* <iframe title='test' className="note-detail-media" src="https://www.youtube.com/embed/lJIrF4YjHfQ" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
-                  <div className="note-detail-media">Media 1</div>
-                  <div className="note-detail-media">Media 2</div>
-                  <div className="note-detail-media">Media 3</div>
-                  <div className="note-detail-media">Media 4</div> */}
               </div>
             </div>
             <div className="note-detail-settings">
@@ -156,7 +159,7 @@ const NoteDetailSelfDiv = styled.div`
       height: 100%;
       .note-detail-left{
         ${start('white')}
-        width: 80%;
+        width: 70%;
         margin: 5px;
         height: 99%;
         flex-direction: column;
@@ -193,7 +196,7 @@ const NoteDetailSelfDiv = styled.div`
       .note-detail-right{
         ${start('red')}
         flex-direction: column;
-        width: 20%;
+        width: 30%;
         margin: 5px;
         overflow: auto;
         height: 99%;
@@ -203,9 +206,9 @@ const NoteDetailSelfDiv = styled.div`
             border:1px solid green;
           }
         }
-        .note-detail-media{
+        .link-source-container{
           border: 1px solid green;
-          height: 100px;
+          ${'' /* height: 100px; */}
           width: 95%;
           overflow: hidden;   
         }

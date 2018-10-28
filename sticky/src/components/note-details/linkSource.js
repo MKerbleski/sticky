@@ -3,18 +3,20 @@ import React from 'react';
 import {DragSource} from 'react-dnd';
 
 
-const LayerThreeSource = (props) => {
-    if (props.layerThree){
+const LinkSource = (props) => {
+    if (props.link){
+        console.log(props.link)
         return (
             props.connectDragSource(
-                <div className="layerThreeContainer"> 
-                    <LayerThreeDiv type="note" style={{
+                <div> 
+                    <LinkSourceDiv type="note" style={{
                          opacity: props.isDragging ? '0.25' : '1',
                          border: props.isDragging ? '1px dashed gray': '1px solid black',
                         //  color: props.didDrop ? "red" : "green"
                         }}>
-                       <p>...</p>
-                    </LayerThreeDiv>
+                       <p>slack_text: {props.link.slack_text}</p>
+                       <a href={props.link.URL}>view in slack</a>
+                    </LinkSourceDiv>
                 </div>
             )
         )
@@ -25,7 +27,7 @@ const LayerThreeSource = (props) => {
 
  const sourceObj = {
     beginDrag(props) {
-        const {childId} = props.layerThree
+        const childId = props.link.id
         const type = props.type
         return ({
             childId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
@@ -37,11 +39,11 @@ const LayerThreeSource = (props) => {
             return ;
         }
         // console.log(props, 'superSubDropProps', monitor)
-        const childId = props.layerThree.id;
+        const childId = props.link.id;
         // console.log(childId, 'childId')
-        const parentId = monitor.getDropResult();
+        const parent = monitor.getDropResult();
         // console.log(parentId, 'parentId')
-        props.onDrop(childId, parentId.type, parentId.targetId);
+        props.onDrop(childId, parent.type, parent.targetId);
     },
   };
 
@@ -51,19 +53,13 @@ const LayerThreeSource = (props) => {
     // didDrop: monitor.didDrop(),
   });
 
-export default DragSource('item', sourceObj, collect)(LayerThreeSource);
+export default DragSource('item', sourceObj, collect)(LinkSource);
 
-const LayerThreeDiv = styled.div`
-    border: 1px solid green;
-    background: black;
-    color: white;
-    font-size: 10px;
-    ${'' /* margin: 10px; */}
-    ${'' /* padding: 10px; */}
-    max-height: 100%;
-    border-radius: 50px;
+const LinkSourceDiv = styled.div`
+    border: 1px solid red;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 12px;
 `;

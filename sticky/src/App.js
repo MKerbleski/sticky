@@ -48,6 +48,7 @@ class App extends Component {
     if(source_id !== target_id){
         this.editNote({id: source_id, parent_id: target_id})
         this.props.getNotes();
+        this.props.getLinks();
     }
   }
 
@@ -195,6 +196,7 @@ class App extends Component {
         }
       axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
       .then(res => {
+        this.props.getLinks();
         this.props.history.push('/all-notes')
         // this.props.getNotes();
         //this is not necessary because it is called on a different route than /all notes
@@ -354,7 +356,8 @@ class App extends Component {
                           return (
                             <EditNote
                               count={this.state.count}
-                              editNote={this.editNote} note={this.getNoteDetails(note.match.params.noteId)} />
+                              editNote={this.editNote} 
+                              note={this.getNoteDetails(note.match.params.noteId)} />
                           )
                         }}
                       ></Route>

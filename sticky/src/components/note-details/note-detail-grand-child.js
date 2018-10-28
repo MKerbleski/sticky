@@ -114,9 +114,9 @@ const NoteDetailGrandChildDiv = styled.div`
     border: 2px solid black;
     border-radius: 5px;
     ${'' /* height: 90px; */}
-    background: lightgrey;
+    background: lightpink;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-content: center;
     justify-content: space-between;
     width: 100%;
@@ -135,13 +135,13 @@ const NoteDetailGrandChildDiv = styled.div`
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-around;
-        align-items: center;
+        align-items: safe flex-start;
         ${'' /* overflow: hidden; */}
         .layerThreeContainer{
             border: 1px solid red;
             height: 25px;
-            padding: 0 4px;
-            width: 25%;
+            ${'' /* padding: 0 4px; */}
+            width: 25px;
         }
     }
 `;

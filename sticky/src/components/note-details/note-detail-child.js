@@ -70,8 +70,6 @@ class NoteDetailChild extends React.Component {
 
     let firstWord = this.getFirstWord(text)
     firstSen = firstSen.replace(firstWord, '')
-
-    
     if(firstSen !== firstWord){
       return firstSen
     } else{
@@ -174,10 +172,13 @@ const NoteDetailChildDiv = styled.div`
       ${start('green')}
       flex-direction: column;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       color: black;
+      background: lightgreen;
       height: auto;
       margin: 2% 0;
+      max-width: 100%;
+      overflow: hidden;
       .note-preview-title {
         ${'' /* border: 1px solid green; */}
         margin: 0px 10px 5px 0;
