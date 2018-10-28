@@ -3,7 +3,14 @@ import React from 'react';
 import {DragSource} from 'react-dnd';
 
 const SlackNote = (props) => {
-    if (props.star){
+    let note
+    if(props.ref){
+        note = props.star
+    } else {
+        note = props.link
+    }
+    console.log(note)
+    if (note){
         return (
             props.connectDragSource(
                 <div>
@@ -11,14 +18,21 @@ const SlackNote = (props) => {
                             opacity: props.isDragging ? '0.25' : '1',
                             border: props.isDragging ? '1px dashed gray': '1px solid black',
                     }}>
-                    <div className="slack-note-text">
-                        {props.star.message.text}
-                    </div>
-                    <div className="slack-note-link">
-                        <a target="_blank" href={props.star.message.permalink}>
+                    {note.message ? <div className="slack-note-text">
+                        {note.message.text}
+                    </div> : <div className="slack-note-text">
+                        {note.slack_text}
+                    </div> }
+
+                    {note.message ? <div className="slack-note-link">
+                        <a target="_blank" href={note.message.permalink}>
                             go to Slack
                         </a>
-                    </div>
+                    </div> : <div className="slack-note-link">
+                        <a target="_blank" href={note.URL}>
+                            go to Slack
+                        </a>
+                    </div> }
                     </SlackNoteDiv>
                 </div>
             )

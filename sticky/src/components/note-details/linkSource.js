@@ -4,7 +4,13 @@ import {DragSource} from 'react-dnd';
 
 
 const LinkSource = (props) => {
-    if (props.link){
+    let note
+    if(props.type === "link"){
+        note = props.star
+    } else {
+        note = props.link
+    }
+    if (note){
         console.log(props.link)
         return (
             props.connectDragSource(

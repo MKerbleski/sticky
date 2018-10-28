@@ -8,6 +8,8 @@ import { NoteDetailChild }from '../index.js';
 import ReactMarkdown from 'react-markdown';
 
 import LinkSource from './linkSource.js';
+import SlackNote from '../slack-note.js'
+
 
 const NoteDetailSelf = (props) => (
   props.connectDropTarget(
@@ -52,12 +54,12 @@ const NoteDetailSelf = (props) => (
                                   <div  
                                     key={link.id} 
                                     className="link-source-container">
-                                      <LinkSource 
+                                      <SlackNote 
                                           link={link} 
                                           type='note'
                                           onDrop={props.onDrop}>
                                           text: {link.slack_text}
-                                      </LinkSource>
+                                      </SlackNote>
                                   </div>)
                             }{/* if */}
                           })}{/* map */}
