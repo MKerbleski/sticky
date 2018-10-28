@@ -53,6 +53,7 @@ const sourceObj = {
 class NotePreview extends React.Component {
   
   getFirstWord = (text, words=2) => {
+    console.log(text)
     // let firstWord = text.substr(0, text.indexOf(" "));
     let firstWord = text.split(" ").slice(0,words).join(' ');
     // console.log(firstWord, 'word')
@@ -84,7 +85,7 @@ class NotePreview extends React.Component {
           connectDragSource, 
           connectDropTarget, 
       } = this.props
-
+console.log(this.props.layerOne.textBody)
       if (this.props.layerOne){
           return (
               connectDragSource &&
@@ -107,16 +108,17 @@ class NotePreview extends React.Component {
                             </div>
                             <div className="layerTwoContainerAll"  >
                               {this.props.allNotes.map(layerTwo => {
-                                  if (layerTwo.parent_id === this.props.layerOne.id){return (
-                                          <div className="layerTwoContainer" key={layerTwo.id}>
-                                              <LayerTwoTargetSource  
-                                                type="note"
-                                                onDrop={this.props.onDrop} 
-                                                layerTwo={layerTwo} 
-                                                allNotes={this.props.allNotes}
-                                                getFirstWord={this.getFirstWord} />
-                                          </div>
-                                          )
+                                  if (layerTwo.parent_id === this.props.layerOne.id){
+                                      return (
+                                            <div className="layerTwoContainer" key={layerTwo.id}>
+                                                <LayerTwoTargetSource  
+                                                  type="note"
+                                                  onDrop={this.props.onDrop} 
+                                                  layerTwo={layerTwo} 
+                                                  allNotes={this.props.allNotes}
+                                                  getFirstWord={this.getFirstWord} />
+                                            </div>
+                                            )
                                   } else {
                                       return null
                                   }

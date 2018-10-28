@@ -8,8 +8,11 @@ const AllNotesBin = (props) => (
     <div className="all-notes" 
      style={{background: props.hover ? 'lightgreen' : null}}>
         {props.allNotes.map( layerOne => {
+            console.log(layerOne)
         if(layerOne.parent_id === null){
-            return (
+            if(layerOne.isLink == false){
+                console.log(layerOne)
+                return (
             <NotePreview
                 type="note"
                 onDrop={props.onDrop}
@@ -18,6 +21,13 @@ const AllNotesBin = (props) => (
                 layerOne={layerOne}
                 allNotes={props.allNotes}
             />)
+            } else {
+                console.log(layerOne)
+                return (
+                    <p>link</p>
+                )
+            }
+            
         } else {
             return null
             }

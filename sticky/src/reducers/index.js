@@ -20,6 +20,8 @@ import {
   USER_RECIEVED,
   SLACK_STARS_RECIEVED,
   FETCHING_SLACK_STARS,
+  FETCHING_LINKS,
+  LINKS_RECIEVED
 } from '../actions';
 
 const initialState = {
@@ -82,6 +84,16 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         fetchingUserInfo: false,
         userData: action.payload
+      })
+    case FETCHING_LINKS:
+      return Object.assign({}, state, {
+        fetchingLinks: true,
+      })
+    case LINKS_RECIEVED:
+      return Object.assign({}, state, {
+        fetchingLinks: false,
+        linksRecieved: true,
+        links: action.payload.allUserLinks,
       })
     case FETCHING_NOTES:
       return Object.assign({}, state, {

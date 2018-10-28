@@ -236,7 +236,10 @@ class App extends Component {
       console.log(source_id, type, target_id=null)
       this.editNote({id: source_id, parent_id: target_id})
     } else if (type === "link"){
-      this.editNote({id: source_id} )//need to make links into database object with a parent_id of the null or actually the slack folder would work well then either clone or move 
+      let link = source_id
+      link.parent_id = target_id
+      console.log(link)
+      this.newNote(link)//need to make links into database object with a parent_id of the null or actually the slack folder would work well then either clone or move 
       //the trickier part is that on load the api needs to make sure that it has the current list 
     }
     

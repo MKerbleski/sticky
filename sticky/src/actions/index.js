@@ -23,6 +23,9 @@ export const USER_CREATED = 'USER_CREATED';
 export const FETCHING_USER = 'FETCHING_USER';
 export const USER_RECIEVED = 'USER_RECIEVED';
 
+export const LINKS_RECIEVED = 'LINKS_RECIEVED';
+export const FETCHING_LINKS = 'FETCHING_LINKS';
+
 export const ERROR = 'ERROR';
 
 export const clearNotes = () => {
@@ -45,6 +48,30 @@ export const getNotes = () =>  {
       axios.get('http://localhost:3333/api/notes/all', authHeader)
         .then(res => {
         dispatch({type: NOTES_RECIEVED, payload: res.data})
+      })
+        .catch(err => {
+        dispatch({type: ERROR, payload: err})
+      })
+    } else {
+      dispatch({type: ERROR, payload: 'there was no token found'})      
+    }
+  }
+}
+
+export const getLinks = () =>  {
+  return function(dispatch){
+    if(localStorage.getItem('JWT')){
+      // console.log('token')
+      dispatch({type: FETCHING_LINKS});
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token, 
+        }
+      }
+      axios.get('http://localhost:3333/api/notes/all/links', authHeader)
+        .then(res => {
+        dispatch({type: LINKS_RECIEVED, payload: res.data})
       })
         .catch(err => {
         dispatch({type: ERROR, payload: err})

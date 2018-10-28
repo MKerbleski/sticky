@@ -29,7 +29,7 @@ export default class RightMenuDetails extends Component {
       <RightMenuDetailsDiv>
         <div className="app-title">
             {/* <img name={this.props.app} onClick={this.eventHandler} className="menu-item" src={chrome}></img> */}
-            <h4>{this.props.app}</h4>
+            <h4>{this.props.app} - this is a feed from slack, when dragged to a note, it becomes saved to sticky</h4>
         </div>
         {this.state.slackStars ? 
         <div className="app-list">

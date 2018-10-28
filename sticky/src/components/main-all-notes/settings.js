@@ -54,6 +54,7 @@ export default class Settings extends Component {
                     </span>: null}</span></p>
                   </div>
                 : <h6>loading...</h6>}
+                <button onClick={this.connectSlack}>Connect to Slack</button>
           </SettingsDiv>
     );
   }

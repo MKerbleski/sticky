@@ -7,15 +7,18 @@ const SlackNote = (props) => {
     if (props.star){
         return (
             props.connectDragSource(
-                <a target="_blank" href={props.star.message.permalink}> 
-                    <SlackNoteDiv type="note" style={{
+                <div>
+
+                <SlackNoteDiv type="link" style={{
                          opacity: props.isDragging ? '0.25' : '1',
                          border: props.isDragging ? '1px dashed gray': '1px solid black',
                         //  color: props.didDrop ? "red" : "green"
                         }}>
+                        <a target="_blank" href={props.star.message.permalink}> view on Slack
+                        </a>
                        <p>{props.star.message.text}</p>
                     </SlackNoteDiv>
-                </a>
+                </div>
             )
         )
     } else {
@@ -25,10 +28,10 @@ const SlackNote = (props) => {
 
  const sourceObj = {
     beginDrag(props) {
-        const {permalink} = props.star.message
+        const {link} = props.star
         const type = props.type
         return ({
-            permalink, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
+            link, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
         });
     },
 
@@ -37,11 +40,21 @@ const SlackNote = (props) => {
             return ;
         }
         // console.log(props, 'superSubDropProps', monitor)
-        const permalink = props.star.message;
+        const link = props.star.message;
+        console.log('\n --- link', link)
+        let addSlackLink = {
+            slack_text: link.text,
+            slack_type: link.type,
+            slack_user: link.user,
+            URL: link.permalink,
+            API: 'slack',
+            isLink: true,
+        }
+        const selfType = props.type
         // console.log(childId, 'childId')
         const parentId = monitor.getDropResult();
         // console.log(parentId, 'parentId')
-        props.onDrop(permalink, parentId.type, parentId.targetId);
+        props.onDrop(addSlackLink, selfType, parentId.targetId);
     },
   };
 
