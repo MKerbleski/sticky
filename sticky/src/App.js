@@ -142,7 +142,7 @@ class App extends Component {
   getParentId = (id) => {
     
       let notee =  this.props.state.notes.find(note => {return note.id === +id})
-      console.log(notee)
+      // console.log(notee)
       if(notee){
         if(notee.parent_id){
           return notee.parent_id
@@ -213,13 +213,13 @@ class App extends Component {
       
     if(target_id){
       let target = this.getNoteDetails(target_id)
-      console.log(target)
+      // console.log(target)
       if (target.parent_id === +source_id){
         alert('action not allowed')
       }
     } 
     
-      console.log(source_id, type, target_id)
+      // console.log(source_id, type, target_id)
     if(type === "deleteBin"){
       //if has children 
       //ask if want to delete children as well 
@@ -234,15 +234,15 @@ class App extends Component {
       // this.deleteNote(source_id)
       //will need to delete any children as well. 
     } else if (type === "note") {
-      console.log(source_id, type, target_id)
+      // console.log(source_id, type, target_id)
       this.changeParent(source_id, target_id)
     } else if (type === "top" || target_id===null){
-      console.log(source_id, type, target_id=null)
+      // console.log(source_id, type, target_id=null)
       this.editNote({id: source_id, parent_id: target_id})
     } else if (type === "link"){
       let link = source_id
       link.parent_id = target_id
-      console.log(link)
+      // console.log(link)
       this.newNote(link)//need to make links into database object with a parent_id of the null or actually the slack folder would work well then either clone or move 
       //the trickier part is that on load the api needs to make sure that it has the current list 
     }

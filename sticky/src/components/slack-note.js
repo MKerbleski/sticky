@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import {DragSource} from 'react-dnd';
+import ReactMarkdown from 'react-markdown';
 
 const SlackNote = (props) => {
     let note
@@ -9,6 +10,7 @@ const SlackNote = (props) => {
     } else {
         note = props.link
     }
+    console.log(note)
     if (note){
         return (
             props.connectDragSource(
@@ -18,10 +20,13 @@ const SlackNote = (props) => {
                             border: props.isDragging ? '1px dashed gray': '1px solid black',
                     }}>
                         <div className="slack-note-text">
+                        <ReactMarkdown>
                             {note.message ? 
                                 note.message.text : 
                                 note.slack_text
                             }
+
+                        </ReactMarkdown>
                         </div> 
 
                         <div className="slack-note-link">
@@ -91,11 +96,8 @@ const SlackNote = (props) => {
             // const selfType = props.type
             const parent = monitor.getDropResult();
             console.log(parent)
-            props.onDrop(childId, parent.type, parent.targetId)
-            
+            props.onDrop(childId, parent.type, parent.targetId)   
         }
-        // console.log(props, 'superSubDropProps', monitor)
-        
     },
   };
 
@@ -116,7 +118,7 @@ const SlackNoteDiv = styled.div`
     padding: 3px;
     color: black;
     margin-left: 28px ;
-    background: #FFFAE5;
+    background: #FFFFE5;
     .slack-note-text{
         ${'' /* border: 1px solid green; */}
         width: 100%;
