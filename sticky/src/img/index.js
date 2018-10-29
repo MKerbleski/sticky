@@ -1,5 +1,7 @@
 export {default as twitter} from './twitter.png'
 export {default as pocket} from './pocket.png'
 export {default as chrome} from './chrome.png'
-export {default as slack} from './slack.png'
+export {default as slackBlack} from './Slack_Mark_Black_Web.png'
+export {default as slackColor} from './Slack_Mark_Web.png'
+export {default as slackWord} from './slack_rgb_s.png'
 export {default as rightArrow} from './right.png'

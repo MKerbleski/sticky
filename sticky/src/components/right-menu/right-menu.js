@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { flex, menu, start } from '../../styles/styl-utils.js'
 import RightMenuDetails from './right-menu-details.js'
-import {twitter, pocket, chrome, slack, rightArrow} from '../../img'
+import {twitter, pocket, chrome, slackColor, slackBlack, rightArrow} from '../../img'
 
 export default class RightMenu extends Component {
   state = {
@@ -52,7 +52,7 @@ export default class RightMenu extends Component {
                 {/* <div className='rightMenuTop'>   */}
                   {/* <img alt="chrome-logo" name="chrome" onClick={this.eventHandler} className="menu-item" src={chrome}></img> */}
                   {/* <img alt="twitter-logo" name="twitter" onClick={this.eventHandler} className="menu-item" src={twitter}></img> */}
-                  <img alt="slack-logo" name="slack" onClick={this.eventHandler} className="menu-item" src={slack}></img>
+                  <img alt="slack-logo" name="slack" onClick={this.eventHandler} className="menu-item" src={slackBlack}></img>
                   {/* <img alt="pocket-logo" name="pocket" onClick={this.eventHandler} className="menu-item" src={pocket}></img> */}
                   {this.state.openDetails ? 
                   <img alt="rightArrow-logo" name="rightArrow" onClick={this.eventHandler} className="menu-item" src={rightArrow}></img> : null}
@@ -68,7 +68,8 @@ const RightMenuDiv = styled.div`
   ${'' /* ${start('black')} */}
   border: 2px solid black;
   ${'' /* margin: 3; */}
-  ${ menu() }
+  ${'' /* ${ menu() } */}
+  background: lightblue;
   display: flex;
   flex-direction: row;
   align-items: center;

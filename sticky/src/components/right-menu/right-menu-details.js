@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { menu, start } from '../../styles/styl-utils.js'
-// import {twitter, pocket, chrome, slack, rightArrow} from '../../img'
+import {twitter, pocket, chrome, slackColor, slackBlack, slackWord, rightArrow} from '../../img'
 import SlackNote from '../slack-note.js'
 
 export default class RightMenuDetails extends Component {
@@ -28,8 +28,8 @@ export default class RightMenuDetails extends Component {
     return (
       <RightMenuDetailsDiv>
         <div className="app-title">
-            {/* <img name={this.props.app} onClick={this.eventHandler} className="menu-item" src={chrome}></img> */}
-            <h4>{this.props.app} - this is a feed from slack, when dragged to a note, it becomes saved to sticky</h4>
+            <img name={this.props.app} onClick={this.eventHandler} className="rm-details-name" src={slackWord}></img>
+            
         </div>
         {this.state.slackStars ? 
         <div className="app-list">
@@ -65,14 +65,15 @@ const RightMenuDetailsDiv = styled.div`
   width: 250px;
   height: 100%;
   display: flex;
+  background-color: white;
   flex-direction: column;
-  .app-title{
-
+  ${'' /* .app-title{
+      max-width: 100px;
   }
   .app-list{
     overflow: auto;
     .slack-card{
        
     }
-  }
+  } */}
 `;

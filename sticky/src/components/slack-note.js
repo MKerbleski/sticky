@@ -4,12 +4,11 @@ import {DragSource} from 'react-dnd';
 
 const SlackNote = (props) => {
     let note
-    if(props.ref){
+    if(props.type === "link"){
         note = props.star
     } else {
         note = props.link
     }
-    console.log(note)
     if (note){
         return (
             props.connectDragSource(
@@ -18,21 +17,25 @@ const SlackNote = (props) => {
                             opacity: props.isDragging ? '0.25' : '1',
                             border: props.isDragging ? '1px dashed gray': '1px solid black',
                     }}>
-                    {note.message ? <div className="slack-note-text">
-                        {note.message.text}
-                    </div> : <div className="slack-note-text">
-                        {note.slack_text}
-                    </div> }
+                        <div className="slack-note-text">
+                            {note.message ? 
+                                note.message.text : 
+                                note.slack_text
+                            }
+                        </div> 
 
-                    {note.message ? <div className="slack-note-link">
-                        <a target="_blank" href={note.message.permalink}>
-                            go to Slack
-                        </a>
-                    </div> : <div className="slack-note-link">
-                        <a target="_blank" href={note.URL}>
-                            go to Slack
-                        </a>
-                    </div> }
+                        <div className="slack-note-link">
+                            {note.message ?
+                                    <a target="_blank" 
+                                    href={note.message.permalink}>
+                                    go to Slack
+                                    </a> :
+                                
+                                    <a target="_blank" href={note.URL}>
+                                        go to Slack
+                                    </a>
+                            }
+                        </div> 
                     </SlackNoteDiv>
                 </div>
             )
@@ -43,34 +46,56 @@ const SlackNote = (props) => {
  }
 
  const sourceObj = {
+    
     beginDrag(props) {
-        const {link} = props.star
-        const type = props.type
-        return ({
-            link, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
-        });
+        let note
+        if(props.type === "link"){
+            const {link} = props.star
+            const type = props.type
+            return ({
+                link, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
+            });
+        } else {
+            const childId = props.link.id
+            const type = props.type
+            return ({
+                childId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
+            });
+        }
+        
     },
 
     endDrag(props, monitor) {// this takes props mounted on beginDrag
         if(!monitor.didDrop()){
             return ;
         }
-        // console.log(props, 'superSubDropProps', monitor)
-        const link = props.star.message;
-        console.log('\n --- link', link)
-        let addSlackLink = {
-            slack_text: link.text,
-            slack_type: link.type,
-            slack_user: link.user,
-            URL: link.permalink,
-            API: 'slack',
-            isLink: true,
+        let note
+        if(props.type === "link"){
+            note = props.star
+            const link = props.star.message;
+            // console.log('\n --- link', link)
+            let addSlackLink = {
+                slack_text: link.text,
+                slack_type: link.type,
+                slack_user: link.user,
+                URL: link.permalink,
+                API: 'slack',
+                isLink: true,
+            }
+            const selfType = props.type
+            const parentId = monitor.getDropResult();
+            props.onDrop(addSlackLink, selfType, parentId.targetId);
+        } else {
+            const childId = props.link.id
+            console.log(childId)
+            // const selfType = props.type
+            const parent = monitor.getDropResult();
+            console.log(parent)
+            props.onDrop(childId, parent.type, parent.targetId)
+            
         }
-        const selfType = props.type
-        // console.log(childId, 'childId')
-        const parentId = monitor.getDropResult();
-        // console.log(parentId, 'parentId')
-        props.onDrop(addSlackLink, selfType, parentId.targetId);
+        // console.log(props, 'superSubDropProps', monitor)
+        
     },
   };
 
@@ -91,7 +116,7 @@ const SlackNoteDiv = styled.div`
     padding: 3px;
     color: black;
     margin-left: 28px ;
-    background: lightblue;
+    background: #FFFAE5;
     .slack-note-text{
         ${'' /* border: 1px solid green; */}
         width: 100%;

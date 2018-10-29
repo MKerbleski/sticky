@@ -7,7 +7,6 @@ import { start } from '../../styles/styl-utils.js'
 import { NoteDetailChild }from '../index.js';
 import ReactMarkdown from 'react-markdown';
 
-import LinkSource from './linkSource.js';
 import SlackNote from '../slack-note.js'
 
 
