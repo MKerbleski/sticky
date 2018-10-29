@@ -422,7 +422,7 @@ const mapDispatchToProps = {
       flex-direction: column;
       background-color: white;
       height: 100vh;
-      margin: 0;
+      width: 98vw;
       box-sizing: border-box;
       ${'' /* background-image: url(https://picsum.photos/g/1500/1500?image=${1073}); */}
       ${'' /* background-image: url(http://placeimg.com/1000/1000/arch/grayscale); */}
