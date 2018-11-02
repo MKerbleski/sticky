@@ -71,10 +71,10 @@ const NoteDetailSelf = (props) => (
                     onClick={() => props.enableDelete()}
                     to={`/note/${props.note.id}/delete`}
                 >delete</Link>
-                <Link
+                {/* <Link
                   className="settings-link"
                   to={`/note/${props.note.id}/edit`}
-                >edit</Link>
+                >edit</Link> */}
                 <i className="fas fa-cogs"></i>
               </div>{/* note-detail-settings */}
           </NoteDetailSelfDiv>
