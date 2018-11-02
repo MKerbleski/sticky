@@ -121,9 +121,9 @@ class NoteDetailChild extends React.Component {
                       </Link>
                     </NoteDetailChildDiv>        
                   </div>
-                  )
-                  )
-              )
+            )
+            )
+        )
       } else {
           return (null)
       }
