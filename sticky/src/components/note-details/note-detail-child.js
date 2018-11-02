@@ -16,11 +16,8 @@ const targetObj = {
  //              console.log(hoverfalse)
  //    console.log(props)
   if(hover){//this disables layer one droping if there is a nested child
-
      const targetId = props.layerOne.id;
      const type = props.type;
-     console.log('targetId: ', targetId)
-     console.log('targetType: ', type)
      return ({
          targetId, type
      });

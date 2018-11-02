@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import { start } from '../../styles/styl-utils.js'
 import { NoteDetailChild }from '../index.js';
-import ReactMarkdown from 'react-markdown';
 
 import SlackNote from '../slack-note.js'
+import NoteDetailBody from './note-detail-body.js';
 
 
 const NoteDetailSelf = (props) => (
@@ -21,9 +21,7 @@ const NoteDetailSelf = (props) => (
             >
               <div className="note-detail-main">
                 <div className="note-detail-left">
-                  <div className="note-detail-body">
-                    {<ReactMarkdown>{props.note.textBody}</ReactMarkdown>}
-                  </div>
+                  <NoteDetailBody note={props.note} />
                   <div className="note-detail-children">
                     {props.allNotes.map( layerOne => {
                         if(layerOne.parent_id === props.note.id){
@@ -143,19 +141,6 @@ const NoteDetailSelfDiv = styled.div`
       flex-direction: column;
       align-items: space-between;
       justify-content: space-between;
-      .note-detail-body{
-        ${start('blue')}
-        height: 50%;
-        overflow: hidden;
-        h4 {
-          font-weight: bold;
-          margin-bottom: 10px;
-          text-decoration: underline;
-        }
-        p {
-          line-height: 30px;
-        }
-      }
       .note-detail-children{
         ${start('purple')}
         flex-direction: row;
