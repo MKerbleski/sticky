@@ -17,28 +17,14 @@ export default class NoteDetailBodyEdit extends Component {
     }
 
     handleEdit = (e) => {
-        // e.preventDefault()
+        e.preventDefault()
         //currently the way that notes are set up the note cannot update unless the page is refreshed. needs to fetched for specific notes when at /note/1 and only get that note or something
         console.log('handleEdit')
-        if(localStorage.getItem('JWT')){
-            const edit = {
-                textBody: this.state.textBody,
-                id: this.props.note.id
-            }
-            const token = localStorage.getItem('JWT')
-            const authHeader = {
-                headers: {
-                Authorization: token,    
-                } 
-            }
-            axios.put(`http://localhost:3333/api/notes/${edit.id}`, (edit), authHeader)
-            .then(res => {
-                console.log("sent edit note", res)
-                // this.props.history.push(`/note/${edit.id}`)
-            }).catch(err => console.log(err.message))
-        } else {
-        console.log('need to include toekn in request')
+        const edit = {
+            textBody: this.state.textBody,
+            id: this.props.note.id
         }
+        this.props.editNote(edit)
     }      
 
     render(){

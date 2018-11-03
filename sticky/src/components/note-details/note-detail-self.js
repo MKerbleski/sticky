@@ -21,7 +21,7 @@ const NoteDetailSelf = (props) => (
             >
               <div className="note-detail-main">
                 <div className="note-detail-left">
-                  <NoteDetailBody note={props.note} />
+                  <NoteDetailBody editNote={props.editNote} note={props.note} />
                   <div className="note-detail-children">
                     {props.allNotes.map( layerOne => {
                         if(layerOne.parent_id === props.note.id){
