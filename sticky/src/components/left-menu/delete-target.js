@@ -4,7 +4,7 @@ import { DropTarget } from 'react-dnd';
 const DeleteTarget = (props) => (
   props.connectDropTarget(
     <div
-      className={"menu-item"}
+      className="menu-item"
       style={{
         // height: props.highlighted ? "200px" : null,
         background: props.highlighted ? "red" : null,
@@ -12,7 +12,7 @@ const DeleteTarget = (props) => (
         cursor: "default"
       }}
       >
-      <i className="fas fa-trash-alt"></i>
+      <i className=" menu-item fas fa-trash-alt"></i>
     </div>
   )
 );

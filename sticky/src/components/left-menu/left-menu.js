@@ -25,7 +25,9 @@ export default class LeftMenu extends Component {
         </div>
         <div className="leftMenuBottom">
           {/* <div className="menu-item" onClick={this.download} >Download CSV</div> */}
-          <DeleteTarget type='deleteBin' className="menu-item red" />
+          <Link to="/deleted">
+            <DeleteTarget type='deleteBin' className="menu-item red" />
+          </Link>
           {/* <div  onClick={this.delete} to="/deleted-notes">Delete Item</div> */}
           <Link onClick={this.props.hideDetailMenu} to="/settings/" className="menu-item"><i className="fas fa-cogs"></i></Link> 
           {/* <div className="menu-item"></div> */}

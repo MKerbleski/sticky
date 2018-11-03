@@ -31,6 +31,8 @@ export {
     LeftMenu
 } from './left-menu';
 
-export {default as NewNote} from './new-note.js';
+export {
+    Deleted
+} from './deleted'
 
 

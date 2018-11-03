@@ -11,9 +11,7 @@ import { start } from './styles/styl-utils.js'
 
 import {
   AllNotes,
-  EditNote,
-  DeleteNote,
-  NewNote,
+  Deleted,
   LeftMenu,
   Welcome, 
   Header,
@@ -362,7 +360,7 @@ class App extends Component {
                               )
                             }}></Route>
 
-                          <Route
+                          {/* <Route
                             exact
                             path="/note/:noteId/edit"
                             render={ (note) => {
@@ -373,7 +371,7 @@ class App extends Component {
                                   note={this.getNoteDetails(note.match.params.noteId)} />
                               )
                             }}
-                          ></Route>
+                          ></Route> */}
 
                           <Route
                             path="/settings"
@@ -386,6 +384,15 @@ class App extends Component {
                             }}
                           ></Route>
                           
+                          <Route
+                            path="/deleted"
+                            render={() => {
+                              return (
+                                <Deleted />
+                              )
+                            }}
+                          ></Route>
+{/*                           
                           {(this.state.deleteEnabled) ?
                               (<div className="delete">
                                   <Route
@@ -398,7 +405,7 @@ class App extends Component {
                                         </div>)}}
                                   ></Route>
                               </div>) :
-                          null}
+                          null} */}
                     </React.Fragment> 
                 </div> {/*   center-display    */}
                 
