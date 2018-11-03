@@ -43,7 +43,7 @@ const sourceObj = {
     // const  { id }  = monitor.getItem(); 
     const sourceId= props.layerOne.id
     const dropResult = monitor.getDropResult();
-    console.log(sourceId,  dropResult, dropResult.targetId)
+    // console.log(sourceId,  dropResult, dropResult.targetId)
     props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
   },
 };

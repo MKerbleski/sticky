@@ -4,16 +4,14 @@ import React from 'react';
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
 
-
-// import SubNote from "./subNote"
 import LayerThreeSource from "./note-detail-great-grand-child"
 
  const targetObj = {
      drop(props) {
-        console.log(props.hover)
+        // console.log(props.hover)
         const targetId = props.layerTwo.id;
         const type = props.type
-        console.log('L2-targetId: ', targetId)
+        // console.log('L2-targetId: ', targetId)
         return ({
             targetId, type
         });
@@ -37,8 +35,8 @@ import LayerThreeSource from "./note-detail-great-grand-child"
         // console.log(childId, 'childId')
         
         const dropResult = monitor.getDropResult({shallow: true});
-        console.log(dropResult, 'dropResult')
-        console.log(props, 'props')
+        // console.log(dropResult, 'dropResult')
+        // console.log(props, 'props')
         props.onDrop(sourceId, dropResult.type, dropResult.targetId);
     }
   };
