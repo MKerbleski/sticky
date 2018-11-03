@@ -25,6 +25,7 @@ export default class NoteDetailBodyEdit extends Component {
             id: this.props.note.id
         }
         this.props.editNote(edit)
+        this.props.changeView();
     }      
 
     render(){

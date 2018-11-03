@@ -43,7 +43,7 @@ class NoteDetailBody extends Component {
         return(
             <NoteDetailBodyDiv  onDoubleClick={this.handleDClick}> 
                 {this.state.edit ? 
-                    <NoteDetailBodyEdit editNote={this.props.editNote} note={this.props.note} /> : 
+                    <NoteDetailBodyEdit changeView={this.handleDClick} editNote={this.props.editNote} note={this.props.note} /> : 
                     <div 
                         className="note-detail-body" 
                         onClick={this.handleClick}>
