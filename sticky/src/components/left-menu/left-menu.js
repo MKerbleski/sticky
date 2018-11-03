@@ -19,7 +19,7 @@ export default class LeftMenu extends Component {
       <LeftMenuDiv>
         <div className='leftMenuTop'>
           <Link className={this.state.allNotesSelected ? "current menu-item" : "menu-item"}  to="/all-notes" style={this.props}><i className="fab fa-stack-overflow"></i></Link>
-          <Link className="menu-item" to="/new-note"><i className="fas fa-plus-square"></i></Link>
+          <div onClick={this.props.toggleNewNote} className="menu-item"><i className="fas fa-plus-square"></i></div>
           <div className="menu-item"><i className="fas fa-tv"></i></div>
           <div className="menu-item"><i className="fas fa-book-open"></i></div>
         </div>

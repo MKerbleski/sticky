@@ -39,12 +39,11 @@ class App extends Component {
     this.state = {
       hideDetails: true,
       main: true, 
+      showNewNote: false,
     }
   }
 
   changeParent = (source_id, target_id) => {
-    console.log('change target', 'sourceId: ', source_id, 'targetId: ', target_id)
-
     if(source_id !== target_id){
         this.editNote({id: source_id, parent_id: target_id})
         this.props.getNotes();
@@ -63,7 +62,7 @@ class App extends Component {
   }
   
   deleteNote = (id) => {
-    //use this for actualy deleting notes
+    //use this for actualy deleting notes, from trash when set up
     if(localStorage.getItem('JWT')){
       const token = localStorage.getItem('JWT')
       const authHeader = {
@@ -88,6 +87,7 @@ class App extends Component {
     })
   }
   
+  //should be able to delete this as it is called later
   editNote = (noteEdit) => {
     console.log('editNote', noteEdit)
     if(localStorage.getItem('JWT')){
@@ -174,6 +174,13 @@ class App extends Component {
   showDetailMenu = () => {
     this.setState({
       main: true
+    })
+  }
+
+  toggleNewNote = () => {
+    console.log('toggle new note clicked')
+    this.setState({
+      showNewNote: !this.state.showNewNote
     })
   }
 
@@ -284,7 +291,7 @@ class App extends Component {
   }
 
   render(props) {
-    // console.log(this.props)
+    console.log(this.state.showNewNote)
     return (
       <AppDiv>
       
@@ -295,7 +302,9 @@ class App extends Component {
         {localStorage.getItem('JWT') ? 
 
             <div className="app-bottom">
-                <LeftMenu hideDetailMenu={this.hideDetailMenu} />
+                <LeftMenu 
+                    hideDetailMenu={this.hideDetailMenu}
+                    toggleNewNote={this.toggleNewNote} />
                 <div className="center-display">
                     <React.Fragment>
                         <Route
@@ -314,7 +323,8 @@ class App extends Component {
                                     getNotes={this.props.getNotes}
                                     getUser={this.props.getUser}
                                     getLinks={this.props.getLinks}
-                                    showDetailMenu={this.showDetailMenu} />
+                                    showDetailMenu={this.showDetailMenu}
+                                    showNewNote={this.state.showNewNote} />
                                 )
                             }}
                           ></Route>

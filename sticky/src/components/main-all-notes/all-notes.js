@@ -39,6 +39,7 @@ export default class AllNotes extends Component {
                 onDrop={this.props.onDrop} 
                 allNotes={this.props.notes} 
                 allLinks={this.props.links} 
+                showNewNote={this.props.showNewNote}
              /> : 
                 <h1>loading notes</h1>}
             </AllNotesDiv>
@@ -53,7 +54,6 @@ ${'' /* border: 1px solid green; */}
   padding: 15px;
   ${'' /* background-color: #2a465c; */}
   color: black;
-  ${'' /* height: 100%; */}
   overflow: auto;
   .sort {
     display: flex;
