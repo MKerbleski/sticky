@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { flex, menu, start } from '../../styles/styl-utils.js'
+import { flex } from '../../styles/styl-utils.js'
 import RightMenuDetails from './right-menu-details.js'
 import {slackBlack, rightArrow, leftArrow} from '../../img'
 

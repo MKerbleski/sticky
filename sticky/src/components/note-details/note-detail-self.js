@@ -25,19 +25,18 @@ const NoteDetailSelf = (props) => (
                   <div className="note-detail-children">
                     {props.allNotes.map( layerOne => {
                         if(layerOne.parent_id === props.note.id){
-                            return (
-                                <NoteDetailChild
-                                    type="note"
-                                    onDrop={props.onDrop}
-                                    changeParent={props.changeParent}
-                                    key={layerOne.id}
-                                    layerOne={layerOne}
-                                    allNotes={props.allNotes}
-                                    color={layerOne.note_color}
-                                />)
+                            return <NoteDetailChild
+                                      type="note"
+                                      onDrop={props.onDrop}
+                                      changeParent={props.changeParent}
+                                      key={layerOne.id}
+                                      layerOne={layerOne}
+                                      allNotes={props.allNotes}
+                                      color={layerOne.note_color}
+                                  />
                         } else {
                             return null
-                        }{/* if */}
+                        }
                     })}{/* map */}
                   </div>{/* noted-detail-children */}
                 </div>{/* note-detail-left */}
@@ -46,7 +45,7 @@ const NoteDetailSelf = (props) => (
                         <React.Fragment>
                           <h5>media links</h5>
                           {props.allLinks.map(link => {
-                            if (link.parent_id == props.note.id){
+                            if (+link.parent_id === +props.note.id){
                                 return (
                                   <div  
                                     key={link.id} 
@@ -58,7 +57,9 @@ const NoteDetailSelf = (props) => (
                                           text: {link.slack_text}
                                       </SlackNote>
                                   </div>)
-                            }{/* if */}
+                            } else {
+                              return null
+                            }
                           })}{/* map */}
                         </React.Fragment>
                     : <p>no links associated with this note</p>}

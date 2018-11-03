@@ -10,7 +10,6 @@ const SlackNote = (props) => {
     } else {
         note = props.link
     }
-    console.log(note)
     if (note){
         return (
             props.connectDragSource(
@@ -53,7 +52,6 @@ const SlackNote = (props) => {
  const sourceObj = {
     
     beginDrag(props) {
-        let note
         if(props.type === "link"){
             const {link} = props.star
             const type = props.type

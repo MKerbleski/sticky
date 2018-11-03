@@ -18,7 +18,6 @@ import {
   NoteDetailParent,
   RightMenu,
   Settings,
-  SettingsAuth,
 } from './components';
 
 import {
@@ -97,7 +96,7 @@ class App extends Component {
       }
       axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
       .then(res => {
-        console.log("app111 get notes", res)
+        console.log("App Edit note respons", res)
         this.props.getNotes();
         //this functino is now only called outside of app so no need ot 'refresh' notes
         // this.props.history.push('/all-notes')
@@ -329,17 +328,6 @@ class App extends Component {
                             }}
                           ></Route>
 
-                          {/* <Route
-                            exact
-                            path="/new-note"//should change to new
-                            render={ () => {
-                              return (
-                                <NewNote
-                                  count={this.state.count} username={this.props.state.username} newNote={this.newNote} notes={this.state.notes} />
-                              )
-                            }}
-                          ></Route> */}
-
                           <Route
                             exact={!this.state.deleteEnabled}
                             path="/note/:note_id"
@@ -360,19 +348,6 @@ class App extends Component {
                               )
                             }}></Route>
 
-                          {/* <Route
-                            exact
-                            path="/note/:noteId/edit"
-                            render={ (note) => {
-                              return (
-                                <EditNote
-                                  count={this.state.count}
-                                  editNote={this.editNote} 
-                                  note={this.getNoteDetails(note.match.params.noteId)} />
-                              )
-                            }}
-                          ></Route> */}
-
                           <Route
                             path="/settings"
                             render={() => {
@@ -388,24 +363,11 @@ class App extends Component {
                             path="/deleted"
                             render={() => {
                               return (
-                                <Deleted />
+                                <Deleted editNote={this.editNote} />
                               )
                             }}
                           ></Route>
-{/*                           
-                          {(this.state.deleteEnabled) ?
-                              (<div className="delete">
-                                  <Route
-                                    path="/note/:noteId/delete"
-                                    render={ (note) => {
-                                      return (
-                                        <div>
-                                          <DeleteNote
-                                            deleteNote={this.deleteNote} disableDelete={this.disableDelete} note={this.getNoteDetails(note.match.params.noteId)} />
-                                        </div>)}}
-                                  ></Route>
-                              </div>) :
-                          null} */}
+
                     </React.Fragment> 
                 </div> {/*   center-display    */}
                 

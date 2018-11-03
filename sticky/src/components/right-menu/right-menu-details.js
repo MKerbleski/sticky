@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-// import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { menu, start } from '../../styles/styl-utils.js'
-import {twitter, pocket, chrome, slackColor, slackBlack, slackWord, rightArrow} from '../../img'
+import { slackWord } from '../../img'
 import SlackNote from '../slack-note.js'
 
 export default class RightMenuDetails extends Component {
@@ -15,9 +14,9 @@ export default class RightMenuDetails extends Component {
   }
 
   componentDidMount(props){
-    console.log(this)
+    // console.log(this)
     if(this.state.logo === 'slack'){
-        console.log(this.props)
+        // console.log(this.props)
         this.setState({
             slackStars: this.props.slackStars
         })
@@ -28,7 +27,7 @@ export default class RightMenuDetails extends Component {
     return (
       <RightMenuDetailsDiv>
         <div className="app-title">
-            <img name={this.props.app} onClick={this.eventHandler} className="rm-details-name" src={slackWord}></img>
+            <img alt='slackLogo' name={this.props.app} onClick={this.eventHandler} className="rm-details-name" src={slackWord}></img>
             
         </div>
         {this.state.slackStars ? 

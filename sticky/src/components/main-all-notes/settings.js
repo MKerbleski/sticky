@@ -3,7 +3,6 @@ import styled from 'styled-components';
 // // import {Link} from 'react-router-dom';
 // import { Route } from 'react-router-dom';
 // import axios from 'axios';
-// import { SettingsAuth } from './index'
 // import Redirect from 'react-router-dom/Redirect';
 
 export default class Settings extends Component {
