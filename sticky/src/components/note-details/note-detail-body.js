@@ -4,59 +4,38 @@ import ReactMarkdown from 'react-markdown';
 import { start } from '../../styles/styl-utils.js'
 import axios from 'axios'
 import {withRouter} from 'react-router'
+import NoteDetailBodyEdit from './note-detail-body-edit.js';
 
 class NoteDetailBody extends Component {
     constructor(props){
         super(props)
         this.state = {
             edit: false,
-            textBody: props.note.textBody
+            textBody: this.props.note.textBody,
         }
+    }
+    componentDidMount(){
+        this.setState({
+            edit: false,
+            textBody: this.props.note.textBody,
+        })
+    }
+    componentWillUnmount(){
+        this.setState({
+            edit: false,
+            textBody: 'test',
+        })
     }
 
     handleClick = () => {
-        console.log('click')
         this.setState({
             edit: true
         })
     }
     
     handleDClick = () => {
-        console.log('Dclick')
         this.setState({
             edit: false
-        })
-    }
-
-    handleEdit = (e) => {
-        // e.preventDefault()
-        //currently the way that notes are set up the note cannot update unless the page is refreshed. needs to fetched for specific notes when at /note/1 and only get that note or something
-        console.log('handleEdit')
-        if(localStorage.getItem('JWT')){
-            const edit = {
-                textBody: this.state.textBody,
-                id: this.props.note.id
-            }
-            const token = localStorage.getItem('JWT')
-            const authHeader = {
-                headers: {
-                Authorization: token,    
-                } 
-            }
-            axios.put(`http://localhost:3333/api/notes/${edit.id}`, (edit), authHeader)
-            .then(res => {
-                console.log("sent edit note", res)
-                // this.props.history.push(`/note/${edit.id}`)
-            }).catch(err => console.log(err.message))
-        } else {
-        console.log('need to include toekn in request')
-        }
-    }            
-
-
-    handleInput = (e) => {
-        this.setState({
-            textBody: e.target.value
         })
     }
 
@@ -64,16 +43,7 @@ class NoteDetailBody extends Component {
         return(
             <NoteDetailBodyDiv  onDoubleClick={this.handleDClick}> 
                 {this.state.edit ? 
-                    <div className="note-detail-body-edit" >
-                        <form onSubmit={this.handleEdit}>
-                            <input 
-                                wrap="hard" 
-                                type='textarea' 
-                                onChange={this.handleInput} 
-                                value={this.state.textBody} name='textBody'>{this.value}</input>
-                            <button>save</button>
-                        </form>
-                    </div> : 
+                    <NoteDetailBodyEdit note={this.props.note} /> : 
                     <div 
                         className="note-detail-body" 
                         onClick={this.handleClick}>
@@ -90,7 +60,8 @@ export default withRouter(NoteDetailBody);
 const NoteDetailBodyDiv = styled.div`
     ${'' /* border: 1px solid red; */}
     height: 100%;
-    .note-detail-body{
+    background: lavender;
+    .note-detail-body {
         ${start()}
         height: 50%;
         overflow: hidden;
@@ -102,32 +73,5 @@ const NoteDetailBodyDiv = styled.div`
         p {
           line-height: 30px;
         }
-    }
-    ${'' /* form */}
-    .note-detail-body-edit { 
-        ${'' /* background: orange; */}
-        padding: 0;
-        height: 50%;
-        ${'' /* display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center; */}
-        form{
-            ${'' /* border: 1px solid blue; */}
-            height: 100%;
-            input{
-            width: 99%;
-            height: 87%;
-            margin: 0;
-            background-color: lightgray;
-            border: none;
-            }
-            button{
-                height: 12%;
-                width: 100%;
-                ${'' /* margin: 3px; */}
-            }
-        }
-        
     }
 `

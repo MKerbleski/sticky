@@ -5,55 +5,55 @@ class NotePreviewNew extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            textBody: 'new note text body sample words'
+            textBody: ''
         }
     }
   
-  getFirstWord = (text, words=2) => {
-    let firstWord = text.split(" ").slice(0,words).join(' ');
-    if(firstWord.length > 0){
-      return firstWord
-    } else {
-      return text
+    getFirstWord = (text, words=2) => {
+        let firstWord = text.split(" ").slice(0,words).join(' ');
+        if(firstWord.length > 0){
+        return firstWord
+        } else {
+        return text
+        }
     }
-  }
 
-  getFirstSen = (text) => {
-    let firstSen = text
-    let firstWord = this.getFirstWord(text)
-    firstSen = firstSen.replace(firstWord, '')    
-    if(firstSen !== firstWord){
-      return firstSen
-    } else{
-      return null
+    getFirstSen = (text) => {
+        let firstSen = text
+        let firstWord = this.getFirstWord(text)
+        firstSen = firstSen.replace(firstWord, '')    
+        if(firstSen !== firstWord){
+        return firstSen
+        } else{
+        return null
+        }
     }
-  }
 
-  addNote = (e) => {
-      console.log('addNote', this.state.textBody)
-      this.props.newNote({textBody: this.state.textBody})
-  }
+    addNote = (e) => {
+        console.log('addNote', this.state.textBody)
+        this.props.newNote({textBody: this.state.textBody})
+    }
 
-  changeHandler = (e) => {
-        e.preventDefault();
-        this.setState({
-            textBody: e.target.value,
-        })
-  }
-  
-  render(props){
-    return (
-        <div className="startObject">
-            <NotePreviewNewDiv >
-                <form onSubmit={this.addNote}>
-                    <input autoFocus onChange={this.changeHandler} name="textBody" value={this.state.textBody}
-                    className="note-link" >{this.value}</input>
-                    <button>save note</button>
-                </form>
-            </NotePreviewNewDiv>        
-        </div>
-    )
-  }
+    changeHandler = (e) => {
+            e.preventDefault();
+            this.setState({
+                textBody: e.target.value,
+            })
+    }
+    
+    render(props){
+        return (
+            <div className="startObject">
+                <NotePreviewNewDiv >
+                    <form onSubmit={this.addNote}>
+                        <input autoFocus onChange={this.changeHandler} name="textBody" value={this.state.textBody}
+                        className="note-link" >{this.value}</input>
+                        <button>save note</button>
+                    </form>
+                </NotePreviewNewDiv>        
+            </div>
+        )
+    }
 }
 
 export default NotePreviewNew;

@@ -154,7 +154,6 @@ class App extends Component {
   getParentColor = (id) => {
       let parent_id = this.getParentId(id)
       let parent =  this.props.state.notes.find(note => {return note.id === +parent_id})
-      console.log(parent)
       if(parent){
           return parent.note_color
       } else {
