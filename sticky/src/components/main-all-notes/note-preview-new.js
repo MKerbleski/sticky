@@ -19,6 +19,8 @@ const targetObj = {
 
      const targetId = props.layerOne.id;
      const type = props.type;
+     console.log('targetId: ', targetId)
+     console.log('targetType: ', type)
      return ({
          targetId, type
      });
@@ -48,7 +50,13 @@ const sourceObj = {
   },
 };
 
-class NotePreview extends React.Component {
+class NotePreviewNew extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            textBody: 'new note text body sample words'
+        }
+    }
   
   getFirstWord = (text, words=2) => {
     // let firstWord = text.substr(0, text.indexOf(" "));
@@ -89,64 +97,19 @@ class NotePreview extends React.Component {
           connectDragSource, 
           connectDropTarget, 
       } = this.props
-      if (this.props.layerOne){
           return (
               connectDragSource &&
               connectDropTarget &&
               connectDragSource(
               connectDropTarget(
                   <div className="startObject">
-                    <NotePreviewDiv color={this.props.layerOne.note_color} >
-                      <Link
-                        key={this.props.key}
-                        index={this.props.index}
-                        className="note-link"
-                        id={this.props.layerOne.id}
-                        to={`/note/${this.props.layerOne.id}`}
-                        style={{background: this.props.hover ? 'lightgreen' : null}}
-                      >
-                          <div className="note-content">
-                              <div className="note-content-header">
-                                  <h3 className="note-content-title">       
-                                      {this.getFirstWord(this.props.layerOne.textBody)}
-                                  </h3>
-                                  {this.getLinksLength(this.props.allLinks) > 0 ? 
-                                    <div className="note-content-link-count">
-                                        {this.getLinksLength(this.props.allLinks)}
-                                    </div> : null
-                                  }
-                              </div>
-                              <p>
-                                  {this.getFirstSen(this.props.layerOne.textBody)}
-                              </p> 
-                          </div>
-                            <div className="layerTwoContainerAll"  >
-                              {this.props.allNotes.map(layerTwo => {
-                                  if (layerTwo.parent_id === this.props.layerOne.id){
-                                      return (
-                                            <div className="layerTwoContainer" key={layerTwo.id}>
-                                                <LayerTwoTargetSource  
-                                                  type="note"
-                                                  onDrop={this.props.onDrop}
-                                                  layerTwo={layerTwo} 
-                                                  allNotes={this.props.allNotes}
-                                                  getFirstWord={this.getFirstWord} />
-                                            </div>
-                                            )
-                                  } else {
-                                      return null
-                                  }
-                              })}
-                          </div>                     
-                      </Link>
-                    </NotePreviewDiv>        
+                    <NotePreviewNewDiv >
+                       <input className="note-link" ></input>
+                    </NotePreviewNewDiv>        
                   </div>
                   )
                   )
               )
-      } else {
-          return (null)
-      }
   }
 }
 
@@ -165,9 +128,9 @@ export default flow(
       isFoobar: true,
   }))
 
-)(NotePreview);
+)(NotePreviewNew);
 
-const NotePreviewDiv = styled.div`
+const NotePreviewNewDiv = styled.div`
   ${'' /* border: 5px solid blue; */}
   padding: 10px;
   width: 300px;
@@ -264,42 +227,3 @@ const NotePreviewDiv = styled.div`
     }
   }  
 `;
-
-
-
-//old way if
-// export default class NotePreview extends Component {
-//
-//   render() {
-//     // console.log(this.props)
-//     const { note, index, key } = this.props;
-//
-//     return (
-//             <NotePreviewDiv>
-//               <Link
-//                 key={key}
-//                 index={index}
-//                 className="note-link"
-//                 id={note.id}
-//                 to={`/note/${note.id}`}>
-//
-//                   <div key={index} className="note-preview">
-//
-//                     <div className="notTags">
-//                       <h3>{note.title}</h3>
-//                       <p>{note.textBody}</p>
-//                     </div>
-//
-//                     <div className="tags">
-//                       {(note.tags.length > 0) ?
-//                         note.tags.map(tag => {
-//                               return (<div key={tag}>{tag}</div>)
-//                             }
-//                         ) :
-//                         null}
-//                     </div>
-//                   </div>
-//               </Link>
-//             </NotePreviewDiv>)
-// }
-// }

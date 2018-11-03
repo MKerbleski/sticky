@@ -1,5 +1,5 @@
 
-export {default as EditNote} from './edit-note.js';
+// export {default as EditNote} from '../../../../toBeDeleted/edit-note.js';
 export {default as DeleteNote} from './delete-note.js';
 export {default as NoteDetailParent} from './note-detail-parent.js';
 export {default as NoteDetailSelf} from './note-detail-self.js';

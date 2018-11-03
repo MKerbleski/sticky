@@ -1,12 +1,15 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
 import NotePreview from './note-preview.js';
-// import loadingGif from './../img/Triangles-6.2s-200px.gif';
+import NotePreviewNew from './note-preview-new.js';
+
 
 const AllNotesBin = (props) => (
   props.connectDropTarget(
     <div className="all-notes" 
      style={{background: props.hover ? 'lightgreen' : null}}>
+        <NotePreviewNew />
+        
         {props.allNotes.map( layerOne => {
             {/* console.log(layerOne) */}
         if(layerOne.parent_id === null){
