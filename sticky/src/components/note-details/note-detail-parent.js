@@ -3,7 +3,7 @@ import { DropTarget } from 'react-dnd';
 import { NoteDetailSelf } from '../index.js';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import { flex, start } from '../../styles/styl-utils.js'
+import { start } from '../../styles/styl-utils.js'
 
 const NoteDetailParent = (props) => (
     props.connectDropTarget(

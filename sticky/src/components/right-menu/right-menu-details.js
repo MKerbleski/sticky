@@ -14,9 +14,7 @@ export default class RightMenuDetails extends Component {
   }
 
   componentDidMount(props){
-    // console.log(this)
     if(this.state.logo === 'slack'){
-        // console.log(this.props)
         this.setState({
             slackStars: this.props.slackStars
         })
@@ -34,15 +32,9 @@ export default class RightMenuDetails extends Component {
         <div className="app-list">
             {this.state.slackStars.map(star => {
                 if(star.type === "message"){
-                    {/* console.log(star, 'message') */}
-                    return (
-                        <SlackNote type="link" onDrop={this.props.onDrop} key={star.date_create} star={star}></SlackNote>
-                    )
+                    return <SlackNote type="link" onDrop={this.props.onDrop} key={star.date_create} star={star}></SlackNote>
                 } else if (star.type === "channel") {
-                    {/* console.log(star, 'not message') */}
-                    return (
-                        <div key={star.date_create} className="list-title">stared channel: {star.channel}</div>
-                    )
+                    return <div key={star.date_create} className="list-title">stared channel: {star.channel}</div>
                 } else {
                     return (
                         <p>no data or failed to load</p>
