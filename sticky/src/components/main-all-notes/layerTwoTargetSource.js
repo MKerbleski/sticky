@@ -35,8 +35,8 @@ endDrag(props, monitor) {// this takes props mounted on beginDrag
     // console.log(childId, 'childId')
     
     const dropResult = monitor.getDropResult({shallow: true});
-    // console.log(dropResult, 'dropResult')
-    // console.log(props, 'props')
+    console.log(dropResult, 'dropResult')
+    console.log(props, 'props')
     props.onDrop(sourceId, dropResult.type, dropResult.targetId);
 }
 };
@@ -48,7 +48,7 @@ class LayerTwoTargetSource extends React.Component {
         this.props.redirect(this.props.layerTwo.id)
     }
     render(props){
-        // console.log(this.props)
+        console.log(this.props)
         const {
             connectDragSource, 
             connectDropTarget, 
@@ -61,10 +61,12 @@ class LayerTwoTargetSource extends React.Component {
                 connectDragSource(
                 connectDropTarget(
                     <div onClick={(e) => {e.stopPropagation();}}>
+
                     <LayerTwoDiv 
                             type="note"
                             onClick={this.goToNote}
                             style={{background: this.props.hover ? 'lightgreen' : null}}>
+                            {/* <h3>{this.props.layerTwo.title}</h3> */}
                             
                             <h4>{this.props.getFirstWord(this.props.layerTwo.textBody)}</h4>
                             <div className="layerThreeContainerAll">

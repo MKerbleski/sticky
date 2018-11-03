@@ -2,6 +2,7 @@ import React , { Component } from 'react'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown';
 import { start } from '../../styles/styl-utils.js'
+import axios from 'axios'
 import {withRouter} from 'react-router'
 import NoteDetailBodyEdit from './note-detail-body-edit.js';
 
@@ -10,45 +11,43 @@ class NoteDetailBody extends Component {
         super(props)
         this.state = {
             edit: false,
-            id: this.props.note.id,
-            textBody: '',
+            textBody: this.props.note.textBody,
         }
     }
-
     componentDidMount(){
         this.setState({
+            edit: false,
             textBody: this.props.note.textBody,
         })
     }
+    componentWillUnmount(){
+        this.setState({
+            edit: false,
+            textBody: 'test',
+        })
+    }
+
     handleClick = () => {
         this.setState({
             edit: true
         })
     }
-
-    editFalse = (newText) => {
-        this.setState({
-            edit: false,
-        })
-    }
     
-    updateState = (textBody) => {
-        //I realize this is janky
+    handleDClick = () => {
         this.setState({
-            textBody: textBody
+            edit: false
         })
     }
 
     render(props){
-        //this is really janky but looks smooth to the user. I am replaceing the props textBody with state textbody so that the user can edit the note without needing to refetch or refresh the page and remain on the same page on save. it does get saved as well
         return(
-            <NoteDetailBodyDiv  onDoubleClick={this.editFalse}> 
+            <NoteDetailBodyDiv  onDoubleClick={this.handleDClick}> 
                 {this.state.edit ? 
-                    <NoteDetailBodyEdit updateState={this.updateState} editFalse={this.editFalse} editNote={this.props.editNote} textBody={this.state.textBody} id={this.state.id} /> : 
+                    <NoteDetailBodyEdit note={this.props.note} /> : 
                     <div 
                         className="note-detail-body" 
                         onClick={this.handleClick}>
-                          {<ReactMarkdown>{this.state.textBody}</ReactMarkdown>}
+                          {<ReactMarkdown>{this.props.note.textBody}</ReactMarkdown>}
                     </div>
                 }
             </NoteDetailBodyDiv>

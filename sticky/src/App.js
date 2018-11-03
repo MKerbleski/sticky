@@ -85,8 +85,8 @@ class App extends Component {
   }
   
   //cannot move because it is used in dragging and dropping
-  editNote = (noteEdit, redirectRoute) => {
-    console.log('editNote', noteEdit, redirectRoute)
+  editNote = (noteEdit) => {
+    console.log('editNote', noteEdit)
     if(localStorage.getItem('JWT')){
       const token = localStorage.getItem('JWT')
       const authHeader = {
@@ -96,10 +96,10 @@ class App extends Component {
       }
       axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
       .then(res => {
-        // console.log("App Edit note respons", res)
-        // this.props.getNotes();
+        console.log("App Edit note respons", res)
+        this.props.getNotes();
         //this functino is now only called outside of app so no need ot 'refresh' notes
-        this.props.history.push(`/note/${redirectRoute}`)
+        // this.props.history.push('/all-notes')
       }).catch(err => console.log(err.message))
     }else {
       console.log('need to include toekn in request')
@@ -107,7 +107,6 @@ class App extends Component {
   }
 
   enableDelete = () => {
-    //i don't think this is used anymore
     this.setState({
       deleteEnabled: true,
     })
@@ -250,6 +249,7 @@ class App extends Component {
       this.newNote(link)//need to make links into database object with a parent_id of the null or actually the slack folder would work well then either clone or move 
       //the trickier part is that on load the api needs to make sure that it has the current list 
     }
+    
   }
 
   sortById = (e) => {
@@ -347,7 +347,6 @@ class App extends Component {
                                   changeParent={this.changeParent}
                                   type="note"
                                   parentColor={this.getParentColor(note.match.params.note_id)}
-                                  redirect={this.redirect}
                                   editNote={this.editNote}
                                   targetId={this.getParentId(note.match.params.note_id)}
                                   />
