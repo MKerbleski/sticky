@@ -2,13 +2,15 @@ import styled from 'styled-components';
 import React from 'react';
 import {DragSource} from 'react-dnd';
 
-
 const LayerThreeSource = (props) => {
+    const goToNote = () => {
+        props.redirect(props.layerThree.id)
+    }
     if (props.layerThree){
         return (
             props.connectDragSource(
-                <div> 
-                    <LayerThreeDiv type="note" style={{
+                <div onClick={(e) => {e.stopPropagation();}}> 
+                    <LayerThreeDiv  onClick={goToNote} type="note" style={{
                          opacity: props.isDragging ? '0.25' : '1',
                          border: props.isDragging ? '1px dashed gray': '1px solid black',
                         //  color: props.didDrop ? "red" : "green"
@@ -37,11 +39,8 @@ const LayerThreeSource = (props) => {
         if(!monitor.didDrop()){
             return ;
         }
-        // console.log(props, 'superSubDropProps', monitor)
         const childId = props.layerThree.id;
-        // console.log(childId, 'childId')
         const parentId = monitor.getDropResult();
-        // console.log(parentId, 'parentId')
         props.onDrop(childId, parentId.type, parentId.targetId);
     },
   };

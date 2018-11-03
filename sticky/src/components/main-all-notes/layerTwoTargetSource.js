@@ -8,45 +8,47 @@ import flow from 'lodash/flow'
 
 import LayerThreeSource from "./layerThreeSource"
 
- const targetObj = {
-     drop(props) {
-        const targetId = props.layerTwo.id;
-        const type = props.type
-        return ({
-            targetId, type
-        });
+const targetObj = {
+    drop(props) {
+    const targetId = props.layerTwo.id;
+    const type = props.type
+    return ({
+        targetId, type
+    });
 
-    }
-  }
-  
-  const sourceObj = {
-    beginDrag(props) {
-        const sourceId = props.layerTwo
-        return ({
-            sourceId //this gets sent to the drop item // is null in this example because react-dnd is overkill
-        });
-    },
+}
+}
 
-    endDrag(props, monitor) {// this takes props mounted on beginDrag
-        if(!monitor.didDrop()){
-            return ;
-        }
-        const sourceId = props.layerTwo.id;
-        // console.log(childId, 'childId')
-        
-        const dropResult = monitor.getDropResult({shallow: true});
-        console.log(dropResult, 'dropResult')
-        console.log(props, 'props')
-        props.onDrop(sourceId, dropResult.type, dropResult.targetId);
+const sourceObj = {
+beginDrag(props) {
+    const sourceId = props.layerTwo
+    return ({
+        sourceId //this gets sent to the drop item // is null in this example because react-dnd is overkill
+    });
+},
+
+endDrag(props, monitor) {// this takes props mounted on beginDrag
+    if(!monitor.didDrop()){
+        return ;
     }
-  };
+    const sourceId = props.layerTwo.id;
+    // console.log(childId, 'childId')
+    
+    const dropResult = monitor.getDropResult({shallow: true});
+    console.log(dropResult, 'dropResult')
+    console.log(props, 'props')
+    props.onDrop(sourceId, dropResult.type, dropResult.targetId);
+}
+};
 
 
 class LayerTwoTargetSource extends React.Component {
+    goToNote = () => {
+        // console.log('layer two go to note')
+        this.props.redirect(this.props.layerTwo.id)
+    }
     render(props){
-        // console.log(this.props.hover)
-        // console.log(this.props.hoverShallow)
-        // console.log(this.props.highlighted)
+        console.log(this.props)
         const {
             connectDragSource, 
             connectDropTarget, 
@@ -58,11 +60,11 @@ class LayerTwoTargetSource extends React.Component {
                 connectDropTarget &&
                 connectDragSource(
                 connectDropTarget(
-                    <div>
+                    <div onClick={(e) => {e.stopPropagation();}}>
 
                     <LayerTwoDiv 
                             type="note"
-                            onClick={(e) => {e.stopPropagation();}} 
+                            onClick={this.goToNote}
                             style={{background: this.props.hover ? 'lightgreen' : null}}>
                             {/* <h3>{this.props.layerTwo.title}</h3> */}
                             
@@ -75,6 +77,7 @@ class LayerTwoTargetSource extends React.Component {
                                                 <LayerThreeSource 
                                                     type="note"
                                                     changeParent={this.props.changeParent} layerThree={layerThree} 
+                                                    redirect={this.props.redirect}
                                                     onDrop={this.props.onDrop}
                                                     getFirstWord={this.props.getFirstWord}
                                                     />
