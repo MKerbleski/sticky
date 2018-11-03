@@ -113,8 +113,7 @@ export default flow(
 const NoteDetailGrandChildDiv = styled.div`
     border: 2px solid black;
     border-radius: 5px;
-    ${'' /* height: 90px; */}
-    background: lightpink;
+    background: black;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -125,7 +124,7 @@ const NoteDetailGrandChildDiv = styled.div`
         border: 1px solid orange;
         margin: 0px;
         width: 100%;
-        color: black;
+        color: white;
     }
     .layerThreeContainerAll{
         width: 100%;

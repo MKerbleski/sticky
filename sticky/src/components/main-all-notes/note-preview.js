@@ -83,6 +83,12 @@ class NotePreview extends React.Component {
     // console.log(len)
     return len
   }
+
+  goToNote = (e) => {
+    e.preventDefault()
+    console.log('go to note')
+
+  }
   
   render(props){
       const {
@@ -95,7 +101,7 @@ class NotePreview extends React.Component {
               connectDropTarget &&
               connectDragSource(
               connectDropTarget(
-                  <div className="startObject">
+                  <div className="startObject" onClick={this.goToNote}>
                     <NotePreviewDiv color={this.props.layerOne.note_color} >
                       <Link
                         key={this.props.key}
@@ -129,6 +135,7 @@ class NotePreview extends React.Component {
                                                   type="note"
                                                   onDrop={this.props.onDrop}
                                                   layerTwo={layerTwo} 
+                                                  onClick={this.goToNote}
                                                   allNotes={this.props.allNotes}
                                                   getFirstWord={this.getFirstWord} />
                                             </div>
@@ -175,13 +182,12 @@ const NotePreviewDiv = styled.div`
   display: flex;
   flex-direction: column;  
   .note-link{
-    ${'' /* border: 1px solid green; */}
     ${ flex('column') }
     padding: 10px;
     width: 95%;
     padding: 10px;
     justify-content: space-around;
-    background-color: lightgray;
+    background-color: lavender;
     background-color: ${props => props.color};
       .note-content{
       ${'' /* border: 1px solid green; */}

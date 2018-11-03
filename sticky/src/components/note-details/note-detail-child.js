@@ -9,22 +9,17 @@ import LayerTwoTargetSource from "./note-detail-grand-child"
 
 const targetObj = {
   drop(props, monitor) {
-      //so this somehow allows other items to be dropped in a nested child component
-    const hover =  monitor.isOver({shallow:true})
-             //  const hoverfalse =  monitor.isOver({shallow:false})
- //              console.log(hover)
- //              console.log(hoverfalse)
- //    console.log(props)
-  if(hover){//this disables layer one droping if there is a nested child
-     const targetId = props.layerOne.id;
-     const type = props.type;
-     return ({
-         targetId, type
-     });
- }
- },
- hover(props, monitor){
- }
+      const hover =  monitor.isOver({shallow:true})
+      if(hover){//this disables layer one droping if there is a nested child
+        const targetId = props.layerOne.id;
+        const type = props.type;
+        return ({
+            targetId, type
+        });
+    }
+  },
+  hover(props, monitor){
+  }
 }
 
 const sourceObj = {
@@ -39,7 +34,6 @@ const sourceObj = {
     if (!monitor.didDrop()) {
       return;
     }
-    // const  { id }  = monitor.getItem(); 
     const sourceId= props.layerOne.id
     const dropResult = monitor.getDropResult();
     console.log(sourceId,  dropResult, dropResult.targetId)
@@ -52,7 +46,6 @@ class NoteDetailChild extends React.Component {
   getFirstWord = (text, words=2) => {
     // let firstWord = text.substr(0, text.indexOf(" "));
     let firstWord = text.split(" ").slice(0,words).join(' ');
-    // console.log(firstWord, 'word')
     if(firstWord.length > 0){
       return firstWord
     } else {
@@ -61,10 +54,7 @@ class NoteDetailChild extends React.Component {
   }
 
   getFirstSen = (text) => {
-    // let firstSen = text.substr(0, text.indexOf("."));    
-    // or 
     let firstSen = text
-
     let firstWord = this.getFirstWord(text)
     firstSen = firstSen.replace(firstWord, '')
     if(firstSen !== firstWord){
@@ -128,7 +118,6 @@ class NoteDetailChild extends React.Component {
 }
 
 export default flow(
-
   DropTarget('item', targetObj, (connect, monitor) => ({
       connectDropTarget: connect.dropTarget(),
       highlighted: monitor.canDrop(),
@@ -163,15 +152,14 @@ const NoteDetailChildDiv = styled.div`
     justify-content: flex-start;
     background-color: ${props => props.color};
     ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
-    background-color: white;
+    background-color: wheat;
     text-decoration: none;
       .noteContent{
-      ${start('green')}
+      ${start()}
       flex-direction: column;
       justify-content: space-between;
       align-items: flex-start;
       color: black;
-      background: lightgreen;
       height: auto;
       margin: 2% 0;
       max-width: 100%;

@@ -55,8 +55,8 @@ export default DragSource('item', sourceObj, collect)(LayerThreeSource);
 
 const LayerThreeDiv = styled.div`
     border: 1px solid green;
-    background: black;
-    color: white;
+    background: white;
+    color: black;
     font-size: 10px;
     ${'' /* margin: 10px; */}
     ${'' /* padding: 10px; */}

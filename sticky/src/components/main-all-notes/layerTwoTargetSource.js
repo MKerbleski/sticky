@@ -1,19 +1,17 @@
 import styled from 'styled-components';
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
 
 
-// import SubNote from "./subNote"
 import LayerThreeSource from "./layerThreeSource"
 
  const targetObj = {
      drop(props) {
-        console.log(props.hover)
         const targetId = props.layerTwo.id;
         const type = props.type
-        console.log('L2-targetId: ', targetId)
         return ({
             targetId, type
         });
@@ -61,7 +59,8 @@ class LayerTwoTargetSource extends React.Component {
                 connectDragSource(
                 connectDropTarget(
                     <div>
-                        <LayerTwoDiv 
+
+                    <LayerTwoDiv 
                             type="note"
                             onClick={(e) => {e.stopPropagation();}} 
                             style={{background: this.props.hover ? 'lightgreen' : null}}>
@@ -86,7 +85,7 @@ class LayerTwoTargetSource extends React.Component {
                                     }
                                 })}
                             </div>                       
-                        </LayerTwoDiv>         
+                        </LayerTwoDiv>       
                     </div>
                     )
                     )
@@ -120,7 +119,7 @@ const LayerTwoDiv = styled.div`
     margin: 10px;
     padding: 10px;
     ${'' /* height: 90px; */}
-    background: white;
+    background: wheat;
     display: flex;
     flex-direction: column;
     align-content: flex-start;

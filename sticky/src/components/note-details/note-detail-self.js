@@ -25,7 +25,8 @@ const NoteDetailSelf = (props) => (
                   <div className="note-detail-children">
                     {props.allNotes.map( layerOne => {
                         if(layerOne.parent_id === props.note.id){
-                            return <NoteDetailChild
+                            return (
+                              <NoteDetailChild
                                       type="note"
                                       onDrop={props.onDrop}
                                       changeParent={props.changeParent}
@@ -34,6 +35,7 @@ const NoteDetailSelf = (props) => (
                                       allNotes={props.allNotes}
                                       color={layerOne.note_color}
                                   />
+                            )
                         } else {
                             return null
                         }
@@ -160,7 +162,7 @@ const NoteDetailSelfDiv = styled.div`
     .note-detail-right{
       ${start('red')}
       flex-direction: column;
-      background: gray;
+      background: skyblue;
       color: white;
       width: 30%;
       margin: 5px;
