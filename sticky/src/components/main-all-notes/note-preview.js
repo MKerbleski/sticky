@@ -86,11 +86,12 @@ class NotePreview extends React.Component {
 
   goToNote = (e) => {
     e.preventDefault()
-    console.log('go to note')
-
+    console.log('go to note', e.target.id, this.props.layerOne.id)
+    this.props.redirect(this.props.layerOne.id)
   }
   
   render(props){
+    // console.log(this)
       const {
           connectDragSource, 
           connectDropTarget, 
@@ -103,12 +104,11 @@ class NotePreview extends React.Component {
               connectDropTarget(
                   <div className="startObject" onClick={this.goToNote}>
                     <NotePreviewDiv color={this.props.layerOne.note_color} >
-                      <Link
+                      <div
                         key={this.props.key}
                         index={this.props.index}
                         className="note-link"
                         id={this.props.layerOne.id}
-                        to={`/note/${this.props.layerOne.id}`}
                         style={{background: this.props.hover ? 'lightgreen' : null}}
                       >
                           <div className="note-content">
@@ -135,7 +135,7 @@ class NotePreview extends React.Component {
                                                   type="note"
                                                   onDrop={this.props.onDrop}
                                                   layerTwo={layerTwo} 
-                                                  onClick={this.goToNote}
+                                                  redirect={this.props.redirect}
                                                   allNotes={this.props.allNotes}
                                                   getFirstWord={this.getFirstWord} />
                                             </div>
@@ -145,7 +145,7 @@ class NotePreview extends React.Component {
                                   }
                               })}
                           </div>                     
-                      </Link>
+                      </div>
                     </NotePreviewDiv>        
                   </div>
                   )

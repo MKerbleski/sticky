@@ -20,6 +20,7 @@ const AllNotesBin = (props) => (
                 key={layerOne.id}
                 layerOne={layerOne}
                 allNotes={props.allNotes}
+                redirect={props.redirect}
                 allLinks={props.allLinks.filter(link => {
                     return (
                         +link.parent_id === +layerOne.id

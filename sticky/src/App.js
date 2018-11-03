@@ -286,8 +286,13 @@ class App extends Component {
     this.props.sortNote(newArr)
   }
 
+  redirect = (id) => {
+     console.log('redirect to', id)
+     this.props.history.push(`/note/${id}`)
+  }
+
   render(props) {
-    console.log(this)
+    // console.log(this)
     return (
       <AppDiv>
       
@@ -322,7 +327,8 @@ class App extends Component {
                                     getLinks={this.props.getLinks}
                                     showDetailMenu={this.showDetailMenu}
                                     showNewNote={this.state.showNewNote}
-                                    newNote={this.newNote} />
+                                    newNote={this.newNote}
+                                    redirect={this.redirect} />
                                 )
                             }}
                           ></Route>
