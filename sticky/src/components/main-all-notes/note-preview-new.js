@@ -105,6 +105,7 @@ class NotePreviewNew extends React.Component {
                   <div className="startObject">
                     <NotePreviewNewDiv >
                        <input className="note-link" ></input>
+                       <button>save note</button>
                     </NotePreviewNewDiv>        
                   </div>
                   )
@@ -131,99 +132,18 @@ export default flow(
 )(NotePreviewNew);
 
 const NotePreviewNewDiv = styled.div`
-  ${'' /* border: 5px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   padding: 10px;
   width: 300px;
   height: auto;
   display: flex;
   flex-direction: column;  
-  .note-link{
-    ${'' /* border: 1px solid green; */}
-    ${ flex('column') }
-    padding: 10px;
-    width: 95%;
-    padding: 10px;
-    justify-content: space-around;
-    background-color: lightgray;
-    background-color: ${props => props.color};
-      .note-content{
-      ${'' /* border: 1px solid green; */}
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-
-      color: black;
-      width: 250px;
-      height: auto;
-      ${'' /* flex-wrap: wrap; */}
-      max-height: 100px;
-      margin: 2% 0;
-      .note-content-header{
-        ${'' /* border: 1px solid pink; */}
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-          .note-content-title {
-            ${'' /* border: 1px solid green; */}
-            margin: 0px 10px 5px 0;
-            text-decoration: none;
-            text-align: left;
-          }
-          .note-content-link-count {
-            border: .5px solid black;
-            border-radius: 50px;
-            height: 20px;
-            width: 20px;
-            text-align: center;
-            background: lightblue;
-          }
-
-      }
-      p {
-        ${'' /* border: 1px solid blue; */}
-        width: 95%;
-        height: 46px;
-        text-decoration: none;
-        margin: 0;
-        line-height: 23px;
-        font-size: 14px;
-        font: roboto;
-        white-space: normal;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-    .layerTwoContainer{
-      ${'' /* border: 1px solid red; */}
-      ${flex()}
-    }
-    .layerTwoContainerAll{
-      ${'' /* border: 1px solid blue; */}
+  input{
       width: 100%;
-      ${flex()}
-      flex-wrap: wrap;
-      justify-content: space-around;
-    }
-    .tags {
-      border: 1px solid red;
-      display: flex;
-      flex-direction: row:
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      align-items: flex-end;
-      width: 90%;
-      bottom: 0;
-      overflow: hidden;
-      ${'' /* overflow: hidden; */}
-      div {
-        border: 1px solid lightgray;
-        margin: 2px;
-        padding: 4px;
-      }
-    }
-  }  
+      background-color: lightgray;
+      margin: 0;
+      min-height: 169px;
+      border: none;
+      ${'' /* border: 1px solid green; */}
+  }
 `;

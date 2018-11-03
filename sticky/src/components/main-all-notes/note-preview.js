@@ -168,7 +168,7 @@ export default flow(
 )(NotePreview);
 
 const NotePreviewDiv = styled.div`
-  ${'' /* border: 5px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   padding: 10px;
   width: 300px;
   height: auto;
