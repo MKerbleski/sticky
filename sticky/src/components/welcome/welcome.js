@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import Login from './login';
 import Register from './register';
+
 // import Header from './header';
 // import { flex } from '../../styles/styl-utils.js'
 
@@ -62,7 +63,7 @@ class Welcome extends Component{
             }
         }).catch(err => {console.log(err.message)})
     }
-    
+    // this is a repeated 3 times 
     newNote = (newNote) => {
         if(localStorage.getItem('JWT')){
           const token = localStorage.getItem('JWT')
@@ -82,6 +83,7 @@ class Welcome extends Component{
         console.log('need to include toekn in request')
       }
     }
+
 
     inputHandler = (e) => {
         e.preventDefault();

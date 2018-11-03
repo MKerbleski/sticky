@@ -87,7 +87,7 @@ class App extends Component {
     })
   }
   
-  //should be able to delete this as it is called later
+  //cannot move because it is used in dragging and dropping
   editNote = (noteEdit) => {
     console.log('editNote', noteEdit)
     if(localStorage.getItem('JWT')){
@@ -291,7 +291,7 @@ class App extends Component {
   }
 
   render(props) {
-    console.log(this.state.showNewNote)
+    console.log(this)
     return (
       <AppDiv>
       
@@ -305,6 +305,7 @@ class App extends Component {
                 <LeftMenu 
                     hideDetailMenu={this.hideDetailMenu}
                     toggleNewNote={this.toggleNewNote} />
+
                 <div className="center-display">
                     <React.Fragment>
                         <Route
@@ -313,8 +314,8 @@ class App extends Component {
                             render={ () => {
                                 return (
                                   <AllNotes
-                                    sortByLetter={this.sortByLetter}
-                                    sortById={this.sortById}
+                                    // sortByLetter={this.sortByLetter}
+                                    // sortById={this.sortById}
                                     onDrop={this.onDrop} 
                                     changeParent={this.changeParent}
                                     notes={this.props.state.notes}
@@ -324,12 +325,13 @@ class App extends Component {
                                     getUser={this.props.getUser}
                                     getLinks={this.props.getLinks}
                                     showDetailMenu={this.showDetailMenu}
-                                    showNewNote={this.state.showNewNote} />
+                                    showNewNote={this.state.showNewNote}
+                                    newNote={this.newNote} />
                                 )
                             }}
                           ></Route>
 
-                          <Route
+                          {/* <Route
                             exact
                             path="/new-note"//should change to new
                             render={ () => {
@@ -338,7 +340,7 @@ class App extends Component {
                                   count={this.state.count} username={this.props.state.username} newNote={this.newNote} notes={this.state.notes} />
                               )
                             }}
-                          ></Route>
+                          ></Route> */}
 
                           <Route
                             exact={!this.state.deleteEnabled}
@@ -434,8 +436,6 @@ const mapDispatchToProps = {
       height: 100vh;
       width: 98vw;
       box-sizing: border-box;
-      ${'' /* background-image: url(https://picsum.photos/g/1500/1500?image=${1073}); */}
-      ${'' /* background-image: url(http://placeimg.com/1000/1000/arch/grayscale); */}
       .all-notes {
         box-sizing: border-box;
         ${'' /* border: 1px solid red; */}

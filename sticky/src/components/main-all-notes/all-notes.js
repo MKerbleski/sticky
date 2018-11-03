@@ -25,7 +25,7 @@ export default class AllNotes extends Component {
   }
 
   render(props) {    
-    // console.log(this.props)
+    console.log(this)
     return (
       <AllNotesDiv>
         {/* <div className="sort">
@@ -39,6 +39,7 @@ export default class AllNotes extends Component {
                 onDrop={this.props.onDrop} 
                 allNotes={this.props.notes} 
                 allLinks={this.props.links} 
+                newNote={this.props.newNote}
                 showNewNote={this.props.showNewNote}
              /> : 
                 <h1>loading notes</h1>}

@@ -8,7 +8,7 @@ const AllNotesBin = (props) => (
   props.connectDropTarget(
     <div className="all-notes" 
      style={{background: props.hover ? 'lightgreen' : null}}>
-        {props.showNewNote ? <NotePreviewNew /> : null}        
+        {props.showNewNote ? <NotePreviewNew newNote={props.newNote} /> : null}        
         {props.allNotes.map( layerOne => {
             {/* console.log(layerOne) */}
         if(layerOne.parent_id === null){

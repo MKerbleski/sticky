@@ -64,12 +64,20 @@ class NoteDetailBody extends Component {
         return(
             <NoteDetailBodyDiv  onDoubleClick={this.handleDClick}> 
                 {this.state.edit ? 
-                    <form className="note-detail-body-edit" onSubmit={this.handleEdit}>
-                        <textarea wrap="hard" type='textarea' onChange={this.handleInput} value={this.state.textBody} name='textBody'>{this.value}</textarea>
-                        <button>save</button>
-                    </form> : 
-                    <div className="note-detail-body" onClick={this.handleClick}>
-                        {<ReactMarkdown>{this.props.note.textBody}</ReactMarkdown>}
+                    <div className="note-detail-body-edit" >
+                        <form onSubmit={this.handleEdit}>
+                            <input 
+                                wrap="hard" 
+                                type='textarea' 
+                                onChange={this.handleInput} 
+                                value={this.state.textBody} name='textBody'>{this.value}</input>
+                            <button>save</button>
+                        </form>
+                    </div> : 
+                    <div 
+                        className="note-detail-body" 
+                        onClick={this.handleClick}>
+                          {<ReactMarkdown>{this.props.note.textBody}</ReactMarkdown>}
                     </div>
                 }
             </NoteDetailBodyDiv>
@@ -80,10 +88,10 @@ class NoteDetailBody extends Component {
 export default withRouter(NoteDetailBody);
 
 const NoteDetailBodyDiv = styled.div`
-    border: 1px solid red;
+    ${'' /* border: 1px solid red; */}
     height: 100%;
     .note-detail-body{
-        ${start('blue')}
+        ${start()}
         height: 50%;
         overflow: hidden;
         h4 {
@@ -95,20 +103,31 @@ const NoteDetailBodyDiv = styled.div`
           line-height: 30px;
         }
     }
-    .note-detail-body-edit{
-        background: orange;
-        height: 75%;
-        display: flex;
+    ${'' /* form */}
+    .note-detail-body-edit { 
+        ${'' /* background: orange; */}
+        padding: 0;
+        height: 50%;
+        ${'' /* display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
-        textarea{
-            width: 96%;
+        align-items: center; */}
+        form{
+            ${'' /* border: 1px solid blue; */}
             height: 100%;
-            margin: 2px;
+            input{
+            width: 99%;
+            height: 87%;
+            margin: 0;
+            background-color: lightgray;
+            border: none;
+            }
+            button{
+                height: 12%;
+                width: 100%;
+                ${'' /* margin: 3px; */}
+            }
         }
-        button{
-            margin: 3px;
-        }
+        
     }
 `
