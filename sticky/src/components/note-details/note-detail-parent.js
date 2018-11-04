@@ -14,7 +14,6 @@ const NoteDetailParent = (props) => (
                 to={props.note.parent_id ? `/note/${props.note.parent_id}/` : `/all-notes/`}
             >back to parent note</Link>
             <NoteDetailSelf
-                enableDelete={props.enableDelete} 
                 allNotes={props.allNotes}
                 allLinks={props.allLinks}
                 note={props.note} 

@@ -102,16 +102,9 @@ class App extends Component {
     }else {
       console.log('need to include toekn in request')
   }
-
   }
 
-  enableDelete = () => {
-    this.setState({
-      deleteEnabled: true,
-    })
-  }
-
-  fakeDeleteNote = (noteEdit) => {
+  sendToTrash = (noteEdit) => {
     if(localStorage.getItem('JWT')){
       const token = localStorage.getItem('JWT')
       const authHeader = {
@@ -120,9 +113,7 @@ class App extends Component {
         } 
       }
       axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
-      // axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
       .then(res => {
-        console.log("app111 get notes")
         this.props.getNotes();
         this.props.history.push('/all-notes')
       }).catch(err => console.log(err.message))
@@ -136,7 +127,6 @@ class App extends Component {
   }
   
   getParentId = (id) => {
-    
       let notee =  this.props.state.notes.find(note => {return note.id === +id})
       // console.log(notee)
       if(notee){
@@ -159,18 +149,6 @@ class App extends Component {
         return null
       }
   }
-  
-  // hideDetailMenu = () => {
-  //   this.setState({
-  //     main: false
-  //   })
-  // }
-
-  // showDetailMenu = () => {
-  //   this.setState({
-  //     main: true
-  //   })
-  // }
 
   toggleNewNote = () => {
     this.setState({
@@ -221,7 +199,7 @@ class App extends Component {
         isDeleted: true, 
         id: source_id
       }
-      this.fakeDeleteNote(changes)
+      this.sendToTrash(changes)
       //now I don't actually delete the note for reviving. In the trash can there can be an option to permenantly delete.
       // this.deleteNote(source_id)
       //will need to delete any children as well. 
@@ -326,7 +304,7 @@ class App extends Component {
                             render={ (note) => {
                               return (
                                 <NoteDetailParent
-                                  enableDelete={this.enableDelete} 
+                        
                                   allNotes={this.props.state.notes}
                                   allLinks={this.props.state.links}
                                   note={this.getNoteDetails(note.match.params.note_id)} 
