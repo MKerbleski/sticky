@@ -183,6 +183,7 @@ class App extends Component {
     e.preventDefault();
     localStorage.removeItem('JWT');
     localStorage.removeItem('username');
+    localStorage.removeItem('userid');
     this.props.logout();
     console.log(this.props, 'this.props')
     this.props.history.push('/welcome')

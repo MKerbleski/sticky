@@ -48,8 +48,8 @@ export const reducer = (state = initialState, action) => {
       })
     case API_LIST_RECIEVED:
       return Object.assign({}, state, {
-        fetchingApiList: true,
-        ApiList: action.payload
+        fetchingApiList: false,
+        connectedApis: action.payload.connected_apis
       })
     case FETCHING_DEL_NOTES:
       return Object.assign({}, state, {

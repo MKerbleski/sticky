@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { flex } from '../../styles/styl-utils.js'
 import RightMenuDetails from './right-menu-details.js'
-import {slackBlack, rightArrow} from '../../img'
+import {slackBlack, rightArrow, leftArrow} from '../../img'
 import { getConnectedApis } from '../../actions'
 import { connect } from 'react-redux';
 
@@ -18,9 +18,10 @@ class RightMenu extends Component {
 
     eventHandler = (e) => {
         e.preventDefault();
-        if(!this.state.openDetails){
+        console.log(e.target.name)
+        if(e.target.name === "leftArrow"){
           this.setState({
-            selectedApp: e.target.name, 
+            selectedApp: null, 
             openDetails: true
           })
         } else if (e.target.name === "rightArrow"){
@@ -28,15 +29,12 @@ class RightMenu extends Component {
             openDetails: false,
             selectedApp: null
           })
-        } else if (e.target.name === "leftArrow"){
-          this.setState({
-            openDetails: true
-          }) 
         } else {
           this.setState({
+            openDetails: true,
             selectedApp: e.target.name
-          })
-        }
+          }) 
+        } 
     }
 
     render(){
@@ -44,25 +42,35 @@ class RightMenu extends Component {
         <RightMenuDiv>
           {this.state.openDetails ?
             <RightMenuDetails 
-              slackStars={this.props.slackStars} 
               app={this.state.selectedApp} 
               onDrop={this.props.onDrop}
               />
             : null
           }
-          <div className="right-menu-preview">
-              {this.state.selectedApp === 'slack' ? 
-                <img 
-                  alt="rightArrow-logo" 
-                  name="rightArrow" 
-                  onClick={this.eventHandler} className="menu-item" 
-                  src={rightArrow} /> : 
-                <img 
-                  alt="slack-logo" 
-                  name="slack" 
-                  onClick={this.eventHandler} className="menu-item" 
-                  src={slackBlack} />}
-          </div>
+          
+          {this.state.openDetails ? 
+              <div className="right-menu-preview">
+                {this.props.state.connectedApis ? 
+                      <img 
+                        alt="slack-logo" 
+                        name="slack" 
+                        onClick={this.eventHandler} className="menu-item" 
+                        src={slackBlack} /> :
+                      <img 
+                        alt="rightArrow-logo" 
+                        name="rightArrow" 
+                        onClick={this.eventHandler} className="menu-item" 
+                        src={rightArrow} /> 
+                }
+              </div> :
+              <div className="right-menu-preview">
+                  <img 
+                    alt="leftArrow" 
+                    name="leftArrow" 
+                    onClick={this.eventHandler} className="menu-item" 
+                    src={leftArrow} />
+              </div>
+          }
         </RightMenuDiv>
       )
     }

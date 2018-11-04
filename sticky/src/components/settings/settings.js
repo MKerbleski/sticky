@@ -20,9 +20,9 @@ class Settings extends Component {
       // console.log('connect to slack')
       let client_id = '465374768868.465546770546'
       let scope = 'stars:read stars:write'
-      let username = localStorage.getItem('username')
-      let redirect_uri = `http://localhost:3333/api/slack/auth/${username}`
-      let codeRequestUrl = `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${username}`
+      let userid = localStorage.getItem('userId')
+      let redirect_uri = `http://localhost:3333/api/slack/auth/${userid}`
+      let codeRequestUrl = `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${userid}`
       window.open(codeRequestUrl)
       //every second check and see if the user thing is true
     }

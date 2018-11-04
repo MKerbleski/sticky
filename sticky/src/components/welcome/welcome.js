@@ -31,11 +31,13 @@ class Welcome extends Component{
             sendingData: true
         })
         axios.post('http://localhost:3333/api/welcome/register/', newUser).then(res => {
+            console.log(res.data)
             this.setState({
                 sendingData: false
             })
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
+            localStorage.setItem('userId', res.data.userId)
             if(localStorage.getItem('textBody')){
                 this.newNote({textBody: localStorage.getItem('textBody')})
             } else {
@@ -51,11 +53,13 @@ class Welcome extends Component{
             entryNote: ''
         })
         axios.post('http://localhost:3333/api/welcome/login', creds).then(res => {
+            console.log(res.data)
             this.setState({
                 sendingData: true
             })
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
+            localStorage.setItem('userId', res.data.userId)
             if(localStorage.getItem('textBody')){
                 this.newNote({textBody: localStorage.getItem('textBody')})
             } else {
