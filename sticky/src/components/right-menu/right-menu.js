@@ -51,11 +51,23 @@ class RightMenu extends Component {
         {this.props.slack ?
             <div className="right-menu-preview">
                 {this.state.selectedApp === 'slack' ? 
-                  <img alt="rightArrow-logo" name="rightArrow" onClick={this.eventHandler} className="menu-item" src={rightArrow}></img> : 
-                  <img alt="slack-logo" name="slack" onClick={this.eventHandler} className="menu-item" src={slackBlack}></img>}
+                  <img 
+                    alt="rightArrow-logo" 
+                    name="rightArrow" 
+                    onClick={this.eventHandler} className="menu-item" 
+                    src={rightArrow} /> : 
+                  <img 
+                    alt="slack-logo" 
+                    name="slack" 
+                    onClick={this.eventHandler} className="menu-item" 
+                    src={slackBlack} />}
             </div> :
             <div className="right-menu-preview">
-              <img alt="leftArrow-logo" name="leftArrow" onClick={this.eventHandler} className="menu-item" src={leftArrow} />>
+              <img 
+                  alt="leftArrow-logo" 
+                  name="leftArrow" 
+                  onClick={this.eventHandler} className="menu-item" 
+                  src={leftArrow} />>
             </div>}
       </RightMenuDiv>
     )
