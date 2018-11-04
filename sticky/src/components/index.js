@@ -7,7 +7,6 @@ export {
     AllNotes, 
     AllNotesBin,
     NotePreview,
-    Settings,
 } from './main-all-notes';
 
 export {
@@ -34,4 +33,6 @@ export {
     Deleted
 } from './deleted'
 
-
+export {
+    Settings,
+} from './settings'

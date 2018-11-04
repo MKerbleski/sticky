@@ -16,7 +16,6 @@ export default class AllNotes extends Component {
     if(localStorage.getItem('JWT')){
       // console.log("getNotes() at allnotes")
       this.props.getLinks();
-      this.props.getUser();
       this.props.getNotes();
     } else {
       this.props.history.push('/welcome/login')

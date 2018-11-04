@@ -23,7 +23,6 @@ import {
 import {
   getNotes,
   sortNote,
-  getUser,
   logout,
   getLinks,
   getDeletedNotes,
@@ -323,7 +322,6 @@ class App extends Component {
                                     links={this.props.state.links}
                                     username={this.props.state.username}
                                     getNotes={this.props.getNotes}
-                                    getUser={this.props.getUser}
                                     getLinks={this.props.getLinks}
                                     showDetailMenu={this.showDetailMenu}
                                     showNewNote={this.state.showNewNote}
@@ -357,9 +355,7 @@ class App extends Component {
                             path="/settings"
                             render={() => {
                               return (
-                                <Settings 
-                                  user={this.props.state.userData}
-                                  getUser={this.props.getUser} />
+                                <Settings />
                               )
                             }}
                           ></Route>
@@ -396,7 +392,6 @@ const mapDispatchToProps = {
   getNotes,
   sortNote,
   logout,
-  getUser,
   getLinks,
   getDeletedNotes
 }
