@@ -34,8 +34,8 @@ endDrag(props, monitor) {// this takes props mounted on beginDrag
     // console.log(childId, 'childId')
     
     const dropResult = monitor.getDropResult({shallow: true});
-    console.log(dropResult, 'dropResult')
-    console.log(props, 'props')
+    // console.log(dropResult, 'dropResult')
+    // console.log(props, 'props')
     props.onDrop(sourceId, dropResult.type, dropResult.targetId);
 }
 };
@@ -47,7 +47,7 @@ class LayerTwoTargetSource extends React.Component {
         this.props.redirect(this.props.layerTwo.id)
     }
     render(props){
-        console.log(this.props)
+        // console.log(this.props)
         const {
             connectDragSource, 
             connectDropTarget, 

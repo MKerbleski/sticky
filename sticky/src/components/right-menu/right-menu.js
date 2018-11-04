@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { flex } from '../../styles/styl-utils.js'
 import RightMenuDetails from './right-menu-details.js'
-import {slackBlack, rightArrow, leftArrow} from '../../img'
+import {slackBlack, rightArrow} from '../../img'
 
 class RightMenu extends Component {
     state = {
@@ -44,27 +44,19 @@ class RightMenu extends Component {
               />
             : null
           }
-          {this.props.slack ?
-              <div className="right-menu-preview">
-                  {this.state.selectedApp === 'slack' ? 
-                    <img 
-                      alt="rightArrow-logo" 
-                      name="rightArrow" 
-                      onClick={this.eventHandler} className="menu-item" 
-                      src={rightArrow} /> : 
-                    <img 
-                      alt="slack-logo" 
-                      name="slack" 
-                      onClick={this.eventHandler} className="menu-item" 
-                      src={slackBlack} />}
-              </div> :
-              <div className="right-menu-preview">
+          <div className="right-menu-preview">
+              {this.state.selectedApp === 'slack' ? 
                 <img 
-                    alt="leftArrow-logo" 
-                    name="leftArrow" 
-                    onClick={this.eventHandler} className="menu-item" 
-                    src={leftArrow} />>
-              </div>}
+                  alt="rightArrow-logo" 
+                  name="rightArrow" 
+                  onClick={this.eventHandler} className="menu-item" 
+                  src={rightArrow} /> : 
+                <img 
+                  alt="slack-logo" 
+                  name="slack" 
+                  onClick={this.eventHandler} className="menu-item" 
+                  src={slackBlack} />}
+          </div>
         </RightMenuDiv>
       )
     }
