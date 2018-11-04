@@ -3,34 +3,40 @@ import styled from 'styled-components';
 import { flex } from '../../styles/styl-utils.js'
 import RightMenuDetails from './right-menu-details.js'
 import {slackBlack, rightArrow} from '../../img'
+import { getConnectedApis } from '../../actions'
+import { connect } from 'react-redux';
 
 class RightMenu extends Component {
     state = {
-      selectedApp: '',
-      openDetails: false,
+        selectedApp: '',
+        openDetails: false,
+    }
+
+    componentDidMount(){
+        this.props.getConnectedApis()
     }
 
     eventHandler = (e) => {
-      e.preventDefault();
-      if(!this.state.openDetails){
-        this.setState({
-          selectedApp: e.target.name, 
-          openDetails: true
-        })
-      } else if (e.target.name === "rightArrow"){
-        this.setState({
-          openDetails: false,
-          selectedApp: null
-        })
-      } else if (e.target.name === "leftArrow"){
-        this.setState({
-          openDetails: true
-        }) 
-      } else {
-        this.setState({
-          selectedApp: e.target.name
-        })
-      }
+        e.preventDefault();
+        if(!this.state.openDetails){
+          this.setState({
+            selectedApp: e.target.name, 
+            openDetails: true
+          })
+        } else if (e.target.name === "rightArrow"){
+          this.setState({
+            openDetails: false,
+            selectedApp: null
+          })
+        } else if (e.target.name === "leftArrow"){
+          this.setState({
+            openDetails: true
+          }) 
+        } else {
+          this.setState({
+            selectedApp: e.target.name
+          })
+        }
     }
 
     render(){
@@ -62,7 +68,15 @@ class RightMenu extends Component {
     }
 }
 
-export default RightMenu
+const mapStateToProps = store => {
+  return {state: store};
+}
+
+const mapDispatchToProps = {
+  getConnectedApis,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RightMenu)
 
 const RightMenuDiv = styled.div`
   ${'' /* ${start('black')} */}

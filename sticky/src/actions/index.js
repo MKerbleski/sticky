@@ -33,6 +33,9 @@ export const FETCHING_LINKS = 'FETCHING_LINKS';
 export const FETCHING_DEL_NOTES = 'FETCHING_DEL_NOTES';
 export const DEL_NOTES_RECIEVED = 'DEL_NOTES_RECIEVED';
 
+export const FETCHING_API_LIST = 'FETCHING_API_LIST';
+export const API_LIST_RECIEVED = 'API_LIST_RECIEVED';
+
 export const ERROR = 'ERROR';
 
 export const getDeletedNotes = () => {
@@ -61,6 +64,28 @@ export const logout = () => {
   }
 }
 
+export const getConnectedApis = () =>  {
+  return function(dispatch){
+    if(localStorage.getItem('JWT')){
+      dispatch({type: FETCHING_API_LIST});
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token, 
+        }
+      }
+      axios.get('http://localhost:3333/api/user/apis', authHeader)
+        .then(res => {
+        dispatch({type: API_LIST_RECIEVED, payload: res.data})
+      })
+        .catch(err => {
+        dispatch({type: ERROR, payload: err})
+      })
+    } else {
+      dispatch({type: ERROR, payload: 'there was no token found'})      
+    }
+  }
+}
 export const getNotes = () =>  {
   return function(dispatch){
     if(localStorage.getItem('JWT')){

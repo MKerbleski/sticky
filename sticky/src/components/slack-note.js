@@ -14,10 +14,12 @@ const SlackNote = (props) => {
         return (
             props.connectDragSource(
                 <div>
-                    <SlackNoteDiv type="link" style={{
+                    <SlackNoteDiv 
+                        type="link" 
+                        style={{
                             opacity: props.isDragging ? '0.25' : '1',
-                            border: props.isDragging ? '1px dashed gray': '1px solid black',
-                    }}>
+                            border: props.isDragging ? '1px dashed gray': '1px solid black'}}
+                    >
                         <div className="slack-note-text">
                         <ReactMarkdown>
                             {note.message ? 
@@ -65,7 +67,6 @@ const SlackNote = (props) => {
                 childId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
             });
         }
-        
     },
 
     endDrag(props, monitor) {// this takes props mounted on beginDrag

@@ -19,27 +19,22 @@ const targetObj = {
 }
 
 const sourceObj = {
-beginDrag(props) {
-    const sourceId = props.layerTwo
-    return ({
-        sourceId //this gets sent to the drop item // is null in this example because react-dnd is overkill
+    beginDrag(props) {
+        const sourceId = props.layerTwo
+        return ({
+            sourceId
     });
-},
+    },
 
-endDrag(props, monitor) {// this takes props mounted on beginDrag
-    if(!monitor.didDrop()){
-        return ;
+    endDrag(props, monitor) {
+        if(!monitor.didDrop()){
+            return ;
+        }
+        const sourceId = props.layerTwo.id;
+        const dropResult = monitor.getDropResult({shallow: true});
+        props.onDrop(sourceId, dropResult.type, dropResult.targetId);
     }
-    const sourceId = props.layerTwo.id;
-    // console.log(childId, 'childId')
-    
-    const dropResult = monitor.getDropResult({shallow: true});
-    // console.log(dropResult, 'dropResult')
-    // console.log(props, 'props')
-    props.onDrop(sourceId, dropResult.type, dropResult.targetId);
-}
 };
-
 
 class LayerTwoTargetSource extends React.Component {
     goToNote = () => {

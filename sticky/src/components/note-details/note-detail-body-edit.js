@@ -59,5 +59,6 @@ const NoteDetailBodyEditDiv = styled.div`
             height: 12%;
             width: 100%;
             ${'' /* margin: 3px; */}
-        }        
+        }   
+    }         
 `
