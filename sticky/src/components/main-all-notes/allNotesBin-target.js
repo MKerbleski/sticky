@@ -3,7 +3,6 @@ import { DropTarget } from 'react-dnd';
 import NotePreview from './note-preview.js';
 import NotePreviewNew from './note-preview-new.js';
 
-
 const AllNotesBin = (props) => (
   props.connectDropTarget(
     <div className="all-notes" 
@@ -11,28 +10,24 @@ const AllNotesBin = (props) => (
         {props.showNewNote ? <NotePreviewNew newNote={props.newNote} /> : null}        
         {props.allNotes.map( layerOne => {
         if(layerOne.parent_id === null){
-            if(layerOne.isLink == false){
-                return (
-            <NotePreview
-                type="note"
-                onDrop={props.onDrop}
-                changeParent={props.changeParent}
-                key={layerOne.id}
-                layerOne={layerOne}
-                allNotes={props.allNotes}
-                redirect={props.redirect}
-                allLinks={props.allLinks.filter(link => {
-                    return (
-                        +link.parent_id === +layerOne.id
-                    )//returns links only liked to parent
-                })}
-            />)
+            if(layerOne.isLink === 0){
+                return <NotePreview
+                            type="note"
+                            onDrop={props.onDrop}
+                            changeParent={props.changeParent}
+                            key={layerOne.id}
+                            layerOne={layerOne}
+                            allNotes={props.allNotes}
+                            redirect={props.redirect}
+                            allLinks={props.allLinks.filter(link => {
+                                return (
+                                    +link.parent_id === +layerOne.id
+                                )//returns links only liked to parent
+                            })}
+                        />
             } else {
-                return (
-                    <p>link</p>
-                )
+                return <p>link</p>
             }
-            
         } else {
             return null
             }

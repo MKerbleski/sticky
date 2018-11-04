@@ -23,8 +23,9 @@ export const FAILED_LOGIN_ATTEMPT = 'FAILED_LOGIN_ATTEMPT';
 export const FAILED_REGISTRATION_ATTEMPT = 'FAILED_REGISTRATION_ATTEMPT';
 export const SENDING_NEW_USERDATA = 'SENDING_NEW_USERDATA';
 export const USER_CREATED = 'USER_CREATED';
-export const FETCHING_USER = 'FETCHING_USER';
-export const USER_RECIEVED = 'USER_RECIEVED';
+
+export const FETCHING_USERDATA = 'FETCHING_USER';
+export const USERDATA_RECIEVED = 'USER_RECIEVED';
 
 export const LINKS_RECIEVED = 'LINKS_RECIEVED';
 export const FETCHING_LINKS = 'FETCHING_LINKS';
@@ -130,10 +131,10 @@ export const getSlackStars = () =>  {
     }
   }
 }
-export const getUser = (username) =>  {
+export const getUserData = (username) =>  {
   return function(dispatch){
     if(localStorage.getItem('JWT')){
-      dispatch({type: FETCHING_USER});
+      dispatch({type: FETCHING_USERDATA});
       const token = localStorage.getItem('JWT')
       const authHeader = {
         headers: {
@@ -142,7 +143,7 @@ export const getUser = (username) =>  {
       }
       axios.get(`http://localhost:3333/api/user/settings`, authHeader)
         .then(res => {
-        dispatch({type: USER_RECIEVED, payload: res.data})
+        dispatch({type: USERDATA_RECIEVED, payload: res.data})
       })
         .catch(err => {
         dispatch({type: ERROR, payload: err})

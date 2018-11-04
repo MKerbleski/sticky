@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-// // import {Link} from 'react-router-dom';
-// import { Route } from 'react-router-dom';
-// import axios from 'axios';
-// import Redirect from 'react-router-dom/Redirect';
-import { getUser } from '../../actions'
+import { getUserData } from '../../actions'
 import { connect } from 'react-redux';
 
 class Settings extends Component {
@@ -16,12 +12,12 @@ class Settings extends Component {
     }
 
     componentDidMount(){
-      this.props.getUser()//this is the only trigger that fetches user data, need a better place to put
+      this.props.getUserData()
     }
 
     connectSlack = (e) => {
       e.preventDefault();
-      console.log('connect to slack')
+      // console.log('connect to slack')
       let client_id = '465374768868.465546770546'
       let scope = 'stars:read stars:write'
       let username = localStorage.getItem('username')
@@ -43,12 +39,12 @@ class Settings extends Component {
               <h1>settings</h1>
               {userData ? 
                   <div>
-                    <h4>Connected Apps</h4>
                     <p>username: <span>{userData.username}</span></p>
                     <p>first: <span>{userData.firstname}</span></p>
                     <p>last: <span>{userData.lastname}</span></p>
                     {/* this will loop over the connect apps column in the users table eventually */}
-                    <ul>apps: 
+                    <h4>Connected Apps</h4>
+                    <ul>
                         {userData.slack ?
                           <li>slack -- 
                               <button onClick={this.clickHandler}>revoke access button goes here eventually </button>
@@ -69,7 +65,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-  getUser,
+  getUserData,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings)

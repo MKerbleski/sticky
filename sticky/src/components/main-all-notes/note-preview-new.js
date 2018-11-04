@@ -67,7 +67,7 @@ const NotePreviewNewDiv = styled.div`
   flex-direction: column;  
   input{
       width: 100%;
-      background-color: lightgray;
+      background-color: lavender;
       margin: 0;
       min-height: 169px;
       border: none;

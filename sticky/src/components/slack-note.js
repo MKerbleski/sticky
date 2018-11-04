@@ -72,9 +72,9 @@ const SlackNote = (props) => {
         if(!monitor.didDrop()){
             return ;
         }
-        let note
+        // let note = {}
         if(props.type === "link"){
-            note = props.star
+            let note = props.star
             const link = props.star.message;
             // console.log('\n --- link', link)
             let addSlackLink = {

@@ -16,8 +16,8 @@ import {
   FAILED_LOGIN_ATTEMPT,
   FAILED_REGISTRATION_ATTEMPT,
   LOGOUT,
-  FETCHING_USER,
-  USER_RECIEVED,
+  FETCHING_USERDATA,
+  USERDATA_RECIEVED,
   SLACK_STARS_RECIEVED,
   FETCHING_SLACK_STARS,
   FETCHING_LINKS,
@@ -91,11 +91,11 @@ export const reducer = (state = initialState, action) => {
         username: action.payload.username,
         token: action.payload.token
       })
-    case FETCHING_USER:
+    case FETCHING_USERDATA:
       return Object.assign({}, state, {
         fetchingUserInfo: true,
       })
-    case USER_RECIEVED:
+    case USERDATA_RECIEVED:
       return Object.assign({}, state, {
         fetchingUserInfo: false,
         userData: action.payload,

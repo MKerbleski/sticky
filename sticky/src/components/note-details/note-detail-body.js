@@ -2,7 +2,6 @@ import React , { Component } from 'react'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown';
 import { start } from '../../styles/styl-utils.js'
-import axios from 'axios'
 import {withRouter} from 'react-router'
 import NoteDetailBodyEdit from './note-detail-body-edit.js';
 
@@ -13,18 +12,6 @@ class NoteDetailBody extends Component {
             edit: false,
             textBody: this.props.note.textBody,
         }
-    }
-    componentDidMount(){
-        this.setState({
-            edit: false,
-            textBody: this.props.note.textBody,
-        })
-    }
-    componentWillUnmount(){
-        this.setState({
-            edit: false,
-            textBody: 'test',
-        })
     }
 
     handleClick = () => {

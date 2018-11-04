@@ -1,8 +1,6 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
-// import { NoteDetails } from '../index.js';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
 import { start } from '../../styles/styl-utils.js'
 import { NoteDetailChild }from '../index.js';
 
