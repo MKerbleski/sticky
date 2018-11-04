@@ -1,8 +1,11 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-export default class Deleted extends Component {
+import { getDeletedNotes } from '../../actions'
+
+class Deleted extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -11,59 +14,49 @@ export default class Deleted extends Component {
     }
 
     componentDidMount(){
-        this.getDeletedNotes();
+        this.props.getDeletedNotes();
     }
-    restoreNote = (id) => {
+
+    restoreNote = (e) => {
+        // e.preventDefault();
         let edit = {
-            id: id, 
+            id: e.target.id, 
             isDeleted: false,
         }
         this.props.editNote(edit);
-        this.getDeletedNotes()
-    }
-    getDeletedNotes = () => {
-        if(localStorage.getItem('JWT')){
-            const token = localStorage.getItem('JWT')
-            const authHeader = {
-              headers: {
-                Authorization: token,    
-              } 
-            }
-            axios.get(`http://localhost:3333/api/notes/del`, authHeader)
-            .then(res => {
-              console.log("getDeletedNotes", res)
-              this.setState({
-                  deleted: res.data.allUserDelNotes
-              })
-            }).catch(err => console.log(err.message))
-          }else {
-            console.log('need to include toekn in request')
-          }
     }
 
     render(){
-        console.log(this.state)
         return (
             <DeletedDiv> 
-            {this.state.deleted.length > 0 ?
-                <React.Fragment>
-                    <h1>this is the deleted div</h1>
-                    {this.state.deleted.map(note => {
-                        return (
-                            <div key={note.id} className="deletedNote">
-                                <li>{note.textBody} -- {note.id}</li>
-                                <button id={note.id} onClick={this.restoreNote}>restore</button>
-                            </div>
-                        )
-                    })}
-                </React.Fragment>
-                : 
-                null
-            }
+                {this.props.state.deletedNotes ?
+                    <React.Fragment>
+                        <h1>this is the deleted div</h1>
+                        {this.props.state.deletedNotes.map(note => {
+                            return (
+                                <div key={note.id} className="deletedNote">
+                                    <li><button id={note.id} onClick={this.restoreNote}>restore</button>{note.textBody} -- {note.id}</li>
+                                </div>
+                            )
+                        })}
+                    </React.Fragment>
+                    : 
+                    null
+                }
             </DeletedDiv> 
         )
     }
 }
+
+const mapStateToProps = store => {
+    return {state: store};//state is really props & store is store
+  }
+  
+  const mapDispatchToProps = {
+    getDeletedNotes
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Deleted)
 
 const DeletedDiv = styled.div`
     border: 1px solid red;

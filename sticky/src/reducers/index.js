@@ -21,7 +21,9 @@ import {
   SLACK_STARS_RECIEVED,
   FETCHING_SLACK_STARS,
   FETCHING_LINKS,
-  LINKS_RECIEVED
+  LINKS_RECIEVED,
+  FETCHING_DEL_NOTES,
+  DEL_NOTES_RECIEVED,
 } from '../actions';
 
 const initialState = {
@@ -38,6 +40,15 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCHING_DEL_NOTES:
+      return Object.assign({}, state, {
+        fetchingDelNotes: true,
+      })
+    case DEL_NOTES_RECIEVED:
+      return Object.assign({}, state, {
+        fetchingDelNotes: false,
+        deletedNotes: action.payload.allUserDelNotes
+      })
     case LOGOUT: 
       return Object.assign({}, state, {
         notes: [],

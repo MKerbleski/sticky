@@ -29,7 +29,30 @@ export const USER_RECIEVED = 'USER_RECIEVED';
 export const LINKS_RECIEVED = 'LINKS_RECIEVED';
 export const FETCHING_LINKS = 'FETCHING_LINKS';
 
+export const FETCHING_DEL_NOTES = 'FETCHING_DEL_NOTES';
+export const DEL_NOTES_RECIEVED = 'DEL_NOTES_RECIEVED';
+
 export const ERROR = 'ERROR';
+
+export const getDeletedNotes = () => {
+  return function(dispatch){
+  if(localStorage.getItem('JWT')){
+    dispatch({type: FETCHING_DEL_NOTES})
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token,    
+        } 
+      }
+      axios.get(`http://localhost:3333/api/notes/del`, authHeader)
+      .then(res => {
+        dispatch({type: DEL_NOTES_RECIEVED, payload: res.data})
+      }).catch(err => console.log(err.message))
+    }else {
+      console.log('need to include toekn in request')
+    }
+  }
+}
 
 export const logout = () => {
   return function(dispatch){

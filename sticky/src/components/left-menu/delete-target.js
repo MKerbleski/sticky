@@ -19,11 +19,11 @@ const DeleteTarget = (props) => (
 
 const specObj = {
   hover(props, component){
-    console.log(props)
+    // console.log(props)
   },
 
   drop(props) {
-    console.log('target props', props)
+    // console.log('target props', props)
     const { type } = props;
     return ({
       type,

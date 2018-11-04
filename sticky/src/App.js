@@ -27,6 +27,7 @@ import {
   logout,
   getSlackList,
   getLinks,
+  getDeletedNotes,
 } from './actions';
 
 class App extends Component {
@@ -98,6 +99,7 @@ class App extends Component {
       .then(res => {
         console.log("App Edit note respons", res)
         this.props.getNotes();
+        this.props.getDeletedNotes();
         //this functino is now only called outside of app so no need ot 'refresh' notes
         // this.props.history.push('/all-notes')
       }).catch(err => console.log(err.message))
@@ -368,7 +370,7 @@ class App extends Component {
                             path="/deleted"
                             render={() => {
                               return (
-                                <Deleted editNote={this.editNote} />
+                                <Deleted deletedNotes={this.state.deletedNotes} editNote={this.editNote} />
                               )
                             }}
                           ></Route>
@@ -400,6 +402,7 @@ const mapDispatchToProps = {
   getUser,
   getSlackList,
   getLinks,
+  getDeletedNotes
 }
  export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 
