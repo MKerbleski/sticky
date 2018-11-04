@@ -108,30 +108,26 @@ class Welcome extends Component{
       }
 
     render(props){
-        // console.log(this.props)
         return(
             <WelcomeDiv>
-                {/* <Route path="/welcome" component={Header} /> */}
-
-                    <Route path="/welcome/login" render={() => {
-                        return <Login failed={(this.props.state.failedLoginAttempt)? true : false} 
-                        sendingData={this.state.sendingData}
-                        loginUser={this.loginUser2} />}} />
-                    <Route path="/welcome/register" render={() => {
-                        return <Register failed={this.props.state.failedRegistrationAttempt} 
-                        sendingData={this.state.sendingData}
-                        createUser={this.createUser} />}} />
-                    <Route exact path="/welcome/" render={() => {
-                        return <form onSubmit={this.saveLocalNote}>
-                                    <textarea 
-                                        type="text" 
-                                        name="entryNote" placeholder='have an idea? start typing...' 
-                                        onChange={this.inputHandler} 
-                                        value={this.state.entryNote} autoFocus>{this.value}</textarea>
-                                    <input type="submit" name="Save note" />
-                                </form>
-                        }} />
-
+                <Route path="/welcome/login" render={() => {
+                    return <Login failed={(this.props.state.failedLoginAttempt)? true : false} 
+                    sendingData={this.state.sendingData}
+                    loginUser={this.loginUser2} />}} />
+                <Route path="/welcome/register" render={() => {
+                    return <Register failed={this.props.state.failedRegistrationAttempt} 
+                    sendingData={this.state.sendingData}
+                    createUser={this.createUser} />}} />
+                <Route exact path="/welcome/" render={() => {
+                    return <form onSubmit={this.saveLocalNote}>
+                                <textarea 
+                                    type="text" 
+                                    name="entryNote" placeholder='have an idea? start typing...' 
+                                    onChange={this.inputHandler} 
+                                    value={this.state.entryNote} autoFocus>{this.value}</textarea>
+                                <input type="submit" name="Save note" />
+                            </form>
+                    }} />
             </WelcomeDiv>
         )
     }

@@ -160,26 +160,23 @@ class App extends Component {
       }
   }
   
-  hideDetailMenu = () => {
-    this.setState({
-      main: false
-    })
-  }
+  // hideDetailMenu = () => {
+  //   this.setState({
+  //     main: false
+  //   })
+  // }
 
-  showDetailMenu = () => {
-    this.setState({
-      main: true
-    })
-  }
+  // showDetailMenu = () => {
+  //   this.setState({
+  //     main: true
+  //   })
+  // }
 
   toggleNewNote = () => {
-    console.log('toggle new note clicked')
     this.setState({
       showNewNote: !this.state.showNewNote
     })
   }
-
-
 
   newNote = (newNote) => {
       if(localStorage.getItem('JWT')){
