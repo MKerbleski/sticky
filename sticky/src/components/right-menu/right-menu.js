@@ -21,7 +21,6 @@ class RightMenu extends Component {
         console.log(e.target.name)
         if(e.target.name === "leftArrow"){
           this.setState({
-            selectedApp: null, 
             openDetails: true
           })
         } else if (e.target.name === "rightArrow"){
@@ -38,39 +37,38 @@ class RightMenu extends Component {
     }
 
     render(){
+      console.log(this.state)
       return (
         <RightMenuDiv>
           {this.state.openDetails ?
             <RightMenuDetails 
-              app={this.state.selectedApp} 
+              selectedApp={this.state.selectedApp} 
               onDrop={this.props.onDrop}
               />
             : null
           }
-          
-          {this.state.openDetails ? 
-              <div className="right-menu-preview">
-                {this.props.state.connectedApis ? 
-                      <img 
-                        alt="slack-logo" 
-                        name="slack" 
-                        onClick={this.eventHandler} className="menu-item" 
-                        src={slackBlack} /> :
-                      <img 
-                        alt="rightArrow-logo" 
-                        name="rightArrow" 
-                        onClick={this.eventHandler} className="menu-item" 
-                        src={rightArrow} /> 
-                }
-              </div> :
-              <div className="right-menu-preview">
+
+          <div className="right-menu-preview">
+              {this.props.state.connectedApis ? 
+                    <img 
+                      alt="slack-logo" 
+                      name="slack" 
+                      onClick={this.eventHandler} className="menu-item" 
+                      src={slackBlack} /> : null
+              }
+              {this.state.openDetails ? 
                   <img 
-                    alt="leftArrow" 
-                    name="leftArrow" 
-                    onClick={this.eventHandler} className="menu-item" 
-                    src={leftArrow} />
-              </div>
-          }
+                      alt="rightArrow-logo" 
+                      name="rightArrow" 
+                      onClick={this.eventHandler} className="menu-item" 
+                      src={rightArrow} /> :
+                    <img 
+                      alt="leftArrow" 
+                      name="leftArrow" 
+                      onClick={this.eventHandler} className="menu-item" 
+                      src={leftArrow} />
+              }
+          </div>
         </RightMenuDiv>
       )
     }

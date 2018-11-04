@@ -12,27 +12,36 @@ class RightMenuDetails extends Component {
     constructor(props){
         super(props);
         this.state = {
-            selectedApp: null,
+            selectedApp: this.props.selectedApp,
             fakeList: []
         }
     }
 
-    componentDidMount(){
-        if(this.state.app === 'slack'){
+    componentDidMount(props){
+        console.log(this.props.selectedApp)
+        this.setState({
+            selectedApp: this.props.selectedApp, 
+        })
+
             this.props.getSlackStars()
             this.setState({
-                selectedApp: this.props.app, 
                 slackStars: this.props.slackStars
             })
-        }
+
+
+        
+        
+        
     }
+    
 
     render(){
-        // console.log(this.state)
+        console.log(this.state)
+        console.log(this.props.state)
         return (
 
             <RightMenuDetailsDiv>
-            {this.state.selectedApp ?
+            {this.props.selectedApp ?
                     <React.Fragment>
                         <div className="app-title">
                             <img alt='slackLogo' name={this.props.app} onClick={this.eventHandler} className="rm-details-name" src={slackWord}></img>
