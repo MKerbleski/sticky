@@ -13,7 +13,6 @@ export default class AllNotes extends Component {
 
   componentDidMount(){
     if(localStorage.getItem('JWT')){
-      // console.log("getNotes() at allnotes")
       this.props.getLinks();
       this.props.getNotes();
     } else {
@@ -22,14 +21,8 @@ export default class AllNotes extends Component {
   }
 
   render(props) {    
-    // console.log(this)
     return (
       <AllNotesDiv>
-        {/* <div className="sort">
-          <h4>Sort by :</h4>
-            <button onClick={this.props.sortByLetter}>A->Z</button>
-            <button onClick={this.props.sortById}>Id</button>
-        </div> */}
         {this.props.notes.length > 0 ? 
             <AllNotesBin 
                 type="top" 
@@ -54,17 +47,6 @@ ${'' /* border: 1px solid green; */}
   ${'' /* background-color: #2a465c; */}
   color: black;
   overflow: auto;
-  .sort {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 5px 0 0 15px;
-    button {
-      height: 25px;
-      margin: 0 10px;
-    }
-  }
   .all-notes {
     ${'' /* border: 1px solid blue; */}
     display: flex;

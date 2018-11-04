@@ -246,8 +246,6 @@ class App extends Component {
                             render={ () => {
                                 return (
                                   <AllNotes
-                                    // sortByLetter={this.sortByLetter}
-                                    // sortById={this.sortById}
                                     onDrop={this.onDrop} 
                                     changeParent={this.changeParent}
                                     notes={this.props.state.notes}
