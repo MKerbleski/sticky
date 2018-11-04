@@ -12,7 +12,7 @@ class RightMenuDetails extends Component {
     constructor(props){
         super(props);
         this.state = {
-            app: null,
+            selectedApp: null,
             fakeList: []
         }
     }
@@ -21,7 +21,7 @@ class RightMenuDetails extends Component {
         if(this.state.app === 'slack'){
             this.props.getSlackStars()
             this.setState({
-                app: this.props.app, 
+                selectedApp: this.props.app, 
                 slackStars: this.props.slackStars
             })
         }

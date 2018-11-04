@@ -45,12 +45,13 @@ class Settings extends Component {
                     {/* this will loop over the connect apps column in the users table eventually */}
                     <h4>Connected Apps</h4>
                     <ul>
-                        {userData.slack ?
-                          <li>slack -- 
-                              <button onClick={this.clickHandler}>revoke access button goes here eventually </button>
-                          </li> :
-                          <button onClick={this.connectSlack}>Connect to Slack</button>
-                        }
+                        <li>slack -- 
+                            {userData.connected_apis == 'slack' ?
+                                  <button onClick={this.clickHandler}>revoke access button goes here eventually </button>
+                              :
+                              <button onClick={this.connectSlack}>Connect to Slack</button>
+                            }
+                        </li> 
                     </ul>
                   </div> :
                   <h6>loading...</h6>

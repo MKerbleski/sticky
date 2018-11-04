@@ -64,6 +64,11 @@ export const logout = () => {
   }
 }
 
+const turnToArr = (string) => {
+  let arr = string.split(',')
+  return arr
+}
+
 export const getConnectedApis = () =>  {
   return function(dispatch){
     if(localStorage.getItem('JWT')){
@@ -76,7 +81,9 @@ export const getConnectedApis = () =>  {
       }
       axios.get('http://localhost:3333/api/user/apis', authHeader)
         .then(res => {
-        dispatch({type: API_LIST_RECIEVED, payload: res.data})
+          let apiStr = res.data.connected_apis 
+          let apiArr = turnToArr(apiStr);
+        dispatch({type: API_LIST_RECIEVED, payload: apiArr})
       })
         .catch(err => {
         dispatch({type: ERROR, payload: err})
