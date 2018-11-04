@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 class RightMenu extends Component {
     state = {
-        selectedApp: '',
+        selectedApp: null,
         openDetails: false,
     }
 

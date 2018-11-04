@@ -12,26 +12,22 @@ class RightMenuDetails extends Component {
     constructor(props){
         super(props);
         this.state = {
-            selectedApp: this.props.selectedApp,
+            selectedApp: this.props.state.connectedApis[0],
             fakeList: []
         }
     }
 
-    componentDidMount(props){
+    async componentDidMount(props){
         console.log(this.props.selectedApp)
-        this.setState({
-            selectedApp: this.props.selectedApp, 
-        })
-
-            this.props.getSlackStars()
-            this.setState({
-                slackStars: this.props.slackStars
+        if(this.props.selectedApp){
+            await this.setState({
+                selectedApp: this.props.selectedApp, 
             })
-
-
-        
-        
-        
+        }
+        this.props.getSlackStars()
+        this.setState({
+            slackStars: this.props.slackStars
+        })
     }
     
 
@@ -41,7 +37,7 @@ class RightMenuDetails extends Component {
         return (
 
             <RightMenuDetailsDiv>
-            {this.props.selectedApp ?
+            {this.state.selectedApp ?
                     <React.Fragment>
                         <div className="app-title">
                             <img alt='slackLogo' name={this.props.app} onClick={this.eventHandler} className="rm-details-name" src={slackWord}></img>
