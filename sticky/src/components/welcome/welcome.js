@@ -105,7 +105,6 @@ class Welcome extends Component{
         })
         this.props.history.push('/welcome/login')
         alert('notes saved locally. please sign in or register to save note permenantly.')
-        // return <Redirect to='/login' />
       }
 
     render(props){

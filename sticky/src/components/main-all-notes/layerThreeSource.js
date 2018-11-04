@@ -4,7 +4,7 @@ import {DragSource} from 'react-dnd';
 
 const LayerThreeSource = (props) => {
     const goToNote = () => {
-        props.redirect(props.layerThree.id)
+        props.redirect(`/note/${props.layerThree.id}`)
     }
     if (props.layerThree){
         return (

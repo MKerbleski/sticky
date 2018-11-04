@@ -86,7 +86,7 @@ class NotePreview extends React.Component {
   goToNote = (e) => {
     e.preventDefault()
     // console.log('go to note', e.target.id, this.props.layerOne.id)
-    this.props.redirect(this.props.layerOne.id)
+    this.props.redirect(`/note/${this.props.layerOne.id}`)
   }
   
   render(props){

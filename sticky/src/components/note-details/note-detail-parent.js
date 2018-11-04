@@ -74,7 +74,7 @@ const NoteDetailParentDiv = styled.div`
         ${start('green')}
         height: 100%;
         background: black;
-        width: 90%;
+        width: 89%;
     }
     .link {
         ${'' /* border: 1px solid red; */}

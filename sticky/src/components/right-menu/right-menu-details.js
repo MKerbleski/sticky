@@ -17,10 +17,9 @@ class RightMenuDetails extends Component {
         }
     }
 
-    async componentDidMount(props){
-        console.log(this.props.selectedApp)
+    componentDidMount(props){
         if(this.props.selectedApp){
-            await this.setState({
+            this.setState({
                 selectedApp: this.props.selectedApp, 
             })
         }

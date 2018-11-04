@@ -1,5 +1,4 @@
 export {
-    Header, 
     Welcome,
 } from './welcome';
 
@@ -36,3 +35,7 @@ export {
 export {
     Settings,
 } from './settings'
+
+export {
+    Header, 
+} from './header'

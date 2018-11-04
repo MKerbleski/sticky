@@ -2,9 +2,21 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { flex, menu } from '../../styles/styl-utils.js'
+import { logout } from '../../actions'
+import { connect } from 'react-redux';
 
+class Header extends Component{
 
-export default class Header extends Component{
+    logout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem('JWT');
+        localStorage.removeItem('username');
+        localStorage.removeItem('userid');
+        this.props.logout();
+        // console.log(this.props, 'this.props')
+        this.props.redirect('/welcome')
+      }
+    
     render(props){
         return(
             <HeaderDiv>
@@ -14,7 +26,7 @@ export default class Header extends Component{
                     {localStorage.getItem('username') ?
                         <div className="linkss">
                             <h3>{` Hello ${localStorage.getItem('username')},`}</h3>
-                            <div className="headerLink" onClick={this.props.logout} >Logout</div> 
+                            <div className="headerLink" onClick={this.logout} >Logout</div> 
                         </div> :
 
                         <div className="linkss">
@@ -26,6 +38,17 @@ export default class Header extends Component{
         )
     }
 }
+
+const mapStateToProps = store => {
+    return {state: store};
+  }
+  
+  const mapDispatchToProps = {
+    logout,
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Header)
+  
 
 const HeaderDiv = styled.div`
     ${'' /* border: 1px solid red; */}

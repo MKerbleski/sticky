@@ -39,7 +39,7 @@ const sourceObj = {
 class LayerTwoTargetSource extends React.Component {
     goToNote = () => {
         // console.log('layer two go to note')
-        this.props.redirect(this.props.layerTwo.id)
+        this.props.redirect(`/note/${this.props.layerTwo.id}`)
     }
     render(props){
         // console.log(this.props)

@@ -14,10 +14,10 @@ import {
   Deleted,
   LeftMenu,
   Welcome, 
-  Header,
   NoteDetailParent,
   RightMenu,
   Settings,
+  Header,
 } from './components';
 
 import {
@@ -179,15 +179,7 @@ class App extends Component {
     })
   }
 
-  logout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem('JWT');
-    localStorage.removeItem('username');
-    localStorage.removeItem('userid');
-    this.props.logout();
-    console.log(this.props, 'this.props')
-    this.props.history.push('/welcome')
-  }
+
 
   newNote = (newNote) => {
       if(localStorage.getItem('JWT')){
@@ -286,18 +278,17 @@ class App extends Component {
     this.props.sortNote(newArr)
   }
 
-  redirect = (id) => {
-     console.log('redirect to', id)
-     this.props.history.push(`/note/${id}`)
+  redirect = (route) => {
+     console.log('redirect to', route)
+     this.props.history.push(route)
   }
 
   render(props) {
-    // console.log(this)
     return (
       <AppDiv>
       
         <div className="appTop">
-          <Header logout={this.logout} />
+          <Header redirect={this.redirect} />
         </div>
         
         {localStorage.getItem('JWT') ? 
