@@ -215,42 +215,7 @@ class App extends Component {
       // console.log(link)
       this.newNote(link)//need to make links into database object with a parent_id of the null or actually the slack folder would work well then either clone or move 
       //the trickier part is that on load the api needs to make sure that it has the current list 
-    }
-    
-  }
-
-  sortById = (e) => {
-    let newArr = this.props.state.notes.slice()
-    function compare(a, b){
-      const Aa = a.id;
-      const Bb = b.id;
-      let comparison = 0;
-      if (Aa > Bb) {
-        comparison = 1;
-      } else if (Aa < Bb) {
-        comparison = -1;
-      }
-      return comparison;
-    }
-    newArr.sort(compare)
-    this.props.sortNote(newArr)
-  }
- 
-  sortByLetter = (e) => {
-    let newArr = this.props.state.notes.slice()
-    function compare(a, b){
-      const titleA = a.title;
-      const titleB = b.title;
-      let comparison = 0;
-      if (titleA > titleB) {
-        comparison = 1;
-      } else if (titleA < titleB) {
-        comparison = -1;
-      }
-      return comparison;
-    }
-    newArr.sort(compare)
-    this.props.sortNote(newArr)
+    }    
   }
 
   redirect = (route) => {
@@ -304,7 +269,6 @@ class App extends Component {
                             render={ (note) => {
                               return (
                                 <NoteDetailParent
-                        
                                   allNotes={this.props.state.notes}
                                   allLinks={this.props.state.links}
                                   note={this.getNoteDetails(note.match.params.note_id)} 
@@ -352,7 +316,7 @@ class App extends Component {
 }
 
 const mapStateToProps = store => {
-  return {state: store};//state is really props & store is store
+  return {state: store};
 }
 
 const mapDispatchToProps = {
