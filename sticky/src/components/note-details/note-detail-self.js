@@ -69,16 +69,7 @@ const NoteDetailSelf = (props) => (
               </div>{/* note-detail-main */}
 
               <div className="note-detail-settings">
-                <Link
-                    className="settings-link"
-                    onClick={() => props.enableDelete()}
-                    to={`/note/${props.note.id}/delete`}
-                >delete</Link>
-                {/* <Link
-                  className="settings-link"
-                  to={`/note/${props.note.id}/edit`}
-                >edit</Link> */}
-                <i className="fas fa-cogs"></i>
+                  <i className="fas fa-cogs"></i>
               </div>{/* note-detail-settings */}
           </NoteDetailSelfDiv>
         ) :
@@ -90,7 +81,7 @@ const NoteDetailSelf = (props) => (
 const targetObj = {
   hover(props, component){
       if(props.hoverShallow){
-          console.log('hoverShallow')
+          // console.log('hoverShallow')
       }
   },
 

@@ -4,20 +4,18 @@ import { flex } from '../../styles/styl-utils.js'
 import RightMenuDetails from './right-menu-details.js'
 import {slackBlack, rightArrow, leftArrow} from '../../img'
 
-export default class RightMenu extends Component {
+class RightMenu extends Component {
   state = {
     selectedApp: '',
     openDetails: false,
   }
 
   componentDidMount(){
-    this.props.getSlackList()
-    // console.log(this.props)
+    // this.props.getSlackStars()
   }
 
   eventHandler = (e) => {
     e.preventDefault();
-    // console.log('eventHandler', e.target.name)
     if(!this.state.openDetails){
       this.setState({
         selectedApp: e.target.name, 
@@ -52,20 +50,19 @@ export default class RightMenu extends Component {
         }
         {this.props.slack ?
             <div className="right-menu-preview">
-                {/* <div className='rightMenuTop'>   */}
-                  {/* <img alt="chrome-logo" name="chrome" onClick={this.eventHandler} className="menu-item" src={chrome}></img> */}
-                  {/* <img alt="twitter-logo" name="twitter" onClick={this.eventHandler} className="menu-item" src={twitter}></img> */}
-                  
-                  {/* <img alt="pocket-logo" name="pocket" onClick={this.eventHandler} className="menu-item" src={pocket}></img> */}
-                  {this.state.selectedApp === 'slack' ? 
-                  <img alt="rightArrow-logo" name="rightArrow" onClick={this.eventHandler} className="menu-item" src={rightArrow}></img> : <img alt="slack-logo" name="slack" onClick={this.eventHandler} className="menu-item" src={slackBlack}></img>}
-                {/* </div> */}
-            </div> : <div className="right-menu-preview"><img alt="leftArrow-logo" name="leftArrow" onClick={this.eventHandler} className="menu-item" src={leftArrow}></img></div>}
-        
+                {this.state.selectedApp === 'slack' ? 
+                  <img alt="rightArrow-logo" name="rightArrow" onClick={this.eventHandler} className="menu-item" src={rightArrow}></img> : 
+                  <img alt="slack-logo" name="slack" onClick={this.eventHandler} className="menu-item" src={slackBlack}></img>}
+            </div> :
+            <div className="right-menu-preview">
+              <img alt="leftArrow-logo" name="leftArrow" onClick={this.eventHandler} className="menu-item" src={leftArrow} />>
+            </div>}
       </RightMenuDiv>
     )
   }
 }
+
+export default RightMenu
 
 const RightMenuDiv = styled.div`
   ${'' /* ${start('black')} */}

@@ -38,36 +38,34 @@ export default class LeftMenu extends Component {
 };
 
 const LeftMenuDiv = styled.div`
-  ${'' /* border: 1px solid lightgray; */}
-  ${'' /* ${ solid() } */}
-  ${ menu() }
-  color: white;
-  width: 5%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  .menu-item{
-    ${'' /* border: 1px solid red; */}
-    height: 50px;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    margin: 10px;
-    font-size: 22px;
-    ${ flex('row') }
-    &:hover {
-      cursor: pointer;
-      text-decoration: underline;
+    ${ menu() }
+    color: white;
+    width: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    .menu-item{
+        ${'' /* border: 1px solid red; */}
+        height: 50px;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        margin: 10px;
+        font-size: 22px;
+        ${ flex('row') }
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
     }
-  }
-  .current {
-    background-color: orange;
-  }
-  .red {
-    background-color: red;
-    color: black;
-    height: 200px;
-  }
+    .current {
+        background-color: orange;
+    }
+    .red {
+        background-color: red;
+        color: black;
+        height: 200px;
+    }
 `;

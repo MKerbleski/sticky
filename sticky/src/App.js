@@ -25,7 +25,6 @@ import {
   sortNote,
   getUser,
   logout,
-  getSlackList,
   getLinks,
   getDeletedNotes,
 } from './actions';
@@ -51,12 +50,10 @@ class App extends Component {
 
   componentDidMount = () => {
     if (localStorage.getItem('JWT')){
-      this.props.getLinks()
       this.props.history.push('/all-notes')
     } else {
       this.props.history.push('/welcome/')
     }
-    this.props.getLinks()
   }
   
   deleteNote = (id) => {
@@ -87,7 +84,7 @@ class App extends Component {
   
   //cannot move because it is used in dragging and dropping
   editNote = (noteEdit) => {
-    console.log('editNote', noteEdit)
+    // console.log('editNote', noteEdit)
     if(localStorage.getItem('JWT')){
       const token = localStorage.getItem('JWT')
       const authHeader = {
@@ -97,15 +94,16 @@ class App extends Component {
       }
       axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
       .then(res => {
-        console.log("App Edit note respons", res)
+        // console.log("App Edit note respons", res)
         this.props.getNotes();
-        this.props.getDeletedNotes();
         //this functino is now only called outside of app so no need ot 'refresh' notes
         // this.props.history.push('/all-notes')
+        return res
       }).catch(err => console.log(err.message))
     }else {
       console.log('need to include toekn in request')
-    }
+  }
+
   }
 
   enableDelete = () => {
@@ -379,7 +377,6 @@ class App extends Component {
                 </div> {/*   center-display    */}
                 
                 {this.state.main ? <RightMenu 
-                  getSlackList={this.props.getSlackList} 
                   slackStars={this.props.state.slackStars}
                   onDrop={this.onDrop} 
                   slack={this.props.state.slackToken} /> : null}
@@ -400,7 +397,6 @@ const mapDispatchToProps = {
   sortNote,
   logout,
   getUser,
-  getSlackList,
   getLinks,
   getDeletedNotes
 }

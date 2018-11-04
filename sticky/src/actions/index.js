@@ -108,7 +108,7 @@ export const getLinks = () =>  {
   }
 }
 
-export const getSlackList = () =>  {
+export const getSlackStars = () =>  {
   return function(dispatch){
     if(localStorage.getItem('JWT')){
       dispatch({type: FETCHING_SLACK_STARS});

@@ -17,13 +17,32 @@ class Deleted extends Component {
         this.props.getDeletedNotes();
     }
 
+    editNote = (noteEdit) => {
+        if(localStorage.getItem('JWT')){
+            const token = localStorage.getItem('JWT')
+            const authHeader = {
+                headers: {
+                Authorization: token,    
+                } 
+            }
+        axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
+        .then(res => {
+            this.props.getDeletedNotes();
+            return res
+        }).catch(err => console.log(err.message))
+        } else {
+            console.log('need to include toekn in request')
+        }
+    }
+
     restoreNote = (e) => {
         // e.preventDefault();
         let edit = {
             id: e.target.id, 
             isDeleted: false,
         }
-        this.props.editNote(edit);
+        this.editNote(edit)
+        this.props.getDeletedNotes();
     }
 
     render(){
@@ -49,7 +68,7 @@ class Deleted extends Component {
 }
 
 const mapStateToProps = store => {
-    return {state: store};//state is really props & store is store
+    return {state: store};
   }
   
   const mapDispatchToProps = {
