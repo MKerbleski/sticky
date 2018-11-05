@@ -17,7 +17,7 @@ class AllNotes extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props)
+    // console.log(this.props)
     if(localStorage.getItem('JWT')){
       this.props.getLinks();
       this.props.getNotes();
@@ -27,6 +27,7 @@ class AllNotes extends Component {
   }
 
   render(props) {    
+    // console.log(this.props)
     return (
       <AllNotesDiv>
         {this.props.notes.length > 0 ? 
@@ -35,8 +36,6 @@ class AllNotes extends Component {
                 onDrop={this.props.onDrop} 
                 allNotes={this.props.notes} 
                 allLinks={this.props.links} 
-                newNote={this.props.newNote}
-                showNewNote={this.props.showNewNote}
                 redirect={this.props.redirect}
              /> : 
                 <h1>loading notes</h1>}

@@ -55,25 +55,6 @@ class App extends Component {
     }
   }
   
-  deleteNote = (id) => {
-    //use this for actualy deleting notes, from trash when set up
-    if(localStorage.getItem('JWT')){
-      const token = localStorage.getItem('JWT')
-      const authHeader = {
-        headers: {
-          Authorization: token,    
-        } 
-      }
-      console.log(token, id, 'from app')
-      axios.delete(`http://localhost:3333/api/notes/${id}`, authHeader)
-      .then(res => {
-        this.props.history.push('/all-notes')
-        this.props.getNotes();
-      }).catch(err => console.log(err.message))
-    } else {
-     console.log('need to include a valid token in request')
-    }
-  }
 
   disableDelete = () => {
     this.setState({
@@ -150,32 +131,6 @@ class App extends Component {
       }
   }
 
-  toggleNewNote = () => {
-    this.setState({
-      showNewNote: !this.state.showNewNote
-    })
-  }
-
-  newNote = (newNote) => {
-      if(localStorage.getItem('JWT')){
-        const token = localStorage.getItem('JWT')
-        const authHeader = {
-          headers: {
-            Authorization: token,    
-          } 
-        }
-      axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
-      .then(res => {
-        this.props.getLinks();
-        this.props.history.push('/all-notes')
-        // this.props.getNotes();
-        //this is not necessary because it is called on a different route than /all notes
-      }).catch(err => console.log(err.message))
-    } else {
-      console.log('need to include toekn in request')
-    }
-  }
-
   onDrop(source_id, type, target_id=null){
     if(target_id){
         let target = this.getNoteDetails(target_id)
@@ -185,8 +140,8 @@ class App extends Component {
     } 
     if(type === "deleteBin"){
       const changes = {
+        id: source_id,
         isDeleted: true, 
-        id: source_id
       }
       this.sendToTrash(changes)
     } else if (type === "note") {
@@ -220,8 +175,7 @@ class App extends Component {
 
             <div className="app-bottom">
                 <LeftMenu 
-                    hideDetailMenu={this.hideDetailMenu}
-                    toggleNewNote={this.toggleNewNote} />
+                    hideDetailMenu={this.hideDetailMenu}  />
 
                 <div className="center-display">
                     <React.Fragment>
@@ -239,8 +193,6 @@ class App extends Component {
                                     getNotes={this.props.getNotes}
                                     getLinks={this.props.getLinks}
                                     showDetailMenu={this.showDetailMenu}
-                                    showNewNote={this.state.showNewNote}
-                                    newNote={this.newNote}
                                     redirect={this.redirect} />
                                 )
                             }}

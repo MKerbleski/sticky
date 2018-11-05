@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { flex, menu } from '../../styles/styl-utils.js'
 import DeleteTarget from './delete-target.js';
+import { newNoteFalse, newNoteTrue } from '../../actions'
+import { connect } from 'react-redux';
 
-
-export default class LeftMenu extends Component {
+class LeftMenu extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -14,12 +15,22 @@ export default class LeftMenu extends Component {
     }
   }
 
+  clickHandler = () => {
+    console.log('clickHandler')
+    if(this.props.state.showNewNote){
+      this.props.newNoteFalse()
+    }else {
+      this.props.newNoteTrue()
+    }
+  }
+
   render(){
+    console.log(this.props)
     return (
       <LeftMenuDiv>
         <div className='leftMenuTop'>
           <Link className={this.state.allNotesSelected ? "current menu-item" : "menu-item"}  to="/all-notes" style={this.props}><i className="fab fa-stack-overflow"></i></Link>
-          <div onClick={this.props.toggleNewNote} className="menu-item"><i className="fas fa-plus-square"></i></div>
+          <div onClick={this.clickHandler} className="menu-item"><i className="fas fa-plus-square"></i></div>
           <div className="menu-item"><i className="fas fa-tv"></i></div>
           <div className="menu-item"><i className="fas fa-book-open"></i></div>
         </div>
@@ -36,6 +47,16 @@ export default class LeftMenu extends Component {
     );
   };
 };
+
+const mapStateToProps = store => {
+  return {state: store};
+}
+
+const mapDispatchToProps = {
+  newNoteFalse, newNoteTrue
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeftMenu)
 
 const LeftMenuDiv = styled.div`
     ${ menu() }

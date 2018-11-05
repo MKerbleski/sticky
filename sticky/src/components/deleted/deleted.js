@@ -45,6 +45,26 @@ class Deleted extends Component {
         this.props.getDeletedNotes();
     }
 
+    deleteNote = (id) => {
+        //use this for actualy deleting notes, from trash when set up
+        if(localStorage.getItem('JWT')){
+          const token = localStorage.getItem('JWT')
+          const authHeader = {
+            headers: {
+              Authorization: token,    
+            } 
+          }
+          // console.log(token, id, 'from app')
+          axios.delete(`http://localhost:3333/api/notes/${id}`, authHeader)
+          .then(res => {
+            this.props.history.push('/all-notes')
+            this.props.getNotes();
+          }).catch(err => console.log(err.message))
+        } else {
+         console.log('need to include a valid token in request')
+        }
+      }
+
     render(){
         return (
             <DeletedDiv> 

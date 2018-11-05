@@ -26,6 +26,8 @@ import {
   DEL_NOTES_RECIEVED,
   API_LIST_RECIEVED,
   FETCHING_API_LIST,
+  NEW_NOTE_FALSE,
+  NEW_NOTE_TRUE,
 } from '../actions';
 
 const initialState = {
@@ -38,10 +40,19 @@ const initialState = {
   status: '',
   error: null,
   failedLoginAttempt: false,
+  showNewNote: false
 }
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case NEW_NOTE_FALSE:
+      return Object.assign({}, state, {
+        showNewNote: false,
+      })
+    case NEW_NOTE_TRUE:
+      return Object.assign({}, state, {
+        showNewNote: true,
+      })
     case FETCHING_API_LIST:
       return Object.assign({}, state, {
         fetchingApiList: true,

@@ -3,33 +3,36 @@ import { DropTarget } from 'react-dnd';
 import NotePreview from './note-preview.js';
 import NotePreviewNew from './note-preview-new.js';
 
+import { newNoteFalse } from '../../actions'
+import { connect } from 'react-redux';
+
 const AllNotesBin = (props) => (
   props.connectDropTarget(
     <div className="all-notes" 
      style={{background: props.hover ? 'lightgreen' : null}}>
-        {props.showNewNote ? <NotePreviewNew newNote={props.newNote} /> : null}        
+        {props.state.showNewNote ? <NotePreviewNew /> : null}        
         {props.allNotes.map( layerOne => {
-        if(layerOne.parent_id === null){
-            if(layerOne.isLink === 0){
-                return <NotePreview
-                            type="note"
-                            onDrop={props.onDrop}
-                            changeParent={props.changeParent}
-                            key={layerOne.id}
-                            layerOne={layerOne}
-                            allNotes={props.allNotes}
-                            redirect={props.redirect}
-                            allLinks={props.allLinks.filter(link => {
-                                return (
-                                    +link.parent_id === +layerOne.id
-                                )//returns links only liked to parent
-                            })}
-                        />
+            if(layerOne.parent_id === null){
+                if(layerOne.isLink === 0){
+                    return <NotePreview
+                                type="note"
+                                onDrop={props.onDrop}
+                                changeParent={props.changeParent}
+                                key={layerOne.id}
+                                layerOne={layerOne}
+                                allNotes={props.allNotes}
+                                redirect={props.redirect}
+                                allLinks={props.allLinks.filter(link => {
+                                    return (
+                                        +link.parent_id === +layerOne.id
+                                    )//returns links only liked to parent
+                                })}
+                            />
+                } else {
+                    return <p>link</p>
+                }
             } else {
-                return <p>link</p>
-            }
-        } else {
-            return null
+                return null
             }
         })}
     </div>
@@ -63,4 +66,12 @@ const collect = (connect,  monitor) => ({
   hoverFalse: monitor.isOver()
 });
 
-export default DropTarget('item', targetObj, collect)(AllNotesBin);
+const mapStateToProps = store => {
+    return {state: store};
+  }
+  
+  const mapDispatchToProps = {
+    newNoteFalse
+  }
+
+export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, mapDispatchToProps)(AllNotesBin));
