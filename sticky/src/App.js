@@ -35,15 +35,6 @@ class App extends Component {
     this.state = {
       hideDetails: true,
       main: true, 
-      showNewNote: false,
-    }
-  }
-
-  changeParent = (source_id, target_id) => {
-    if(source_id !== target_id){
-        this.editNote({id: source_id, parent_id: target_id})
-        this.props.getNotes();
-        this.props.getLinks();
     }
   }
 
@@ -55,13 +46,14 @@ class App extends Component {
     }
   }
   
-
-  disableDelete = () => {
-    this.setState({
-      deleteEnabled: false,
-    })
+  changeParent = (source_id, target_id) => {
+    if(source_id !== target_id){
+        this.editNote({id: source_id, parent_id: target_id})
+        this.props.getNotes();
+        this.props.getLinks();
+    }
   }
-  
+
   //cannot move because it is used in dragging and dropping
   editNote = (noteEdit) => {
     // console.log('editNote', noteEdit)
@@ -109,7 +101,6 @@ class App extends Component {
   
   getParentId = (id) => {
       let notee =  this.props.state.notes.find(note => {return note.id === +id})
-      // console.log(notee)
       if(notee){
         if(notee.parent_id){
           return notee.parent_id
@@ -121,15 +112,15 @@ class App extends Component {
       }
   }
 
-  getParentColor = (id) => {
-      let parent_id = this.getParentId(id)
-      let parent =  this.props.state.notes.find(note => {return note.id === +parent_id})
-      if(parent){
-          return parent.note_color
-      } else {
-        return null
-      }
-  }
+  // getParentColor = (id) => {
+  //     let parent_id = this.getParentId(id)
+  //     let parent =  this.props.state.notes.find(note => {return note.id === +parent_id})
+  //     if(parent){
+  //         return parent.note_color
+  //     } else {
+  //       return null
+  //     }
+  // }
 
   onDrop(source_id, type, target_id=null){
     if(target_id){

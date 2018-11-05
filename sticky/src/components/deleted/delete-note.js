@@ -15,6 +15,13 @@ export default class DeleteNote extends Component {
     this.props.disableDelete();
   }
 
+  //this came from app.js and does nothing in this app currently
+  disableDelete = () => {
+    this.setState({
+      deleteEnabled: false,
+    })
+  }
+
   render() {
     return (
       <DeleteNoteDiv>
