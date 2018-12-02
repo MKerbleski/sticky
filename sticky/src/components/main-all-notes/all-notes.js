@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { AllNotesBin } from '../index';
-import { 
-  getLinks,
-  getNotes,
- } from '../../actions'
-import { connect } from 'react-redux';
 
-class AllNotes extends Component {
+export default class AllNotes extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -17,7 +12,10 @@ class AllNotes extends Component {
   }
 
   componentDidMount(){
+<<<<<<< HEAD
     // console.log(this.props)
+=======
+>>>>>>> parent of b286373... cleaned up notes in onDrop function
     if(localStorage.getItem('JWT')){
       this.props.getLinks();
       this.props.getNotes();
@@ -43,17 +41,6 @@ class AllNotes extends Component {
     );
   }
 }
-
-const mapStateToProps = store => {
-  return {state: store};
-}
-
-const mapDispatchToProps = {
-  getLinks,
-  getNotes,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AllNotes)
 
 const AllNotesDiv = styled.div`
 ${'' /* border: 1px solid green; */}

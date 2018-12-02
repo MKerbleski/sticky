@@ -144,35 +144,49 @@ class App extends Component {
   // }
 
   onDrop(source_id, type, target_id=null){
+    // console.log('handleDrop, id: ', id);
+    //will delete from actions when uncommented
+    // this.props.deleteNote(id)
+      
     if(target_id){
-        let target = this.getNoteDetails(target_id)
-        if (target.parent_id === +source_id){
-          alert('action not allowed')
-        }
+      let target = this.getNoteDetails(target_id)
+      // console.log(target)
+      if (target.parent_id === +source_id){
+        alert('action not allowed')
+      }
     } 
+    
+      // console.log(source_id, type, target_id)
     if(type === "deleteBin"){
+      //if has children 
+      //ask if want to delete children as well 
+      //if yes 
+      //if no different route
       const changes = {
         id: source_id,
         isDeleted: true, 
       }
       this.sendToTrash(changes)
+      //now I don't actually delete the note for reviving. In the trash can there can be an option to permenantly delete.
+      // this.deleteNote(source_id)
+      //will need to delete any children as well. 
     } else if (type === "note") {
+      // console.log(source_id, type, target_id)
       this.changeParent(source_id, target_id)
     } else if (type === "top" || target_id===null){
+      // console.log(source_id, type, target_id=null)
       this.editNote({id: source_id, parent_id: target_id})
-    } else if (type === "link" && target_id===null){
-      //do nothing
     } else if (type === "link"){
-      //slack note sends its own type
       let link = source_id
-      //source_id for slack notes contains all note properties
       link.parent_id = target_id
-      console.log("newlink", link)
-      this.newNote(link)
+      // console.log(link)
+      this.newNote(link)//need to make links into database object with a parent_id of the null or actually the slack folder would work well then either clone or move 
+      //the trickier part is that on load the api needs to make sure that it has the current list 
     }    
   }
 
   redirect = (route) => {
+     console.log('redirect to', route)
      this.props.history.push(route)
   }
 
@@ -247,6 +261,7 @@ class App extends Component {
                               )
                             }}
                           ></Route>
+
                     </React.Fragment> 
                 </div> {/*   center-display    */}
                 
