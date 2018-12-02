@@ -12,10 +12,6 @@ export default class AllNotes extends Component {
   }
 
   componentDidMount(){
-<<<<<<< HEAD
-    // console.log(this.props)
-=======
->>>>>>> parent of b286373... cleaned up notes in onDrop function
     if(localStorage.getItem('JWT')){
       this.props.getLinks();
       this.props.getNotes();
