@@ -7,7 +7,6 @@ import { NoteDetailChild }from '../index.js';
 import SlackNote from '../slack-note.js'
 import NoteDetailBody from './note-detail-body.js';
 
-
 const NoteDetailSelf = (props) => (
   props.connectDropTarget(
     <div className="note-detail-self-container">{/* THIS IS ON PREVIOUS COMPONENT */}

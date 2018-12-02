@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { getUserData } from '../../actions'
 import { connect } from 'react-redux';
+import ApiSettings from './api-settings';
 
 class Settings extends Component {
     constructor(props){
@@ -13,27 +14,11 @@ class Settings extends Component {
 
     componentDidMount(){
       this.props.getUserData()
-    }
+    }    
 
-    connectSlack = (e) => {
-      e.preventDefault();
-      // console.log('connect to slack')
-      let client_id = '465374768868.465546770546'
-      let scope = 'stars:read stars:write'
-      let userid = localStorage.getItem('userId')
-      let redirect_uri = `http://localhost:3333/api/slack/auth/${userid}`
-      let codeRequestUrl = `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${userid}`
-      window.open(codeRequestUrl)
-      //every second check and see if the user thing is true
-    }
-
-    clickHandler = (e) => {
-      e.preventDefault();
-      console.log('but it doesnt do nothing right now')
-    }
-
-    render(props) {
-      const {userData} = this.props.state
+    render() {
+      console.log("settings", this.props)
+      const { userData } = this.props.state
       return (
         <SettingsDiv>
               <h1>settings</h1>
@@ -42,20 +27,11 @@ class Settings extends Component {
                     <p>username: <span>{userData.username}</span></p>
                     <p>first: <span>{userData.firstname}</span></p>
                     <p>last: <span>{userData.lastname}</span></p>
-                    {/* this will loop over the connect apps column in the users table eventually */}
-                    <h4>Connected Apps</h4>
-                    <ul>
-                        <li>slack -- 
-                            {userData.connected_apis == 'slack' ?
-                                  <button onClick={this.clickHandler}>revoke access button goes here eventually </button>
-                              :
-                              <button onClick={this.connectSlack}>Connect to Slack</button>
-                            }
-                        </li> 
-                    </ul>
+                    <h4>Apps</h4>
+                    <ApiSettings connectedApis={this.props.state.connectedApis} userData={userData} /> 
                   </div> :
                   <h6>loading...</h6>
-                } 
+              } 
             </SettingsDiv>
       );
     }
