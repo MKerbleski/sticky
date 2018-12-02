@@ -37,7 +37,7 @@ class RightMenu extends Component {
     }
 
     render(){
-      console.log(this.state)
+      console.log(this.props)
       return (
         <RightMenuDiv>
           {this.state.openDetails ?
@@ -49,7 +49,7 @@ class RightMenu extends Component {
           }
 
           <div className="right-menu-preview">
-              {this.props.state.connectedApis ? 
+              {this.props.state.userData && this.props.state.userData.slack ? 
                     <img 
                       alt="slack-logo" 
                       name="slack" 

@@ -26,6 +26,7 @@ import {
   logout,
   getLinks,
   getDeletedNotes,
+  getUserData,
 } from './actions';
 
 class App extends Component {
@@ -48,6 +49,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+    this.props.getUserData()
     if (localStorage.getItem('JWT')){
       this.props.history.push('/all-notes')
     } else {
@@ -306,7 +308,8 @@ const mapDispatchToProps = {
   sortNote,
   logout,
   getLinks,
-  getDeletedNotes
+  getDeletedNotes,
+  getUserData, 
 }
  export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 

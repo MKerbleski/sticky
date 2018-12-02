@@ -12,7 +12,7 @@ class RightMenuDetails extends Component {
     constructor(props){
         super(props);
         this.state = {
-            selectedApp: this.props.state.connectedApis[0],
+            selectedApp: "slack",
             fakeList: []
         }
     }
