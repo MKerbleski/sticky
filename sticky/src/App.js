@@ -77,6 +77,27 @@ class App extends Component {
   }
   }
 
+  newNote = (newNote) => {
+    if(localStorage.getItem('JWT')){
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token,    
+        } 
+      }
+    axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
+    .then(res => {
+      console.log("new note res", res)
+        localStorage.removeItem('textBody')
+        // this.props.history.push('/all-notes')
+        this.props.getNotes();
+        //this is not necessary because it is called on a different route than /all notes
+    }).catch(err => console.log(err.message))
+    } else {
+      console.log('need to include toekn in request')
+    }
+  }
+
   sendToTrash = (noteEdit) => {
     if(localStorage.getItem('JWT')){
       const token = localStorage.getItem('JWT')
@@ -146,6 +167,7 @@ class App extends Component {
       let link = source_id
       //source_id for slack notes contains all note properties
       link.parent_id = target_id
+      console.log("newlink", link)
       this.newNote(link)
     }    
   }
@@ -201,7 +223,7 @@ class App extends Component {
                                   onDrop={this.onDrop} 
                                   changeParent={this.changeParent}
                                   type="note"
-                                  parentColor={this.getParentColor(note.match.params.note_id)}
+                                  // parentColor={this.getParentColor(note.match.params.note_id)}
                                   editNote={this.editNote}
                                   targetId={this.getParentId(note.match.params.note_id)}
                                   />
@@ -233,6 +255,7 @@ class App extends Component {
                   onDrop={this.onDrop} 
                   slack={this.props.state.slackToken} /> : null}
             </div> : 
+
             <Route path="/welcome/" component={Welcome} />
         }    
       </AppDiv>

@@ -39,7 +39,7 @@ class AllNotes extends Component {
                 redirect={this.props.redirect}
              /> : 
                 <h1>loading notes</h1>}
-            </AllNotesDiv>
+      </AllNotesDiv>
     );
   }
 }

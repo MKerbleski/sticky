@@ -7,7 +7,6 @@ import { getSlackStars } from '../../actions'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-
 class RightMenuDetails extends Component {
     constructor(props){
         super(props);
@@ -28,7 +27,6 @@ class RightMenuDetails extends Component {
             slackStars: this.props.slackStars
         })
     }
-    
 
     render(){
         console.log(this.state)
