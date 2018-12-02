@@ -64,5 +64,6 @@ const UserFormDiv = styled.div`
     form{
         display: flex;
         flex-direction: column;
+
     }
 `;

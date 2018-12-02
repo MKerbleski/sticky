@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { AllNotesBin } from '../index';
+import { 
+  getLinks,
+  getNotes,
+ } from '../../actions'
+import { connect } from 'react-redux';
 
-export default class AllNotes extends Component {
+class AllNotes extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -12,6 +17,7 @@ export default class AllNotes extends Component {
   }
 
   componentDidMount(){
+    console.log(this.props)
     if(localStorage.getItem('JWT')){
       this.props.getLinks();
       this.props.getNotes();
@@ -21,7 +27,6 @@ export default class AllNotes extends Component {
   }
 
   render(props) {    
-    // console.log(this.props)
     return (
       <AllNotesDiv>
         {this.props.notes.length > 0 ? 
@@ -30,13 +35,26 @@ export default class AllNotes extends Component {
                 onDrop={this.props.onDrop} 
                 allNotes={this.props.notes} 
                 allLinks={this.props.links} 
+                newNote={this.props.newNote}
+                showNewNote={this.props.showNewNote}
                 redirect={this.props.redirect}
              /> : 
                 <h1>loading notes</h1>}
-      </AllNotesDiv>
+            </AllNotesDiv>
     );
   }
 }
+
+const mapStateToProps = store => {
+  return {state: store};
+}
+
+const mapDispatchToProps = {
+  getLinks,
+  getNotes,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllNotes)
 
 const AllNotesDiv = styled.div`
 ${'' /* border: 1px solid green; */}

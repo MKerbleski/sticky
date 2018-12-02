@@ -1,12 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios'
-import { 
-    getLinks,
-    getNotes,
-    newNoteFalse,
-   } from '../../actions'
-import { connect } from 'react-redux';
 
 class NotePreviewNew extends React.Component {
     constructor(props){
@@ -37,42 +30,18 @@ class NotePreviewNew extends React.Component {
     }
 
     addNote = (e) => {
-        e.preventDefault()
         console.log('addNote', this.state.textBody)
-        this.newNote({textBody: this.state.textBody})
+        this.props.newNote({textBody: this.state.textBody})
     }
 
     changeHandler = (e) => {
-        e.preventDefault();
-        this.setState({
-            textBody: e.target.value,
-        })
+            e.preventDefault();
+            this.setState({
+                textBody: e.target.value,
+            })
     }
     
-    newNote = (newNote) => {
-        if(localStorage.getItem('JWT')){
-          const token = localStorage.getItem('JWT')
-          const authHeader = {
-            headers: {
-              Authorization: token,    
-            } 
-          }
-        axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
-        .then(res => {
-          this.props.getLinks();
-          this.props.getNotes();
-          this.setState({
-              textBody:'',
-          })
-          this.props.newNoteFalse();
-        }).catch(err => console.log(err.message))
-      } else {
-        console.log('need to include toekn in request')
-      }
-    }
-
     render(props){
-        console.log(this.props)
         return (
             <div className="startObject">
                 <NotePreviewNewDiv >
@@ -87,17 +56,7 @@ class NotePreviewNew extends React.Component {
     }
 }
 
-const mapStateToProps = store => {
-    return {state: store};
-  }
-  
-  const mapDispatchToProps = {
-    getLinks,
-    getNotes,
-    newNoteFalse,
-  }
-  
-export default connect(mapStateToProps, mapDispatchToProps)(NotePreviewNew)
+export default NotePreviewNew;
 
 const NotePreviewNewDiv = styled.div`
   ${'' /* border: 1px solid blue; */}

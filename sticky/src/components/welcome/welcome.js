@@ -125,7 +125,7 @@ class Welcome extends Component{
                                     name="entryNote" placeholder='have an idea? start typing...' 
                                     onChange={this.inputHandler} 
                                     value={this.state.entryNote} autoFocus>{this.value}</textarea>
-                                <button type="submit" name="Save note">Sign in -></button>
+                                <input type="submit" name="Save note" />
                             </form>
                     }} />
             </WelcomeDiv>

@@ -35,6 +35,15 @@ class App extends Component {
     this.state = {
       hideDetails: true,
       main: true, 
+      showNewNote: false,
+    }
+  }
+
+  changeParent = (source_id, target_id) => {
+    if(source_id !== target_id){
+        this.editNote({id: source_id, parent_id: target_id})
+        this.props.getNotes();
+        this.props.getLinks();
     }
   }
 
@@ -46,14 +55,32 @@ class App extends Component {
     }
   }
   
-  changeParent = (source_id, target_id) => {
-    if(source_id !== target_id){
-        this.editNote({id: source_id, parent_id: target_id})
+  deleteNote = (id) => {
+    //use this for actualy deleting notes, from trash when set up
+    if(localStorage.getItem('JWT')){
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token,    
+        } 
+      }
+      console.log(token, id, 'from app')
+      axios.delete(`http://localhost:3333/api/notes/${id}`, authHeader)
+      .then(res => {
+        this.props.history.push('/all-notes')
         this.props.getNotes();
-        this.props.getLinks();
+      }).catch(err => console.log(err.message))
+    } else {
+     console.log('need to include a valid token in request')
     }
   }
 
+  disableDelete = () => {
+    this.setState({
+      deleteEnabled: false,
+    })
+  }
+  
   //cannot move because it is used in dragging and dropping
   editNote = (noteEdit) => {
     // console.log('editNote', noteEdit)
@@ -75,27 +102,6 @@ class App extends Component {
     }else {
       console.log('need to include toekn in request')
   }
-  }
-
-  newNote = (newNote) => {
-    if(localStorage.getItem('JWT')){
-      const token = localStorage.getItem('JWT')
-      const authHeader = {
-        headers: {
-          Authorization: token,    
-        } 
-      }
-    axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
-    .then(res => {
-      console.log("new note res", res)
-        localStorage.removeItem('textBody')
-        // this.props.history.push('/all-notes')
-        this.props.getNotes();
-        //this is not necessary because it is called on a different route than /all notes
-    }).catch(err => console.log(err.message))
-    } else {
-      console.log('need to include toekn in request')
-    }
   }
 
   sendToTrash = (noteEdit) => {
@@ -122,6 +128,7 @@ class App extends Component {
   
   getParentId = (id) => {
       let notee =  this.props.state.notes.find(note => {return note.id === +id})
+      // console.log(notee)
       if(notee){
         if(notee.parent_id){
           return notee.parent_id
@@ -133,60 +140,71 @@ class App extends Component {
       }
   }
 
-  // getParentColor = (id) => {
-  //     let parent_id = this.getParentId(id)
-  //     let parent =  this.props.state.notes.find(note => {return note.id === +parent_id})
-  //     if(parent){
-  //         return parent.note_color
-  //     } else {
-  //       return null
-  //     }
-  // }
+  getParentColor = (id) => {
+      let parent_id = this.getParentId(id)
+      let parent =  this.props.state.notes.find(note => {return note.id === +parent_id})
+      if(parent){
+          return parent.note_color
+      } else {
+        return null
+      }
+  }
+
+  toggleNewNote = () => {
+    this.setState({
+      showNewNote: !this.state.showNewNote
+    })
+  }
+
+  newNote = (newNote) => {
+      if(localStorage.getItem('JWT')){
+        const token = localStorage.getItem('JWT')
+        const authHeader = {
+          headers: {
+            Authorization: token,    
+          } 
+        }
+      axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
+      .then(res => {
+        this.props.getLinks();
+        this.props.history.push('/all-notes')
+        // this.props.getNotes();
+        //this is not necessary because it is called on a different route than /all notes
+      }).catch(err => console.log(err.message))
+    } else {
+      console.log('need to include toekn in request')
+    }
+  }
 
   onDrop(source_id, type, target_id=null){
-    // console.log('handleDrop, id: ', id);
-    //will delete from actions when uncommented
-    // this.props.deleteNote(id)
-      
     if(target_id){
-      let target = this.getNoteDetails(target_id)
-      // console.log(target)
-      if (target.parent_id === +source_id){
-        alert('action not allowed')
-      }
+        let target = this.getNoteDetails(target_id)
+        if (target.parent_id === +source_id){
+          alert('action not allowed')
+        }
     } 
-    
-      // console.log(source_id, type, target_id)
     if(type === "deleteBin"){
-      //if has children 
-      //ask if want to delete children as well 
-      //if yes 
-      //if no different route
       const changes = {
-        id: source_id,
         isDeleted: true, 
+        id: source_id
       }
       this.sendToTrash(changes)
-      //now I don't actually delete the note for reviving. In the trash can there can be an option to permenantly delete.
-      // this.deleteNote(source_id)
-      //will need to delete any children as well. 
     } else if (type === "note") {
-      // console.log(source_id, type, target_id)
       this.changeParent(source_id, target_id)
     } else if (type === "top" || target_id===null){
-      // console.log(source_id, type, target_id=null)
       this.editNote({id: source_id, parent_id: target_id})
+    } else if (type === "link" && target_id===null){
+      //do nothing
     } else if (type === "link"){
+      //slack note sends its own type
       let link = source_id
+      //source_id for slack notes contains all note properties
       link.parent_id = target_id
-      // console.log(link)
-      this.newNote(link)//need to make links into database object with a parent_id of the null or actually the slack folder would work well then either clone or move 
-      //the trickier part is that on load the api needs to make sure that it has the current list 
+      this.newNote(link)
     }    
   }
 
   redirect = (route) => {
-     console.log('redirect to', route)
      this.props.history.push(route)
   }
 
@@ -202,7 +220,8 @@ class App extends Component {
 
             <div className="app-bottom">
                 <LeftMenu 
-                    hideDetailMenu={this.hideDetailMenu}  />
+                    hideDetailMenu={this.hideDetailMenu}
+                    toggleNewNote={this.toggleNewNote} />
 
                 <div className="center-display">
                     <React.Fragment>
@@ -220,6 +239,8 @@ class App extends Component {
                                     getNotes={this.props.getNotes}
                                     getLinks={this.props.getLinks}
                                     showDetailMenu={this.showDetailMenu}
+                                    showNewNote={this.state.showNewNote}
+                                    newNote={this.newNote}
                                     redirect={this.redirect} />
                                 )
                             }}
@@ -237,7 +258,7 @@ class App extends Component {
                                   onDrop={this.onDrop} 
                                   changeParent={this.changeParent}
                                   type="note"
-                                  // parentColor={this.getParentColor(note.match.params.note_id)}
+                                  parentColor={this.getParentColor(note.match.params.note_id)}
                                   editNote={this.editNote}
                                   targetId={this.getParentId(note.match.params.note_id)}
                                   />
@@ -261,7 +282,6 @@ class App extends Component {
                               )
                             }}
                           ></Route>
-
                     </React.Fragment> 
                 </div> {/*   center-display    */}
                 
@@ -270,7 +290,6 @@ class App extends Component {
                   onDrop={this.onDrop} 
                   slack={this.props.state.slackToken} /> : null}
             </div> : 
-
             <Route path="/welcome/" component={Welcome} />
         }    
       </AppDiv>

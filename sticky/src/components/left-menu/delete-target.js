@@ -23,7 +23,6 @@ const specObj = {
   },
 
   drop(props) {
-    // console.log('target props', props)
     const { type } = props;
     return ({
       type,

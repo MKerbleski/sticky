@@ -36,9 +36,6 @@ export const DEL_NOTES_RECIEVED = 'DEL_NOTES_RECIEVED';
 export const FETCHING_API_LIST = 'FETCHING_API_LIST';
 export const API_LIST_RECIEVED = 'API_LIST_RECIEVED';
 
-export const NEW_NOTE_FALSE = 'NEW_NOTE_FALSE';
-export const NEW_NOTE_TRUE = 'NEW_NOTE_TRUE';
-
 export const ERROR = 'ERROR';
 
 export const getDeletedNotes = () => {
@@ -58,17 +55,6 @@ export const getDeletedNotes = () => {
     }else {
       console.log('need to include toekn in request')
     }
-  }
-}
-
-export const newNoteFalse = () => {
-  return function(dispatch){
-    dispatch({type: NEW_NOTE_FALSE})
-  }
-}
-export const newNoteTrue = () => {
-  return function(dispatch){
-    dispatch({type: NEW_NOTE_TRUE})
   }
 }
 
