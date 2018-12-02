@@ -21,11 +21,9 @@ export default class ApiSettings extends Component {
 
     whichApp = () => {
         if(this.state.selectedApp == "slack"){
-            return <SlackSettings
-
-                    />
+            return <SlackSettings userData={this.props.userData} />
         } else if(this.state.selectedApp == "pocket"){
-            return <PocketSettings />
+            return <PocketSettings userData={this.props.userData} />
         } else {
             return null;
         }

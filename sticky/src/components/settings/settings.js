@@ -28,7 +28,8 @@ class Settings extends Component {
                     <p>first: <span>{userData.firstname}</span></p>
                     <p>last: <span>{userData.lastname}</span></p>
                     <h4>Apps</h4>
-                    <ApiSettings connectedApis={this.props.state.connectedApis} userData={userData} /> 
+                    <ApiSettings 
+                        connectedApis={this.props.state.connectedApis} userData={userData} /> 
                   </div> :
                   <h6>loading...</h6>
               } 
