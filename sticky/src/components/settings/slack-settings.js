@@ -10,7 +10,7 @@ export default class SlackSettings extends Component {
     }
 
     componentDidMount(){
-        if(this.props.userData.connected_apis.includes("slack")){
+        if(this.props.userData.slack){
             this.setState({
                 isApiConnected: true,
             })
@@ -38,7 +38,7 @@ export default class SlackSettings extends Component {
                         <p>slack is connected </p><button onClick={this.clickHandler}>revoke access button goes here eventually </button>
                     </div> :
                     <div>
-                        <p>pocket is NOT connected</p><button onClick={this.connectSlack}>Connect to Slack</button>
+                        <p>slack is NOT connected</p><button onClick={this.connectSlack}>Connect to Slack</button>
                     </div>}
                  {/* <ul>
                         <li>slack -- 

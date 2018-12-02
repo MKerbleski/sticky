@@ -8,7 +8,6 @@ export default class PocketSettings extends Component {
             isApiConnected: false
         }
     }
-
     
     componentDidMount(){
         if(this.props.userData.connected_apis.includes("pocket")){
