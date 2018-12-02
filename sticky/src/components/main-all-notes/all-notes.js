@@ -17,7 +17,7 @@ class AllNotes extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props)
+    // console.log(this.props)
     if(localStorage.getItem('JWT')){
       this.props.getLinks();
       this.props.getNotes();
