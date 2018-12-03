@@ -4,11 +4,13 @@ import { pocket } from '../img/'
 const availibleApis = [
     {
         name: "slack",
-        thumbnail: slackBlack
+        thumbnail: slackBlack,
+        alt: "a thumbnail of the slack icon"
     }, 
     {
         name: "pocket",
-        thumbnail: pocket
+        thumbnail: pocket,
+        alt: "a thumbnail of the slack icon"
     }
 ]
 

@@ -20,9 +20,9 @@ export default class ApiSettings extends Component {
     }
 
     whichApp = () => {
-        if(this.state.selectedApp == "slack"){
+        if(this.state.selectedApp === "slack"){
             return <SlackSettings userData={this.props.userData} />
-        } else if(this.state.selectedApp == "pocket"){
+        } else if(this.state.selectedApp === "pocket"){
             return <PocketSettings userData={this.props.userData} />
         } else {
             return null;
@@ -37,12 +37,13 @@ export default class ApiSettings extends Component {
                     {availibleApis.map(api => {
                         return (
                             <button 
+                                style={{background: this.state.selectedApp===api.name ? "lightgray" : "gray"}}
                                 key={api.name}
                                 name={api.name} 
                                 onClick={this.clickHandler}
                                 className="settingApiTab">
                                 <h5>{api.name}</h5>
-                                <img  className="menu-item" src={api.thumbnail} />
+                                <img alt={api.alt} className="menu-item" src={api.thumbnail} />
                             </button>
                         )
                     })}

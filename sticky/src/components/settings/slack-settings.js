@@ -63,4 +63,5 @@ export default class SlackSettings extends Component {
 
 const SlackSettingsDiv = styled.div`
     border: 1px solid red;
+    padding: 2px;
 `
