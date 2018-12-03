@@ -22,7 +22,7 @@ export default class SlackSettings extends Component {
         // console.log('connect to slack')
         let client_id = '465374768868.465546770546'
         let scope = 'stars:read stars:write'
-        let userid = localStorage.getItem('userId')
+        let userid = this.props.userData.id
         let redirect_uri = `http://localhost:3333/api/slack/auth/${userid}`
         let codeRequestUrl = `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${userid}`
         window.open(codeRequestUrl)
