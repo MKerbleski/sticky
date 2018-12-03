@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { flex } from '../../styles/styl-utils.js'
 import RightMenuDetails from './right-menu-details.js'
 import {slackBlack, rightArrow, leftArrow} from '../../img'
-import { getConnectedApis } from '../../actions'
+// import { getConnectedApis } from '../../actions'
 import { connect } from 'react-redux';
 
 class RightMenu extends Component {
@@ -13,7 +13,7 @@ class RightMenu extends Component {
     }
 
     componentDidMount(){
-        this.props.getConnectedApis()
+        // this.props.getConnectedApis()
     }
 
     eventHandler = (e) => {
@@ -79,7 +79,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-  getConnectedApis,
+  // getConnectedApis,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu)
