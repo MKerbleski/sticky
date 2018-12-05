@@ -61,7 +61,7 @@ class RightMenuDetails extends Component {
                         </div>
                         <div className="app-list">
                             {this.props.selectedApp === "slack" ? 
-                                <SlackList />:
+                                <SlackList type="link" onDrop={this.props.onDrop} />:
                                 <p>loading slack</p> }
                             {this.props.selectedApp === "pocket" ? 
                             <PocketList />:
