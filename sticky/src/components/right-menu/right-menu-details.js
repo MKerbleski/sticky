@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { menu, start } from '../../styles/styl-utils.js'
-import { SlackList } from './index'
+import { SlackList, PocketList } from './index'
 import { getSlackStars } from '../../actions'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -64,7 +64,7 @@ class RightMenuDetails extends Component {
                                 <SlackList />:
                                 <p>loading slack</p> }
                             {this.props.selectedApp === "pocket" ? 
-                            <h1>POCKET</h1>:
+                            <PocketList />:
                             <p>loading pocket</p>}
                         </div>
                     </React.Fragment> :
