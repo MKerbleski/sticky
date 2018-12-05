@@ -287,7 +287,7 @@ class App extends Component {
                     </React.Fragment> 
                 </div> {/*   center-display    */}
                 
-                {this.state.main ? <RightMenu 
+                {this.props.state.userData ? <RightMenu 
                   slackStars={this.props.state.slackStars}
                   onDrop={this.onDrop} 
                   slack={this.props.state.slackToken} /> : null}

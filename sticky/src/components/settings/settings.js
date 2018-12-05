@@ -17,7 +17,7 @@ class Settings extends Component {
     }    
 
     render() {
-      console.log("settings", this.props)
+      // console.log("settings", this.props)
       const { userData } = this.props.state
       return (
         <SettingsDiv>

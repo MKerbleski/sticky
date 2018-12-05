@@ -1,17 +1,22 @@
 import { slackBlack } from '../img/'
-import { pocket } from '../img/'
+import { pocketThumbnail } from '../img/'
 
-const availibleApis = [
-    {
+const slack = {
         name: "slack",
         thumbnail: slackBlack,
         alt: "a thumbnail of the slack icon"
-    }, 
-    {
-        name: "pocket",
-        thumbnail: pocket,
-        alt: "a thumbnail of the slack icon"
-    }
-]
+}
+const pocket = {
+    name: "pocket",
+    thumbnail: pocketThumbnail,
+    alt: "a thumbnail of the slack icon"
+}
 
-export {availibleApis};
+const availibleApisArray = [slack, pocket]
+const availibleApisObject = {
+    slack: {slack},
+    pocket: {pocket}
+}
+
+
+export { availibleApisArray, availibleApisObject };

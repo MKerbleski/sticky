@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 export const ADDING_NOTE = 'ADDING_NOTE';
-export const FETCHING_NOTES = 'FETCHING_NOTES';
 export const DELETING_NOTE = 'DELETING_NOTE';
 export const EDITING_NOTE = 'EDITING_NOTE';
+export const FETCHING_NOTES = 'FETCHING_NOTES';
 
 export const NOTE_ADDED = 'NOTE_ADDED';
 export const NOTES_RECIEVED = 'NOTES_RECIEVED';
@@ -69,30 +69,30 @@ export const logout = () => {
 //   return arr
 // }
 
-// export const getConnectedApis = () =>  {
-//   return function(dispatch){
-//     if(localStorage.getItem('JWT')){
-//       dispatch({type: FETCHING_API_LIST});
-//       const token = localStorage.getItem('JWT')
-//       const authHeader = {
-//         headers: {
-//           Authorization: token, 
-//         }
-//       }
-//       axios.get('http://localhost:3333/api/user/apis', authHeader)
-//         .then(res => {
-//           let apiStr = res.data.connected_apis 
-//           let apiArr = turnToArr(apiStr);
-//         dispatch({type: API_LIST_RECIEVED, payload: apiArr})
-//       })
-//         .catch(err => {
-//         dispatch({type: ERROR, payload: err})
-//       })
-//     } else {
-//       dispatch({type: ERROR, payload: 'there was no token found'})      
-//     }
-//   }
-// }
+export const getConnectedApis = () =>  {
+  return function(dispatch){
+    if(localStorage.getItem('JWT')){
+      dispatch({type: FETCHING_API_LIST});
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token, 
+        }
+      }
+      axios.get('http://localhost:3333/api/user/apis', authHeader)
+        .then(res => {
+          // let apiStr = res.data.connected_apis 
+          // let apiArr = turnToArr(apiStr);
+        dispatch({type: API_LIST_RECIEVED, payload: res.data})
+      })
+        .catch(err => {
+        dispatch({type: ERROR, payload: err})
+      })
+    } else {
+      dispatch({type: ERROR, payload: 'there was no token found'})      
+    }
+  }
+}
 
 export const getNotes = () =>  {
   return function(dispatch){

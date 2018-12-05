@@ -3,22 +3,24 @@ import styled from 'styled-components';
 import { flex } from '../../styles/styl-utils.js'
 import RightMenuDetails from './right-menu-details.js'
 import {slackBlack, rightArrow, leftArrow} from '../../img'
-// import { getConnectedApis } from '../../actions'
+import { getConnectedApis } from '../../actions'
+import { availibleApisObject, availibleApisArray } from '../../helpers/availbleApis'
 import { connect } from 'react-redux';
 
 class RightMenu extends Component {
     state = {
         selectedApp: null,
         openDetails: false,
+        connectedApis: [],
     }
 
     componentDidMount(){
-        // this.props.getConnectedApis()
+        this.props.getConnectedApis()
     }
 
     eventHandler = (e) => {
         e.preventDefault();
-        console.log(e.target.name)
+        // console.log(e.target.name)
         if(e.target.name === "leftArrow"){
           this.setState({
             openDetails: true
@@ -37,6 +39,7 @@ class RightMenu extends Component {
     }
 
     render(){
+      console.log(this.state)
       console.log(this.props)
       return (
         <RightMenuDiv>
@@ -47,15 +50,22 @@ class RightMenu extends Component {
               />
             : null
           }
-
+          
           <div className="right-menu-preview">
-              {this.props.state.userData && this.props.state.userData.slack ? 
+            {this.props.state.connectedApis ? availibleApisArray.map(apiName => {
+                console.log("connected api ", apiName.name)
+                {/* console.log("connected api ", this.props.state.connectedApis[apiName.name]) */}
+              if(this.props.state.connectedApis[apiName.name] == true){
+                return <img alt={apiName.alt} name={apiName.name} src={apiName.thumbnail} onClick={this.eventHandler} className="menu-item" />
+              }
+            }) : null}
+              {/* {this.props.state.userData && this.props.state.userData.slack ? 
                     <img 
                       alt="slack-logo" 
                       name="slack" 
                       onClick={this.eventHandler} className="menu-item" 
                       src={slackBlack} /> : null
-              }
+              } */}
               {this.state.openDetails ? 
                   <img 
                       alt="rightArrow-logo" 
@@ -79,7 +89,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-  // getConnectedApis,
+  getConnectedApis,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu)
