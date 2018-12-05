@@ -52,6 +52,7 @@ class RightMenuDetails extends Component {
             {selectedApp ?
                     <React.Fragment>
                         <div className="app-title">
+                            <h6>{AAO[selectedApp].name}</h6>
                             <img 
                                 alt={AAO[selectedApp].alt} 
                                 name={AAO[selectedApp].name} 
@@ -60,10 +61,11 @@ class RightMenuDetails extends Component {
                         </div>
                         <div className="app-list">
                             {this.props.selectedApp === "slack" ? 
-                                <SlackList />
-                                    :
+                                <SlackList />:
                                 <p>loading slack</p> }
-                                
+                            {this.props.selectedApp === "pocket" ? 
+                            <h1>POCKET</h1>:
+                            <p>loading pocket</p>}
                         </div>
                     </React.Fragment> :
                 
@@ -97,14 +99,15 @@ const RightMenuDetailsDiv = styled.div`
     display: flex;
     background-color: white;
     flex-direction: column;
-    ${'' /* .app-title{
+    .app-title{
         max-width: 100px;
+        color: black;
     }
-    .app-list{
+    /* .app-list{
         overflow: auto;
         .slack-card{
         }
-    } */}
+    } */
     .connect-apis{
         border: 1px solid purple;
         color: black;

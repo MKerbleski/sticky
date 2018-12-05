@@ -33,7 +33,7 @@ class SlackList extends Component {
                     } else {
                         return <p>no data or failed to load</p>
                     }
-                }): null} 
+                }): <p>loading...</p>} 
             </SlackListDiv>
         )
     }

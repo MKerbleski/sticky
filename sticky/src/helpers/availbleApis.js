@@ -6,12 +6,13 @@ const slack = {
         name: "slack",
         thumbnail: slackBlack,
         logo: slackWord,
+
         alt: "a thumbnail of the slack icon"
 }
 const pocket = {
     name: "pocket",
     thumbnail: pocketThumbnail,
-    alt: "a thumbnail of the slack icon"
+    alt: "a thumbnail of the pocket icon"
 }
 
 const AAA = [slack, pocket]
