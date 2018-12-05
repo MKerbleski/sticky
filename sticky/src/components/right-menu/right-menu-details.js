@@ -12,27 +12,41 @@ class RightMenuDetails extends Component {
     constructor(props){
         super(props);
         this.state = {
-            selectedApp: "slack",
             fakeList: []
         }
     }
 
-    componentDidMount(props){
-        if(this.props.selectedApp){
-            this.setState({
-                selectedApp: this.props.selectedApp, 
-            })
-        }
-        this.props.getSlackStars()
+    componentWillReceiveProps(){
         this.setState({
-            slackStars: this.props.slackStars
+            selectedApp: this.props.selectedApp
         })
+        // this.setupApiDetails();
     }
-    
+    componentDidMount(props){
+        switch(this.props.selectedApp){
+            case "slack":
+            console.log("slack in switch statement")
+                this.props.getSlackStars()
+                this.setState({
+                    selectedApp: "slack",
+                    slackStars: this.props.slackStars
+                })
+                break;
+            case "pocket":
+                this.setState({
+                    selectedApp: "pocket",
+                })
+                console.log("pocket is selected App");
+                break;
+            default: 
+                console.log("This should never be displayed but if it is something with API naming and right menu happened");   
+        }
+    }
+   
 
     render(){
         console.log(this.state)
-        console.log(this.props.state)
+        console.log(this.props)
         return (
 
             <RightMenuDetailsDiv>

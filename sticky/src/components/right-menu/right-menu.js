@@ -31,6 +31,7 @@ class RightMenu extends Component {
             selectedApp: null
           })
         } else {
+          console.log("selectedApp == ", e.target.name)
           this.setState({
             openDetails: true,
             selectedApp: e.target.name
@@ -53,10 +54,13 @@ class RightMenu extends Component {
           
           <div className="right-menu-preview">
             {this.props.state.connectedApis ? availibleApisArray.map(apiName => {
-                console.log("connected api ", apiName.name)
-                {/* console.log("connected api ", this.props.state.connectedApis[apiName.name]) */}
               if(this.props.state.connectedApis[apiName.name] == true){
-                return <img alt={apiName.alt} name={apiName.name} src={apiName.thumbnail} onClick={this.eventHandler} className="menu-item" />
+                return <img 
+                  alt={apiName.alt} 
+                  key={apiName.name} 
+                  name={apiName.name} 
+                  src={apiName.thumbnail} 
+                  onClick={this.eventHandler} className="menu-item" />
               }
             }) : null}
               {/* {this.props.state.userData && this.props.state.userData.slack ? 
