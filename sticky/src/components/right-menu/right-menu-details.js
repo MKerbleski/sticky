@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { menu, start } from '../../styles/styl-utils.js'
-import { slackWord } from '../../img'
-import SlackNote from '../slack-note.js'
+import { SlackList } from './index'
 import { getSlackStars } from '../../actions'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -25,11 +24,11 @@ class RightMenuDetails extends Component {
         switch(this.props.selectedApp){
             case "slack":
             console.log("slack in switch statement")
-                this.props.getSlackStars()
-                this.setState({
-                    selectedApp: "slack",
-                    slackStars: this.props.slackStars
-                })
+                // this.props.getSlackStars()
+                // this.setState({
+                //     selectedApp: "slack",
+                //     slackStars: this.props.slackStars
+                // })
                 break;
             case "pocket":
                 this.setState({
@@ -44,6 +43,7 @@ class RightMenuDetails extends Component {
    
 
     render(){
+
         console.log(this.props)
         const {selectedApp} = this.props;
         console.log(AAO[selectedApp])
@@ -59,24 +59,15 @@ class RightMenuDetails extends Component {
                                 src={AAO[selectedApp].logo}></img>
                         </div>
                         <div className="app-list">
-                                {this.props.state.slackStars ? 
-                                    <React.Fragment>
-                                        {this.props.state.slackStars.map(star => {
-                                            if (star.type === "message"){
-                                                return <SlackNote type="link" onDrop={this.props.onDrop} key={star.date_create} star={star}></SlackNote>
-                                            } else if (star.type === "channel") {
-                                                return <div key={star.date_create} className="list-title">stared channel: {star.channel}</div>
-                                            } else {
-                                                return <p>no data or failed to load</p>
-                                            }
-                                        })} 
-                                    </React.Fragment> :
-                                    <p>loading</p> }
+                            {this.props.selectedApp === "slack" ? 
+                                <SlackList />
+                                    :
+                                <p>loading slack</p> }
                                 
                         </div>
                     </React.Fragment> :
                 
-                    <div className="connect-apis"><Link to='/settings'>connect apps in settings</Link></div>
+                    <div className="connect-apis"><Link to='/settings'>please select an app</Link></div>
             }
             </RightMenuDetailsDiv>
                 

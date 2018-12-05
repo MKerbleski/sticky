@@ -23,7 +23,8 @@ class RightMenu extends Component {
         // console.log(e.target.name)
         if(e.target.name === "leftArrow"){
           this.setState({
-            openDetails: true
+            openDetails: true,
+            selectedApp: "slack"
           })
         } else if (e.target.name === "rightArrow"){
           this.setState({
@@ -31,7 +32,7 @@ class RightMenu extends Component {
             selectedApp: null
           })
         } else {
-          console.log("selectedApp == ", e.target.name)
+          // console.log("selectedApp == ", e.target.name)
           this.setState({
             openDetails: true,
             selectedApp: e.target.name
