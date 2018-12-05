@@ -6,7 +6,7 @@ import SlackNote from '../slack-note.js'
 import { getSlackStars } from '../../actions'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import { AAO } from '../../helpers/availbleApis'
 
 class RightMenuDetails extends Component {
     constructor(props){
@@ -20,7 +20,6 @@ class RightMenuDetails extends Component {
         this.setState({
             selectedApp: this.props.selectedApp
         })
-        // this.setupApiDetails();
     }
     componentDidMount(props){
         switch(this.props.selectedApp){
@@ -45,15 +44,19 @@ class RightMenuDetails extends Component {
    
 
     render(){
-        console.log(this.state)
         console.log(this.props)
+        const {selectedApp} = this.props;
+        console.log(AAO[selectedApp])
         return (
-
             <RightMenuDetailsDiv>
-            {this.state.selectedApp ?
+            {selectedApp ?
                     <React.Fragment>
                         <div className="app-title">
-                            <img alt='slackLogo' name={this.props.app} onClick={this.eventHandler} className="rm-details-name" src={slackWord}></img>
+                            <img 
+                                alt={AAO[selectedApp].alt} 
+                                name={AAO[selectedApp].name} 
+                                onClick={this.eventHandler} className="rm-details-name" 
+                                src={AAO[selectedApp].logo}></img>
                         </div>
                         <div className="app-list">
                                 {this.props.state.slackStars ? 

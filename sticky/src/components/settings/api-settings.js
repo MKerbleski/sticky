@@ -1,6 +1,6 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
-import { availibleApisArray } from '../../helpers/availbleApis'
+import { AAA } from '../../helpers/availbleApis'
 import  SlackSettings  from './slack-settings'
 import  PocketSettings  from './pocket-settings'
 
@@ -34,7 +34,7 @@ export default class ApiSettings extends Component {
         return(
             <ApiSettingsDiv> 
                 <div className="settingApiTabs">
-                    {availibleApisArray.map(api => {
+                    {AAA.map(api => {
                         return (
                             <button 
                                 style={{background: this.state.selectedApp===api.name ? "lightgray" : "gray"}}

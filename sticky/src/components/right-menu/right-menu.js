@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { flex } from '../../styles/styl-utils.js'
 import RightMenuDetails from './right-menu-details.js'
-import {slackBlack, rightArrow, leftArrow} from '../../img'
+import { rightArrow, leftArrow} from '../../img'
 import { getConnectedApis } from '../../actions'
-import { availibleApisObject, availibleApisArray } from '../../helpers/availbleApis'
+import { AAA } from '../../helpers/availbleApis'
 import { connect } from 'react-redux';
 
 class RightMenu extends Component {
@@ -53,7 +53,7 @@ class RightMenu extends Component {
           }
           
           <div className="right-menu-preview">
-            {this.props.state.connectedApis ? availibleApisArray.map(apiName => {
+            {this.props.state.connectedApis ? AAA.map(apiName => {
               if(this.props.state.connectedApis[apiName.name] == true){
                 return <img 
                   alt={apiName.alt} 
