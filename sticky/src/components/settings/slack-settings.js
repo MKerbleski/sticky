@@ -1,5 +1,6 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
+import axios from 'axios';
 
 export default class SlackSettings extends Component {
     constructor(props){
@@ -29,33 +30,48 @@ export default class SlackSettings extends Component {
         //every second check and see if the user thing is true
     }
 
+    getSlackInfo = (e) => {
+        e.preventDefault()
+        console.log("getSlackInfo")
+        if(localStorage.getItem('JWT')){
+            const token = localStorage.getItem('JWT')
+            const authHeader = {
+              headers: {
+                Authorization: token, 
+              }
+            }
+            axios.get(`http://localhost:3333/api/slack/${e.target.name}`, authHeader)
+              .then(res => {
+              console.log(res.data)
+            })
+              .catch(err => {
+              console.log("error!")
+            })
+          } else {
+            console.log("no token found.")
+          }
+    }
+
+    clickHandler = (e) => {
+        e.preventDefault();
+        console.log(e.target.name)
+    }
+
     render(){
         return(
             <SlackSettingsDiv> 
-                <h5>Slack!</h5>
+                <h5>Slack</h5>
                 {this.state.isApiConnected ?
                      <div>
-                        <p>slack is connected </p><button onClick={this.clickHandler}>revoke access button goes here eventually </button>
+                        <h3>slack is connected!</h3>
+                        <button name="revokeAccess" onClick={this.clickHandler}>revoke access button goes here eventually </button>
+                        <button name="pins" onClick={this.getSlackInfo}>Console.log list of pins</button>
+                        <button name="channels" onClick={this.getSlackInfo}>Console.log list of channels</button>
+                        <button name="users" onClick={this.getSlackInfo}>Console.log list of users</button>
                     </div> :
                     <div>
                         <p>slack is NOT connected</p><button onClick={this.connectSlack}>Connect to Slack</button>
                     </div>}
-                 {/* <ul>
-                        <li>slack -- 
-                            {this.props.state.connectedApis.includes('slack') ?
-                                  
-                              :
-                             
-                            }
-                        </li> 
-                        <li>pocket -- 
-                            {this.props.userData.connected_apis == 'pocket' ?
-                                  <button onClick={this.clickHandler}>revoke access button goes here eventually </button>
-                              :
-                              <button onClick={this.connectSlack}>Connect to Pocket</button>
-                            }
-                        </li> 
-                    </ul> */}
             </SlackSettingsDiv>
         )
     }

@@ -44,9 +44,9 @@ class RightMenuDetails extends Component {
 
     render(){
 
-        console.log(this.props)
+        // console.log(this.props)
         const {selectedApp} = this.props;
-        console.log(AAO[selectedApp])
+        // console.log(AAO[selectedApp])
         return (
             <RightMenuDetailsDiv>
             {selectedApp ?

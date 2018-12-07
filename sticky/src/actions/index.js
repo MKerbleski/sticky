@@ -1,42 +1,32 @@
 import axios from 'axios';
 
+export const API_LIST_RECIEVED = 'API_LIST_RECIEVED';
 export const ADDING_NOTE = 'ADDING_NOTE';
+export const CREDENTIALS_ACCEPTED = 'CREDENTIALS_ACCEPTED';
 export const DELETING_NOTE = 'DELETING_NOTE';
+export const DEL_NOTES_RECIEVED = 'DEL_NOTES_RECIEVED';
 export const EDITING_NOTE = 'EDITING_NOTE';
+export const ERROR = 'ERROR';
+export const FAILED_LOGIN_ATTEMPT = 'FAILED_LOGIN_ATTEMPT';
+export const FAILED_REGISTRATION_ATTEMPT = 'FAILED_REGISTRATION_ATTEMPT';
+export const FETCHING_API_LIST = 'FETCHING_API_LIST';
+export const FETCHING_DEL_NOTES = 'FETCHING_DEL_NOTES';
+export const FETCHING_LINKS = 'FETCHING_LINKS';
 export const FETCHING_NOTES = 'FETCHING_NOTES';
-
+export const FETCHING_SLACK_STARS = 'FETCHING_SLACK_STARS';
+export const FETCHING_USERDATA = 'FETCHING_USER';
+export const LINKS_RECIEVED = 'LINKS_RECIEVED';
+export const LOGOUT = 'LOGOUT';
 export const NOTE_ADDED = 'NOTE_ADDED';
 export const NOTES_RECIEVED = 'NOTES_RECIEVED';
 export const NOTE_DELETED = 'NOTE_DELETED';
 export const NOTE_EDITED = 'NOTE_EDITED';
-
-export const SORT_NOTE = 'SORT_NOTE';
-
-export const LOGOUT = 'LOGOUT';
-
-export const FETCHING_SLACK_STARS = 'FETCHING_SLACK_STARS';
-export const SLACK_STARS_RECIEVED = 'SLACK_STARS_RECIEVED';
-
 export const SENDING_CREDENTIALS = 'SENDING_CREDENTIALS';
-export const CREDENTIALS_ACCEPTED = 'CREDENTIALS_ACCEPTED';
-export const FAILED_LOGIN_ATTEMPT = 'FAILED_LOGIN_ATTEMPT';
-export const FAILED_REGISTRATION_ATTEMPT = 'FAILED_REGISTRATION_ATTEMPT';
 export const SENDING_NEW_USERDATA = 'SENDING_NEW_USERDATA';
-export const USER_CREATED = 'USER_CREATED';
-
-export const FETCHING_USERDATA = 'FETCHING_USER';
+export const SORT_NOTE = 'SORT_NOTE';
+export const SLACK_STARS_RECIEVED = 'SLACK_STARS_RECIEVED';
 export const USERDATA_RECIEVED = 'USER_RECIEVED';
-
-export const LINKS_RECIEVED = 'LINKS_RECIEVED';
-export const FETCHING_LINKS = 'FETCHING_LINKS';
-
-export const FETCHING_DEL_NOTES = 'FETCHING_DEL_NOTES';
-export const DEL_NOTES_RECIEVED = 'DEL_NOTES_RECIEVED';
-
-export const FETCHING_API_LIST = 'FETCHING_API_LIST';
-export const API_LIST_RECIEVED = 'API_LIST_RECIEVED';
-
-export const ERROR = 'ERROR';
+export const USER_CREATED = 'USER_CREATED';
 
 export const getDeletedNotes = () => {
   return function(dispatch){
@@ -64,11 +54,6 @@ export const logout = () => {
   }
 }
 
-// const turnToArr = (string) => {
-//   let arr = string.split(',')
-//   return arr
-// }
-
 export const getConnectedApis = () =>  {
   return function(dispatch){
     if(localStorage.getItem('JWT')){
@@ -80,12 +65,12 @@ export const getConnectedApis = () =>  {
         }
       }
       axios.get('http://localhost:3333/api/user/apis', authHeader)
-        .then(res => {
-          // let apiStr = res.data.connected_apis 
-          // let apiArr = turnToArr(apiStr);
+      .then(res => {
+        // let apiStr = res.data.connected_apis 
+        // let apiArr = turnToArr(apiStr);
         dispatch({type: API_LIST_RECIEVED, payload: res.data})
       })
-        .catch(err => {
+      .catch(err => {
         dispatch({type: ERROR, payload: err})
       })
     } else {
@@ -106,10 +91,10 @@ export const getNotes = () =>  {
         }
       }
       axios.get('http://localhost:3333/api/notes/all', authHeader)
-        .then(res => {
+      .then(res => {
         dispatch({type: NOTES_RECIEVED, payload: res.data})
       })
-        .catch(err => {
+      .catch(err => {
         dispatch({type: ERROR, payload: err})
       })
     } else {
@@ -130,10 +115,10 @@ export const getLinks = () =>  {
         }
       }
       axios.get('http://localhost:3333/api/notes/all/links', authHeader)
-        .then(res => {
+      .then(res => {
         dispatch({type: LINKS_RECIEVED, payload: res.data})
       })
-        .catch(err => {
+      .catch(err => {
         dispatch({type: ERROR, payload: err})
       })
     } else {
@@ -153,10 +138,10 @@ export const getSlackStars = () =>  {
         }
       }
       axios.get(`http://localhost:3333/api/slack/stars`, authHeader)
-        .then(res => {
+      .then(res => {
         dispatch({type: SLACK_STARS_RECIEVED, payload: res.data})
       })
-        .catch(err => {
+      .catch(err => {
         dispatch({type: ERROR, payload: err})
       })
     } else {
@@ -164,6 +149,7 @@ export const getSlackStars = () =>  {
     }
   }
 }
+
 export const getUserData = (username) =>  {
   return function(dispatch){
     if(localStorage.getItem('JWT')){
@@ -175,10 +161,10 @@ export const getUserData = (username) =>  {
         }
       }
       axios.get(`http://localhost:3333/api/user/settings`, authHeader)
-        .then(res => {
+      .then(res => {
         dispatch({type: USERDATA_RECIEVED, payload: res.data})
       })
-        .catch(err => {
+      .catch(err => {
         dispatch({type: ERROR, payload: err})
       })
     } else {
@@ -192,3 +178,8 @@ export const sortNote = (newlySortedArray) => {
     dispatch({type: SORT_NOTE, payload: newlySortedArray});
   }
 }
+
+// const turnToArr = (string) => {
+//   let arr = string.split(',')
+//   return arr
+// }

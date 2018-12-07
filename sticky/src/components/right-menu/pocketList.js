@@ -13,7 +13,6 @@ class PocketList extends Component {
     }
 
     componentDidMount(){
-
         this.setState({
             selectedApp: "slack",
             // slackStars: this.props.slackStars

@@ -41,7 +41,7 @@ class NotePreviewNew extends React.Component {
             })
     }
     
-    render(props){
+    render(){
         return (
             <div className="startObject">
                 <NotePreviewNewDiv >
