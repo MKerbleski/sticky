@@ -65,9 +65,10 @@ export default class SlackSettings extends Component {
                      <div>
                         <h3>slack is connected!</h3>
                         <button name="revokeAccess" onClick={this.clickHandler}>revoke access button goes here eventually </button>
-                        <button name="pins" onClick={this.getSlackInfo}>Console.log list of pins</button>
-                        <button name="channels" onClick={this.getSlackInfo}>Console.log list of channels</button>
-                        <button name="users" onClick={this.getSlackInfo}>Console.log list of users</button>
+                        <button name="pins" onClick={this.getSlackInfo}>pins</button>
+                        <button name="channels" onClick={this.getSlackInfo}>channels</button>
+                        <button name="users" onClick={this.getSlackInfo}>users</button>
+                        <button name="stars" onClick={this.getSlackInfo}>stars</button>
                     </div> :
                     <div>
                         <p>slack is NOT connected</p><button onClick={this.connectSlack}>Connect to Slack</button>
