@@ -48,12 +48,6 @@ export const getDeletedNotes = () => {
   }
 }
 
-export const logout = () => {
-  return function(dispatch){
-    dispatch({type: LOGOUT})
-  }
-}
-
 export const getConnectedApis = () =>  {
   return function(dispatch){
     if(localStorage.getItem('JWT')){
@@ -170,6 +164,12 @@ export const getUserData = (username) =>  {
     } else {
       dispatch({type: ERROR, payload: 'there was no token found'})      
     }
+  }
+}
+
+export const logout = () => {
+  return function(dispatch){
+    dispatch({type: LOGOUT})
   }
 }
 

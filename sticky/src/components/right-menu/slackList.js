@@ -29,7 +29,7 @@ class SlackList extends Component {
                     if (star.type === "message"){
                         return <SlackNote type="link" onDrop={this.props.onDrop} key={star.date_create} star={star}></SlackNote>
                     } else if (star.type === "channel") {
-                        return <div key={star.date_create} className="list-title">stared channel: {star.channel}</div>
+                        return <div key={star.date_create} className="list-title">Stared channel: {star.channel}</div>
                     } else {
                         return <p>no data or failed to load</p>
                     }

@@ -64,25 +64,18 @@ class RightMenu extends Component {
                   onClick={this.eventHandler} className="menu-item" />
               }
             }) : <p>!</p>}
-              {/* {this.props.state.userData && this.props.state.userData.slack ? 
-                    <img 
-                      alt="slack-logo" 
-                      name="slack" 
-                      onClick={this.eventHandler} className="menu-item" 
-                      src={slackBlack} /> : null
-              } */}
-              {this.state.openDetails ? 
+            {this.state.openDetails ? 
+                <img 
+                    alt="rightArrow-logo" 
+                    name="rightArrow" 
+                    onClick={this.eventHandler} className="menu-item" 
+                    src={rightArrow} /> :
                   <img 
-                      alt="rightArrow-logo" 
-                      name="rightArrow" 
-                      onClick={this.eventHandler} className="menu-item" 
-                      src={rightArrow} /> :
-                    <img 
-                      alt="leftArrow" 
-                      name="leftArrow" 
-                      onClick={this.eventHandler} className="menu-item" 
-                      src={leftArrow} />
-              }
+                    alt="leftArrow" 
+                    name="leftArrow" 
+                    onClick={this.eventHandler} className="menu-item" 
+                    src={leftArrow} />
+            }
           </div>
         </RightMenuDiv>
       )

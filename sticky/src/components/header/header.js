@@ -11,7 +11,7 @@ class Header extends Component{
         e.preventDefault();
         localStorage.removeItem('JWT');
         localStorage.removeItem('username');
-        localStorage.removeItem('userid');
+        localStorage.removeItem('sticky_user_id');
         this.props.logout();
         // console.log(this.props, 'this.props')
         this.props.redirect('/welcome')

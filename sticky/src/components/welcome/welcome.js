@@ -31,13 +31,13 @@ class Welcome extends Component{
             sendingData: true
         })
         axios.post('http://localhost:3333/api/welcome/register/', newUser).then(res => {
-            console.log(res.data)
+            console.log("create user in welcome route", res.data)
             this.setState({
                 sendingData: false
             })
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
-            localStorage.setItem('userId', res.data.userId)
+            localStorage.setItem('sticky_user_id', res.data.sticky_user_id)
             if(localStorage.getItem('textBody')){
                 this.newNote({textBody: localStorage.getItem('textBody')})
             } else {
@@ -59,7 +59,7 @@ class Welcome extends Component{
             })
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
-            localStorage.setItem('userId', res.data.userId)
+            localStorage.setItem('sticky_user_id', res.data.sticky_user_id)
             if(localStorage.getItem('textBody')){
                 this.newNote({textBody: localStorage.getItem('textBody')})
             } else {
