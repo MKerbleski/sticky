@@ -44,7 +44,7 @@ class Welcome extends Component{
                 this.props.history.push('/all-notes')
             }
             this.props.history.push('/all-notes')
-        }).catch(err => {alert(err.message); console.err(err.message)})
+        }).catch(err => {console.log(err.message)})
     }
 
     loginUser2 = (creds) => {

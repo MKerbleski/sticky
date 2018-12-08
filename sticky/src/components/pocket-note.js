@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import {DragSource} from 'react-dnd';
-import ReactMarkdown from 'react-markdown';
+// import ReactMarkdown from 'react-markdown';
 
 const PocketNote = (props) => {
     if(props.pocket){

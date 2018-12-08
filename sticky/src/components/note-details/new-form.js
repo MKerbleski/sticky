@@ -90,7 +90,6 @@ const NewNoteDiv = styled.div`
         background-color: #2AC0C4;
         font-weight: bold;
         border: 1px solid lightgray;
-      }
-  }
+    }
 }
 `;

@@ -63,7 +63,7 @@ class RightMenu extends Component {
                   src={apiName.thumbnail} 
                   onClick={this.eventHandler} className="menu-item" />
               }
-            }) : null}
+            }) : <p>!</p>}
               {/* {this.props.state.userData && this.props.state.userData.slack ? 
                     <img 
                       alt="slack-logo" 
