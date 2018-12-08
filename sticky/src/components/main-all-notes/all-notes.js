@@ -38,10 +38,10 @@ class AllNotes extends Component {
                 allLinks={this.props.links} 
                 newNote={this.props.newNote}
                 showNewNote={this.props.showNewNote}
-                redirect={this.props.redirect}
-             /> : 
-                <NotePreviewNew />}
-            </AllNotesDiv>
+                redirect={this.props.redirect} /> : 
+            <NotePreviewNew
+                newNote={this.props.newNote} />}
+      </AllNotesDiv>
     );
   }
 }
