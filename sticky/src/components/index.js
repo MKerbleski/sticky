@@ -39,3 +39,11 @@ export {
 export {
     Header, 
 } from './header'
+
+export {
+    default as PocketNote
+} from './pocket-note';
+
+export {
+    default as SlackNote
+} from './slack-note';

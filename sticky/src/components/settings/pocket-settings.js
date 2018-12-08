@@ -35,6 +35,33 @@ export default class PocketSettings extends Component {
         })
     }
 
+    getPocketInfo = (e) => {
+        e.preventDefault()
+        console.log("getPocketInfo")
+        if(localStorage.getItem('JWT')){
+            const token = localStorage.getItem('JWT')
+            const authHeader = {
+              headers: {
+                Authorization: token, 
+              }
+            }
+            axios.get(`http://localhost:3333/api/pocket/${e.target.name}`, authHeader)
+              .then(res => {
+              console.log(res.data)
+            })
+              .catch(err => {
+              console.log("error!")
+            })
+          } else {
+            console.log("no token found.")
+          }
+    }
+
+    clickHandler = (e) => {
+        e.preventDefault();
+        console.log(e.target.name)
+    }
+
     render(){ 
         return(
             <PocketSettingsDiv> 
@@ -42,6 +69,8 @@ export default class PocketSettings extends Component {
                 {this.state.isApiConnected ?
                     <div>
                         <p>pocket is connected </p><button onClick={this.clickHandler}>revoke access button goes here eventually </button>
+                        <button name="notes" onClick={this.getPocketInfo}>notes</button>
+                        {/* <button name="stars" onClick={this.getSlackInfo}>stars</button> */}
                     </div> : 
                     <div>
                         <p>pocket is NOT connected</p><button onClick={this.connectPocket}>Connect to Pocket</button>

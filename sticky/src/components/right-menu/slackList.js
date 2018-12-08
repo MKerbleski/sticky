@@ -1,6 +1,6 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
-import SlackNote from '../slack-note.js'
+import { SlackNote }from '../index.js'
 import { getSlackStars } from '../../actions'
 import { connect } from 'react-redux';
 
