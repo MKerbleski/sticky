@@ -15,32 +15,46 @@ class RightMenuDetails extends Component {
         }
     }
 
-    componentWillReceiveProps(){
-        this.setState({
-            selectedApp: this.props.selectedApp
-        })
-    }
-    componentDidMount(props){
+    
+    //I think this can be deleted because I use props anyways?
+    
+    // componentWillReceiveProps(){
+    //     this.setState({
+    //         selectedApp: this.props.selectedApp
+    //     })
+    // }
+
+    // componentDidMount(props){
+    //     switch(this.props.selectedApp){
+    //         case "slack":
+    //         console.log("slack in switch statement")
+    //             // this.props.getSlackStars()
+    //             // this.setState({
+    //             //     selectedApp: "slack",
+    //             //     slackStars: this.props.slackStars
+    //             // })
+    //             break;
+    //         case "pocket":
+    //             this.setState({
+    //                 selectedApp: "pocket",
+    //             })
+    //             console.log("pocket is selected App");
+    //             break;
+    //         default: 
+    //             console.log("This should never be displayed but if it is something with API naming and right menu happened");   
+    //     }
+    // }
+    
+    getCorrectListComponent(){
         switch(this.props.selectedApp){
             case "slack":
-            console.log("slack in switch statement")
-                // this.props.getSlackStars()
-                // this.setState({
-                //     selectedApp: "slack",
-                //     slackStars: this.props.slackStars
-                // })
-                break;
+                return <SlackList type="link" onDrop={this.props.onDrop} />
             case "pocket":
-                this.setState({
-                    selectedApp: "pocket",
-                })
-                console.log("pocket is selected App");
-                break;
+                return <PocketList />
             default: 
-                console.log("This should never be displayed but if it is something with API naming and right menu happened");   
+                return null;
         }
     }
-   
 
     render(){
 
@@ -60,12 +74,7 @@ class RightMenuDetails extends Component {
                                 src={AAO[selectedApp].logo}></img>
                         </div>
                         <div className="app-list">
-                            {this.props.selectedApp === "slack" ? 
-                                <SlackList type="link" onDrop={this.props.onDrop} />:
-                                null}
-                            {this.props.selectedApp === "pocket" ? 
-                                <PocketList /> :
-                                null}
+                            {this.getCorrectListComponent()}
                         </div>
                     </React.Fragment> :
                 

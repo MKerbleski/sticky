@@ -13,6 +13,7 @@ export const FETCHING_API_LIST = 'FETCHING_API_LIST';
 export const FETCHING_DEL_NOTES = 'FETCHING_DEL_NOTES';
 export const FETCHING_LINKS = 'FETCHING_LINKS';
 export const FETCHING_NOTES = 'FETCHING_NOTES';
+export const FETCHING_POCKET_LIST = 'FETCHING_POCKET_List';
 export const FETCHING_SLACK_STARS = 'FETCHING_SLACK_STARS';
 export const FETCHING_USERDATA = 'FETCHING_USER';
 export const LINKS_RECIEVED = 'LINKS_RECIEVED';
@@ -21,7 +22,7 @@ export const NOTE_ADDED = 'NOTE_ADDED';
 export const NOTES_RECIEVED = 'NOTES_RECIEVED';
 export const NOTE_DELETED = 'NOTE_DELETED';
 export const NOTE_EDITED = 'NOTE_EDITED';
-export const POCKET_NOTES_RECIEVED = 'POCKET_NOTES_RECIEVED';
+export const POCKET_LIST_RECIEVED = 'POCKET_LIST_RECIEVED';
 export const SENDING_CREDENTIALS = 'SENDING_CREDENTIALS';
 export const SENDING_NEW_USERDATA = 'SENDING_NEW_USERDATA';
 export const SORT_NOTE = 'SORT_NOTE';
@@ -145,19 +146,19 @@ export const getSlackStars = () =>  {
   }
 }
 
-export const getPocketNotes = () =>  {
+export const getPocketList = () =>  {
   return function(dispatch){
     if(localStorage.getItem('JWT')){
-      dispatch({type: FETCHING_SLACK_STARS});
+      dispatch({type: FETCHING_POCKET_LIST});
       const token = localStorage.getItem('JWT')
       const authHeader = {
         headers: {
           Authorization: token, 
         }
       }
-      axios.get(`http://localhost:3333/api/pocket/notes`, authHeader)
+      axios.get(`http://localhost:3333/api/pocket/list`, authHeader)
       .then(res => {
-        dispatch({type: POCKET_NOTES_RECIEVED, payload: res.data})
+        dispatch({type: POCKET_LIST_RECIEVED, payload: res.data})
       })
       .catch(err => {
         dispatch({type: ERROR, payload: err})

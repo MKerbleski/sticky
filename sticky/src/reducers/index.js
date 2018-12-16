@@ -13,6 +13,7 @@ import {
   FETCHING_USERDATA,
   FETCHING_NOTES,
   FETCHING_SLACK_STARS,
+  FETCHING_POCKET_LIST,
   FETCHING_LINKS,
   LINKS_RECIEVED,
   LOGOUT,
@@ -20,7 +21,7 @@ import {
   NOTE_DELETED,
   NOTE_EDITED,
   NOTES_RECIEVED,
-  POCKET_NOTES_RECIEVED,
+  POCKET_LIST_RECIEVED,
   SENDING_CREDENTIALS,
   SENDING_NEW_USERDATA,
   SLACK_STARS_RECIEVED,
@@ -150,6 +151,15 @@ export const reducer = (state = initialState, action) => {
         gettingSlackStars: false
       })
     case FETCHING_SLACK_STARS:
+      return Object.assign({}, state, {
+        gettingSlackStars: true
+      })
+    case POCKET_LIST_RECIEVED:
+      return Object.assign({}, state, {
+        pocketList: action.payload.pocketList,
+        gettingSlackStars: false
+      })
+    case FETCHING_POCKET_LIST:
       return Object.assign({}, state, {
         gettingSlackStars: true
       })

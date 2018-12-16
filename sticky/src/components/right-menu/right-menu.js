@@ -18,9 +18,9 @@ class RightMenu extends Component {
         this.props.getConnectedApis()
     }
 
+    
     eventHandler = (e) => {
         e.preventDefault();
-        // console.log(e.target.name)
         if(e.target.name === "leftArrow"){
           this.setState({
             openDetails: true,
@@ -32,7 +32,6 @@ class RightMenu extends Component {
             selectedApp: null
           })
         } else {
-          // console.log("selectedApp == ", e.target.name)
           this.setState({
             openDetails: true,
             selectedApp: e.target.name
@@ -41,8 +40,6 @@ class RightMenu extends Component {
     }
 
     render(){
-      console.log(this.state)
-      console.log(this.props)
       return (
         <RightMenuDiv>
           {this.state.openDetails ?
