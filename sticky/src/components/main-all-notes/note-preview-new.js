@@ -12,9 +12,9 @@ class NotePreviewNew extends React.Component {
     getFirstWord = (text, words=2) => {
         let firstWord = text.split(" ").slice(0,words).join(' ');
         if(firstWord.length > 0){
-        return firstWord
+            return firstWord
         } else {
-        return text
+            return text
         }
     }
 
@@ -23,9 +23,9 @@ class NotePreviewNew extends React.Component {
         let firstWord = this.getFirstWord(text)
         firstSen = firstSen.replace(firstWord, '')    
         if(firstSen !== firstWord){
-        return firstSen
+            return firstSen
         } else{
-        return null
+            return null
         }
     }
 

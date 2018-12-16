@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { flex } from '../../styles/styl-utils.js'
-import RightMenuDetails from './right-menu-details.js'
-import { rightArrow, leftArrow} from '../../img'
-import { getConnectedApis } from '../../actions'
-import { AAA } from '../../helpers/availbleApis'
 import { connect } from 'react-redux';
+import { AAA } from '../../helpers/availbleApis'
+import { RightMenuDetails } from './index'
+import { 
+  rightArrow, 
+  leftArrow} from '../../img'
+import { getConnectedApis } from '../../actions'
 
 class RightMenu extends Component {
     state = {

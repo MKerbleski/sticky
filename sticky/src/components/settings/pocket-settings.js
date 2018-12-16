@@ -20,11 +20,9 @@ export default class PocketSettings extends Component {
 
     connectPocket = (e) => {
         e.preventDefault();
-        // console.log('connect to pocket')
         let userid = this.props.userData.id
         let redirect_uri = `http://localhost:3333/api/pocket/incoming/${userid}`
         axios.get(`http://localhost:3333/api/pocket/auth/${userid}`).then(res => {
-            // console.log("front end res", res)
             if(res.data){
                 window.open(`https://getpocket.com/auth/authorize?request_token=${res.data}&redirect_uri=${redirect_uri}`)
             } else {
@@ -37,7 +35,6 @@ export default class PocketSettings extends Component {
 
     getPocketInfo = (e) => {
         e.preventDefault()
-        console.log("getPocketInfo")
         if(localStorage.getItem('JWT')){
             const token = localStorage.getItem('JWT')
             const authHeader = {
@@ -67,8 +64,7 @@ export default class PocketSettings extends Component {
                 {this.state.isApiConnected ?
                     <div style={{background: "lightgreen"}}>
                         <p>pocket is connected </p><button onClick={this.clickHandler}>revoke access button goes here eventually </button>
-                        <button name="notes" onClick={this.getPocketInfo}>notes</button>
-                        {/* <button name="stars" onClick={this.getSlackInfo}>stars</button> */}
+                        <button name="list" onClick={this.getPocketInfo}>notes</button>
                     </div> : 
                     <div>
                         <p>pocket is NOT connected</p><button onClick={this.connectPocket}>Connect to Pocket</button>

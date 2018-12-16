@@ -20,7 +20,7 @@ const sourceObj = {
         const sourceId = props.layerTwo
         return ({
             sourceId
-    });
+        });
     },
 
     endDrag(props, monitor) {

@@ -6,8 +6,7 @@ import {
   NotePreviewNew } from './index';
 import { 
   getLinks,
-  getNotes,
- } from '../../actions'
+  getNotes, } from '../../actions'
 
 class AllNotes extends Component {
   constructor(props){
