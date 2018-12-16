@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { AllNotesBin, } from '../index';
+import { connect } from 'react-redux';
+import { 
+  AllNotesBin,
+  NotePreviewNew } from './index';
 import { 
   getLinks,
   getNotes,
  } from '../../actions'
-import { connect } from 'react-redux';
-import  NotePreviewNew  from './note-preview-new'
 
 class AllNotes extends Component {
   constructor(props){
@@ -18,7 +19,6 @@ class AllNotes extends Component {
   }
 
   componentDidMount(){
-    // console.log(this.props)
     if(localStorage.getItem('JWT')){
       this.props.getLinks();
       this.props.getNotes();

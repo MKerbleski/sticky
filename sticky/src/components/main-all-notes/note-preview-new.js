@@ -30,15 +30,14 @@ class NotePreviewNew extends React.Component {
     }
 
     addNote = (e) => {
-        console.log('addNote', this.state.textBody)
         this.props.newNote({textBody: this.state.textBody})
     }
 
     changeHandler = (e) => {
-            e.preventDefault();
-            this.setState({
-                textBody: e.target.value,
-            })
+        e.preventDefault();
+        this.setState({
+            textBody: e.target.value,
+        })
     }
     
     render(){

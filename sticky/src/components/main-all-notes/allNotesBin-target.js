@@ -1,7 +1,8 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
-import NotePreview from './note-preview.js';
-import NotePreviewNew from './note-preview-new.js';
+import { 
+    NotePreviewNew, 
+    NotePreview } from './index';
 
 const AllNotesBin = (props) => (
   props.connectDropTarget(

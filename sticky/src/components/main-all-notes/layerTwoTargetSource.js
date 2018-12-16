@@ -1,21 +1,18 @@
 import styled from 'styled-components';
 import React from 'react';
-
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
 
-
-import LayerThreeSource from "./layerThreeSource"
+import { LayerThreeSource } from "./index"
 
 const targetObj = {
     drop(props) {
-    const targetId = props.layerTwo.id;
-    const type = props.type
-    return ({
-        targetId, type
-    });
-
-}
+        const targetId = props.layerTwo.id;
+        const type = props.type
+        return ({
+            targetId, type
+        });
+    }
 }
 
 const sourceObj = {
@@ -109,7 +106,6 @@ export default flow(
 
 )(LayerTwoTargetSource);
 
-
 const LayerTwoDiv = styled.div`
     border: 2px solid black;
     border-radius: 20px;
@@ -121,7 +117,6 @@ const LayerTwoDiv = styled.div`
     flex-direction: column;
     align-content: flex-start;
     justify-content: flex-start;
-    
     overflow: visible;
     h4 {
         ${'' /* border: 1px solid orange; */}

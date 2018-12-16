@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
+import { DragSource, DropTarget } from 'react-dnd';
 import { flex } from '../../styles/styl-utils.js'
 
-import LayerTwoTargetSource from "./layerTwoTargetSource"
+import { LayerTwoSource } from "./index"
 
 const targetObj = {
   drop(props, monitor) {
@@ -130,7 +130,7 @@ class NotePreview extends React.Component {
                                   if (layerTwo.parent_id === this.props.layerOne.id){
                                       return (
                                             <div className="layerTwoContainer" key={layerTwo.id}>
-                                                <LayerTwoTargetSource  
+                                                <LayerTwoSource  
                                                   type="note"
                                                   onDrop={this.props.onDrop}
                                                   layerTwo={layerTwo} 

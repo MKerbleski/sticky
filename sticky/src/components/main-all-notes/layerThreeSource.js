@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import {DragSource} from 'react-dnd';
+import { DragSource } from 'react-dnd';
 
 const LayerThreeSource = (props) => {
     const goToNote = () => {
