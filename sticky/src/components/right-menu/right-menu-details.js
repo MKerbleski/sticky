@@ -8,42 +8,6 @@ import { Link } from 'react-router-dom';
 import { AAO } from '../../helpers/availbleApis'
 
 class RightMenuDetails extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            fakeList: []
-        }
-    }
-
-    
-    //I think this can be deleted because I use props anyways?
-    
-    // componentWillReceiveProps(){
-    //     this.setState({
-    //         selectedApp: this.props.selectedApp
-    //     })
-    // }
-
-    // componentDidMount(props){
-    //     switch(this.props.selectedApp){
-    //         case "slack":
-    //         console.log("slack in switch statement")
-    //             // this.props.getSlackStars()
-    //             // this.setState({
-    //             //     selectedApp: "slack",
-    //             //     slackStars: this.props.slackStars
-    //             // })
-    //             break;
-    //         case "pocket":
-    //             this.setState({
-    //                 selectedApp: "pocket",
-    //             })
-    //             console.log("pocket is selected App");
-    //             break;
-    //         default: 
-    //             console.log("This should never be displayed but if it is something with API naming and right menu happened");   
-    //     }
-    // }
     
     getCorrectListComponent(){
         switch(this.props.selectedApp){
@@ -57,33 +21,28 @@ class RightMenuDetails extends Component {
     }
 
     render(){
-
-        // console.log(this.props)
-        const {selectedApp} = this.props;
-        // console.log(AAO[selectedApp])
+        const { selectedApp } = this.props;
         return (
             <RightMenuDetailsDiv>
-            {selectedApp ?
-                    <React.Fragment>
-                        <div className="app-title">
-                            <h6>{AAO[selectedApp].name}</h6>
-                            <img 
-                                alt={AAO[selectedApp].alt} 
-                                name={AAO[selectedApp].name} 
-                                onClick={this.eventHandler} className="rm-details-name" 
-                                src={AAO[selectedApp].logo}></img>
-                        </div>
-                        <div className="app-list">
-                            {this.getCorrectListComponent()}
-                        </div>
-                    </React.Fragment> :
-                
-                    <div className="connect-apis"><Link to='/settings'>please select an app</Link></div>
-            }
-            </RightMenuDetailsDiv>
-                
-            
-            )
+                {selectedApp ?
+                        <React.Fragment>
+                            <div className="app-title">
+                                <h6>{AAO[selectedApp].name}</h6>
+                                <img 
+                                    alt={AAO[selectedApp].alt} 
+                                    name={AAO[selectedApp].name} 
+                                    onClick={this.eventHandler} className="rm-details-name" 
+                                    src={AAO[selectedApp].logo}></img>
+                            </div>
+                            <div className="app-list">
+                                {this.getCorrectListComponent()}
+                            </div>
+                        </React.Fragment> :
+                    
+                        <div className="connect-apis"><Link to='/settings'>please select an app</Link></div>
+                }
+            </RightMenuDetailsDiv>           
+        )
     }
 }
 
