@@ -21,7 +21,7 @@ class SlackList extends Component {
     }
 
     render(){
-        // console.log(this.props.state)
+        console.log(this.props.state)
 
         return(
             <SlackListDiv> 

@@ -24,7 +24,7 @@ class PocketList extends Component {
 
 
     componentDidMount(){
-
+        
         this.setState({
             selectedApp: "pocket",
         })

@@ -20,7 +20,7 @@ export default class SlackSettings extends Component {
 
     connectSlack = (e) => {
         e.preventDefault();
-        // console.log('connect to slack')
+        console.log('connect to slack', this.props.userData.id)
         let client_id = '465374768868.465546770546'
         let scope = 'stars:read stars:write'
         let userid = this.props.userData.id

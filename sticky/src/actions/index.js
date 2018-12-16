@@ -21,6 +21,7 @@ export const NOTE_ADDED = 'NOTE_ADDED';
 export const NOTES_RECIEVED = 'NOTES_RECIEVED';
 export const NOTE_DELETED = 'NOTE_DELETED';
 export const NOTE_EDITED = 'NOTE_EDITED';
+export const POCKET_NOTES_RECIEVED = 'POCKET_NOTES_RECIEVED';
 export const SENDING_CREDENTIALS = 'SENDING_CREDENTIALS';
 export const SENDING_NEW_USERDATA = 'SENDING_NEW_USERDATA';
 export const SORT_NOTE = 'SORT_NOTE';
@@ -134,6 +135,29 @@ export const getSlackStars = () =>  {
       axios.get(`http://localhost:3333/api/slack/stars`, authHeader)
       .then(res => {
         dispatch({type: SLACK_STARS_RECIEVED, payload: res.data})
+      })
+      .catch(err => {
+        dispatch({type: ERROR, payload: err})
+      })
+    } else {
+      dispatch({type: ERROR, payload: 'there was no token found'})      
+    }
+  }
+}
+
+export const getPocketNotes = () =>  {
+  return function(dispatch){
+    if(localStorage.getItem('JWT')){
+      dispatch({type: FETCHING_SLACK_STARS});
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token, 
+        }
+      }
+      axios.get(`http://localhost:3333/api/pocket/notes`, authHeader)
+      .then(res => {
+        dispatch({type: POCKET_NOTES_RECIEVED, payload: res.data})
       })
       .catch(err => {
         dispatch({type: ERROR, payload: err})
