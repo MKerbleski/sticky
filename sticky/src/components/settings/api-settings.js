@@ -1,8 +1,10 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
 import { AAA } from '../../helpers/availbleApis'
-import  SlackSettings  from './slack-settings'
-import  PocketSettings  from './pocket-settings'
+import { 
+    SlackSettings,
+    PocketSettings
+} from '../settings'
 
 export default class ApiSettings extends Component {
     constructor(props){

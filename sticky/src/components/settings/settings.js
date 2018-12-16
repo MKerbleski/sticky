@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { getUserData } from '../../actions'
 import { connect } from 'react-redux';
-import ApiSettings from './api-settings';
+import { ApiSettings } from '../settings';
 
 class Settings extends Component {
     constructor(props){
@@ -54,10 +54,6 @@ const SettingsDiv = styled.div`
   padding: 25px;
   height: 100vh;
 `;
-
-
-
-
 
   // pocketTokenRequest = (consumer_key, redirect_uri) => {
   //     console.log('this.pocketTokenRequest')
