@@ -5,12 +5,8 @@ import { getPocketList } from '../../actions'
 import { connect } from 'react-redux';
 
 class PocketList extends Component {
-
     componentDidMount(){
         this.props.getPocketList();
-        this.setState({
-            selectedApp: "pocket",
-        })
     }
 
     render(){
