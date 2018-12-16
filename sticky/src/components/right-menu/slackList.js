@@ -5,24 +5,11 @@ import { getSlackStars } from '../../actions'
 import { connect } from 'react-redux';
 
 class SlackList extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-
-        }
-    }
-
     componentDidMount(){
         this.props.getSlackStars()
-        this.setState({
-            selectedApp: "slack",
-            // slackStars: this.props.slackStars
-        })
     }
 
     render(){
-        console.log(this.props.state)
-
         return(
             <SlackListDiv> 
                 {this.props.state.slackStars ? this.props.state.slackStars.map(star => {

@@ -63,6 +63,7 @@ class RightMenu extends Component {
                 return null
               }
             }) : <p>!</p>}
+            
             {this.state.openDetails ? 
                   <img 
                     alt="rightArrow-logo" 
