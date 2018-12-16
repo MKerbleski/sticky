@@ -59,15 +59,13 @@ export default class PocketSettings extends Component {
 
     clickHandler = (e) => {
         e.preventDefault();
-        console.log(e.target.name)
     }
 
     render(){ 
         return(
             <PocketSettingsDiv> 
-                <h5>Pocket!</h5>
                 {this.state.isApiConnected ?
-                    <div>
+                    <div style={{background: "lightgreen"}}>
                         <p>pocket is connected </p><button onClick={this.clickHandler}>revoke access button goes here eventually </button>
                         <button name="notes" onClick={this.getPocketInfo}>notes</button>
                         {/* <button name="stars" onClick={this.getSlackInfo}>stars</button> */}

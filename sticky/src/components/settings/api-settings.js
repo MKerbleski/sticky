@@ -8,7 +8,7 @@ export default class ApiSettings extends Component {
     constructor(props){
         super(props)
         this.state = {
-            selectedApp: null,
+            selectedApp: "slack",
         }
     }
 
@@ -19,13 +19,14 @@ export default class ApiSettings extends Component {
         })
     }
 
-    whichApp = () => {
-        if(this.state.selectedApp === "slack"){
-            return <SlackSettings userData={this.props.userData} />
-        } else if(this.state.selectedApp === "pocket"){
-            return <PocketSettings userData={this.props.userData} />
-        } else {
-            return null;
+    renderSelectedApp = () => {
+        switch(this.state.selectedApp){
+            case "slack":
+                return <SlackSettings userData={this.props.userData} />
+            case "pocket":
+                return <PocketSettings userData={this.props.userData} />
+            default:
+                return null;
         }
     }
 
@@ -37,19 +38,19 @@ export default class ApiSettings extends Component {
                     {AAA.map(api => {
                         return (
                             <button 
-                                style={{background: this.state.selectedApp===api.name ? "lightgray" : "gray"}}
+                                style={{background: this.state.selectedApp === api.name ? "white" : "gray"}}
                                 key={api.name}
                                 name={api.name} 
                                 onClick={this.clickHandler}
                                 className="settingApiTab">
-                                <h5>{api.name}</h5>
-                                <img alt={api.alt} className="menu-item" src={api.thumbnail} />
+                                <h4>{api.title}</h4>
+                                <img alt={api.alt} className="menu-item" src={api.icon} />
                             </button>
                         )
                     })}
                 </div>
                 <div className="settingApiDetails">
-                    {this.state.selectedApp != null ? (this.whichApp()) : null}    
+                    {this.state.selectedApp != null ? (this.renderSelectedApp()) : null}    
                 </div>               
             </ApiSettingsDiv>
         )

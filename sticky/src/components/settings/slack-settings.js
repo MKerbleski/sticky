@@ -54,15 +54,13 @@ export default class SlackSettings extends Component {
 
     clickHandler = (e) => {
         e.preventDefault();
-        console.log(e.target.name)
     }
 
     render(){
         return(
             <SlackSettingsDiv> 
-                <h5>Slack</h5>
                 {this.state.isApiConnected ?
-                     <div>
+                     <div style={{background: "lightgreen"}}>
                         <h3>slack is connected!</h3>
                         <button name="revokeAccess" onClick={this.clickHandler}>revoke access button goes here eventually </button>
                         <button name="pins" onClick={this.getSlackInfo}>pins</button>

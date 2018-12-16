@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { AAO } from '../../helpers/availbleApis'
 
 class RightMenuDetails extends Component {
-    
     getCorrectListComponent(){
         switch(this.props.selectedApp){
             case "slack":
@@ -27,7 +26,6 @@ class RightMenuDetails extends Component {
                 {selectedApp ?
                         <React.Fragment>
                             <div className="app-title">
-                                <h6>{AAO[selectedApp].name}</h6>
                                 <img 
                                     alt={AAO[selectedApp].alt} 
                                     name={AAO[selectedApp].name} 

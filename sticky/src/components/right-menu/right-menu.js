@@ -57,13 +57,13 @@ class RightMenu extends Component {
                   alt={apiName.alt} 
                   key={apiName.name} 
                   name={apiName.name} 
-                  src={apiName.thumbnail} 
+                  src={apiName.icon} 
                   onClick={this.eventHandler} className="menu-item" />
               } else {
                 return null
               }
             }) : <p>!</p>}
-            
+
             {this.state.openDetails ? 
                   <img 
                     alt="rightArrow-logo" 

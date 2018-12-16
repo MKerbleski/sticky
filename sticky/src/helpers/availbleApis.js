@@ -1,5 +1,5 @@
 import { 
-    slackColorIcon, 
+    slackBlack, 
     slackWordLogo,
     pocketColorIcon,
     pocketWordLogo
@@ -7,14 +7,16 @@ import {
 
 const slack = {
     name: "slack",
-    thumbnail: slackColorIcon,
+    title: "Slack",
+    icon: slackBlack,
     logo: slackWordLogo,
     alt: "a thumbnail of the slack icon"
 }
 
 const pocket = {
     name: "pocket",
-    thumbnail: pocketColorIcon,
+    title: "Pocket",
+    icon: pocketColorIcon,
     logo: pocketWordLogo,
     alt: "a thumbnail of the pocket icon"
 }
