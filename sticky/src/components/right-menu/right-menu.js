@@ -18,7 +18,7 @@ class RightMenu extends Component {
         this.props.getConnectedApis()
     }
 
-    
+
     eventHandler = (e) => {
         e.preventDefault();
         if(e.target.name === "leftArrow"){
@@ -52,17 +52,19 @@ class RightMenu extends Component {
           
           <div className="right-menu-preview">
             {this.props.state.connectedApis ? AAA.map(apiName => {
-              if(this.props.state.connectedApis[apiName.name] == true){
+              if(this.props.state.connectedApis[apiName.name] === 1){
                 return <img 
                   alt={apiName.alt} 
                   key={apiName.name} 
                   name={apiName.name} 
                   src={apiName.thumbnail} 
                   onClick={this.eventHandler} className="menu-item" />
+              } else {
+                return null
               }
             }) : <p>!</p>}
             {this.state.openDetails ? 
-                <img 
+                  <img 
                     alt="rightArrow-logo" 
                     name="rightArrow" 
                     onClick={this.eventHandler} className="menu-item" 
