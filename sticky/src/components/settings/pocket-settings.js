@@ -59,12 +59,14 @@ export default class PocketSettings extends Component {
     }
 
     render(){ 
+        //need a status button that says saving everything to server while it is initializing
         return(
             <PocketSettingsDiv> 
                 {this.state.isApiConnected ?
                     <div style={{background: "lightgreen"}}>
                         <p>pocket is connected </p><button onClick={this.clickHandler}>revoke access button goes here eventually </button>
                         <button name="list" onClick={this.getPocketInfo}>notes</button>
+                    
                     </div> : 
                     <div>
                         <p>pocket is NOT connected</p><button onClick={this.connectPocket}>Connect to Pocket</button>
