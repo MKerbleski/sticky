@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const API_LIST_RECIEVED = 'API_LIST_RECIEVED';
 export const ADDING_NOTE = 'ADDING_NOTE';
+export const ATTACHING_POCKET_ITEM = 'ATTACHING_POCKET_ITEM';
 export const CREDENTIALS_ACCEPTED = 'CREDENTIALS_ACCEPTED';
 export const DELETING_NOTE = 'DELETING_NOTE';
 export const DEL_NOTES_RECIEVED = 'DEL_NOTES_RECIEVED';
@@ -23,12 +24,38 @@ export const NOTES_RECIEVED = 'NOTES_RECIEVED';
 export const NOTE_DELETED = 'NOTE_DELETED';
 export const NOTE_EDITED = 'NOTE_EDITED';
 export const POCKET_LIST_RECIEVED = 'POCKET_LIST_RECIEVED';
+export const POCKET_ITEM_ATTACHED = 'POCKET_ITEM_ATTACHED';
 export const SENDING_CREDENTIALS = 'SENDING_CREDENTIALS';
 export const SENDING_NEW_USERDATA = 'SENDING_NEW_USERDATA';
 export const SORT_NOTE = 'SORT_NOTE';
 export const SLACK_STARS_RECIEVED = 'SLACK_STARS_RECIEVED';
 export const USERDATA_RECIEVED = 'USER_RECIEVED';
 export const USER_CREATED = 'USER_CREATED';
+
+export const attachPocketItem = () => {
+  return function(dispatch){
+    if(localStorage.getItem('JWT')){
+      dispatch({type: ATTACHING_POCKET_ITEM});
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token, 
+        }
+      }
+      axios.put('http://localhost:3333/api/pocket/attach', {attached_to:[1,2]} ,authHeader)
+      .then(res => {
+
+        dispatch({type: POCKET_ITEM_ATTACHED, payload: res.data})
+      })
+      .catch(err => {
+        console.log("error returnd from pocket/attach endpoint")
+        dispatch({type: ERROR, payload: err})
+      })
+    } else {
+      dispatch({type: ERROR, payload: 'there was no token found'})      
+    }
+  }
+}
 
 export const getDeletedNotes = () => {
   return function(dispatch){

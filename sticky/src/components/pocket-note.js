@@ -9,7 +9,7 @@ const PocketNote = (props) => {
             props.connectDragSource(
                 <div>
                     <PocketNoteDiv 
-                        type="link" 
+                        type="pocket" 
                         style={{
                             opacity: props.isDragging ? '0.25' : '1',
                             border: props.isDragging ? '1px dashed gray': '1px solid black'}}
@@ -33,48 +33,39 @@ const PocketNote = (props) => {
  const sourceObj = {
     
     beginDrag(props) {
-        if(props.type === "link"){
+        if(props.type === "pocket"){
+            const pocketId = props.pocketItem.item_id
+            const type = props.type
+            return ({
+                pocketId, type //this gets sent to the drop item 
+            });
+        } 
+        else {
             const pocketId = props.pocketItem.item_id
             const type = props.type
             return ({
                 pocketId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
             });
-        } else {
-            const childId = props.link.id
-            const type = props.type
-            return ({
-                childId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
-            });
         }
     },
-
+    
     endDrag(props, monitor) {// this takes props mounted on beginDrag
         if(!monitor.didDrop()){
             return ;
         }
-        // let note = {}
-        if(props.type === "link"){
-            // let note = props.star
-            const link = props.star.message;
-            let addSlackLink = {
-                slack_text: link.text,
-                slack_type: link.type,
-                slack_user: link.user,
-                URL: link.permalink,
-                API: 'slack',
-                isLink: true,
-            }
-            const selfType = props.type
-            const parentId = monitor.getDropResult();
-            props.onDrop(addSlackLink, selfType, parentId.targetId);
+
+        let attached_to = props.pocketItem.attached_to;
+        let target_id = monitor.getDropResult();
+        target_id = target_id.targetId
+        console.log("end Drag pocket, attached_to", attached_to, "target_id", target_id)
+        let newAttached;
+        if(attached_to === null){   
+            newAttached = [target_id]
         } else {
-            const childId = props.link.id
-            console.log(childId)
-            // const selfType = props.type
-            const parent = monitor.getDropResult();
-            console.log(parent)
-            props.onDrop(childId, parent.type, parent.targetId)   
+            newAttached = attached_to.push(target_id)
         }
+        console.log(newAttached, "new_attached", "target_id", target_id)
+        props.attachPocketItem(newAttached, target_id)
     },
   };
 

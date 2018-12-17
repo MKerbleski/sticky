@@ -203,7 +203,9 @@ class App extends Component {
       //source_id for slack notes contains all note properties
       link.parent_id = target_id
       this.newNote(link)
-    }    
+    } else if (type === "pocket"){
+      console.log("pocket item dropped, and not picked up")
+    }
   }
 
   redirect = (route) => {

@@ -1,6 +1,7 @@
 import {
   ADDING_NOTE,
   API_LIST_RECIEVED,
+  ATTACHING_POCKET_ITEM,
   CREDENTIALS_ACCEPTED,
   DELETING_NOTE,
   DEL_NOTES_RECIEVED,
@@ -22,6 +23,7 @@ import {
   NOTE_EDITED,
   NOTES_RECIEVED,
   POCKET_LIST_RECIEVED,
+  POCKET_ITEM_ATTACHED,
   SENDING_CREDENTIALS,
   SENDING_NEW_USERDATA,
   SLACK_STARS_RECIEVED,
@@ -45,6 +47,14 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ATTACHING_POCKET_ITEM:
+      return Object.assign({}, state, {
+        attachingPocketItem: true,
+      })
+    case POCKET_ITEM_ATTACHED:
+      return Object.assign({}, state, {
+        attachingPocketItem: false,
+      })
     case FETCHING_API_LIST:
       return Object.assign({}, state, {
         fetchingApiList: true,
