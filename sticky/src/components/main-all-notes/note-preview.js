@@ -18,8 +18,13 @@ const targetObj = {
 
      const targetId = props.layerOne.id;
      const type = props.type;
+     const pocket_items_attached = props.layerOne.pocket_items_attached;
+     const slack_items_attached = props.layerOne.slack_items_attached;
      return ({
-         targetId, type
+        targetId,
+        type,
+        slack_items_attached,
+        pocket_items_attached,
      });
  }
  },
@@ -90,6 +95,7 @@ class NotePreview extends React.Component {
   }
   
   render(props){
+    console.log(this.props.layerOne, "layerOne")
       const {
           connectDragSource, 
           connectDropTarget, 
