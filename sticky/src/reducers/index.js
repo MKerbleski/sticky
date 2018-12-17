@@ -30,6 +30,7 @@ import {
   SORT_NOTE,
   USER_CREATED,
   USERDATA_RECIEVED,
+
 } from '../actions';
 
 const initialState = {
@@ -47,9 +48,11 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+
     case ATTACHING_POCKET_ITEM:
       return Object.assign({}, state, {
         attachingPocketItem: true,
+        refreshNotes: true,
       })
     case POCKET_ITEM_ATTACHED:
       return Object.assign({}, state, {
@@ -138,6 +141,7 @@ export const reducer = (state = initialState, action) => {
     case FETCHING_NOTES:
       return Object.assign({}, state, {
         fetchingNotes: true,
+        refreshNotes: false,
       })
     case NOTES_RECIEVED:
       return Object.assign({}, state, {

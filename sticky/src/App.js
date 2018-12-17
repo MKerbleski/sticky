@@ -40,6 +40,13 @@ class App extends Component {
     }
   }
 
+  componentWillReceiveProps(){
+    console.log("cwrp", this.props.state.refreshNotes)
+    if(this.props.state.refreshNotes === true){
+      this.props.getNotes()
+    }
+  }
+
   changeParent = (source_id, target_id) => {
     if(source_id !== target_id){
         this.editNote({id: source_id, parent_id: target_id})
