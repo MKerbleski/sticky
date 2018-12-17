@@ -32,7 +32,7 @@ export const SLACK_STARS_RECIEVED = 'SLACK_STARS_RECIEVED';
 export const USERDATA_RECIEVED = 'USER_RECIEVED';
 export const USER_CREATED = 'USER_CREATED';
 
-export const attachPocketItem = () => {
+export const attachPocketItem = (newAttached, sticky_note_id) => {
   return function(dispatch){
     if(localStorage.getItem('JWT')){
       dispatch({type: ATTACHING_POCKET_ITEM});
@@ -42,13 +42,14 @@ export const attachPocketItem = () => {
           Authorization: token, 
         }
       }
-      axios.put('http://localhost:3333/api/pocket/attach', {attached_to:[1,2]} ,authHeader)
+      axios.put(`http://localhost:3333/api/notes/${sticky_note_id}`,(newAttached), authHeader 
+      ) 
       .then(res => {
 
         dispatch({type: POCKET_ITEM_ATTACHED, payload: res.data})
       })
       .catch(err => {
-        console.log("error returnd from pocket/attach endpoint")
+        console.log("error returnd from notes/edit endpoint")
         dispatch({type: ERROR, payload: err})
       })
     } else {

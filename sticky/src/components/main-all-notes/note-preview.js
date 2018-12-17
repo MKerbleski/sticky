@@ -18,7 +18,13 @@ const targetObj = {
 
      const targetId = props.layerOne.id;
      const type = props.type;
-     const pocket_items_attached = props.layerOne.pocket_items_attached;
+     let pocket_items_attached;
+     console.log(props.layerOne)
+    //  if(props.layerOne.pocket_items_attached){
+    // } else {
+    //   pocket_items_attached = null;
+    // }
+    pocket_items_attached = props.layerOne.pocket_items_attached;
      const slack_items_attached = props.layerOne.slack_items_attached;
      return ({
         targetId,

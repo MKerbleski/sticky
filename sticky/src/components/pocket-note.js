@@ -53,20 +53,23 @@ const PocketNote = (props) => {
         if(!monitor.didDrop()){
             return ;
         }
-        let pocket_item_id = props.pocketItem.pocket_id;
-        let sticky_note_attached_pocket_items;
-        let sticky_note_id = monitor.getDropResult();
+        console.log(props.pocketItem)
+        let pocket_item_id = props.pocketItem.id;
+        let target_info = monitor.getDropResult();
+        console.log(target_info)
         //need to extract pocket_items_attached off notes
-        sticky_note_id = sticky_note_id.targetId
-        console.log("end Drag pocket, attached_to", sticky_note_attached_pocket_items, "sticky_note_id", sticky_note_id)
+        let sticky_note_id = target_info.targetId
+        let attached_pocket_items = target_info.pocket_items_attached
+        console.log("end Drag pocket, attached_to", attached_pocket_items, "sticky_note_id", sticky_note_id)
         let newAttached;
-        if(sticky_note_attached_pocket_items === null){   
+        if(attached_pocket_items === null){   
             newAttached = [pocket_item_id]
         } else {
-            newAttached = sticky_note_attached_pocket_items.push(pocket_item_id)
+            newAttached = attached_pocket_items + `,${pocket_item_id}`
         }
         console.log(newAttached, "new_attached", "sticky_note_id", sticky_note_id)
-        props.attachPocketItem(newAttached, sticky_note_id)
+        let noteEdit = {pocket_items_attached: newAttached}
+        props.attachPocketItem(noteEdit, sticky_note_id)
     },
   };
 
