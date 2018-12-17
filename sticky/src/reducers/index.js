@@ -36,6 +36,7 @@ const initialState = {
   addingNote: false,
   noteAdded: false,
   fetchingNotes: false,
+  fetchingPocketList: false,
   notesRecieved: false,
   status: '',
   error: null,
@@ -157,11 +158,11 @@ export const reducer = (state = initialState, action) => {
     case POCKET_LIST_RECIEVED:
       return Object.assign({}, state, {
         pocketList: action.payload.pocketList,
-        gettingSlackStars: false
+        fetchingPocketList: false
       })
     case FETCHING_POCKET_LIST:
       return Object.assign({}, state, {
-        gettingSlackStars: true
+        fetchingPocketList: true
       })
     case DELETING_NOTE:
       return Object.assign({}, state, {

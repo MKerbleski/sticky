@@ -4,7 +4,7 @@ import {DragSource} from 'react-dnd';
 // import ReactMarkdown from 'react-markdown';
 
 const PocketNote = (props) => {
-    if(props.pocket){
+    if(props.pocketItem){
         return (
             props.connectDragSource(
                 <div>
@@ -15,11 +15,11 @@ const PocketNote = (props) => {
                             border: props.isDragging ? '1px dashed gray': '1px solid black'}}
                     >
                         <div className="pocket-note-text">
-                            <p>{props.pocket.given_title}</p>
+                            <p>{props.pocketItem.given_title}</p>
                         </div> 
 
                         <div className="pocket-note-link">
-                            <a src={props.pocket.given_url}>Link</a>
+                            <a target="_blank" href={props.pocketItem.given_url}>Link</a>
                         </div> 
                     </PocketNoteDiv>
                 </div>
@@ -34,10 +34,10 @@ const PocketNote = (props) => {
     
     beginDrag(props) {
         if(props.type === "link"){
-            const {link} = props.star
+            const pocketId = props.pocketItem.item_id
             const type = props.type
             return ({
-                link, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
+                pocketId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
             });
         } else {
             const childId = props.link.id

@@ -12,9 +12,9 @@ class PocketList extends Component {
     render(){
         return(
             <PocketListDiv> 
-                PocketList Div!
-                {this.props.state.pocketList ? this.props.state.pocketList.map(pocket => {
-                        return <PocketNote type="link" onDrop={this.props.onDrop} key={pocket.item_id} pocket={pocket} />
+                {this.props.state.fetchingPocketList ? <p>fetching pocket list. The first time connecting can take up to a couple minutes.</p> : null }
+                {this.props.state.pocketList ? this.props.state.pocketList.map(pocketItem => {
+                        return <PocketNote type="link" onDrop={this.props.onDrop} key={pocketItem.item_id} pocketItem={pocketItem} />
                 }): <p>loading...</p>} 
             </PocketListDiv>
         )
@@ -33,6 +33,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(PocketList)
 
 const PocketListDiv = styled.div`
     border: 1px solid red;
+    color: black;
 `
 
 //     domain_metadata: {name: "Shane Parrish", logo: "https://logo.clearbit.com/fs.blog?size=800", greyscale_logo: "https://logo.clearbit.com/fs.blog?size=800&greyscale=true"}

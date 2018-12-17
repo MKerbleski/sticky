@@ -66,6 +66,7 @@ export default class PocketSettings extends Component {
                     <div style={{background: "lightgreen"}}>
                         <p>pocket is connected </p><button onClick={this.clickHandler}>revoke access button goes here eventually </button>
                         <button name="list" onClick={this.getPocketInfo}>notes</button>
+                        <p>Last accessed list: {}</p>
                     
                     </div> : 
                     <div>
