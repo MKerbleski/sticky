@@ -41,7 +41,7 @@ class App extends Component {
   }
 
   componentWillReceiveProps(){
-    console.log("cwrp", this.props.store.pocket.refreshNotes)
+    // console.log("cwrp", this.props.store.pocket.refreshNotes)
     if(this.props.store.pocket.refreshNotes === true){
       this.props.getNotes()
     }
@@ -73,10 +73,10 @@ class App extends Component {
           Authorization: token,    
         } 
       }
-      console.log(token, id, 'from app')
+      // console.log(token, id, 'from app')
       axios.delete(`http://localhost:3333/api/notes/${id}`, authHeader)
       .then(res => {
-        this.props.history.push('/all-notes')
+        // this.props.history.push('/all-notes')
         this.props.getNotes();
       }).catch(err => console.log(err.message))
     } else {

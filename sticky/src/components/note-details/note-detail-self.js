@@ -88,8 +88,10 @@ const targetObj = {
     if(hover){
         console.log('target props', props, hover)
         const { type, targetId } = props;
+        const pocket_items_attached = props.note.pocket_items_attached;
+        const slack_items_attached = props.note.slack_items_attached;
         return ({
-            type, targetId
+            type, targetId, pocket_items_attached, slack_items_attached
         });
     }
   }

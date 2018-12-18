@@ -53,10 +53,10 @@ const PocketNote = (props) => {
         if(!monitor.didDrop()){
             return ;
         }
-        console.log(props.pocketItem)
+        // console.log(props.pocketItem)
         let pocket_item_id = props.pocketItem.id;
         let target_info = monitor.getDropResult();
-        console.log(target_info)
+        // console.log(target_info)
         //need to extract pocket_items_attached off notes
         let sticky_note_id = target_info.targetId
         let attached_pocket_items = target_info.pocket_items_attached
@@ -65,24 +65,27 @@ const PocketNote = (props) => {
         
         if(attached_pocket_items === null){   
             newAttached = `${pocket_item_id}`
+            let noteEdit = {pocket_items_attached: newAttached}
+            props.attachPocketItem(noteEdit, sticky_note_id)
         } else {
             let tempArr = attached_pocket_items.split(',')
-            console.log(tempArr)
+            // console.log(tempArr)
             let repeat = tempArr.filter(note => {
-                console.log("inside filter", +note, pocket_item_id)
+                // console.log("inside filter", +note, pocket_item_id)
                 return +note === pocket_item_id
             })
-            console.log(repeat)
+            // console.log(repeat)
             if(repeat.length > 0){
                 //do nothing
-                console.log("REPEAT")
+                console.log("REPEAT no action taken, alert needed")
+                window.alert("item is already attached. No duplicate notes")
             } else {
                 newAttached = attached_pocket_items + `,${pocket_item_id}`
-                console.log(newAttached, "new_attached", "sticky_note_id", sticky_note_id)
+                // console.log(newAttached, "new_attached", "sticky_note_id", sticky_note_id)
+                let noteEdit = {pocket_items_attached: newAttached}
+                props.attachPocketItem(noteEdit, sticky_note_id)
             }
         }
-        let noteEdit = {pocket_items_attached: newAttached}
-        props.attachPocketItem(noteEdit, sticky_note_id)
     },
   };
 

@@ -8,6 +8,7 @@ export const POCKET_ERROR = 'POCKET_ERROR';
 export const ERROR = 'ERROR';
 
 export const attachPocketItem = (newAttached, sticky_note_id) => {
+  console.log("attachedPocketItem", newAttached)
     return function(dispatch){
       if(localStorage.getItem('JWT')){
         dispatch({type: ATTACHING_POCKET_ITEM});
