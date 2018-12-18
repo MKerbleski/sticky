@@ -62,12 +62,25 @@ const PocketNote = (props) => {
         let attached_pocket_items = target_info.pocket_items_attached
         console.log("end Drag pocket, attached_to", attached_pocket_items, "sticky_note_id", sticky_note_id)
         let newAttached;
+        
         if(attached_pocket_items === null){   
-            newAttached = [pocket_item_id]
+            newAttached = `${pocket_item_id}`
         } else {
-            newAttached = attached_pocket_items + `,${pocket_item_id}`
+            let tempArr = attached_pocket_items.split(',')
+            console.log(tempArr)
+            let repeat = tempArr.filter(note => {
+                console.log("inside filter", +note, pocket_item_id)
+                return +note === pocket_item_id
+            })
+            console.log(repeat)
+            if(repeat.length > 0){
+                //do nothing
+                console.log("REPEAT")
+            } else {
+                newAttached = attached_pocket_items + `,${pocket_item_id}`
+                console.log(newAttached, "new_attached", "sticky_note_id", sticky_note_id)
+            }
         }
-        console.log(newAttached, "new_attached", "sticky_note_id", sticky_note_id)
         let noteEdit = {pocket_items_attached: newAttached}
         props.attachPocketItem(noteEdit, sticky_note_id)
     },

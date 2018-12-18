@@ -4,7 +4,6 @@ import {
     SLACK_ERROR
 } from '../actions/slack_actions';
 
-
 const initialState = {    
 }
 

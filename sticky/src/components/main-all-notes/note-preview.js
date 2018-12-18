@@ -71,6 +71,10 @@ class NotePreview extends React.Component {
     }
   }
 
+  componentWillReceiveProps(){
+    console.log("CWRP NotePreview")
+  }
+
   getFirstSen = (text) => {
     // let firstSen = text.substr(0, text.indexOf("."));    
     // or 
@@ -109,7 +113,7 @@ class NotePreview extends React.Component {
   }
   
   render(props){
-    console.log(this.props.layerOne, "layerOne")
+    // console.log(this.props.layerOne, "layerOne")
       const {
           connectDragSource, 
           connectDropTarget, 

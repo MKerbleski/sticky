@@ -41,8 +41,8 @@ class App extends Component {
   }
 
   componentWillReceiveProps(){
-    console.log("cwrp", this.props.store.notes.refreshNotes)
-    if(this.props.store.notes.refreshNotes === true){
+    console.log("cwrp", this.props.store.pocket.refreshNotes)
+    if(this.props.store.pocket.refreshNotes === true){
       this.props.getNotes()
     }
   }

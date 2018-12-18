@@ -5,7 +5,11 @@ import {
     FETCHING_POCKET_LIST,
     POCKET_ERROR,
     ERROR,
- } from '../actions/pocket_actions';
+} from '../actions/pocket_actions';
+
+import {
+    FETCHING_NOTES
+} from '../actions/note_actions'
 
 const initialState = {    
     fetchingPocketList: false,
@@ -13,6 +17,10 @@ const initialState = {
 
 export const pocketReducer = (state = initialState, action) => {
     switch(action.type) {
+        case FETCHING_NOTES:
+            return Object.assign({}, state, {
+                refreshNotes: false
+            })
         case ATTACHING_POCKET_ITEM:
             return Object.assign({}, state, {
                 attachingPocketItem: true,
@@ -20,16 +28,16 @@ export const pocketReducer = (state = initialState, action) => {
             })
         case POCKET_ITEM_ATTACHED:
             return Object.assign({}, state, {
-              attachingPocketItem: false,
+                attachingPocketItem: false,
             })
         case POCKET_LIST_RECIEVED:
             return Object.assign({}, state, {
-              pocketList: action.payload.pocketList,
-              fetchingPocketList: false
+                pocketList: action.payload.pocketList,
+                fetchingPocketList: false
             })
         case FETCHING_POCKET_LIST:
             return Object.assign({}, state, {
-              fetchingPocketList: true
+                fetchingPocketList: true
             })
         case POCKET_ERROR:    
             return Object.assign({}, state, {
