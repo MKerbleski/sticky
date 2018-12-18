@@ -13,6 +13,8 @@ import {
     NOTES_RECIEVED,
     SORT_NOTE,
     NOTE_ERROR,
+    FETCHING_ATTACHED_ITEMS,
+    ATTACHED_ITEMS_RECIEVED
  } from '../actions/note_actions';
 
 
@@ -26,6 +28,15 @@ const initialState = {
 
 export const notesReducer = (state = initialState, action) => {
     switch(action.type) {
+        case FETCHING_ATTACHED_ITEMS:
+            return Object.assign({}, state, {
+                fetchingAttachedItems: true,
+            })
+        case ATTACHED_ITEMS_RECIEVED:
+            return Object.assign({}, state, {
+                fetchingAttachedItems: false,
+                attachedItems: action.payload
+            })
         case FETCHING_DEL_NOTES:
             return Object.assign({}, state, {
                 fetchingDelNotes: true,

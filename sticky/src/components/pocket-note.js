@@ -65,6 +65,7 @@ const PocketNote = (props) => {
         
         if(attached_pocket_items === null){   
             newAttached = `${pocket_item_id}`
+            //SHOULD ALSO ATTACH HOW MANY ARE ON THE NOTES
             let noteEdit = {pocket_items_attached: newAttached}
             props.attachPocketItem(noteEdit, sticky_note_id)
         } else {
@@ -82,6 +83,7 @@ const PocketNote = (props) => {
             } else {
                 newAttached = attached_pocket_items + `,${pocket_item_id}`
                 // console.log(newAttached, "new_attached", "sticky_note_id", sticky_note_id)
+                //SHOULD ALSO ATTACH HOW MANY ARE ON THE NOTES
                 let noteEdit = {pocket_items_attached: newAttached}
                 props.attachPocketItem(noteEdit, sticky_note_id)
             }
