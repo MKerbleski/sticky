@@ -27,9 +27,10 @@ class AllNotes extends Component {
   }
 
   render(props) {    
+    console.log(this.props)
     return (
       <AllNotesDiv>
-        {this.props.notes.length > 0 ? 
+        {this.props.state.store.notes.length > 0 ? 
             <AllNotesBin 
                 type="top" 
                 onDrop={this.props.onDrop} 

@@ -31,6 +31,10 @@ export const SORT_NOTE = 'SORT_NOTE';
 export const SLACK_STARS_RECIEVED = 'SLACK_STARS_RECIEVED';
 export const USERDATA_RECIEVED = 'USER_RECIEVED';
 export const USER_CREATED = 'USER_CREATED';
+export const POCKET_ERROR = 'POCKET_ERROR';
+export const SLACK_ERROR = 'SLACK_ERROR';
+export const USER_ERROR = 'USER_ERROR';
+export const NOTE_ERROR = 'NOTE_ERROR';
 
 
 export const attachPocketItem = (newAttached, sticky_note_id) => {
@@ -50,7 +54,7 @@ export const attachPocketItem = (newAttached, sticky_note_id) => {
       })
       .catch(err => {
         console.log("error returnd from notes/edit endpoint")
-        dispatch({type: ERROR, payload: err})
+        dispatch({type: POCKET_ERROR, payload: err})
       })
     } else {
       dispatch({type: ERROR, payload: 'there was no token found'})      
@@ -68,10 +72,12 @@ export const getDeletedNotes = () => {
           Authorization: token,    
         } 
       }
-      axios.get(`http://localhost:3333/api/notes/del`, authHeader)
-      .then(res => {
+      axios.get(`http://localhost:3333/api/notes/del`, authHeader).then(res => {
         dispatch({type: DEL_NOTES_RECIEVED, payload: res.data})
-      }).catch(err => console.log(err.message))
+      }).catch(err => {
+        dispatch({type: NOTE_ERROR, payload:err.message})
+        console.log(err.message)
+      })
     }else {
       console.log('need to include toekn in request')
     }
@@ -119,7 +125,7 @@ export const getNotes = () =>  {
         dispatch({type: NOTES_RECIEVED, payload: res.data})
       })
       .catch(err => {
-        dispatch({type: ERROR, payload: err})
+        dispatch({type: NOTE_ERROR, payload: err})
       })
     } else {
       dispatch({type: ERROR, payload: 'there was no token found'})      
@@ -143,7 +149,7 @@ export const getLinks = () =>  {
         dispatch({type: LINKS_RECIEVED, payload: res.data})
       })
       .catch(err => {
-        dispatch({type: ERROR, payload: err})
+        dispatch({type: NOTE_ERROR, payload: err})
       })
     } else {
       dispatch({type: ERROR, payload: 'there was no token found'})      
@@ -166,7 +172,7 @@ export const getSlackStars = () =>  {
         dispatch({type: SLACK_STARS_RECIEVED, payload: res.data})
       })
       .catch(err => {
-        dispatch({type: ERROR, payload: err})
+        dispatch({type: SLACK_ERROR, payload: err})
       })
     } else {
       dispatch({type: ERROR, payload: 'there was no token found'})      
@@ -189,7 +195,7 @@ export const getPocketList = () =>  {
         dispatch({type: POCKET_LIST_RECIEVED, payload: res.data})
       })
       .catch(err => {
-        dispatch({type: ERROR, payload: err})
+        dispatch({type: POCKET_ERROR, payload: err})
       })
     } else {
       dispatch({type: ERROR, payload: 'there was no token found'})      
@@ -212,7 +218,7 @@ export const getUserData = (username) =>  {
         dispatch({type: USERDATA_RECIEVED, payload: res.data})
       })
       .catch(err => {
-        dispatch({type: ERROR, payload: err})
+        dispatch({type: USER_ERROR, payload: err})
       })
     } else {
       dispatch({type: ERROR, payload: 'there was no token found'})      
@@ -236,3 +242,5 @@ export const sortNote = (newlySortedArray) => {
 //   let arr = string.split(',')
 //   return arr
 // }
+
+///missing credential logins

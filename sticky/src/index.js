@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import {reducer} from  './reducers';
+import { masterReducer } from  './reducers';
 import axios from 'axios';
 
 import App from './App';
@@ -16,7 +16,7 @@ import Route from 'react-router-dom/Route';
 axios.defaults.withCredentials = false;
 
 
-const store = createStore( reducer,
+const store = createStore( masterReducer,
   //  applyMiddleware(thunk)
    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
    applyMiddleware(thunk, 

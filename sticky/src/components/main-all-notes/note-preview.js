@@ -87,6 +87,14 @@ class NotePreview extends React.Component {
     }
   }
 
+  getNumberOfPocketItems(){
+    console.log(this.props)
+    //turn into array
+    //count array
+    //return count
+    return 1
+  }
+
   getLinksLength = (arr) => {
     // console.log(arr)
     let len = arr.length
@@ -126,6 +134,7 @@ class NotePreview extends React.Component {
                                   <h3 className="note-content-title">       
                                       {this.getFirstWord(this.props.layerOne.textBody)}
                                   </h3>
+                                        <p>{this.getNumberOfPocketItems()}</p>
                                   {this.getLinksLength(this.props.allLinks) > 0 ? 
                                     <div className="note-content-link-count">
                                         {this.getLinksLength(this.props.allLinks)}

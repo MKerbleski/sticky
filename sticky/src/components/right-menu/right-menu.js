@@ -6,7 +6,7 @@ import { AAA } from '../../helpers/availbleApis'
 import { RightMenuDetails } from './index'
 import { 
   rightArrow, 
-  leftArrow} from '../../img'
+  leftArrow, } from '../../img'
 import { getConnectedApis } from '../../actions'
 
 class RightMenu extends Component {
