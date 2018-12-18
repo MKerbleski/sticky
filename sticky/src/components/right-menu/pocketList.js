@@ -12,8 +12,8 @@ class PocketList extends Component {
     render(){
         return(
             <PocketListDiv> 
-                {this.props.state.fetchingPocketList ? <p>fetching pocket list. The first time connecting can take up to a couple minutes.</p> : null }
-                {this.props.state.pocketList ? this.props.state.pocketList.map(pocketItem => {
+                {this.props.store.pocket.fetchingPocketList ? <p>fetching pocket list. The first time connecting can take up to a couple minutes.</p> : null }
+                {this.props.store.pocket.pocketList ? this.props.store.pocket.pocketList.map(pocketItem => {
                         return <PocketNote type="pocket" onDrop={this.props.onDrop} attachPocketItem={this.props.attachPocketItem} key={pocketItem.item_id} pocketItem={pocketItem} />
                 }): <p>loading...</p>} 
             </PocketListDiv>
@@ -22,7 +22,7 @@ class PocketList extends Component {
 }
 
 const mapStateToProps = store => {
-    return {state: store};
+    return {store: store};
 }
   
 const mapDispatchToProps = {

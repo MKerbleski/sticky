@@ -42,6 +42,7 @@ class RightMenu extends Component {
     }
 
     render(){
+      console.log(this.props)
       return (
         <RightMenuDiv>
           {this.state.openDetails ?
@@ -53,8 +54,8 @@ class RightMenu extends Component {
           }
           
           <div className="right-menu-preview">
-            {this.props.state.connectedApis ? AAA.map(apiName => {
-              if(this.props.state.connectedApis[apiName.name] === 1){
+            {this.props.store.user.connectedApis ? AAA.map(apiName => {
+              if(this.props.store.user.connectedApis[apiName.name] === 1){
                 return <img 
                   alt={apiName.alt} 
                   key={apiName.name} 
@@ -85,7 +86,7 @@ class RightMenu extends Component {
 }
 
 const mapStateToProps = store => {
-  return {state: store};
+  return {store: store};
 }
 
 const mapDispatchToProps = {

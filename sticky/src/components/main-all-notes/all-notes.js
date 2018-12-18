@@ -30,12 +30,12 @@ class AllNotes extends Component {
     console.log(this.props)
     return (
       <AllNotesDiv>
-        {this.props.state.store.notes.length > 0 ? 
+        {this.props.store.notes.notes.length > 0 ? 
             <AllNotesBin 
                 type="top" 
                 onDrop={this.props.onDrop} 
-                allNotes={this.props.notes} 
-                allLinks={this.props.links} 
+                allNotes={this.props.store.notes.notes} 
+                allLinks={this.props.store.notes.links} 
                 newNote={this.props.newNote}
                 showNewNote={this.props.showNewNote}
                 redirect={this.props.redirect} /> : 
@@ -47,7 +47,7 @@ class AllNotes extends Component {
 }
 
 const mapStateToProps = store => {
-  return {state: store};
+  return {store: store};
 }
 
 const mapDispatchToProps = {

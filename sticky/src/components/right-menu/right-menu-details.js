@@ -45,7 +45,7 @@ class RightMenuDetails extends Component {
 }
 
 const mapStateToProps = store => {
-    return {state: store};
+    return {store: store};
 }
   
 const mapDispatchToProps = {

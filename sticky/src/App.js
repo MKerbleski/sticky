@@ -41,8 +41,8 @@ class App extends Component {
   }
 
   componentWillReceiveProps(){
-    console.log("cwrp", this.props.state.refreshNotes)
-    if(this.props.state.refreshNotes === true){
+    console.log("cwrp", this.props.store.notes.refreshNotes)
+    if(this.props.store.notes.refreshNotes === true){
       this.props.getNotes()
     }
   }
@@ -132,11 +132,11 @@ class App extends Component {
   }
   
   getNoteDetails = (id) => {
-      return this.props.state.notes.find(note => {return note.id === +id})
+      return this.props.store.notes.notes.find(note => {return note.id === +id})
   }
   
   getParentId = (id) => {
-      let notee =  this.props.state.notes.find(note => {return note.id === +id})
+      let notee =  this.props.store.notes.notes.find(note => {return note.id === +id})
       // console.log(notee)
       if(notee){
         if(notee.parent_id){
@@ -151,7 +151,7 @@ class App extends Component {
 
   getParentColor = (id) => {
       let parent_id = this.getParentId(id)
-      let parent =  this.props.state.notes.find(note => {return note.id === +parent_id})
+      let parent =  this.props.store.notes.notes.find(note => {return note.id === +parent_id})
       if(parent){
           return parent.note_color
       } else {
@@ -220,6 +220,7 @@ class App extends Component {
   }
 
   render(props) {
+    console.log(this.props)
     return (
       <AppDiv>
       
@@ -244,11 +245,11 @@ class App extends Component {
                                   <AllNotes
                                     onDrop={this.onDrop} 
                                     changeParent={this.changeParent}
-                                    notes={this.props.state.notes}
-                                    links={this.props.state.links}
-                                    username={this.props.state.username}
-                                    getNotes={this.props.getNotes}
-                                    getLinks={this.props.getLinks}
+                                    // notes={this.props.state.notes}
+                                    // links={this.props.state.links}
+                                    // username={this.props.state.username}
+                                    // getNotes={this.props.getNotes}
+                                    // getLinks={this.props.getLinks}
                                     showDetailMenu={this.showDetailMenu}
                                     showNewNote={this.state.showNewNote}
                                     newNote={this.newNote}
@@ -263,8 +264,8 @@ class App extends Component {
                             render={ (note) => {
                               return (
                                 <NoteDetailParent
-                                  allNotes={this.props.state.notes}
-                                  allLinks={this.props.state.links}
+                                  allNotes={this.props.store.notes.notes}
+                                  allLinks={this.props.store.notes.links}
                                   note={this.getNoteDetails(note.match.params.note_id)} 
                                   onDrop={this.onDrop} 
                                   changeParent={this.changeParent}
@@ -296,10 +297,11 @@ class App extends Component {
                     </React.Fragment> 
                 </div> {/*   center-display    */}
                 
-                {this.props.state.userData ? <RightMenu 
-                  slackStars={this.props.state.slackStars}
+                {this.props.store.user.userData ? <RightMenu 
+                  // slackStars={this.props.state.slackStars}
+                  // slack={this.props.state.slackToken}
                   onDrop={this.onDrop} 
-                  slack={this.props.state.slackToken} /> : null}
+                   /> : null}
             </div> : 
             <Route path="/welcome/" component={Welcome} />
         }    
@@ -309,7 +311,7 @@ class App extends Component {
 }
 
 const mapStateToProps = store => {
-  return {state: store};
+  return {store: store};
 }
 
 const mapDispatchToProps = {

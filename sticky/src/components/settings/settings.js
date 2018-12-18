@@ -16,9 +16,13 @@ class Settings extends Component {
       this.props.getUserData()
     }    
 
+    componentWillReceiveProps(){
+      console.log("settings updated, should eventually rerender and trigger redux action for initializing api")
+    }
+
     render() {
       // console.log("settings", this.props)
-      const { userData } = this.props.state
+      const { userData } = this.props.store.user
       return (
         <SettingsDiv>
               <h1>settings</h1>
@@ -38,7 +42,7 @@ class Settings extends Component {
 }
 
 const mapStateToProps = store => {
-  return {state: store};
+  return {store: store};
 }
 
 const mapDispatchToProps = {

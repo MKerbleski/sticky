@@ -15,8 +15,8 @@ import {
 
 
 const initialState = {    
-   notes: [],
    failedLoginAttempt: false,
+   userData: {}
 }
 
 export const userReducer = (state = initialState, action) => {

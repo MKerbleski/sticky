@@ -12,7 +12,7 @@ class SlackList extends Component {
     render(){
         return(
             <SlackListDiv> 
-                {this.props.state.slackStars ? this.props.state.slackStars.map(star => {
+                {this.props.store.slack.slackStars ? this.props.store.slack.slackStars.map(star => {
                     if (star.type === "message"){
                         return <SlackNote type="link" onDrop={this.props.onDrop} key={star.date_create} star={star}></SlackNote>
                     } else if (star.type === "channel") {
@@ -27,7 +27,7 @@ class SlackList extends Component {
 }
 
 const mapStateToProps = store => {
-    return {state: store};
+    return {store: store};
 }
   
 const mapDispatchToProps = {
