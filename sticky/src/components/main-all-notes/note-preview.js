@@ -19,7 +19,7 @@ const targetObj = {
      const targetId = props.layerOne.id;
      const type = props.type;
      let pocket_items_attached;
-     console.log(props.layerOne)
+    //  console.log(props.layerOne)
     //  if(props.layerOne.pocket_items_attached){
     // } else {
     //   pocket_items_attached = null;
@@ -53,7 +53,7 @@ const sourceObj = {
     // const  { id }  = monitor.getItem(); 
     const sourceId= props.layerOne.id
     const dropResult = monitor.getDropResult();
-    console.log(sourceId,  dropResult, dropResult.targetId)
+    // console.log(sourceId,  dropResult, dropResult.targetId)
     props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
   },
 };
@@ -72,7 +72,7 @@ class NotePreview extends React.Component {
   }
 
   componentWillReceiveProps(){
-    console.log("CWRP NotePreview")
+    // console.log("CWRP NotePreview")
   }
 
   getFirstSen = (text) => {

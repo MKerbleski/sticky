@@ -311,16 +311,16 @@ class App extends Component {
 }
 
 const mapStateToProps = store => {
-  return {store: store};
+    return {store: store};
 }
 
 const mapDispatchToProps = {
-  getNotes,
-  sortNote,
-  logout,
-  getLinks,
-  getDeletedNotes,
-  getUserData, 
+    getNotes,
+    sortNote,
+    logout,
+    getLinks,
+    getDeletedNotes,
+    getUserData, 
 }
  export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 

@@ -16,8 +16,34 @@ export const ERROR = 'ERROR';
 export const FETCHING_LINKS = 'FETCHING_LINKS';
 export const LINKS_RECIEVED = 'LINKS_RECIEVED';
 
+
+export const FETCHING_ATTACHED_ITEMS = 'FETCHING_ATTACHED_ITEMS';
+export const ATTACHED_ITEMS_RECIEVED = 'ATTACHED_ITEMS_RECIEVED';
+
+export const getAttachedItems = (sticky_note_id) => {
+  return function(dispatch){
+    if(localStorage.getItem('JWT')){
+      dispatch({type: FETCHING_ATTACHED_ITEMS})
+        const token = localStorage.getItem('JWT')
+        const authHeader = {
+          headers: {
+            Authorization: token,    
+          } 
+        }
+        axios.get(`http://localhost:3333/api/notes/attached/${sticky_note_id}`, authHeader).then(res => {
+          dispatch({type: ATTACHED_ITEMS_RECIEVED, payload: res.data})
+        }).catch(err => {
+          dispatch({type: NOTE_ERROR, payload: err.message})
+          console.log(err.message)
+        })
+    } else {
+      console.log('need to include toekn in request')
+    }
+  }
+}
+
 export const getDeletedNotes = () => {
-    return function(dispatch){
+  return function(dispatch){
     if(localStorage.getItem('JWT')){
       dispatch({type: FETCHING_DEL_NOTES})
         const token = localStorage.getItem('JWT')
@@ -32,63 +58,63 @@ export const getDeletedNotes = () => {
           dispatch({type: NOTE_ERROR, payload:err.message})
           console.log(err.message)
         })
-      }else {
-        console.log('need to include toekn in request')
-      }
+    } else {
+      console.log('need to include toekn in request')
     }
   }
+}
 
-  export const getNotes = () =>  {
-    return function(dispatch){
-      if(localStorage.getItem('JWT')){
-        // console.log('token')
-        dispatch({type: FETCHING_NOTES});
-        const token = localStorage.getItem('JWT')
-        const authHeader = {
-          headers: {
-            Authorization: token, 
-          }
+export const getNotes = () =>  {
+  return function(dispatch){
+    if(localStorage.getItem('JWT')){
+      // console.log('token')
+      dispatch({type: FETCHING_NOTES});
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token, 
         }
-        axios.get('http://localhost:3333/api/notes/all', authHeader)
-        .then(res => {
-          dispatch({type: NOTES_RECIEVED, payload: res.data})
-        })
-        .catch(err => {
-          dispatch({type: NOTE_ERROR, payload: err})
-        })
-      } else {
-        dispatch({type: ERROR, payload: 'there was no token found'})      
       }
+      axios.get('http://localhost:3333/api/notes/all', authHeader)
+      .then(res => {
+        dispatch({type: NOTES_RECIEVED, payload: res.data})
+      })
+      .catch(err => {
+        dispatch({type: NOTE_ERROR, payload: err})
+      })
+    } else {
+      dispatch({type: ERROR, payload: 'there was no token found'})      
     }
   }
+}
 
-  export const getLinks = () =>  {
-    return function(dispatch){
-      if(localStorage.getItem('JWT')){
-        // console.log('token')
-        dispatch({type: FETCHING_LINKS});
-        const token = localStorage.getItem('JWT')
-        const authHeader = {
-          headers: {
-            Authorization: token, 
-          }
+export const getLinks = () =>  {
+  return function(dispatch){
+    if(localStorage.getItem('JWT')){
+      // console.log('token')
+      dispatch({type: FETCHING_LINKS});
+      const token = localStorage.getItem('JWT')
+      const authHeader = {
+        headers: {
+          Authorization: token, 
         }
-        axios.get('http://localhost:3333/api/notes/all/links', authHeader)
-        .then(res => {
-          dispatch({type: LINKS_RECIEVED, payload: res.data})
-        })
-        .catch(err => {
-          dispatch({type: NOTE_ERROR, payload: err})
-        })
-      } else {
-        dispatch({type: ERROR, payload: 'there was no token found'})      
       }
+      axios.get('http://localhost:3333/api/notes/all/links', authHeader)
+      .then(res => {
+        dispatch({type: LINKS_RECIEVED, payload: res.data})
+      })
+      .catch(err => {
+        dispatch({type: NOTE_ERROR, payload: err})
+      })
+    } else {
+      dispatch({type: ERROR, payload: 'there was no token found'})      
     }
   }
+}
 
-  export const sortNote = (newlySortedArray) => {
-    return function(dispatch){
-      dispatch({type: SORT_NOTE, payload: newlySortedArray});
-    }
+export const sortNote = (newlySortedArray) => {
+  return function(dispatch){
+    dispatch({type: SORT_NOTE, payload: newlySortedArray});
   }
+}
   
