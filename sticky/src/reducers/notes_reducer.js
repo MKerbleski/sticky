@@ -13,7 +13,7 @@ import {
     NOTES_RECIEVED,
     SORT_NOTE,
     NOTE_ERROR,
- } from '../actions';
+ } from '../actions/note_actions';
 
 
 const initialState = {    

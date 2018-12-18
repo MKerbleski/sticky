@@ -2,7 +2,7 @@ import {
     FETCHING_SLACK_STARS,
     SLACK_STARS_RECIEVED,
     SLACK_ERROR
-} from '../actions';
+} from '../actions/slack_actions';
 
 
 const initialState = {    

@@ -11,8 +11,7 @@ import {
     USER_CREATED,
     USERDATA_RECIEVED,
     USER_ERROR
-} from '../actions';
-
+} from '../actions/user_actions';
 
 const initialState = {    
    failedLoginAttempt: false,
