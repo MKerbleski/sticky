@@ -4,8 +4,8 @@ import {
     POCKET_ITEM_ATTACHED,
     FETCHING_POCKET_LIST,
     POCKET_ERROR,
- } from '../actions';
-
+    ERROR,
+ } from '../actions/pocket_actions';
 
 const initialState = {    
     fetchingPocketList: false,
@@ -35,6 +35,10 @@ export const pocketReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
               pocketError: true,
               pocketErrMsg: action.payload
+            })
+        case ERROR:
+            return Object.assign({}, state, {
+                error: action.payload
             })
         default: 
             return state;

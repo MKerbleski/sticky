@@ -246,7 +246,7 @@ class App extends Component {
                                     onDrop={this.onDrop} 
                                     changeParent={this.changeParent}
                                     // notes={this.props.state.notes}
-                                    // links={this.props.state.links}
+                                    links={this.props.store.notes.links}
                                     // username={this.props.state.username}
                                     // getNotes={this.props.getNotes}
                                     // getLinks={this.props.getLinks}
