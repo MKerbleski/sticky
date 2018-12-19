@@ -36,6 +36,7 @@ class Settings extends Component {
                   </div> :
                   <h6>loading...</h6>
               } 
+              <p>another thing that I would like here is an option to 'delete' remove the pocket item from the list and attach it to the note. so there is only one copy or have redundent copies. There will be a flag on the note that says whether it is used or not.</p>
             </SettingsDiv>
       );
     }

@@ -72,6 +72,7 @@ export default class PocketSettings extends Component {
                     <div>
                         <p>pocket is NOT connected</p><button onClick={this.connectPocket}>Connect to Pocket</button>
                     </div>}
+                    {/* what I want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read... */}
             </PocketSettingsDiv>
         )
     }

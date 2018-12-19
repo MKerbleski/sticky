@@ -15,6 +15,13 @@ class NoteDetailSelf extends React.Component {
         console.log("CDM",this.props.note.id);
         this.props.getAttachedItems(this.props.note.id);
     }
+    
+    componentWillReceiveProps(){
+        console.log("CWRP note-detail-self", this.props)
+        if(this.props.store.pocket.refreshNotes === true){
+            this.props.getAttachedItems(this.props.note.id);
+        }
+    }
 
     render(){
         console.log(this.props)
@@ -54,7 +61,6 @@ class NoteDetailSelf extends React.Component {
                                 {this.props.allLinks ? 
                                     <React.Fragment>
                                     <div>
-                                        
                                       <h5>slack links</h5>
                                       {this.props.allLinks.map(link => {
                                         if (+link.parent_id === +this.props.note.id){

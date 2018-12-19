@@ -69,11 +69,9 @@ const RightMenuDetailsDiv = styled.div`
         max-width: 100px;
         color: black;
     }
-    /* .app-list{
+    .app-list{
         overflow: auto;
-        .slack-card{
-        }
-    } */
+    }
     .connect-apis{
         border: 1px solid purple;
         color: black;
