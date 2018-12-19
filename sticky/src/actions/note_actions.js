@@ -21,6 +21,7 @@ export const ATTACHED_ITEMS_RECIEVED = 'ATTACHED_ITEMS_RECIEVED';
 
 export const getAttachedItems = (sticky_note_id) => {
   return function(dispatch){
+    console.log("getAttachedItems")
     if(localStorage.getItem('JWT')){
       dispatch({type: FETCHING_ATTACHED_ITEMS})
         const token = localStorage.getItem('JWT')

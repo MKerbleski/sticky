@@ -35,7 +35,7 @@ export const notesReducer = (state = initialState, action) => {
         case ATTACHED_ITEMS_RECIEVED:
             return Object.assign({}, state, {
                 fetchingAttachedItems: false,
-                attachedItems: action.payload
+                attachedItems: action.payload,
             })
         case FETCHING_DEL_NOTES:
             return Object.assign({}, state, {

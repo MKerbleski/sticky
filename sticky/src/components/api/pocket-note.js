@@ -16,6 +16,7 @@ const PocketNote = (props) => {
                         {/* flag for whether or not it is attached to a note */}
                         <div className="pocket-note-text">
                             <p>{props.pocketItem.given_title}</p>
+                            <p>{props.pocketItem.given_title}</p>
                         </div> 
 
                         <div className="pocket-note-link">
@@ -53,6 +54,7 @@ const PocketNote = (props) => {
         if(!monitor.didDrop()){
             return ;
         }
+        // IF TYPE == TRASH THAN DELETE ATTACHMENT
         // console.log(props.pocketItem)
         let pocket_item_id = props.pocketItem.id;
         let target_info = monitor.getDropResult();

@@ -17,7 +17,7 @@ const initialState = {
 
 export const pocketReducer = (state = initialState, action) => {
     switch(action.type) {
-        //this is here to turn off refresh Notes
+        //this is here (in this reducer) to turn off refresh Notes
         case FETCHING_NOTES:
             return Object.assign({}, state, {
                 refreshNotes: false

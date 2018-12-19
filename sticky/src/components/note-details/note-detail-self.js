@@ -18,7 +18,7 @@ class NoteDetailSelf extends React.Component {
     
     componentWillReceiveProps(){
         // console.log("CWRP note-detail-self", this.props)
-        if(this.props.store.pocket.refreshNotes === true){
+        if(this.props.store.pocket.tes === true){
             this.props.getAttachedItems(this.props.note.id);
         }
     }
