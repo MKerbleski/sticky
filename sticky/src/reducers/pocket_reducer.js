@@ -25,11 +25,11 @@ export const pocketReducer = (state = initialState, action) => {
         case ATTACHING_POCKET_ITEM:
             return Object.assign({}, state, {
                 attachingPocketItem: true,
-                refreshNotes: true,
             })
         case POCKET_ITEM_ATTACHED:
             return Object.assign({}, state, {
                 attachingPocketItem: false,
+                refreshNotes: true,
             })
         case POCKET_LIST_RECIEVED:
             return Object.assign({}, state, {

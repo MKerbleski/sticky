@@ -13,8 +13,10 @@ const targetObj = {
       if(hover){//this disables layer one droping if there is a nested child
         const targetId = props.layerOne.id;
         const type = props.type;
+        const pocket_items_attached = props.layerOne.pocket_items_attached;
+        const slack_items_attached = props.layerOne.slack_items_attached;
         return ({
-            targetId, type
+            targetId, type, pocket_items_attached, slack_items_attached
         });
     }
   },

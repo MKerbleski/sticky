@@ -10,12 +10,12 @@ import LayerThreeSource from "./note-detail-great-grand-child"
 
  const targetObj = {
      drop(props) {
-        console.log(props.hover)
         const targetId = props.layerTwo.id;
         const type = props.type
-        console.log('L2-targetId: ', targetId)
+        const pocket_items_attached = props.layerTwo.pocket_items_attached;
+        const slack_items_attached = props.layerTwo.slack_items_attached;
         return ({
-            targetId, type
+            targetId, type, pocket_items_attached, slack_items_attached
         });
 
     }

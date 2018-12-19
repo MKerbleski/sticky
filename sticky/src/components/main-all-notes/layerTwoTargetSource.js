@@ -9,8 +9,13 @@ const targetObj = {
     drop(props) {
         const targetId = props.layerTwo.id;
         const type = props.type
+        const pocket_items_attached = props.layerTwo.pocket_items_attached;
+        const slack_items_attached = props.layerTwo.slack_items_attached;
         return ({
-            targetId, type
+            targetId,
+            type,
+            slack_items_attached,
+            pocket_items_attached,
         });
     }
 }

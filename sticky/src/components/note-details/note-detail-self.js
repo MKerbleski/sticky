@@ -12,19 +12,19 @@ import { getAttachedItems } from '../../actions'
 
 class NoteDetailSelf extends React.Component {
     componentDidMount(){
-        console.log("CDM",this.props.note.id);
+        // console.log("CDM",this.props.note.id);
         this.props.getAttachedItems(this.props.note.id);
     }
     
     componentWillReceiveProps(){
-        console.log("CWRP note-detail-self", this.props)
+        // console.log("CWRP note-detail-self", this.props)
         if(this.props.store.pocket.refreshNotes === true){
             this.props.getAttachedItems(this.props.note.id);
         }
     }
 
     render(){
-        console.log(this.props)
+        // console.log(this.props)
         return (
             this.props.connectDropTarget(
                 <div className="note-detail-self-container">{/* THIS IS ON PREVIOUS COMPONENT */}
