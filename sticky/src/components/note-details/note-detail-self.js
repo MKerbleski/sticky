@@ -6,6 +6,7 @@ import { NoteDetailChild } from '../index.js';
 import { connect } from 'react-redux';
 
 import SlackNote from '../slack-note.js'
+import PocketNote from '../pocket-note.js'
 import NoteDetailBody from './note-detail-body.js';
 import { getAttachedItems } from '../../actions'
 
@@ -16,6 +17,7 @@ class NoteDetailSelf extends React.Component {
     }
 
     render(){
+        console.log(this.props)
         return (
             this.props.connectDropTarget(
                 <div className="note-detail-self-container">{/* THIS IS ON PREVIOUS COMPONENT */}
@@ -51,7 +53,9 @@ class NoteDetailSelf extends React.Component {
                             <div className="note-detail-right">
                                 {this.props.allLinks ? 
                                     <React.Fragment>
-                                      <h5>media links</h5>
+                                    <div>
+                                        
+                                      <h5>slack links</h5>
                                       {this.props.allLinks.map(link => {
                                         if (+link.parent_id === +this.props.note.id){
                                             return (
@@ -69,6 +73,15 @@ class NoteDetailSelf extends React.Component {
                                           return null
                                         }
                                       })}{/* map */}
+                                    </div>
+                                    <div>
+
+                                      {this.props.store.notes.attachedItems ? this.props.store.notes.attachedItems.map(item => {
+                                          return (
+                                              <PocketNote key={item.id} pocketItem={item} />
+                                          )
+                                      }) :  null}
+                                    </div>
                                     </React.Fragment>
                                 : <p>no links associated with this note</p>}
                             </div>{/* note-detail-right */}
@@ -84,76 +97,7 @@ class NoteDetailSelf extends React.Component {
               )
         )
     }
-
 }
-
-// const NoteDetailSelf = (props) => (
-//   props.connectDropTarget(
-//     <div className="note-detail-self-container">{/* THIS IS ON PREVIOUS COMPONENT */}
-//         {(props.note) ?
-//           (<NoteDetailSelfDiv 
-//                 color={props.note.note_color}
-//                 className="note-detail" 
-//                 style={{background: props.hover ? 'lightgreen' : null}}
-//             >
-//               <div className="note-detail-main">
-//                 <div className="note-detail-left">
-//                   <NoteDetailBody editNote={props.editNote} note={props.note} />
-//                   <div className="note-detail-children">
-//                     {props.allNotes.map( layerOne => {
-//                         if(layerOne.parent_id === props.note.id){
-//                             return (
-//                                 <NoteDetailChild
-//                                     type="note"
-//                                     onDrop={props.onDrop}
-//                                     changeParent={props.changeParent}
-//                                     key={layerOne.id}
-//                                     layerOne={layerOne}
-//                                     allNotes={props.allNotes}
-//                                     color={layerOne.note_color}
-//                                 />
-//                             )
-//                         } else {
-//                             return null
-//                         }
-//                     })}{/* map */}
-//                   </div>{/* noted-detail-children */}
-//                 </div>{/* note-detail-left */}
-//                 <div className="note-detail-right">
-//                     {props.allLinks ? 
-//                         <React.Fragment>
-//                           <h5>media links</h5>
-//                           {props.allLinks.map(link => {
-//                             if (+link.parent_id === +props.note.id){
-//                                 return (
-//                                   <div  
-//                                     key={link.id} 
-//                                     className="link-source-container">
-//                                       <SlackNote 
-//                                           link={link} 
-//                                           type='note'
-//                                           onDrop={props.onDrop}>
-//                                           text: {link.slack_text}
-//                                       </SlackNote>
-//                                   </div>)
-//                             } else {
-//                               return null
-//                             }
-//                           })}{/* map */}
-//                         </React.Fragment>
-//                     : <p>no links associated with this note</p>}
-//                 </div>{/* note-detail-right */}
-//               </div>{/* note-detail-main */}
-
-//               <div className="note-detail-settings">
-//                   <i className="fas fa-cogs"></i>
-//               </div>{/* note-detail-settings */}
-//           </NoteDetailSelfDiv>
-//         ) :
-//         null}
-//       </div>
-//   )
-// );
 
 const targetObj = {
   hover(props, component){
