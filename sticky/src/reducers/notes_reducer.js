@@ -1,5 +1,5 @@
 import {   
-    ADDING_NOTE,
+    SENDING_NEW_NOTE,
     DELETING_NOTE,
     DEL_NOTES_RECIEVED,
     EDITING_NOTE,
@@ -7,14 +7,15 @@ import {
     FETCHING_NOTES,
     FETCHING_LINKS,
     LINKS_RECIEVED,
-    NOTE_ADDED,
+    NEW_NOTE_ADDED,
     NOTE_DELETED,
     NOTE_EDITED,
     NOTES_RECIEVED,
     SORT_NOTE,
     NOTE_ERROR,
     FETCHING_ATTACHED_ITEMS,
-    ATTACHED_ITEMS_RECIEVED
+    ATTACHED_ITEMS_RECIEVED,
+    CREDENTIAL_ERROR
  } from '../actions/note_actions';
 
 
@@ -28,6 +29,10 @@ const initialState = {
 
 export const notesReducer = (state = initialState, action) => {
     switch(action.type) {
+        case CREDENTIAL_ERROR:
+            return Object.assign({}, state, {
+                credentialError: true,
+            })
         case FETCHING_ATTACHED_ITEMS:
             return Object.assign({}, state, {
                 fetchingAttachedItems: true,
@@ -59,7 +64,6 @@ export const notesReducer = (state = initialState, action) => {
         case FETCHING_NOTES:
             return Object.assign({}, state, {
                 fetchingNotes: true,
-                refreshNotes: false,
             })
         case NOTES_RECIEVED:
             return Object.assign({}, state, {
@@ -68,15 +72,14 @@ export const notesReducer = (state = initialState, action) => {
                 notes: action.payload.allUserNotes,
                 username: action.payload.username
             })
-        case ADDING_NOTE:
+        case SENDING_NEW_NOTE:
             return Object.assign({}, state, {
-                addingNote: true,
+                sendingNewNote: true,
             })
-        case NOTE_ADDED:
+        case NEW_NOTE_ADDED:
             return Object.assign({}, state, {
-                addingNote: false,
+                sendingNewNote: false,
                 noteAdded: true,
-                status: action.payload,
             })    
         case DELETING_NOTE:
             return Object.assign({}, state, {

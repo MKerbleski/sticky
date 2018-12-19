@@ -26,6 +26,8 @@ class AllNotes extends Component {
     }
   }
 
+
+  // -----------------------------this can probably be deleted and merged with all Notes Bin- target--------------------------------------------------//
   render(props) {    
     // console.log(this.props)
     return (
@@ -36,7 +38,7 @@ class AllNotes extends Component {
                 onDrop={this.props.onDrop} 
                 allNotes={this.props.store.notes.notes} 
                 allLinks={this.props.store.notes.links} 
-                newNote={this.props.newNote}
+                // newNote={this.props.newNote}
                 showNewNote={this.props.showNewNote}
                 redirect={this.props.redirect} /> : 
             <NotePreviewNew

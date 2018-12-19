@@ -1,10 +1,9 @@
 import axios from 'axios';
-
-export const ADDING_NOTE = 'ADDING_NOTE';
+export const SENDING_NEW_NOTE = 'SENDING_NEW_NOTE';
 export const DELETING_NOTE = 'DELETING_NOTE';
 export const EDITING_NOTE = 'EDITING_NOTE';
 export const FETCHING_NOTES = 'FETCHING_NOTES';
-export const NOTE_ADDED = 'NOTE_ADDED';
+export const NEW_NOTE_ADDED = 'NEW_NOTE_ADDED';
 export const NOTES_RECIEVED = 'NOTES_RECIEVED';
 export const NOTE_DELETED = 'NOTE_DELETED';
 export const NOTE_EDITED = 'NOTE_EDITED';
@@ -15,13 +14,38 @@ export const NOTE_ERROR = 'NOTE_ERROR';
 export const ERROR = 'ERROR';
 export const FETCHING_LINKS = 'FETCHING_LINKS';
 export const LINKS_RECIEVED = 'LINKS_RECIEVED';
-
 export const FETCHING_ATTACHED_ITEMS = 'FETCHING_ATTACHED_ITEMS';
 export const ATTACHED_ITEMS_RECIEVED = 'ATTACHED_ITEMS_RECIEVED';
+export const CREDENTIAL_ERROR = 'CREDENTIAL_ERROR';
+
+export const newNote = (newNote) => {
+  return function(dispatch){
+      if(localStorage.getItem('JWT')){
+        const token = localStorage.getItem('JWT')
+        const authHeader = {
+          headers: {
+            Authorization: token,    
+          } 
+        }
+        dispatch({type: SENDING_NEW_NOTE})
+        axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
+        .then(res => {
+        // this.props.getLinks();
+          dispatch({type: NEW_NOTE_ADDED})
+          // this.props.history.push('/all-notes')
+          // this.props.getNotes();
+          //this is not necessary because it is called on a different route than /all notes
+        }).catch(err => {
+          console.log(err.message)
+        })
+      } else {
+        dispatch({type: CREDENTIAL_ERROR})
+    }
+  }
+}
 
 export const getAttachedItems = (sticky_note_id) => {
   return function(dispatch){
-    console.log("getAttachedItems")
     if(localStorage.getItem('JWT')){
       dispatch({type: FETCHING_ATTACHED_ITEMS})
         const token = localStorage.getItem('JWT')

@@ -40,13 +40,6 @@ class App extends Component {
     }
   }
 
-  componentWillReceiveProps(){
-    // console.log("cwrp", this.props.store.pocket.refreshNotes)
-    if(this.props.store.pocket.refreshNotes === true){
-      this.props.getNotes()
-    }
-  }
-
   changeParent = (source_id, target_id) => {
     if(source_id !== target_id){
         this.editNote({id: source_id, parent_id: target_id})
@@ -165,25 +158,25 @@ class App extends Component {
     })
   }
 
-  newNote = (newNote) => {
-      if(localStorage.getItem('JWT')){
-        const token = localStorage.getItem('JWT')
-        const authHeader = {
-          headers: {
-            Authorization: token,    
-          } 
-        }
-      axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
-      .then(res => {
-        this.props.getLinks();
-        this.props.history.push('/all-notes')
-        // this.props.getNotes();
-        //this is not necessary because it is called on a different route than /all notes
-      }).catch(err => console.log(err.message))
-    } else {
-      console.log('need to include toekn in request')
-    }
-  }
+  // newNote = (newNote) => {
+  //     if(localStorage.getItem('JWT')){
+  //       const token = localStorage.getItem('JWT')
+  //       const authHeader = {
+  //         headers: {
+  //           Authorization: token,    
+  //         } 
+  //       }
+  //     axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
+  //     .then(res => {
+  //       this.props.getLinks();
+  //       this.props.history.push('/all-notes')
+  //       // this.props.getNotes();
+  //       //this is not necessary because it is called on a different route than /all notes
+  //     }).catch(err => console.log(err.message))
+  //   } else {
+  //     console.log('need to include toekn in request')
+  //   }
+  // }
 
   onDrop(source_id, type, target_id=null){
     if(target_id){
@@ -252,7 +245,7 @@ class App extends Component {
                                     // getLinks={this.props.getLinks}
                                     showDetailMenu={this.showDetailMenu}
                                     showNewNote={this.state.showNewNote}
-                                    newNote={this.newNote}
+                                    // newNote={this.newNote}
                                     redirect={this.redirect} />
                                 )
                             }}

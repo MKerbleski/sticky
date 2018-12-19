@@ -24,7 +24,6 @@ class RightMenu extends Component {
         e.preventDefault();
         switch(e.target.name){
           case "leftArrow": 
-              console.log("leftArrow")
               this.setState({
                 openDetails: true,
                 selectedApp: "slack"
