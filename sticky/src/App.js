@@ -220,7 +220,7 @@ class App extends Component {
   }
 
   render(props) {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <AppDiv>
       

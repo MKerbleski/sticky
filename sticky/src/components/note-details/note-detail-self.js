@@ -12,15 +12,7 @@ import { getAttachedItems } from '../../actions'
 
 class NoteDetailSelf extends React.Component {
     componentDidMount(){
-        // console.log("CDM",this.props.note.id);
         this.props.getAttachedItems(this.props.note.id);
-    }
-    
-    componentWillReceiveProps(){
-        // console.log("CWRP note-detail-self", this.props)
-        if(this.props.store.pocket.tes === true){
-            this.props.getAttachedItems(this.props.note.id);
-        }
     }
 
     render(){

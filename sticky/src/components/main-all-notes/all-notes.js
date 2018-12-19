@@ -27,7 +27,7 @@ class AllNotes extends Component {
   }
 
   render(props) {    
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <AllNotesDiv>
         {this.props.store.notes.notes.length > 0 ? 

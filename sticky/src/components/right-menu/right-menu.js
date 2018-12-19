@@ -20,29 +20,32 @@ class RightMenu extends Component {
         this.props.getConnectedApis()
     }
 
-
     eventHandler = (e) => {
         e.preventDefault();
-        if(e.target.name === "leftArrow"){
-          this.setState({
-            openDetails: true,
-            selectedApp: "slack"
-          })
-        } else if (e.target.name === "rightArrow"){
-          this.setState({
-            openDetails: false,
-            selectedApp: null
-          })
-        } else {
-          this.setState({
-            openDetails: true,
-            selectedApp: e.target.name
-          }) 
-        } 
+        switch(e.target.name){
+          case "leftArrow": 
+              console.log("leftArrow")
+              this.setState({
+                openDetails: true,
+                selectedApp: "slack"
+              })
+              break;
+          case "rightArrow":
+              this.setState({
+                openDetails: false,
+                selectedApp: null
+              })
+              break;
+          default:
+              this.setState({
+                openDetails: true,
+                selectedApp: e.target.name
+              })    
+        }
     }
 
     render(){
-      console.log(this.props)
+      // console.log(this.props)
       return (
         <RightMenuDiv>
           {this.state.openDetails ?
