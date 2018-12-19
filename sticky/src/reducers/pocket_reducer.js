@@ -7,21 +7,12 @@ import {
     ERROR,
 } from '../actions/pocket_actions';
 
-import {
-    FETCHING_NOTES
-} from '../actions/note_actions'
-
 const initialState = {    
     fetchingPocketList: false,
 }
 
 export const pocketReducer = (state = initialState, action) => {
     switch(action.type) {
-        //this is here (in this reducer) to turn off refresh Notes
-        case FETCHING_NOTES:
-            return Object.assign({}, state, {
-                refreshNotes: false
-            })
         case ATTACHING_POCKET_ITEM:
             return Object.assign({}, state, {
                 attachingPocketItem: true,
@@ -29,7 +20,6 @@ export const pocketReducer = (state = initialState, action) => {
         case POCKET_ITEM_ATTACHED:
             return Object.assign({}, state, {
                 attachingPocketItem: false,
-                refreshNotes: true,
             })
         case POCKET_LIST_RECIEVED:
             return Object.assign({}, state, {

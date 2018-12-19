@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAttachedItems } from './note_actions'
+import { getAttachedItems } from './index'
 
 export const ATTACHING_POCKET_ITEM = 'ATTACHING_POCKET_ITEM';
 export const FETCHING_POCKET_LIST = 'FETCHING_POCKET_List';
@@ -24,7 +24,6 @@ export const attachPocketItem = (newAttached, sticky_note_id) => {
         ) 
         .then(res => {
           dispatch({type: POCKET_ITEM_ATTACHED, payload: res.data})
-          // console.log(getAttachedItems)
           dispatch(getAttachedItems(sticky_note_id));
         })
         .catch(err => {
