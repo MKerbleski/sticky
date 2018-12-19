@@ -15,9 +15,10 @@ export {
     NoteDetailGrandChild,
     NoteDetailGreatGrandChild,
     NoteDetailSettings,
+    NoteDetailBody,
+    NoteDetailBodyEdit,
     EditNote,
     DeleteNote,
-
 } from './note-details';
 
 export { 
@@ -42,8 +43,8 @@ export {
 
 export {
     default as PocketNote
-} from './pocket-note';
+} from './api/pocket-note';
 
 export {
     default as SlackNote
-} from './slack-note';
+} from './api/slack-note';

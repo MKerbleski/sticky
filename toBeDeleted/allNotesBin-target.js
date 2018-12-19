@@ -2,7 +2,7 @@ import React from 'react';
 import { DropTarget } from 'react-dnd';
 import { 
     NotePreviewNew, 
-    NotePreview } from './index';
+    NotePreview } from '../sticky/src/components/main-all-notes/index';
 
 class AllNotesBin extends React.Component {
     render(){

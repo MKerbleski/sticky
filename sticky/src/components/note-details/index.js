@@ -4,3 +4,5 @@ export {default as NoteDetailSettings} from './note-detail-settings.js';
 export {default as NoteDetailChild} from './note-detail-child.js';
 export {default as NoteDetailGrandChild} from './note-detail-grand-child.js';
 export {default as NoteDetailGreatGrandChild} from './note-detail-great-grand-child.js';
+export {default as NoteDetailBody} from './note-detail-body.js';
+export {default as NoteDetailBodyEdit} from './note-detail-body-edit.js';

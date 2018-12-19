@@ -5,7 +5,7 @@ import { DragSource } from 'react-dnd';
 
 const PocketNote = (props) => {
     if(props.pocketItem){
-        return (
+        console.log(props)        return (
             props.connectDragSource(
                 <div>
                     <PocketNoteDiv 
@@ -15,8 +15,7 @@ const PocketNote = (props) => {
                             border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
                         {/* flag for whether or not it is attached to a note */}
                         <div className="pocket-note-text">
-                            <p>{props.pocketItem.given_title}</p>
-                            <p>{props.pocketItem.given_title}</p>
+                            {props.pocketItem.given_title === "" ? <p>{props.pocketItem.resolved_title}</p> : <p>{props.pocketItem.given_title}</p>}
                         </div> 
 
                         <div className="pocket-note-link">

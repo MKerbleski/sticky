@@ -28,15 +28,15 @@ class AllNotes extends Component {
     }
   }
 
-
   // -----------------------------this can probably be deleted and merged with all Notes Bin- target--------------------------------------------------//
   render(props) {    
-    console.log(this.props)
+    // console.log(this.props)
     return (
         <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}>
-          <div className="all-notes" 
-          style={{background: this.props.hover ? 'lightgreen' : null}}>
-              {this.props.showNewNote ? <NotePreviewNew newNote={this.props.newNote} /> : null}        
+          <div 
+            className="all-notes" 
+            style={{background: this.props.hover ? 'lightgreen' : null}}>
+              {this.props.showNewNote ? <NotePreviewNew /> : null}        
               {this.props.store.notes.notes.map(layerOne => {
                 if(layerOne.parent_id === null){
                     if(layerOne.isLink === 0){
