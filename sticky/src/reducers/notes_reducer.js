@@ -15,7 +15,8 @@ import {
     NOTE_ERROR,
     FETCHING_ATTACHED_ITEMS,
     ATTACHED_ITEMS_RECIEVED,
-    CREDENTIAL_ERROR
+    CREDENTIAL_ERROR,
+    ERROR_ADDING_NEW_NOTE
  } from '../actions/note_actions';
 
 
@@ -80,6 +81,11 @@ export const notesReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 sendingNewNote: false,
                 noteAdded: true,
+            })    
+        case ERROR_ADDING_NEW_NOTE:
+            return Object.assign({}, state, {
+                sendingNewNote: false,
+                noteAdded: false,
             })    
         case DELETING_NOTE:
             return Object.assign({}, state, {

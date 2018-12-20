@@ -5,7 +5,8 @@ import { DragSource } from 'react-dnd';
 
 const PocketNote = (props) => {
     if(props.pocketItem){
-        console.log(props)        return (
+        // console.log(props)        
+        return (
             props.connectDragSource(
                 <div>
                     <PocketNoteDiv 

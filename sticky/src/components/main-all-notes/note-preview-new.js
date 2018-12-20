@@ -1,5 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { 
+    addNote } from '../../actions'
+
+import { connect } from 'react-redux';
+
 
 class NotePreviewNew extends React.Component {
     constructor(props){
@@ -30,7 +35,12 @@ class NotePreviewNew extends React.Component {
     }
 
     addNote = (e) => {
-        this.props.newNote({textBody: this.state.textBody})
+        e.preventDefault()
+        this.props.addNote({textBody: this.state.textBody})
+        this.setState({
+            textBody: ""
+        })
+        //call to close tab
     }
 
     changeHandler = (e) => {
@@ -55,7 +65,15 @@ class NotePreviewNew extends React.Component {
     }
 }
 
-export default NotePreviewNew;
+const mapStateToProps = store => {
+    return {store: store};
+}
+
+const mapDispatchToProps = {
+    addNote
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotePreviewNew)
 
 const NotePreviewNewDiv = styled.div`
   ${'' /* border: 1px solid blue; */}

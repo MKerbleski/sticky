@@ -17,8 +17,9 @@ export const LINKS_RECIEVED = 'LINKS_RECIEVED';
 export const FETCHING_ATTACHED_ITEMS = 'FETCHING_ATTACHED_ITEMS';
 export const ATTACHED_ITEMS_RECIEVED = 'ATTACHED_ITEMS_RECIEVED';
 export const CREDENTIAL_ERROR = 'CREDENTIAL_ERROR';
+export const ERROR_ADDING_NEW_NOTE = 'ERROR_ADDING_NEW_NOTE';
 
-export const newNote = (newNote) => {
+export const addNote = (newNote) => {
   return function(dispatch){
       if(localStorage.getItem('JWT')){
         const token = localStorage.getItem('JWT')
@@ -28,15 +29,12 @@ export const newNote = (newNote) => {
           } 
         }
         dispatch({type: SENDING_NEW_NOTE})
-        axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
-        .then(res => {
-        // this.props.getLinks();
+        axios.post('http://localhost:3333/api/notes/', (newNote), authHeader).then(res => {
           dispatch({type: NEW_NOTE_ADDED})
-          // this.props.history.push('/all-notes')
-          // this.props.getNotes();
-          //this is not necessary because it is called on a different route than /all notes
+          dispatch(getNotes());
         }).catch(err => {
           console.log(err.message)
+          dispatch({type: ERROR_ADDING_NEW_NOTE})
         })
       } else {
         dispatch({type: CREDENTIAL_ERROR})
