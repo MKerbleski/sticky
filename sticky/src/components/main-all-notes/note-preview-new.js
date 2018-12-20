@@ -40,7 +40,7 @@ class NotePreviewNew extends React.Component {
         this.setState({
             textBody: ""
         })
-        //call to close tab
+        this.props.toggleNewNote();
     }
 
     changeHandler = (e) => {
@@ -51,6 +51,7 @@ class NotePreviewNew extends React.Component {
     }
     
     render(){
+        console.log(this.props)
         return (
             <div className="startObject">
                 <NotePreviewNewDiv >
