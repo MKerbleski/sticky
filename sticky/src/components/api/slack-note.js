@@ -12,39 +12,32 @@ const SlackNote = (props) => {
     }
     if (note){
         return (
-            props.connectDragSource(
-                <div>
-                    <SlackNoteDiv 
-                        type="link" 
-                        style={{
-                            opacity: props.isDragging ? '0.25' : '1',
-                            border: props.isDragging ? '1px dashed gray': '1px solid black'}}
-                    >
-                        <div className="slack-note-text">
-                        <ReactMarkdown>
-                            {note.message ? 
-                                note.message.text : 
-                                note.slack_text
-                            }
-
-                        </ReactMarkdown>
-                        </div> 
-
-                        <div className="slack-note-link">
-                            {note.message ?
-                                    <a target="_blank" 
-                                    href={note.message.permalink}>
-                                    go to Slack
-                                    </a> :
-                                
-                                    <a target="_blank" href={note.URL}>
-                                        go to Slack
-                                    </a>
-                            }
-                        </div> 
-                    </SlackNoteDiv>
-                </div>
-            )
+            <SlackNoteDiv 
+                innerRef={instance => props.connectDragSource(instance)}
+                type="link" 
+                style={{
+                    opacity: props.isDragging ? '0.25' : '1',
+                    border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
+                <div className="slack-note-text">
+                <ReactMarkdown>
+                    {note.message ? 
+                        note.message.text : 
+                        note.slack_text
+                    }
+                </ReactMarkdown>
+                </div> 
+                <div className="slack-note-link">
+                    {note.message ?
+                            <a target="_blank" 
+                            href={note.message.permalink}>
+                            go to Slack
+                            </a> :
+                            <a target="_blank" href={note.URL}>
+                                go to Slack
+                            </a>
+                    }
+                </div> 
+            </SlackNoteDiv>
         )
     } else {
         return null

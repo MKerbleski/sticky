@@ -27,9 +27,8 @@ class AllNotes extends Component {
     }
   }
 
-  // -----------------------------this can probably be deleted and merged with all Notes Bin- target--------------------------------------------------//
   render(props) {    
-    console.log(this.props)
+    // console.log(this.props)
     return (
         <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}>
           <div 

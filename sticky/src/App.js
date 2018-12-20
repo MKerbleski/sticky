@@ -119,7 +119,7 @@ class App extends Component {
         this.props.getNotes();
         this.props.history.push('/all-notes')
       }).catch(err => console.log(err.message))
-    }else {
+    } else {
       console.log('need to include toekn in request')
     }
   }
@@ -184,6 +184,7 @@ class App extends Component {
       //source_id for slack notes contains all note properties
       link.parent_id = target_id
       this.newNote(link)
+      
     } else if (type === "pocket"){
       console.log("pocket item dropped, and not picked up")
     }
@@ -218,7 +219,7 @@ class App extends Component {
                                 return (
                                   <AllNotes
                                     onDrop={this.onDrop} 
-                                    changeParent={this.changeParent}
+                                    // changeParent={this.changeParent}
                                     // notes={this.props.state.notes}
                                     links={this.props.store.notes.links}
                                     // username={this.props.state.username}
@@ -265,7 +266,8 @@ class App extends Component {
                             path="/deleted"
                             render={() => {
                               return (
-                                <Deleted deletedNotes={this.state.deletedNotes} editNote={this.editNote} />
+                                <Deleted 
+                                 editNote={this.editNote} />
                               )
                             }}
                           ></Route>

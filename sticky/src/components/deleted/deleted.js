@@ -46,12 +46,13 @@ class Deleted extends Component {
     }
 
     render(){
+        // console.log(this.props)
         return (
             <DeletedDiv> 
-                {this.props.state.deletedNotes ?
+                {this.props.state.notes.deletedNotes ?
                     <React.Fragment>
                         <h1>this is the deleted div</h1>
-                        {this.props.state.deletedNotes.map(note => {
+                        {this.props.state.notes.deletedNotes.map(note => {
                             return (
                                 <div key={note.id} className="deletedNote">
                                     <li><button id={note.id} onClick={this.restoreNote}>restore</button>{note.textBody} -- {note.id}</li>
@@ -60,7 +61,7 @@ class Deleted extends Component {
                         })}
                     </React.Fragment>
                     : 
-                    null
+                    <p>no deleted notes</p>
                 }
             </DeletedDiv> 
         )
