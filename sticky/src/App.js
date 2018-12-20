@@ -169,7 +169,7 @@ class App extends Component {
     } 
     if(type === "deleteBin"){
       const changes = {
-        isDeleted: true, 
+        is_deleted: true, 
         id: source_id
       }
       this.sendToTrash(changes)
