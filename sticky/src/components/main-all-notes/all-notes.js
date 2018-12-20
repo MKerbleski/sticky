@@ -20,7 +20,7 @@ class AllNotes extends Component {
 
   componentDidMount(){
     if(localStorage.getItem('JWT')){
-      this.props.getLinks();
+      // this.props.getLinks();
       this.props.getNotes();
     } else {
       this.props.history.push('/welcome/login')
@@ -28,36 +28,41 @@ class AllNotes extends Component {
   }
 
   render(props) {    
-    // console.log(this.props)
+    console.log(this.props.store.notes.notes.length)
     return (
         <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}>
           <div 
             className="all-notes" 
             style={{background: this.props.hover ? 'lightgreen' : null}}>
+              {this.props.store.notes.notes.length > 0 ? null :
+                <div>
+                  <h3>Welcome!</h3>
+                  <p>Click the plus to the left to create a new note</p>
+                </div> }
               {this.props.showNewNote ? <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> : null}        
               {this.props.store.notes.notes.map(layerOne => {
-                if(layerOne.parent_id === null){
-                    if(layerOne.isLink === 0){
-                        return <NotePreview
-                                    type="note"
-                                    onDrop={this.props.onDrop}
-                                    changeParent={this.props.changeParent}
-                                    key={layerOne.id}
-                                    layerOne={layerOne}
-                                    allNotes={this.props.store.notes.notes}
-                                    redirect={this.props.redirect}
-                                    // allLinks={this.props.allLinks.filter(link => {
-                                    //     return (
-                                    //         +link.parent_id === +layerOne.id
-                                    //     )//returns links only liked to parent
-                                    // })}
-                                />
-                    } else {
-                        return <p>link</p>
-                    }
-                } else {
-                    return null
-                    }
+                  if(layerOne.parent_id === null){
+                      {/* if(layerOne.isLink === 0){ */}
+                          return <NotePreview
+                                      type="note"
+                                      onDrop={this.props.onDrop}
+                                      changeParent={this.props.changeParent}
+                                      key={layerOne.id}
+                                      layerOne={layerOne}
+                                      allNotes={this.props.store.notes.notes}
+                                      redirect={this.props.redirect}
+                                      // allLinks={this.props.allLinks.filter(link => {
+                                      //     return (
+                                      //         +link.parent_id === +layerOne.id
+                                      //     )//returns links only liked to parent
+                                      // })}
+                                  />
+                      {/* } else {
+                          return <p>link</p>
+                      } */}
+                  } else {
+                      return null
+                      }
               })}
           </div>
         </AllNotesDiv>

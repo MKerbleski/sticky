@@ -88,8 +88,8 @@ class NoteDetailChild extends React.Component {
                         to={`/note/${this.props.layerOne.id}`}
                         style={{background: this.props.hover ? 'lightgreen' : null}}>
                             <div className="noteContent">
-                              <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.textBody)}</h3>
-                              <p>{this.getFirstSen(this.props.layerOne.textBody)}</p> 
+                              <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.text_body)}</h3>
+                              <p>{this.getFirstSen(this.props.layerOne.text_body)}</p> 
                             </div>
                             <div className="layerTwoContainerAll"  >
                               {this.props.allNotes.map(layerTwo => {

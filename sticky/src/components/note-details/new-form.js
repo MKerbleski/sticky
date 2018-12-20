@@ -8,7 +8,7 @@ export default class NewForm extends Component {
     super(props);
     this.state = {
       // title: "",//commente out 
-      textBody: "",
+      text_body: "",
       //will need to add if public or private
     }
   }
@@ -41,10 +41,10 @@ export default class NewForm extends Component {
           >{this.value}</input> */}
           <textarea
             className="input"
-            id="textBody"
-            name='textBody'
+            id="text_body"
+            name='text_body'
             onChange={this.inputHandler}
-            value={this.state.textBody}
+            value={this.state.text_body}
             placeholder="Note Content"
           >{this.value}</textarea>
           <Link
@@ -73,7 +73,7 @@ const NewNoteDiv = styled.div`
     #title{
       width: 40%;
     }
-    #textBody{
+    #text_body{
       height: 400px;
       text-emphasis: wrap;
       max-width: 90%;

@@ -55,7 +55,7 @@ class Deleted extends Component {
                         {this.props.state.notes.deletedNotes.map(note => {
                             return (
                                 <div key={note.id} className="deletedNote">
-                                    <li><button id={note.id} onClick={this.restoreNote}>restore</button>{note.textBody} -- {note.id}</li>
+                                    <li><button id={note.id} onClick={this.restoreNote}>restore</button>{note.text_body} -- {note.id}</li>
                                 </div>
                             )
                         })}

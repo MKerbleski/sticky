@@ -21,12 +21,13 @@ import {
 } from './components';
 
 import {
-  getNotes,
-  sortNote,
-  logout,
-  getLinks,
-  getDeletedNotes,
-  getUserData,
+    getNotes,
+    addNote,
+    sortNote,
+    logout,
+    getLinks,
+    getDeletedNotes,
+    getUserData,
 } from './actions';
 
 class App extends Component {
@@ -183,8 +184,8 @@ class App extends Component {
       let link = source_id
       //source_id for slack notes contains all note properties
       link.parent_id = target_id
-      this.newNote(link)
-      
+      this.props.addNote(link)
+
     } else if (type === "pocket"){
       console.log("pocket item dropped, and not picked up")
     }
@@ -293,6 +294,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
     getNotes,
+    addNote,
     sortNote,
     logout,
     getLinks,

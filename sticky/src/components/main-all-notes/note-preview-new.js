@@ -10,7 +10,7 @@ class NotePreviewNew extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            textBody: ''
+            text_body: ''
         }
     }
   
@@ -36,9 +36,9 @@ class NotePreviewNew extends React.Component {
 
     addNote = (e) => {
         e.preventDefault()
-        this.props.addNote({textBody: this.state.textBody})
+        this.props.addNote({text_body: this.state.text_body})
         this.setState({
-            textBody: ""
+            text_body: ""
         })
         this.props.toggleNewNote();
     }
@@ -46,7 +46,7 @@ class NotePreviewNew extends React.Component {
     changeHandler = (e) => {
         e.preventDefault();
         this.setState({
-            textBody: e.target.value,
+            text_body: e.target.value,
         })
     }
     
@@ -56,7 +56,7 @@ class NotePreviewNew extends React.Component {
             <div className="startObject">
                 <NotePreviewNewDiv >
                     <form onSubmit={this.addNote}>
-                        <input autoFocus onChange={this.changeHandler} name="textBody" value={this.state.textBody}
+                        <input autoFocus onChange={this.changeHandler} name="text_body" value={this.state.text_body}
                         className="note-link" >{this.value}</input>
                         <button>save note</button>
                     </form>

@@ -11,6 +11,7 @@ const SlackNote = (props) => {
         note = props.link
     }
     if (note){
+        //probably need an up pin unstar button
         return (
             <SlackNoteDiv 
                 innerRef={instance => props.connectDragSource(instance)}

@@ -20,7 +20,7 @@ export const attachPocketItem = (newAttached, sticky_note_id) => {
             Authorization: token,
           }
         }
-        axios.put(`http://localhost:3333/api/notes/${sticky_note_id}`,(newAttached), authHeader 
+        axios.put(`http://localhost:3333/api/notes/${sticky_note_id}`, (newAttached), authHeader 
         ) 
         .then(res => {
           dispatch({type: POCKET_ITEM_ATTACHED, payload: res.data})

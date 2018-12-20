@@ -5,13 +5,13 @@ export default class NoteDetailBodyEdit extends Component {
     constructor(props){
         super(props)
         this.state = {
-            textBody: this.props.note.textBody,
+            text_body: this.props.note.text_body,
         }
     }
 
     handleInput = (e) => {
         this.setState({
-            textBody: e.target.value
+            text_body: e.target.value
         })
     }
 
@@ -20,7 +20,7 @@ export default class NoteDetailBodyEdit extends Component {
         //currently the way that notes are set up the note cannot update unless the page is refreshed. needs to fetched for specific notes when at /note/1 and only get that note or something
         console.log('handleEdit')
         const edit = {
-            textBody: this.state.textBody,
+            text_body: this.state.text_body,
             id: this.props.note.id
         }
         this.props.editNote(edit)
@@ -35,7 +35,7 @@ export default class NoteDetailBodyEdit extends Component {
                         wrap="hard" 
                         type='textarea' 
                         onChange={this.handleInput} 
-                        value={this.state.textBody} name='textBody'>{this.value}</input>
+                        value={this.state.text_body} name='text_body'>{this.value}</input>
                     <button>save</button>
                 </form>
             </NoteDetailBodyEditDiv>

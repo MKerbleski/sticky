@@ -136,7 +136,7 @@ class NotePreview extends React.Component {
                           <div className="note-content">
                               <div className="note-content-header">
                                   <h3 className="note-content-title">       
-                                      {this.getFirstWord(this.props.layerOne.textBody)}
+                                      {this.getFirstWord(this.props.layerOne.text_body)}
                                   </h3>
                                         <p>{this.getNumberOfPocketItems()}</p>
                                   {this.getLinksLength(this.props.allLinks) > 0 ? 
@@ -146,7 +146,7 @@ class NotePreview extends React.Component {
                                   }
                               </div>
                               <p>
-                                  {this.getFirstSen(this.props.layerOne.textBody)}
+                                  {this.getFirstSen(this.props.layerOne.text_body)}
                               </p> 
                           </div>
                             <div className="layerTwoContainerAll"  >
@@ -316,7 +316,7 @@ const NotePreviewDiv = styled.div`
 //
 //                     <div className="notTags">
 //                       <h3>{note.title}</h3>
-//                       <p>{note.textBody}</p>
+//                       <p>{note.text_body}</p>
 //                     </div>
 //
 //                     <div className="tags">

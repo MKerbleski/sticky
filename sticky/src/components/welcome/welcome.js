@@ -38,8 +38,8 @@ class Welcome extends Component{
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
             localStorage.setItem('sticky_user_id', res.data.sticky_user_id)
-            if(localStorage.getItem('textBody')){
-                this.newNote({textBody: localStorage.getItem('textBody')})
+            if(localStorage.getItem('text_body')){
+                this.newNote({text_body: localStorage.getItem('text_body')})
             } else {
                 this.props.history.push('/all-notes')
             }
@@ -60,8 +60,8 @@ class Welcome extends Component{
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
             localStorage.setItem('sticky_user_id', res.data.sticky_user_id)
-            if(localStorage.getItem('textBody')){
-                this.newNote({textBody: localStorage.getItem('textBody')})
+            if(localStorage.getItem('text_body')){
+                this.newNote({text_body: localStorage.getItem('text_body')})
             } else {
                 this.props.history.push('/all-notes')
             }
@@ -78,7 +78,7 @@ class Welcome extends Component{
           }
         axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
         .then(res => {
-            localStorage.removeItem('textBody')
+            localStorage.removeItem('text_body')
             this.props.history.push('/all-notes')
             // this.props.getNotes();
             //this is not necessary because it is called on a different route than /all notes
@@ -99,7 +99,7 @@ class Welcome extends Component{
     saveLocalNote = (e) => {
         e.preventDefault();
         console.log(this)
-        localStorage.setItem(`textBody`, this.state.entryNote)
+        localStorage.setItem(`text_body`, this.state.entryNote)
         this.setState({
             entryNote: '',
         })

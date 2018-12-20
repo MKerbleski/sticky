@@ -64,7 +64,7 @@ class NoteDetailGrandChild extends React.Component {
                             style={{background: this.props.hover ? 'lightgreen' : null}}>
                             {/* <h3>{this.props.layerTwo.title}</h3> */}
                             
-                            <h4>{this.props.getFirstWord(this.props.layerTwo.textBody)}</h4>
+                            <h4>{this.props.getFirstWord(this.props.layerTwo.text_body)}</h4>
                             <div className="layerThreeContainerAll">
                                {this.props.allNotes.map(layerThree => {
                                     if (layerThree.parent_id === this.props.layerTwo.id){

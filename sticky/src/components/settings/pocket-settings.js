@@ -35,6 +35,7 @@ export default class PocketSettings extends Component {
 
     getPocketInfo = (e) => {
         e.preventDefault()
+        //start spinning wheel or something... 
         if(localStorage.getItem('JWT')){
             const token = localStorage.getItem('JWT')
             const authHeader = {
@@ -44,7 +45,8 @@ export default class PocketSettings extends Component {
             }
             axios.get(`http://localhost:3333/api/pocket/${e.target.name}`, authHeader)
               .then(res => {
-              console.log(res.data)
+                //stop spinning wheel here...
+                console.log(res.data)
             })
               .catch(err => {
               console.log("error!")

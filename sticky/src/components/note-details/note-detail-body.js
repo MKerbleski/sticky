@@ -10,7 +10,7 @@ class NoteDetailBody extends Component {
         super(props)
         this.state = {
             edit: false,
-            textBody: this.props.note.textBody,
+            text_body: this.props.note.text_body,
         }
     }
 
@@ -34,7 +34,7 @@ class NoteDetailBody extends Component {
                     <div 
                         className="note-detail-body" 
                         onClick={this.handleClick}>
-                          {<ReactMarkdown>{this.props.note.textBody}</ReactMarkdown>}
+                          {<ReactMarkdown>{this.props.note.text_body}</ReactMarkdown>}
                     </div>
                 }
             </NoteDetailBodyDiv>

@@ -16,7 +16,7 @@ const LayerThreeSource = (props) => {
                         //  color: props.didDrop ? "red" : "green"
                         }}>
                        <p>...</p>
-                       {/* <p>{props.getFirstWord(props.layerThree.textBody,1)}</p> */}
+                       {/* <p>{props.getFirstWord(props.layerThree.text_body,1)}</p> */}
                     </LayerThreeDiv>
                 </div>
             )
