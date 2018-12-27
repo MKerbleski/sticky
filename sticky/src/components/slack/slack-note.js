@@ -13,7 +13,6 @@ const SlackNote = (props) => {
         note = props.note
     }
     if (props){
-        console.log(note)
         return (
             <SlackNoteDiv 
                 innerRef={instance => props.connectDragSource(instance)}

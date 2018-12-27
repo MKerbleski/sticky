@@ -39,7 +39,7 @@ export function start(color){
 
 export function apiNote(){
     return `
-    border: 1px solid green;
+    border: 3px solid green;
     font-size: 13px;
     box-sizing: border-box;
     width: 90%;

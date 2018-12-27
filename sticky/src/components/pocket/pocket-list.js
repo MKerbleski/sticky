@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { PocketNote } from '../index.js'
 import { getPocketList, attachPocketItem } from '../../actions'
 import { connect } from 'react-redux';
+import { PocketChannel } from './index.js';
 
 class PocketList extends Component {
     componentDidMount(){
@@ -13,10 +14,9 @@ class PocketList extends Component {
         console.log(this.props)
         return(
             <PocketListDiv> 
-                {this.props.store.pocket.fetchingPocketList ? <p>fetching pocket list. The first time connecting can take up to a couple minutes.</p> : null }
-                {this.props.store.pocket.pocketList ? this.props.store.pocket.pocketList.map(pocketItem => {
-                        return <PocketNote type="pocket" onDrop={this.props.onDrop} attachPocketItem={this.props.attachPocketItem} key={pocketItem.item_id} pocketItem={pocketItem} />
-                }): <p>loading...</p>} 
+            {this.props.store.pocket.fetchingPocketList ? <p>fetching pocket list. The first time connecting can take up to a couple minutes.</p> : null }
+                {this.props.store.pocket.pocketList ? 
+                <PocketChannel onDrop={this.props.onDrop} pocketList={this.props.store.pocket.pocketList} attachPocketItem={this.props.attachPocketItem}/>: <p>loading...</p>} 
             </PocketListDiv>
         )
     }
@@ -36,6 +36,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(PocketList)
 const PocketListDiv = styled.div`
     border: 1px solid red;
     color: black;
+    background: green;
 `
 
 //     domain_metadata: {name: "Shane Parrish", logo: "https://logo.clearbit.com/fs.blog?size=800", greyscale_logo: "https://logo.clearbit.com/fs.blog?size=800&greyscale=true"}

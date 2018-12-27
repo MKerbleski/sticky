@@ -9,24 +9,21 @@ const PocketNote = (props) => {
     if(props.pocketItem){
         // console.log(props)        
         return (
-            props.connectDragSource(
-                <div>
-                    <PocketNoteDiv 
-                        type="pocket" 
-                        style={{
-                            opacity: props.isDragging ? '0.25' : '1',
-                            border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
-                        {/* flag for whether or not it is attached to a note */}
-                        <div className="pocket-note-text">
-                            {props.pocketItem.given_title === "" ? <p>{props.pocketItem.resolved_title}</p> : <p>{props.pocketItem.given_title}</p>}
-                        </div> 
+            <PocketNoteDiv 
+                innerRef={instance => props.connectDragSource(instance)}
+                type="pocket" 
+                style={{
+                    opacity: props.isDragging ? '0.25' : '1',
+                    border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
+                {/* flag for whether or not it is attached to a note */}
+                <div className="pocket-note-text">
+                    {props.pocketItem.given_title === "" ? <p>{props.pocketItem.resolved_title}</p> : <p>{props.pocketItem.given_title}</p>}
+                </div> 
 
-                        <div className="pocket-note-link">
-                            <a target="_blank" href={props.pocketItem.given_url}>Link</a>
-                        </div> 
-                    </PocketNoteDiv>
-                </div>
-            )
+                <div className="pocket-note-link">
+                    <a target="_blank" href={props.pocketItem.given_url}>Link</a>
+                </div> 
+            </PocketNoteDiv>
         )
     } else {
         return null
@@ -107,7 +104,7 @@ const PocketNoteDiv = styled.div`
     ${apiNote()}
     background: lightpink;
     .pocket-note-text{
-        ${'' /* border: 1px solid green; */}
+         border: 1px solid green;
         width: 100%;
         display: flex;
         flex-wrap: wrap;
@@ -116,7 +113,7 @@ const PocketNoteDiv = styled.div`
         margin-bottom: 2px;
     }
     .pocket-note-link{
-        ${'' /* border: 1px solid red; */}
+        border: 1px solid red;
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
