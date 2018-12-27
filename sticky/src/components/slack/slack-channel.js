@@ -15,15 +15,10 @@ const SlackChannel = (props) => {
                 style={{
                     opacity: props.isDragging ? '0.25' : '1',
                     border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
-                    <h3>{props.channel.name}</h3>
+                <h3 className="slack-channel-title">#{props.channel.name}</h3>
                 {props.channel.notes.map(note => {
                     return <SlackNote key={note.uuid} note={note} />
                 })}
-                <div className="slack-channel-text">
-                    <ReactMarkdown>
-                    
-                    </ReactMarkdown>
-                </div> 
             </SlackChannelDiv>
         )
     } else {
@@ -33,19 +28,20 @@ const SlackChannel = (props) => {
 
  const sourceObj = {
     beginDrag(props) {
-        if(props.type === "link"){
-            const {link} = props.star
-            const type = props.type
-            return ({
-                link, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
-            });
-        } else {
-            const childId = props.link.id
-            const type = props.type
-            return ({
-                childId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
-            });
-        }
+        // if(props.type === "link"){
+        //     const {link} = props.star
+        //     const type = props.type
+        //     return ({
+        //         link, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
+        //     });
+        // } else {
+        //     const channel_id = props.link.id
+        //     const type = props.type
+        //     return ({
+        //         childId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
+        //     });
+        // }
+        return props.channel.name
     },
 
     endDrag(props, monitor) {// this takes props mounted on beginDrag
@@ -88,30 +84,24 @@ const SlackChannel = (props) => {
 export default DragSource('item', sourceObj, collect)(SlackChannel);
 
 const SlackChannelDiv = styled.div`
-    border: 1px solid green;
-    font-size: 13px;
+    border: 13px solid green;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     padding: 3px;
+    margin: 3px;
     color: black;
-    margin-left: 28px ;
-    background: #FFFFE5;
-    .slack-channel-text{
-        ${'' /* border: 1px solid green; */}
+    background: white;
+    .slack-channel-title{
+        border: 1px solid green;
+        box-sizing: border-box;
         width: 100%;
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
         overflow: hidden;
         margin-bottom: 2px;
-    }
-    .slack-note-link{
-        ${'' /* border: 1px solid red; */}
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: flex-end;
-
+        margin-top: 0;
+        padding: 2px;
     }
 `;

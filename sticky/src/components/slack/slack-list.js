@@ -41,4 +41,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(SlackList)
 
 const SlackListDiv = styled.div`
     border: 1px solid red;
+    background: maroon;
 `
