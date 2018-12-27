@@ -3,6 +3,8 @@ import React from 'react';
 import { DragSource } from 'react-dnd';
 // import ReactMarkdown from 'react-markdown';
 
+import { apiNote } from '../../styles/styl-utils'
+
 const PocketNote = (props) => {
     if(props.pocketItem){
         // console.log(props)        
@@ -102,14 +104,7 @@ const PocketNote = (props) => {
 export default DragSource('item', sourceObj, collect)(PocketNote);
 
 const PocketNoteDiv = styled.div`
-    border: 1px solid green;
-    font-size: 13px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 3px;
-    color: black;
-    margin-left: 28px ;
+    ${apiNote()}
     background: lightpink;
     .pocket-note-text{
         ${'' /* border: 1px solid green; */}

@@ -10,6 +10,7 @@ class PocketList extends Component {
     }
 
     render(){
+        console.log(this.props)
         return(
             <PocketListDiv> 
                 {this.props.store.pocket.fetchingPocketList ? <p>fetching pocket list. The first time connecting can take up to a couple minutes.</p> : null }

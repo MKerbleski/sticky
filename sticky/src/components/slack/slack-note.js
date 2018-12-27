@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
-import {DragSource} from 'react-dnd';
+import { DragSource } from 'react-dnd';
 import ReactMarkdown from 'react-markdown';
+import { apiNote } from '../../styles/styl-utils'
+
 
 const SlackNote = (props) => {
     let note
@@ -102,14 +104,7 @@ const SlackNote = (props) => {
 export default DragSource('item', sourceObj, collect)(SlackNote);
 
 const SlackNoteDiv = styled.div`
-    border: 1px solid green;
-    font-size: 13px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 3px;
-    color: black;
-    margin-left: 28px ;
+    ${apiNote()}
     background: #FFFFE5;
     .slack-note-text{
         ${'' /* border: 1px solid green; */}

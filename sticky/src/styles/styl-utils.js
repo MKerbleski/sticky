@@ -36,3 +36,18 @@ export function start(color){
     margin: 1px;
     `
 }
+
+export function apiNote(){
+    return `
+    border: 1px solid green;
+    font-size: 13px;
+    box-sizing: border-box;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 3px;
+    color: black;
+    margin: 1px;
+    `
+}
