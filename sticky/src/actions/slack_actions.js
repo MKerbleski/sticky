@@ -15,7 +15,7 @@ export const getSlackStars = () =>  {
             Authorization: token, 
           }
         }
-        axios.get(`http://localhost:3333/api/slack/stars`, authHeader)
+        axios.get(`http://localhost:3333/api/slack/list`, authHeader)
         .then(res => {
           dispatch({type: SLACK_STARS_RECIEVED, payload: res.data})
         })

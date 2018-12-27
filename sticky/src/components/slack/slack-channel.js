@@ -2,43 +2,29 @@ import styled from 'styled-components';
 import React from 'react';
 import {DragSource} from 'react-dnd';
 import ReactMarkdown from 'react-markdown';
+import { SlackNote }from '../index.js'
 
-const SlackNote = (props) => {
-    let note
-    if(props.type === "link"){
-        note = props.star
-    } else {
-        note = props.link
-    }
-    if (note){
+const SlackChannel = (props) => {
+    if (props){
+        console.log(props)
         //probably need an up pin unstar button
         return (
-            <SlackNoteDiv 
+            <SlackChannelDiv 
                 innerRef={instance => props.connectDragSource(instance)}
-                type="link" 
+                type="channel" 
                 style={{
                     opacity: props.isDragging ? '0.25' : '1',
                     border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
-                <div className="slack-note-text">
-                <ReactMarkdown>
-                    {note.message ? 
-                        note.message.text : 
-                        note.slack_text
-                    }
-                </ReactMarkdown>
+                    <h3>{props.channel.name}</h3>
+                {props.channel.notes.map(note => {
+                    return <SlackNote key={note.uuid} note={note} />
+                })}
+                <div className="slack-channel-text">
+                    <ReactMarkdown>
+                    
+                    </ReactMarkdown>
                 </div> 
-                <div className="slack-note-link">
-                    {note.message ?
-                            <a target="_blank" 
-                            href={note.message.permalink}>
-                            go to Slack
-                            </a> :
-                            <a target="_blank" href={note.URL}>
-                                go to Slack
-                            </a>
-                    }
-                </div> 
-            </SlackNoteDiv>
+            </SlackChannelDiv>
         )
     } else {
         return null
@@ -46,7 +32,6 @@ const SlackNote = (props) => {
  }
 
  const sourceObj = {
-    
     beginDrag(props) {
         if(props.type === "link"){
             const {link} = props.star
@@ -70,26 +55,27 @@ const SlackNote = (props) => {
         // let note = {}
         if(props.type === "link"){
             // let note = props.star
-            const link = props.star.message;
-            let addSlackLink = {
-                slack_text: link.text,
-                slack_type: link.type,
-                slack_user: link.user,
-                URL: link.permalink,
-                API: 'slack',
-                isLink: true,
-            }
-            const selfType = props.type
-            const parentId = monitor.getDropResult();
-            props.onDrop(addSlackLink, selfType, parentId.targetId);
-        } else {
-            const childId = props.link.id
-            console.log(childId)
+            // const link = props.star.message;
+            // let addSlackLink = {
+            //     slack_text: link.text,
+            //     slack_type: link.type,
+            //     slack_user: link.user,
+            //     URL: link.permalink,
+            //     API: 'slack',
+            //     isLink: true,
+            // }
             // const selfType = props.type
-            const parent = monitor.getDropResult();
-            console.log(parent)
-            props.onDrop(childId, parent.type, parent.targetId)   
+            // const parentId = monitor.getDropResult();
+            // props.onDrop(addSlackLink, selfType, parentId.targetId);
+        } else {
+            // const childId = props.link.id
+            // console.log(childId)
+            // // const selfType = props.type
+            // const parent = monitor.getDropResult();
+            // console.log(parent)
+            // props.onDrop(childId, parent.type, parent.targetId)   
         }
+        return
     },
   };
 
@@ -99,9 +85,9 @@ const SlackNote = (props) => {
     // didDrop: monitor.didDrop(),
   });
 
-export default DragSource('item', sourceObj, collect)(SlackNote);
+export default DragSource('item', sourceObj, collect)(SlackChannel);
 
-const SlackNoteDiv = styled.div`
+const SlackChannelDiv = styled.div`
     border: 1px solid green;
     font-size: 13px;
     display: flex;
@@ -111,7 +97,7 @@ const SlackNoteDiv = styled.div`
     color: black;
     margin-left: 28px ;
     background: #FFFFE5;
-    .slack-note-text{
+    .slack-channel-text{
         ${'' /* border: 1px solid green; */}
         width: 100%;
         display: flex;

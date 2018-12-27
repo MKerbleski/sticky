@@ -42,9 +42,14 @@ export {
 } from './header'
 
 export {
-    default as PocketNote
-} from './api/pocket-note';
+    PocketNote,
+    PocketSettings,
+    PocketList
+} from './pocket';
 
 export {
-    default as SlackNote
-} from './api/slack-note';
+    SlackNote,
+    SlackChannel,
+    SlackSettings,
+    SlackList
+} from './slack';

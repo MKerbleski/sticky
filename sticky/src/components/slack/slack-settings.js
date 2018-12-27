@@ -69,6 +69,8 @@ export default class SlackSettings extends Component {
                         <button name="users" onClick={this.getSlackInfo}>users</button>
                         <button name="stars" onClick={this.getSlackInfo}>stars</button>
                         <button name="team" onClick={this.getSlackInfo}>team</button>
+                        <button name="sync" onClick={this.getSlackInfo}>sync</button>
+                        <button name="list" onClick={this.getSlackInfo}>list</button>
                     </div> :
                     <div>
                         <p>slack is NOT connected</p><button onClick={this.connectSlack}>Connect to Slack</button>

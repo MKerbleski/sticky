@@ -11,7 +11,7 @@ export const slackReducer = (state = initialState, action) => {
    switch(action.type) {
         case SLACK_STARS_RECIEVED:
             return Object.assign({}, state, {
-                slackStars: action.payload.items,
+                slackStars: action.payload,
                 gettingSlackStars: false
             })
         case FETCHING_SLACK_STARS:
