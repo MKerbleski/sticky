@@ -71,6 +71,7 @@ const RightMenuDetailsDiv = styled.div`
     }
     .app-list{
         overflow: auto;
+        width: 100%;
     }
     .connect-apis{
         border: 1px solid purple;

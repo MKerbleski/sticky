@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
 import { DragSource } from 'react-dnd';
-import p from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 import { apiNote } from '../../styles/styl-utils'
-import moment from 'moment'
+import format from 'date-fns/format'
 
 
 const SlackNote = (props) => {
@@ -13,7 +13,8 @@ const SlackNote = (props) => {
     } else {
         note = props.note
     }
-    let time = note.ts.slice(0, 10)
+    let time = note.ts.slice(0, 10)*1000
+    time = format(time, 'MMM Do YYYY')
     if (props){
         return (
             <SlackNoteDiv 
@@ -30,7 +31,7 @@ const SlackNote = (props) => {
                     </div>
                 </div> 
                 <div className="slack-note-middle">
-                    <p className="slack-text">{note.type === "message" ? note.text : "error at note text"}</p>
+                    <ReactMarkdown className="slack-text">{note.type === "message" ? note.text : "error at note text"}</ReactMarkdown>
                 </div> 
                 <span className="slack-note-bottom">
                     <p className="slack-time">{time}</p>
@@ -117,6 +118,7 @@ const SlackNoteDiv = styled.div`
         border: 1px solid blue;
         width: 100%;
         box-sizing: border-box;
+        overflow: hidden;
     }
     .slack-time{
         margin: 0;
