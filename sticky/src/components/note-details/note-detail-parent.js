@@ -3,48 +3,48 @@ import { DropTarget } from 'react-dnd';
 import { NoteDetailSelf } from '../index.js';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import { start } from '../../styles/styl-utils.js'
+// import { start } from '../../styles/styl-utils.js'
 
 const NoteDetailParent = (props) => (
-    props.connectDropTarget(
-    <div>
-        <NoteDetailParentDiv color={props.parentColor} style={{background: props.hover ? 'lightgreen' : null}}>
-            <Link
-                className="link"
-                to={props.note.parent_id ? `/note/${props.note.parent_id}/` : `/all-notes/`}
-            >back to parent note</Link>
-            <NoteDetailSelf
-                allNotes={props.allNotes}
-                allLinks={props.allLinks}
-                note={props.note} 
-                onDrop={props.onDrop} 
-                changeParent={props.changeParent}
-                targetId={props.note.id}
-                editNote={props.editNote}
-                type="note"
-            />
-        </NoteDetailParentDiv>
-    </div>
-  )
+    <NoteDetailParentDiv 
+        // innerRef={instance => props.connectDropTarget(instance)}
+        color={props.parentColor} style={{background: props.hover ? 'lightgreen' : null}}>
+        <Link
+            className="link"
+            to={props.note.parent_id ? `/note/${props.note.parent_id}/` : `/all-notes/`}
+        >back to parent note</Link>
+        <NoteDetailSelf
+            allNotes={props.allNotes}
+            allLinks={props.allLinks}
+            note={props.note} 
+            onDrop={props.onDrop} 
+            changeParent={props.changeParent}
+            targetId={props.note.id}
+            editNote={props.editNote}
+            type="note"
+        />
+    </NoteDetailParentDiv>
 );
 
 const targetObj = {
   hover(props, component){
-      if(props.hoverShallow){
-          console.log('hoverShallow')
-      }
+    //   if(props.hoverShallow){
+    //       console.log('hoverShallow')
+    //   }
+    return
   },
 
   drop(props, monitor) {
-    const hover = monitor.isOver({shallow:true})
+    // const hover = monitor.isOver({shallow:true})
     
-    if(hover){
-        // console.log('target props', props, hover)
-        const { type, targetId } = props;
-        return ({
-            type, targetId
-        });
-    }
+    // if(hover){
+    //     // console.log('target props', props, hover)
+    //     const { type, targetId } = props;
+    //     return ({
+    //         type, targetId
+    //     });
+    // }
+    return
   }
 }
 

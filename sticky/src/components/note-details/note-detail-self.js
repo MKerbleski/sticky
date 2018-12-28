@@ -2,7 +2,11 @@ import React from 'react';
 import { DropTarget } from 'react-dnd';
 import styled from 'styled-components';
 import { start } from '../../styles/styl-utils.js'
-import { NoteDetailChild, SlackNote, PocketNote, NoteDetailBody } from '../index.js';
+import { 
+    NoteDetailChild, 
+    // SlackNote, 
+    PocketNote, 
+    NoteDetailBody } from '../index.js';
 import { connect } from 'react-redux';
 
 // import SlackNote from '../../../../toBeDeleted/slack-note.js'
@@ -21,15 +25,15 @@ class NoteDetailSelf extends React.Component {
         if(this.props.note){
             return (
                 <NoteDetailSelfDiv 
-                            innerRef={instance => this.props.connectDropTarget(instance)}
-                            color={this.props.note.note_color}
-                            className="note-detail" 
-                            style={{background: this.props.hover ? 'lightgreen' : null}}
-                        >
-                          <div className="note-detail-main">
-                            <div className="note-detail-left">
-                              <NoteDetailBody editNote={this.props.editNote} note={this.props.note} />
-                              <div className="note-detail-children">
+                    innerRef={instance => this.props.connectDropTarget(instance)}
+                    color={this.props.note.note_color}
+                    className="note-detail" 
+                    style={{background: this.props.hover ? 'lightgreen' : null}}
+                >
+                    <div className="note-detail-main">
+                        <div className="note-detail-left">
+                            <NoteDetailBody editNote={this.props.editNote} note={this.props.note} />
+                            <div className="note-detail-children">
                                 {this.props.allNotes.map( layerOne => {
                                     if(layerOne.parent_id === this.props.note.id){
                                         return (
@@ -47,21 +51,21 @@ class NoteDetailSelf extends React.Component {
                                         return null
                                     }
                                 })}{/* map */}
-                              </div>{/* noted-detail-children */}
-                            </div>{/* note-detail-left */}
-                            <div className="note-detail-right">
-                                {this.props.store.notes.attachedItems ? this.props.store.notes.attachedItems.map(item => {
-                                    return (
-                                        <PocketNote key={item.id} pocketItem={item} />
-                                    )
-                                }) :  null}
-                            </div>{/* note-detail-right */}
-                          </div>{/* note-detail-main */}
-            
-                          <div className="note-detail-settings">
-                              <i className="fas fa-cogs"></i>
-                          </div>{/* note-detail-settings */}
-                      </NoteDetailSelfDiv>
+                            </div>{/* noted-detail-children */}
+                        </div>{/* note-detail-left */}
+                        <div className="note-detail-right">
+                            {this.props.store.notes.attachedItems ? this.props.store.notes.attachedItems.map(item => {
+                                return (
+                                    <PocketNote key={item.id} pocketItem={item} />
+                                )
+                            }) :  null}
+                        </div>{/* note-detail-right */}
+                    </div>{/* note-detail-main */}
+    
+                    <div className="note-detail-settings">
+                        <i className="fas fa-cogs"></i>
+                    </div>{/* note-detail-settings */}
+                </NoteDetailSelfDiv>
             )
         } else {
             return (

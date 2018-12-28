@@ -92,11 +92,12 @@ class NotePreview extends React.Component {
   }
 
   getNumberOfPocketItems(){
-    console.log(this.props)
-    //turn into array
-    //count array
-    //return count
-    return 1
+    let arr;
+    if(this.props.layerOne.pocket_items_attached){
+      arr = this.props.layerOne.pocket_items_attached.split(",")
+      return arr.length
+    }
+    return null
   }
 
   getLinksLength = (arr) => {
@@ -113,7 +114,7 @@ class NotePreview extends React.Component {
   }
   
   render(props){
-    // console.log(this.props.layerOne, "layerOne")
+    console.log(this.props.layerOne, "layerOne")
       const {
           connectDragSource, 
           connectDropTarget, 
@@ -125,7 +126,8 @@ class NotePreview extends React.Component {
               connectDragSource(
               connectDropTarget(
                   <div className="startObject" onClick={this.goToNote}>
-                    <NotePreviewDiv color={this.props.layerOne.note_color} >
+                    <NotePreviewDiv 
+                      color={this.props.layerOne.note_color} >
                       <div
                         key={this.props.key}
                         index={this.props.index}
@@ -138,10 +140,9 @@ class NotePreview extends React.Component {
                                   <h3 className="note-content-title">       
                                       {this.getFirstWord(this.props.layerOne.text_body)}
                                   </h3>
-                                        <p>{this.getNumberOfPocketItems()}</p>
-                                  {this.getLinksLength(this.props.allLinks) > 0 ? 
+                                  {this.getNumberOfPocketItems() > 0 ? 
                                     <div className="note-content-link-count">
-                                        {this.getLinksLength(this.props.allLinks)}
+                                        {this.getNumberOfPocketItems()}
                                     </div> : null
                                   }
                               </div>
