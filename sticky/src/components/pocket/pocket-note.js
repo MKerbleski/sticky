@@ -6,8 +6,7 @@ import { DragSource } from 'react-dnd';
 import { apiNote } from '../../styles/styl-utils'
 
 const PocketNote = (props) => {
-    if(props.pocketItem){
-        // console.log(props)        
+    if(props.pocketItem){     
         return (
             <PocketNoteDiv 
                 innerRef={instance => props.connectDragSource(instance)}

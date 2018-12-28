@@ -2,7 +2,7 @@ import React , { Component } from 'react'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown';
 import { start } from '../../styles/styl-utils.js'
-import {withRouter} from 'react-router'
+import { withRouter } from 'react-router'
 import NoteDetailBodyEdit from './note-detail-body-edit.js';
 
 class NoteDetailBody extends Component {

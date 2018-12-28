@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 import React from 'react';
 import {DragSource} from 'react-dnd';
-import ReactMarkdown from 'react-markdown';
 import { PocketNote }from '../index.js'
+import { apiChannel } from '../../styles/styl-utils'
 
 const PocketChannel = (props) => {
     if (props){
-        console.log(props)
-        //probably need an up pin unstar button
+        //probably need an unpin unstar button
         return (
             <PocketChannelDiv 
                 innerRef={instance => props.connectDragSource(instance)}
@@ -85,14 +84,7 @@ const PocketChannel = (props) => {
 export default DragSource('item', sourceObj, collect)(PocketChannel);
 
 const PocketChannelDiv = styled.div`
-    border: 13px solid green;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 3px;
-    margin: 3px;
-    color: black;
-    background: white;
+    ${apiChannel()}
     .pocket-channel-title{
         border: 1px solid green;
         box-sizing: border-box;

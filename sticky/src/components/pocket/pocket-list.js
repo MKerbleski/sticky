@@ -1,6 +1,5 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
-import { PocketNote } from '../index.js'
 import { getPocketList, attachPocketItem } from '../../actions'
 import { connect } from 'react-redux';
 import { PocketChannel } from './index.js';

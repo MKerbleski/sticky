@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 import React from 'react';
 import {DragSource} from 'react-dnd';
-import ReactMarkdown from 'react-markdown';
 import { SlackNote }from '../index.js'
+import { apiChannel } from '../../styles/styl-utils'
 
 const SlackChannel = (props) => {
     if (props){
-        console.log(props)
-        //probably need an up pin unstar button
+        //probably need an unstar button -- to take off stikcy server
         return (
             <SlackChannelDiv 
                 innerRef={instance => props.connectDragSource(instance)}
@@ -84,14 +83,7 @@ const SlackChannel = (props) => {
 export default DragSource('item', sourceObj, collect)(SlackChannel);
 
 const SlackChannelDiv = styled.div`
-    border: 13px solid green;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 3px;
-    margin: 3px;
-    color: black;
-    background: white;
+    ${apiChannel()}
     .slack-channel-title{
         border: 1px solid green;
         box-sizing: border-box;

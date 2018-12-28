@@ -51,3 +51,16 @@ export function apiNote(){
     margin: 1px;
     `
 }
+
+export function apiChannel(){
+    return `
+    border: 13px solid green;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 3px;
+    margin: 3px;
+    color: black;
+    background: white;
+    `
+}
