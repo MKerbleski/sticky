@@ -50,38 +50,11 @@ class NoteDetailSelf extends React.Component {
                               </div>{/* noted-detail-children */}
                             </div>{/* note-detail-left */}
                             <div className="note-detail-right">
-                                {this.props.allLinks ? 
-                                    <React.Fragment>
-                                    <div>
-                                      <h5>slack links</h5>
-                                      {this.props.allLinks.map(link => {
-                                        if (+link.parent_id === +this.props.note.id){
-                                            return (
-                                              <div  
-                                                key={link.id} 
-                                                className="link-source-container">
-                                                  <SlackNote 
-                                                      link={link} 
-                                                      type='note'
-                                                      onDrop={this.props.onDrop}>
-                                                      text: {link.slack_text}
-                                                  </SlackNote>
-                                              </div>)
-                                        } else {
-                                          return null
-                                        }
-                                      })}{/* map */}
-                                    </div>
-                                    <div>
-
-                                      {this.props.store.notes.attachedItems ? this.props.store.notes.attachedItems.map(item => {
-                                          return (
-                                              <PocketNote key={item.id} pocketItem={item} />
-                                          )
-                                      }) :  null}
-                                    </div>
-                                    </React.Fragment>
-                                : <p>no links associated with this note</p>}
+                                {this.props.store.notes.attachedItems ? this.props.store.notes.attachedItems.map(item => {
+                                    return (
+                                        <PocketNote key={item.id} pocketItem={item} />
+                                    )
+                                }) :  null}
                             </div>{/* note-detail-right */}
                           </div>{/* note-detail-main */}
             
