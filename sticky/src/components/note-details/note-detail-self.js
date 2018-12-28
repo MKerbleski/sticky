@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 // import SlackNote from '../../../../toBeDeleted/slack-note.js'
 // import PocketNote from '../../../../toBeDeleted/pocket-note.js'
 // import NoteDetailBody from './note-detail-body.js';
+
 import { getAttachedItems } from '../../actions'
 
 class NoteDetailSelf extends React.Component {
@@ -17,11 +18,10 @@ class NoteDetailSelf extends React.Component {
 
     render(){
         // console.log(this.props)
-        return (
-            this.props.connectDropTarget(
-                <div className="note-detail-self-container">{/* THIS IS ON PREVIOUS COMPONENT */}
-                    {(this.props.note) ?
-                      (<NoteDetailSelfDiv 
+        if(this.props.note){
+            return (
+                <NoteDetailSelfDiv 
+                            innerRef={instance => this.props.connectDropTarget(instance)}
                             color={this.props.note.note_color}
                             className="note-detail" 
                             style={{background: this.props.hover ? 'lightgreen' : null}}
@@ -89,11 +89,12 @@ class NoteDetailSelf extends React.Component {
                               <i className="fas fa-cogs"></i>
                           </div>{/* note-detail-settings */}
                       </NoteDetailSelfDiv>
-                    ) :
-                    null}
-                  </div>
-              )
-        )
+            )
+        } else {
+            return (
+                <p>note-detail-self</p>
+            )
+        }
     }
 }
 
@@ -141,7 +142,7 @@ const NoteDetailSelfDiv = styled.div`
   ${start('red')}
   justify-content: center;
   height: 100%;
-  width: 100%;
+  width: 89%;
   background-color: ${props => props.color};
   ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
   background-color: lightgray;

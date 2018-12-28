@@ -39,7 +39,7 @@ const targetObj = {
     const hover = monitor.isOver({shallow:true})
     
     if(hover){
-        console.log('target props', props, hover)
+        // console.log('target props', props, hover)
         const { type, targetId } = props;
         return ({
             type, targetId
@@ -68,13 +68,6 @@ const NoteDetailParentDiv = styled.div`
     box-sizing: border-box;
     height: 94vh;
     overflow: auto;
-    .note-detail-self-container{
-        ${'' /* THIS IS ON NEXT PAGE */}
-        ${start('green')}
-        height: 100%;
-        background: black;
-        width: 89%;
-    }
     .link {
         ${'' /* border: 1px solid red; */}
         display: flex;
