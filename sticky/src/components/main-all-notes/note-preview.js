@@ -114,7 +114,7 @@ class NotePreview extends React.Component {
   }
   
   render(props){
-    console.log(this.props.layerOne, "layerOne")
+    // console.log(this.props.layerOne, "layerOne")
       const {
           connectDragSource, 
           connectDropTarget, 
@@ -123,10 +123,12 @@ class NotePreview extends React.Component {
           return (
               connectDragSource &&
               connectDropTarget &&
-              connectDragSource(
-              connectDropTarget(
-                  <div className="startObject" onClick={this.goToNote}>
                     <NotePreviewDiv 
+                      onClick={this.goToNote}
+                      innerRef={instance => {
+                        this.props.connectDragSource(instance);
+                        this.props.connectDropTarget(instance)
+                      }}
                       color={this.props.layerOne.note_color} >
                       <div
                         key={this.props.key}
@@ -171,9 +173,6 @@ class NotePreview extends React.Component {
                           </div>                     
                       </div>
                     </NotePreviewDiv>        
-                  </div>
-                  )
-                  )
               )
       } else {
           return (null)
