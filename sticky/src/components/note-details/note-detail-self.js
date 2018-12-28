@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 // import NoteDetailBody from './note-detail-body.js';
 
 import { getAttachedItems } from '../../actions'
+import { SlackNote } from '../slack/index.js';
 
 class NoteDetailSelf extends React.Component {
     componentDidMount(){
@@ -21,7 +22,7 @@ class NoteDetailSelf extends React.Component {
     }
 
     render(){
-        // console.log(this.props)
+        console.log(this.props)
         if(this.props.note){
             return (
                 <NoteDetailSelfDiv 
@@ -54,10 +55,19 @@ class NoteDetailSelf extends React.Component {
                             </div>{/* noted-detail-children */}
                         </div>{/* note-detail-left */}
                         <div className="note-detail-right">
-                            {this.props.store.notes.attachedItems ? this.props.store.notes.attachedItems.map(item => {
-                                return (
-                                    <PocketNote key={item.id} pocketItem={item} />
-                                )
+                            {this.props.store.notes.attachedItems ? 
+                            this.props.store.notes.attachedItems.map(item => {
+                                console.log(item)
+                                if(item.slack_user_id){
+                                    return (
+                                        <SlackNote key={item.uuid} note={item} />
+                                    )
+                                } else {
+                                    return (
+                                        <PocketNote key={item.id} pocketItem={item} />
+                                    )
+                                }
+                                
                             }) :  null}
                         </div>{/* note-detail-right */}
                     </div>{/* note-detail-main */}
