@@ -123,20 +123,19 @@ class NotePreview extends React.Component {
           return (
               connectDragSource &&
               connectDropTarget &&
-                    <NotePreviewDiv 
-                      onClick={this.goToNote}
-                      innerRef={instance => {
-                        this.props.connectDragSource(instance);
-                        this.props.connectDropTarget(instance)
-                      }}
-                      color={this.props.layerOne.note_color} >
+              <NotePreviewDiv 
+                onClick={this.goToNote}
+                innerRef={instance => {
+                  this.props.connectDragSource(instance);
+                  this.props.connectDropTarget(instance)
+                }}
+                color={this.props.layerOne.note_color} >
                       <div
                         key={this.props.key}
                         index={this.props.index}
                         className="note-link"
                         id={this.props.layerOne.id}
-                        style={{background: this.props.hover ? 'lightgreen' : null}}
-                      >
+                        style={{background: this.props.hover ? 'lightgreen' : null}} >
                           <div className="note-content">
                               <div className="note-content-header">
                                   <h3 className="note-content-title">       

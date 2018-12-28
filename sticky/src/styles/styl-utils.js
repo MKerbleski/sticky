@@ -48,7 +48,7 @@ export function apiNote(){
     align-items: flex-end;
     padding: 3px;
     color: black;
-    margin: 1px;
+    margin: 2px;
     `
 }
 
