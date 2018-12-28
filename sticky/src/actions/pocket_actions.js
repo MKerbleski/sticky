@@ -9,7 +9,7 @@ export const POCKET_ERROR = 'POCKET_ERROR';
 export const ERROR = 'ERROR';
 
 export const attachPocketItem = (newAttached, sticky_note_id) => {
-  // console.log("attachedPocketItem", newAttached)
+  console.log("attachedPocketItem", newAttached)
     return function(dispatch){
       if(localStorage.getItem('JWT')){
         dispatch({type: ATTACHING_POCKET_ITEM});
@@ -26,7 +26,7 @@ export const attachPocketItem = (newAttached, sticky_note_id) => {
           dispatch(getAttachedItems(sticky_note_id));
         })
         .catch(err => {
-          console.log("error returnd from notes/edit endpoint")
+          console.log("error returnd from notes/edit endpoint", err)
           dispatch({type: POCKET_ERROR, payload: err})
         })
       } else {

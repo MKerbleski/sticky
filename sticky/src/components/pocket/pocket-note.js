@@ -2,11 +2,10 @@ import styled from 'styled-components';
 import React from 'react';
 import { DragSource } from 'react-dnd';
 // import ReactMarkdown from 'react-markdown';
-
 import { apiNote } from '../../styles/styl-utils'
 
 const PocketNote = (props) => {
-    if(props.pocketItem){     
+    if(props.pocketItem){
         return (
             <PocketNoteDiv 
                 innerRef={instance => props.connectDragSource(instance)}

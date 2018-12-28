@@ -19,7 +19,7 @@ const SlackNote = (props) => {
         return (
             <SlackNoteDiv 
                 innerRef={instance => props.connectDragSource(instance)}
-                type="link"
+                type="slack"
                 style={{
                     opacity: props.isDragging ? '0.25' : '1',
                     border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
@@ -47,48 +47,83 @@ const SlackNote = (props) => {
  const sourceObj = {
     
     beginDrag(props) {
-        if(props.type === "link"){
-            const {link} = props.star
-            const type = props.type
-            return ({
-                link, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
-            });
-        } else {
-            const childId = props.link.id
-            const type = props.type
-            return ({
-                childId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
-            });
-        }
+        const slack_note_id = props.note.id;
+        const type = "slack"
+        return ({ slack_note_id, type })
+        // if(props.type === "slack"){
+        //     const {link} = props.star
+        //     const type = props.type
+        //     return ({
+        //         link, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
+        //     });
+        // } else {
+        //     const childId = props.link.id
+        //     const type = props.type
+        //     return ({
+        //         childId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
+        //     });
+        // }
     },
 
     endDrag(props, monitor) {// this takes props mounted on beginDrag
         if(!monitor.didDrop()){
             return ;
         }
-        // let note = {}
-        if(props.type === "link"){
-            // let note = props.star
-            const link = props.star.message;
-            let addSlackLink = {
-                slack_text: link.text,
-                slack_type: link.type,
-                slack_user: link.user,
-                URL: link.permalink,
-                API: 'slack',
-                isLink: true,
-            }
-            const selfType = props.type
-            const parentId = monitor.getDropResult();
-            props.onDrop(addSlackLink, selfType, parentId.targetId);
+        console.log(props)
+        const slack_item_id = props.note.id;
+        const target_info = monitor.getDropResult();
+        const sticky_note_id = target_info.targetId
+        let attached_slack_items = target_info.slack_items_attached
+        console.log(target_info)
+        console.log("attached_slack_items", attached_slack_items)
+        if(!attached_slack_items){
+            //SHOULD ALSO ATTACH HOW MANY ARE ON THE NOTES
+            let noteEdit = {slack_items_attached: `${slack_item_id}`}
+            props.attachPocketItem(noteEdit, sticky_note_id)
         } else {
-            const childId = props.link.id
-            console.log(childId)
-            // const selfType = props.type
-            const parent = monitor.getDropResult();
-            console.log(parent)
-            props.onDrop(childId, parent.type, parent.targetId)   
+            console.log(attached_slack_items)
+            let tempArr = attached_slack_items.split(',')
+            console.log(tempArr)
+            let repeat = tempArr.filter(note => {
+                console.log("inside filter", +note, slack_item_id)
+                return +note === slack_item_id
+            })
+            console.log(repeat)
+            let newAttached;
+            if(repeat.length > 0){
+                //do nothing
+                console.log("REPEAT no action taken, alert needed")
+                window.alert("item is already attached. No duplicate notes")
+            } else {
+                newAttached = attached_slack_items + `,${slack_item_id}`
+                // console.log(newAttached, "new_attached", "sticky_note_id", sticky_note_id)
+                //SHOULD ALSO ATTACH HOW MANY ARE ON THE NOTES
+                let noteEdit = {slack_items_attached: newAttached}
+                props.attachPocketItem(noteEdit, sticky_note_id)
+            }
         }
+        // if(targetInfo.slack_items_attached)
+        // if(props.type === "link"){
+        //     // let note = props.star
+        //     const link = props.star.message;
+        //     let addSlackLink = {
+        //         slack_text: link.text,
+        //         slack_type: link.type,
+        //         slack_user: link.user,
+        //         URL: link.permalink,
+        //         API: 'slack',
+        //         isLink: true,
+        //     }
+        //     const selfType = props.type
+        //     props.onDrop(addSlackLink, selfType, parentId.targetId);
+        // } else {
+        //     const childId = props.link.id
+        //     console.log(childId)
+        //     // const selfType = props.type
+        //     const parent = monitor.getDropResult();
+        //     console.log(parent)
+        //     props.onDrop(childId, parent.type, parent.targetId)   
+        // }
     },
   };
 

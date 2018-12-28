@@ -26,7 +26,7 @@ class RightMenu extends Component {
           case "leftArrow": 
               this.setState({
                 openDetails: true,
-                selectedApp: "slack"
+                selectedApp: null
               })
               break;
           case "rightArrow":

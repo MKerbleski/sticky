@@ -15,7 +15,7 @@ class RightMenuDetails extends Component {
             case "pocket":
                 return <PocketList />
             default: 
-                return null;
+                return <p>connect an app in settings</p>;
         }
     }
 
@@ -37,7 +37,7 @@ class RightMenuDetails extends Component {
                             </div>
                         </React.Fragment> :
                     
-                        <div className="connect-apis"><Link to='/settings'>please select an app</Link></div>
+                        <div className="connect-apis"><Link to='/settings'>connect app in settings</Link></div>
                 }
             </RightMenuDetailsDiv>           
         )
