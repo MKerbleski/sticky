@@ -4,25 +4,25 @@ import styled from 'styled-components';
 import { start } from '../../styles/styl-utils.js'
 import { 
     NoteDetailChild, 
-    // // SlackNote, 
-    // PocketNote, 
-    NoteDetailBody,
-    AttachedList
-
-} from '../index.js';
+    // SlackNote, 
+    PocketNote, 
+    NoteDetailBody } from '../index.js';
 import { connect } from 'react-redux';
-import { getAttachedItems, attachPocketItem } from '../../actions'
+
+// import SlackNote from '../../../../toBeDeleted/slack-note.js'
+// import PocketNote from '../../../../toBeDeleted/pocket-note.js'
+// import NoteDetailBody from './note-detail-body.js';
+
+import { getAttachedItems } from '../../actions'
+import { SlackNote } from '../slack/index.js';
 
 class NoteDetailSelf extends React.Component {
     componentDidMount(){
-        // this.props.getAttachedItems(this.props.note.id);
-        console.log("CDM NDS")
+        this.props.getAttachedItems(this.props.note.id);
     }
 
-    componentWillReceiveProps(){
-        console.log("CWRP NDS", this.props.note)
-    }
     render(){
+        console.log(this.props)
         if(this.props.note){
             return (
                 <NoteDetailSelfDiv 
@@ -54,7 +54,22 @@ class NoteDetailSelf extends React.Component {
                                 })}{/* map */}
                             </div>{/* noted-detail-children */}
                         </div>{/* note-detail-left */}
-                        <AttachedList list={this.props.store.notes.attachedItems} />
+                        <div className="note-detail-right">
+                            {this.props.store.notes.attachedItems ? 
+                            this.props.store.notes.attachedItems.map(item => {
+                                console.log(item)
+                                if(item.slack_user_id){
+                                    return (
+                                        <SlackNote key={item.uuid} note={item} />
+                                    )
+                                } else {
+                                    return (
+                                        <PocketNote key={item.id} pocketItem={item} />
+                                    )
+                                }
+                                
+                            }) :  null}
+                        </div>{/* note-detail-right */}
                     </div>{/* note-detail-main */}
     
                     <div className="note-detail-settings">
@@ -104,8 +119,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    getAttachedItems,
-    // attachPocketItem
+    getAttachedItems
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailSelf));

@@ -8,7 +8,6 @@ export const POCKET_ITEM_ATTACHED = 'POCKET_ITEM_ATTACHED';
 export const POCKET_ERROR = 'POCKET_ERROR';
 export const ERROR = 'ERROR';
 
-//THIS SHOULD BE ATTACH iTEMS AND LIVE IN NOTES ACTIONS
 export const attachPocketItem = (newAttached, sticky_note_id) => {
   console.log("attachedPocketItem", newAttached)
     return function(dispatch){

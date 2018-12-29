@@ -6,18 +6,16 @@ import {Link} from 'react-router-dom';
 // import { start } from '../../styles/styl-utils.js'
 
 const NoteDetailParent = (props) => (
-    
     <NoteDetailParentDiv 
-        innerRef={instance => props.connectDropTarget(instance)}
+        // innerRef={instance => props.connectDropTarget(instance)}
         color={props.parentColor} style={{background: props.hover ? 'lightgreen' : null}}>
         <Link
             className="link"
-            to={props.note.parent_id ? `/note/${props.note.parent_id}` : `/all-notes/`}
+            to={props.note.parent_id ? `/note/${props.note.parent_id}/` : `/all-notes/`}
         >back to parent note</Link>
         <NoteDetailSelf
             allNotes={props.allNotes}
             allLinks={props.allLinks}
-            note_id={props.note_id}
             note={props.note} 
             onDrop={props.onDrop} 
             changeParent={props.changeParent}

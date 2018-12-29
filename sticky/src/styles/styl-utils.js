@@ -49,7 +49,6 @@ export function apiNote(){
     padding: 3px;
     color: black;
     margin: 2px;
-    min-height: 100px;
     `
 }
 
