@@ -105,13 +105,6 @@ class NotePreview extends React.Component {
     }
   }
 
-  getLinksLength = (arr) => {
-    // console.log(arr)
-    // let len = arr.length
-    // console.log(len)
-    return 99
-  }
-
   goToNote = (e) => {
     e.preventDefault()
     // console.log('go to note', e.target.id, this.props.layerOne.id)
@@ -251,7 +244,6 @@ const NotePreviewDiv = styled.div`
             text-align: center;
             background: lightblue;
           }
-
       }
       p {
         ${'' /* border: 1px solid blue; */}
