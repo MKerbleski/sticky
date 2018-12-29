@@ -105,12 +105,6 @@ class NotePreview extends React.Component {
     }
   }
 
-  getLinksLength = (arr) => {
-    // console.log(arr)
-    // let len = arr.length
-    // console.log(len)
-    return 99
-  }
 
   goToNote = (e) => {
     e.preventDefault()
