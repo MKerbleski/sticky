@@ -92,17 +92,12 @@ class NotePreview extends React.Component {
   }
 
   getNumberOfPocketItems(){
-    let pocket = this.props.layerOne.pocket_items_attached;
-    let slack = this.props.layerOne.slack_items_attached;
-    if(pocket && slack){
-      pocket = pocket.split(",")
-      slack = slack.split(",")
-      return pocket.concat(slack).length
-    } else if(pocket){
-      return pocket.split(",").length
-    } else if(slack){
-      return slack.split(",").length
+    let arr;
+    if(this.props.layerOne.pocket_items_attached){
+      arr = this.props.layerOne.pocket_items_attached.split(",")
+      return arr.length
     }
+    return null
   }
 
   goToNote = (e) => {
