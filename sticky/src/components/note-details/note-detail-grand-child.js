@@ -2,19 +2,14 @@ import styled from 'styled-components';
 import React from 'react';
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
-import LayerThreeSource from "./note-detail-great-grand-child"
+import { LayerThreeSource } from "../index"
 
 class NoteDetailGrandChild extends React.Component {
     render(){
-        const {
-            connectDragSource, 
-            connectDropTarget, 
-        } = this.props
-
         if (this.props.layerTwo){
             return (
-                connectDragSource &&
-                connectDropTarget &&
+                this.props.connectDragSource &&
+                this.props.connectDropTarget &&
                     <NoteDetailGrandChildDiv 
                         innerRef={instance => {
                             this.props.connectDragSource(instance);
@@ -111,7 +106,6 @@ const NoteDetailGrandChildDiv = styled.div`
     .layerThreeContainerAll{
         width: 100%;
         border: 1px solid green;
-        ${'' /* height: 500px; */}
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
