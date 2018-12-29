@@ -1,13 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
-import { flex, start } from '../../styles/styl-utils.js'
-import { getAttachedItems } from '../../actions'
 import { connect } from 'react-redux';
-
-import LayerTwoTargetSource from "./note-detail-grand-child"
+import { LayerTwoTargetSource } from "../index"
+import { getAttachedItems } from '../../actions'
+import { flex, start } from '../../styles/styl-utils.js'
 
 class NoteDetailChild extends React.Component {
   
@@ -21,18 +20,18 @@ class NoteDetailChild extends React.Component {
   }
 
   getFirstSen = (text) => {
-    let firstSen = text
-    let firstWord = this.getFirstWord(text)
-    firstSen = firstSen.replace(firstWord, '')
-    if(firstSen !== firstWord){
-      return firstSen
-    } else{
-      return null
-    }
+      let firstSen = text
+      let firstWord = this.getFirstWord(text)
+      firstSen = firstSen.replace(firstWord, '')
+      if(firstSen !== firstWord){
+        return firstSen
+      } else{
+        return null
+      }
   }
   
   refreshNotes = (id) => {
-    this.props.getAttachedItems(id)
+      this.props.getAttachedItems(id)
   }
 
   render(props){
@@ -63,20 +62,20 @@ class NoteDetailChild extends React.Component {
                           <p>{this.getFirstSen(this.props.layerOne.text_body)}</p> 
                       </div>
                       <div className="layerTwoContainerAll">
-                        {this.props.allNotes.map(layerTwo => {
-                            if (layerTwo.parent_id === this.props.layerOne.id){return (
-                                        <LayerTwoTargetSource  
-                                          key={layerTwo.id}
-                                          type="note"
-                                          onDrop={this.props.onDrop} 
-                                          layerTwo={layerTwo} 
-                                          allNotes={this.props.allNotes}
-                                          getFirstWord={this.getFirstWord} />
-                                    )
-                            } else {
-                                return null
-                            }
-                        })}
+                          {this.props.allNotes.map(layerTwo => {
+                              if (layerTwo.parent_id === this.props.layerOne.id){return (
+                                          <LayerTwoTargetSource  
+                                            key={layerTwo.id}
+                                            type="note"
+                                            onDrop={this.props.onDrop} 
+                                            layerTwo={layerTwo} 
+                                            allNotes={this.props.allNotes}
+                                            getFirstWord={this.getFirstWord} />
+                                      )
+                              } else {
+                                  return null
+                              }
+                          })}
                       </div>                     
                 </Link>
               </NoteDetailChildDiv>        

@@ -6,6 +6,7 @@ export {
     AllNotes, 
     AllNotesBin,
     NotePreview,
+    LayerTwoTargetSource,
 } from './main-all-notes';
 
 export {
