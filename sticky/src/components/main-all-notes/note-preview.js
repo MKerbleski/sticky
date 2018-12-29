@@ -275,7 +275,7 @@ const NotePreviewDiv = styled.div`
     .tags {
       border: 1px solid red;
       display: flex;
-      flex-direction: row:
+      flex-direction: row;
       flex-wrap: wrap;
       justify-content: flex-start;
       align-items: flex-end;

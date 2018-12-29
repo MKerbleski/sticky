@@ -69,26 +69,26 @@ const SlackNote = (props) => {
         if(!monitor.didDrop()){
             return ;
         }
-        console.log(props)
+        // console.log(props)
         const slack_item_id = props.note.id;
         const target_info = monitor.getDropResult();
         const sticky_note_id = target_info.targetId
         let attached_slack_items = target_info.slack_items_attached
-        console.log(target_info)
-        console.log("attached_slack_items", attached_slack_items)
+        // console.log(target_info)
+        // console.log("attached_slack_items", attached_slack_items)
         if(!attached_slack_items){
             //SHOULD ALSO ATTACH HOW MANY ARE ON THE NOTES
             let noteEdit = {slack_items_attached: `${slack_item_id}`}
             props.attachPocketItem(noteEdit, sticky_note_id)
         } else {
-            console.log(attached_slack_items)
+            // console.log(attached_slack_items)
             let tempArr = attached_slack_items.split(',')
-            console.log(tempArr)
+            // console.log(tempArr)
             let repeat = tempArr.filter(note => {
-                console.log("inside filter", +note, slack_item_id)
+                // console.log("inside filter", +note, slack_item_id)
                 return +note === slack_item_id
             })
-            console.log(repeat)
+            // console.log(repeat)
             let newAttached;
             if(repeat.length > 0){
                 //do nothing

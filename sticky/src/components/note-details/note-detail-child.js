@@ -4,44 +4,10 @@ import styled from 'styled-components';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import { flex, start } from '../../styles/styl-utils.js'
+import { getAttachedItems } from '../../actions'
+import { connect } from 'react-redux';
 
 import LayerTwoTargetSource from "./note-detail-grand-child"
-
-const targetObj = {
-  drop(props, monitor) {
-      const hover =  monitor.isOver({shallow:true})
-      if(hover){//this disables layer one droping if there is a nested child
-        const targetId = props.layerOne.id;
-        const type = props.type;
-        const pocket_items_attached = props.layerOne.pocket_items_attached;
-        const slack_items_attached = props.layerOne.slack_items_attached;
-        return ({
-            targetId, type, pocket_items_attached, slack_items_attached
-        });
-    }
-  },
-  hover(props, monitor){
-  }
-}
-
-const sourceObj = {
-  beginDrag(props) {
-    const { source_id } = props.layerOne; 
-    return ({
-      source_id
-    });
-  },
-
-  endDrag(props, monitor) {
-    if (!monitor.didDrop()) {
-      return;
-    }
-    const sourceId= props.layerOne.id
-    const dropResult = monitor.getDropResult();
-    console.log(sourceId,  dropResult, dropResult.targetId)
-    props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
-  },
-};
 
 class NoteDetailChild extends React.Component {
   
@@ -66,6 +32,10 @@ class NoteDetailChild extends React.Component {
     }
   }
   
+  refreshNotes = () => {
+
+  }
+
   render(props){
       const {
           connectDragSource, 
@@ -81,6 +51,7 @@ class NoteDetailChild extends React.Component {
                   <div className="note-detail-child-container">
                     <NoteDetailChildDiv color={this.props.color} >
                       <Link
+                      onClick={this.refreshNotes}
                         key={this.props.key}
                         index={this.props.index}
                         className="note-link"
@@ -119,7 +90,52 @@ class NoteDetailChild extends React.Component {
   }
 }
 
-export default flow(
+
+const targetObj = {
+  drop(props, monitor) {
+      const hover =  monitor.isOver({shallow:true})
+      if(hover){//this disables layer one droping if there is a nested child
+        const targetId = props.layerOne.id;
+        const type = props.type;
+        const pocket_items_attached = props.layerOne.pocket_items_attached;
+        const slack_items_attached = props.layerOne.slack_items_attached;
+        return ({
+            targetId, type, pocket_items_attached, slack_items_attached
+        });
+    }
+  },
+  hover(props, monitor){
+  }
+}
+
+const sourceObj = {
+  beginDrag(props) {
+    const { source_id } = props.layerOne; 
+    return ({
+      source_id
+    });
+  },
+
+  endDrag(props, monitor) {
+    if (!monitor.didDrop()) {
+      return;
+    }
+    const sourceId= props.layerOne.id
+    const dropResult = monitor.getDropResult();
+    console.log(sourceId,  dropResult, dropResult.targetId)
+    props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
+  },
+};
+
+const mapStateToProps = store => {
+  return {store: store};
+}
+
+const mapDispatchToProps = {
+  getAttachedItems
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(flow(
   DropTarget('item', targetObj, (connect, monitor) => ({
       connectDropTarget: connect.dropTarget(),
       highlighted: monitor.canDrop(),
@@ -133,7 +149,7 @@ export default flow(
       isFoobar: true,
   }))
 
-)(NoteDetailChild);
+)(NoteDetailChild));
 
 const NoteDetailChildDiv = styled.div`
   ${start('pink')}
