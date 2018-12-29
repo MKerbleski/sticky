@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import flow from 'lodash/flow';
 import { DragSource, DropTarget } from 'react-dnd';
 import { flex } from '../../styles/styl-utils.js'
-
-import { LayerTwoSource } from "./index"
+import { LayerTwoTargetSource } from "./index"
 
 const targetObj = {
   drop(props, monitor) {
@@ -39,27 +38,26 @@ const targetObj = {
 }
 
 const sourceObj = {
-  beginDrag(props) {
-    const { source_id } = props.layerOne; 
-    return ({
-      source_id
-    });
-  },
+    beginDrag(props) {
+        const { source_id } = props.layerOne; 
+        return ({
+          source_id
+        });
+    },
 
-  endDrag(props, monitor) {
-    if (!monitor.didDrop()) {
-      return;
-    }
-    // const  { id }  = monitor.getItem(); 
-    const sourceId= props.layerOne.id
-    const dropResult = monitor.getDropResult();
-    // console.log(sourceId,  dropResult, dropResult.targetId)
-    props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
-  },
+    endDrag(props, monitor) {
+        if (!monitor.didDrop()) {
+          return;
+        }
+        // const  { id }  = monitor.getItem(); 
+        const sourceId= props.layerOne.id
+        const dropResult = monitor.getDropResult();
+        // console.log(sourceId,  dropResult, dropResult.targetId)
+        props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
+    },
 };
 
 class NotePreview extends React.Component {
-  
   getFirstWord = (text, words=2) => {
     // let firstWord = text.substr(0, text.indexOf(" "));
     let firstWord = text.split(" ").slice(0,words).join(' ');
@@ -92,17 +90,17 @@ class NotePreview extends React.Component {
   }
 
   getNumberOfPocketItems(){
-    let pocket = this.props.layerOne.pocket_items_attached;
-    let slack = this.props.layerOne.slack_items_attached;
-    if(pocket && slack){
-      pocket = pocket.split(",")
-      slack = slack.split(",")
-      return pocket.concat(slack).length
-    } else if(pocket){
-      return pocket.split(",").length
-    } else if(slack){
-      return slack.split(",").length
-    }
+      let pocket = this.props.layerOne.pocket_items_attached;
+      let slack = this.props.layerOne.slack_items_attached;
+      if(pocket && slack){
+          pocket = pocket.split(",")
+          slack = slack.split(",")
+          return pocket.concat(slack).length
+      } else if(pocket){
+          return pocket.split(",").length
+      } else if(slack){
+          return slack.split(",").length
+      }
   }
 
 
@@ -155,7 +153,7 @@ class NotePreview extends React.Component {
                                   if (layerTwo.parent_id === this.props.layerOne.id){
                                       return (
                                             <div className="layerTwoContainer" key={layerTwo.id}>
-                                                <LayerTwoSource  
+                                                <LayerTwoTargetSource  
                                                   type="note"
                                                   onDrop={this.props.onDrop}
                                                   layerTwo={layerTwo} 

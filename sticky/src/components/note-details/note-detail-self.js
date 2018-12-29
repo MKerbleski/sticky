@@ -2,7 +2,6 @@ import React from 'react';
 import { DropTarget } from 'react-dnd';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { start } from '../../styles/styl-utils.js'
 import { 
     NoteDetailChild, 
     SlackNote, 
@@ -10,6 +9,7 @@ import {
     NoteDetailBody
 } from '../index.js';
 import { getAttachedItems } from '../../actions'
+import { start } from '../../styles/styl-utils.js'
 
 class NoteDetailSelf extends React.Component {
     componentDidMount(){
@@ -17,15 +17,13 @@ class NoteDetailSelf extends React.Component {
     }
 
     render(){
-        console.log(this.props)
         if(this.props.note){
             return (
                 <NoteDetailSelfDiv 
                     innerRef={instance => this.props.connectDropTarget(instance)}
                     color={this.props.note.note_color}
                     className="note-detail" 
-                    style={{background: this.props.hover ? 'lightgreen' : null}}
-                >
+                    style={{background: this.props.hover ? 'lightgreen' : null}}>
                     <div className="note-detail-main">
                         <div className="note-detail-left">
                             <NoteDetailBody editNote={this.props.editNote} note={this.props.note} />
@@ -40,8 +38,7 @@ class NoteDetailSelf extends React.Component {
                                                 key={layerOne.id}
                                                 layerOne={layerOne}
                                                 allNotes={this.props.allNotes}
-                                                color={layerOne.note_color}
-                                            />
+                                                color={layerOne.note_color} />
                                         )
                                     } else {
                                         return null
@@ -52,21 +49,14 @@ class NoteDetailSelf extends React.Component {
                         <div className="note-detail-right">
                             {this.props.store.notes.attachedItems ? 
                             this.props.store.notes.attachedItems.map(item => {
-                                console.log(item)
                                 if(item.slack_user_id){
-                                    return (
-                                        <SlackNote key={item.uuid} note={item} />
-                                    )
+                                    return <SlackNote key={item.uuid} note={item} />
                                 } else {
-                                    return (
-                                        <PocketNote key={item.id} pocketItem={item} />
-                                    )
+                                    return <PocketNote key={item.id} pocketItem={item} />
                                 }
-                                
                             }) :  null}
                         </div>{/* note-detail-right */}
                     </div>{/* note-detail-main */}
-    
                     <div className="note-detail-settings">
                         <i className="fas fa-cogs"></i>
                     </div>{/* note-detail-settings */}
@@ -81,32 +71,32 @@ class NoteDetailSelf extends React.Component {
 }
 
 const targetObj = {
-  hover(props, component){
-      if(props.hoverShallow){
-          // console.log('hoverShallow')
-      }
-  },
+    hover(props, component){
+        if(props.hoverShallow){
+            // console.log('hoverShallow')
+        }
+    },
 
-  drop(props, monitor) {
-    const hover = monitor.isOver({shallow: false})
-    
-    if(hover){
-        // console.log('target props', props, hover)
-        const { type, targetId } = props;
-        const pocket_items_attached = props.note.pocket_items_attached;
-        const slack_items_attached = props.note.slack_items_attached;
-        return ({
-            type, targetId, pocket_items_attached, slack_items_attached
-        });
+    drop(props, monitor) {
+        const hover = monitor.isOver({shallow: false})
+        
+        if(hover){
+            // console.log('target props', props, hover)
+            const { type, targetId } = props;
+            const pocket_items_attached = props.note.pocket_items_attached;
+            const slack_items_attached = props.note.slack_items_attached;
+            return ({
+                type, targetId, pocket_items_attached, slack_items_attached
+            });
+        }
     }
-  }
 }
 
 const collect = (connect,  monitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  highlighted: monitor.canDrop(),
-  hover: monitor.isOver({shallow: true}),
-  hoverFalse: monitor.isOver()
+    connectDropTarget: connect.dropTarget(),
+    highlighted: monitor.canDrop(),
+    hover: monitor.isOver({shallow: true}),
+    hoverFalse: monitor.isOver()
 });
 
 const mapStateToProps = store => {

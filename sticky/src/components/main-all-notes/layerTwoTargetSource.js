@@ -2,8 +2,57 @@ import styled from 'styled-components';
 import React from 'react';
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
-
 import { LayerThreeSource } from "./index"
+
+class LayerTwoTargetSource extends React.Component {
+    goToNote = (e) => {
+        e.stopPropagation();
+        this.props.redirect(`/note/${this.props.layerTwo.id}`)
+    }
+    render(props){
+        const {
+            connectDragSource, 
+            connectDropTarget, 
+        } = this.props
+
+        if (this.props.layerTwo){
+            return (
+                connectDragSource &&
+                connectDropTarget &&
+                    <LayerTwoDiv 
+                        innerRef={instance => {
+                            this.props.connectDragSource(instance);
+                            this.props.connectDropTarget(instance);}}
+                        type="note"
+                        onClick={this.goToNote}
+                        style={{background: this.props.hover ? 'lightgreen' : null}}>
+                        <h4>{this.props.getFirstWord(this.props.layerTwo.text_body)}</h4>
+                        <div className="layerThreeContainerAll">
+                            {this.props.allNotes.map(layerThree => {
+                                if (layerThree.parent_id === this.props.layerTwo.id){
+                                    return (
+                                        <div className="layerThreeContainer" key={layerThree.id} >
+                                            <LayerThreeSource 
+                                                type="note"
+                                                changeParent={this.props.changeParent} layerThree={layerThree} 
+                                                redirect={this.props.redirect}
+                                                onDrop={this.props.onDrop}
+                                                getFirstWord={this.props.getFirstWord}
+                                                />
+                                        </div>
+                                    )
+                                } else {
+                                    return null
+                                }
+                            })}
+                        </div>                       
+                    </LayerTwoDiv>       
+                )
+        } else {
+            return (null)
+        }
+    }
+}
 
 const targetObj = {
     drop(props) {
@@ -37,63 +86,6 @@ const sourceObj = {
         props.onDrop(sourceId, dropResult.type, dropResult.targetId);
     }
 };
-
-class LayerTwoTargetSource extends React.Component {
-    goToNote = () => {
-        // console.log('layer two go to note')
-        this.props.redirect(`/note/${this.props.layerTwo.id}`)
-    }
-    render(props){
-        // console.log(this.props)
-        const {
-            connectDragSource, 
-            connectDropTarget, 
-        } = this.props
-
-        if (this.props.layerTwo){
-            return (
-                connectDragSource &&
-                connectDropTarget &&
-                connectDragSource(
-                connectDropTarget(
-                    <div onClick={(e) => {e.stopPropagation();}}>
-
-                    <LayerTwoDiv 
-                            type="note"
-                            onClick={this.goToNote}
-                            style={{background: this.props.hover ? 'lightgreen' : null}}>
-                            {/* <h3>{this.props.layerTwo.title}</h3> */}
-                            
-                            <h4>{this.props.getFirstWord(this.props.layerTwo.text_body)}</h4>
-                            <div className="layerThreeContainerAll">
-                               {this.props.allNotes.map(layerThree => {
-                                    if (layerThree.parent_id === this.props.layerTwo.id){
-                                        return (
-                                            <div className="layerThreeContainer" key={layerThree.id} >
-                                                <LayerThreeSource 
-                                                    type="note"
-                                                    changeParent={this.props.changeParent} layerThree={layerThree} 
-                                                    redirect={this.props.redirect}
-                                                    onDrop={this.props.onDrop}
-                                                    getFirstWord={this.props.getFirstWord}
-                                                    />
-                                            </div>
-                                        )
-                                    } else {
-                                        return null
-                                    }
-                                })}
-                            </div>                       
-                        </LayerTwoDiv>       
-                    </div>
-                    )
-                    )
-                )
-        } else {
-            return (null)
-        }
-    }
-}
 
 export default flow(
 
