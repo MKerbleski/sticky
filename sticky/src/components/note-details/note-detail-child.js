@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import { connect } from 'react-redux';
 import { LayerTwoTargetSource } from "../index"
 import { getAttachedItems } from '../../actions'
 import { flex, start } from '../../styles/styl-utils.js'
+import { NoteDetailGrandChild } from '.';
 
 class NoteDetailChild extends React.Component {
   getFirstWord = (text, words=2) => {
@@ -29,7 +30,9 @@ class NoteDetailChild extends React.Component {
       }
   }
   
-  refreshNotes = (id) => {
+  refreshNotes = (e, id) => {
+     e.preventDefault()
+      e.stopPropagation()
       this.props.getAttachedItems(id)
   }
 
@@ -47,9 +50,9 @@ class NoteDetailChild extends React.Component {
                 innerRef={instance => {
                   this.props.connectDragSource(instance);
                   this.props.connectDropTarget(instance);}}
+                  onClick={(e) => this.refreshNotes(e,this.props.layerOne.id)}
                 color={this.props.color} >
                 <Link
-                  onClick={() => this.refreshNotes(this.props.layerOne.id)}
                   key={this.props.key}
                   index={this.props.index}
                   className="note-link"
@@ -62,15 +65,14 @@ class NoteDetailChild extends React.Component {
                       </div>
                       <div className="layerTwoContainerAll">
                           {this.props.allNotes.map(layerTwo => {
-                              if (layerTwo.parent_id === this.props.layerOne.id){return (
-                                          <LayerTwoTargetSource  
-                                            key={layerTwo.id}
-                                            type="note"
-                                            onDrop={this.props.onDrop} 
-                                            layerTwo={layerTwo} 
-                                            allNotes={this.props.allNotes}
-                                            getFirstWord={this.getFirstWord} />
-                                      )
+                              if (layerTwo.parent_id === this.props.layerOne.id){
+                                  return <NoteDetailGrandChild
+                                              key={layerTwo.id}
+                                              type="note"
+                                              onDrop={this.props.onDrop} 
+                                              layerTwo={layerTwo} 
+                                              allNotes={this.props.allNotes}
+                                              getFirstWord={this.getFirstWord} />
                               } else {
                                   return null
                               }

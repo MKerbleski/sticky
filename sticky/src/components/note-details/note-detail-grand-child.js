@@ -1,11 +1,20 @@
 import styled from 'styled-components';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
+import { connect } from 'react-redux';
 import { LayerThreeSource } from "../index"
+import { getAttachedItems } from '../../actions'
 
 class NoteDetailGrandChild extends React.Component {
+    clickHandler = (e, id) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.props.getAttachedItems(id)
+    }
     render(){
+        console.log(this.props.layerTwo)
         if (this.props.layerTwo){
             return (
                 this.props.connectDragSource &&
@@ -15,23 +24,33 @@ class NoteDetailGrandChild extends React.Component {
                             this.props.connectDragSource(instance);
                             this.props.connectDropTarget(instance);}}
                         type="note"
-                        onClick={(e) => {e.stopPropagation();}} 
-                        style={{background: this.props.hover ? 'lightgreen' : null}} >              
-                        <h4>{this.props.getFirstWord(this.props.layerTwo.text_body)}</h4>
-                        <div className="layerThreeContainerAll">
-                            {this.props.allNotes.map(layerThree => {
-                                if (layerThree.parent_id === this.props.layerTwo.id){
-                                    return <LayerThreeSource 
-                                                key={layerThree.id}
-                                                type="note"
-                                                changeParent={this.props.changeParent} layerThree={layerThree} 
-                                                onDrop={this.props.onDrop}
-                                                getFirstWord={this.props.getFirstWord} />
-                                } else {
-                                    return null
-                                }
-                            })}
-                        </div>                       
+                        onClick={(e) => {
+                                this.clickHandler(e, this.props.layerTwo.id)
+                            }}
+                        style={{background: this.props.hover ? 'lightgreen' : null}}>
+                        <Link
+                            key={this.props.key}
+                            index={this.props.index}
+                            className="note-link"
+                            id={this.props.layerTwo.id}
+                            to={`/note/${this.props.layerTwo.id}`}
+                            style={{background: this.props.hover ? 'lightgreen' : null}}>
+                            <h4>{this.props.getFirstWord(this.props.layerTwo.text_body)}</h4>
+                            <div className="layerThreeContainerAll">
+                                {this.props.allNotes.map(layerThree => {
+                                    if (layerThree.parent_id === this.props.layerTwo.id){
+                                        return <LayerThreeSource 
+                                                    key={layerThree.id}
+                                                    type="note"
+                                                    changeParent={this.props.changeParent} layerThree={layerThree} 
+                                                    onDrop={this.props.onDrop}
+                                                    getFirstWord={this.props.getFirstWord} />
+                                    } else {
+                                        return null
+                                    }
+                                })}
+                            </div>     
+                        </Link>                  
                     </NoteDetailGrandChildDiv>         
                 )
         } else {
@@ -70,7 +89,15 @@ const sourceObj = {
     }
 };
 
-export default flow(
+const mapStateToProps = store => {
+    return {store: store};
+  }
+  
+  const mapDispatchToProps = {
+    getAttachedItems
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)( flow(
 
     DropTarget('item', targetObj, (connect, monitor) => ({
         connectDropTarget: connect.dropTarget(),
@@ -84,7 +111,7 @@ export default flow(
         isDragging: monitor.isDragging(),
     }))
 
-)(NoteDetailGrandChild);
+)(NoteDetailGrandChild));
 
 
 const NoteDetailGrandChildDiv = styled.div`
