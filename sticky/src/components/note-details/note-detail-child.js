@@ -45,6 +45,10 @@ const sourceObj = {
 
 class NoteDetailChild extends React.Component {
   
+  clickHandler = () => {
+    console.log("click")
+  }
+
   getFirstWord = (text, words=2) => {
     // let firstWord = text.substr(0, text.indexOf(" "));
     let firstWord = text.split(" ").slice(0,words).join(' ');
@@ -81,6 +85,7 @@ class NoteDetailChild extends React.Component {
                   <div className="note-detail-child-container">
                     <NoteDetailChildDiv color={this.props.color} >
                       <Link
+                        onClick={this.clickHandler}
                         key={this.props.key}
                         index={this.props.index}
                         className="note-link"

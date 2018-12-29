@@ -28,6 +28,7 @@ import {
     getLinks,
     getDeletedNotes,
     getUserData,
+    getAttachedItems
 } from './actions';
 
 class App extends Component {
@@ -128,6 +129,10 @@ class App extends Component {
   getNoteDetails = (id) => {
       return this.props.store.notes.notes.find(note => {return note.id === +id})
   }
+
+  getNoteAttachments = (id) => {
+    return this.props.getAttachedItems(id);
+  }
   
   getParentId = (id) => {
       let notee =  this.props.store.notes.notes.find(note => {return note.id === +id})
@@ -197,7 +202,7 @@ class App extends Component {
   }
 
   render(props) {
-    // console.log(this.props)
+    console.log(this.props)
     return (
       <AppDiv>
       
@@ -244,6 +249,8 @@ class App extends Component {
                                 <NoteDetailParent
                                   allNotes={this.props.store.notes.notes}
                                   allLinks={this.props.store.notes.links}
+                                  note_id={this.props.location.pathname.substring(6)}
+                                  attachments={this.getNoteAttachments(note.match.params.note_id)}
                                   note={this.getNoteDetails(note.match.params.note_id)} 
                                   onDrop={this.onDrop} 
                                   changeParent={this.changeParent}
@@ -301,6 +308,7 @@ const mapDispatchToProps = {
     getLinks,
     getDeletedNotes,
     getUserData, 
+    getAttachedItems,
 }
  export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 
