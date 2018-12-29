@@ -132,6 +132,7 @@ class App extends Component {
   getParentId = (id) => {
       let notee =  this.props.store.notes.notes.find(note => {return note.id === +id})
       // console.log(notee)
+      //change
       if(notee){
         if(notee.parent_id){
           return notee.parent_id
