@@ -85,7 +85,8 @@ const targetObj = {
             // console.log('target props', props, hover)
             const { type, targetId } = props;
             const pocket_items_attached = props.note.pocket_items_attached;
-            const slack_items_attached = props.note.slack_items_attached;
+            console.log(props)
+            const slack_items_attached = props.store.notes.attachedItems;
             return ({
                 type, targetId, pocket_items_attached, slack_items_attached
             });

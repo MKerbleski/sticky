@@ -69,34 +69,45 @@ const SlackNote = (props) => {
         console.log(target_info)
         if(target_info.type === "deleteBin"){
             let stickyNote = props.stickyNote;
-            console.log(stickyNote)
             console.log("deleteBin", stickyNote.id, stickyNote.slack_items_attached.length)
-            if(stickyNote.slack_items_attached.length === 1){
-                let noteEdit = {slack_items_attached: null}
-                props.attachPocketItem(noteEdit, stickyNote.id)
-            } else {
-                let tempArr = stickyNote.slack_items_attached.split(',')
-                console.log(tempArr)
-                let index = tempArr.indexOf(slack_item_id)
-                if(index > -1){
-                    tempArr.splice(index, 1)
+            console.log(props)
+                let tempArr = props.store.notes.attachedItems.map(obj => {
+                    return obj.id
+                })
+                console.log("previous" ,tempArr)
+                if(tempArr.length === 1){
+                    console.log("one")
+                    let noteEdit = {slack_items_attached: null}
+                    props.attachPocketItem(noteEdit, stickyNote.id)
+                } else {
+                    let index = tempArr.indexOf(slack_item_id)
+                    console.log(slack_item_id, index)
+                    if(index > -1){
+                        tempArr.splice(index, 1)
+                    }
+                    console.log("new",tempArr)
+                    let newStr = tempArr.toString()
+                    let noteEdit = {slack_items_attached: newStr}
+                    console.log(noteEdit)
+                    props.attachPocketItem(noteEdit, stickyNote.id) 
                 }
-                let newStr = tempArr.toString()
-                let noteEdit = {slack_items_attached: newStr}
-                console.log(noteEdit)
-                props.attachPocketItem(noteEdit, stickyNote.id)
-            }
+            
 
-        } else { //not trash can
+        } else if (target_info.type === "note") { //not trash can
             const sticky_note_id = target_info.targetId
-            let attached_slack_items = target_info.slack_items_attached
-            console.log(attached_slack_items)
-            if(!attached_slack_items){
+            let slack_items_attached = target_info.slack_items_attached
+            console.log("previous", slack_items_attached)
+            if(slack_items_attached.length === 0){
                 //SHOULD ALSO ATTACH HOW MANY ARE ON THE NOTES
                 let noteEdit = {slack_items_attached: `${slack_item_id}`}
                 props.attachPocketItem(noteEdit, sticky_note_id)
             } else {
-                let tempArr = attached_slack_items.split(',')
+                // let tempArr = slack_items_attached
+                let tempArr = slack_items_attached.map(obj => {
+                    return obj.id
+                })
+                console.log(tempArr)
+                // tempArr = slack_items_attached.split(',')
                 let repeat = tempArr.filter(note => {
                     return +note === slack_item_id
                 })
@@ -106,9 +117,10 @@ const SlackNote = (props) => {
                     console.log("REPEAT no action taken, alert needed")
                     window.alert("Item is already attached to this note. No duplicate notes")
                 } else {
-                    newAttached = attached_slack_items + `,${slack_item_id}`
+                    newAttached = tempArr + `,${slack_item_id}`
                     //SHOULD ALSO ATTACH HOW MANY ARE ON THE NOTES
                     let noteEdit = {slack_items_attached: newAttached}
+                    console.log("noteEdit", noteEdit)
                     props.attachPocketItem(noteEdit, sticky_note_id)
                 }
             }
