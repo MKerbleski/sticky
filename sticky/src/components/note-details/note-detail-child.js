@@ -12,7 +12,6 @@ import LayerTwoTargetSource from "./note-detail-grand-child"
 class NoteDetailChild extends React.Component {
   
   getFirstWord = (text, words=2) => {
-    // let firstWord = text.substr(0, text.indexOf(" "));
     let firstWord = text.split(" ").slice(0,words).join(' ');
     if(firstWord.length > 0){
       return firstWord
@@ -32,8 +31,8 @@ class NoteDetailChild extends React.Component {
     }
   }
   
-  refreshNotes = () => {
-
+  refreshNotes = (id) => {
+    this.props.getAttachedItems(id)
   }
 
   render(props){
@@ -51,7 +50,7 @@ class NoteDetailChild extends React.Component {
                   <div className="note-detail-child-container">
                     <NoteDetailChildDiv color={this.props.color} >
                       <Link
-                      onClick={this.refreshNotes}
+                        onClick={() => this.refreshNotes(this.props.layerOne.id)}
                         key={this.props.key}
                         index={this.props.index}
                         className="note-link"

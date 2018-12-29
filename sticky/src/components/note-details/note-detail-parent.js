@@ -5,26 +5,36 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 // import { start } from '../../styles/styl-utils.js'
 
-const NoteDetailParent = (props) => (
-    <NoteDetailParentDiv 
-        // innerRef={instance => props.connectDropTarget(instance)}
-        color={props.parentColor} style={{background: props.hover ? 'lightgreen' : null}}>
-        <Link
-            className="link"
-            to={props.note.parent_id ? `/note/${props.note.parent_id}/` : `/all-notes/`}
-        >back to parent note</Link>
-        <NoteDetailSelf
-            allNotes={props.allNotes}
-            allLinks={props.allLinks}
-            note={props.note} 
-            onDrop={props.onDrop} 
-            changeParent={props.changeParent}
-            targetId={props.note.id}
-            editNote={props.editNote}
-            type="note"
-        />
-    </NoteDetailParentDiv>
-);
+import { getAttachedItems } from '../../actions'
+import { connect } from 'react-redux';
+  
+
+ class NoteDetailParent extends React.Component{
+    refreshNotes = (id) => {
+        this.props.getAttachedItems(id)
+    }
+    render(){
+        return (
+        <NoteDetailParentDiv 
+            innerRef={instance => this.props.connectDropTarget(instance)}
+            color={this.props.parentColor} style={{background: this.props.hover ? 'lightgreen' : null}}>
+            <Link 
+                onClick={() => this.refreshNotes(this.props.note.parent_id)}
+                className="link"
+                to={this.props.note.parent_id ? `/note/${this.props.note.parent_id}/` : `/all-notes/`}>back to parent note</Link>
+            <NoteDetailSelf
+                allNotes={this.props.allNotes}
+                allLinks={this.props.allLinks}
+                note={this.props.note} 
+                onDrop={this.props.onDrop} 
+                changeParent={this.props.changeParent}
+                targetId={this.props.note.id}
+                editNote={this.props.editNote}
+                type="note"/>
+        </NoteDetailParentDiv>
+        )
+    }
+}
 
 const targetObj = {
   hover(props, component){
@@ -55,7 +65,15 @@ const collect = (connect,  monitor) => ({
   hoverFalse: monitor.isOver()
 });
 
-export default DropTarget('item', targetObj, collect)(NoteDetailParent);
+const mapStateToProps = store => {
+    return {store: store};
+}
+
+const mapDispatchToProps = {
+getAttachedItems
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailParent))
 
 const NoteDetailParentDiv = styled.div`
     background-color: ${props => props.color};
