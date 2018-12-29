@@ -98,6 +98,16 @@ class NotePreview extends React.Component {
       return arr.length
     }
     return null
+<<<<<<< HEAD
+=======
+  }
+
+  getLinksLength = (arr) => {
+    // console.log(arr)
+    // let len = arr.length
+    // console.log(len)
+    return 99
+>>>>>>> parent of 862f4fc... modified note-preview to work with slack as well
   }
 
   goToNote = (e) => {

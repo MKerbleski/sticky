@@ -19,7 +19,7 @@ const SlackNote = (props) => {
         return (
             <SlackNoteDiv 
                 innerRef={instance => props.connectDragSource(instance)}
-                type="slack"
+                type="link"
                 style={{
                     opacity: props.isDragging ? '0.25' : '1',
                     border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
@@ -81,6 +81,16 @@ const SlackNote = (props) => {
                 let noteEdit = {slack_items_attached: newAttached}
                 props.attachPocketItem(noteEdit, sticky_note_id)
             }
+            const selfType = props.type
+            const parentId = monitor.getDropResult();
+            props.onDrop(addSlackLink, selfType, parentId.targetId);
+        } else {
+            const childId = props.link.id
+            console.log(childId)
+            // const selfType = props.type
+            const parent = monitor.getDropResult();
+            console.log(parent)
+            props.onDrop(childId, parent.type, parent.targetId)   
         }
     },
   };
