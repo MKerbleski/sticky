@@ -28,6 +28,7 @@ class NoteDetailParent extends React.Component{
                     changeParent={this.props.changeParent}
                     targetId={this.props.note.id}
                     editNote={this.props.editNote}
+                    redirect={this.props.redirect}
                     type="note"/>
             </NoteDetailParentDiv>
         )

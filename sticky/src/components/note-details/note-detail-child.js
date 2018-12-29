@@ -35,7 +35,7 @@ class NoteDetailChild extends React.Component {
       this.props.getAttachedItems(id)
   }
 
-  render(props){
+  render(){
       if (this.props.layerOne){
           return (
               this.props.connectDragSource &&
@@ -65,6 +65,7 @@ class NoteDetailChild extends React.Component {
                                               type="note"
                                               onDrop={this.props.onDrop} 
                                               layerTwo={layerTwo} 
+                                              redirect={this.props.redirect}
                                               allNotes={this.props.allNotes}
                                               getFirstWord={this.getFirstWord} />
                               } else {

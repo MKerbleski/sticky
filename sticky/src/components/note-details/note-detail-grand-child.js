@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
 import { connect } from 'react-redux';
@@ -12,29 +11,19 @@ class NoteDetailGrandChild extends React.Component {
         e.preventDefault();
         e.stopPropagation();
         this.props.getAttachedItems(id)
+        this.props.redirect(`/note/${this.props.layerTwo.id}`)
     }
+    
     render(){
-        console.log(this.props.layerTwo)
         if (this.props.layerTwo){
             return (
                 this.props.connectDragSource &&
                 this.props.connectDropTarget &&
                     <NoteDetailGrandChildDiv 
-                        innerRef={instance => {
-                            this.props.connectDragSource(instance);
-                            this.props.connectDropTarget(instance);}}
+                        innerRef={instance => {this.props.connectDragSource(instance);this.props.connectDropTarget(instance);}}
                         type="note"
-                        onClick={(e) => {
-                                this.clickHandler(e, this.props.layerTwo.id)
-                            }}
+                        onClick={(e) => {this.clickHandler(e, this.props.layerTwo.id)}}
                         style={{background: this.props.hover ? 'lightgreen' : null}}>
-                        <Link
-                            key={this.props.key}
-                            index={this.props.index}
-                            className="note-link"
-                            id={this.props.layerTwo.id}
-                            to={`/note/${this.props.layerTwo.id}`}
-                            style={{background: this.props.hover ? 'lightgreen' : null}}>
                             <h4>{this.props.getFirstWord(this.props.layerTwo.text_body)}</h4>
                             <div className="layerThreeContainerAll">
                                 {this.props.allNotes.map(layerThree => {
@@ -49,8 +38,7 @@ class NoteDetailGrandChild extends React.Component {
                                         return null
                                     }
                                 })}
-                            </div>     
-                        </Link>                  
+                            </div>                     
                     </NoteDetailGrandChildDiv>         
                 )
         } else {

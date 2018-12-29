@@ -4,16 +4,11 @@ import { DragSource } from 'react-dnd';
 import ReactMarkdown from 'react-markdown';
 import { apiNote } from '../../styles/styl-utils'
 import format from 'date-fns/format'
-
+import { attachPocketItem } from '../../actions'
+import { connect } from 'react-redux';
 
 const SlackNote = (props) => {
-    let note
-    if(props.type === "link"){
-        note = props.note
-    } else {
-        note = props.note
-    }
-    let time = note.ts.slice(0, 10)*1000
+    let time = props.slackItem.ts.slice(0, 10)*1000
     time = format(time, 'MMM Do YYYY')
     if (props){
         return (
@@ -24,18 +19,18 @@ const SlackNote = (props) => {
                     opacity: props.isDragging ? '0.25' : '1',
                     border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
                 <div className="slack-note-top">
-                    <strong>{note.slack_user_name}</strong>
+                    <strong>{props.slackItem.slack_user_name}</strong>
                     <div className="status">
-                        <span>{note.is_pinned ? "pin" : null}</span>
-                        <span>{note.is_starred ? "star" : null}</span>
+                        <span>{props.slackItem.is_pinned ? "pin" : null}</span>
+                        <span>{props.slackItem.is_starred ? "star" : null}</span>
                     </div>
                 </div> 
                 <div className="slack-note-middle">
-                    <ReactMarkdown className="slack-text">{note.type === "message" ? note.text : "error at note text"}</ReactMarkdown>
+                    <ReactMarkdown className="slack-text">{props.slackItem.type === "message" ? props.slackItem.text : "error at note text"}</ReactMarkdown>
                 </div> 
                 <span className="slack-note-bottom">
                     <p className="slack-time">{time}</p>
-                    <a target="_blank" href={note.permalink}>Link to Slack</a>
+                    <a target="_blank" href={props.slackItem.permalink}>Link to Slack</a>
                 </span>
             </SlackNoteDiv>
         )
@@ -47,7 +42,7 @@ const SlackNote = (props) => {
  const sourceObj = {
     
     beginDrag(props) {
-        const slack_note_id = props.note.id;
+        const slack_note_id = props.slackItem.id;
         const type = "slack"
         return ({ slack_note_id, type })
         // if(props.type === "slack"){
@@ -67,41 +62,58 @@ const SlackNote = (props) => {
 
     endDrag(props, monitor) {// this takes props mounted on beginDrag
         if(!monitor.didDrop()){
-            return ;
+            return;
         }
-        // console.log(props)
-        const slack_item_id = props.note.id;
+        const slack_item_id = props.slackItem.id;
         const target_info = monitor.getDropResult();
-        const sticky_note_id = target_info.targetId
-        let attached_slack_items = target_info.slack_items_attached
-        // console.log(target_info)
-        // console.log("attached_slack_items", attached_slack_items)
-        if(!attached_slack_items){
-            //SHOULD ALSO ATTACH HOW MANY ARE ON THE NOTES
-            let noteEdit = {slack_items_attached: `${slack_item_id}`}
-            props.attachPocketItem(noteEdit, sticky_note_id)
-        } else {
-            // console.log(attached_slack_items)
-            let tempArr = attached_slack_items.split(',')
-            // console.log(tempArr)
-            let repeat = tempArr.filter(note => {
-                // console.log("inside filter", +note, slack_item_id)
-                return +note === slack_item_id
-            })
-            // console.log(repeat)
-            let newAttached;
-            if(repeat.length > 0){
-                //do nothing
-                console.log("REPEAT no action taken, alert needed")
-                window.alert("item is already attached. No duplicate notes")
+        console.log(target_info)
+        if(target_info.type === "deleteBin"){
+            let stickyNote = props.stickyNote;
+            console.log(stickyNote)
+            console.log("deleteBin", stickyNote.id, stickyNote.slack_items_attached.length)
+            if(stickyNote.slack_items_attached.length === 1){
+                let noteEdit = {slack_items_attached: null}
+                props.attachPocketItem(noteEdit, stickyNote.id)
             } else {
-                newAttached = attached_slack_items + `,${slack_item_id}`
-                // console.log(newAttached, "new_attached", "sticky_note_id", sticky_note_id)
+                let tempArr = stickyNote.slack_items_attached.split(',')
+                console.log(tempArr)
+                let index = tempArr.indexOf(slack_item_id)
+                if(index > -1){
+                    tempArr.splice(index, 1)
+                }
+                let newStr = tempArr.toString()
+                let noteEdit = {slack_items_attached: newStr}
+                console.log(noteEdit)
+                props.attachPocketItem(noteEdit, stickyNote.id)
+            }
+
+        } else { //not trash can
+            const sticky_note_id = target_info.targetId
+            let attached_slack_items = target_info.slack_items_attached
+            console.log(attached_slack_items)
+            if(!attached_slack_items){
                 //SHOULD ALSO ATTACH HOW MANY ARE ON THE NOTES
-                let noteEdit = {slack_items_attached: newAttached}
+                let noteEdit = {slack_items_attached: `${slack_item_id}`}
                 props.attachPocketItem(noteEdit, sticky_note_id)
+            } else {
+                let tempArr = attached_slack_items.split(',')
+                let repeat = tempArr.filter(note => {
+                    return +note === slack_item_id
+                })
+                let newAttached;
+                if(repeat.length > 0){
+                    //do nothing
+                    console.log("REPEAT no action taken, alert needed")
+                    window.alert("Item is already attached to this note. No duplicate notes")
+                } else {
+                    newAttached = attached_slack_items + `,${slack_item_id}`
+                    //SHOULD ALSO ATTACH HOW MANY ARE ON THE NOTES
+                    let noteEdit = {slack_items_attached: newAttached}
+                    props.attachPocketItem(noteEdit, sticky_note_id)
+                }
             }
         }
+        
         // if(targetInfo.slack_items_attached)
         // if(props.type === "link"){
         //     // let note = props.star
@@ -133,7 +145,15 @@ const SlackNote = (props) => {
     // didDrop: monitor.didDrop(),
   });
 
-export default DragSource('item', sourceObj, collect)(SlackNote);
+const mapStateToProps = store => {
+    return {store: store};
+}
+
+const mapDispatchToProps = {
+    attachPocketItem
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DragSource('item', sourceObj, collect)(SlackNote))
 
 const SlackNoteDiv = styled.div`
     ${apiNote()}

@@ -38,6 +38,7 @@ class NoteDetailSelf extends React.Component {
                                                 key={layerOne.id}
                                                 layerOne={layerOne}
                                                 allNotes={this.props.allNotes}
+                                                redirect={this.props.redirect}
                                                 color={layerOne.note_color} />
                                         )
                                     } else {
@@ -50,7 +51,7 @@ class NoteDetailSelf extends React.Component {
                             {this.props.store.notes.attachedItems ? 
                             this.props.store.notes.attachedItems.map(item => {
                                 if(item.slack_user_id){
-                                    return <SlackNote key={item.uuid} note={item} />
+                                    return <SlackNote key={item.uuid} slackItem={item} stickyNote={this.props.note} />
                                 } else {
                                     return <PocketNote key={item.id} pocketItem={item} />
                                 }

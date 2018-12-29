@@ -236,13 +236,14 @@ class App extends Component {
                             render={ (note) => {
                               return (
                                 <NoteDetailParent
+                                  redirect={this.redirect}
                                   allNotes={this.props.store.notes.notes}
-                                  allLinks={this.props.store.notes.links}
+                                  // allLinks={this.props.store.notes.links}
                                   note={this.getNoteDetails(note.match.params.note_id)} 
                                   onDrop={this.onDrop} 
                                   changeParent={this.changeParent}
                                   type="note"
-                                  parentColor={this.getParentColor(note.match.params.note_id)}
+                                  // parentColor={this.getParentColor(note.match.params.note_id)}
                                   editNote={this.editNote}
                                   targetId={this.getParentId(note.match.params.note_id)}
                                   />
