@@ -5,6 +5,114 @@ import { DragSource, DropTarget } from 'react-dnd';
 import { flex } from '../../styles/styl-utils.js'
 import { LayerTwoTargetSource } from "./index"
 
+class NotePreview extends React.Component {
+    getFirstWord = (text, words=2) => {
+      // let firstWord = text.substr(0, text.indexOf(" "));
+      let firstWord = text.split(" ").slice(0,words).join(' ');
+      if(firstWord.length > 0){
+        return firstWord
+      } else {
+        return text
+      }
+    }
+
+    getFirstSen = (text) => {
+      // let firstSen = text.substr(0, text.indexOf("."));    
+      // or 
+      let firstSen = text
+      let firstWord = this.getFirstWord(text)
+      firstSen = firstSen.replace(firstWord, '')
+      if(firstSen !== firstWord){
+          return firstSen
+      } else{
+          return null
+      }
+    }
+
+    getNumberOfPocketItems(){
+        let pocket = this.props.layerOne.pocket_items_attached;
+        let slack = this.props.layerOne.slack_items_attached;
+        if(pocket && slack){
+            pocket = pocket.split(",")
+            slack = slack.split(",")
+            return pocket.concat(slack).length
+        } else if(pocket){
+            return pocket.split(",").length
+        } else if(slack){
+            return slack.split(",").length
+        }
+    }
+
+    goToNote = (e) => {
+      e.preventDefault()
+      this.props.redirect(`/note/${this.props.layerOne.id}`)
+    }
+    
+    render(){
+        const {
+            connectDragSource, 
+            connectDropTarget, 
+        } = this.props
+        if (this.props.layerOne){
+            return (
+                connectDragSource &&
+                connectDropTarget &&
+                <NotePreviewDiv 
+                  onClick={this.goToNote}
+                  innerRef={instance => {
+                    this.props.connectDragSource(instance);
+                    this.props.connectDropTarget(instance)
+                  }}
+                  color={this.props.layerOne.note_color} >
+                        <div
+                          key={this.props.key}
+                          index={this.props.index}
+                          className="note-link"
+                          id={this.props.layerOne.id}
+                          style={{background: this.props.hover ? 'lightgreen' : null}} >
+                            <div className="note-content">
+                                <div className="note-content-header">
+                                    <h3 className="note-content-title">       
+                                        {this.getFirstWord(this.props.layerOne.text_body)}
+                                    </h3>
+                                    {this.getNumberOfPocketItems() > 0 ? 
+                                      <div className="note-content-link-count">
+                                          {this.getNumberOfPocketItems()}
+                                      </div> : null
+                                    }
+                                </div>
+                                <p>
+                                    {this.getFirstSen(this.props.layerOne.text_body)}
+                                </p> 
+                            </div>
+                              <div className="layerTwoContainerAll"  >
+                                {this.props.allNotes.map(layerTwo => {
+                                    if (layerTwo.parent_id === this.props.layerOne.id){
+                                        return (
+                                              <div className="layerTwoContainer" key={layerTwo.id}>
+                                                  <LayerTwoTargetSource  
+                                                    type="note"
+                                                    onDrop={this.props.onDrop}
+                                                    layerTwo={layerTwo} 
+                                                    redirect={this.props.redirect}
+                                                    allNotes={this.props.allNotes}
+                                                    getFirstWord={this.getFirstWord} />
+                                              </div>
+                                              )
+                                    } else {
+                                        return null
+                                    }
+                                })}
+                            </div>                     
+                        </div>
+                      </NotePreviewDiv>        
+                )
+        } else {
+            return (null)
+        }
+    }
+}
+
 const targetObj = {
   drop(props, monitor) {
       //so this somehow allows other items to be dropped in a nested child component
@@ -56,125 +164,6 @@ const sourceObj = {
         props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
     },
 };
-
-class NotePreview extends React.Component {
-  getFirstWord = (text, words=2) => {
-    // let firstWord = text.substr(0, text.indexOf(" "));
-    let firstWord = text.split(" ").slice(0,words).join(' ');
-    // console.log(firstWord, 'word')
-    if(firstWord.length > 0){
-      return firstWord
-    } else {
-      return text
-    }
-  }
-
-  componentWillReceiveProps(){
-    // console.log("CWRP NotePreview")
-  }
-
-  getFirstSen = (text) => {
-    // let firstSen = text.substr(0, text.indexOf("."));    
-    // or 
-    let firstSen = text
-
-    let firstWord = this.getFirstWord(text)
-    firstSen = firstSen.replace(firstWord, '')
-
-    
-    if(firstSen !== firstWord){
-      return firstSen
-    } else{
-      return null
-    }
-  }
-
-  getNumberOfPocketItems(){
-      let pocket = this.props.layerOne.pocket_items_attached;
-      let slack = this.props.layerOne.slack_items_attached;
-      if(pocket && slack){
-          pocket = pocket.split(",")
-          slack = slack.split(",")
-          return pocket.concat(slack).length
-      } else if(pocket){
-          return pocket.split(",").length
-      } else if(slack){
-          return slack.split(",").length
-      }
-  }
-
-
-  goToNote = (e) => {
-    e.preventDefault()
-    // console.log('go to note', e.target.id, this.props.layerOne.id)
-    this.props.redirect(`/note/${this.props.layerOne.id}`)
-  }
-  
-  render(props){
-    // console.log(this.props.layerOne, "layerOne")
-      const {
-          connectDragSource, 
-          connectDropTarget, 
-      } = this.props
-      if (this.props.layerOne){
-          return (
-              connectDragSource &&
-              connectDropTarget &&
-              <NotePreviewDiv 
-                onClick={this.goToNote}
-                innerRef={instance => {
-                  this.props.connectDragSource(instance);
-                  this.props.connectDropTarget(instance)
-                }}
-                color={this.props.layerOne.note_color} >
-                      <div
-                        key={this.props.key}
-                        index={this.props.index}
-                        className="note-link"
-                        id={this.props.layerOne.id}
-                        style={{background: this.props.hover ? 'lightgreen' : null}} >
-                          <div className="note-content">
-                              <div className="note-content-header">
-                                  <h3 className="note-content-title">       
-                                      {this.getFirstWord(this.props.layerOne.text_body)}
-                                  </h3>
-                                  {this.getNumberOfPocketItems() > 0 ? 
-                                    <div className="note-content-link-count">
-                                        {this.getNumberOfPocketItems()}
-                                    </div> : null
-                                  }
-                              </div>
-                              <p>
-                                  {this.getFirstSen(this.props.layerOne.text_body)}
-                              </p> 
-                          </div>
-                            <div className="layerTwoContainerAll"  >
-                              {this.props.allNotes.map(layerTwo => {
-                                  if (layerTwo.parent_id === this.props.layerOne.id){
-                                      return (
-                                            <div className="layerTwoContainer" key={layerTwo.id}>
-                                                <LayerTwoTargetSource  
-                                                  type="note"
-                                                  onDrop={this.props.onDrop}
-                                                  layerTwo={layerTwo} 
-                                                  redirect={this.props.redirect}
-                                                  allNotes={this.props.allNotes}
-                                                  getFirstWord={this.getFirstWord} />
-                                            </div>
-                                            )
-                                  } else {
-                                      return null
-                                  }
-                              })}
-                          </div>                     
-                      </div>
-                    </NotePreviewDiv>        
-              )
-      } else {
-          return (null)
-      }
-  }
-}
 
 export default flow(
 
