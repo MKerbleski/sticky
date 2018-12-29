@@ -1,20 +1,15 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { start } from '../../styles/styl-utils.js'
 import { 
     NoteDetailChild, 
-    // SlackNote, 
+    SlackNote, 
     PocketNote, 
-    NoteDetailBody } from '../index.js';
-import { connect } from 'react-redux';
-
-// import SlackNote from '../../../../toBeDeleted/slack-note.js'
-// import PocketNote from '../../../../toBeDeleted/pocket-note.js'
-// import NoteDetailBody from './note-detail-body.js';
-
+    NoteDetailBody
+} from '../index.js';
 import { getAttachedItems } from '../../actions'
-import { SlackNote } from '../slack/index.js';
 
 class NoteDetailSelf extends React.Component {
     componentDidMount(){

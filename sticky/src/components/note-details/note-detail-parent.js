@@ -1,37 +1,35 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
-import { NoteDetailSelf } from '../index.js';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
-// import { start } from '../../styles/styl-utils.js'
-
-import { getAttachedItems } from '../../actions'
 import { connect } from 'react-redux';
-  
+import { Link } from 'react-router-dom';
+import { NoteDetailSelf } from '../index.js';
+import { getAttachedItems } from '../../actions'
 
- class NoteDetailParent extends React.Component{
+class NoteDetailParent extends React.Component{
     refreshNotes = (id) => {
         this.props.getAttachedItems(id)
     }
     render(){
         return (
-        <NoteDetailParentDiv 
-            innerRef={instance => this.props.connectDropTarget(instance)}
-            color={this.props.parentColor} style={{background: this.props.hover ? 'lightgreen' : null}}>
-            <Link 
-                onClick={() => this.refreshNotes(this.props.note.parent_id)}
-                className="link"
-                to={this.props.note.parent_id ? `/note/${this.props.note.parent_id}/` : `/all-notes/`}>back to parent note</Link>
-            <NoteDetailSelf
-                allNotes={this.props.allNotes}
-                allLinks={this.props.allLinks}
-                note={this.props.note} 
-                onDrop={this.props.onDrop} 
-                changeParent={this.props.changeParent}
-                targetId={this.props.note.id}
-                editNote={this.props.editNote}
-                type="note"/>
-        </NoteDetailParentDiv>
+            <NoteDetailParentDiv 
+                innerRef={instance => this.props.connectDropTarget(instance)}
+                color={this.props.parentColor} 
+                style={{background: this.props.hover ? 'lightgreen' : null}}>
+                <Link 
+                    onClick={() => this.refreshNotes(this.props.note.parent_id)}
+                    className="link"
+                    to={this.props.note.parent_id ? `/note/${this.props.note.parent_id}/` : `/all-notes/`}>back to parent note</Link>
+                <NoteDetailSelf
+                    allNotes={this.props.allNotes}
+                    allLinks={this.props.allLinks}
+                    note={this.props.note} 
+                    onDrop={this.props.onDrop} 
+                    changeParent={this.props.changeParent}
+                    targetId={this.props.note.id}
+                    editNote={this.props.editNote}
+                    type="note"/>
+            </NoteDetailParentDiv>
         )
     }
 }

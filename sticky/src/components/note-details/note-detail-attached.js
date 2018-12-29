@@ -1,4 +1,5 @@
 import React , { Component } from 'react'
+import { connect } from 'react-redux';
 import styled from 'styled-components'
 import { 
     SlackNote, 
@@ -8,16 +9,13 @@ import {
     getAttachedItems,
     attachPocketItem, 
 } from '../../actions'
-import { connect } from 'react-redux';
 
 class AttachedList extends Component {
-
     render(){
-        console.log("render AL", this.props)
         return (
         <AttachedListDiv> 
             {this.props.store.notes.attachedItems ? 
-           this.props.store.notes.attachedItems.map(item => {
+            this.props.store.notes.attachedItems.map(item => {
                if(item.slack_user_id){
                    return (
                        <SlackNote attachPocketItem={this.props.attachPocketItem} key={item.uuid} note={item} />

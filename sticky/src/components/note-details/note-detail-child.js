@@ -45,50 +45,47 @@ class NoteDetailChild extends React.Component {
           return (
               connectDragSource &&
               connectDropTarget &&
-              connectDragSource(
-              connectDropTarget(
-                  <div className="note-detail-child-container">
-                    <NoteDetailChildDiv color={this.props.color} >
-                      <Link
-                        onClick={() => this.refreshNotes(this.props.layerOne.id)}
-                        key={this.props.key}
-                        index={this.props.index}
-                        className="note-link"
-                        id={this.props.layerOne.id}
-                        to={`/note/${this.props.layerOne.id}`}
-                        style={{background: this.props.hover ? 'lightgreen' : null}}>
-                            <div className="noteContent">
-                              <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.text_body)}</h3>
-                              <p>{this.getFirstSen(this.props.layerOne.text_body)}</p> 
-                            </div>
-                            <div className="layerTwoContainerAll"  >
-                              {this.props.allNotes.map(layerTwo => {
-                                  if (layerTwo.parent_id === this.props.layerOne.id){return (
-                                              <LayerTwoTargetSource  
-                                                key={layerTwo.id}
-                                                type="note"
-                                                onDrop={this.props.onDrop} 
-                                                layerTwo={layerTwo} 
-                                                allNotes={this.props.allNotes}
-                                                getFirstWord={this.getFirstWord} />
-                                          )
-                                  } else {
-                                      return null
-                                  }
-                              })}
-                          </div>                     
-                      </Link>
-                    </NoteDetailChildDiv>        
-                  </div>
-            )
-            )
-        )
+              <NoteDetailChildDiv 
+                innerRef={instance => {
+                  this.props.connectDragSource(instance);
+                  this.props.connectDropTarget(instance);}}
+                color={this.props.color} >
+                <Link
+                  onClick={() => this.refreshNotes(this.props.layerOne.id)}
+                  key={this.props.key}
+                  index={this.props.index}
+                  className="note-link"
+                  id={this.props.layerOne.id}
+                  to={`/note/${this.props.layerOne.id}`}
+                  style={{background: this.props.hover ? 'lightgreen' : null}}>
+                      <div className="noteContent">
+                          <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.text_body)}</h3>
+                          <p>{this.getFirstSen(this.props.layerOne.text_body)}</p> 
+                      </div>
+                      <div className="layerTwoContainerAll">
+                        {this.props.allNotes.map(layerTwo => {
+                            if (layerTwo.parent_id === this.props.layerOne.id){return (
+                                        <LayerTwoTargetSource  
+                                          key={layerTwo.id}
+                                          type="note"
+                                          onDrop={this.props.onDrop} 
+                                          layerTwo={layerTwo} 
+                                          allNotes={this.props.allNotes}
+                                          getFirstWord={this.getFirstWord} />
+                                    )
+                            } else {
+                                return null
+                            }
+                        })}
+                      </div>                     
+                </Link>
+              </NoteDetailChildDiv>        
+          )
       } else {
           return (null)
       }
   }
 }
-
 
 const targetObj = {
   drop(props, monitor) {
@@ -121,7 +118,7 @@ const sourceObj = {
     }
     const sourceId= props.layerOne.id
     const dropResult = monitor.getDropResult();
-    console.log(sourceId,  dropResult, dropResult.targetId)
+    // console.log(sourceId,  dropResult, dropResult.targetId)
     props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
   },
 };
