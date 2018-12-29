@@ -4,10 +4,9 @@ import { Link } from 'react-router-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import { connect } from 'react-redux';
-import { LayerTwoTargetSource } from "../index"
 import { getAttachedItems } from '../../actions'
 import { flex, start } from '../../styles/styl-utils.js'
-import { NoteDetailGrandChild } from '.';
+import { NoteDetailGrandChild } from './index';
 
 class NoteDetailChild extends React.Component {
   getFirstWord = (text, words=2) => {
@@ -31,21 +30,16 @@ class NoteDetailChild extends React.Component {
   }
   
   refreshNotes = (e, id) => {
-     e.preventDefault()
+      e.preventDefault()
       e.stopPropagation()
       this.props.getAttachedItems(id)
   }
 
   render(props){
-      const {
-          connectDragSource, 
-          connectDropTarget, 
-      } = this.props
-
       if (this.props.layerOne){
           return (
-              connectDragSource &&
-              connectDropTarget &&
+              this.props.connectDragSource &&
+              this.props.connectDropTarget &&
               <NoteDetailChildDiv 
                 innerRef={instance => {
                   this.props.connectDragSource(instance);

@@ -36,27 +36,23 @@ class NotePreview extends React.Component {
             pocket = pocket.split(",")
             slack = slack.split(",")
             return pocket.concat(slack).length
-        } else if(pocket){
+        } else if (pocket){
             return pocket.split(",").length
-        } else if(slack){
+        } else if (slack){
             return slack.split(",").length
         }
     }
 
     goToNote = (e) => {
-      e.preventDefault()
-      this.props.redirect(`/note/${this.props.layerOne.id}`)
+        e.preventDefault()
+        this.props.redirect(`/note/${this.props.layerOne.id}`)
     }
     
     render(){
-        const {
-            connectDragSource, 
-            connectDropTarget, 
-        } = this.props
         if (this.props.layerOne){
             return (
-                connectDragSource &&
-                connectDropTarget &&
+                this.props.connectDragSource &&
+                this.props.connectDropTarget &&
                 <NotePreviewDiv 
                   onClick={this.goToNote}
                   innerRef={instance => {
