@@ -106,6 +106,7 @@ const RightMenuDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  box-sizing: border-box;
   height: 99%;
   .right-menu-preview{
       ${'' /* ${start('blue')} */}

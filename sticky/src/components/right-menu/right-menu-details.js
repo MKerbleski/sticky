@@ -55,7 +55,6 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenuDetails)
 
 const RightMenuDetailsDiv = styled.div`
-    ${'' /* height: 100%; */}
     ${start('purple')}
     margin: 5px;
     ${ menu() }

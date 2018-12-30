@@ -327,17 +327,5 @@ const mapDispatchToProps = {
           ${'' /* height: 94vh; */}
           overflow: auto;
         }
-        .delete {
-          ${'' /* border: 1px solid red; */}
-          display: flex;
-          width: 100vw;
-          ${'' /* height: 100vh; */}
-          background-color:rgba(215,215,215,0.5);
-          position: fixed;
-          z-index: 10;
-          justify-content: center;
-          align-items: center;
-        }
      }
-     
  `;
