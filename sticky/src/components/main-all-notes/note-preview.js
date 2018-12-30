@@ -28,7 +28,18 @@ class NotePreview extends React.Component {
 
     goToNote = (e) => {
         e.preventDefault()
-        this.props.redirect(`/note/${this.props.layerOne.id}`)
+        if(!this.props.deleteBin){
+          this.props.redirect(`/note/${this.props.layerOne.id}`)
+        }
+    }
+
+    clickHandler = (e) => {
+      e.preventDefault()
+      if(e.target.name === "delete"){
+        console.log(e.target.name, "was clicked!")
+      } else if (e.target.name === "restore"){
+        console.log(e.target.name, "was clicked!")
+      }
     }
     
     render(){
@@ -40,11 +51,9 @@ class NotePreview extends React.Component {
                   onClick={this.goToNote}
                   innerRef={instance => {
                     this.props.connectDragSource(instance);
-                    this.props.connectDropTarget(instance)
-                  }}
+                    this.props.connectDropTarget(instance)}}
                   color={this.props.layerOne.note_color} >
-                        <div
-                          key={this.props.key}
+                        <div key={this.props.key}
                           index={this.props.index}
                           className="note-link"
                           id={this.props.layerOne.id}
@@ -54,9 +63,15 @@ class NotePreview extends React.Component {
                                     <h3 className="note-content-title">       
                                         {this.getFirstWord(this.props.layerOne.text_body)}
                                     </h3>
-                                    
-                                        {this.props.layerOne.total_items_attached ? <div className="note-content-link-count">{this.props.layerOne.total_items_attached}</div> : null }
-                                    
+                                    {this.props.layerOne.is_deleted ?
+                                      <div>
+                                        <button name="restore" onClick={this.clickHandler}>RESTORE</button>
+                                        <button name="delete" onClick={this.clickHandler}>DELETE</button>
+                                      </div> : null}
+                                    {this.props.layerOne.total_items_attached ? 
+                                      <div className="note-content-link-count">
+                                          {this.props.layerOne.total_items_attached}
+                                      </div> : null }
                                 </div>
                                 <p>
                                     {this.getFirstSen(this.props.layerOne.text_body)}

@@ -36,12 +36,12 @@ class AllNotes extends Component {
     return (
         <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}
         style={{background: this.props.hover ? 'lightgreen' : null, background: this.props.deleteBin ? 'red' : null}}>
-              {this.props.store.notes.notes.length > 0 ? null :
+              {this.props.store.notes.notes.length > 0 && !this.props.deleteBin ? null :
                 <div>
                   <h3>Welcome!</h3>
                   <p>Click the plus to the left to create a new note</p>
                 </div> }
-              {this.props.showNewNote ? <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> : null}        
+              {this.props.showNewNote && !this.props.deleteBin ? <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> : null}        
               {this.props.store.notes.notes.map(layerOne => {
                   if(layerOne.parent_id === null){
                           return (
@@ -53,6 +53,7 @@ class AllNotes extends Component {
                                 layerOne={layerOne}
                                 allNotes={this.props.store.notes.notes}
                                 redirect={this.props.redirect}
+                                deleteBin={this.props.deleteBin ? true : false}
                                 // allLinks={this.props.allLinks.filter(link => {
                                 //     return (
                                 //         +link.parent_id === +layerOne.id
