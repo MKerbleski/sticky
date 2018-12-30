@@ -78,11 +78,10 @@ const SlackNote = (props) => {
             }
         } else if (target_info.type === "note") { 
             let total_items_attached = target_info.total_items_attached
-            console.log("total_items attached", total_items_attached)
             const sticky_note_id = target_info.targetId
             let slack_items_attached = target_info.slack_items_attached
             if(!slack_items_attached){
-                console.log(" NO slack_items_attached")
+                console.log("NO slack_items_attached")
                 let noteEdit = {slack_items_attached: `${slack_item_id}`, total_items_attached: 1}
                 props.attachPocketItem(noteEdit, sticky_note_id)
             } else {

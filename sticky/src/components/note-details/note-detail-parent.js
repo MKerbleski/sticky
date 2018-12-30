@@ -83,10 +83,9 @@ const NoteDetailParentDiv = styled.div`
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    height: 94vh;
+    height: 95vh;
     overflow: auto;
     .link {
-        ${'' /* border: 1px solid red; */}
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -94,6 +93,5 @@ const NoteDetailParentDiv = styled.div`
         padding: 15px;
         margin: 8px;
         color: gray;
-        width: 100%;
     }
 `;

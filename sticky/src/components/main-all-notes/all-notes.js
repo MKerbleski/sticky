@@ -30,10 +30,8 @@ class AllNotes extends Component {
   render(props) {    
     // console.log(this.props.store.notes.notes.length)
     return (
-        <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}>
-          <div 
-            className="all-notes" 
-            style={{background: this.props.hover ? 'lightgreen' : null}}>
+        <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}
+        style={{background: this.props.hover ? 'lightgreen' : null}}>
               {this.props.store.notes.notes.length > 0 ? null :
                 <div>
                   <h3>Welcome!</h3>
@@ -62,7 +60,6 @@ class AllNotes extends Component {
                       return null
                       }
               })}
-          </div>
         </AllNotesDiv>
       )
   }
@@ -107,24 +104,22 @@ const mapDispatchToProps = {
 export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, mapDispatchToProps)(AllNotes))
 
 const AllNotesDiv = styled.div`
-${'' /* border: 1px solid green; */}
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-  ${'' /* background-color: #2a465c; */}
-  color: black;
-  overflow: auto;
-  .all-notes {
-    ${'' /* border: 1px solid blue; */}
+    border: 1px solid green;
+    color: black;
+    overflow: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: flex-start;
     padding: 20px;
-    ${'' /* height: 100%; */}
-    .note-link{
-      text-decoration: none;
-    }
-  }
+    /* add scroll bar styling */
 `;
+
+
+
+
+
+    /* .note-link{
+        text-decoration: none;
+    } */

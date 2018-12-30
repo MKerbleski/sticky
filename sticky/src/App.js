@@ -300,27 +300,13 @@ const mapDispatchToProps = {
  export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 
  const AppDiv = styled.div`
-     ${start('red')}
+      display: flex;
       flex-direction: column;
       background-color: white;
       height: 100vh;
-      width: 98vw;
+      width: 100vw;
       box-sizing: border-box;
-      .all-notes {
-        box-sizing: border-box;
-        ${'' /* border: 1px solid red; */}
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        align-items: flex-start;
-        padding: 20px;
-        height: 0 auto;
-        .note-link{
-          text-decoration: none;
-        }
-      }
-      .top{
+      .top {
         height: 5vh;
       }
      .app-bottom {
