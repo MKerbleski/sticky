@@ -212,30 +212,24 @@ class App extends Component {
                             exact
                             path="/all-notes" 
                             render={ () => {
-                                return (
-                                  <AllNotes
-                                    onDrop={this.onDrop} 
-                                    // changeParent={this.changeParent}
-                                    // notes={this.props.state.notes}
-                                    links={this.props.store.notes.links}
-                                    // username={this.props.state.username}
-                                    // getNotes={this.props.getNotes}
-                                    // getLinks={this.props.getLinks}
-                                    showDetailMenu={this.showDetailMenu}
-                                    showNewNote={this.state.showNewNote}
-                                    toggleNewNote={this.toggleNewNote}
-                                    // newNote={this.newNote}
-                                    redirect={this.redirect} />
-                                )
-                            }}
-                          ></Route>
-
+                                return <AllNotes
+                                          onDrop={this.onDrop} 
+                                          // changeParent={this.changeParent}
+                                          // notes={this.props.state.notes}
+                                          // links={this.props.store.notes.links}
+                                          // username={this.props.state.username}
+                                          // getNotes={this.props.getNotes}
+                                          // getLinks={this.props.getLinks}
+                                          showDetailMenu={this.showDetailMenu}
+                                          showNewNote={this.state.showNewNote}
+                                          toggleNewNote={this.toggleNewNote}
+                                          // newNote={this.newNote}
+                                          redirect={this.redirect} /> }} />
                           <Route
                             exact={!this.state.deleteEnabled}
                             path="/note/:note_id"
                             render={ (note) => {
-                              return (
-                                <NoteDetailParent
+                              return <NoteDetailParent
                                   redirect={this.redirect}
                                   allNotes={this.props.store.notes.notes}
                                   // allLinks={this.props.store.notes.links}
@@ -246,34 +240,27 @@ class App extends Component {
                                   // parentColor={this.getParentColor(note.match.params.note_id)}
                                   editNote={this.editNote}
                                   targetId={this.getParentId(note.match.params.note_id)}
-                                  />
-                              )
-                            }}></Route>
+                                  />}} />
 
                           <Route
                             path="/settings"
-                            render={() => {
-                              return (
-                                <Settings />
-                              )
-                            }}
-                          ></Route>
+                            component={Settings} />
                           
                           <Route
                             path="/deleted"
                             render={() => {
-                              return (
-                                <Deleted 
-                                 editNote={this.editNote} />
-                              )
-                            }}
-                          ></Route>
+                              return <AllNotes 
+                                  deleteBin
+                                  onDrop={this.onDrop} 
+                                  showDetailMenu={this.showDetailMenu}
+                                  showNewNote={this.state.showNewNote}
+                                  toggleNewNote={this.toggleNewNote}
+                                  redirect={this.redirect} />
+                            }} />
                     </React.Fragment> 
                 </div> {/*   center-display    */}
                 
                 {this.props.store.user.userData ? <RightMenu 
-                  // slackStars={this.props.state.slackStars}
-                  // slack={this.props.state.slackToken}
                   onDrop={this.onDrop} 
                    /> : null}
             </div> : 
@@ -310,21 +297,16 @@ const mapDispatchToProps = {
         height: 5vh;
       }
      .app-bottom {
-        ${'' /* border: 1px solid blue; */}
-        ${'' /* background: black; */}
         display: flex;
         flex-direction: row;
         z-index: 0;
         box-sizing: border-box;
         height: 95vh;
         .center-display{
-          ${'' /* border: 1px solid blue; */}
-          ${'' /* background-color: black; */}
           width: 100%;
           display: flex;
           flex-direction: column;
           flex-wrap: wrap;
-          ${'' /* height: 94vh; */}
           overflow: auto;
         }
      }

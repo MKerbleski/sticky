@@ -7,7 +7,9 @@ import {
   NotePreview } from './index';
 import { 
   getLinks,
-  getNotes, } from '../../actions'
+  getNotes,
+  getDeletedNotes,
+} from '../../actions'
 
 class AllNotes extends Component {
   constructor(props){
@@ -20,18 +22,20 @@ class AllNotes extends Component {
 
   componentDidMount(){
     if(localStorage.getItem('JWT')){
-      // this.props.getLinks();
-      this.props.getNotes();
+      if(this.props.deleteBin){
+        this.props.getDeletedNotes();
+      } else {
+        this.props.getNotes();
+      }
     } else {
       this.props.history.push('/welcome/login')
     }
   }
 
-  render(props) {    
-    // console.log(this.props.store.notes.notes.length)
+  render(pops) {    
     return (
         <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}
-        style={{background: this.props.hover ? 'lightgreen' : null}}>
+        style={{background: this.props.hover ? 'lightgreen' : null, background: this.props.deleteBin ? 'red' : null}}>
               {this.props.store.notes.notes.length > 0 ? null :
                 <div>
                   <h3>Welcome!</h3>
@@ -94,8 +98,9 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-  getLinks,
+  // getLinks,
   getNotes,
+  getDeletedNotes
 }
 
 export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, mapDispatchToProps)(AllNotes))
