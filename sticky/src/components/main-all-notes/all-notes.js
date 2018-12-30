@@ -111,18 +111,10 @@ const AllNotesDiv = styled.div`
     align-items: flex-start;
     padding: 20px;
     &::-webkit-scrollbar {
-            width: 6px;
-            &-thumb{
-                background-color: gray;
-                border-radius: 25px;
-            }
+        width: 6px;
+        &-thumb{
+            background-color: gray;
+            border-radius: 25px;
         }
+    }
 `;
-
-
-
-
-
-    /* .note-link{
-        text-decoration: none;
-    } */

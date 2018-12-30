@@ -72,6 +72,13 @@ const RightMenuDetailsDiv = styled.div`
     .app-list{
         overflow: auto;
         width: 100%;
+        &::-webkit-scrollbar {
+        width: 6px;
+        &-thumb{
+            background-color: gray;
+            border-radius: 25px;
+        }
+    }
     }
     .connect-apis{
         border: 1px solid purple;
