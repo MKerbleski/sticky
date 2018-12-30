@@ -53,8 +53,8 @@ const SlackNote = (props) => {
         }
         const slack_item_id = props.slackItem.id;
         const target_info = monitor.getDropResult();       
+        let stickyNote = props.stickyNote;
         if(target_info.type === "deleteBin"){
-            let stickyNote = props.stickyNote;
             let tempArr = props.store.notes.attachedItems.map(obj => {
                 return obj.id
             })
@@ -77,6 +77,9 @@ const SlackNote = (props) => {
                 props.attachPocketItem(noteEdit, stickyNote.id) 
             }
         } else if (target_info.type === "note") { 
+            if(props.stickyNote){
+                console.log("came from another note")
+            }
             let total_items_attached = target_info.total_items_attached
             const sticky_note_id = target_info.targetId
             let slack_items_attached = target_info.slack_items_attached

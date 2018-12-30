@@ -68,15 +68,12 @@ class AllNotes extends Component {
 const targetObj = {
   hover(props, component){
       if(props.hoverShallow){
-        //   console.log('hoverShallow')
       }
   },
 
   drop(props, monitor) {
     const hover = monitor.isOver({shallow:false})
-    
     if(hover){
-        // console.log('target props', props, hover)
         const { type } = props;
         return ({
             type,

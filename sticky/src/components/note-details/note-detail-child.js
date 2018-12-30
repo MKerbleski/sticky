@@ -53,10 +53,14 @@ class NoteDetailChild extends React.Component {
                   id={this.props.layerOne.id}
                   to={`/note/${this.props.layerOne.id}`}
                   style={{background: this.props.hover ? 'lightgreen' : null}}>
-                      <div className="noteContent">
+                      <div className="note-content-header">
                           <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.text_body)}</h3>
-                          <p>{this.getFirstSen(this.props.layerOne.text_body)}</p> 
+                          {this.props.layerOne.total_items_attached ? 
+                            <div className="note-content-link-count"> 
+                              {this.props.layerOne.total_items_attached}
+                            </div> : null }
                       </div>
+                      <p>{this.getFirstSen(this.props.layerOne.text_body)}</p> 
                       <div className="layerTwoContainerAll">
                           {this.props.allNotes.map(layerTwo => {
                               if (layerTwo.parent_id === this.props.layerOne.id){
@@ -143,6 +147,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 )(NoteDetailChild));
 
 const NoteDetailChildDiv = styled.div`
+/* similarities to note preview */
   ${start('pink')}
   height: 99%;
   width: 100%;
@@ -152,17 +157,38 @@ const NoteDetailChildDiv = styled.div`
   align-items: center;
   .note-link{
     ${start('red')}
-    ${'' /* border: 1px solid green; */}
-    ${ flex('column') }
+    display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
     width: 95%;
     height: 100%;
     padding: 10px;
     align-items: space-around;
     justify-content: flex-start;
-    background-color: ${props => props.color};
-    ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
     background-color: wheat;
     text-decoration: none;
+    .note-content-header{
+        border: 1px solid pink;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+          .note-content-title {
+            border: 1px solid green;
+            margin: 0px 10px 5px 0;
+            text-decoration: none;
+            text-align: left;
+          }
+          .note-content-link-count {
+            border: .5px solid black;
+            border-radius: 50px;
+            height: 20px;
+            width: 20px;
+            text-align: center;
+            background: lightblue;
+          }
       .noteContent{
       ${start()}
       flex-direction: column;
