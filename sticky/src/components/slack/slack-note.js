@@ -53,6 +53,10 @@ const SlackNote = (props) => {
         }
         const slack_item_id = props.slackItem.id;
         const target_info = monitor.getDropResult();
+        console.log(target_info)
+        let total_items_attached = target_info.total_items_attached
+        console.log(total_items_attached)
+
         if(target_info.type === "deleteBin"){
             let stickyNote = props.stickyNote;
             let tempArr = props.store.notes.attachedItems.map(obj => {
@@ -66,31 +70,33 @@ const SlackNote = (props) => {
                 if(index > -1){
                     tempArr.splice(index, 1)
                 }
+                total_items_attached--
                 let newStr = tempArr.toString()
-                let noteEdit = {slack_items_attached: newStr}
+                let noteEdit = {slack_items_attached: newStr, total_items_attached: total_items_attached}
                 props.attachPocketItem(noteEdit, stickyNote.id) 
             }
         } else if (target_info.type === "note") { 
             const sticky_note_id = target_info.targetId
             let slack_items_attached = target_info.slack_items_attached
-            if(slack_items_attached.length === 0){
-                let noteEdit = {slack_items_attached: `${slack_item_id}`}
+            if(!slack_items_attached){
+                let noteEdit = {slack_items_attached: `${slack_item_id}`, total_items_attached: 1}
                 props.attachPocketItem(noteEdit, sticky_note_id)
             } else {
-                let tempArr = slack_items_attached.map(obj => {
-                    return obj.id
-                })
-                let repeat = tempArr.filter(note => {
-                    return +note === slack_item_id
-                })
-                if(repeat.length > 0){
-                    //do nothing
-                    console.log("REPEAT no action taken, alert needed")
-                    window.alert("Item is already attached to this note. No duplicate notes")
-                } else {
-                    let newAttached = tempArr + `,${slack_item_id}`
-                    let noteEdit = {slack_items_attached: newAttached}
-                    props.attachPocketItem(noteEdit, sticky_note_id)
+                let repeat = 0;
+                if(slack_items_attached && slack_items_attached.length > 0){
+                    let tempArr = slack_items_attached.split(',');
+                    repeat = tempArr.filter(note => {
+                        return +note === slack_item_id
+                    })
+                    if(repeat.length > 0){
+                        console.log("REPEAT no action taken, alert needed")
+                        window.alert("Item is already attached to this note. No duplicate notes")
+                    } else {
+                        total_items_attached++
+                        let newAttached = tempArr + `,${slack_item_id}`
+                        let noteEdit = {slack_items_attached: newAttached, total_items_attached: total_items_attached}
+                        props.attachPocketItem(noteEdit, sticky_note_id)
+                    }
                 }
             }
         }

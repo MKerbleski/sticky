@@ -29,19 +29,19 @@ class NotePreview extends React.Component {
       }
     }
 
-    getNumberOfPocketItems(){
-        let pocket = this.props.layerOne.pocket_items_attached;
-        let slack = this.props.layerOne.slack_items_attached;
-        if(pocket && slack){
-            pocket = pocket.split(",")
-            slack = slack.split(",")
-            return pocket.concat(slack).length
-        } else if (pocket){
-            return pocket.split(",").length
-        } else if (slack){
-            return slack.split(",").length
-        }
-    }
+    // getNumberOfPocketItems(){
+    //     let pocket = this.props.layerOne.pocket_items_attached;
+    //     let slack = this.props.layerOne.slack_items_attached;
+    //     if(pocket && slack){
+    //         pocket = pocket.split(",")
+    //         slack = slack.split(",")
+    //         return pocket.concat(slack).length
+    //     } else if (pocket){
+    //         return pocket.split(",").length
+    //     } else if (slack){
+    //         return slack.split(",").length
+    //     }
+    // }
 
     goToNote = (e) => {
         e.preventDefault()
@@ -49,6 +49,7 @@ class NotePreview extends React.Component {
     }
     
     render(){
+        console.log(this.props)
         if (this.props.layerOne){
             return (
                 this.props.connectDragSource &&
@@ -71,11 +72,9 @@ class NotePreview extends React.Component {
                                     <h3 className="note-content-title">       
                                         {this.getFirstWord(this.props.layerOne.text_body)}
                                     </h3>
-                                    {this.getNumberOfPocketItems() > 0 ? 
-                                      <div className="note-content-link-count">
-                                          {this.getNumberOfPocketItems()}
-                                      </div> : null
-                                    }
+                                    
+                                        {this.props.layerOne.total_items_attached ? <div className="note-content-link-count">{this.props.layerOne.total_items_attached}</div> : null }
+                                    
                                 </div>
                                 <p>
                                     {this.getFirstSen(this.props.layerOne.text_body)}
@@ -118,22 +117,18 @@ const targetObj = {
  //              console.log(hoverfalse)
  //    console.log(props)
   if(hover){//this disables layer one droping if there is a nested child
-
+    console.log(props.layerOne)
      const targetId = props.layerOne.id;
      const type = props.type;
-     let pocket_items_attached;
-    //  console.log(props.layerOne)
-    //  if(props.layerOne.pocket_items_attached){
-    // } else {
-    //   pocket_items_attached = null;
-    // }
-    pocket_items_attached = props.layerOne.pocket_items_attached;
+     const pocket_items_attached = props.layerOne.pocket_items_attached;
      const slack_items_attached = props.layerOne.slack_items_attached;
+     const total_items_attached = props.layerOne.total_items_attached;
      return ({
         targetId,
         type,
         slack_items_attached,
         pocket_items_attached,
+        total_items_attached,
      });
  }
  },

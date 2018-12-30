@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAttachedItems } from './index'
+import { getAttachedItems, getNotes } from './index'
 
 export const ATTACHING_POCKET_ITEM = 'ATTACHING_POCKET_ITEM';
 export const FETCHING_POCKET_LIST = 'FETCHING_POCKET_List';
@@ -25,6 +25,7 @@ export const attachPocketItem = (newAttached, sticky_note_id) => {
         .then(res => {
           dispatch({type: POCKET_ITEM_ATTACHED, payload: res.data})
           dispatch(getAttachedItems(sticky_note_id));
+          dispatch(getNotes());
         })
         .catch(err => {
           console.log("error returnd from notes/edit endpoint", err)
