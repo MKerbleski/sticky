@@ -9,7 +9,7 @@ export const POCKET_ERROR = 'POCKET_ERROR';
 export const ERROR = 'ERROR';
 
 //NEEDS TO BE RENAMED AND GO IN NOTES
-export const attachPocketItem = (newAttached, sticky_note_id) => {
+export const attachPocketItem = (newAttached, sticky_note_id, parent_id=null) => {
   console.log("attachedPocketItem", newAttached)
     return function(dispatch){
       if(localStorage.getItem('JWT')){
@@ -24,7 +24,11 @@ export const attachPocketItem = (newAttached, sticky_note_id) => {
         ) 
         .then(res => {
           dispatch({type: POCKET_ITEM_ATTACHED, payload: res.data})
-          dispatch(getAttachedItems(sticky_note_id));
+          if(parent_id === null){
+            dispatch(getAttachedItems(sticky_note_id));
+          } else {
+            dispatch(getAttachedItems(parent_id));
+          }
           dispatch(getNotes());
         })
         .catch(err => {
