@@ -25,7 +25,7 @@ import {
     getDeletedNotes,
     getUserData,
 } from './actions';
-import { start } from './styles/styl-utils.js'
+import {  } from './styles/styl-utils.js'
 
 class App extends Component {
   constructor(){

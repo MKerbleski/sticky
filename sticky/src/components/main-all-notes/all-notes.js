@@ -104,7 +104,7 @@ const mapDispatchToProps = {
 export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, mapDispatchToProps)(AllNotes))
 
 const AllNotesDiv = styled.div`
-    border: 1px solid green;
+    /* border: 1px solid green; */
     color: black;
     overflow: auto;
     display: flex;
@@ -113,7 +113,13 @@ const AllNotesDiv = styled.div`
     justify-content: space-around;
     align-items: flex-start;
     padding: 20px;
-    /* add scroll bar styling */
+    &::-webkit-scrollbar {
+            width: 6px;
+            &-thumb{
+                background-color: gray;
+                border-radius: 25px;
+            }
+        }
 `;
 
 
