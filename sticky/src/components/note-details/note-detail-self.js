@@ -17,6 +17,7 @@ class NoteDetailSelf extends React.Component {
     }
 
     render(){
+        console.log(this.props)
         if(this.props.note){
             return (
                 <NoteDetailSelfDiv 
@@ -82,13 +83,16 @@ const targetObj = {
         const hover = monitor.isOver({shallow: false})
         
         if(hover){
-            // console.log('target props', props, hover)
             const { type, targetId } = props;
             const pocket_items_attached = props.note.pocket_items_attached;
-            console.log(props)
-            const slack_items_attached = props.store.notes.attachedItems;
+            const total_items_attached = props.note.total_items_attached;
+            const slack_items_attached = props.note.slack_items_attached;
             return ({
-                type, targetId, pocket_items_attached, slack_items_attached
+                type, 
+                targetId, 
+                pocket_items_attached, 
+                slack_items_attached,
+                total_items_attached
             });
         }
     }

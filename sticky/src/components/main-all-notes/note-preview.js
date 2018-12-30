@@ -112,25 +112,20 @@ const targetObj = {
   drop(props, monitor) {
       //so this somehow allows other items to be dropped in a nested child component
     const hover =  monitor.isOver({shallow:true})
-             //  const hoverfalse =  monitor.isOver({shallow:false})
- //              console.log(hover)
- //              console.log(hoverfalse)
- //    console.log(props)
-  if(hover){//this disables layer one droping if there is a nested child
-    console.log(props.layerOne)
-     const targetId = props.layerOne.id;
-     const type = props.type;
-     const pocket_items_attached = props.layerOne.pocket_items_attached;
-     const slack_items_attached = props.layerOne.slack_items_attached;
-     const total_items_attached = props.layerOne.total_items_attached;
-     return ({
-        targetId,
-        type,
-        slack_items_attached,
-        pocket_items_attached,
-        total_items_attached,
-     });
- }
+    if(hover){//this disables layer one droping if there is a nested child
+        const targetId = props.layerOne.id;
+        const type = props.type;
+        const pocket_items_attached = props.layerOne.pocket_items_attached;
+        const slack_items_attached = props.layerOne.slack_items_attached;
+        const total_items_attached = props.layerOne.total_items_attached;
+        return ({
+            targetId,
+            type,
+            slack_items_attached,
+            pocket_items_attached,
+            total_items_attached,
+        });
+    }
  },
  hover(props, monitor){
  }

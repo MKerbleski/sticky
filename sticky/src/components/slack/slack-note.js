@@ -52,16 +52,13 @@ const SlackNote = (props) => {
             return;
         }
         const slack_item_id = props.slackItem.id;
-        const target_info = monitor.getDropResult();
-        console.log(target_info)
-        let total_items_attached = target_info.total_items_attached
-        console.log(total_items_attached)
-
+        const target_info = monitor.getDropResult();       
         if(target_info.type === "deleteBin"){
             let stickyNote = props.stickyNote;
             let tempArr = props.store.notes.attachedItems.map(obj => {
                 return obj.id
             })
+            let total_items_attached = stickyNote.total_items_attached
             if(tempArr.length === 1){
                 let noteEdit = {slack_items_attached: null}
                 props.attachPocketItem(noteEdit, stickyNote.id)
@@ -70,20 +67,28 @@ const SlackNote = (props) => {
                 if(index > -1){
                     tempArr.splice(index, 1)
                 }
-                total_items_attached--
+                if(total_items_attached > 0){
+                    total_items_attached--
+                } else {
+                    total_items_attached = 0
+                }
                 let newStr = tempArr.toString()
                 let noteEdit = {slack_items_attached: newStr, total_items_attached: total_items_attached}
                 props.attachPocketItem(noteEdit, stickyNote.id) 
             }
         } else if (target_info.type === "note") { 
+            let total_items_attached = target_info.total_items_attached
+            console.log("total_items attached", total_items_attached)
             const sticky_note_id = target_info.targetId
             let slack_items_attached = target_info.slack_items_attached
             if(!slack_items_attached){
+                console.log(" NO slack_items_attached")
                 let noteEdit = {slack_items_attached: `${slack_item_id}`, total_items_attached: 1}
                 props.attachPocketItem(noteEdit, sticky_note_id)
             } else {
                 let repeat = 0;
                 if(slack_items_attached && slack_items_attached.length > 0){
+                    console.log(slack_items_attached)
                     let tempArr = slack_items_attached.split(',');
                     repeat = tempArr.filter(note => {
                         return +note === slack_item_id
