@@ -90,18 +90,16 @@ const SlackNote = (props) => {
                 console.log("NO slack_items_attached")
                 let noteEdit = {slack_items_attached: `${slack_item_id}`, total_items_attached: 1}
                 props.attachPocketItem(noteEdit, sticky_note_id)
-                total_items_attached++
-                        if(props.stickyNote){
-                            console.log("came from another note", props.stickyNote)
-                            removeAttachment()
-                            props.attachPocketItem(noteEdit, sticky_note_id, props.stickyNote.id)
-                        } else {
-                            props.attachPocketItem(noteEdit, sticky_note_id)
-                        }
+                if(props.stickyNote){
+                    console.log("came from another note", props.stickyNote)
+                    removeAttachment()
+                    props.attachPocketItem(noteEdit, sticky_note_id, props.stickyNote.id)
+                } else {
+                    props.attachPocketItem(noteEdit, sticky_note_id)
+                }
             } else {
                 let repeat = 0;
                 if(slack_items_attached && slack_items_attached.length > 0){
-                    console.log(slack_items_attached)
                     let tempArr = slack_items_attached.split(',');
                     repeat = tempArr.filter(note => {
                         return +note === slack_item_id

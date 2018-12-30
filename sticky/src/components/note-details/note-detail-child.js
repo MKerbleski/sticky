@@ -36,6 +36,7 @@ class NoteDetailChild extends React.Component {
   }
 
   render(){
+    console.log(this.props)
       if (this.props.layerOne){
           return (
               this.props.connectDragSource &&
@@ -94,8 +95,13 @@ const targetObj = {
         const type = props.type;
         const pocket_items_attached = props.layerOne.pocket_items_attached;
         const slack_items_attached = props.layerOne.slack_items_attached;
+        const total_items_attached = props.layerOne.total_items_attached;
         return ({
-            targetId, type, pocket_items_attached, slack_items_attached
+            targetId, 
+            type, 
+            pocket_items_attached, 
+            slack_items_attached,
+            total_items_attached,
         });
     }
   },
