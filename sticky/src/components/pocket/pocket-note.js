@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
 import { DragSource } from 'react-dnd';
-// import ReactMarkdown from 'react-markdown';
 import { apiNote } from '../../styles/styl-utils'
 import { sharedEndDrag } from '../../helpers/api-end-drag'
 import { editAttachedItems } from '../../actions'
@@ -9,23 +8,20 @@ import { connect } from 'react-redux';
 
 const PocketNote = (props) => {
     if(props.item){
-        return (
-            <PocketNoteDiv 
-                innerRef={instance => props.connectDragSource(instance)}
-                type="pocket" 
-                style={{
-                    opacity: props.isDragging ? '0.25' : '1',
-                    border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
-                {/* flag for whether or not it is attached to a note */}
-                <div className="pocket-note-text">
-                    {props.item.given_title === "" ? <p>{props.item.resolved_title}</p> : <p>{props.item.given_title}</p>}
-                </div> 
+        return <PocketNoteDiv 
+                    innerRef={instance => props.connectDragSource(instance)}
+                    type="pocket" 
+                    style={{
+                        opacity: props.isDragging ? '0.25' : '1',
+                        border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
+                    <div className="pocket-note-text">
+                        {props.item.given_title === "" ? <p>{props.item.resolved_title}</p> : <p>{props.item.given_title}</p>}
+                    </div> 
 
-                <div className="pocket-note-link">
-                    <a target="_blank" href={props.item.given_url}>Link</a>
-                </div> 
-            </PocketNoteDiv>
-        )
+                    <div className="pocket-note-link">
+                        <a target="_blank" href={props.item.given_url}>Link</a>
+                    </div> 
+                </PocketNoteDiv>
     } else {
         return null
     }
@@ -52,8 +48,6 @@ const PocketNote = (props) => {
     
     endDrag(props, monitor) {// this takes props mounted on beginDrags
         let obj = sharedEndDrag(props, monitor, 'pocket_items_attached');
-        console.log(obj)
-        //noteEdit is the modified note
         props.editAttachedItems(obj)
     },
   };
