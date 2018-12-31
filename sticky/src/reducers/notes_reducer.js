@@ -16,7 +16,10 @@ import {
     FETCHING_ATTACHED_ITEMS,
     ATTACHED_ITEMS_RECIEVED,
     CREDENTIAL_ERROR,
-    ERROR_ADDING_NEW_NOTE
+    ERROR_ADDING_NEW_NOTE,
+    EDITING_LIST,
+    LIST_EDITED,
+    LIST_EDIT_ERROR
  } from '../actions/note_actions';
 
 
@@ -30,6 +33,19 @@ const initialState = {
 
 export const notesReducer = (state = initialState, action) => {
     switch(action.type) {
+        case LIST_EDIT_ERROR:
+            return Object.assign({}, state, {
+                
+            })
+        case EDITING_LIST:
+            return Object.assign({}, state, {
+                attachingPocketItem: true,
+            })
+        case LIST_EDITED:
+            return Object.assign({}, state, {
+                attachingPocketItem: false,
+                triggerGetNotes: true
+            })
         case CREDENTIAL_ERROR:
             return Object.assign({}, state, {
                 credentialError: true,
@@ -67,6 +83,7 @@ export const notesReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 fetchingNotes: true,
                 triggerAttached: true,
+                triggerGetNotes: false
             })
         case NOTES_RECIEVED:
             return Object.assign({}, state, {

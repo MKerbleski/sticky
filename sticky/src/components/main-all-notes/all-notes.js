@@ -33,6 +33,10 @@ class AllNotes extends Component {
   }
 
   render() {    
+    console.log("ALLNOTES", this.props)
+    if(this.props.store.notes.triggerGetNotes){
+        this.props.getNotes();
+    }
     return (
         <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}
         style={{background: this.props.hover ? 'lightgreen' : null, background: this.props.deleteBin ? 'red' : null}}>

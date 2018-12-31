@@ -51,7 +51,6 @@ export const sharedEndDrag = (props, monitor, type) => {
     } else if (sticky_target.type === "note"){ 
         let sticky_target_id = sticky_target.targetId
         let sticky_target_edit;
-        
         //add note to target sticky
         let list = sticky_target[type]
         if(list && list.length > 0){
@@ -63,6 +62,7 @@ export const sharedEndDrag = (props, monitor, type) => {
             })
             if(repeat.length > 0){
                 console.log("Item is already attached to sticky note")
+                window.alert("Item is already attached to sticky note")
             } else {
                 total_items_attached++
                 let newAttached = tempArr + `,${item_id}`

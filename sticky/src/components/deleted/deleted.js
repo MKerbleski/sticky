@@ -46,7 +46,6 @@ class Deleted extends Component {
     }
 
     render(){
-        // console.log(this.props)
         return (
             <DeletedDiv> 
                 {this.props.state.notes.deletedNotes ?
@@ -59,10 +58,7 @@ class Deleted extends Component {
                                 </div>
                             )
                         })}
-                    </React.Fragment>
-                    : 
-                    <p>no deleted notes</p>
-                }
+                    </React.Fragment> : <p>no deleted notes</p> }
             </DeletedDiv> 
         )
     }

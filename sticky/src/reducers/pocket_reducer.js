@@ -1,7 +1,7 @@
 import {   
-    EDITING_LIST,
+
     POCKET_LIST_RECIEVED,
-    LIST_EDITED,
+
     FETCHING_POCKET_LIST,
     POCKET_ERROR,
     ERROR,
@@ -13,14 +13,7 @@ const initialState = {
 
 export const pocketReducer = (state = initialState, action) => {
     switch(action.type) {
-        case EDITING_LIST:
-            return Object.assign({}, state, {
-                attachingPocketItem: true,
-            })
-        case LIST_EDITED:
-            return Object.assign({}, state, {
-                attachingPocketItem: false,
-            })
+            
         case POCKET_LIST_RECIEVED:
             return Object.assign({}, state, {
                 pocketList: action.payload.pocketList,
