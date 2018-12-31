@@ -36,7 +36,6 @@ class NoteDetailChild extends React.Component {
   }
 
   render(){
-    // console.log(this.props)
       if (this.props.layerOne){
           return (
               this.props.connectDragSource &&
@@ -110,12 +109,12 @@ const targetObj = {
 }
 
 const sourceObj = {
-  beginDrag(props) {
-    const { source_id } = props.layerOne; 
-    return ({
-      source_id
-    });
-  },
+    beginDrag(props) {
+        const { source_id } = props.layerOne; 
+        return ({
+            source_id
+        });
+    },
 
   endDrag(props, monitor) {
     if (!monitor.didDrop()) {

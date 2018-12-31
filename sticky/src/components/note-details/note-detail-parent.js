@@ -11,6 +11,7 @@ class NoteDetailParent extends React.Component{
         this.props.getAttachedItems(id)
     }
     render(){
+        console.log(this.props)
         return (
             <NoteDetailParentDiv 
                 innerRef={instance => this.props.connectDropTarget(instance)}
@@ -35,26 +36,43 @@ class NoteDetailParent extends React.Component{
     }
 }
 
-const targetObj = {
-  hover(props, component){
-    //   if(props.hoverShallow){
-    //       console.log('hoverShallow')
-    //   }
-    return
-  },
+const getNoteDetails = (props, id) => {
+    console.log(props)
+    return props.allNotes.find(note => {return note.id === +id})
+}
 
-  drop(props, monitor) {
-    // const hover = monitor.isOver({shallow:true})
-    
-    // if(hover){
-    //     // console.log('target props', props, hover)
-    //     const { type, targetId } = props;
-    //     return ({
-    //         type, targetId
-    //     });
-    // }
-    return
-  }
+const targetObj = {
+    hover(props, component){
+        //   if(props.hoverShallow){
+        //       console.log('hoverShallow')
+        //   }
+        return
+    },
+
+    drop(props, monitor) {
+        const hover =  monitor.isOver({shallow:true})
+            if(hover){//this disables layer one droping if there is a nested child
+                if(props.note.parent_id === null){
+                    window.alert("There is no parent note")
+                } else {
+                    console.log(props)
+                    let parentNote = getNoteDetails(props, props.note.parent_id)
+                    console.log(parentNote)
+                    const targetId = parentNote.id;
+                    const type = props.type;
+                    const pocket_items_attached = parentNote.pocket_items_attached;
+                    const slack_items_attached = parentNote.slack_items_attached;
+                    const total_items_attached = parentNote.total_items_attached;
+                    return ({
+                        targetId, 
+                        type, 
+                        pocket_items_attached, 
+                        slack_items_attached,
+                        total_items_attached,
+                    });
+                }
+        }
+    }
 }
 
 const collect = (connect,  monitor) => ({
@@ -85,6 +103,7 @@ const NoteDetailParentDiv = styled.div`
     box-sizing: border-box;
     height: 95vh;
     overflow: auto;
+    padding-bottom: 10px;
     .link {
         display: flex;
         flex-direction: row;

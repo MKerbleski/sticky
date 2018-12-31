@@ -1,11 +1,11 @@
 import { editAttachedItems } from '../actions/index.js'
 
 export const sharedEndDrag = (props, monitor, type) => {
-    console.log("sharedEndDrag props:", props)
     if(!monitor.didDrop()){
         return;
     }
     const sticky_target = monitor.getDropResult();
+    console.log("sharedEndDrag props:", props, sticky_target, type)
     let total_items_attached = sticky_target.total_items_attached
     const item_id = props.item.id;
     const parentStickyNote = props.stickyNote;
