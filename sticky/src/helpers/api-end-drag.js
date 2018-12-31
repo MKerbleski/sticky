@@ -8,35 +8,26 @@ export const sharedEndDrag = (props, monitor, type) => {
     const sticky_target = monitor.getDropResult();
     let total_items_attached = sticky_target.total_items_attached
     const item_id = props.item.id;
-    let parentStickyNote = props.stickyNote;
-    console.log("sticky_target", sticky_target)
+    const parentStickyNote = props.stickyNote;
     const removeItem = () => {
-        console.log("remove item", parentStickyNote)
         let total_items_attached = parentStickyNote.total_items_attached
         if(total_items_attached === 1){
             let noteEdit = {[type]: null, total_items_attached: 0}
             return noteEdit
         } else {
-            console.log(parentStickyNote, type)
-            let tempArr = parentStickyNote[type]
-            console.log(tempArr)
-            tempArr = tempArr.split(',')
-            console.log(tempArr)
-            console.log(item_id)
-            let index = tempArr.indexOf(`${item_id}`)
-            console.log(index)
+            let itemArr = parentStickyNote[type]
+            itemArr = itemArr.split(',')
+            let index = itemArr.indexOf(`${item_id}`)
             if(index > -1){
-                tempArr.splice(index, 1)
+                itemArr.splice(index, 1)
                 if(total_items_attached > 1){
                     total_items_attached--
                 } else {
                     total_items_attached = 0
                 }
             }
-            let newStr = tempArr.join(',')
-            console.log(newStr)
-            let noteEdit = {[type]: newStr, total_items_attached: total_items_attached}
-            console.log("removeItem", noteEdit)
+            let itemsAttached = itemArr.join(',')
+            let noteEdit = {[type]: itemsAttached, total_items_attached: total_items_attached}
             return noteEdit
         }
     }    
@@ -47,7 +38,8 @@ export const sharedEndDrag = (props, monitor, type) => {
         return { 
             sticky_source: {
                 sticky_source_edit, sticky_source_id
-            }}
+            }
+        }
     } else if (sticky_target.type === "note"){ 
         let sticky_target_id = sticky_target.targetId
         let sticky_target_edit;
@@ -56,8 +48,8 @@ export const sharedEndDrag = (props, monitor, type) => {
         if(list && list.length > 0){
             //there are items on this note
             let repeat = 0;
-            let tempArr = list.split(',');
-            repeat = tempArr.filter(note => {
+            let itemArr = list.split(',');
+            repeat = itemArr.filter(note => {
                 return +note === item_id
             })
             if(repeat.length > 0){
@@ -65,7 +57,7 @@ export const sharedEndDrag = (props, monitor, type) => {
                 window.alert("Item is already attached to sticky note")
             } else {
                 total_items_attached++
-                let newAttached = tempArr + `,${item_id}`
+                let newAttached = itemArr + `,${item_id}`
                 sticky_target_edit = {[type]: newAttached, total_items_attached: total_items_attached}
             }
         } else {
@@ -74,7 +66,6 @@ export const sharedEndDrag = (props, monitor, type) => {
             total_items_attached++
             sticky_target_edit = {[type]: `${item_id}`, total_items_attached: total_items_attached}
         }
-
         //is sticky Source? 
         if(parentStickyNote){
             //if yes make sticky source stuff and some both
