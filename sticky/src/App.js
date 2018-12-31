@@ -121,16 +121,6 @@ class App extends Component {
       }
   }
 
-  // getParentColor = (id) => {
-  //     let parent_id = this.getParentId(id)
-  //     let parent =  this.props.store.notes.notes.find(note => {return note.id === +parent_id})
-  //     if(parent){
-  //         return parent.note_color
-  //     } else {
-  //       return null
-  //     }
-  // }
-
   toggleNewNote = () => {
       this.setState({
         showNewNote: !this.state.showNewNote
@@ -218,7 +208,6 @@ class App extends Component {
                                   onDrop={this.onDrop} 
                                   changeParent={this.changeParent}
                                   type="note"
-                                  // parentColor={this.getParentColor(note.match.params.note_id)}
                                   editNote={this.editNote}
                                   targetId={this.getParentId(note.match.params.note_id)}
                                   />}} />
