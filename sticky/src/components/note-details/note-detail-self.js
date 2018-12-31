@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { 
     NoteDetailChild, 
-    SlackNote, 
-    PocketNote, 
     NoteDetailBody,
     AttachedList,
 } from '../index.js';
@@ -28,8 +26,7 @@ class NoteDetailSelf extends React.Component {
                             <div className="note-detail-children">
                                 {this.props.allNotes.map( layerOne => {
                                     if(layerOne.parent_id === this.props.note.id){
-                                        return (
-                                            <NoteDetailChild
+                                        return <NoteDetailChild
                                                 type="note"
                                                 onDrop={this.props.onDrop}
                                                 changeParent={this.props.changeParent}
@@ -38,15 +35,13 @@ class NoteDetailSelf extends React.Component {
                                                 allNotes={this.props.allNotes}
                                                 redirect={this.props.redirect}
                                                 color={layerOne.note_color} />
-                                        )
                                     } else {
                                         return null
-                                    }
-                                })}{/* map */}
+                                    }})}
                             </div>{/* noted-detail-children */}
                         </div>{/* note-detail-left */}
                         <div className="note-detail-right">
-                                <AttachedList stickyNote={this.props.note} />
+                            <AttachedList stickyNote={this.props.note} />
                         </div>{/* note-detail-right */}
                     </div>{/* note-detail-main */}
                     <div className="note-detail-settings">
@@ -55,9 +50,7 @@ class NoteDetailSelf extends React.Component {
                 </NoteDetailSelfDiv>
             )
         } else {
-            return (
-                <p>note-detail-self</p>
-            )
+            return  <p>note-detail-self</p>
         }
     }
 }
@@ -68,7 +61,6 @@ const targetObj = {
             // console.log('hoverShallow')
         }
     },
-
     drop(props, monitor) {
         const hover = monitor.isOver({shallow: false})
         
@@ -111,8 +103,6 @@ const NoteDetailSelfDiv = styled.div`
   justify-content: center;
   height: 100%;
   width: 89%;
-  background-color: ${props => props.color};
-  ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
   background-color: lightgray;
   flex-direction: column;
   justify-content: space-between;
