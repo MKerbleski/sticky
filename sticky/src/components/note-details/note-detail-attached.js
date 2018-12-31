@@ -14,8 +14,12 @@ class AttachedList extends Component {
     componentDidMount(){
         this.props.getAttachedItems(this.props.stickyNote.id);
     }
-
+    
     render(){
+        console.log("ATTACHEDLIST", this.props.store.notes.fetchingNotes)
+        if(this.props.store.notes.triggerAttached){
+            this.props.getAttachedItems(this.props.stickyNote.id);
+        }
         return (
         <AttachedListDiv> 
             {this.props.store.notes.attachedItems ? 

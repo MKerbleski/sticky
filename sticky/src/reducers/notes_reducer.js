@@ -37,6 +37,7 @@ export const notesReducer = (state = initialState, action) => {
         case FETCHING_ATTACHED_ITEMS:
             return Object.assign({}, state, {
                 fetchingAttachedItems: true,
+                triggerAttached: false
             })
         case ATTACHED_ITEMS_RECIEVED:
             return Object.assign({}, state, {
@@ -65,6 +66,7 @@ export const notesReducer = (state = initialState, action) => {
         case FETCHING_NOTES:
             return Object.assign({}, state, {
                 fetchingNotes: true,
+                triggerAttached: true,
             })
         case NOTES_RECIEVED:
             return Object.assign({}, state, {

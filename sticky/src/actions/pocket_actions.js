@@ -27,7 +27,6 @@ export const editAttachedItems = (obj) => {
                 let sticky_source_id = obj.sticky_source.sticky_source_id
                 axios.put(`http://localhost:3333/api/notes/${sticky_source_id}`, (obj.sticky_source.sticky_source_edit), authHeader).then(res1 => {
                     dispatch({type: LIST_EDITED, payload: res1.data})
-                    dispatch(getAttachedItems(sticky_source_id));
                     dispatch(getNotes())})
                 .catch(err => {
                     console.log("error returnd from notes/edit endpoint", err)
@@ -39,7 +38,6 @@ export const editAttachedItems = (obj) => {
             let sticky_target_id = obj.sticky_target.sticky_target_id
             axios.put(`http://localhost:3333/api/notes/${sticky_target_id}`, (obj.sticky_target.sticky_target_edit), authHeader).then(res => {
                 dispatch({type: LIST_EDITED, payload: res.data})
-                dispatch(getAttachedItems(sticky_target_id));
                 dispatch(getNotes())})
             .catch(err => {
                 console.log("error returnd from edit attached items", err)
@@ -48,7 +46,7 @@ export const editAttachedItems = (obj) => {
             let sticky_source_id = obj.sticky_source.sticky_source_id
             axios.put(`http://localhost:3333/api/notes/${sticky_source_id}`, (obj.sticky_source.sticky_source_edit), authHeader).then(res1 => {
                 dispatch({type: LIST_EDITED, payload: res1.data})
-                dispatch(getAttachedItems(sticky_source_id));
+                // dispatch(getAttachedItems(sticky_source_id));
                 dispatch(getNotes())})
             .catch(err => {
                 console.log("error returnd from notes/edit endpoint", err)
