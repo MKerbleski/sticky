@@ -72,7 +72,7 @@ const PocketNoteDiv = styled.div`
     ${apiNote()}
     background: lightpink;
     .pocket-note-text{
-         border: 1px solid green;
+         /* border: 1px solid green; */
         width: 100%;
         display: flex;
         flex-wrap: wrap;
@@ -81,11 +81,10 @@ const PocketNoteDiv = styled.div`
         margin-bottom: 2px;
     }
     .pocket-note-link{
-        border: 1px solid red;
+        /* border: 1px solid red; */
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
         align-items: flex-end;
-
     }
 `;

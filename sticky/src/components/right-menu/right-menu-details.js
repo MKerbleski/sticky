@@ -55,7 +55,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenuDetails)
 
 const RightMenuDetailsDiv = styled.div`
-    ${start('purple')}
+    /* ${start('purple')} */
     margin: 5px;
     ${ menu() }
     color: white;
@@ -69,7 +69,7 @@ const RightMenuDetailsDiv = styled.div`
         color: black;
     }
     .app-list {
-        border: 1px solid black;
+        /* border: 1px solid black; */
         overflow: auto;
         width: 100%;
         &::-webkit-scrollbar {

@@ -73,7 +73,7 @@ const SlackNoteDiv = styled.div`
     ${apiNote()}
     background: #FFD700;
     .slack-note-top{
-        border: 1px solid green;
+        /* border: 1px solid green; */
         width: 100%;
         box-sizing: border-box;
         display: flex;
@@ -84,7 +84,7 @@ const SlackNoteDiv = styled.div`
         margin-bottom: 2px;
     }
     .slack-note-middle{
-        border: 1px solid blue;
+        /* border: 1px solid black; */
         width: 100%;
         box-sizing: border-box;
         overflow: hidden;
@@ -93,7 +93,7 @@ const SlackNoteDiv = styled.div`
         margin: 0;
     }
     .slack-note-bottom{
-        border: 1px solid red;
+        /* border: 1px solid red; */
         width: 100%;
         box-sizing: border-box;
         display: flex;

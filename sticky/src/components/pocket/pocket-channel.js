@@ -90,7 +90,7 @@ export default DragSource('item', sourceObj, collect)(PocketChannel);
 const PocketChannelDiv = styled.div`
     ${apiChannel()}
     .pocket-channel-title{
-        border: 1px solid green;
+        /* border: 1px solid green; */
         box-sizing: border-box;
         width: 100%;
         display: flex;

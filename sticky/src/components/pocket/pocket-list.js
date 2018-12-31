@@ -33,9 +33,9 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(PocketList)
 
 const PocketListDiv = styled.div`
-    border: 1px solid red;
+    /* border: 1px solid red; */
     color: black;
-    background: green;
+    /* background: green; */
 `
 
 //     domain_metadata: {name: "Shane Parrish", logo: "https://logo.clearbit.com/fs.blog?size=800", greyscale_logo: "https://logo.clearbit.com/fs.blog?size=800&greyscale=true"}

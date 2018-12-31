@@ -37,7 +37,6 @@ class NoteDetailParent extends React.Component{
 }
 
 const getNoteDetails = (props, id) => {
-    console.log(props)
     return props.allNotes.find(note => {return note.id === +id})
 }
 
@@ -55,9 +54,7 @@ const targetObj = {
                 if(props.note.parent_id === null){
                     window.alert("There is no parent note")
                 } else {
-                    console.log(props)
                     let parentNote = getNoteDetails(props, props.note.parent_id)
-                    console.log(parentNote)
                     const targetId = parentNote.id;
                     const type = props.type;
                     const pocket_items_attached = parentNote.pocket_items_attached;

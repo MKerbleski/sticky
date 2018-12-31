@@ -136,13 +136,12 @@ const NoteDetailSelfDiv = styled.div`
             }
         }
         .note-detail-right{
-            ${start('red')}
+            /* ${start('red')} */
             flex-direction: column;
             background: skyblue;
             color: white;
             width: 30%;
             margin: 5px;
-            overflow: auto;
             height: 99%;
             overflow: auto;
             &::-webkit-scrollbar {

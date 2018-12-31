@@ -23,7 +23,7 @@ class AttachedList extends Component {
                     {this.props.store.notes.attachedItems ? 
                         this.props.store.notes.attachedItems.map(item => {
                         if(item.slack_user_id){
-                            return <SlackNote 
+                            return <SlackNote
                                     key={item.uuid} 
                                     item={item} 
                                     stickyNote={this.props.stickyNote} />
@@ -50,8 +50,11 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(AttachedList)
 
 const AttachedListDiv = styled.div`
-    border: 1px solid red;
+    /* border: 1px solid red; */
     color: black;
-    background: green;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* background: green; */
+
 `
