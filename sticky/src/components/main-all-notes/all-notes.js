@@ -6,46 +6,47 @@ import {
   NotePreviewNew,
   NotePreview } from './index';
 import { 
-  getLinks,
+  // getLinks,
   getNotes,
   getDeletedNotes,
 } from '../../actions'
 
 class AllNotes extends Component {
   constructor(props){
-    super(props);
-    this.state = {
-      stateNotes: false,
-      notes: [],
-    }
+      super(props);
+      this.state = {
+          stateNotes: false,
+          notes: [],
+      }
   }
 
   componentDidMount(){
-    if(localStorage.getItem('JWT')){
-      if(this.props.deleteBin){
-        this.props.getDeletedNotes();
+      if(localStorage.getItem('JWT')){
+          if(this.props.deleteBin){
+            this.props.getDeletedNotes();
+          } else {
+            this.props.getNotes();
+          }
       } else {
-        this.props.getNotes();
+          this.props.history.push('/welcome/login')
       }
-    } else {
-      this.props.history.push('/welcome/login')
-    }
   }
 
-  render(pops) {    
+  render() {    
     return (
         <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}
         style={{background: this.props.hover ? 'lightgreen' : null, background: this.props.deleteBin ? 'red' : null}}>
-              {this.props.store.notes.notes.length > 0 && !this.props.deleteBin ? null :
+              {this.props.store.notes.notes.length > 0 ? null :
                 <div>
                   <h3>Welcome!</h3>
                   <p>Click the plus to the left to create a new note</p>
                 </div> }
-              {this.props.showNewNote && !this.props.deleteBin ? <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> : null}        
+              {this.props.showNewNote && !this.props.deleteBin ?
+                 <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> :
+                 null}        
               {this.props.store.notes.notes.map(layerOne => {
                   if(layerOne.parent_id === null){
-                          return (
-                            <NotePreview
+                          return <NotePreview
                                 type="note"
                                 onDrop={this.props.onDrop}
                                 changeParent={this.props.changeParent}
@@ -60,11 +61,9 @@ class AllNotes extends Component {
                                 //     )//returns links only liked to parent
                                 // })} 
                                 />
-                          )
                   } else {
                       return null
-                      }
-              })}
+                  }})}
         </AllNotesDiv>
       )
   }

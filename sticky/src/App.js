@@ -103,25 +103,6 @@ class App extends Component {
         console.log('need to include toekn in request')
       }
   }
-
-  sendToTrash = (noteEdit) => {
-    if(localStorage.getItem('JWT')){
-      const token = localStorage.getItem('JWT')
-      const authHeader = {
-        headers: {
-          Authorization: token,    
-        } 
-      }
-      axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
-      .then(res => {
-        this.props.getNotes();
-        this.props.history.push('/all-notes')
-      }).catch(err => console.log(err.message))
-    } else {
-      console.log('need to include token in request')
-      alert('Please login and try again.')
-    }
-  }
   
   getNoteDetails = (id) => {
       return this.props.store.notes.notes.find(note => {return note.id === +id})
@@ -168,7 +149,7 @@ class App extends Component {
             is_deleted: true, 
             id: source_id
           }
-          this.sendToTrash(changes)
+          this.editNote(changes)
       } else if (type === "note") {
           this.changeParent(source_id, target_id)
       } else if (type === "top" || target_id===null){

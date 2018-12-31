@@ -98,10 +98,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu)
 
 const RightMenuDiv = styled.div`
-  ${'' /* ${start('black')} */}
   border: 2px solid black;
-  ${'' /* margin: 3; */}
-  ${'' /* ${ menu() } */}
   background: lightblue;
   display: flex;
   flex-direction: row;
@@ -109,7 +106,6 @@ const RightMenuDiv = styled.div`
   box-sizing: border-box;
   height: 95vh;
   .right-menu-preview{
-      ${'' /* ${start('blue')} */}
       display: flex;
       flex-direction: column;
       justify-content: center;
