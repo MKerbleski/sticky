@@ -64,22 +64,23 @@ const RightMenuDetailsDiv = styled.div`
     display: flex;
     background-color: white;
     flex-direction: column;
-    .app-title{
+    .app-title {
         max-width: 100px;
         color: black;
     }
-    .app-list{
+    .app-list {
+        border: 1px solid black;
         overflow: auto;
         width: 100%;
         &::-webkit-scrollbar {
         width: 6px;
-        &-thumb{
-            background-color: gray;
-            border-radius: 25px;
+            &-thumb{
+                background-color: gray;
+                border-radius: 25px;
+            }
         }
     }
-    }
-    .connect-apis{
+    .connect-apis {
         border: 1px solid purple;
         color: black;
     }

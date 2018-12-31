@@ -83,7 +83,7 @@ class App extends Component {
   
   //cannot move because it is used in dragging and dropping
   editNote = (noteEdit) => {
-    // console.log('editNote', noteEdit)
+    console.log('editNote in APPPPPPPPP', noteEdit)
       if(localStorage.getItem('JWT')){
           const token = localStorage.getItem('JWT')
           const authHeader = {
@@ -161,8 +161,7 @@ class App extends Component {
      this.props.history.push(route)
   }
 
-  render(props) {
-    // console.log(this.props)
+  render() {
     return (
       <AppDiv>
       
@@ -179,8 +178,7 @@ class App extends Component {
 
                 <div className="center-display">
                     <React.Fragment>
-                        <Route
-                            exact
+                        <Route exact
                             path="/all-notes" 
                             render={ () => {
                                 return <AllNotes
