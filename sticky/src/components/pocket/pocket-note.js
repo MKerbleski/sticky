@@ -3,9 +3,10 @@ import React from 'react';
 import { DragSource } from 'react-dnd';
 // import ReactMarkdown from 'react-markdown';
 import { apiNote } from '../../styles/styl-utils'
+import { sharedEndDrag } from '../../helpers/api-end-drag'
 
 const PocketNote = (props) => {
-    if(props.pocketItem){
+    if(props.item){
         return (
             <PocketNoteDiv 
                 innerRef={instance => props.connectDragSource(instance)}
@@ -15,11 +16,11 @@ const PocketNote = (props) => {
                     border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
                 {/* flag for whether or not it is attached to a note */}
                 <div className="pocket-note-text">
-                    {props.pocketItem.given_title === "" ? <p>{props.pocketItem.resolved_title}</p> : <p>{props.pocketItem.given_title}</p>}
+                    {props.item.given_title === "" ? <p>{props.item.resolved_title}</p> : <p>{props.item.given_title}</p>}
                 </div> 
 
                 <div className="pocket-note-link">
-                    <a target="_blank" href={props.pocketItem.given_url}>Link</a>
+                    <a target="_blank" href={props.item.given_url}>Link</a>
                 </div> 
             </PocketNoteDiv>
         )
@@ -32,14 +33,14 @@ const PocketNote = (props) => {
     
     beginDrag(props) {
         if(props.type === "pocket"){
-            const pocketId = props.pocketItem.item_id
+            const pocketId = props.item.item_id
             const type = props.type
             return ({
                 pocketId, type //this gets sent to the drop item 
             });
         } 
         else {
-            const pocketId = props.pocketItem.item_id
+            const pocketId = props.item.item_id
             const type = props.type
             return ({
                 pocketId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
@@ -48,45 +49,7 @@ const PocketNote = (props) => {
     },
     
     endDrag(props, monitor) {// this takes props mounted on beginDrag
-        if(!monitor.didDrop()){
-            return ;
-        }
-        // IF TYPE == TRASH THAN DELETE ATTACHMENT
-        // console.log(props.pocketItem)
-        let pocket_item_id = props.pocketItem.id;
-        let target_info = monitor.getDropResult();
-        // console.log(target_info)
-        //need to extract pocket_items_attached off notes
-        let sticky_note_id = target_info.targetId
-        let attached_pocket_items = target_info.pocket_items_attached
-        console.log("end Drag pocket, attached_to", attached_pocket_items, "sticky_note_id", sticky_note_id)
-        let newAttached;
-        
-        if(attached_pocket_items === null){   
-            newAttached = `${pocket_item_id}`
-            //SHOULD ALSO ATTACH HOW MANY ARE ON THE NOTES
-            let noteEdit = {pocket_items_attached: newAttached}
-            props.attachPocketItem(noteEdit, sticky_note_id)
-        } else {
-            let tempArr = attached_pocket_items.split(',')
-            // console.log(tempArr)
-            let repeat = tempArr.filter(note => {
-                // console.log("inside filter", +note, pocket_item_id)
-                return +note === pocket_item_id
-            })
-            // console.log(repeat)
-            if(repeat.length > 0){
-                //do nothing
-                console.log("REPEAT no action taken, alert needed")
-                window.alert("item is already attached. No duplicate notes")
-            } else {
-                newAttached = attached_pocket_items + `,${pocket_item_id}`
-                // console.log(newAttached, "new_attached", "sticky_note_id", sticky_note_id)
-                //SHOULD ALSO ATTACH HOW MANY ARE ON THE NOTES
-                let noteEdit = {pocket_items_attached: newAttached}
-                props.attachPocketItem(noteEdit, sticky_note_id)
-            }
-        }
+        sharedEndDrag(props, monitor, 'pocket_items_attached')
     },
   };
 

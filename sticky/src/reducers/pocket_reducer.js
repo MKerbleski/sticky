@@ -1,7 +1,7 @@
 import {   
-    ATTACHING_POCKET_ITEM,
+    EDITING_LIST,
     POCKET_LIST_RECIEVED,
-    POCKET_ITEM_ATTACHED,
+    LIST_EDITED,
     FETCHING_POCKET_LIST,
     POCKET_ERROR,
     ERROR,
@@ -13,11 +13,11 @@ const initialState = {
 
 export const pocketReducer = (state = initialState, action) => {
     switch(action.type) {
-        case ATTACHING_POCKET_ITEM:
+        case EDITING_LIST:
             return Object.assign({}, state, {
                 attachingPocketItem: true,
             })
-        case POCKET_ITEM_ATTACHED:
+        case LIST_EDITED:
             return Object.assign({}, state, {
                 attachingPocketItem: false,
             })

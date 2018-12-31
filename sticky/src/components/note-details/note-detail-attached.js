@@ -7,24 +7,30 @@ import {
 } from './../index.js';
 import { 
     getAttachedItems,
-    attachPocketItem, 
+    editAttachedItems, 
 } from '../../actions'
 
 class AttachedList extends Component {
+    componentDidMount(){
+        this.props.getAttachedItems(this.props.stickyNote.id);
+    }
+
     render(){
-        console.log(this.props)
         return (
         <AttachedListDiv> 
             {this.props.store.notes.attachedItems ? 
             this.props.store.notes.attachedItems.map(item => {
                if(item.slack_user_id){
-                   return (
-                       <SlackNote key={item.uuid} slackItem={item} stickyNote={this.props.note} />
-                   )
+                   return <SlackNote 
+                        key={item.uuid} 
+                        item={item} 
+                        stickyNote={this.props.stickyNote} />
                } else {
-                   return (
-                       <PocketNote key={item.id} attachPocketItem={this.props.attachPocketItem} pocketItem={item} />
-                   )
+                   return <PocketNote 
+                        key={item.id} 
+                        stickyNote={this.props.stickyNote}
+                        // editAttachedItems={this.props.editAttachedItems} 
+                        item={item} />
                }
            }) :  null}
        </AttachedListDiv>)
@@ -37,7 +43,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
     getAttachedItems,
-    attachPocketItem
+    editAttachedItems
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(AttachedList)

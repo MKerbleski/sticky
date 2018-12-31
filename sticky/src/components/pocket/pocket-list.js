@@ -1,6 +1,6 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
-import { getPocketList, attachPocketItem } from '../../actions'
+import { getPocketList, editAttachedItems } from '../../actions'
 import { connect } from 'react-redux';
 import { PocketChannel } from './index.js';
 
@@ -15,7 +15,7 @@ class PocketList extends Component {
             <PocketListDiv> 
             {this.props.store.pocket.fetchingPocketList ? <p>fetching pocket list. The first time connecting can take up to a couple minutes.</p> : null }
                 {this.props.store.pocket.pocketList ? 
-                <PocketChannel onDrop={this.props.onDrop} pocketList={this.props.store.pocket.pocketList} attachPocketItem={this.props.attachPocketItem}/>: <p>loading...</p>} 
+                <PocketChannel onDrop={this.props.onDrop} pocketList={this.props.store.pocket.pocketList} editAttachedItems={this.props.editAttachedItems}/>: <p>loading...</p>} 
             </PocketListDiv>
         )
     }
@@ -27,7 +27,7 @@ const mapStateToProps = store => {
   
 const mapDispatchToProps = {
     getPocketList,
-    attachPocketItem
+    editAttachedItems
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(PocketList)

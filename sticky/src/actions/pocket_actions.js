@@ -1,19 +1,19 @@
 import axios from 'axios';
 import { getAttachedItems, getNotes } from './index'
 
-export const ATTACHING_POCKET_ITEM = 'ATTACHING_POCKET_ITEM';
+export const EDITING_LIST = 'EDITING_LIST';
 export const FETCHING_POCKET_LIST = 'FETCHING_POCKET_List';
 export const POCKET_LIST_RECIEVED = 'POCKET_LIST_RECIEVED';
-export const POCKET_ITEM_ATTACHED = 'POCKET_ITEM_ATTACHED';
+export const LIST_EDITED = 'LIST_EDITED';
 export const POCKET_ERROR = 'POCKET_ERROR';
 export const ERROR = 'ERROR';
 
 //NEEDS TO BE RENAMED AND GO IN NOTES
-export const attachPocketItem = (newAttached, sticky_note_id, parent_id=null) => {
-  console.log("attachedPocketItem", newAttached)
+export const editAttachedItems = (newAttached, sticky_note_id, parent_id=null) => {
+  console.log("editAttachedItems", newAttached)
     return function(dispatch){
       if(localStorage.getItem('JWT')){
-        dispatch({type: ATTACHING_POCKET_ITEM});
+        dispatch({type: EDITING_LIST});
         const token = localStorage.getItem('JWT')
         const authHeader = {
           headers: {
@@ -23,7 +23,7 @@ export const attachPocketItem = (newAttached, sticky_note_id, parent_id=null) =>
         axios.put(`http://localhost:3333/api/notes/${sticky_note_id}`, (newAttached), authHeader 
         ) 
         .then(res => {
-          dispatch({type: POCKET_ITEM_ATTACHED, payload: res.data})
+          dispatch({type: LIST_EDITED, payload: res.data})
           if(parent_id === null){
             dispatch(getAttachedItems(sticky_note_id));
           } else {

@@ -1,19 +1,23 @@
-export const sharedEndDrag = (props, monitor) => {
+import { editAttachedItems } from '../actions/index.js'
+
+export const sharedEndDrag = (props, monitor, type) => {
+    console.log("sharedEndDrag props:", props)
     if(!monitor.didDrop()){
         return;
     }
-    const slack_item_id = props.slackItem.id;
-    const target_info = monitor.getDropResult();   
+    const item_id = props.item.id;
+    const target_info = monitor.getDropResult();
+    let parentStickyNote = props.stickyNote;
+
     const removeAttachment = () => {
-        let tempArr = props.store.notes.attachedItems.map(obj => {
-            return obj.id
-        })
-        let total_items_attached = stickyNote.total_items_attached
-        if(tempArr.length === 1){
-            let noteEdit = {slack_items_attached: null}
-            props.attachPocketItem(noteEdit, stickyNote.id)
+        console.log("remove Attachment", parentStickyNote.total_items_attached)
+        let total_items_attached = parentStickyNote.total_items_attached
+        if(total_items_attached === 1){
+            let noteEdit = {[type]: 0}
+            editAttachedItems(noteEdit, parentStickyNote.id)
         } else {
-            let index = tempArr.indexOf(slack_item_id)
+            let tempArr = parentStickyNote[type].join(',')
+            let index = tempArr.indexOf(item_id)
             if(index > -1){
                 tempArr.splice(index, 1)
             }
@@ -23,50 +27,53 @@ export const sharedEndDrag = (props, monitor) => {
                 total_items_attached = 0
             }
             let newStr = tempArr.toString()
-            let noteEdit = {slack_items_attached: newStr, total_items_attached: total_items_attached}
+            let noteEdit = {[type]: newStr, total_items_attached: total_items_attached}
             console.log("removeAttachment", noteEdit)
-            props.attachPocketItem(noteEdit, stickyNote.id) 
+            editAttachedItems(noteEdit, parentStickyNote.id) 
         }
     }    
-    let stickyNote = props.stickyNote;
+
     if(target_info.type === "deleteBin"){
-        removeAttachment()
+    let parentStickyNote = props.stickyNote;
+        removeAttachment(parentStickyNote)
     } else if (target_info.type === "note") { 
         //check if note is parent
         let total_items_attached = target_info.total_items_attached
         const sticky_note_id = target_info.targetId
-        let slack_items_attached = target_info.slack_items_attached
-        if(!slack_items_attached){
-            console.log("NO slack_items_attached")
-            let noteEdit = {slack_items_attached: `${slack_item_id}`, total_items_attached: 1}
-            props.attachPocketItem(noteEdit, sticky_note_id)
-            if(props.stickyNote){
+        let list = target_info[type]
+        console.log(list)
+        if(!list){
+            console.log("NO EXISTING LIST")
+            let noteEdit = {[type]: `${item_id}`, total_items_attached: 1}
+            editAttachedItems(noteEdit, sticky_note_id)
+
+            if(parentStickyNote){
                 console.log("came from another note", props.stickyNote)
                 removeAttachment()
-                props.attachPocketItem(noteEdit, sticky_note_id, props.stickyNote.id)
+                editAttachedItems(noteEdit, sticky_note_id, props.stickyNote.id)
             } else {
-                props.attachPocketItem(noteEdit, sticky_note_id)
+                editAttachedItems(noteEdit, sticky_note_id)
             }
         } else {
             let repeat = 0;
-            if(slack_items_attached && slack_items_attached.length > 0){
-                let tempArr = slack_items_attached.split(',');
+            if(list && list.length > 0){
+                let tempArr = list.split(',');
                 repeat = tempArr.filter(note => {
-                    return +note === slack_item_id
+                    return +note === item_id
                 })
                 if(repeat.length > 0){
                     console.log("REPEAT no action taken, alert needed")
                     window.alert("Item is already attached to this note. No duplicate notes")
                 } else {
                     total_items_attached++
-                    let newAttached = tempArr + `,${slack_item_id}`
-                    let noteEdit = {slack_items_attached: newAttached, total_items_attached: total_items_attached}
+                    let newAttached = tempArr + `,${item_id}`
+                    let noteEdit = {[type]: newAttached, total_items_attached: total_items_attached}
                     if(props.stickyNote){
                         console.log("came from another note", props.stickyNote)
                         removeAttachment()
-                        props.attachPocketItem(noteEdit, sticky_note_id, props.stickyNote.id)
+                        editAttachedItems(noteEdit, sticky_note_id, props.stickyNote.id)
                     } else {
-                        props.attachPocketItem(noteEdit, sticky_note_id)
+                        editAttachedItems(noteEdit, sticky_note_id)
                     }
                 }
             }

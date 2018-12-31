@@ -16,7 +16,7 @@ const SlackChannel = (props) => {
                     border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
                 <h3 className="slack-channel-title">#{props.channel.name}</h3>
                 {props.channel.notes.map(note => {
-                    return <SlackNote key={note.uuid} attachPocketItem={props.attachPocketItem} slackItem={note} />
+                    return <SlackNote key={note.uuid} editAttachedItems={props.editAttachedItems} item={note} />
                 })}
             </SlackChannelDiv>
         )

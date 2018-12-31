@@ -1,6 +1,6 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
-import { getSlackStars, attachPocketItem } from '../../actions'
+import { getSlackStars, editAttachedItems } from '../../actions'
 import { connect } from 'react-redux';
 import { SlackChannel } from '../index.js';
 
@@ -14,7 +14,7 @@ class SlackList extends Component {
             <SlackListDiv> 
                 {slackStars ? Object.keys(slackStars).map(channelName => {
                     const channel = slackStars[channelName]
-                    return <SlackChannel key={channel.name} attachPocketItem={this.props.attachPocketItem} channel={channel} />
+                    return <SlackChannel key={channel.name} editAttachedItems={this.props.editAttachedItems} channel={channel} />
                 }): <p>loading...</p>} 
             </SlackListDiv>
         )
@@ -27,7 +27,7 @@ const mapStateToProps = store => {
   
 const mapDispatchToProps = {
     getSlackStars,
-    attachPocketItem
+    editAttachedItems
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(SlackList)

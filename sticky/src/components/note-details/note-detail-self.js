@@ -13,12 +13,7 @@ import { getAttachedItems } from '../../actions'
 import { start } from '../../styles/styl-utils.js'
 
 class NoteDetailSelf extends React.Component {
-    componentDidMount(){
-        this.props.getAttachedItems(this.props.note.id);
-    }
-
     render(){
-        console.log(this.props)
         if(this.props.note){
             return (
                 <NoteDetailSelfDiv 
@@ -50,7 +45,7 @@ class NoteDetailSelf extends React.Component {
                             </div>{/* noted-detail-children */}
                         </div>{/* note-detail-left */}
                         <div className="note-detail-right">
-                                <AttachedList />
+                                <AttachedList stickyNote={this.props.note} />
                         </div>{/* note-detail-right */}
                     </div>{/* note-detail-main */}
                     <div className="note-detail-settings">

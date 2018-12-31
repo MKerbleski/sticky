@@ -4,12 +4,12 @@ import { DragSource } from 'react-dnd';
 import ReactMarkdown from 'react-markdown';
 import { apiNote } from '../../styles/styl-utils'
 import format from 'date-fns/format'
-import { attachPocketItem } from '../../actions'
+import { editAttachedItems } from '../../actions'
 import { connect } from 'react-redux';
 import { sharedEndDrag } from '../../helpers/api-end-drag'
 
 const SlackNote = (props) => {
-    let time = props.slackItem.ts.slice(0, 10)*1000
+    let time = props.item.ts.slice(0, 10)*1000
     time = format(time, 'MMM Do YYYY')
     if (props){
         return (
@@ -20,18 +20,18 @@ const SlackNote = (props) => {
                     opacity: props.isDragging ? '0.25' : '1',
                     border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
                 <div className="slack-note-top">
-                    <strong>{props.slackItem.slack_user_name}</strong>
+                    <strong>{props.item.slack_user_name}</strong>
                     <div className="status">
-                        <span>{props.slackItem.is_pinned ? "pin" : null}</span>
-                        <span>{props.slackItem.is_starred ? "star" : null}</span>
+                        <span>{props.item.is_pinned ? "pin" : null}</span>
+                        <span>{props.item.is_starred ? "star" : null}</span>
                     </div>
                 </div> 
                 <div className="slack-note-middle">
-                    <ReactMarkdown className="slack-text">{props.slackItem.type === "message" ? props.slackItem.text : "error at note text"}</ReactMarkdown>
+                    <ReactMarkdown className="slack-text">{props.item.type === "message" ? props.item.text : "error at note text"}</ReactMarkdown>
                 </div> 
                 <span className="slack-note-bottom">
                     <p className="slack-time">{time}</p>
-                    <a target="_blank" href={props.slackItem.permalink}>Link to Slack</a>
+                    <a target="_blank" href={props.item.permalink}>Link to Slack</a>
                 </span>
             </SlackNoteDiv>
         )
@@ -43,13 +43,13 @@ const SlackNote = (props) => {
  const sourceObj = {
     
     beginDrag(props) {
-        const slack_note_id = props.slackItem.id;
+        const slack_note_id = props.item.id;
         const type = "slack"
         return ({ slack_note_id, type })
     },
 
     endDrag(props, monitor) {// this takes props mounted on beginDrag
-        sharedEndDrag(props, monitor);
+        sharedEndDrag(props, monitor, 'slack_items_attached');
     },
 };
 
@@ -64,7 +64,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    attachPocketItem
+    editAttachedItems
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DragSource('item', sourceObj, collect)(SlackNote))
