@@ -16,7 +16,12 @@ const PocketChannel = (props) => {
                     border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
                 <h3 className="pocket-channel-title">All Pocket Notes</h3>
                 {props.pocketList.map(pocketItem => {
-                            return <PocketNote type="pocket" onDrop={props.onDrop} editAttachedItems={props.editAttachedItems} key={pocketItem.item_id} item={pocketItem} />
+                            return <PocketNote 
+                            type="pocket" 
+                            // onDrop={props.onDrop} 
+                            editAttachedItems={props.editAttachedItems} 
+                            key={pocketItem.item_id} 
+                            item={pocketItem} />
                     
                     })}
             </PocketChannelDiv>

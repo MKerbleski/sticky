@@ -8,7 +8,6 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import axios from 'axios';
 import {
     AllNotes,
-    Deleted,
     LeftMenu,
     Welcome, 
     NoteDetailParent,

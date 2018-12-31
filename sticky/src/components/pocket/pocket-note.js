@@ -4,6 +4,8 @@ import { DragSource } from 'react-dnd';
 // import ReactMarkdown from 'react-markdown';
 import { apiNote } from '../../styles/styl-utils'
 import { sharedEndDrag } from '../../helpers/api-end-drag'
+import { editAttachedItems } from '../../actions'
+import { connect } from 'react-redux';
 
 const PocketNote = (props) => {
     if(props.item){
@@ -48,8 +50,11 @@ const PocketNote = (props) => {
         }
     },
     
-    endDrag(props, monitor) {// this takes props mounted on beginDrag
-        sharedEndDrag(props, monitor, 'pocket_items_attached')
+    endDrag(props, monitor) {// this takes props mounted on beginDrags
+        let obj = sharedEndDrag(props, monitor, 'pocket_items_attached');
+        console.log(obj)
+        //noteEdit is the modified note
+        props.editAttachedItems(obj)
     },
   };
 
@@ -59,7 +64,15 @@ const PocketNote = (props) => {
     // didDrop: monitor.didDrop(),
   });
 
-export default DragSource('item', sourceObj, collect)(PocketNote);
+  const mapStateToProps = store => {
+    return {store: store};
+}
+
+const mapDispatchToProps = {
+    editAttachedItems
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DragSource('item', sourceObj, collect)(PocketNote));
 
 const PocketNoteDiv = styled.div`
     ${apiNote()}

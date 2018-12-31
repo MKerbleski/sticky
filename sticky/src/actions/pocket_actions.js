@@ -9,8 +9,8 @@ export const POCKET_ERROR = 'POCKET_ERROR';
 export const ERROR = 'ERROR';
 
 //NEEDS TO BE RENAMED AND GO IN NOTES
-export const editAttachedItems = (newAttached, sticky_note_id, parent_id=null) => {
-  console.log("editAttachedItems", newAttached)
+export const editAttachedItems = (obj) => {
+  console.log("editAttachedItems", obj)
     return function(dispatch){
       if(localStorage.getItem('JWT')){
         dispatch({type: EDITING_LIST});
@@ -20,21 +20,40 @@ export const editAttachedItems = (newAttached, sticky_note_id, parent_id=null) =
             Authorization: token,
           }
         }
-        axios.put(`http://localhost:3333/api/notes/${sticky_note_id}`, (newAttached), authHeader 
-        ) 
-        .then(res => {
-          dispatch({type: LIST_EDITED, payload: res.data})
-          if(parent_id === null){
-            dispatch(getAttachedItems(sticky_note_id));
-          } else {
-            dispatch(getAttachedItems(parent_id));
-          }
-          dispatch(getNotes());
-        })
-        .catch(err => {
-          console.log("error returnd from notes/edit endpoint", err)
-          dispatch({type: POCKET_ERROR, payload: err})
-        })
+        let {sticky_source, sticky_target} = obj
+        if(sticky_target && sticky_source){
+            let sticky_target_id = obj.sticky_target.sticky_target_id
+            axios.put(`http://localhost:3333/api/notes/${sticky_target_id}`, (obj.sticky_target.sticky_target_edit), authHeader).then(res => {
+                let sticky_source_id = obj.sticky_source.sticky_source_id
+                axios.put(`http://localhost:3333/api/notes/${sticky_source_id}`, (obj.sticky_source.sticky_source_edit), authHeader).then(res1 => {
+                    dispatch({type: LIST_EDITED, payload: res1.data})
+                    dispatch(getAttachedItems(sticky_source_id));
+                    dispatch(getNotes())})
+                .catch(err => {
+                    console.log("error returnd from notes/edit endpoint", err)
+                    dispatch({type: POCKET_ERROR, payload: err})})})
+            .catch(err => {
+                console.log("error returnd from notes/edit endpoint", err)
+                dispatch({type: POCKET_ERROR, payload: err})})
+        } else if (obj.sticky_target){
+            let sticky_target_id = obj.sticky_target.sticky_target_id
+            axios.put(`http://localhost:3333/api/notes/${sticky_target_id}`, (obj.sticky_target.sticky_target_edit), authHeader).then(res => {
+                dispatch({type: LIST_EDITED, payload: res.data})
+                dispatch(getAttachedItems(sticky_target_id));
+                dispatch(getNotes())})
+            .catch(err => {
+                console.log("error returnd from edit attached items", err)
+                dispatch({type: POCKET_ERROR, payload: err})})
+        } else if (obj.sticky_source){
+            let sticky_source_id = obj.sticky_source.sticky_source_id
+            axios.put(`http://localhost:3333/api/notes/${sticky_source_id}`, (obj.sticky_source.sticky_source_edit), authHeader).then(res1 => {
+                dispatch({type: LIST_EDITED, payload: res1.data})
+                dispatch(getAttachedItems(sticky_source_id));
+                dispatch(getNotes())})
+            .catch(err => {
+                console.log("error returnd from notes/edit endpoint", err)
+                dispatch({type: POCKET_ERROR, payload: err})})
+        }
       } else {
         dispatch({type: ERROR, payload: 'there was no token found'})      
       }
