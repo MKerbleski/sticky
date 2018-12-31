@@ -8,7 +8,7 @@ export const sharedEndDrag = (props, monitor, type) => {
     const item_id = props.item.id;
     const target_info = monitor.getDropResult();
     let parentStickyNote = props.stickyNote;
-
+    console.log("target_info", target_info)
     const removeAttachment = () => {
         console.log("remove Attachment", parentStickyNote.total_items_attached)
         let total_items_attached = parentStickyNote.total_items_attached
@@ -38,6 +38,7 @@ export const sharedEndDrag = (props, monitor, type) => {
         removeAttachment(parentStickyNote)
     } else if (target_info.type === "note") { 
         //check if note is parent
+        // if(target_info.)
         let total_items_attached = target_info.total_items_attached
         const sticky_note_id = target_info.targetId
         let list = target_info[type]
@@ -45,14 +46,16 @@ export const sharedEndDrag = (props, monitor, type) => {
         if(!list){
             console.log("NO EXISTING LIST")
             let noteEdit = {[type]: `${item_id}`, total_items_attached: 1}
-            editAttachedItems(noteEdit, sticky_note_id)
-
             if(parentStickyNote){
                 console.log("came from another note", props.stickyNote)
                 removeAttachment()
-                editAttachedItems(noteEdit, sticky_note_id, props.stickyNote.id)
+                let parent_id = props.stickyNote.id
+                return {noteEdit, sticky_note_id, parent_id }
+                // editAttachedItems(noteEdit, sticky_note_id, props.stickyNote.id)
             } else {
-                editAttachedItems(noteEdit, sticky_note_id)
+                console.log("came from right menu")
+                return {noteEdit, sticky_note_id, }
+                // editAttachedItems(noteEdit, sticky_note_id)
             }
         } else {
             let repeat = 0;

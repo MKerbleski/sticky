@@ -14,6 +14,7 @@ import { start } from '../../styles/styl-utils.js'
 
 class NoteDetailSelf extends React.Component {
     render(){
+        console.log(this.props)
         if(this.props.note){
             return (
                 <NoteDetailSelfDiv 

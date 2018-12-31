@@ -49,7 +49,9 @@ const SlackNote = (props) => {
     },
 
     endDrag(props, monitor) {// this takes props mounted on beginDrag
-        sharedEndDrag(props, monitor, 'slack_items_attached');
+        let obj = sharedEndDrag(props, monitor, 'slack_items_attached');
+        console.log(obj)
+        props.editAttachedItems(obj.noteEdit, obj.sticky_note_id)
     },
 };
 
