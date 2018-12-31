@@ -6,7 +6,8 @@ import {
     NoteDetailChild, 
     SlackNote, 
     PocketNote, 
-    NoteDetailBody
+    NoteDetailBody,
+    AttachedList,
 } from '../index.js';
 import { getAttachedItems } from '../../actions'
 import { start } from '../../styles/styl-utils.js'
@@ -49,14 +50,7 @@ class NoteDetailSelf extends React.Component {
                             </div>{/* noted-detail-children */}
                         </div>{/* note-detail-left */}
                         <div className="note-detail-right">
-                            {this.props.store.notes.attachedItems ? 
-                            this.props.store.notes.attachedItems.map(item => {
-                                if(item.slack_user_id){
-                                    return <SlackNote key={item.uuid} slackItem={item} stickyNote={this.props.note} />
-                                } else {
-                                    return <PocketNote key={item.id} pocketItem={item} />
-                                }
-                            }) :  null}
+                                <AttachedList />
                         </div>{/* note-detail-right */}
                     </div>{/* note-detail-main */}
                     <div className="note-detail-settings">
@@ -167,6 +161,14 @@ const NoteDetailSelfDiv = styled.div`
           margin: 5px;
           overflow: auto;
           height: 99%;
+          overflow: auto;
+            &::-webkit-scrollbar {
+            width: 6px;
+                &-thumb{
+                    background-color: gray;
+                    border-radius: 25px;
+                }
+            }
           .link-source-container{
             ${'' /* border: 1px solid green; */}
             ${'' /* height: 100px; */}

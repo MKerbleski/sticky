@@ -12,13 +12,14 @@ import {
 
 class AttachedList extends Component {
     render(){
+        console.log(this.props)
         return (
         <AttachedListDiv> 
             {this.props.store.notes.attachedItems ? 
             this.props.store.notes.attachedItems.map(item => {
                if(item.slack_user_id){
                    return (
-                       <SlackNote attachPocketItem={this.props.attachPocketItem} key={item.uuid} note={item} />
+                       <SlackNote key={item.uuid} slackItem={item} stickyNote={this.props.note} />
                    )
                } else {
                    return (
@@ -45,4 +46,5 @@ const AttachedListDiv = styled.div`
     border: 1px solid red;
     color: black;
     background: green;
+    
 `

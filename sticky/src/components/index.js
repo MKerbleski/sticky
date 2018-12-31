@@ -19,6 +19,7 @@ export {
     NoteDetailSettings,
     NoteDetailBody,
     NoteDetailBodyEdit,
+    AttachedList,
     EditNote,
     DeleteNote,
 } from './note-details';
