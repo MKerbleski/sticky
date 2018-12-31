@@ -1,7 +1,5 @@
 import {   
-
     POCKET_LIST_RECIEVED,
-
     FETCHING_POCKET_LIST,
     POCKET_ERROR,
     ERROR,
@@ -13,7 +11,6 @@ const initialState = {
 
 export const pocketReducer = (state = initialState, action) => {
     switch(action.type) {
-            
         case POCKET_LIST_RECIEVED:
             return Object.assign({}, state, {
                 pocketList: action.payload.pocketList,

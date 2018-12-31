@@ -16,28 +16,25 @@ class AttachedList extends Component {
     }
     
     render(){
-        console.log("ATTACHEDLIST", this.props.store.notes.fetchingNotes)
         if(this.props.store.notes.triggerAttached){
             this.props.getAttachedItems(this.props.stickyNote.id);
         }
-        return (
-        <AttachedListDiv> 
-            {this.props.store.notes.attachedItems ? 
-            this.props.store.notes.attachedItems.map(item => {
-               if(item.slack_user_id){
-                   return <SlackNote 
-                        key={item.uuid} 
-                        item={item} 
-                        stickyNote={this.props.stickyNote} />
-               } else {
-                   return <PocketNote 
-                        key={item.id} 
-                        stickyNote={this.props.stickyNote}
-                        // editAttachedItems={this.props.editAttachedItems} 
-                        item={item} />
-               }
-           }) :  null}
-       </AttachedListDiv>)
+        return <AttachedListDiv> 
+                    {this.props.store.notes.attachedItems ? 
+                        this.props.store.notes.attachedItems.map(item => {
+                        if(item.slack_user_id){
+                            return <SlackNote 
+                                    key={item.uuid} 
+                                    item={item} 
+                                    stickyNote={this.props.stickyNote} />
+                        } else {
+                            return <PocketNote 
+                                    key={item.id} 
+                                    stickyNote={this.props.stickyNote}
+                                    item={item} />
+                        }
+                    }) :  null}
+            </AttachedListDiv>
     }
 }
 

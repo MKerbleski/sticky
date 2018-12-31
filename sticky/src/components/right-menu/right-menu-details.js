@@ -60,7 +60,7 @@ const RightMenuDetailsDiv = styled.div`
     ${ menu() }
     color: white;
     width: 250px;
-    height: 100%;
+    height: 99%;
     display: flex;
     background-color: white;
     flex-direction: column;

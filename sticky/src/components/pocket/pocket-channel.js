@@ -6,7 +6,7 @@ import { apiChannel } from '../../styles/styl-utils'
 
 const PocketChannel = (props) => {
     if (props){
-        //probably need an unpin unstar button
+        //probably need an unpin/unstar button
         return (
             <PocketChannelDiv 
                 innerRef={instance => props.connectDragSource(instance)}
@@ -18,7 +18,6 @@ const PocketChannel = (props) => {
                 {props.pocketList.map(pocketItem => {
                             return <PocketNote 
                             type="pocket" 
-                            // onDrop={props.onDrop} 
                             editAttachedItems={props.editAttachedItems} 
                             key={pocketItem.item_id} 
                             item={pocketItem} />

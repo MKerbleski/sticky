@@ -18,7 +18,6 @@ const SlackChannel = (props) => {
                 {props.channel.notes.map(note => {
                     return <SlackNote 
                         key={note.uuid} 
-                        editAttachedItems={props.editAttachedItems} 
                         item={note} />
                 })}
             </SlackChannelDiv>

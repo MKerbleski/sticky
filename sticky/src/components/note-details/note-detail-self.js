@@ -11,11 +11,7 @@ import { getAttachedItems } from '../../actions'
 import { start } from '../../styles/styl-utils.js'
 
 class NoteDetailSelf extends React.Component {
-    componentWillReceiveProps(){
-        // getAttachedItems(this.props.note.id)
-    }
     render(){
-        console.log(this.props)
         if(this.props.note){
             return (
                 <NoteDetailSelfDiv 
