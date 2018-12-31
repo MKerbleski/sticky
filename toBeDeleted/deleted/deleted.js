@@ -66,11 +66,11 @@ class Deleted extends Component {
 
 const mapStateToProps = store => {
     return {state: store};
-  }
+}
   
-  const mapDispatchToProps = {
+const mapDispatchToProps = {
     getDeletedNotes
-  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deleted)
 

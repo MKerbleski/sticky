@@ -3,91 +3,84 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
 import { 
-  NotePreviewNew,
-  NotePreview } from './index';
+    NotePreviewNew,
+    NotePreview } from './index';
 import { 
-  // getLinks,
   getNotes,
   getDeletedNotes,
 } from '../../actions'
 
 class AllNotes extends Component {
-  constructor(props){
-      super(props);
-      this.state = {
-          stateNotes: false,
-          notes: [],
-      }
-  }
-
-  componentDidMount(){
-      if(localStorage.getItem('JWT')){
-          if(this.props.deleteBin){
-            this.props.getDeletedNotes();
-          } else {
-            this.props.getNotes();
-          }
-      } else {
-          this.props.history.push('/welcome/login')
-      }
-  }
-
-  render() {    
-    console.log("ALLNOTES", this.props)
-    if(this.props.store.notes.triggerGetNotes){
-        this.props.getNotes();
+    constructor(props){
+        super(props);
+        this.state = {
+            stateNotes: false,
+            notes: [],
+        }
     }
-    return (
-        <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}
-        style={{background: this.props.hover ? 'lightgreen' : null, background: this.props.deleteBin ? 'red' : null}}>
-              {this.props.store.notes.notes.length > 0 ? null :
-                <div>
-                  <h3>Welcome!</h3>
-                  <p>Click the plus to the left to create a new note</p>
-                </div> }
-              {this.props.showNewNote && !this.props.deleteBin ?
-                 <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> :
-                 null}        
-              {this.props.store.notes.notes.map(layerOne => {
-                  if(layerOne.parent_id === null){
-                          return <NotePreview
-                                type="note"
-                                onDrop={this.props.onDrop}
-                                changeParent={this.props.changeParent}
-                                key={layerOne.id}
-                                layerOne={layerOne}
-                                allNotes={this.props.store.notes.notes}
-                                redirect={this.props.redirect}
-                                deleteBin={this.props.deleteBin ? true : false}
-                                // allLinks={this.props.allLinks.filter(link => {
-                                //     return (
-                                //         +link.parent_id === +layerOne.id
-                                //     )//returns links only liked to parent
-                                // })} 
-                                />
-                  } else {
-                      return null
-                  }})}
-        </AllNotesDiv>
-      )
-  }
+
+    componentDidMount(){
+        if(localStorage.getItem('JWT')){
+            if(this.props.deleteBin){
+                this.props.getDeletedNotes();
+            } else {
+                this.props.getNotes();
+            }
+        } else {
+            this.props.history.push('/welcome/login')
+        }
+    }
+
+    render() {    
+        if(this.props.store.notes.triggerGetNotes){
+            this.props.getNotes();
+        }
+        return (
+            <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}
+            style={{background: this.props.hover ? 'lightgreen' : null, background: this.props.deleteBin ? 'red' : null}}>
+                {this.props.store.notes.notes.length > 0 ? null :
+                    <div>
+                    <h3>Welcome!</h3>
+                    <p>Click the plus to the left to create a new note</p>
+                    </div> }
+                {this.props.showNewNote && !this.props.deleteBin ?
+                    <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> :
+                    null}        
+                {this.props.store.notes.notes.map(layerOne => {
+                    if(layerOne.parent_id === null){
+                            return <NotePreview
+                                    type="note"
+                                    onDrop={this.props.onDrop}
+                                    changeParent={this.props.changeParent}
+                                    key={layerOne.id}
+                                    layerOne={layerOne}
+                                    allNotes={this.props.store.notes.notes}
+                                    redirect={this.props.redirect}
+                                    deleteBin={this.props.deleteBin ? true : false}
+                                    />
+                    } else {
+                        return null
+                    }})}
+            </AllNotesDiv>
+        )
+    }
 }
 
 const targetObj = {
-  hover(props, component){
-      if(props.hoverShallow){
-      }
-  },
+    hover(props, component){
+        if(props.hoverShallow){
+        }
+    },
 
-  drop(props, monitor) {
-    const hover = monitor.isOver({shallow:false})
-    if(hover){
-        const { type } = props;
-        return ({
-            type,
-        });
+    drop(props, monitor) {
+        const hover = monitor.isOver({shallow:false})
+        if(hover){
+            const { type } = props;
+            return ({
+                type,
+            });
+        }
     }
-  }
 }
 
 const collect = (connect,  monitor) => ({
@@ -102,7 +95,6 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-  // getLinks,
   getNotes,
   getDeletedNotes
 }
