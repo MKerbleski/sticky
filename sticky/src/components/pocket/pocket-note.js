@@ -5,8 +5,11 @@ import { apiNote } from '../../styles/styl-utils'
 import { sharedEndDrag } from '../../helpers/api-end-drag'
 import { editAttachedItems } from '../../actions'
 import { connect } from 'react-redux';
+import format from 'date-fns/format'
 
 const PocketNote = (props) => {
+    let time = +props.item.time_added*1000
+    time = format(time, 'MMM Do YYYY')
     if(props.item){
         return <PocketNoteDiv 
                     innerRef={instance => props.connectDragSource(instance)}
@@ -17,10 +20,10 @@ const PocketNote = (props) => {
                     <div className="pocket-note-text">
                         {props.item.given_title === "" ? <p>{props.item.resolved_title}</p> : <p>{props.item.given_title}</p>}
                     </div> 
-
-                    <div className="pocket-note-link">
-                        <a target="_blank" href={props.item.given_url}>Link</a>
-                    </div> 
+                    <span className="pocket-note-bottom">
+                        <p className="pocket-time">{time}</p>
+                        <a className="pocket-note-link" target="_blank" href={props.item.given_url}>Link</a>
+                    </span>
                 </PocketNoteDiv>
     } else {
         return null
@@ -84,11 +87,20 @@ const PocketNoteDiv = styled.div`
         overflow: hidden;
         margin-bottom: 2px;
     }
-    .pocket-note-link{
+    .pocket-note-bottom{
         /* border: 1px solid red; */
+        width: 100%;
+        box-sizing: border-box;
         display: flex;
         flex-direction: row;
-        justify-content: flex-end;
-        align-items: flex-end;
+        justify-content: space-between;
+        align-items: center;
+        .pocket-note-link{
+            /* border: 1px solid red; */
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
     }
 `;
