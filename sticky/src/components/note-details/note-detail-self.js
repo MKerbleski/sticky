@@ -10,6 +10,14 @@ import {
 import { getAttachedItems } from '../../actions'
 import { start } from '../../styles/styl-utils.js'
 
+const mapStateToProps = store => {
+    return {store: store};
+}
+
+const mapDispatchToProps = {
+    getAttachedItems,
+}
+
 class NoteDetailSelf extends React.Component {
     render(){
         if(this.props.note){
@@ -85,14 +93,6 @@ const collect = (connect,  monitor) => ({
     hover: monitor.isOver({shallow: true}),
     hoverFalse: monitor.isOver()
 });
-
-const mapStateToProps = store => {
-    return {store: store};
-}
-
-const mapDispatchToProps = {
-    getAttachedItems
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailSelf));
 

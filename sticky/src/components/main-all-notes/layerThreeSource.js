@@ -68,7 +68,7 @@ const LayerThreeSource = (props) => {
     editNote,
   }
   
-  export default connect(mapStateToProps, mapDispatchToProps)(DragSource('item', sourceObj, collect)(LayerThreeSource))
+export default connect(mapStateToProps, mapDispatchToProps)(DragSource('item', sourceObj, collect)(LayerThreeSource))
 
 const LayerThreeDiv = styled.div`
     border: 1px solid green;

@@ -49,7 +49,11 @@ const SlackNote = (props) => {
 
     endDrag(props, monitor) {// this takes props mounted on beginDrag
         let obj = sharedEndDrag(props, monitor, 'slack_items_attached');
-        props.editAttachedItems(obj)
+        if(obj.sticky_target.sticky_target_id !== null){
+            props.editAttachedItems(obj)
+        } else {
+            window.alert("There is no parent note availible to put the item")
+        }
     },
 };
 

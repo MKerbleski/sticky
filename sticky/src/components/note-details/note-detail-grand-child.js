@@ -4,7 +4,8 @@ import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
 import { connect } from 'react-redux';
 import { LayerThreeSource } from "../index"
-import { getAttachedItems } from '../../actions'
+import { getAttachedItems, editNote } from '../../actions'
+import { sharedStickyNoteDrop } from '../../helpers'
 
 class NoteDetailGrandChild extends React.Component {
     clickHandler = (e, id) => {
@@ -71,9 +72,14 @@ const sourceObj = {
         if(!monitor.didDrop()){
             return;
         }
-        const sourceId = props.layerTwo.id;        
-        const dropResult = monitor.getDropResult({shallow: true});
-        props.onDrop(sourceId, dropResult.type, dropResult.targetId);
+        // const sourceId = props.layerTwo.id;        
+        // const dropResult = monitor.getDropResult({shallow: true});
+        // props.onDrop(sourceId, dropResult.type, dropResult.targetId);
+        const sticky_source_id = props.layerTwo.id;
+        const target = monitor.getDropResult({shallow: true});
+        const target_id = target.targetId;
+        let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
+        props.editNote(noteEdit)
     }
 };
 
@@ -82,7 +88,8 @@ const mapStateToProps = store => {
   }
   
   const mapDispatchToProps = {
-    getAttachedItems
+    getAttachedItems,
+    editNote
   }
   
   export default connect(mapStateToProps, mapDispatchToProps)( flow(

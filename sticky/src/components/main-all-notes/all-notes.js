@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
 import { 
     NotePreviewNew,
-    NotePreview } from './index';
+    NotePreview
+} from './index';
 import { 
   getNotes,
   getDeletedNotes,
@@ -49,7 +50,7 @@ class AllNotes extends Component {
                     if(layerOne.parent_id === null){
                             return <NotePreview
                                     type="note"
-                                    onDrop={this.props.onDrop}
+                                    // onDrop={this.props.onDrop}
                                     changeParent={this.props.changeParent}
                                     key={layerOne.id}
                                     layerOne={layerOne}

@@ -87,7 +87,7 @@ class NotePreview extends React.Component {
                                               <div className="layerTwoContainer" key={layerTwo.id}>
                                                   <LayerTwoTargetSource  
                                                     type="note"
-                                                    onDrop={this.props.onDrop}
+                                                    // onDrop={this.props.onDrop}
                                                     layerTwo={layerTwo} 
                                                     redirect={this.props.redirect}
                                                     allNotes={this.props.allNotes}

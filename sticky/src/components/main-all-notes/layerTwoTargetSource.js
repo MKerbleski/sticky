@@ -39,7 +39,7 @@ class LayerTwoTargetSource extends React.Component {
                                                 type="note"
                                                 changeParent={this.props.changeParent} layerThree={layerThree} 
                                                 redirect={this.props.redirect}
-                                                onDrop={this.props.onDrop}
+                                                // onDrop={this.props.onDrop}
                                                 getFirstWord={this.props.getFirstWord}
                                                 />
                                         </div>

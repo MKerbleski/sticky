@@ -48,7 +48,11 @@ const PocketNote = (props) => {
     
     endDrag(props, monitor) {// this takes props mounted on beginDrags
         let obj = sharedEndDrag(props, monitor, 'pocket_items_attached');
-        props.editAttachedItems(obj)
+        if(obj.sticky_target.sticky_target_id !== null){
+            props.editAttachedItems(obj)
+        } else {
+            window.alert("There is no parent note availible to put the item")
+        }
     },
   };
 

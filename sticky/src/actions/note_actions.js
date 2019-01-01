@@ -69,7 +69,7 @@ export const deleteNote = (id) => {
 
 export const editAttachedItems = (obj) => {
     return function(dispatch){
-        if(localStorage.getItem('JWT')){
+        if(localStorage.getItem('JWT') && obj.sticky_target !== null){
             dispatch({type: EDITING_LIST});
             const token = localStorage.getItem('JWT')
             const authHeader = {

@@ -4,86 +4,87 @@ import { Link } from 'react-router-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import { connect } from 'react-redux';
-import { getAttachedItems } from '../../actions'
+import { getAttachedItems, editNote } from '../../actions'
 import { flex, start } from '../../styles/styl-utils.js'
 import { NoteDetailGrandChild } from './index';
+import { sharedStickyNoteDrop } from '../../helpers'
 
 class NoteDetailChild extends React.Component {
-  getFirstWord = (text, words=2) => {
-      let firstWord = text.split(" ").slice(0,words).join(' ');
-      if(firstWord.length > 0){
-        return firstWord
-      } else {
-        return text
-      }
-  }
+    getFirstWord = (text, words=2) => {
+        let firstWord = text.split(" ").slice(0,words).join(' ');
+        if(firstWord.length > 0){
+          return firstWord
+        } else {
+          return text
+        }
+    }
 
-  getFirstSen = (text) => {
-      let firstSen = text
-      let firstWord = this.getFirstWord(text)
-      firstSen = firstSen.replace(firstWord, '')
-      if(firstSen !== firstWord){
-        return firstSen
-      } else{
-        return null
-      }
-  }
+    getFirstSen = (text) => {
+        let firstSen = text
+        let firstWord = this.getFirstWord(text)
+        firstSen = firstSen.replace(firstWord, '')
+        if(firstSen !== firstWord){
+          return firstSen
+        } else{
+          return null
+        }
+    }
   
-  refreshNotes = (e, id) => {
-      e.preventDefault()
-      e.stopPropagation()
-      this.props.getAttachedItems(id)
-  }
+    refreshNotes = (e, id) => {
+        e.preventDefault()
+        e.stopPropagation()
+        this.props.getAttachedItems(id)
+    }
 
-  render(){
-      if (this.props.layerOne){
-          return (
-              this.props.connectDragSource &&
-              this.props.connectDropTarget &&
-              <NoteDetailChildDiv 
-                innerRef={instance => {
-                  this.props.connectDragSource(instance);
-                  this.props.connectDropTarget(instance);}}
-                  onClick={(e) => this.refreshNotes(e,this.props.layerOne.id)}
-                color={this.props.color} >
-                <Link
-                  key={this.props.key}
-                  index={this.props.index}
-                  className="note-link"
-                  id={this.props.layerOne.id}
-                  to={`/note/${this.props.layerOne.id}`}
-                  style={{background: this.props.hover ? 'lightgreen' : null}}>
-                      <div className="note-content-header">
-                          <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.text_body)}</h3>
-                          {this.props.layerOne.total_items_attached ? 
-                            <div className="note-content-link-count"> 
-                              {this.props.layerOne.total_items_attached}
-                            </div> : null }
-                      </div>
-                      <p>{this.getFirstSen(this.props.layerOne.text_body)}</p> 
-                      <div className="layerTwoContainerAll">
-                          {this.props.allNotes.map(layerTwo => {
-                              if (layerTwo.parent_id === this.props.layerOne.id){
-                                  return <NoteDetailGrandChild
-                                              key={layerTwo.id}
-                                              type="note"
-                                              onDrop={this.props.onDrop} 
-                                              layerTwo={layerTwo} 
-                                              redirect={this.props.redirect}
-                                              allNotes={this.props.allNotes}
-                                              getFirstWord={this.getFirstWord} />
-                              } else {
-                                  return null
-                              }
-                          })}
-                      </div>                     
-                </Link>
-              </NoteDetailChildDiv>        
-          )
-      } else {
-          return (null)
-      }
-  }
+    render(){
+        if (this.props.layerOne){
+            return (
+                this.props.connectDragSource &&
+                this.props.connectDropTarget &&
+                <NoteDetailChildDiv 
+                  innerRef={instance => {
+                    this.props.connectDragSource(instance);
+                    this.props.connectDropTarget(instance);}}
+                    onClick={(e) => this.refreshNotes(e,this.props.layerOne.id)}
+                  color={this.props.color} >
+                  <Link
+                    key={this.props.key}
+                    index={this.props.index}
+                    className="note-link"
+                    id={this.props.layerOne.id}
+                    to={`/note/${this.props.layerOne.id}`}
+                    style={{background: this.props.hover ? 'lightgreen' : null}}>
+                        <div className="note-content-header">
+                            <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.text_body)}</h3>
+                            {this.props.layerOne.total_items_attached ? 
+                              <div className="note-content-link-count"> 
+                                {this.props.layerOne.total_items_attached}
+                              </div> : null }
+                        </div>
+                        <p>{this.getFirstSen(this.props.layerOne.text_body)}</p> 
+                        <div className="layerTwoContainerAll">
+                            {this.props.allNotes.map(layerTwo => {
+                                if (layerTwo.parent_id === this.props.layerOne.id){
+                                    return <NoteDetailGrandChild
+                                                key={layerTwo.id}
+                                                type="note"
+                                                onDrop={this.props.onDrop} 
+                                                layerTwo={layerTwo} 
+                                                redirect={this.props.redirect}
+                                                allNotes={this.props.allNotes}
+                                                getFirstWord={this.getFirstWord} />
+                                } else {
+                                    return null
+                                }
+                            })}
+                        </div>                     
+                  </Link>
+                </NoteDetailChildDiv>        
+            )
+        } else {
+            return (null)
+        }
+    }
 }
 
 const targetObj = {
@@ -120,10 +121,15 @@ const sourceObj = {
     if (!monitor.didDrop()) {
       return;
     }
-    const sourceId= props.layerOne.id
-    const dropResult = monitor.getDropResult();
+    // const sourceId= props.layerOne.id
+    // const dropResult = monitor.getDropResult();
     // console.log(sourceId,  dropResult, dropResult.targetId)
-    props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
+    // props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
+        const sticky_source_id = props.layerOne.id;
+        const target = monitor.getDropResult();
+        const target_id = target.targetId;
+        let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
+        props.editNote(noteEdit)
   },
 };
 
@@ -132,7 +138,8 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-  getAttachedItems
+  getAttachedItems,
+  editNote,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(flow(
