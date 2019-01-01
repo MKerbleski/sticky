@@ -4,6 +4,8 @@ import flow from 'lodash/flow';
 import { DragSource, DropTarget } from 'react-dnd';
 import { flex } from '../../styles/styl-utils.js'
 import { LayerTwoTargetSource } from "./index"
+import { deleteNote } from '../../actions'
+import { connect } from 'react-redux';
 
 class NotePreview extends React.Component {
     getFirstWord = (text, words=2) => {
@@ -37,6 +39,7 @@ class NotePreview extends React.Component {
       e.preventDefault()
       if(e.target.name === "delete"){
         console.log(e.target.name, "was clicked!")
+        this.props.deleteNote(this.props.layerOne.id)
       } else if (e.target.name === "restore"){
         console.log(e.target.name, "was clicked!")
       }
@@ -148,7 +151,15 @@ const sourceObj = {
     },
 };
 
-export default flow(
+const mapStateToProps = store => {
+  return {store: store};
+}
+
+const mapDispatchToProps = {
+  deleteNote
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(flow(
 
   DropTarget('item', targetObj, (connect, monitor) => ({
       connectDropTarget: connect.dropTarget(),
@@ -163,7 +174,7 @@ export default flow(
       isFoobar: true,
   }))
 
-)(NotePreview);
+)(NotePreview))
 
 const NotePreviewDiv = styled.div`
   ${'' /* border: 1px solid blue; */}

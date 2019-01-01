@@ -34,7 +34,7 @@ export const deleteNote = (id) => {
           axios.delete(`http://localhost:3333/api/notes/${id}`, authHeader)
           .then(res => {
               dispatch({type: NOTE_DELETED})
-              dispatch(getDeletedNotes)
+              dispatch(getDeletedNotes())
             }).catch(err => {
               console.log("error deleting note", err.message)
               dispatch({type: ERROR_DELETING_NOTE})
