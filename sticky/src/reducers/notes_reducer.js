@@ -5,8 +5,9 @@ import {
     DELETING_NOTE,
     EDITING_NOTE,
     EDITING_LIST,
-    ERROR_DELETING_NOTE,
     ERROR_ADDING_NEW_NOTE,
+    ERROR_DELETING_NOTE,
+    ERROR_EDITING_NOTE,
     FETCHING_ATTACHED_ITEMS,
     FETCHING_DEL_NOTES,
     FETCHING_NOTES,
@@ -120,6 +121,11 @@ export const notesReducer = (state = initialState, action) => {
         case ERROR_DELETING_NOTE:
             return Object.assign({}, state, {
                 deletingNote: false, 
+                status: action.payload
+            })
+        case ERROR_EDITING_NOTE:
+            return Object.assign({}, state, {
+                editingNote: false, 
                 status: action.payload
             })
         case EDITING_NOTE:

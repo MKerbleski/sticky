@@ -5,9 +5,10 @@ export const DELETING_NOTE = 'DELETING_NOTE';
 export const DEL_NOTES_RECIEVED = 'DEL_NOTES_RECIEVED';
 export const ERROR = 'ERROR';
 export const EDITING_LIST = 'EDITING_LIST';
+export const EDITING_NOTE = 'EDITING_NOTE';
+export const ERROR_EDITING_NOTE = 'ERROR_EDITING_NOTE';
 export const ERROR_ADDING_NEW_NOTE = 'ERROR_ADDING_NEW_NOTE';
 export const ERROR_DELETING_NOTE = 'ERROR_DELETING_NOTE';
-export const EDITING_NOTE = 'EDITING_NOTE';
 export const FETCHING_ATTACHED_ITEMS = 'FETCHING_ATTACHED_ITEMS';
 export const FETCHING_DEL_NOTES = 'FETCHING_DEL_NOTES';
 export const FETCHING_LINKS = 'FETCHING_LINKS';
@@ -22,6 +23,24 @@ export const NOTE_EDITED = 'NOTE_EDITED';
 export const NOTE_ERROR = 'NOTE_ERROR';
 export const SENDING_NEW_NOTE = 'SENDING_NEW_NOTE';
 export const SORT_NOTE = 'SORT_NOTE';
+
+export const editNote = (noteEdit) => {
+    return function(dispatch){
+        if(localStorage.getItem('JWT')){
+            const token = localStorage.getItem('JWT')
+            const authHeader = { headers: { Authorization: token } }
+            dispatch({ type: EDITING_NOTE })
+            axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader).then(res => {
+                dispatch(getNotes());
+                dispatch({ type: NOTE_EDITED })
+              }).catch(err => {
+                dispatch({ type: ERROR_EDITING_NOTE })
+                console.log(err.message)})
+        } else {
+            console.log('need to include toekn in request')
+        }
+    }
+}
 
 export const deleteNote = (id) => {
   return function(dispatch){
@@ -165,9 +184,7 @@ export const getNotes = () =>  {
           dispatch({type: FETCHING_NOTES});
           const token = localStorage.getItem('JWT')
           const authHeader = {
-            headers: {
-              Authorization: token, 
-            }
+            headers: { Authorization: token }
           }
           axios.get('http://localhost:3333/api/notes/all', authHeader)
           .then(res => {
@@ -182,28 +199,28 @@ export const getNotes = () =>  {
     }
 }
 
-export const getLinks = () =>  {
-    return function(dispatch){
-        if(localStorage.getItem('JWT')){
-          dispatch({type: FETCHING_LINKS});
-          const token = localStorage.getItem('JWT')
-          const authHeader = {
-            headers: {
-              Authorization: token, 
-            }
-          }
-          axios.get('http://localhost:3333/api/notes/all/links', authHeader)
-          .then(res => {
-            dispatch({type: LINKS_RECIEVED, payload: res.data})
-          })
-          .catch(err => {
-            dispatch({type: NOTE_ERROR, payload: err})
-          })
-        } else {
-          dispatch({type: ERROR, payload: 'there was no token found'})      
-        }
-    }
-}
+// export const getLinks = () =>  {
+//     return function(dispatch){
+//         if(localStorage.getItem('JWT')){
+//           dispatch({type: FETCHING_LINKS});
+//           const token = localStorage.getItem('JWT')
+//           const authHeader = {
+//             headers: {
+//               Authorization: token, 
+//             }
+//           }
+//           axios.get('http://localhost:3333/api/notes/all/links', authHeader)
+//           .then(res => {
+//             dispatch({type: LINKS_RECIEVED, payload: res.data})
+//           })
+//           .catch(err => {
+//             dispatch({type: NOTE_ERROR, payload: err})
+//           })
+//         } else {
+//           dispatch({type: ERROR, payload: 'there was no token found'})      
+//         }
+//     }
+// }
 
 export const sortNote = (newlySortedArray) => {
     return function(dispatch){

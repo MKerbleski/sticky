@@ -34,11 +34,11 @@ class AllNotes extends Component {
     render() {    
         return (
             <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}
-            style={{background: this.props.hover ? 'lightgreen' : null, background: this.props.deleteBin ? 'red' : null}}>
+            style={{background: this.props.hover ? 'lightgreen' : this.props.deleteBin ? 'red' : null}}>
                 {this.props.store.notes.notes.length > 0 ? null :
                     <div>
-                    <h3>Welcome!</h3>
-                    <p>Click the plus to the left to create a new note</p>
+                        <h3>Welcome!</h3>
+                        <p>Click the plus to the left to create a new note</p>
                     </div> }
                 {this.props.showNewNote && !this.props.deleteBin ?
                     <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> :

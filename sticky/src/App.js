@@ -49,25 +49,7 @@ class App extends Component {
         if(source_id !== target_id){
             this.editNote({id: source_id, parent_id: target_id})
             this.props.getNotes();
-            this.props.getLinks();
-        }
-    }
-
-  
-    deleteNote = (id) => {
-        //use this for actualy deleting notes, from trash when set up
-        if(localStorage.getItem('JWT')){
-            const token = localStorage.getItem('JWT')
-            const authHeader = {
-                headers: { Authorization: token } 
-            }
-            axios.delete(`http://localhost:3333/api/notes/${id}`, authHeader)
-            .then(res => {
-                // this.props.history.push('/all-notes')
-                this.props.getNotes();
-            }).catch(err => console.log(err.message))
-        } else {
-            console.log('need to include a valid token in request')
+            // this.props.getLinks();
         }
     }
 
