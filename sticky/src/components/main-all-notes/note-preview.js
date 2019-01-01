@@ -4,7 +4,7 @@ import flow from 'lodash/flow';
 import { DragSource, DropTarget } from 'react-dnd';
 import { flex } from '../../styles/styl-utils.js'
 import { LayerTwoTargetSource } from "./index"
-import { deleteNote } from '../../actions'
+import { deleteNote, editNote } from '../../actions'
 import { connect } from 'react-redux';
 
 class NotePreview extends React.Component {
@@ -42,6 +42,8 @@ class NotePreview extends React.Component {
         this.props.deleteNote(this.props.layerOne.id)
       } else if (e.target.name === "restore"){
         console.log(e.target.name, "was clicked!")
+        let noteEdit = {id: this.props.layerOne.id, is_deleted: false}
+        this.props.editNote(noteEdit, true)
       }
     }
     
@@ -53,7 +55,7 @@ class NotePreview extends React.Component {
                 <NotePreviewDiv 
                   onClick={this.goToNote}
                   innerRef={instance => {
-                    this.props.connectDragSource(instance);
+                    this.props.connectDragSource(instance)
                     this.props.connectDropTarget(instance)}}
                   color={this.props.layerOne.note_color} >
                         <div key={this.props.key}
@@ -156,7 +158,8 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-  deleteNote
+  deleteNote,
+  editNote,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(flow(

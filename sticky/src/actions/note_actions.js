@@ -24,14 +24,18 @@ export const NOTE_ERROR = 'NOTE_ERROR';
 export const SENDING_NEW_NOTE = 'SENDING_NEW_NOTE';
 export const SORT_NOTE = 'SORT_NOTE';
 
-export const editNote = (noteEdit) => {
+export const editNote = (noteEdit, fetchDeleted=false) => {
     return function(dispatch){
         if(localStorage.getItem('JWT')){
             const token = localStorage.getItem('JWT')
             const authHeader = { headers: { Authorization: token } }
             dispatch({ type: EDITING_NOTE })
             axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader).then(res => {
-                dispatch(getNotes());
+                if(fetchDeleted){
+                  dispatch(getDeletedNotes())
+                } else {
+                  dispatch(getNotes());
+                }   
                 dispatch({ type: NOTE_EDITED })
               }).catch(err => {
                 dispatch({ type: ERROR_EDITING_NOTE })

@@ -1,5 +1,3 @@
-import { editAttachedItems } from '../actions/index.js'
-
 export const sharedEndDrag = (props, monitor, type) => {
     if(!monitor.didDrop()){
         return;
