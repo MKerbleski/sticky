@@ -2,31 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 import flow from 'lodash/flow';
 import { DragSource, DropTarget } from 'react-dnd';
-import { flex } from '../../styles/styl-utils.js'
-import { LayerTwoTargetSource } from "./index"
-import { deleteNote, editNote } from '../../actions'
 import { connect } from 'react-redux';
-import { sharedStickyNoteDrop } from '../../helpers/sticky-end-drag'
+import { LayerTwoTargetSource } from "./index"
+import { flex } from '../../styles/styl-utils.js'
+import { deleteNote, editNote } from '../../actions'
+import { sharedStickyNoteDrop } from '../../helpers'
 
 class NotePreview extends React.Component {
     getFirstWord = (text, words=2) => {
-      let firstWord = text.split(" ").slice(0,words).join(' ');
-      if(firstWord.length > 0){
-        return firstWord
-      } else {
-        return text
-      }
+        let firstWord = text.split(" ").slice(0,words).join(' ');
+        if(firstWord.length > 0){
+          return firstWord
+        } else {
+          return text
+        }
     }
 
     getFirstSen = (text) => {
-      let firstSen = text
-      let firstWord = this.getFirstWord(text)
-      firstSen = firstSen.replace(firstWord, '')
-      if(firstSen !== firstWord){
-          return firstSen
-      } else{
-          return null
-      }
+        let firstSen = text
+        let firstWord = this.getFirstWord(text)
+        firstSen = firstSen.replace(firstWord, '')
+        if(firstSen !== firstWord){
+            return firstSen
+        } else{
+            return null
+        }
     }
 
     goToNote = (e) => {
@@ -37,15 +37,12 @@ class NotePreview extends React.Component {
     }
 
     clickHandler = (e) => {
-      e.preventDefault()
-      if(e.target.name === "delete"){
-        console.log(e.target.name, "was clicked!")
-        this.props.deleteNote(this.props.layerOne.id)
-      } else if (e.target.name === "restore"){
-        console.log(e.target.name, "was clicked!")
-        let noteEdit = {id: this.props.layerOne.id, is_deleted: false}
-        this.props.editNote(noteEdit, true)
-      }
+        e.preventDefault()
+        if(e.target.name === "delete"){
+          this.props.deleteNote(this.props.layerOne.id)
+        } else if (e.target.name === "restore"){
+          this.props.editNote({id: this.props.layerOne.id, is_deleted: false}, true)
+        }
     }
     
     render(){
@@ -147,7 +144,11 @@ const sourceObj = {
           return;
         }
         // const  { id }  = monitor.getItem(); 
-        sharedStickyNoteDrop(props, monitor);
+        const sticky_source_id = props.layerOne.id;
+        const target = monitor.getDropResult();
+        const target_id = target.targetId;
+        let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
+        props.editNote(noteEdit)
         // const sticky_source_id = props.layerOne.id;
         // const target = monitor.getDropResult();
         // const target_id = target.targetId;

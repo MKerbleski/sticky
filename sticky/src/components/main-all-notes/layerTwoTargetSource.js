@@ -3,6 +3,9 @@ import React from 'react';
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
 import { LayerThreeSource } from "./index"
+import { sharedStickyNoteDrop } from '../../helpers'
+import { editNote } from '../../actions'
+import { connect } from 'react-redux'
 
 class LayerTwoTargetSource extends React.Component {
     goToNote = (e) => {
@@ -81,13 +84,26 @@ const sourceObj = {
         if(!monitor.didDrop()){
             return ;
         }
-        const sourceId = props.layerTwo.id;
-        const dropResult = monitor.getDropResult({shallow: true});
-        props.onDrop(sourceId, dropResult.type, dropResult.targetId);
+        // const sourceId = props.layerTwo.id;
+        // const dropResult = monitor.getDropResult({shallow: true}); 
+
+        const sticky_source_id = props.layerTwo.id;
+        const target = monitor.getDropResult({shallow: true});
+        const target_id = target.targetId;
+        let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
+        props.editNote(noteEdit)
     }
 };
 
-export default flow(
+const mapStateToProps = store => {
+    return {store: store};
+  }
+  
+  const mapDispatchToProps = {
+    editNote,
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(flow(
 
     DropTarget('item', targetObj, (connect, monitor) => ({
         connectDropTarget: connect.dropTarget(),
@@ -101,7 +117,7 @@ export default flow(
         isDragging: monitor.isDragging(),
     }))
 
-)(LayerTwoTargetSource);
+)(LayerTwoTargetSource));
 
 const LayerTwoDiv = styled.div`
     border: 2px solid black;

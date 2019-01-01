@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
 import { DragSource } from 'react-dnd';
+import { sharedStickyNoteDrop } from '../../helpers'
+import { editNote } from '../../actions'
+import { connect } from 'react-redux'
 
 const LayerThreeSource = (props) => {
     const goToNote = () => {
@@ -39,9 +42,15 @@ const LayerThreeSource = (props) => {
         if(!monitor.didDrop()){
             return ;
         }
-        const childId = props.layerThree.id;
-        const parentId = monitor.getDropResult();
-        props.onDrop(childId, parentId.type, parentId.targetId);
+        // const childId = props.layerThree.id;
+        // const parentId = monitor.getDropResult();
+        // props.onDrop(childId, parentId.type, parentId.targetId);
+
+        const sticky_source_id = props.layerThree.id;
+        const target = monitor.getDropResult();
+        const target_id = target.targetId;
+        let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
+        props.editNote(noteEdit)
     },
   };
 
@@ -51,7 +60,15 @@ const LayerThreeSource = (props) => {
     // didDrop: monitor.didDrop(),
   });
 
-export default DragSource('item', sourceObj, collect)(LayerThreeSource);
+  const mapStateToProps = store => {
+    return {store: store};
+  }
+  
+  const mapDispatchToProps = {
+    editNote,
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(DragSource('item', sourceObj, collect)(LayerThreeSource))
 
 const LayerThreeDiv = styled.div`
     border: 1px solid green;

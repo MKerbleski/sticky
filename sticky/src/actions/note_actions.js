@@ -26,23 +26,22 @@ export const SORT_NOTE = 'SORT_NOTE';
 
 export const editNote = (noteEdit, fetchDeleted=false) => {
     return function(dispatch){
-        if(localStorage.getItem('JWT')){
+        if(localStorage.getItem('JWT') && noteEdit){
             const token = localStorage.getItem('JWT')
             const authHeader = { headers: { Authorization: token } }
             dispatch({ type: EDITING_NOTE })
             axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader).then(res => {
-                if(fetchDeleted){
-                  dispatch(getDeletedNotes())
-                } else {
-                  dispatch(getNotes());
-                }   
-                dispatch({ type: NOTE_EDITED })
-              }).catch(err => {
-                dispatch({ type: ERROR_EDITING_NOTE })
-                console.log("error in edit note redux actions", err.message)})
-        } else {
-            console.log('need to include toekn in request')
-        }
+              if(fetchDeleted){
+                dispatch(getDeletedNotes())
+              } else {
+                dispatch(getNotes());
+              }   
+              dispatch({ type: NOTE_EDITED })
+            }).catch(err => {
+              dispatch({ type: ERROR_EDITING_NOTE })
+              console.log("error in edit note redux actions", err.message)})
+            }
+            //else there is note a Token or a note was dropped on itself
     }
 }
 

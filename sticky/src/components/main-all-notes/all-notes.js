@@ -33,7 +33,8 @@ class AllNotes extends Component {
 
     render() {    
         return (
-            <AllNotesDiv 
+            <AllNotesDiv
+                type="top" 
                 innerRef={instance => this.props.connectDropTarget(instance)}
                 style={{background: this.props.hover ? 'lightgreen' : this.props.deleteBin ? 'red' : null}}>
                 {this.props.store.notes.notes.length > 0 ? null :
@@ -73,10 +74,11 @@ const targetObj = {
     drop(props, monitor) {
         const hover = monitor.isOver({shallow:false})
         if(hover){
-            const { type } = props;
-            return ({
-                type,
-            });
+            // const { type } = props;
+            // return ({
+            //     type,
+            // });
+            return {type: 'top'}
         }
     }
 }
