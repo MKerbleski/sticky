@@ -59,11 +59,8 @@ class App extends Component {
         if(localStorage.getItem('JWT')){
             const token = localStorage.getItem('JWT')
             const authHeader = {
-                headers: {
-                Authorization: token,    
-                } 
+                headers: { Authorization: token } 
             }
-            // console.log(token, id, 'from app')
             axios.delete(`http://localhost:3333/api/notes/${id}`, authHeader)
             .then(res => {
                 // this.props.history.push('/all-notes')

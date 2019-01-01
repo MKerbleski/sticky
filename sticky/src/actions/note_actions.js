@@ -6,6 +6,7 @@ export const DEL_NOTES_RECIEVED = 'DEL_NOTES_RECIEVED';
 export const ERROR = 'ERROR';
 export const EDITING_LIST = 'EDITING_LIST';
 export const ERROR_ADDING_NEW_NOTE = 'ERROR_ADDING_NEW_NOTE';
+export const ERROR_DELETING_NOTE = 'ERROR_DELETING_NOTE';
 export const EDITING_NOTE = 'EDITING_NOTE';
 export const FETCHING_ATTACHED_ITEMS = 'FETCHING_ATTACHED_ITEMS';
 export const FETCHING_DEL_NOTES = 'FETCHING_DEL_NOTES';
@@ -21,6 +22,28 @@ export const NOTE_EDITED = 'NOTE_EDITED';
 export const NOTE_ERROR = 'NOTE_ERROR';
 export const SENDING_NEW_NOTE = 'SENDING_NEW_NOTE';
 export const SORT_NOTE = 'SORT_NOTE';
+
+export const deleteNote = (id) => {
+  return function(dispatch){
+      if(localStorage.getItem('JWT')){
+          const token = localStorage.getItem('JWT')
+          const authHeader = {
+              headers: { Authorization: token } 
+          }
+          dispatch({type: DELETING_NOTE})
+          axios.delete(`http://localhost:3333/api/notes/${id}`, authHeader)
+          .then(res => {
+              dispatch({type: NOTE_DELETED})
+              dispatch(getDeletedNotes)
+            }).catch(err => {
+              console.log("error deleting note", err.message)
+              dispatch({type: ERROR_DELETING_NOTE})
+            })
+      } else {
+          console.log('need to include a valid token in request')
+      }
+  }
+}
 
 export const editAttachedItems = (obj) => {
     return function(dispatch){

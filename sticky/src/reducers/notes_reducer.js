@@ -1,25 +1,26 @@
 import {   
-    SENDING_NEW_NOTE,
-    DELETING_NOTE,
+    ATTACHED_ITEMS_RECIEVED,
+    CREDENTIAL_ERROR,
     DEL_NOTES_RECIEVED,
+    DELETING_NOTE,
     EDITING_NOTE,
+    EDITING_LIST,
+    ERROR_DELETING_NOTE,
+    ERROR_ADDING_NEW_NOTE,
+    FETCHING_ATTACHED_ITEMS,
     FETCHING_DEL_NOTES,
     FETCHING_NOTES,
     FETCHING_LINKS,
-    LINKS_RECIEVED,
+    // LINKS_RECIEVED,
+    LIST_EDIT_ERROR,
+    LIST_EDITED,
     NEW_NOTE_ADDED,
     NOTE_DELETED,
     NOTE_EDITED,
-    NOTES_RECIEVED,
-    SORT_NOTE,
     NOTE_ERROR,
-    FETCHING_ATTACHED_ITEMS,
-    ATTACHED_ITEMS_RECIEVED,
-    CREDENTIAL_ERROR,
-    ERROR_ADDING_NEW_NOTE,
-    EDITING_LIST,
-    LIST_EDITED,
-    LIST_EDIT_ERROR
+    NOTES_RECIEVED,
+    SENDING_NEW_NOTE,
+    SORT_NOTE,
  } from '../actions/note_actions';
 
 
@@ -73,12 +74,12 @@ export const notesReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 fetchingLinks: true,
             })
-        case LINKS_RECIEVED:
-            return Object.assign({}, state, {
-                fetchingLinks: false,
-                linksRecieved: true,
-                links: action.payload.allUserLinks,
-            })
+        // case LINKS_RECIEVED:
+        //     return Object.assign({}, state, {
+        //         fetchingLinks: false,
+        //         linksRecieved: true,
+        //         links: action.payload.allUserLinks,
+        //     })
         case FETCHING_NOTES:
             return Object.assign({}, state, {
                 fetchingNotes: true,
@@ -115,6 +116,11 @@ export const notesReducer = (state = initialState, action) => {
                 deletingNote: false,
                 noteDeleted: true,
                 status: action.payload,
+            })
+        case ERROR_DELETING_NOTE:
+            return Object.assign({}, state, {
+                deletingNote: false, 
+                status: action.payload
             })
         case EDITING_NOTE:
             return Object.assign({}, state, {
