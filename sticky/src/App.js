@@ -20,7 +20,7 @@ import {
     addNote,
     sortNote,
     logout,
-    getLinks,
+    // getLinks,
     getDeletedNotes,
     getUserData,
 } from './actions';
@@ -199,12 +199,14 @@ class App extends Component {
                                     toggleNewNote={this.toggleNewNote}
                                     redirect={this.redirect} />
                                 }} />
+
                         </React.Fragment> 
                     </div> {/*   app-center    */}
                     
-                    {this.props.store.user.userData ? <RightMenu 
-                    onDrop={this.onDrop} 
-                    /> : null}
+                    {this.props.store.user.userData ? 
+                        <RightMenu 
+                            onDrop={this.onDrop} 
+                            /> : null}
                 </div> : 
                 <Route path="/welcome/" component={Welcome} />
             }    
@@ -222,34 +224,34 @@ const mapDispatchToProps = {
     addNote,
     sortNote,
     logout,
-    getLinks,
+    // getLinks,
     getDeletedNotes,
     getUserData, 
 }
  export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 
- const AppDiv = styled.div`
-      display: flex;
-      flex-direction: column;
-      background-color: white;
-      height: 100vh;
-      width: 100vw;
-      box-sizing: border-box;
-      .app-top {
+const AppDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    .app-top {
         height: 5vh;
-      }
-     .app-bottom {
+    }
+    .app-bottom {
         display: flex;
         flex-direction: row;
         z-index: 0;
         box-sizing: border-box;
         height: 95vh;
         .app-center {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          flex-wrap: wrap;
-          overflow: auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            overflow: auto;
         }
-     }
- `;
+    }
+`;

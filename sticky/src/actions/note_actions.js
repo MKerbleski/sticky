@@ -39,7 +39,7 @@ export const editNote = (noteEdit, fetchDeleted=false) => {
                 dispatch({ type: NOTE_EDITED })
               }).catch(err => {
                 dispatch({ type: ERROR_EDITING_NOTE })
-                console.log(err.message)})
+                console.log("error in edit note redux actions", err.message)})
         } else {
             console.log('need to include toekn in request')
         }

@@ -146,10 +146,29 @@ const sourceObj = {
           return;
         }
         // const  { id }  = monitor.getItem(); 
-        const sourceId= props.layerOne.id
-        const dropResult = monitor.getDropResult();
-        // console.log(sourceId,  dropResult, dropResult.targetId)
-        props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
+        const sticky_source_id = props.layerOne.id;
+        const target = monitor.getDropResult();
+        const target_id = target.targetId;
+
+        console.log(sticky_source_id , target, target.targetId)
+        switch(target.type){
+          case 'note':
+              console.log("note", sticky_source_id, target_id)
+              if(sticky_source_id !== target_id){
+                  props.editNote({id: sticky_source_id, parent_id: target_id})
+              }
+              break;
+          case 'deleteBin':
+              props.editNote({is_deleted: true, id: sticky_source_id})
+              break;
+          case 'top':
+              props.editNote({id: sticky_source_id, parent_id: null})
+              break
+          default: 
+              console.log("default")
+              break;
+        }
+        // props.onDrop(sourceId, dropResult.type, dropResult.targetId);
     },
 };
 

@@ -33,8 +33,9 @@ class AllNotes extends Component {
 
     render() {    
         return (
-            <AllNotesDiv innerRef={instance => this.props.connectDropTarget(instance)}
-            style={{background: this.props.hover ? 'lightgreen' : this.props.deleteBin ? 'red' : null}}>
+            <AllNotesDiv 
+                innerRef={instance => this.props.connectDropTarget(instance)}
+                style={{background: this.props.hover ? 'lightgreen' : this.props.deleteBin ? 'red' : null}}>
                 {this.props.store.notes.notes.length > 0 ? null :
                     <div>
                         <h3>Welcome!</h3>
