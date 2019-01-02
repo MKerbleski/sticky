@@ -9,7 +9,7 @@ import {
 } from '../index.js';
 import { getAttachedItems } from '../../actions'
 import { start } from '../../styles/styl-utils.js'
-import { NoteDraft } from './note-detail-body-quill'
+
 
 const mapStateToProps = store => {
     return {store: store};
@@ -30,8 +30,7 @@ class NoteDetailSelf extends React.Component {
                     style={{background: this.props.hover ? 'lightgreen' : null}}>
                     <div className="note-detail-main">
                         <div className="note-detail-left">
-                            <NoteDraft />
-                            {/* <NoteDetailBody editNote={this.props.editNote} note={this.props.note} /> */}
+                            <NoteDetailBody editNote={this.props.editNote} note={this.props.note} />
                             <div className="note-detail-children">
                                 {this.props.allNotes.map( layerOne => {
                                     if(layerOne.parent_id === this.props.note.id){

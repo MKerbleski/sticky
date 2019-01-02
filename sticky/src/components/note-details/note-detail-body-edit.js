@@ -1,21 +1,5 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
-import Quill from 'quill';
-import { Editor, EditorState } from 'draft-js'
-
-let editor = new Quill('.form')
-
-var quill = new Quill('#editor-container', {
-    modules: {
-      toolbar: [
-        [{ header: [1, 2, false] }],
-        ['bold', 'italic', 'underline'],
-        ['image', 'code-block']
-      ]
-    },
-    placeholder: 'Compose an epic...',
-    theme: 'snow'  // or 'bubble'
-  });
 
 export default class NoteDetailBodyEdit extends Component {
     constructor(props){

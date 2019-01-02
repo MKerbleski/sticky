@@ -3,7 +3,10 @@ import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown';
 import { start } from '../../styles/styl-utils.js'
 import { withRouter } from 'react-router'
+import { default as NoteQuill } from './note-detail-body-quill'
 import NoteDetailBodyEdit from './note-detail-body-edit.js';
+
+// {/* <NoteDetailBodyEdit changeView={this.handleDClick} editNote={this.props.editNote} note={this.props.note} /> */}
 
 class NoteDetailBody extends Component {
     constructor(props){
@@ -20,11 +23,12 @@ class NoteDetailBody extends Component {
         })
     }
 
+
     render(){
         return(
             <NoteDetailBodyDiv  onDoubleClick={this.handleDClick}> 
                 {this.state.edit ? 
-                    <NoteDetailBodyEdit changeView={this.handleDClick} editNote={this.props.editNote} note={this.props.note} /> : 
+                    <NoteQuill changeView={this.handleDClick} editNote={this.props.editNote} note={this.props.note} /> : 
                     <div 
                         className="note-detail-body" 
                         onDoubleClick={this.handleDClick} >
