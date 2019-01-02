@@ -44,7 +44,7 @@ const PocketNote = (props) => {
             const pocketId = props.item.item_id
             const type = props.type
             return ({
-                pocketId, type //this gets sent to the drop item // is null in this example because react-dnd is overkill
+                pocketId, type //this gets sent to the drop item 
             });
         }
     },

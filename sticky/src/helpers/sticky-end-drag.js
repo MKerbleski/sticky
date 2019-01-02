@@ -8,7 +8,7 @@ export const sharedStickyNoteDrop = (sticky_source_id, target_id, target) => {
             case 'top':
                 return {id: sticky_source_id, parent_id: null}
             default: 
-                console.log("default, there was no type on target object")
+                console.log("retured null, there was no type on target object")
                 return null
         }
     } else {

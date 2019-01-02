@@ -1,5 +1,21 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
+import Quill from 'quill';
+import { Editor, EditorState } from 'draft-js'
+
+let editor = new Quill('.form')
+
+var quill = new Quill('#editor-container', {
+    modules: {
+      toolbar: [
+        [{ header: [1, 2, false] }],
+        ['bold', 'italic', 'underline'],
+        ['image', 'code-block']
+      ]
+    },
+    placeholder: 'Compose an epic...',
+    theme: 'snow'  // or 'bubble'
+  });
 
 export default class NoteDetailBodyEdit extends Component {
     constructor(props){
@@ -15,6 +31,10 @@ export default class NoteDetailBodyEdit extends Component {
         })
     }
 
+    handleChange(value) {
+        this.setState({ text: value })
+      }
+
     handleEdit = (e) => {
         e.preventDefault()
         //currently the way that notes are set up the note cannot update unless the page is refreshed. needs to fetched for specific notes when at /note/1 and only get that note or something
@@ -27,10 +47,11 @@ export default class NoteDetailBodyEdit extends Component {
         this.props.changeView();
     }      
 
+
     render(){
         return(
             <NoteDetailBodyEditDiv> 
-                <form onSubmit={this.handleEdit}>
+                <form onSubmit={this.handleEdit} >
                     <input 
                         wrap="hard" 
                         type='textarea' 

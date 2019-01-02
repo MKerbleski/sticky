@@ -68,6 +68,7 @@ export const deleteNote = (id) => {
 }
 
 export const editAttachedItems = (obj) => {
+    let {sticky_source, sticky_target} = obj
     return function(dispatch){
         if(localStorage.getItem('JWT') && obj.sticky_target !== null){
             dispatch({type: EDITING_LIST});
@@ -77,7 +78,6 @@ export const editAttachedItems = (obj) => {
                 Authorization: token,
               }
             }
-            let {sticky_source, sticky_target} = obj
             if(sticky_target && sticky_source){
                 let sticky_target_id = obj.sticky_target.sticky_target_id
                 axios.put(`http://localhost:3333/api/notes/${sticky_target_id}`, (obj.sticky_target.sticky_target_edit), authHeader).then(res => {

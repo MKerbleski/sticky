@@ -12,8 +12,7 @@ const SlackNote = (props) => {
     let time = props.item.ts.slice(0, 10)*1000
     time = format(time, 'MMM Do YYYY')
     if (props){
-        return (
-            <SlackNoteDiv 
+        return <SlackNoteDiv 
                 innerRef={instance => props.connectDragSource(instance)}
                 type="slack"
                 style={{
@@ -34,7 +33,6 @@ const SlackNote = (props) => {
                     <a target="_blank" href={props.item.permalink}>Link to Slack</a>
                 </span>
             </SlackNoteDiv>
-        )
     } else {
         return null
     }
@@ -47,7 +45,7 @@ const SlackNote = (props) => {
         return ({ slack_note_id, type })
     },
 
-    endDrag(props, monitor) {// this takes props mounted on beginDrag
+    endDrag(props, monitor) {
         let obj = sharedEndDrag(props, monitor, 'slack_items_attached');
         if(obj.sticky_target.sticky_target_id !== null){
             props.editAttachedItems(obj)
@@ -57,14 +55,14 @@ const SlackNote = (props) => {
     },
 };
 
-  const collect = (connect, monitor) => ({
+const collect = (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging(),
     // didDrop: monitor.didDrop(),
-  });
+});
 
 const mapStateToProps = store => {
-    return {store: store};
+    return { store: store };
 }
 
 const mapDispatchToProps = {

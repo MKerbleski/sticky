@@ -13,27 +13,21 @@ class NoteDetailBody extends Component {
             text_body: this.props.note.text_body,
         }
     }
-
-    handleClick = () => {
-        this.setState({
-            edit: true
-        })
-    }
     
     handleDClick = () => {
         this.setState({
-            edit: false
+            edit: !this.state.edit
         })
     }
 
-    render(props){
+    render(){
         return(
             <NoteDetailBodyDiv  onDoubleClick={this.handleDClick}> 
                 {this.state.edit ? 
                     <NoteDetailBodyEdit changeView={this.handleDClick} editNote={this.props.editNote} note={this.props.note} /> : 
                     <div 
                         className="note-detail-body" 
-                        onClick={this.handleClick}>
+                        onDoubleClick={this.handleDClick} >
                           {<ReactMarkdown>{this.props.note.text_body}</ReactMarkdown>}
                     </div>
                 }
