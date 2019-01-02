@@ -1,24 +1,24 @@
 import React from 'react';
-import {Editor, EditorState } from 'draft-js'
+// import {Editor, EditorState } from 'draft-js'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export class NoteDraft extends React.Component {
     constructor (props) {
       super(props)
-      this.state = { 
-          editorState: EditorState.createEmpty() }
+      super(props)
+      this.state = { text: '' } // You can also pass a Quill Delta here
+      this.handleChange = this.handleChange.bind(this)
     }
 
-    onChange = (editorState) => {
-        this.setState({
-            editorState
-        })
-    }
+    handleChange(value) {
+        this.setState({ text: value })
+      }
 
     render () {
       return (
-        <div>
-          <Editor editorState={this.state.editorState} onChange={this.onChange} />
-        </div>
+        <ReactQuill value={this.state.text}
+                  onChange={this.handleChange} />
        )
     }
   }
