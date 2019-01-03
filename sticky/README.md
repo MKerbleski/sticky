@@ -13,10 +13,10 @@ KNOWN BUGS / TODO
     -- add user email and two passwords to sign up and name 
     -- make everything redux
 
-
 FUTURE FEATURES 
     -- colors for notes     
         ``background-color: ${props => props.color};
         ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}``
     -- toggle redundancy. by default items will be redundant, they can appear on different notes in duplicates. this setting would only allow one copy. could be implemented by putting a list on the sticky user credentials
-    -- 
+    -- add a cache to local storage so that pocket and slack will pull immeditally and then refresh when the user clicks a button or every 5 minutes or so. 
+    --double check dependencies to make sure they are in package.json

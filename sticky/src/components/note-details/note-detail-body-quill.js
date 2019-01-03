@@ -93,7 +93,8 @@ class NoteQuill extends React.Component {
     height: 100%;
     background: lavender;
     .editor {
-        max-height: 250px;
+        max-height: 300px;
+        overflow:hidden;
     }
     button {
         color: black;
