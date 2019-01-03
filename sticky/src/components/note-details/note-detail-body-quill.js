@@ -94,9 +94,12 @@ class NoteQuill extends React.Component {
     background: lavender;
     .editor {
         max-height: 250px;
-        overflow: hidden;
     }
-    .quill-editing-area {
+    button {
+        color: black;
+    }
+    .ql-editor {
+        /* react 16 opened this bug and this is the class name for the editor container inside ReactQuill */
         max-height: 250px;
         height: 90%;
         background:white;
