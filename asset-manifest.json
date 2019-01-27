@@ -1,6 +1,12 @@
 {
-  "main.css": "static/css/main.615b0dda.css",
-  "main.css.map": "static/css/main.615b0dda.css.map",
-  "main.js": "static/js/main.46c67b8d.js",
-  "main.js.map": "static/js/main.46c67b8d.js.map"
+  "main.css": "static/css/main.53f0ec5e.css",
+  "main.css.map": "static/css/main.53f0ec5e.css.map",
+  "main.js": "static/js/main.4f811f05.js",
+  "main.js.map": "static/js/main.4f811f05.js.map",
+  "static\\media\\Pocket_Android_AppIcon.png": "static/media/Pocket_Android_AppIcon.4c4d7fb8.png",
+  "static\\media\\chrome.png": "static/media/chrome.f6b4d43d.png",
+  "static\\media\\left.png": "static/media/left.762003a5.png",
+  "static\\media\\pocket.png": "static/media/pocket.12750386.png",
+  "static\\media\\right.png": "static/media/right.42f094f4.png",
+  "static\\media\\twitter.png": "static/media/twitter.fe3da37e.png"
 }
