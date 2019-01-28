@@ -7,6 +7,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "components": "^0.1.0",
+    "date-fns": "^1.30.1",
     "dnd-core": "^4.0.5",
     "dotenv": "^6.0.0",
     "gh-pages": "^2.0.0",
