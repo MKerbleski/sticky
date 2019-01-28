@@ -21,8 +21,8 @@ export default class PocketSettings extends Component {
     connectPocket = (e) => {
         e.preventDefault();
         let userid = this.props.userData.id
-        let redirect_uri = `http://localhost:3333/api/pocket/incoming/${userid}`
-        axios.get(`http://localhost:3333/api/pocket/auth/${userid}`).then(res => {
+        let redirect_uri = `${process.env.REACT_APP_BACKEND_URL}/api/pocket/incoming/${userid}`
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/auth/${userid}`).then(res => {
             if(res.data){
                 window.open(`https://getpocket.com/auth/authorize?request_token=${res.data}&redirect_uri=${redirect_uri}`)
             } else {
@@ -43,7 +43,7 @@ export default class PocketSettings extends Component {
                 Authorization: token, 
               }
             }
-            axios.get(`http://localhost:3333/api/pocket/${e.target.name}`, authHeader)
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/${e.target.name}`, authHeader)
               .then(res => {
                 //stop spinning wheel here...
                 console.log(res.data)

@@ -24,7 +24,7 @@ export default class SlackSettings extends Component {
         let client_id = '465374768868.465546770546'
         let scope = 'stars:read stars:write'
         let userid = this.props.userData.id
-        let redirect_uri = `http://localhost:3333/api/slack/auth/${userid}`
+        let redirect_uri = `${process.env.REACT_APP_BACKEND_URL}/api/slack/auth/${userid}`
         let codeRequestUrl = `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${userid}`
         window.open(codeRequestUrl)
         //every second check and see if the user thing is true
@@ -40,7 +40,7 @@ export default class SlackSettings extends Component {
                 Authorization: token, 
               }
             }
-            axios.get(`http://localhost:3333/api/slack/${e.target.name}`, authHeader)
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/slack/${e.target.name}`, authHeader)
               .then(res => {
               console.log(res.data)
             })

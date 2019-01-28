@@ -24,7 +24,7 @@ export const getConnectedApis = () =>  {
             Authorization: token, 
           }
         }
-        axios.get('http://localhost:3333/api/user/apis', authHeader)
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/apis`, authHeader)
         .then(res => {
           // let apiStr = res.data.connected_apis 
           // let apiArr = turnToArr(apiStr);
@@ -49,7 +49,7 @@ export const getConnectedApis = () =>  {
             Authorization: token, 
           }
         }
-        axios.get(`http://localhost:3333/api/user/settings`, authHeader)
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/settings`, authHeader)
         .then(res => {
           dispatch({type: USERDATA_RECIEVED, payload: res.data})
         })

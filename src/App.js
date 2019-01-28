@@ -69,7 +69,7 @@ class App extends Component {
                     Authorization: token,    
                 } 
             }
-            axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
+            axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
             .then(res => {
                 // console.log("App Edit note respons", res)
                 this.props.getNotes();

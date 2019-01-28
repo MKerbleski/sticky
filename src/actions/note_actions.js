@@ -30,7 +30,7 @@ export const editNote = (noteEdit, fetchDeleted=false) => {
             const token = localStorage.getItem('JWT')
             const authHeader = { headers: { Authorization: token } }
             dispatch({ type: EDITING_NOTE })
-            axios.put(`http://localhost:3333/api/notes/${noteEdit.id}`, (noteEdit), authHeader).then(res => {
+            axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${noteEdit.id}`, (noteEdit), authHeader).then(res => {
               if(fetchDeleted){
                 dispatch(getDeletedNotes())
               } else {
@@ -53,7 +53,7 @@ export const deleteNote = (id) => {
               headers: { Authorization: token } 
           }
           dispatch({type: DELETING_NOTE})
-          axios.delete(`http://localhost:3333/api/notes/${id}`, authHeader)
+          axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${id}`, authHeader)
           .then(res => {
               dispatch({type: NOTE_DELETED})
               dispatch(getDeletedNotes())
@@ -80,9 +80,9 @@ export const editAttachedItems = (obj) => {
             }
             if(sticky_target && sticky_source){
                 let sticky_target_id = obj.sticky_target.sticky_target_id
-                axios.put(`http://localhost:3333/api/notes/${sticky_target_id}`, (obj.sticky_target.sticky_target_edit), authHeader).then(res => {
+                axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${sticky_target_id}`, (obj.sticky_target.sticky_target_edit), authHeader).then(res => {
                     let sticky_source_id = obj.sticky_source.sticky_source_id
-                    axios.put(`http://localhost:3333/api/notes/${sticky_source_id}`, (obj.sticky_source.sticky_source_edit), authHeader).then(res1 => {
+                    axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${sticky_source_id}`, (obj.sticky_source.sticky_source_edit), authHeader).then(res1 => {
                         dispatch({type: LIST_EDITED, payload: res1.data})
                         dispatch(getNotes())})
                     .catch(err => {
@@ -93,7 +93,7 @@ export const editAttachedItems = (obj) => {
                     dispatch({type: LIST_EDIT_ERROR, payload: err})})
             } else if (sticky_target){
                 let sticky_target_id = obj.sticky_target.sticky_target_id
-                axios.put(`http://localhost:3333/api/notes/${sticky_target_id}`, (obj.sticky_target.sticky_target_edit), authHeader).then(res => {
+                axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${sticky_target_id}`, (obj.sticky_target.sticky_target_edit), authHeader).then(res => {
                     dispatch({type: LIST_EDITED, payload: res.data})
                     dispatch(getNotes())})
                 .catch(err => {
@@ -101,7 +101,7 @@ export const editAttachedItems = (obj) => {
                     dispatch({type: LIST_EDIT_ERROR, payload: err})})
             } else if (sticky_source){
                 let sticky_source_id = obj.sticky_source.sticky_source_id
-                axios.put(`http://localhost:3333/api/notes/${sticky_source_id}`, (obj.sticky_source.sticky_source_edit), authHeader).then(res1 => {
+                axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${sticky_source_id}`, (obj.sticky_source.sticky_source_edit), authHeader).then(res1 => {
                     dispatch({type: LIST_EDITED, payload: res1.data})
                     dispatch(getNotes())})
                 .catch(err => {
@@ -124,7 +124,7 @@ export const addNote = (newNote) => {
               } 
             }
             dispatch({type: SENDING_NEW_NOTE})
-            axios.post('http://localhost:3333/api/notes/', (newNote), authHeader).then(res => {
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/`, (newNote), authHeader).then(res => {
               dispatch({type: NEW_NOTE_ADDED})
               dispatch(getNotes());
             }).catch(err => {
@@ -147,7 +147,7 @@ export const getAttachedItems = (sticky_note_id) => {
                 Authorization: token,    
               } 
             }
-            axios.get(`http://localhost:3333/api/notes/attached/${sticky_note_id}`, authHeader).then(res => {
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/attached/${sticky_note_id}`, authHeader).then(res => {
               dispatch({type: ATTACHED_ITEMS_RECIEVED, payload: res.data})
             }).catch(err => {
               dispatch({type: NOTE_ERROR, payload: err.message})
@@ -169,7 +169,7 @@ export const getDeletedNotes = () => {
                 Authorization: token,    
               } 
             }
-            axios.get(`http://localhost:3333/api/notes/del`, authHeader).then(res => {
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/del`, authHeader).then(res => {
               dispatch({type: DEL_NOTES_RECIEVED, payload: res.data})
             }).catch(err => {
               dispatch({type: NOTE_ERROR, payload:err.message})
@@ -189,7 +189,7 @@ export const getNotes = () =>  {
           const authHeader = {
             headers: { Authorization: token }
           }
-          axios.get('http://localhost:3333/api/notes/all', authHeader)
+          axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/all`, authHeader)
           .then(res => {
             dispatch({type: NOTES_RECIEVED, payload: res.data})
           })
@@ -212,7 +212,7 @@ export const getNotes = () =>  {
 //               Authorization: token, 
 //             }
 //           }
-//           axios.get('http://localhost:3333/api/notes/all/links', authHeader)
+//           axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/all/links`, authHeader)
 //           .then(res => {
 //             dispatch({type: LINKS_RECIEVED, payload: res.data})
 //           })

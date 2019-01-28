@@ -30,7 +30,7 @@ class Welcome extends Component{
         this.setState({
             sendingData: true
         })
-        axios.post('http://localhost:3333/api/welcome/register/', newUser).then(res => {
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/register/`, newUser).then(res => {
             console.log("create user in welcome route", res.data)
             this.setState({
                 sendingData: false
@@ -52,7 +52,7 @@ class Welcome extends Component{
             sendingData: false,
             entryNote: ''
         })
-        axios.post('http://localhost:3333/api/welcome/login', creds).then(res => {
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/login`, creds).then(res => {
             console.log(res.data)
             this.setState({
                 sendingData: true
@@ -76,7 +76,7 @@ class Welcome extends Component{
               Authorization: token,    
             } 
           }
-        axios.post('http://localhost:3333/api/notes/', (newNote), authHeader)
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/`, (newNote), authHeader)
         .then(res => {
             localStorage.removeItem('text_body')
             this.props.history.push('/all-notes')
