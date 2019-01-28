@@ -3,7 +3,7 @@
   "author": "Michael Kerbleski",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mkerbleski.github.io/sticky/",
+  "homepage": "https://notes-app.xyz/",
   "dependencies": {
     "axios": "^0.18.0",
     "components": "^0.1.0",
@@ -24,6 +24,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
+    "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "showdown": "^1.8.6",
