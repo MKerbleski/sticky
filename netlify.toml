@@ -6,10 +6,10 @@ ID = "591fb6ca-711c-4766-9593-19f881bfc8dd"
 
 [build]
   # This is the directory to change to before starting a build.
-  base    = "/"
+  base    = ""
   # NOTE: This is where we will look for package.json/.nvmrc/etc, not root.
   # This is the directory that you are publishing from (relative to root of your repo)
-  publish = "build/"
+  publish = "build"
   # This will be your default build command
   command = "yarn build"
 
