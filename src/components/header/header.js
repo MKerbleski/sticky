@@ -30,7 +30,8 @@ class Header extends Component{
 
                         <div className="linkss">
                             <Link className="headerLink" to="/welcome/login" >Login</Link>
-                            <Link className="headerLink" to="/welcome/register" >Register</Link>
+                            <Link className="headerLink" to="/welcome/register">Register</Link>
+                            {/* <button className="headerLink">Register</button> */}
                         </div>
                     }
             </HeaderDiv>

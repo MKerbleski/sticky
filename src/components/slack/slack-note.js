@@ -12,7 +12,7 @@ const SlackNote = (props) => {
     let time = props.item.ts.slice(0, 10)*1000
     time = format(time, 'MMM Do YYYY')
     if (props){
-        console.log(props)
+        // console.log(props)
         return <SlackNoteDiv 
                 innerRef={instance => props.connectDragSource(instance)}
                 type="slack"

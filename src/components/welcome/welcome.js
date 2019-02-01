@@ -10,7 +10,6 @@ import Register from './register';
 // import Header from './header';
 // import { flex } from '../../styles/styl-utils.js'
 
-
 // import {
 //     createUser,
 //     loginUser,
@@ -84,10 +83,9 @@ class Welcome extends Component{
             //this is not necessary because it is called on a different route than /all notes
         }).catch(err => console.log(err.message))
       } else {
-        console.log('need to include toekn in request')
+        console.log('need to include token in request')
       }
     }
-
 
     inputHandler = (e) => {
         e.preventDefault();

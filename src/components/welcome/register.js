@@ -10,9 +10,10 @@ export default class Register extends Component{
             <RegisterDiv>
                 <h1>Register</h1>
                 <p>{this.props.failed ? 'registration failed, please try again. Most likley the username is not availible': null}</p>
-                <UserForm 
+                {/* <UserForm 
                 sendingData={this.props.sendingData}
-                loginOrRegister={this.props.createUser}/>
+                loginOrRegister={this.props.createUser}/> */}
+                <p>Registration is currently disabled for this application. Please contact Mike for at Resume@kerble.ski for demo credentials</p>
             </RegisterDiv>
         );
     };
