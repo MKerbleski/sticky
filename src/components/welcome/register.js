@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-
-import UserForm from './userform.js';
+import { Link } from 'react-router-dom';
+// import UserForm from './userform.js';
 
 export default class Register extends Component{
 
@@ -13,7 +13,7 @@ export default class Register extends Component{
                 {/* <UserForm 
                 sendingData={this.props.sendingData}
                 loginOrRegister={this.props.createUser}/> */}
-                <p>Registration is currently disabled for this application. Please contact Mike for at Resume@kerble.ski for demo credentials</p>
+                <p>Registration is currently disabled. Please <Link to="/welcome/login">Login</Link> or contact Mike at <a href="mailto:resume@kerble.ski">resume@kerble.ski</a> for demo credentials.</p>
             </RegisterDiv>
         );
     };

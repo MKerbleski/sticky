@@ -7,6 +7,8 @@ import { LayerTwoTargetSource } from "./index"
 import { flex } from '../../styles/styl-utils.js'
 import { deleteNote, editNote } from '../../actions'
 import { sharedStickyNoteDrop } from '../../helpers'
+import ReactHTMLParser from 'react-html-parser'
+import ReactQuill from 'react-quill';
 
 class NotePreview extends React.Component {
     getFirstWord = (text, words=2) => {
@@ -45,6 +47,12 @@ class NotePreview extends React.Component {
         }
     }
     
+    renderText(){
+      let doc = new DOMParser().parseFromString(this.props.layerOne.text_body, 'text/html')
+      // console.log(doc)
+      return doc
+    }
+
     render(){
         if (this.props.layerOne){
             return (
@@ -56,16 +64,16 @@ class NotePreview extends React.Component {
                     this.props.connectDragSource(instance)
                     this.props.connectDropTarget(instance)}}
                   color={this.props.layerOne.note_color} >
-                        <div key={this.props.key}
-                          index={this.props.index}
-                          className="note-link"
+                        <div 
+                            key={this.props.key}
+                            index={this.props.index}
+                            className="note-link"
                           id={this.props.layerOne.id}
                           style={{background: this.props.hover ? 'lightgreen' : null}} >
+                            {/* {this.renderText()} */}
+                            {/* <ReactQuill preview value={this.props.layerOne} /> */}
                             <div className="note-content">
                                 <div className="note-content-header">
-                                    <h3 className="note-content-title">       
-                                        {this.getFirstWord(this.props.layerOne.text_body)}
-                                    </h3>
                                     {this.props.layerOne.is_deleted ?
                                       <div>
                                         <button name="restore" onClick={this.clickHandler}>RESTORE</button>
@@ -77,7 +85,7 @@ class NotePreview extends React.Component {
                                       </div> : null }
                                 </div>
                                 <p>
-                                    {this.getFirstSen(this.props.layerOne.text_body)}
+                                    {ReactHTMLParser(this.props.layerOne.text_body)}
                                 </p> 
                             </div>
                               <div className="layerTwoContainerAll"  >

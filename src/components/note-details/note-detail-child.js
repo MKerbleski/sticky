@@ -161,7 +161,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 const NoteDetailChildDiv = styled.div`
 /* similarities to note preview */
   ${start('pink')}
-  height: 99%;
+  /* height: 99%; */
   width: 100%;
   display: flex;
   flex-direction: column;  

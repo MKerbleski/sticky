@@ -9,6 +9,7 @@ export function picture(){
 export function menu(){
     return `
         background-color: rgba(0,0,0,.3);
+        background-color: #00ffb55c;
     `;
 }
 

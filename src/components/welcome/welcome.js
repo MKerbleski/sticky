@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import Login from './login';
 import Register from './register';
+import { Link } from 'react-router-dom';
 
 // import Header from './header';
 // import { flex } from '../../styles/styl-utils.js'
@@ -30,7 +31,7 @@ class Welcome extends Component{
             sendingData: true
         })
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/register/`, newUser).then(res => {
-            console.log("create user in welcome route", res.data)
+            // console.log("create user in welcome route", res.data)
             this.setState({
                 sendingData: false
             })
@@ -52,7 +53,6 @@ class Welcome extends Component{
             entryNote: ''
         })
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/login`, creds).then(res => {
-            console.log(res.data)
             this.setState({
                 sendingData: true
             })
@@ -66,25 +66,26 @@ class Welcome extends Component{
             }
         }).catch(err => {console.log(err.message)})
     }
+    
     // this is a repeated 3 times 
     newNote = (newNote) => {
         if(localStorage.getItem('JWT')){
-          const token = localStorage.getItem('JWT')
-          const authHeader = {
-            headers: {
-              Authorization: token,    
-            } 
-          }
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/`, (newNote), authHeader)
-        .then(res => {
-            localStorage.removeItem('text_body')
-            this.props.history.push('/all-notes')
-            // this.props.getNotes();
-            //this is not necessary because it is called on a different route than /all notes
-        }).catch(err => console.log(err.message))
-      } else {
-        console.log('need to include token in request')
-      }
+            const token = localStorage.getItem('JWT')
+            const authHeader = {
+                headers: {
+                Authorization: token,    
+                } 
+            }
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/`, (newNote), authHeader)
+            .then(res => {
+                localStorage.removeItem('text_body')
+                this.props.history.push('/all-notes')
+                // this.props.getNotes();
+                //this is not necessary because it is called on a different route than /all notes
+            }).catch(err => console.log(err.message))
+        } else {
+            console.log('need to include token in request')
+        }
     }
 
     inputHandler = (e) => {
@@ -96,16 +97,15 @@ class Welcome extends Component{
 
     saveLocalNote = (e) => {
         e.preventDefault();
-        console.log(this)
         localStorage.setItem(`text_body`, this.state.entryNote)
         this.setState({
             entryNote: '',
         })
-        this.props.history.push('/welcome/login')
-        alert('notes saved locally. please sign in or register to save note permenantly.')
+        this.props.history.push('/welcome/register')
+        alert('Note was saved locally. Please login or register to save note permenantly.')
       }
 
-    render(props){
+    render(){
         return(
             <WelcomeDiv>
                 <Route path="/welcome/login" render={() => {
@@ -126,6 +126,10 @@ class Welcome extends Component{
                                 <input type="submit" name="Save note" />
                             </form>
                     }} />
+                <footer>
+                    <Link to="/about">About</Link>
+                    <a href="https://mikerble.ski">Made by Mike</a>
+                </footer>
             </WelcomeDiv>
         )
     }
@@ -145,11 +149,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
 //379 dope picture
 
 const WelcomeDiv = styled.div`
-    ${'' /* border: 1px solid red; */}
+    /* border: 1px solid blue; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     ${'' /* background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)}); */}
     ${'' /* width: 100%; */}
     height: 90vh;
@@ -175,5 +179,14 @@ const WelcomeDiv = styled.div`
     }
     .sign-in{
         ${'' /* z-index: 100; */}
+    }
+    footer {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: center;
+        border: 1px solid red;
+        text-align: baseline;
     }
 `;

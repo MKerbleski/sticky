@@ -101,7 +101,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', t
 const NoteDetailSelfDiv = styled.div`
     ${start('red')}
     justify-content: center;
-    height: 100%;
+    height: auto;
     width: 89%;
     background-color: lightgray;
     flex-direction: column;
@@ -129,6 +129,14 @@ const NoteDetailSelfDiv = styled.div`
                 justify-content: safe space-around;
                 overflow: auto;
                 height: 50%;
+                min-height: 100px;
+                &::-webkit-scrollbar {
+                    width: 6px;
+                        &-thumb{
+                            background-color: gray;
+                            border-radius: 25px;
+                    }
+                }
                 .note-detail-child-container{
                     ${start('blue')}
                     min-width: 24%;

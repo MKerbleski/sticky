@@ -10,8 +10,8 @@ export default class Login extends Component{
                 <h1>Login</h1>
                 <p>{this.props.failed ? 'login failed, please try again or register': null}</p>
                 <UserForm 
-                sendingData={this.props.sendingData}
-                loginOrRegister={this.props.loginUser} />
+                    sendingData={this.props.sendingData}
+                    loginOrRegister={this.props.loginUser} />
             </LoginDiv>
         )
     }

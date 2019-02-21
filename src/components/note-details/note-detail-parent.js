@@ -10,8 +10,8 @@ class NoteDetailParent extends React.Component{
     refreshNotes = (id) => {
         this.props.getAttachedItems(id)
     }
+
     render(){
-        console.log(this.props)
         return (
             <NoteDetailParentDiv 
                 innerRef={instance => this.props.connectDropTarget(instance)}
@@ -129,5 +129,12 @@ const NoteDetailParentDiv = styled.div`
         padding: 15px;
         margin: 8px;
         color: gray;
+    }
+    &::-webkit-scrollbar {
+        width: 6px;
+            &-thumb{
+                background-color: gray;
+                border-radius: 25px;
+        }
     }
 `;

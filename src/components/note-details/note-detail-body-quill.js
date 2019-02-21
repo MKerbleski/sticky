@@ -27,7 +27,7 @@ class NoteQuill extends React.Component {
     }
     
     handleChange(e) {
-        console.log(e)
+        // console.log(e)
         this.setState({ text_body: e })
     }
 
@@ -53,58 +53,57 @@ class NoteQuill extends React.Component {
 
     modules = {
         toolbar: [
-          [{ 'header': [1, 2, false] }],
-          ['bold', 'italic', 'underline','strike'],
-          [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-          ['link', 'image'],
-          ['clean'], ['code-block']
+            [{ 'header': [1, 2, false] }],
+            ['bold', 'italic', 'underline','strike'],
+            [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+            ['link', 'image'],
+            ['clean'], ['code-block']
         ],
-      }
+    }
      
-      formats = [
+    formats = [
         'header',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet', 'indent',
         'link', 'code-block'
-      ]
-
-      
+    ]    
 
     render () {
-        console.log(this.state)
       return (
-          <QuillDiv>
+          <NoteQuillDiv>
             <ReactQuill 
                 className="editor"
                 value={this.state.text_body}
                 onChange={this.handleChange}
-                modules={this.modules}
-                formats={this.formats}
+                modules={this.props.preview ? {} : this.modules}
+                formats={this.props.preview ? {} : this.formats}
             />
-            <button onClick={this.saveNote}>Save</button>
-          </QuillDiv>
+            {/* <button onClick={this.saveNote}>Save</button> */}
+          </NoteQuillDiv>
        )
     }
   }
   
   export default connect(mapStateToProps, mapDispatchToProps)(NoteQuill)
 
-  const QuillDiv = styled.div`
+  const NoteQuillDiv = styled.div`
     height: 100%;
     background: lavender;
     .editor {
-        max-height: 300px;
-        overflow:hidden;
+        /* max-height: 300px; */
+        overflow: hidden;
     }
     button {
         color: black;
     }
     .ql-editor {
         /* react 16 opened this bug and this is the class name for the editor container inside ReactQuill */
-        max-height: 250px;
-        height: 90%;
+        max-height: 400px;
+        /* height: 90%; */
         background:white;
+        background:#f3f3fd;
         overflow: auto;
+        /* background: lavender; */
         &::-webkit-scrollbar {
         width: 6px;
             &-thumb{
