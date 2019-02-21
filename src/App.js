@@ -184,6 +184,24 @@ class App extends Component {
                                     editNote={this.editNote}
                                     targetId={this.getParentId(note.match.params.note_id)}
                                     />}} />
+                            
+                            <Route
+                                exact={!this.state.deleteEnabled}
+                                path="/:username/note/:note_id"
+                                render={ (note) => {
+                                return <NoteDetailPage
+                                    // redirect={this.redirect}
+                                    // allNotes={this.props.store.notes.notes}
+                                    // allLinks={this.props.store.notes.links}
+                                    // note={this.getNoteDetails(note.match.params.note_id)} 
+                                    noteId={note.match.params.note_id}
+                                    username={note.match.params.username}
+                                    // onDrop={this.onDrop} 
+                                    // changeParent={this.changeParent}
+                                    // type="note"
+                                    // editNote={this.editNote}
+                                    // targetId={this.getParentId(note.match.params.note_id)}
+                                    />}} />
 
                             <Route
                                 path="/settings"
@@ -229,7 +247,8 @@ const mapDispatchToProps = {
     getDeletedNotes,
     getUserData, 
 }
- export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
+
+export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 
 const AppDiv = styled.div`
     display: flex;

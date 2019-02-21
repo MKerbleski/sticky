@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export const ATTACHED_ITEMS_RECIEVED = 'ATTACHED_ITEMS_RECIEVED';
 export const CREDENTIAL_ERROR = 'CREDENTIAL_ERROR';
 export const DELETING_NOTE = 'DELETING_NOTE';
@@ -24,6 +25,8 @@ export const NOTE_ERROR = 'NOTE_ERROR';
 export const SENDING_NEW_NOTE = 'SENDING_NEW_NOTE';
 export const SORT_NOTE = 'SORT_NOTE';
 
+export const NOTE_RECIEVED = 'NOTE_RECIEVED';
+
 export const editNote = (noteEdit, fetchDeleted=false) => {
     return function(dispatch){
         if(localStorage.getItem('JWT') && noteEdit){
@@ -31,39 +34,39 @@ export const editNote = (noteEdit, fetchDeleted=false) => {
             const authHeader = { headers: { Authorization: token } }
             dispatch({ type: EDITING_NOTE })
             axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${noteEdit.id}`, (noteEdit), authHeader).then(res => {
-              if(fetchDeleted){
-                dispatch(getDeletedNotes())
-              } else {
-                dispatch(getNotes());
-              }   
-              dispatch({ type: NOTE_EDITED })
+				if(fetchDeleted){
+					dispatch(getDeletedNotes())
+				} else {
+					dispatch(getNotes());
+				}   
+              	dispatch({ type: NOTE_EDITED })
             }).catch(err => {
-              dispatch({ type: ERROR_EDITING_NOTE })
-              console.log("error in edit note redux actions", err.message)})
+              	dispatch({ type: ERROR_EDITING_NOTE })
+              	console.log("error in edit note redux actions", err.message)})
             }
             //else there is note a Token or a note was dropped on itself
     }
 }
 
 export const deleteNote = (id) => {
-  return function(dispatch){
-      if(localStorage.getItem('JWT')){
-          const token = localStorage.getItem('JWT')
-          const authHeader = {
-              headers: { Authorization: token } 
-          }
-          dispatch({type: DELETING_NOTE})
-          axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${id}`, authHeader).then(res => {
-              dispatch({type: NOTE_DELETED})
-              dispatch(getDeletedNotes())
+  	return function(dispatch){
+      	if(localStorage.getItem('JWT')){
+			const token = localStorage.getItem('JWT')
+			const authHeader = {
+				headers: { Authorization: token } 
+			}
+			dispatch({type: DELETING_NOTE})
+          	axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${id}`, authHeader).then(res => {
+             	dispatch({type: NOTE_DELETED})
+              	dispatch(getDeletedNotes())
             }).catch(err => {
              	console.log("error deleting note", err.message)
              	dispatch({type: ERROR_DELETING_NOTE})
             })
-      } else {
+      	} else {
          	console.log('need to include a valid token in request')
-      }
-  }
+      	}
+  	}
 }
 
 export const editAttachedItems = (obj) => {
@@ -175,12 +178,13 @@ export const getDeletedNotes = () => {
               	console.log(err.message)
             })
         } else {
-          	console.log('need to include toekn in request')
+          	console.log('need to include token in request')
         }
     }
 }
 
-export const getNotes = () =>  {
+export const getNotes = (id) =>  {
+	console.log(id)
     return function(dispatch){
         if(localStorage.getItem('JWT')){
 			dispatch({type: FETCHING_NOTES});
@@ -188,8 +192,14 @@ export const getNotes = () =>  {
 			const authHeader = {
 				headers: { Authorization: token }
 			}
-			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/all`, authHeader).then(res => {
-				dispatch({type: NOTES_RECIEVED, payload: res.data})
+			// let url = `${process.env.REACT_APP_BACKEND_URL}/api/notes/`
+			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${id ? id : 'all'}`, authHeader).then(res => {
+				console.log(res.data)
+				if(res.data.allUserNotes){
+					dispatch({type: NOTES_RECIEVED, payload: res.data})
+				} else {
+					dispatch({type: NOTE_RECIEVED, payload: res.data})
+				}
 			}).catch(err => {
 				dispatch({type: NOTE_ERROR, payload: err})
 			})

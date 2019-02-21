@@ -32,6 +32,7 @@ class NoteDetailSelf extends React.Component {
                         <div className="note-detail-left">
                             <NoteQuill note={this.props.note} />
                             <div className="note-detail-children">
+                            {/* should fetch child notes at this point */}
                                 {this.props.allNotes.map( layerOne => {
                                     if(layerOne.parent_id === this.props.note.id){
                                         return <NoteDetailChild

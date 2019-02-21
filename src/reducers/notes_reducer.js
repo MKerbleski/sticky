@@ -22,6 +22,8 @@ import {
     NOTES_RECIEVED,
     SENDING_NEW_NOTE,
     SORT_NOTE,
+
+    NOTE_RECIEVED
  } from '../actions/note_actions';
 
 
@@ -88,11 +90,19 @@ export const notesReducer = (state = initialState, action) => {
                 triggerGetNotes: false,
                 status: "Getting Notes!"
             })
-            case NOTES_RECIEVED:
+        case NOTES_RECIEVED:
             return Object.assign({}, state, {
                 fetchingNotes: false,
                 notesRecieved: true,
                 notes: action.payload.allUserNotes,
+                username: action.payload.username,
+                status: "Got Notes!"
+            })
+        case NOTE_RECIEVED:
+            return Object.assign({}, state, {
+                fetchingNotes: false,
+                notesRecieved: true,
+                note: action.payload,
                 username: action.payload.username,
                 status: "Got Notes!"
             })
