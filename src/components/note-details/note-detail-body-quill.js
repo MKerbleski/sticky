@@ -22,27 +22,27 @@ hljs.configure({   // optionally configure hljs
 class NoteQuill extends React.Component {
     constructor (props) {
         super(props)
-        this.state = { text_body: this.props.note.text_body } // You can also pass a Quill Delta here
-        this.handleChange = this.handleChange.bind(this)
+        this.state = { 
+            text_body: this.props.note.text_body 
+        } // You can also pass a Quill Delta here
+        // this.handleChange = this.handleChange.bind(this)
     }
     
-    handleChange(e) {
-        // console.log(e)
+    handleChange = (e) =>  {
         this.setState({ text_body: e })
     }
 
     componentDidMount() {
-        this.setState({
-            text: this.props.note.text_body,
-        })
+        // this.setState({
+        //     text: this.props.note.text_body,
+        // })
     }
 
     componentWillUnmount(){
         this.saveNote()
     }
 
-    saveNote = (e) => {
-
+    saveNote = () => {
         const edit = {
             text_body: this.state.text_body,
             id: this.props.note.id
@@ -78,7 +78,8 @@ class NoteQuill extends React.Component {
                 modules={this.props.preview ? {} : this.modules}
                 formats={this.props.preview ? {} : this.formats}
             />
-            {/* <button onClick={this.saveNote}>Save</button> */}
+            <button onClick={this.saveNote}>Save</button>
+            {/* this button is more psychological, it will save when unmounted */}
           </NoteQuillDiv>
        )
     }

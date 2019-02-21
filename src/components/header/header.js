@@ -17,30 +17,33 @@ class Header extends Component{
       }
     
     render(){
+        console.log(this.props.store)
         return(
             <HeaderDiv>
-                <Link to={localStorage.getItem('JWT') ? '/all-notes' : '/welcome'} className="headerTitle-link">
+                <Link 
+                    to={localStorage.getItem('JWT') 
+                        ? '/all-notes' 
+                        : '/welcome'} 
+                    className="headerTitle-link">
                     <h1 className="headerTitle">Stic.ky</h1>
                 </Link>
-                    {localStorage.getItem('username') ?
-                        <div className="linkss">
+                {this.props.store.notes.status ? this.props.store.notes.status : <p>status</p>}
+                {localStorage.getItem('username') 
+                    ?   <div className="linkss">
                             <h3>{` Hello ${localStorage.getItem('username')},`}</h3>
                             <div className="headerLink" onClick={this.logout} >Logout</div> 
-                        </div> :
-
-                        <div className="linkss">
+                        </div> 
+                    :   <div className="linkss">
                             <Link className="headerLink" to="/welcome/login" >Login</Link>
                             <Link className="headerLink" to="/welcome/register">Register</Link>
-                            {/* <button className="headerLink">Register</button> */}
-                        </div>
-                    }
+                        </div>}
             </HeaderDiv>
         )
     }
 }
 
 const mapStateToProps = store => {
-    return {state: store};
+    return { store: store };
   }
   
   const mapDispatchToProps = {

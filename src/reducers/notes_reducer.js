@@ -85,14 +85,16 @@ export const notesReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 fetchingNotes: true,
                 triggerAttached: true,
-                triggerGetNotes: false
+                triggerGetNotes: false,
+                status: "Getting Notes!"
             })
-        case NOTES_RECIEVED:
+            case NOTES_RECIEVED:
             return Object.assign({}, state, {
                 fetchingNotes: false,
                 notesRecieved: true,
                 notes: action.payload.allUserNotes,
-                username: action.payload.username
+                username: action.payload.username,
+                status: "Got Notes!"
             })
         case SENDING_NEW_NOTE:
             return Object.assign({}, state, {
@@ -131,12 +133,14 @@ export const notesReducer = (state = initialState, action) => {
         case EDITING_NOTE:
             return Object.assign({}, state, {
                 editingNote: true,
+                status: "Saving Note!"
             })
-        case NOTE_EDITED:
+            case NOTE_EDITED:
             return Object.assign({}, state, {
                 editingNote: false,
                 noteEdited: true,
                 status: action.payload,
+                status: "Note Saved!"
             })
         case SORT_NOTE:
             return Object.assign({}, state, {

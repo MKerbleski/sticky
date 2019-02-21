@@ -84,9 +84,7 @@ class NotePreview extends React.Component {
                                           {this.props.layerOne.total_items_attached}
                                       </div> : null }
                                 </div>
-                                <p>
-                                    {ReactHTMLParser(this.props.layerOne.text_body)}
-                                </p> 
+                                {ReactHTMLParser(this.props.layerOne.text_body)}
                             </div>
                               <div className="layerTwoContainerAll"  >
                                 {this.props.allNotes.map(layerTwo => {
