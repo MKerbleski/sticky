@@ -12,11 +12,14 @@ class NoteDetailParent extends React.Component{
     }
 
     render(){
+        // console.log(this.props)
         return (
             <NoteDetailParentDiv 
                 innerRef={instance => this.props.connectDropTarget(instance)}
                 color={this.props.parentColor} 
-                style={{background: this.props.hover ? 'lightgreen' : null}}>
+                style={{background: this.props.hover 
+                    ? 'lightgreen' 
+                    : null}}>
                 <Link 
                     onClick={() => this.refreshNotes(this.props.note.parent_id)}
                     className="link"

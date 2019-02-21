@@ -17,7 +17,6 @@ class Header extends Component{
       }
     
     render(){
-        console.log(this.props.store)
         return(
             <HeaderDiv>
                 <Link 
@@ -44,13 +43,13 @@ class Header extends Component{
 
 const mapStateToProps = store => {
     return { store: store };
-  }
+}
   
-  const mapDispatchToProps = {
-    logout,
-  }
+const mapDispatchToProps = {
+    logout
+}
   
-  export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
   
 
 const HeaderDiv = styled.div`
@@ -86,7 +85,6 @@ const HeaderDiv = styled.div`
     }
     .linkss{
         ${'' /* border: 1px solid green; */}
-        ${'' /* width: 100px; */}
         height: 30px;
         display: flex;
         flex-direction: row;
@@ -107,5 +105,4 @@ const HeaderDiv = styled.div`
             }
         }
     }
-
 `;

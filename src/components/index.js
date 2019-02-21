@@ -22,6 +22,7 @@ export {
     AttachedList,
     EditNote,
     DeleteNote,
+    NoteDetailPage
 } from './note-details';
 
 export { 

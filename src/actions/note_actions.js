@@ -53,16 +53,15 @@ export const deleteNote = (id) => {
               headers: { Authorization: token } 
           }
           dispatch({type: DELETING_NOTE})
-          axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${id}`, authHeader)
-          .then(res => {
+          axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${id}`, authHeader).then(res => {
               dispatch({type: NOTE_DELETED})
               dispatch(getDeletedNotes())
             }).catch(err => {
-              console.log("error deleting note", err.message)
-              dispatch({type: ERROR_DELETING_NOTE})
+             	console.log("error deleting note", err.message)
+             	dispatch({type: ERROR_DELETING_NOTE})
             })
       } else {
-          console.log('need to include a valid token in request')
+         	console.log('need to include a valid token in request')
       }
   }
 }
@@ -119,17 +118,17 @@ export const addNote = (newNote) => {
         if(localStorage.getItem('JWT')){
             const token = localStorage.getItem('JWT')
             const authHeader = {
-              headers: {
-                Authorization: token,    
-              } 
+				headers: {
+					Authorization: token,    
+				} 
             }
             dispatch({type: SENDING_NEW_NOTE})
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/`, (newNote), authHeader).then(res => {
-              dispatch({type: NEW_NOTE_ADDED})
-              dispatch(getNotes());
+				dispatch({type: NEW_NOTE_ADDED})
+				dispatch(getNotes());
             }).catch(err => {
-              console.log(err.message)
-              dispatch({type: ERROR_ADDING_NEW_NOTE})
+				console.log(err.message)
+				dispatch({type: ERROR_ADDING_NEW_NOTE})
             })
         } else {
             dispatch({type: CREDENTIAL_ERROR})
@@ -140,21 +139,21 @@ export const addNote = (newNote) => {
 export const getAttachedItems = (sticky_note_id) => {
     return function(dispatch){
         if(localStorage.getItem('JWT')){
-          dispatch({type: FETCHING_ATTACHED_ITEMS})
+          	dispatch({type: FETCHING_ATTACHED_ITEMS})
             const token = localStorage.getItem('JWT')
             const authHeader = {
-              headers: {
-                Authorization: token,    
-              } 
+				headers: {
+					Authorization: token,    
+				} 
             }
             axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/attached/${sticky_note_id}`, authHeader).then(res => {
-              dispatch({type: ATTACHED_ITEMS_RECIEVED, payload: res.data})
+              	dispatch({type: ATTACHED_ITEMS_RECIEVED, payload: res.data})
             }).catch(err => {
-              dispatch({type: NOTE_ERROR, payload: err.message})
-              console.log(err.message)
+              	dispatch({type: NOTE_ERROR, payload: err.message})
+              	console.log(err.message)
             })
         } else {
-          console.log('need to include toekn in request')
+          	console.log('need to include toekn in request')
         }
     }
 }
@@ -165,18 +164,18 @@ export const getDeletedNotes = () => {
           dispatch({type: FETCHING_DEL_NOTES})
             const token = localStorage.getItem('JWT')
             const authHeader = {
-              headers: {
-                Authorization: token,    
-              } 
+				headers: {
+					Authorization: token,    
+				} 
             }
             axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/del`, authHeader).then(res => {
-              dispatch({type: DEL_NOTES_RECIEVED, payload: res.data})
+              	dispatch({type: DEL_NOTES_RECIEVED, payload: res.data})
             }).catch(err => {
-              dispatch({type: NOTE_ERROR, payload:err.message})
-              console.log(err.message)
+              	dispatch({type: NOTE_ERROR, payload:err.message})
+              	console.log(err.message)
             })
         } else {
-          console.log('need to include toekn in request')
+          	console.log('need to include toekn in request')
         }
     }
 }
@@ -184,20 +183,18 @@ export const getDeletedNotes = () => {
 export const getNotes = () =>  {
     return function(dispatch){
         if(localStorage.getItem('JWT')){
-          dispatch({type: FETCHING_NOTES});
-          const token = localStorage.getItem('JWT')
-          const authHeader = {
-            headers: { Authorization: token }
-          }
-          axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/all`, authHeader)
-          .then(res => {
-            dispatch({type: NOTES_RECIEVED, payload: res.data})
-          })
-          .catch(err => {
-            dispatch({type: NOTE_ERROR, payload: err})
-          })
+			dispatch({type: FETCHING_NOTES});
+			const token = localStorage.getItem('JWT')
+			const authHeader = {
+				headers: { Authorization: token }
+			}
+			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/all`, authHeader).then(res => {
+				dispatch({type: NOTES_RECIEVED, payload: res.data})
+			}).catch(err => {
+				dispatch({type: NOTE_ERROR, payload: err})
+			})
         } else {
-          dispatch({type: ERROR, payload: 'there was no token found'})      
+          	dispatch({type: ERROR, payload: 'there was no token found'})      
         }
     }
 }

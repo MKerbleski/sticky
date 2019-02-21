@@ -1,5 +1,4 @@
 import React from 'react';
-// import {Editor, EditorState } from 'draft-js'
 import ReactQuill from 'react-quill';
 import styled from 'styled-components'
 import hljs from 'highlight.js'
@@ -7,17 +6,9 @@ import 'react-quill/dist/quill.snow.css';
 import { editNote } from '../../actions'
 import { connect } from 'react-redux';
 
-const mapStateToProps = store => {
-    return {store: store};
-}
-
-const mapDispatchToProps = {
-    editNote,
-}
-
 hljs.configure({   // optionally configure hljs
     languages: ['javascript', 'ruby', 'python']
-  });
+});
 
 class NoteQuill extends React.Component {
     constructor (props) {
@@ -25,17 +16,10 @@ class NoteQuill extends React.Component {
         this.state = { 
             text_body: this.props.note.text_body 
         } // You can also pass a Quill Delta here
-        // this.handleChange = this.handleChange.bind(this)
     }
     
     handleChange = (e) =>  {
         this.setState({ text_body: e })
-    }
-
-    componentDidMount() {
-        // this.setState({
-        //     text: this.props.note.text_body,
-        // })
     }
 
     componentWillUnmount(){
@@ -47,7 +31,6 @@ class NoteQuill extends React.Component {
             text_body: this.state.text_body,
             id: this.props.note.id
         }
-        // console.log(e.target)
         this.props.editNote(edit)
     }
 
@@ -79,28 +62,35 @@ class NoteQuill extends React.Component {
                 formats={this.props.preview ? {} : this.formats}
             />
             <button onClick={this.saveNote}>Save</button>
-            {/* this button is more psychological, it will save when unmounted */}
+            {/* this button is more psychological than necessary, it will save when unmounted, as well */}
           </NoteQuillDiv>
        )
     }
   }
   
-  export default connect(mapStateToProps, mapDispatchToProps)(NoteQuill)
+const mapStateToProps = store => {
+    return {store: store};
+}
 
-  const NoteQuillDiv = styled.div`
+const mapDispatchToProps = {
+    editNote,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteQuill)
+
+const NoteQuillDiv = styled.div`
     height: 100%;
     background: lavender;
     .editor {
-        /* max-height: 300px; */
         overflow: hidden;
+        max-height: 300px;
     }
     button {
         color: black;
     }
     .ql-editor {
-        /* react 16 opened this bug and this is the class name for the editor container inside ReactQuill */
+        /* react 16 opened this bug and this is the inherited class name for the editor container inside ReactQuill */
         max-height: 400px;
-        /* height: 90%; */
         background:white;
         background:#f3f3fd;
         overflow: auto;
@@ -113,4 +103,4 @@ class NoteQuill extends React.Component {
             }
         }
     }
-  `
+`

@@ -14,6 +14,7 @@ import {
     RightMenu,
     Settings,
     Header,
+    NoteDetailPage
 } from './components';
 import {
     getNotes,
@@ -38,10 +39,10 @@ class App extends Component {
 
     componentDidMount = () => {
         this.props.getUserData()
-        if (localStorage.getItem('JWT')){
-            this.props.history.push('/all-notes')
-        } else {
+        if (!localStorage.getItem('JWT')){
             this.props.history.push('/welcome/')
+        } else {
+            // this.props.history.push('/all-notes')
         }
     }
 
