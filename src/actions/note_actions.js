@@ -27,7 +27,28 @@ export const SORT_NOTE = 'SORT_NOTE';
 
 export const NOTE_RECIEVED = 'NOTE_RECIEVED';
 
+export const noteToNote = (notePackage) => {
+    return function(dispatch){
+        console.log('hey', notePackage)
+        if(localStorage.getItem('JWT') && notePackage){
+            const token = localStorage.getItem('JWT')
+            const authHeader = { headers: { Authorization: token } }
+            dispatch({ type: EDITING_NOTE })
+            axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/noteToNote`, (notePackage), authHeader).then(res => {
+                console.log(res)
+				dispatch(getNotes());
+              	dispatch({ type: NOTE_EDITED })
+            }).catch(err => {
+              	dispatch({ type: ERROR_EDITING_NOTE })
+              	console.log("error in edit note redux actions", err.message)})
+        } else {
+            console.log('there is note a Token or a note was dropped on itself')
+        }
+    }
+}
+
 export const editNote = (noteEdit, fetchDeleted=false) => {
+    console.log(noteEdit)
     return function(dispatch){
         if(localStorage.getItem('JWT') && noteEdit){
             const token = localStorage.getItem('JWT')
@@ -43,8 +64,9 @@ export const editNote = (noteEdit, fetchDeleted=false) => {
             }).catch(err => {
               	dispatch({ type: ERROR_EDITING_NOTE })
               	console.log("error in edit note redux actions", err.message)})
-            }
-            //else there is note a Token or a note was dropped on itself
+        } else {
+            console.log('there is note a Token or a note was dropped on itself')
+        }
     }
 }
 
@@ -111,7 +133,7 @@ export const editAttachedItems = (obj) => {
                     dispatch({type: LIST_EDIT_ERROR, payload: err})})
             }
         } else {
-          dispatch({type: ERROR, payload: 'there was no token found'})      
+          	dispatch({type: ERROR, payload: 'there was no token found'})      
         }
     }
 }

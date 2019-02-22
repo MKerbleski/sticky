@@ -5,7 +5,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import { connect } from 'react-redux';
 import { LayerTwoTargetSource } from "./index"
 import { flex } from '../../styles/styl-utils.js'
-import { deleteNote, editNote } from '../../actions'
+import { deleteNote, editNote, noteToNote } from '../../actions'
 import { sharedStickyNoteDrop } from '../../helpers'
 import ReactHTMLParser from 'react-html-parser'
 import ReactQuill from 'react-quill';
@@ -59,11 +59,11 @@ class NotePreview extends React.Component {
                 this.props.connectDragSource &&
                 this.props.connectDropTarget &&
                 <NotePreviewDiv 
-                  onClick={this.goToNote}
-                  innerRef={instance => {
-                    this.props.connectDragSource(instance)
-                    this.props.connectDropTarget(instance)}}
-                  color={this.props.layerOne.note_color} >
+					onClick={this.goToNote}
+					innerRef={instance => {
+						this.props.connectDragSource(instance)
+						this.props.connectDropTarget(instance)}}
+					color={this.props.layerOne.note_color} >
                         <div 
                             key={this.props.key}
                             index={this.props.index}
@@ -80,9 +80,9 @@ class NotePreview extends React.Component {
                                         <button name="delete" onClick={this.clickHandler}>DELETE</button>
                                       </div> : null}
                                     {this.props.layerOne.total_items_attached ? 
-                                      <div className="note-content-link-count">
-                                          {this.props.layerOne.total_items_attached}
-                                      </div> : null }
+										<div className="note-content-link-count">
+											{this.props.layerOne.total_items_attached}
+										</div> : null }
                                 </div>
                                 {ReactHTMLParser(this.props.layerOne.text_body)}
                             </div>
@@ -90,16 +90,16 @@ class NotePreview extends React.Component {
                                 {this.props.allNotes.map(layerTwo => {
                                     if (layerTwo.parent_id === this.props.layerOne.id){
                                         return (
-                                              <div className="layerTwoContainer" key={layerTwo.id}>
-                                                  <LayerTwoTargetSource  
-                                                    type="note"
-                                                    // onDrop={this.props.onDrop}
-                                                    layerTwo={layerTwo} 
-                                                    redirect={this.props.redirect}
-                                                    allNotes={this.props.allNotes}
-                                                    getFirstWord={this.getFirstWord} />
-                                              </div>
-                                              )
+											<div className="layerTwoContainer" key={layerTwo.id}>
+												<LayerTwoTargetSource  
+													type="note"
+													// onDrop={this.props.onDrop}
+													layerTwo={layerTwo} 
+													redirect={this.props.redirect}
+													allNotes={this.props.allNotes}
+													getFirstWord={this.getFirstWord} />
+											</div>
+										)
                                     } else {
                                         return null
                                     }
@@ -125,11 +125,11 @@ const targetObj = {
         const slack_items_attached = props.layerOne.slack_items_attached;
         const total_items_attached = props.layerOne.total_items_attached;
         return ({
-            targetId,
-            type,
-            slack_items_attached,
-            pocket_items_attached,
-            total_items_attached,
+			targetId,
+			type,
+			slack_items_attached,
+			pocket_items_attached,
+			total_items_attached,
         });
     }
  },
@@ -139,43 +139,42 @@ const targetObj = {
 
 const sourceObj = {
     beginDrag(props) {
-        const { source_id } = props.layerOne; 
+		console.log(props)
+        const { source_id, parent_id } = props.layerOne; 
         return ({
-          source_id
+		  source_id,
+		  parent_id
         });
     },
 
     endDrag(props, monitor) {
         if (!monitor.didDrop()) {
-          return;
+          	return;
         }
-        // const  { id }  = monitor.getItem(); 
-        const sticky_source_id = props.layerOne.id;
-        const target = monitor.getDropResult();
-        const target_id = target.targetId;
-        let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
-        props.editNote(noteEdit)
-        // const sticky_source_id = props.layerOne.id;
-        // const target = monitor.getDropResult();
-        // const target_id = target.targetId;
-        // switch(target.type){
-        //   case 'note':
-        //       if(sticky_source_id !== target_id){
-        //           props.editNote({id: sticky_source_id, parent_id: target_id})
-        //       }
-        //       break;
-        //   case 'deleteBin':
-        //       props.editNote({is_deleted: true, id: sticky_source_id})
-        //       break;
-        //   case 'top':
-        //       props.editNote({id: sticky_source_id, parent_id: null})
-        //       break
-        //   default: 
-        //       console.log("default")
-        //       break;
-        // }
-        // props.onDrop(sourceId, dropResult.type, dropResult.targetId);
+		const currently_dragged_note = props.layerOne;
+		const old_parent_note_id = props.layerOne.parent_id;
+		const drop_result = monitor.getDropResult();
+		const new_parent_id = drop_result.targetId;
+		if(drop_result.type !== 'note'){
+			let noteEdit = sharedStickyNoteDrop(currently_dragged_note.id, new_parent_id, drop_result);
+			props.editNote(noteEdit)
+		} else {
+			props.noteToNote({currently_dragged_note:currently_dragged_note, new_parent_id:new_parent_id, old_parent_note_id:old_parent_note_id})
+		}
     },
+    // endDrag(props, monitor) {
+	// 	console.log(props)
+    //     if (!monitor.didDrop()) {
+    //       return;
+    //     }
+    //     // const  { id }  = monitor.getItem(); 
+    //     const selected_note_id = props.layerOne.id;
+	// 	const drop_result = monitor.getDropResult();
+	// 	console.log(drop_result)
+    //     const new_parent_id = drop_result.targetId;
+    //     let noteEdit = sharedStickyNoteDrop(selected_note_id, new_parent_id, drop_result);
+    //     props.editNote(noteEdit)
+    // },
 };
 
 const mapStateToProps = store => {
@@ -185,6 +184,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = {
   deleteNote,
   editNote,
+  noteToNote
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(flow(

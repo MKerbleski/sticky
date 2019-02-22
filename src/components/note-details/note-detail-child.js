@@ -42,12 +42,12 @@ class NoteDetailChild extends React.Component {
                 this.props.connectDragSource &&
                 this.props.connectDropTarget &&
                 <NoteDetailChildDiv 
-                  innerRef={instance => {
-                    this.props.connectDragSource(instance);
-                    this.props.connectDropTarget(instance);}}
-                    onClick={(e) => this.refreshNotes(e,this.props.layerOne.id)}
-                  color={this.props.color} >
-                  <Link
+					innerRef={instance => {
+						this.props.connectDragSource(instance);
+						this.props.connectDropTarget(instance);}}
+					onClick={(e) => this.refreshNotes(e,this.props.layerOne.id)}
+					color={this.props.color} >
+                <Link
                     key={this.props.key}
                     index={this.props.index}
                     className="note-link"
@@ -57,9 +57,9 @@ class NoteDetailChild extends React.Component {
                         <div className="note-content-header">
                             <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.text_body)}</h3>
                             {this.props.layerOne.total_items_attached ? 
-                              <div className="note-content-link-count"> 
-                                {this.props.layerOne.total_items_attached}
-                              </div> : null }
+								<div className="note-content-link-count"> 
+									{this.props.layerOne.total_items_attached}
+								</div> : null }
                         </div>
                         <p>{this.getFirstSen(this.props.layerOne.text_body)}</p> 
                         <div className="layerTwoContainerAll">
