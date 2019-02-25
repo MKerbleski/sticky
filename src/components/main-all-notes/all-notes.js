@@ -48,20 +48,18 @@ class AllNotes extends Component {
                     <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> :
                     null}        
                 {this.props.store.notes.notes.map(layerOne => {
-                    if(layerOne.parent_id === null){
-                            return <NotePreview
-                                    type="note"
-                                    // onDrop={this.props.onDrop}
-                                    changeParent={this.props.changeParent}
-                                    key={layerOne.id}
-                                    layerOne={layerOne}
-                                    allNotes={this.props.store.notes.notes}
-                                    redirect={this.props.redirect}
-                                    deleteBin={this.props.deleteBin ? true : false}
-                                    />
-                    } else {
-                        return null
-                    }})}
+                    return <NotePreview
+                        type="note"
+                        // onDrop={this.props.onDrop}
+                        siblings={this.props.store.notes.notes}
+                        changeParent={this.props.changeParent}
+                        key={layerOne.id}
+                        layerOne={layerOne}
+                        allNotes={this.props.store.notes.notes}
+                        redirect={this.props.redirect}
+                        deleteBin={this.props.deleteBin ? true : false}
+                        />
+                })}
             </AllNotesDiv>
         )
     }

@@ -117,13 +117,18 @@ const targetObj = {
   drop(props, monitor) {
       //so this somehow allows other items to be dropped in a nested child component
     const hover =  monitor.isOver({shallow:true})
-    if(hover){//this disables layer one droping if there is a nested child
+	if(hover){//this disables layer one droping if there is a nested child
+		console.log(props)
         const targetId = props.layerOne.id;
+        const target = props.layerOne;
+        const siblings = props.siblings;
         const type = props.type;
         const pocket_items_attached = props.layerOne.pocket_items_attached;
         const slack_items_attached = props.layerOne.slack_items_attached;
         const total_items_attached = props.layerOne.total_items_attached;
         return ({
+			target,
+			siblings,
 			targetId,
 			type,
 			slack_items_attached,
@@ -151,6 +156,7 @@ const sourceObj = {
           	return;
         }
 		const currently_dragged_note = props.layerOne;
+		const current_note_id = props.layerOne.id;
 		const old_parent_note_id = props.layerOne.parent_id;
 		const drop_result = monitor.getDropResult();
 		const new_parent_id = drop_result.targetId;
@@ -158,22 +164,56 @@ const sourceObj = {
 			let noteEdit = sharedStickyNoteDrop(currently_dragged_note.id, new_parent_id, drop_result);
 			props.editNote(noteEdit)
 		} else {
-			props.noteToNote({currently_dragged_note:currently_dragged_note, new_parent_id:new_parent_id, old_parent_note_id:old_parent_note_id})
+			let old_parent_children = [];
+			let new_parent_children = [];
+			let current_has_parent;
+			let changed_notes;
+			if(props.layerOne.has_parent_note){
+				// console.log(props)
+				// props.siblings.forEach(sibling => {
+					
+				// })	
+				changed_notes = {
+					new_parent: {
+						id: new_parent_id,
+						children_attached: new_parent_children,
+					},
+					current_note: {
+						id: current_note_id,
+						has_parent_note: true,
+					},
+					old_parent: {
+						id: old_parent_note_id,
+						children_attached: old_parent_children,
+					}
+				}
+			} else {
+				// construct new parent children array include id
+				// new_parent_children = this
+				// console.log(drop_result)
+				if(drop_result.target.children_attached){
+					new_parent_children = drop_result.target.children_attached + `,${current_note_id}`
+				} else {
+					new_parent_children = current_note_id
+				}
+				changed_notes = [
+					{
+						id: new_parent_id,
+						children_attached: new_parent_children,
+					},
+					// current child needs the true flag on parent
+					{
+						id: current_note_id,
+						has_parent_note: true,
+					}
+				]
+			}
+			changed_notes.forEach(note => {
+				props.editNote(note)
+			})
+			// props.noteToNote(changed_notes)
 		}
     },
-    // endDrag(props, monitor) {
-	// 	console.log(props)
-    //     if (!monitor.didDrop()) {
-    //       return;
-    //     }
-    //     // const  { id }  = monitor.getItem(); 
-    //     const selected_note_id = props.layerOne.id;
-	// 	const drop_result = monitor.getDropResult();
-	// 	console.log(drop_result)
-    //     const new_parent_id = drop_result.targetId;
-    //     let noteEdit = sharedStickyNoteDrop(selected_note_id, new_parent_id, drop_result);
-    //     props.editNote(noteEdit)
-    // },
 };
 
 const mapStateToProps = store => {
