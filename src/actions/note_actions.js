@@ -29,7 +29,7 @@ export const NOTE_RECIEVED = 'NOTE_RECIEVED';
 
 export const noteToNote = (notePackage) => {
     return function(dispatch){
-        console.log('hey', notePackage)
+        // console.log('hey', notePackage)
         if(localStorage.getItem('JWT') && notePackage){
             const token = localStorage.getItem('JWT')
             const authHeader = { headers: { Authorization: token } }
@@ -206,7 +206,7 @@ export const getDeletedNotes = () => {
 }
 
 export const getNotes = (id) =>  {
-	console.log(id)
+	// console.log(id)
     return function(dispatch){
         if(localStorage.getItem('JWT')){
 			dispatch({type: FETCHING_NOTES});
@@ -216,7 +216,7 @@ export const getNotes = (id) =>  {
 			}
 			// let url = `${process.env.REACT_APP_BACKEND_URL}/api/notes/`
 			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${id ? id : 'all'}`, authHeader).then(res => {
-				console.log(res.data)
+				// console.log(res.data)
 				if(res.data.allUserNotes){
 					dispatch({type: NOTES_RECIEVED, payload: res.data})
 				} else {

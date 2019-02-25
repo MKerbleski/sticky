@@ -33,7 +33,7 @@ class AllNotes extends Component {
     }
 
     render() {    
-        console.log(this.props.store.notes)
+        // console.log(this.props.store.notes)
         return (
             <AllNotesDiv
                 type="top" 

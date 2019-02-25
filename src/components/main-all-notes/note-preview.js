@@ -8,7 +8,6 @@ import { flex } from '../../styles/styl-utils.js'
 import { deleteNote, editNote, noteToNote } from '../../actions'
 import { sharedStickyNoteDrop } from '../../helpers'
 import ReactHTMLParser from 'react-html-parser'
-import ReactQuill from 'react-quill';
 
 class NotePreview extends React.Component {
     getFirstWord = (text, words=2) => {
@@ -139,7 +138,7 @@ const targetObj = {
 
 const sourceObj = {
     beginDrag(props) {
-		console.log(props)
+		// console.log(props)
         const { source_id, parent_id } = props.layerOne; 
         return ({
 		  source_id,

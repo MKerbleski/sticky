@@ -149,7 +149,7 @@ export const notesReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 editingNote: false,
                 noteEdited: true,
-                status: action.payload,
+                // status: action.payload,
                 status: "Note Saved!"
             })
         case SORT_NOTE:
