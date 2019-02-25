@@ -32,10 +32,12 @@ export const sharedStickyNoteDrop = (props, monitor) => {
                     }
                     return [
                         {   id: new_parent_id,
-                            children_attached: new_parent_children  },
+                            children_attached: new_parent_children,
+                            has_children: true  },
                         // current child needs the true flag on parent
                         {   id: current_note_id,
-                            has_parent_note: true   }
+                            has_parent_note: true,
+                            parent: new_parent_id  }
                     ]
                 }
             default: 

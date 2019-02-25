@@ -5,11 +5,13 @@ import { DragSource, DropTarget } from 'react-dnd';
 import { connect } from 'react-redux';
 import { LayerTwoTargetSource } from "./index"
 import { flex } from '../../styles/styl-utils.js'
-import { deleteNote, editNote, noteToNote } from '../../actions'
+import { deleteNote, editNote, getChildren } from '../../actions'
 import { sharedStickyNoteDrop } from '../../helpers'
 import ReactHTMLParser from 'react-html-parser'
+import axios from 'axios'
 
 class NotePreview extends React.Component {
+	state = {}
     getFirstWord = (text, words=2) => {
         let firstWord = text.split(" ").slice(0,words).join(' ');
         if(firstWord.length > 0){
@@ -28,7 +30,31 @@ class NotePreview extends React.Component {
         } else{
             return null
         }
-    }
+	}
+	componentDidMount(){
+		if(this.props.layerOne.has_children){
+			console.log(this.props.layerOne.children_attached)
+
+			let children = this.props.layerOne.children_attached
+			console.log(children)
+			if(localStorage.getItem('JWT')){
+				const token = localStorage.getItem('JWT')
+				const authHeader = {
+					headers: { Authorization: token }
+				}
+				axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({children}), authHeader).then(res => {
+					console.log(res.data)
+					this.setState({children: res.data.children})
+					// return res.data
+					// dispatch({type: NOTES_RECIEVED, payload: res.data})
+				}).catch(err => {
+					console.log({err})
+				})
+			} else {
+				console.log('there was no token found')      
+			}
+		}
+	}
 
     goToNote = (e) => {
         e.preventDefault()
@@ -86,8 +112,8 @@ class NotePreview extends React.Component {
                                 {ReactHTMLParser(this.props.layerOne.text_body)}
                             </div>
                               <div className="layerTwoContainerAll"  >
-                                {this.props.allNotes.map(layerTwo => {
-                                    if (layerTwo.parent_id === this.props.layerOne.id){
+                                {this.state.children ? this.state.children.map(layerTwo => {
+                                    {/* if (layerTwo.parent_id === this.props.layerOne.id){ */}
                                         return (
 											<div className="layerTwoContainer" key={layerTwo.id}>
 												<LayerTwoTargetSource  
@@ -99,10 +125,10 @@ class NotePreview extends React.Component {
 													getFirstWord={this.getFirstWord} />
 											</div>
 										)
-                                    } else {
+                                    {/* } else {
                                         return null
-                                    }
-                                })}
+                                    } */}
+                                }) : null}
                             </div>                     
                         </div>
                       </NotePreviewDiv>        
@@ -121,14 +147,12 @@ const targetObj = {
 		console.log(props)
         const targetId = props.layerOne.id;
         const target = props.layerOne;
-        const siblings = props.siblings;
         const type = props.type;
         const pocket_items_attached = props.layerOne.pocket_items_attached;
         const slack_items_attached = props.layerOne.slack_items_attached;
         const total_items_attached = props.layerOne.total_items_attached;
         return ({
 			target,
-			siblings,
 			targetId,
 			type,
 			slack_items_attached,
@@ -167,13 +191,13 @@ const sourceObj = {
 };
 
 const mapStateToProps = store => {
-  return {store: store};
+  return { store: store };
 }
 
 const mapDispatchToProps = {
   deleteNote,
   editNote,
-  noteToNote
+  getChildren
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(flow(

@@ -27,25 +27,25 @@ export const SORT_NOTE = 'SORT_NOTE';
 
 export const NOTE_RECIEVED = 'NOTE_RECIEVED';
 
-export const noteToNote = (notePackage) => {
-    return function(dispatch){
-        console.log('hey', notePackage)
-        if(localStorage.getItem('JWT') && notePackage){
-            const token = localStorage.getItem('JWT')
-            const authHeader = { headers: { Authorization: token } }
-            dispatch({ type: EDITING_NOTE })
-            axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/noteToNote`, (notePackage), authHeader).then(res => {
-                console.log(res)
-				dispatch(getNotes());
-              	dispatch({ type: NOTE_EDITED })
-            }).catch(err => {
-              	dispatch({ type: ERROR_EDITING_NOTE })
-              	console.log("error in edit note redux actions", err.message)})
-        } else {
-            console.log('there is note a Token or a note was dropped on itself')
-        }
-    }
-}
+// export const noteToNote = (notePackage) => {
+//     return function(dispatch){
+//         console.log('hey', notePackage)
+//         if(localStorage.getItem('JWT') && notePackage){
+//             const token = localStorage.getItem('JWT')
+//             const authHeader = { headers: { Authorization: token } }
+//             dispatch({ type: EDITING_NOTE })
+//             axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/noteToNote`, (notePackage), authHeader).then(res => {
+//                 console.log(res)
+// 				dispatch(getNotes());
+//               	dispatch({ type: NOTE_EDITED })
+//             }).catch(err => {
+//               	dispatch({ type: ERROR_EDITING_NOTE })
+//               	console.log("error in edit note redux actions", err.message)})
+//         } else {
+//             console.log('there is note a Token or a note was dropped on itself')
+//         }
+//     }
+// }
 
 export const editNote = (noteEdit, fetchDeleted=false) => {
     console.log(noteEdit)
@@ -221,6 +221,27 @@ export const getNotes = (id) =>  {
 				} else {
 					dispatch({type: NOTE_RECIEVED, payload: res.data})
 				}
+			}).catch(err => {
+				dispatch({type: NOTE_ERROR, payload: err})
+			})
+        } else {
+          	dispatch({type: ERROR, payload: 'there was no token found'})      
+        }
+    }
+}
+
+export const getChildren = (ids) =>  {
+    return function(dispatch){
+        if(localStorage.getItem('JWT')){
+			dispatch({type: FETCHING_NOTES});
+			const token = localStorage.getItem('JWT')
+			const authHeader = {
+				headers: { Authorization: token }
+			}
+			axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({ids}), authHeader).then(res => {
+                console.log(res.data)
+                return res.data
+                // dispatch({type: NOTES_RECIEVED, payload: res.data})
 			}).catch(err => {
 				dispatch({type: NOTE_ERROR, payload: err})
 			})
