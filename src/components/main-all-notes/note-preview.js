@@ -154,64 +154,14 @@ const sourceObj = {
     endDrag(props, monitor) {
         if (!monitor.didDrop()) {
           	return;
-        }
-		const currently_dragged_note = props.layerOne;
-		const current_note_id = props.layerOne.id;
-		const old_parent_note_id = props.layerOne.parent_id;
-		const drop_result = monitor.getDropResult();
-		const new_parent_id = drop_result.targetId;
-		if(drop_result.type !== 'note'){
-			let noteEdit = sharedStickyNoteDrop(currently_dragged_note.id, new_parent_id, drop_result);
+		}
+		let noteEdit = sharedStickyNoteDrop(props, monitor);
+		if(noteEdit.length<=1){
 			props.editNote(noteEdit)
 		} else {
-			let old_parent_children = [];
-			let new_parent_children = [];
-			let current_has_parent;
-			let changed_notes;
-			if(props.layerOne.has_parent_note){
-				// console.log(props)
-				// props.siblings.forEach(sibling => {
-					
-				// })	
-				changed_notes = {
-					new_parent: {
-						id: new_parent_id,
-						children_attached: new_parent_children,
-					},
-					current_note: {
-						id: current_note_id,
-						has_parent_note: true,
-					},
-					old_parent: {
-						id: old_parent_note_id,
-						children_attached: old_parent_children,
-					}
-				}
-			} else {
-				// construct new parent children array include id
-				// new_parent_children = this
-				// console.log(drop_result)
-				if(drop_result.target.children_attached){
-					new_parent_children = drop_result.target.children_attached + `,${current_note_id}`
-				} else {
-					new_parent_children = current_note_id
-				}
-				changed_notes = [
-					{
-						id: new_parent_id,
-						children_attached: new_parent_children,
-					},
-					// current child needs the true flag on parent
-					{
-						id: current_note_id,
-						has_parent_note: true,
-					}
-				]
-			}
-			changed_notes.forEach(note => {
+			noteEdit.forEach(note => {
 				props.editNote(note)
 			})
-			// props.noteToNote(changed_notes)
 		}
     },
 };
