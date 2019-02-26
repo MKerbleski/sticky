@@ -22,8 +22,9 @@ import {
     NOTES_RECIEVED,
     SENDING_NEW_NOTE,
     SORT_NOTE,
-
-    NOTE_RECIEVED
+    SINGLE_NOTE_RECIEVED,
+    NOTE_RECIEVED,
+    FETCHING_SINGLE_NOTE
  } from '../actions/note_actions';
 
 
@@ -90,6 +91,13 @@ export const notesReducer = (state = initialState, action) => {
                 triggerGetNotes: false,
                 status: "Getting Notes!"
             })
+        case FETCHING_SINGLE_NOTE:
+            return Object.assign({}, state, {
+                fetchingSingleNote: true,
+                triggerAttached: true,
+                triggerGetNotes: false,
+                status: "Getting Note!"
+            })
         case NOTES_RECIEVED:
             return Object.assign({}, state, {
                 fetchingNotes: false,
@@ -97,6 +105,14 @@ export const notesReducer = (state = initialState, action) => {
                 notes: action.payload.allUserNotes,
                 username: action.payload.username,
                 status: "Got Notes!"
+            })
+        case SINGLE_NOTE_RECIEVED:
+            return Object.assign({}, state, {
+                fetchingNotes: false,
+                notesRecieved: true,
+                notes: action.payload,
+                // username: action.payload.username,
+                status: "Note Recieved"
             })
         case NOTE_RECIEVED:
             return Object.assign({}, state, {

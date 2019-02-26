@@ -12,15 +12,14 @@ class NoteDetailParent extends React.Component{
     }
 
     componentDidMount(){
-        this.props.getNotes(this.props.note_id)
+        // this.props.getNotes(this.props.note_id)
     }
 
     render(){
-        console.log(this.props)
         return (
             <NoteDetailParentDiv 
                 innerRef={instance => this.props.connectDropTarget(instance)}
-                color={this.props.parentColor} 
+                // color={this.props.parentColor} 
                 style={{background: this.props.hover 
                     ? 'lightgreen' 
                     : null}}>

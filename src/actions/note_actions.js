@@ -24,6 +24,8 @@ export const NOTE_EDITED = 'NOTE_EDITED';
 export const NOTE_ERROR = 'NOTE_ERROR';
 export const SENDING_NEW_NOTE = 'SENDING_NEW_NOTE';
 export const SORT_NOTE = 'SORT_NOTE';
+export const FETCHING_SINGLE_NOTE = 'FETCHING_SINGLE_NOTE';
+export const SINGLE_NOTE_RECIEVED = 'SINGLE_NOTE_RECIEVED';
 
 export const NOTE_RECIEVED = 'NOTE_RECIEVED';
 
@@ -205,8 +207,7 @@ export const getDeletedNotes = () => {
     }
 }
 
-export const getNotes = (id) =>  {
-	// console.log(id)
+export const getNotes = () =>  {
     return function(dispatch){
         if(localStorage.getItem('JWT')){
 			dispatch({type: FETCHING_NOTES});
@@ -214,13 +215,30 @@ export const getNotes = (id) =>  {
 			const authHeader = {
 				headers: { Authorization: token }
 			}
-			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${id ? id : 'all'}`, authHeader).then(res => {
+			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/all`, authHeader).then(res => {
+                console.log(res)
+                dispatch({type: NOTES_RECIEVED, payload: res.data})
+			}).catch(err => {
+				dispatch({type: NOTE_ERROR, payload: err})
+			})
+        } else {
+          	dispatch({type: ERROR, payload: 'there was no token found'})      
+        }
+    }
+}
+
+//this is going to be seperate because I am possibly eventually going to fetch children as well. 
+export const getSingleNote = (note_id) =>  {
+    return function(dispatch){
+        if(localStorage.getItem('JWT')){
+			dispatch({type: FETCHING_SINGLE_NOTE});
+			const token = localStorage.getItem('JWT')
+			const authHeader = {
+				headers: { Authorization: token }
+			}
+			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${note_id}`, authHeader).then(res => {
 				console.log(res.data)
-				if(res.data.allUserNotes){
-					dispatch({type: NOTES_RECIEVED, payload: res.data})
-				} else {
-					dispatch({type: NOTE_RECIEVED, payload: res.data})
-				}
+    			dispatch({type: SINGLE_NOTE_RECIEVED, payload: res.data})
 			}).catch(err => {
 				dispatch({type: NOTE_ERROR, payload: err})
 			})

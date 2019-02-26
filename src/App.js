@@ -187,16 +187,16 @@ class App extends Component {
                             
                             <Route
                                 exact={!this.state.deleteEnabled}
-                                path="/:username/note/:note_id"
+                                path="/:user_id/note/:note_id"
                                 render={ (note) => {
                                     console.log(note)
                                 return <NoteDetailPage
+                                    note_id={note.match.params.note_id}
+                                    user_id={note.match.params.user_id}
                                     // redirect={this.redirect}
                                     // allNotes={this.props.store.notes.notes}
                                     // allLinks={this.props.store.notes.links}
                                     // note={this.getNoteDetails(note.match.params.note_id)} 
-                                    noteId={note.match.params.note_id}
-                                    username={note.match.params.username}
                                     // onDrop={this.onDrop} 
                                     // changeParent={this.changeParent}
                                     // type="note"

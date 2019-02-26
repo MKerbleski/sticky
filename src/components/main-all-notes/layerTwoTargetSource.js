@@ -8,9 +8,10 @@ import { editNote } from '../../actions'
 import { connect } from 'react-redux'
 
 class LayerTwoTargetSource extends React.Component {
+    
     goToNote = (e) => {
         e.stopPropagation();
-        this.props.redirect(`/note/${this.props.layerTwo.id}`)
+        this.props.redirect(`/${this.props.layerTwo.sticky_user_id}/note/${this.props.layerTwo.id}`)
     }
 
     render(){

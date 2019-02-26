@@ -23,6 +23,7 @@ class NoteDetailSelf extends React.Component {
     }
 
     componentDidMount(){
+        //Get children for notes
         if(this.props.note.has_children){
             let children = this.props.note.children_attached
             if(localStorage.getItem('JWT')){
@@ -47,7 +48,7 @@ class NoteDetailSelf extends React.Component {
             return (
                 <NoteDetailSelfDiv 
                     innerRef={instance => this.props.connectDropTarget(instance)}
-                    color={this.props.note.note_color}
+                    // color={this.props.note.note_color}
                     className="note-detail" 
                     style={{background: this.props.hover ? 'lightgreen' : null}}>
                     <div className="note-detail-main">
@@ -55,17 +56,17 @@ class NoteDetailSelf extends React.Component {
                             <NoteQuill note={this.props.note} />
                             <div className="note-detail-children">
                             {/* should fetch child notes at this point */}
-                                {this.state.children ? this.state.children.map( child => {
+                                {this.state.children ? this.state.children.map(child => {
                                         return <NoteDetailChild
-                                                type="note"
-                                                // onDrop={this.props.onDrop}
-                                                // changeParent={this.props.changeParent}
-                                                key={child.id}
-                                                layerOne={child}
-                                                // allNotes={this.props.allNotes}
-                                                // redirect={this.props.redirect}
-                                                // color={child.note_color}
-                                                 />
+                                            type="note"
+                                            // onDrop={this.props.onDrop}
+                                            // changeParent={this.props.changeParent}
+                                            key={child.id}
+                                            layerOne={child}
+                                            // allNotes={this.props.allNotes}
+                                            // redirect={this.props.redirect}
+                                            // color={child.note_color}
+                                                />
                                 }) : null}
                             </div>{/* noted-detail-children */}
                         </div>{/* note-detail-left */}

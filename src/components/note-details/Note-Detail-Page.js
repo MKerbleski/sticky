@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { NoteDetailParent } from './index.js'
 import { connect } from 'react-redux'
 import {
-    getNotes,
+    getSingleNote,
 } from '../../actions';
 
 //this page is necessary because as it is now there is no way to render a note individually, it is focused on one user with all notes, this component expands the reach so that any user can go to a note specifically and view that note ( if public ).
@@ -17,12 +17,13 @@ class NoteDetailPage extends Component {
     }
 
     componentDidMount(){
-        this.props.getNotes(this.props.noteId)
         console.log(this.props)
+        this.props.getSingleNote(this.props.note_id)
     }
 
     render(){
-        const note = this.props.store.notes.note
+        console.log(this.props.store.notes)
+        const note = this.props.store.notes.notes
         console.log(note)
         if(note && note.length > 0){
             return(
@@ -31,7 +32,7 @@ class NoteDetailPage extends Component {
                 </NoteDetailPageDiv>
             )
         } else {
-            return <p>loading</p>
+            return <p>loading Note-Detail-Page</p>
         }
     }
 }
@@ -41,7 +42,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    getNotes,
+    getSingleNote,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoteDetailPage);

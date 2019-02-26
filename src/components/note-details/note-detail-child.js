@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import { connect } from 'react-redux';
-import { getAttachedItems, editNote } from '../../actions'
+import { getSingleNote, editNote } from '../../actions'
 import { flex, start } from '../../styles/styl-utils.js'
 import { NoteDetailGrandChild } from './index';
 import { sharedStickyNoteDrop } from '../../helpers'
@@ -59,7 +59,7 @@ class NoteDetailChild extends React.Component {
     refreshNotes = (e, id) => {
         e.preventDefault()
         e.stopPropagation()
-        this.props.getAttachedItems(id)
+        this.props.getSingleNote(id)
     }
 
     render(){
@@ -69,9 +69,9 @@ class NoteDetailChild extends React.Component {
                 this.props.connectDropTarget &&
                 <NoteDetailChildDiv 
                     innerRef={instance => {
-                      this.props.connectDragSource(instance);
-                      this.props.connectDropTarget(instance);}}
-                    onClick={(e) => this.refreshNotes(e,this.props.layerOne.id)}
+						this.props.connectDragSource(instance);
+						this.props.connectDropTarget(instance);}}
+                    onClick={(e) => this.refreshNotes(e, this.props.layerOne.id)}
                     color={this.props.color} >
                 <Link
                     key={this.props.key}
@@ -165,7 +165,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-  getAttachedItems,
+	getSingleNote,
   editNote,
 }
 

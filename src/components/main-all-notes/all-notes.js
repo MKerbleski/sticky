@@ -15,8 +15,8 @@ class AllNotes extends Component {
     constructor(props){
         super(props);
         this.state = {
-            stateNotes: false,
-            notes: [],
+            // stateNotes: false,
+            // notes: [],
         }
     }
 
@@ -34,11 +34,12 @@ class AllNotes extends Component {
 
     render() {    
         console.log(this.props.store.notes)
-        return (
-            <AllNotesDiv
-                type="top" 
-                innerRef={instance => this.props.connectDropTarget(instance)}
-                style={{background: this.props.hover ? 'lightgreen' : this.props.deleteBin ? 'red' : null}}>
+        if(this.props.store.notes.notes){
+            return (
+                <AllNotesDiv
+                    type="top" 
+                    innerRef={instance => this.props.connectDropTarget(instance)}
+                    style={{background: this.props.hover ? 'lightgreen' : this.props.deleteBin ? 'red' : null}}>
                 {this.props.store.notes.notes.length > 0 ? null :
                     <div>
                         <h3>Welcome!</h3>
@@ -62,6 +63,9 @@ class AllNotes extends Component {
                 })}
             </AllNotesDiv>
         )
+        } else {
+            return <p>loading all notes</p>
+        }
     }
 }
 
