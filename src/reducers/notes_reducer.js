@@ -24,7 +24,10 @@ import {
     SORT_NOTE,
     SINGLE_NOTE_RECIEVED,
     NOTE_RECIEVED,
-    FETCHING_SINGLE_NOTE
+    FETCHING_SINGLE_NOTE,
+    NOTE_TO_NOTE,
+    NOTE_TO_NOTE_COMPLETE,
+    ERROR_EDITING_NOTE_TO_NOTE
  } from '../actions/note_actions';
 
 
@@ -38,6 +41,19 @@ const initialState = {
 
 export const notesReducer = (state = initialState, action) => {
     switch(action.type) {
+        case NOTE_TO_NOTE:
+            return Object.assign({}, state, {
+                editingNotes: true,
+            })
+        case NOTE_TO_NOTE_COMPLETE:
+            return Object.assign({}, state, {
+                editingNotes: false,
+            })
+        case ERROR_EDITING_NOTE_TO_NOTE:
+            return Object.assign({}, state, {
+                errorEditingNotes: true,
+                error: action.payload
+            })
         case LIST_EDIT_ERROR:
             return Object.assign({}, state, {
                 
@@ -110,7 +126,8 @@ export const notesReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 fetchingNotes: false,
                 notesRecieved: true,
-                notes: action.payload,
+                notes: action.payload.note,
+                children: action.payload.children,
                 // username: action.payload.username,
                 status: "Note Recieved"
             })

@@ -5,7 +5,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import { connect } from 'react-redux';
 import { LayerTwoTargetSource } from "./index"
 import { flex } from '../../styles/styl-utils.js'
-import { deleteNote, editNote, getChildren } from '../../actions'
+import { deleteNote, editNote, getChildren, noteToNote } from '../../actions'
 import { sharedStickyNoteDrop } from '../../helpers'
 import ReactHTMLParser from 'react-html-parser'
 import axios from 'axios'
@@ -109,7 +109,6 @@ class NotePreview extends React.Component {
                             </div>
                               <div className="layerTwoContainerAll"  >
                                 {this.state.children ? this.state.children.map(layerTwo => {
-                                    {/* if (layerTwo.parent_id === this.props.layerOne.id){ */}
                                         return (
 											<div className="layerTwoContainer" key={layerTwo.id}>
 												<LayerTwoTargetSource  
@@ -122,9 +121,6 @@ class NotePreview extends React.Component {
 													 />
 											</div>
 										)
-                                    {/* } else {
-                                        return null
-                                    } */}
                                 }) : null}
                             </div>                     
                         </div>
@@ -137,29 +133,30 @@ class NotePreview extends React.Component {
 }
 
 const targetObj = {
-  drop(props, monitor) {
-      //so this somehow allows other items to be dropped in a nested child component
-    const hover =  monitor.isOver({shallow:true})
-	if(hover){//this disables layer one droping if there is a nested child
-		console.log(props)
-        const targetId = props.layerOne.id;
-        const target = props.layerOne;
-        const type = props.type;
-        const pocket_items_attached = props.layerOne.pocket_items_attached;
-        const slack_items_attached = props.layerOne.slack_items_attached;
-        const total_items_attached = props.layerOne.total_items_attached;
-        return ({
-			target,
-			targetId,
-			type,
-			slack_items_attached,
-			pocket_items_attached,
-			total_items_attached,
-        });
-    }
- },
- hover(props, monitor){
- }
+	drop(props, monitor) {
+		//so this somehow allows other items to be dropped in a nested child component
+		const hover =  monitor.isOver({shallow:true})
+		if(hover){//this disables layer one droping if there is a nested child
+			console.log(props)
+			const targetId = props.layerOne.id;
+			const target = props.layerOne;
+			const type = props.type;
+			const pocket_items_attached = props.layerOne.pocket_items_attached;
+			const slack_items_attached = props.layerOne.slack_items_attached;
+			const total_items_attached = props.layerOne.total_items_attached;
+			return ({
+				target,
+				targetId,
+				type,
+				slack_items_attached,
+				pocket_items_attached,
+				total_items_attached,
+			});
+		}
+	},
+	hover(props, monitor){
+		//this could be used to display a warning or what not
+	}
 }
 
 const sourceObj = {
@@ -177,41 +174,44 @@ const sourceObj = {
           	return;
 		}
 		let noteEdit = sharedStickyNoteDrop(props, monitor);
-		if(noteEdit.length<=1){
-			props.editNote(noteEdit)
+		console.log(noteEdit)
+		if(noteEdit.length <= 1){
+			console.log("noteEdit is 1 or 0 ")
+			// props.editNote(noteEdit[0])
 		} else {
-			noteEdit.forEach(note => {
-				props.editNote(note)
-			})
+			//pass array of 2-3 notes
+			props.noteToNote(noteEdit)
+			// noteEdit.forEach(note => {
+			// 	props.editNote(note)
+			// })
 		}
     },
 };
 
 const mapStateToProps = store => {
-  return { store: store };
+  	return { store: store };
 }
 
 const mapDispatchToProps = {
-  deleteNote,
-  editNote,
-  getChildren
+	deleteNote,
+	editNote,
+	getChildren,
+	noteToNote
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(flow(
-
-  DropTarget('item', targetObj, (connect, monitor) => ({
-      connectDropTarget: connect.dropTarget(),
-      highlighted: monitor.canDrop(),
-      hover: monitor.isOver({shallow:true}),
-      hoverFalse: monitor.isOver()
-  })), 
-  
-  DragSource('item', sourceObj, (connect, monitor) => ({
-      connectDragSource: connect.dragSource(),
-      isDragging: monitor.isDragging(),
-      isFoobar: true,
-  }))
-
+	DropTarget('item', targetObj, (connect, monitor) => ({
+		connectDropTarget: connect.dropTarget(),
+		highlighted: monitor.canDrop(),
+		hover: monitor.isOver({shallow:true}),
+		hoverFalse: monitor.isOver()
+	})), 
+	
+	DragSource('item', sourceObj, (connect, monitor) => ({
+		connectDragSource: connect.dragSource(),
+		isDragging: monitor.isDragging(),
+		isFoobar: true,
+	}))
 )(NotePreview))
 
 const NotePreviewDiv = styled.div`

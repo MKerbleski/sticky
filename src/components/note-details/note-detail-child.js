@@ -38,7 +38,11 @@ class NoteDetailChild extends React.Component {
 	}
 	
 	componentDidMount(){
-        if(this.props.layerOne.has_children){
+        this.fetchChildren()
+	}
+	
+	fetchChildren(){
+		if(this.props.layerOne.has_children){
             let children = this.props.layerOne.children_attached
             if(localStorage.getItem('JWT')){
                 const token = localStorage.getItem('JWT')
@@ -54,12 +58,16 @@ class NoteDetailChild extends React.Component {
                 console.log('there was no token found')      
             }
         }
-    }
+	}
   
     refreshNotes = (e, id) => {
         e.preventDefault()
-        e.stopPropagation()
-        this.props.getSingleNote(id)
+		e.stopPropagation()
+		this.setState({
+			children: null
+		})
+		this.props.getSingleNote(id)
+		this.fetchChildren()
     }
 
     render(){
@@ -81,14 +89,16 @@ class NoteDetailChild extends React.Component {
                     to={`/${this.props.layerOne.sticky_user_id}/note/${this.props.layerOne.id}`}
                     style={{background: this.props.hover ? 'lightgreen' : null}}>
                         <div className="note-content-header">
-                            <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.text_body)}</h3>
+                            <h3 className="note-preview-title">
+								{this.getFirstWord(this.props.layerOne.text_body)}
+							</h3>
                             {this.props.layerOne.total_items_attached 
 								?	<div className="note-content-link-count"> 
 										{this.props.layerOne.total_items_attached}
 									</div> 
 								:	null }
                         </div>
-                        <p>{this.getFirstSen(this.props.layerOne.text_body)}</p> 
+                        {/* <p>{this.getFirstSen(this.props.layerOne.text_body)}</p>  */}
                         <div className="layerTwoContainerAll">
                             {this.state.children ? this.state.children.map(layerTwo => {
                                 if (layerTwo.parent_id === this.props.layerOne.id){

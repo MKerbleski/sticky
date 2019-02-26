@@ -1,43 +1,54 @@
 export const sharedStickyNoteDrop = (props, monitor) => {
+    const draggedNote = props.layerOne
+    const draggedNoteId = draggedNote.id
+    const oldParentNoteId = draggedNote.parent_id
+
+    const newParentNote = monitor.getDropResult()
+    const newParentNoteId = newParentNote.targetId
+    // const current_note_id = props.layerOne.id;
+    // const old_parent_note_id = props.layerOne.parent_id;
+    // const drop_result = monitor.getDropResult();
+    // const new_parent_id = drop_result.targetId;
     
-    const current_note_id = props.layerOne.id;
-    const old_parent_note_id = props.layerOne.parent_id;
-    const drop_result = monitor.getDropResult();
-    const new_parent_id = drop_result.targetId;
-    
-    if(current_note_id !== new_parent_id){
-        switch(drop_result.type){
+    if(draggedNoteId !== newParentNote.targetId){
+        switch(newParentNote.type){
             case 'top':
-                return { id: current_note_id, parent_id: null }
+                return [{ id: draggedNoteId, parent_id: null }]
             case 'deleteBin':
-                return {id: current_note_id, is_deleted: true}
+                return [{ id: draggedNoteId, is_deleted: true }]
             case 'note':
                 let old_parent_children = [];
                 let new_parent_children = [];
-                if(props.layerOne.has_parent_note){
+                //set up new parent list
+                if(newParentNote.target.children_attached){
+                    new_parent_children = newParentNote.target.children_attached + `,${draggedNoteId}`
+                } else {
+                    new_parent_children = `${draggedNoteId}`
+                }
+                if(draggedNote.has_parent_note){
+                    //incomplete need to modify old_parent_children
+                    //incomplete need to modify new_parent_children
                     return [
-                        {   id: new_parent_id,
+                        {   id: newParentNote.targetId,
                             children_attached: new_parent_children },
-                        {   id: current_note_id,
+                        {   id: draggedNoteId,
                             has_parent_note: true  },
-                        {   id: old_parent_note_id,
+                        {   id: oldParentNoteId,
                             children_attached: old_parent_children }
                     ]
                 } else {
-                    // construct new parent children array include id
-                    if(drop_result.target.children_attached){
-                        new_parent_children = drop_result.target.children_attached + `,${current_note_id}`
-                    } else {
-                        new_parent_children = current_note_id
-                    }
                     return [
-                        {   id: new_parent_id,
-                            children_attached: new_parent_children,
-                            has_children: true  },
+                        {   id: newParentNoteId,
+                            edit: {
+                                children_attached: new_parent_children,
+                                has_children: true
+                            }},
                         // current child needs the true flag on parent
-                        {   id: current_note_id,
-                            has_parent_note: true,
-                            parent: new_parent_id  }
+                        {   id: draggedNoteId,
+                            edit: {
+                                has_parent_note: true,
+                                parent: newParentNoteId 
+                            }}
                     ]
                 }
             default: 

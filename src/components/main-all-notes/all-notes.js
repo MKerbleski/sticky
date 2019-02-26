@@ -40,14 +40,18 @@ class AllNotes extends Component {
                     type="top" 
                     innerRef={instance => this.props.connectDropTarget(instance)}
                     style={{background: this.props.hover ? 'lightgreen' : this.props.deleteBin ? 'red' : null}}>
-                {this.props.store.notes.notes.length > 0 ? null :
-                    <div>
-                        <h3>Welcome!</h3>
-                        <p>Click the plus to the left to create a new note</p>
-                    </div> }
-                {this.props.showNewNote && !this.props.deleteBin ?
-                    <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> :
-                    null}        
+                
+                {this.props.store.notes.notes.length > 0 
+                    ? null 
+                    :   this.props.deleteBin 
+                            ?   <div>Delete Bin is empty</div>
+                            :   <div>
+                                    <h3>Welcome!</h3>
+                                    <p>Click the plus to the left to create a new note</p>
+                                </div> }
+                {this.props.showNewNote && !this.props.deleteBin 
+                    ?   <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> 
+                    :   null}        
                 {this.props.store.notes.notes.map(layerOne => {
                     return <NotePreview
                         type="note"

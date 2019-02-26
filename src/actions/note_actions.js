@@ -26,28 +26,28 @@ export const SENDING_NEW_NOTE = 'SENDING_NEW_NOTE';
 export const SORT_NOTE = 'SORT_NOTE';
 export const FETCHING_SINGLE_NOTE = 'FETCHING_SINGLE_NOTE';
 export const SINGLE_NOTE_RECIEVED = 'SINGLE_NOTE_RECIEVED';
-
 export const NOTE_RECIEVED = 'NOTE_RECIEVED';
+export const NOTE_TO_NOTE = 'NOTE_TO_NOTE';
+export const NOTE_TO_NOTE_COMPLETE = 'NOTE_TO_NOTE_COMPLETE';
+export const ERROR_EDITING_NOTE_TO_NOTE = 'ERROR_EDITING_NOTE_TO_NOTE';
 
-// export const noteToNote = (notePackage) => {
-//     return function(dispatch){
-//         console.log('hey', notePackage)
-//         if(localStorage.getItem('JWT') && notePackage){
-//             const token = localStorage.getItem('JWT')
-//             const authHeader = { headers: { Authorization: token } }
-//             dispatch({ type: EDITING_NOTE })
-//             axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/noteToNote`, (notePackage), authHeader).then(res => {
-//                 console.log(res)
-// 				dispatch(getNotes());
-//               	dispatch({ type: NOTE_EDITED })
-//             }).catch(err => {
-//               	dispatch({ type: ERROR_EDITING_NOTE })
-//               	console.log("error in edit note redux actions", err.message)})
-//         } else {
-//             console.log('there is note a Token or a note was dropped on itself')
-//         }
-//     }
-// }
+export const noteToNote = (notePackage) => {
+    return function(dispatch){
+        if(localStorage.getItem('JWT') && notePackage){
+            const token = localStorage.getItem('JWT')
+            const authHeader = { headers: { Authorization: token } }
+            dispatch({ type: NOTE_TO_NOTE })
+            axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/note/ToNote`, (notePackage), authHeader).then(res => {
+                dispatch({ type: NOTE_TO_NOTE_COMPLETE })
+				dispatch(getNotes());
+            }).catch(err => {
+              	dispatch({ type: ERROR_EDITING_NOTE_TO_NOTE, payload: err })
+              	console.log("error in edit note redux actions", err.message)})
+        } else {
+            console.log('there is note a Token or a note was dropped on itself')
+        }
+    }
+}
 
 export const editNote = (noteEdit, fetchDeleted=false) => {
     console.log(noteEdit)
