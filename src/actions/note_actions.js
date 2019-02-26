@@ -36,7 +36,7 @@ export const noteToNote = (notePackage) => {
         if(localStorage.getItem('JWT') && notePackage){
             const token = localStorage.getItem('JWT')
             const authHeader = { headers: { Authorization: token } }
-            dispatch({ type: NOTE_TO_NOTE })
+            dispatch({ type: NOTE_TO_NOTE, payload: notePackage })
             axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/note/ToNote`, (notePackage), authHeader).then(res => {
                 dispatch({ type: NOTE_TO_NOTE_COMPLETE })
 				dispatch(getNotes());

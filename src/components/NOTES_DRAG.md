@@ -4,14 +4,14 @@ The following can be dragged.
     note -> note
 
     SINGLE NOTE CHANGES 
-    note -> top_level
-    note -> trash
-    note -> read
-    note -> watch
-    note -> todo
+    note 1 & 2 & 3 -> top_level
+    note 1 & 2 & 3 -> trash
+    note 1 & 2 & 3 -> read
+    note 1 & 2 & 3 -> watch
+    note 1 & 2 & 3 -> todo
 
     LINK 
-    link -> note
+    link -> note 1 & 2
     link -> trash
     link -> read
     link -> watch 

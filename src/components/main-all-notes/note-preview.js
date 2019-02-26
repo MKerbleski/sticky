@@ -34,8 +34,8 @@ class NotePreview extends React.Component {
 	// }
 
 	componentDidMount(){
-		if(this.props.layerOne.has_children){
-			let children = this.props.layerOne.children_attached
+		if(this.props.note.has_children){
+			let children = this.props.note.children_attached
 			if(localStorage.getItem('JWT')){
 				const token = localStorage.getItem('JWT')
 				const authHeader = {
@@ -55,27 +55,26 @@ class NotePreview extends React.Component {
     goToNote = (e) => {
         e.preventDefault()
         if(!this.props.deleteBin){
-          this.props.redirect(`/${this.props.layerOne.sticky_user_id}/note/${this.props.layerOne.id}`)
+          this.props.redirect(`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`)
         }
     }
 
     clickHandler = (e) => {
         e.preventDefault()
         if(e.target.name === "delete"){
-          this.props.deleteNote(this.props.layerOne.id)
+          this.props.deleteNote(this.props.note.id)
         } else if (e.target.name === "restore"){
-          this.props.editNote({id: this.props.layerOne.id, is_deleted: false}, true)
+          this.props.editNote({id: this.props.note.id, is_deleted: false}, true)
         }
     }
     
     renderText(){
-      let doc = new DOMParser().parseFromString(this.props.layerOne.text_body, 'text/html')
-      // console.log(doc)
+      let doc = new DOMParser().parseFromString(this.props.note.text_body, 'text/html')
       return doc
     }
 
     render(){
-        if (this.props.layerOne){
+        if (this.props.note){
             return (
                 this.props.connectDragSource &&
                 this.props.connectDropTarget &&
@@ -84,43 +83,50 @@ class NotePreview extends React.Component {
 					innerRef={instance => {
 						this.props.connectDragSource(instance)
 						this.props.connectDropTarget(instance)}}
-					color={this.props.layerOne.note_color} >
+					color={this.props.note.note_color} >
                         <div 
                             key={this.props.key}
                             index={this.props.index}
                             className="note-link"
-							id={this.props.layerOne.id}
+							id={this.props.note.id}
 							style={{background: this.props.hover ? 'lightgreen' : null}} >
                             {/* {this.renderText()} */}
-                            {/* <ReactQuill preview value={this.props.layerOne} /> */}
+                            {/* <ReactQuill preview value={this.props.note} /> */}
                             <div className="note-content">
                                 <div className="note-content-header">
-                                    {this.props.layerOne.is_deleted ?
+                                    {this.props.note.is_deleted ?
                                       <div>
                                         <button name="restore" onClick={this.clickHandler}>RESTORE</button>
                                         <button name="delete" onClick={this.clickHandler}>DELETE</button>
                                       </div> : null}
-                                    {this.props.layerOne.total_items_attached ? 
+                                    {this.props.note.total_items_attached ? 
 										<div className="note-content-link-count">
-											{this.props.layerOne.total_items_attached}
+											{this.props.note.total_items_attached}
 										</div> : null }
                                 </div>
-                                {ReactHTMLParser(this.props.layerOne.text_body)}
+                                {ReactHTMLParser(this.props.note.text_body)}
                             </div>
-                              <div className="layerTwoContainerAll"  >
+                            <div className="layerTwoContainerAll"  >
                                 {this.state.children ? this.state.children.map(layerTwo => {
+									if(layerTwo.is_deleted){
+										return null
+									} else {
                                         return (
-											<div className="layerTwoContainer" key={layerTwo.id}>
+											<div 
+												className="layerTwoContainer" 
+												key={layerTwo.id}>
 												<LayerTwoTargetSource  
 													type="note"
 													// onDrop={this.props.onDrop}
-													layerTwo={layerTwo} 
-													redirect={this.props.redirect}
-													allNotes={this.props.allNotes}
+													note={layerTwo} 
+													parent={this.props.note}
+													// redirect={this.props.redirect}
+													// allNotes={this.props.allNotes}
 													// getFirstWord={this.getFirstWord}
 													 />
 											</div>
 										)
+									}
                                 }) : null}
                             </div>                     
                         </div>
@@ -137,20 +143,16 @@ const targetObj = {
 		//so this somehow allows other items to be dropped in a nested child component
 		const hover =  monitor.isOver({shallow:true})
 		if(hover){//this disables layer one droping if there is a nested child
-			console.log(props)
-			const targetId = props.layerOne.id;
-			const target = props.layerOne;
-			const type = props.type;
-			const pocket_items_attached = props.layerOne.pocket_items_attached;
-			const slack_items_attached = props.layerOne.slack_items_attached;
-			const total_items_attached = props.layerOne.total_items_attached;
+			// console.log(props)
+			// const targetId = props.note.id;
+			const note = props.note;
+			const target_type = props.type;
+			// const pocket_items_attached = props.note.pocket_items_attached;
+			// const slack_items_attached = props.note.slack_items_attached;
+			// const total_items_attached = props.note.total_items_attached;
 			return ({
-				target,
-				targetId,
-				type,
-				slack_items_attached,
-				pocket_items_attached,
-				total_items_attached,
+				note,
+				target_type,
 			});
 		}
 	},
@@ -162,10 +164,11 @@ const targetObj = {
 const sourceObj = {
     beginDrag(props) {
 		// console.log(props)
-        const { source_id, parent_id } = props.layerOne; 
+        const { source_id, parent_id } = props.note; 
         return ({
-		  source_id,
-		  parent_id
+			source_id,
+			parent_id,
+			props
         });
     },
 
@@ -173,11 +176,12 @@ const sourceObj = {
         if (!monitor.didDrop()) {
           	return;
 		}
+		// console.log(props)
 		let noteEdit = sharedStickyNoteDrop(props, monitor);
-		console.log(noteEdit)
+		// console.log(noteEdit)
 		if(noteEdit.length <= 1){
-			console.log("noteEdit is 1 or 0 ")
-			// props.editNote(noteEdit[0])
+			// console.log("noteEdit is 1 or 0 ")
+			props.editNote(noteEdit[0])
 		} else {
 			//pass array of 2-3 notes
 			props.noteToNote(noteEdit)
@@ -189,7 +193,7 @@ const sourceObj = {
 };
 
 const mapStateToProps = store => {
-  	return { store: store };
+  	return { store: store }
 }
 
 const mapDispatchToProps = {
@@ -205,8 +209,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 		highlighted: monitor.canDrop(),
 		hover: monitor.isOver({shallow:true}),
 		hoverFalse: monitor.isOver()
-	})), 
-	
+	})),
 	DragSource('item', sourceObj, (connect, monitor) => ({
 		connectDragSource: connect.dragSource(),
 		isDragging: monitor.isDragging(),

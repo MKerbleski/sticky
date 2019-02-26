@@ -4,14 +4,14 @@ import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
 import { LayerThreeSource } from "./index"
 import { sharedStickyNoteDrop } from '../../helpers'
-import { editNote } from '../../actions'
+import { editNote, noteToNote } from '../../actions'
 import { connect } from 'react-redux'
 
 class LayerTwoTargetSource extends React.Component {
     
     goToNote = (e) => {
         e.stopPropagation();
-        this.props.redirect(`/${this.props.layerTwo.sticky_user_id}/note/${this.props.layerTwo.id}`)
+        this.props.redirect(`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`)
     }
 
     render(){
@@ -20,19 +20,19 @@ class LayerTwoTargetSource extends React.Component {
             connectDropTarget, 
         } = this.props
 
-        if (this.props.layerTwo){
+        if (this.props.note){
             return (
                 connectDragSource &&
                 connectDropTarget &&
                     <LayerTwoDiv 
                         innerRef={instance => {
-                            this.props.connectDragSource(instance);
-                            this.props.connectDropTarget(instance);}}
+                            this.props.connectDragSource(instance)
+                            this.props.connectDropTarget(instance)}}
                         type="note"
                         onClick={this.goToNote}
                         style={{background: this.props.hover ? 'lightgreen' : null}}>
-                        <h4>{this.props.layerTwo.text_body}</h4>
-                        <div className="layerThreeContainerAll">
+                        <h4>{this.props.note.text_body}</h4>
+                        {/* <div className="layerThreeContainerAll">
                             {this.props.allNotes.map(layerThree => {
                                 if (layerThree.parent_id === this.props.layerTwo.id){
                                     return (
@@ -52,7 +52,7 @@ class LayerTwoTargetSource extends React.Component {
                                     return null
                                 }
                             })}
-                        </div>                       
+                        </div>                        */}
                     </LayerTwoDiv>       
                 )
         } else {
@@ -63,15 +63,15 @@ class LayerTwoTargetSource extends React.Component {
 
 const targetObj = {
     drop(props) {
-        const targetId = props.layerTwo.id;
-        const type = props.type
-        const pocket_items_attached = props.layerTwo.pocket_items_attached;
-        const slack_items_attached = props.layerTwo.slack_items_attached;
+        const note = props.layerTwo;
+        const target_type = props.type
+        // const pocket_items_attached = props.layerTwo.pocket_items_attached;
+        // const slack_items_attached = props.layerTwo.slack_items_attached;
         return ({
-            targetId,
-            type,
-            slack_items_attached,
-            pocket_items_attached,
+            note,
+            target_type,
+            // slack_items_attached,
+            // pocket_items_attached,
         });
     }
 }
@@ -80,7 +80,7 @@ const sourceObj = {
     beginDrag(props) {
         const sourceId = props.layerTwo
         return ({
-            sourceId
+            props
         });
     },
 
@@ -91,11 +91,18 @@ const sourceObj = {
         // const sourceId = props.layerTwo.id;
         // const dropResult = monitor.getDropResult({shallow: true}); 
 
-        const sticky_source_id = props.layerTwo.id;
-        const target = monitor.getDropResult({shallow: true});
-        const target_id = target.targetId;
-        let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
-        props.editNote(noteEdit)
+        // const sticky_source_id = props.layerTwo.id;
+        // const target = monitor.getDropResult({shallow: true});
+        // const target_id = target.targetId;
+        // let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
+        // props.editNote(noteEdit)
+    console.log(props)
+        let noteEdit = sharedStickyNoteDrop(props, monitor);
+        props.noteToNote(noteEdit)
+		// if(noteEdit.length <= 1){
+		// 	props.editNote(noteEdit[0])
+		// } else {
+		// }
     }
 };
 
@@ -105,6 +112,7 @@ const mapStateToProps = store => {
   
   const mapDispatchToProps = {
     editNote,
+    noteToNote
   }
   
   export default connect(mapStateToProps, mapDispatchToProps)(flow(

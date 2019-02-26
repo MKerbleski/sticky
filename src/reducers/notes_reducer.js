@@ -44,6 +44,7 @@ export const notesReducer = (state = initialState, action) => {
         case NOTE_TO_NOTE:
             return Object.assign({}, state, {
                 editingNotes: true,
+                noteEdits: action.payload
             })
         case NOTE_TO_NOTE_COMPLETE:
             return Object.assign({}, state, {

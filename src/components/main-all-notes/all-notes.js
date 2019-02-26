@@ -32,8 +32,7 @@ class AllNotes extends Component {
         }
     }
 
-    render() {    
-        console.log(this.props.store.notes)
+    render() {
         if(this.props.store.notes.notes){
             return (
                 <AllNotesDiv
@@ -59,7 +58,7 @@ class AllNotes extends Component {
                         siblings={this.props.store.notes.notes}
                         changeParent={this.props.changeParent}
                         key={layerOne.id}
-                        layerOne={layerOne}
+                        note={layerOne}
                         allNotes={this.props.store.notes.notes}
                         redirect={this.props.redirect}
                         deleteBin={this.props.deleteBin ? true : false}
@@ -86,7 +85,7 @@ const targetObj = {
             // return ({
             //     type,
             // });
-            return {type: 'top'}
+            return {target_type: 'top'}
         }
     }
 }

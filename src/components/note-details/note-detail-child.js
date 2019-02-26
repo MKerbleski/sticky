@@ -128,17 +128,17 @@ const targetObj = {
   drop(props, monitor) {
       const hover =  monitor.isOver({shallow:true})
       if(hover){//this disables layer one droping if there is a nested child
-        const targetId = props.layerOne.id;
-        const type = props.type;
-        const pocket_items_attached = props.layerOne.pocket_items_attached;
-        const slack_items_attached = props.layerOne.slack_items_attached;
-        const total_items_attached = props.layerOne.total_items_attached;
+        const target = props.layerOne;
+        const target_type = props.type;
+        // const pocket_items_attached = props.layerOne.pocket_items_attached;
+        // const slack_items_attached = props.layerOne.slack_items_attached;
+        // const total_items_attached = props.layerOne.total_items_attached;
         return ({
-            targetId, 
-            type, 
-            pocket_items_attached, 
-            slack_items_attached,
-            total_items_attached,
+            target, 
+            target_type, 
+            // pocket_items_attached, 
+            // slack_items_attached,
+            // total_items_attached,
         });
     }
   },
@@ -150,24 +150,31 @@ const sourceObj = {
     beginDrag(props) {
         const { source_id } = props.layerOne; 
         return ({
-            source_id
+            props
         });
     },
 
-  endDrag(props, monitor) {
-    if (!monitor.didDrop()) {
-      return;
-    }
-    // const sourceId= props.layerOne.id
-    // const dropResult = monitor.getDropResult();
-    // console.log(sourceId,  dropResult, dropResult.targetId)
-    // props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
-        const sticky_source_id = props.layerOne.id;
-        const target = monitor.getDropResult();
-        const target_id = target.targetId;
-        let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
-        props.editNote(noteEdit)
-  },
+	endDrag(props, monitor) {
+		if (!monitor.didDrop()) {
+			return;
+		}
+		// const sourceId= props.layerOne.id
+		// const dropResult = monitor.getDropResult();
+		// console.log(sourceId,  dropResult, dropResult.targetId)
+		// props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
+			// const sticky_source_id = props.layerOne.id;
+			// const target = monitor.getDropResult();
+			// const target_id = target.targetId;
+			// let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
+			// props.editNote(noteEdit)
+		console.log(props)
+		let noteEdit = sharedStickyNoteDrop(props, monitor);
+		if(noteEdit.length <= 1){
+			props.editNote(noteEdit[0])
+		} else {
+			props.noteToNote(noteEdit)
+		}
+	},
 };
 
 const mapStateToProps = store => {

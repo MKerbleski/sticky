@@ -57,7 +57,6 @@ class NoteDetailSelf extends React.Component {
                             <p>{this.props.note.text_body}</p>
                             <div className="note-detail-children">
                                 {this.props.store.notes.children ? this.props.store.notes.children.map(child => {
-                                        console.log(child)
                                         return <NoteDetailChild
                                             type="note"
                                             // onDrop={this.props.onDrop}

@@ -1,27 +1,53 @@
 export const sharedStickyNoteDrop = (props, monitor) => {
-    const draggedNote = props.layerOne
+    console.log(props)
+    console.log(oldParent)
+    const draggedNote = props.note
     const draggedNoteId = draggedNote.id
     const oldParentNoteId = draggedNote.parent_id
-
-    const newParentNote = monitor.getDropResult()
-    const newParentNoteId = newParentNote.targetId
+    const target = monitor.getDropResult()
+    console.log("target", target)
+    
+    
+    const oldParent = props.parent
+    let old_parent_children;
+    if(oldParent){
+        if(oldParent.children_attached){
+            old_parent_children = null
+        } else {
+            old_parent_children = oldParent.children_attached.split(',')
+            old_parent_children = old_parent_children.filter(noteId => {
+                return parseInt(noteId) !== draggedNoteId
+            })
+            // console.log(old_parent_children)
+        }
+    }
     // const current_note_id = props.layerOne.id;
     // const old_parent_note_id = props.layerOne.parent_id;
     // const drop_result = monitor.getDropResult();
     // const new_parent_id = drop_result.targetId;
+
     
-    if(draggedNoteId !== newParentNote.targetId){
-        switch(newParentNote.type){
+    
+    if(draggedNoteId !== target.targetId){
+        switch(target.target_type){
             case 'top':
-                return [{ id: draggedNoteId, parent_id: null }]
+                return [
+                    {   id: draggedNoteId,
+                        has_parent_note: false,
+                        parent: null     },
+                    {   id: oldParent.id,
+                        has_children: old_parent_children ? true : false, 
+                        children_attached: old_parent_children  }]
             case 'deleteBin':
-                return [{ id: draggedNoteId, is_deleted: true }]
+                return [
+                    {   id: draggedNoteId, 
+                        is_deleted: true    }]
             case 'note':
-                let old_parent_children = [];
+                const targetId = target.note.id
                 let new_parent_children = [];
                 //set up new parent list
-                if(newParentNote.target.children_attached){
-                    new_parent_children = newParentNote.target.children_attached + `,${draggedNoteId}`
+                if(target.note.children_attached){
+                    new_parent_children = target.note.children_attached + `,${draggedNoteId}`
                 } else {
                     new_parent_children = `${draggedNoteId}`
                 }
@@ -29,7 +55,7 @@ export const sharedStickyNoteDrop = (props, monitor) => {
                     //incomplete need to modify old_parent_children
                     //incomplete need to modify new_parent_children
                     return [
-                        {   id: newParentNote.targetId,
+                        {   id: target.targetId,
                             children_attached: new_parent_children },
                         {   id: draggedNoteId,
                             has_parent_note: true  },
@@ -38,17 +64,13 @@ export const sharedStickyNoteDrop = (props, monitor) => {
                     ]
                 } else {
                     return [
-                        {   id: newParentNoteId,
-                            edit: {
-                                children_attached: new_parent_children,
-                                has_children: true
-                            }},
+                        {   id: targetId,
+                            children_attached: new_parent_children,
+                            has_children: true  },
                         // current child needs the true flag on parent
                         {   id: draggedNoteId,
-                            edit: {
-                                has_parent_note: true,
-                                parent: newParentNoteId 
-                            }}
+                            has_parent_note: true,
+                            parent: targetId    }
                     ]
                 }
             default: 

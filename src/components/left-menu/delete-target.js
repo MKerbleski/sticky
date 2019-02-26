@@ -18,21 +18,21 @@ const DeleteTarget = (props) => (
 );
 
 const specObj = {
-  hover(props, component){
-    // console.log(props)
-  },
+	hover(props, component){
+		// console.log(props)
+	},
 
-  drop(props) {
-    const { type } = props;
-    return ({
-      type,
-    });
-  }
+	drop(props) {
+		// const target_type = props.type;
+		return ({
+			target_type: 'deleteBin',
+		});
+	}
 }
 
 const collect = (connect,  monitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  highlighted: monitor.canDrop(),
+	connectDropTarget: connect.dropTarget(),
+	highlighted: monitor.canDrop(),
 });
 
 export default DropTarget('item', specObj, collect)(DeleteTarget);
