@@ -11,14 +11,17 @@ export const sharedStickyNoteDrop = (props, monitor) => {
     const oldParent = props.parent
     let old_parent_children;
     if(oldParent){
-        if(oldParent.children_attached){
+        console.log(oldParent)
+        if(oldParent.children_attached.length === 1){
             old_parent_children = null
         } else {
             old_parent_children = oldParent.children_attached.split(',')
+            console.log(old_parent_children)
             old_parent_children = old_parent_children.filter(noteId => {
                 return parseInt(noteId) !== draggedNoteId
             })
-            // console.log(old_parent_children)
+            old_parent_children = old_parent_children.join(',')
+            console.log(old_parent_children)
         }
     }
     // const current_note_id = props.layerOne.id;
@@ -51,6 +54,8 @@ export const sharedStickyNoteDrop = (props, monitor) => {
                 } else {
                     new_parent_children = `${draggedNoteId}`
                 }
+
+
                 if(draggedNote.has_parent_note){
                     //incomplete need to modify old_parent_children
                     //incomplete need to modify new_parent_children
