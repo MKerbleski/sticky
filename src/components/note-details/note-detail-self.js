@@ -10,17 +10,39 @@ import {
 import { getAttachedItems } from '../../actions'
 import { start } from '../../styles/styl-utils.js'
 import { default as NoteQuill } from './note-detail-body-quill'
+import axios from 'axios'
 
-const mapStateToProps = store => {
-    return {store: store};
-}
 
-const mapDispatchToProps = {
-    getAttachedItems,
-}
 
 class NoteDetailSelf extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+
+        }
+    }
+
+    componentDidMount(){
+        if(this.props.note.has_children){
+            let children = this.props.note.children_attached
+            if(localStorage.getItem('JWT')){
+                const token = localStorage.getItem('JWT')
+                const authHeader = {
+                    headers: { Authorization: token }
+                }
+                axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({children}), authHeader).then(res => {
+                    this.setState({children: res.data.children})
+                }).catch(err => {
+                    console.log(err)
+                })
+            } else {
+                console.log('there was no token found')      
+            }
+        }
+    }
+
     render(){
+        console.log(this.props)
         if(this.props.note){
             return (
                 <NoteDetailSelfDiv 
@@ -33,20 +55,18 @@ class NoteDetailSelf extends React.Component {
                             <NoteQuill note={this.props.note} />
                             <div className="note-detail-children">
                             {/* should fetch child notes at this point */}
-                                {this.props.allNotes.map( layerOne => {
-                                    if(layerOne.parent_id === this.props.note.id){
+                                {this.state.children ? this.state.children.map( child => {
                                         return <NoteDetailChild
                                                 type="note"
-                                                onDrop={this.props.onDrop}
-                                                changeParent={this.props.changeParent}
-                                                key={layerOne.id}
-                                                layerOne={layerOne}
-                                                allNotes={this.props.allNotes}
-                                                redirect={this.props.redirect}
-                                                color={layerOne.note_color} />
-                                    } else {
-                                        return null
-                                    }})}
+                                                // onDrop={this.props.onDrop}
+                                                // changeParent={this.props.changeParent}
+                                                key={child.id}
+                                                layerOne={child}
+                                                // allNotes={this.props.allNotes}
+                                                // redirect={this.props.redirect}
+                                                // color={child.note_color}
+                                                 />
+                                }) : null}
                             </div>{/* noted-detail-children */}
                         </div>{/* note-detail-left */}
                         <div className="note-detail-right">
@@ -96,8 +116,15 @@ const collect = (connect,  monitor) => ({
     hoverFalse: monitor.isOver()
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailSelf));
+const mapStateToProps = store => {
+    return {store: store};
+}
 
+const mapDispatchToProps = {
+    getAttachedItems,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailSelf));
 
 const NoteDetailSelfDiv = styled.div`
     ${start('red')}

@@ -31,24 +31,19 @@ class NotePreview extends React.Component {
             return null
         }
 	}
+
 	componentDidMount(){
 		if(this.props.layerOne.has_children){
-			console.log(this.props.layerOne.children_attached)
-
 			let children = this.props.layerOne.children_attached
-			console.log(children)
 			if(localStorage.getItem('JWT')){
 				const token = localStorage.getItem('JWT')
 				const authHeader = {
 					headers: { Authorization: token }
 				}
 				axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({children}), authHeader).then(res => {
-					console.log(res.data)
-					this.setState({children: res.data.children})
-					// return res.data
-					// dispatch({type: NOTES_RECIEVED, payload: res.data})
+					this.setState({ children: res.data.children })
 				}).catch(err => {
-					console.log({err})
+					console.log(err)
 				})
 			} else {
 				console.log('there was no token found')      
@@ -59,7 +54,7 @@ class NotePreview extends React.Component {
     goToNote = (e) => {
         e.preventDefault()
         if(!this.props.deleteBin){
-          this.props.redirect(`/note/${this.props.layerOne.id}`)
+          this.props.redirect(`/${this.props.layerOne.sticky_user_id}/note/${this.props.layerOne.id}`)
         }
     }
 
@@ -93,8 +88,8 @@ class NotePreview extends React.Component {
                             key={this.props.key}
                             index={this.props.index}
                             className="note-link"
-                          id={this.props.layerOne.id}
-                          style={{background: this.props.hover ? 'lightgreen' : null}} >
+							id={this.props.layerOne.id}
+							style={{background: this.props.hover ? 'lightgreen' : null}} >
                             {/* {this.renderText()} */}
                             {/* <ReactQuill preview value={this.props.layerOne} /> */}
                             <div className="note-content">

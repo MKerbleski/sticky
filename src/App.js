@@ -189,6 +189,7 @@ class App extends Component {
                                 exact={!this.state.deleteEnabled}
                                 path="/:username/note/:note_id"
                                 render={ (note) => {
+                                    console.log(note)
                                 return <NoteDetailPage
                                     // redirect={this.redirect}
                                     // allNotes={this.props.store.notes.notes}

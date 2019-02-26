@@ -215,7 +215,7 @@ export const getNotes = (id) =>  {
 				headers: { Authorization: token }
 			}
 			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${id ? id : 'all'}`, authHeader).then(res => {
-				// console.log(res.data)
+				console.log(res.data)
 				if(res.data.allUserNotes){
 					dispatch({type: NOTES_RECIEVED, payload: res.data})
 				} else {

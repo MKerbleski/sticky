@@ -8,8 +8,15 @@ import { getAttachedItems, editNote } from '../../actions'
 import { flex, start } from '../../styles/styl-utils.js'
 import { NoteDetailGrandChild } from './index';
 import { sharedStickyNoteDrop } from '../../helpers'
+import axios from 'axios'
 
 class NoteDetailChild extends React.Component {
+	constructor(){
+		super()
+		this.state = {
+
+		}
+	}
     getFirstWord = (text, words=2) => {
         let firstWord = text.split(" ").slice(0,words).join(' ');
         if(firstWord.length > 0){
@@ -28,6 +35,25 @@ class NoteDetailChild extends React.Component {
         } else{
           return null
         }
+	}
+	
+	componentDidMount(){
+        if(this.props.layerOne.has_children){
+            let children = this.props.layerOne.children_attached
+            if(localStorage.getItem('JWT')){
+                const token = localStorage.getItem('JWT')
+                const authHeader = {
+                    headers: { Authorization: token }
+                }
+                axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({children}), authHeader).then(res => {
+                    this.setState({children: res.data.children})
+                }).catch(err => {
+                    console.log(err)
+                })
+            } else {
+                console.log('there was no token found')      
+            }
+        }
     }
   
     refreshNotes = (e, id) => {
@@ -42,28 +68,29 @@ class NoteDetailChild extends React.Component {
                 this.props.connectDragSource &&
                 this.props.connectDropTarget &&
                 <NoteDetailChildDiv 
-					innerRef={instance => {
-						this.props.connectDragSource(instance);
-						this.props.connectDropTarget(instance);}}
-					onClick={(e) => this.refreshNotes(e,this.props.layerOne.id)}
-					color={this.props.color} >
+                    innerRef={instance => {
+                      this.props.connectDragSource(instance);
+                      this.props.connectDropTarget(instance);}}
+                    onClick={(e) => this.refreshNotes(e,this.props.layerOne.id)}
+                    color={this.props.color} >
                 <Link
                     key={this.props.key}
                     index={this.props.index}
                     className="note-link"
                     id={this.props.layerOne.id}
-                    to={`/note/${this.props.layerOne.id}`}
+                    to={`/${this.props.layerOne.sticky_user_id}/note/${this.props.layerOne.id}`}
                     style={{background: this.props.hover ? 'lightgreen' : null}}>
                         <div className="note-content-header">
                             <h3 className="note-preview-title">{this.getFirstWord(this.props.layerOne.text_body)}</h3>
-                            {this.props.layerOne.total_items_attached ? 
-								<div className="note-content-link-count"> 
-									{this.props.layerOne.total_items_attached}
-								</div> : null }
+                            {this.props.layerOne.total_items_attached 
+								?	<div className="note-content-link-count"> 
+										{this.props.layerOne.total_items_attached}
+									</div> 
+								:	null }
                         </div>
                         <p>{this.getFirstSen(this.props.layerOne.text_body)}</p> 
                         <div className="layerTwoContainerAll">
-                            {this.props.allNotes.map(layerTwo => {
+                            {this.state.children ? this.state.children.map(layerTwo => {
                                 if (layerTwo.parent_id === this.props.layerOne.id){
                                     return <NoteDetailGrandChild
                                                 key={layerTwo.id}
@@ -76,7 +103,7 @@ class NoteDetailChild extends React.Component {
                                 } else {
                                     return null
                                 }
-                            })}
+                            }) : null}
                         </div>                     
                   </Link>
                 </NoteDetailChildDiv>        

@@ -12,7 +12,8 @@ class LayerTwoTargetSource extends React.Component {
         e.stopPropagation();
         this.props.redirect(`/note/${this.props.layerTwo.id}`)
     }
-    render(props){
+
+    render(){
         const {
             connectDragSource, 
             connectDropTarget, 
@@ -34,7 +35,9 @@ class LayerTwoTargetSource extends React.Component {
                             {this.props.allNotes.map(layerThree => {
                                 if (layerThree.parent_id === this.props.layerTwo.id){
                                     return (
-                                        <div className="layerThreeContainer" key={layerThree.id} >
+                                        <div 
+                                            className="layerThreeContainer" 
+                                            key={layerThree.id} >
                                             <LayerThreeSource 
                                                 type="note"
                                                 changeParent={this.props.changeParent} layerThree={layerThree} 

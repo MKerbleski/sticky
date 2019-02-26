@@ -8,7 +8,7 @@ export const sharedStickyNoteDrop = (props, monitor) => {
     if(current_note_id !== new_parent_id){
         switch(drop_result.type){
             case 'top':
-                return {id: current_note_id, parent_id: null}
+                return { id: current_note_id, parent_id: null }
             case 'deleteBin':
                 return {id: current_note_id, is_deleted: true}
             case 'note':

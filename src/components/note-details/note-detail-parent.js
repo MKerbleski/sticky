@@ -4,11 +4,15 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { NoteDetailSelf } from '../index.js';
-import { getAttachedItems } from '../../actions'
+import { getAttachedItems, getNotes } from '../../actions'
 
 class NoteDetailParent extends React.Component{
     refreshNotes = (id) => {
         this.props.getAttachedItems(id)
+    }
+
+    componentDidMount(){
+        this.props.getNotes(this.props.note_id)
     }
 
     render(){
@@ -25,14 +29,14 @@ class NoteDetailParent extends React.Component{
                     className="link"
                     to={this.props.note.parent_id ? `/note/${this.props.note.parent_id}/` : `/all-notes/`}>back to parent note</Link>
                 <NoteDetailSelf
-                    allNotes={this.props.allNotes}
-                    allLinks={this.props.allLinks}
-                    note={this.props.note} 
-                    onDrop={this.props.onDrop} 
-                    changeParent={this.props.changeParent}
-                    targetId={this.props.note.id}
-                    editNote={this.props.editNote}
-                    redirect={this.props.redirect}
+                    // allNotes={this.props.allNotes}
+                    // allLinks={this.props.allLinks}
+                    note={this.props.note}
+                    // onDrop={this.props.onDrop} 
+                    // changeParent={this.props.changeParent}
+                    // targetId={this.props.note.id}
+                    // editNote={this.props.editNote}
+                    // redirect={this.props.redirect}
                     type="note"/>
             </NoteDetailParentDiv>
         )
@@ -107,7 +111,8 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-getAttachedItems
+    getAttachedItems,
+    getNotes
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailParent))
