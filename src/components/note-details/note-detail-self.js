@@ -43,7 +43,7 @@ class NoteDetailSelf extends React.Component {
     }
 
     render(){
-        console.log(this.props)
+        console.log("note detail self", this.props.note)
         if(this.props.note){
             return (
                 <NoteDetailSelfDiv 
@@ -53,7 +53,8 @@ class NoteDetailSelf extends React.Component {
                     style={{background: this.props.hover ? 'lightgreen' : null}}>
                     <div className="note-detail-main">
                         <div className="note-detail-left">
-                            <NoteQuill note={this.props.note} />
+                            {/* <NoteQuill note={this.props.note} /> */}
+                            <p>{this.props.note.text_body}</p>
                             <div className="note-detail-children">
                             {/* should fetch child notes at this point */}
                                 {this.state.children ? this.state.children.map(child => {

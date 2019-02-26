@@ -12,25 +12,26 @@ import axios from 'axios'
 
 class NotePreview extends React.Component {
 	state = {}
-    getFirstWord = (text, words=2) => {
-        let firstWord = text.split(" ").slice(0,words).join(' ');
-        if(firstWord.length > 0){
-          return firstWord
-        } else {
-          return text
-        }
-    }
 
-    getFirstSen = (text) => {
-        let firstSen = text
-        let firstWord = this.getFirstWord(text)
-        firstSen = firstSen.replace(firstWord, '')
-        if(firstSen !== firstWord){
-            return firstSen
-        } else{
-            return null
-        }
-	}
+  //   getFirstWord = (text, words=2) => {
+  //       let firstWord = text.split(" ").slice(0,words).join(' ');
+  //       if(firstWord.length > 0){
+  //         return firstWord
+  //       } else {
+  //         return text
+  //       }
+  //   }
+
+  //   getFirstSen = (text) => {
+  //       let firstSen = text
+  //       let firstWord = this.getFirstWord(text)
+  //       firstSen = firstSen.replace(firstWord, '')
+  //       if(firstSen !== firstWord){
+  //           return firstSen
+  //       } else{
+  //           return null
+  //       }
+	// }
 
 	componentDidMount(){
 		if(this.props.layerOne.has_children){
@@ -117,7 +118,8 @@ class NotePreview extends React.Component {
 													layerTwo={layerTwo} 
 													redirect={this.props.redirect}
 													allNotes={this.props.allNotes}
-													getFirstWord={this.getFirstWord} />
+													// getFirstWord={this.getFirstWord}
+													 />
 											</div>
 										)
                                     {/* } else {

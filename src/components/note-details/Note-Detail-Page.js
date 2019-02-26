@@ -22,9 +22,9 @@ class NoteDetailPage extends Component {
     }
 
     render(){
-        console.log(this.props.store.notes)
+        // console.log(this.props.store.notes)
         const note = this.props.store.notes.notes
-        console.log(note)
+        // console.log(note)
         if(note && note.length > 0){
             return(
                 <NoteDetailPageDiv> 
