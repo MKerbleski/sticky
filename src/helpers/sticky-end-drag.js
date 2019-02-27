@@ -49,7 +49,10 @@ export const sharedStickyNoteDrop = (props, monitor) => {
             case 'deleteBin':
                 return [
                     {   id: draggedNoteId, 
-                        is_deleted: true    }]
+                        is_deleted: true,
+                        // has_parent_note: false,
+                        // parent: null
+                    }]
             case 'note':
                 const targetId = target.note.id
                 if(targetId === draggedNoteId){

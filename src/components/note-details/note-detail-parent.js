@@ -27,7 +27,11 @@ class NoteDetailParent extends React.Component{
                 <Link 
                     // onClick={() => this.refreshNotes(this.props.note.parent_id)}
                     className="link"
-                    to={this.props.note.has_parent_note ? `/${this.props.note.sticky_user_id}/note/${this.props.note.parent}` : `/all-notes/`}>back to parent note</Link>
+                    to={this.props.note.has_parent_note 
+                        ?   `/${this.props.note.sticky_user_id}/note/${this.props.note.parent}` 
+                        :   `/all-notes/`}>
+                        {this.props.note.has_parent_note ? `back to parent (note #${this.props.note.parent})`: `back to All notes`}
+                </Link>
                 <NoteDetailSelf
                     // allNotes={this.props.allNotes}
                     // allLinks={this.props.allLinks}

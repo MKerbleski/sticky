@@ -17,22 +17,17 @@ class NoteDetailPage extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props)
         this.props.getSingleNote(this.props.note_id)
     }
 
     componentWillReceiveProps(nextProps){
-        console.log(this.props)
-        console.log(nextProps)
         if(this.props.note_id !== nextProps.note_id){
             this.props.getSingleNote(nextProps.note_id)
         }
     }
 
     render(){
-        // console.log(this.props.store.notes)
         const note = this.props.store.notes.notes
-        // console.log(note)
         if(note && note.length > 0){
             return (
                 <NoteDetailPageDiv> 
