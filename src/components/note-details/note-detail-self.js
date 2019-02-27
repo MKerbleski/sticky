@@ -9,7 +9,7 @@ import {
 } from '../index.js';
 import { getAttachedItems } from '../../actions'
 import { start } from '../../styles/styl-utils.js'
-import { default as NoteQuill } from './note-detail-body-quill'
+// import { default as NoteQuill } from './note-detail-body-quill'
 import axios from 'axios'
 
 

@@ -143,7 +143,7 @@ const targetObj = {
 		//so this somehow allows other items to be dropped in a nested child component
 		const hover =  monitor.isOver({shallow:true})
 		if(hover){//this disables layer one droping if there is a nested child
-			// console.log(props)
+			console.log(props)
 			// const targetId = props.note.id;
 			const note = props.note;
 			const target_type = props.type;
@@ -179,9 +179,9 @@ const sourceObj = {
 		// console.log(props)
 		let noteEdit = sharedStickyNoteDrop(props, monitor);
 		// console.log(noteEdit)
-		if(noteEdit.length <= 1){
-			// console.log("noteEdit is 1 or 0 ")
-			props.editNote(noteEdit[0])
+		if(noteEdit === 'do nothing'){
+			console.log("noteEdit", noteEdit)
+			// props.editNote(noteEdit[0])
 		} else {
 			//pass array of 2-3 notes
 			props.noteToNote(noteEdit)

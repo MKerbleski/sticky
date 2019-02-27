@@ -1,6 +1,5 @@
 export const sharedStickyNoteDrop = (props, monitor) => {
     console.log(props)
-    console.log(oldParent)
     const draggedNote = props.note
     const draggedNoteId = draggedNote.id
     const oldParentNoteId = draggedNote.parent_id
@@ -9,6 +8,7 @@ export const sharedStickyNoteDrop = (props, monitor) => {
     
     
     const oldParent = props.parent
+    console.log(oldParent)
     let old_parent_children;
     if(oldParent){
         console.log(oldParent)
@@ -23,30 +23,38 @@ export const sharedStickyNoteDrop = (props, monitor) => {
             old_parent_children = old_parent_children.join(',')
             console.log(old_parent_children)
         }
+    } else {
+        console.log(oldParent)
     }
     // const current_note_id = props.layerOne.id;
     // const old_parent_note_id = props.layerOne.parent_id;
     // const drop_result = monitor.getDropResult();
     // const new_parent_id = drop_result.targetId;
-
-    
     
     if(draggedNoteId !== target.targetId){
         switch(target.target_type){
             case 'top':
-                return [
-                    {   id: draggedNoteId,
-                        has_parent_note: false,
-                        parent: null     },
-                    {   id: oldParent.id,
-                        has_children: old_parent_children ? true : false, 
-                        children_attached: old_parent_children  }]
+                if(oldParent){
+                    return [
+                        {   id: draggedNoteId,
+                            has_parent_note: false,
+                            parent: null     },
+                        {   id: oldParent.id,
+                            has_children: old_parent_children ? true : false, 
+                            children_attached: old_parent_children  }]
+
+                } else {
+                    return 'do nothing'
+                }
             case 'deleteBin':
                 return [
                     {   id: draggedNoteId, 
                         is_deleted: true    }]
             case 'note':
                 const targetId = target.note.id
+                if(targetId === draggedNoteId){
+                    return 'do nothing'
+                }
                 let new_parent_children = [];
                 //set up new parent list
                 if(target.note.children_attached){

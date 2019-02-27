@@ -85,7 +85,10 @@ const targetObj = {
             // return ({
             //     type,
             // });
-            return {target_type: 'top'}
+            return {
+                target_type: 'top',
+                parent: null
+            }
         }
     }
 }
