@@ -7,15 +7,16 @@ import { NoteDetailSelf } from '../index.js';
 import { getAttachedItems, getNotes } from '../../actions'
 
 class NoteDetailParent extends React.Component{
-    refreshNotes = (id) => {
-        this.props.getAttachedItems(id)
-    }
+    // refreshNotes = (id) => {
+    //     this.props.getAttachedItems(id)
+    // }
 
     componentDidMount(){
         // this.props.getNotes(this.props.note_id)
     }
 
     render(){
+        console.log(this.props)
         return (
             <NoteDetailParentDiv 
                 innerRef={instance => this.props.connectDropTarget(instance)}
@@ -24,9 +25,9 @@ class NoteDetailParent extends React.Component{
                     ? 'lightgreen' 
                     : null}}>
                 <Link 
-                    onClick={() => this.refreshNotes(this.props.note.parent_id)}
+                    // onClick={() => this.refreshNotes(this.props.note.parent_id)}
                     className="link"
-                    to={this.props.note.parent_id ? `/note/${this.props.note.parent_id}/` : `/all-notes/`}>back to parent note</Link>
+                    to={this.props.note.has_parent_note ? `/${this.props.note.sticky_user_id}/note/${this.props.note.parent}` : `/all-notes/`}>back to parent note</Link>
                 <NoteDetailSelf
                     // allNotes={this.props.allNotes}
                     // allLinks={this.props.allLinks}
@@ -42,9 +43,9 @@ class NoteDetailParent extends React.Component{
     }
 }
 
-const getNoteDetails = (props, id) => {
-    return props.allNotes.find(note => {return note.id === +id})
-}
+// const getNoteDetails = (props, id) => {
+//     return props.allNotes.find(note => {return note.id === +id})
+// }
 
 const targetObj = {
     hover(props, component){
@@ -74,25 +75,25 @@ const targetObj = {
                 //         total_items_attached,
                 //     });
                 // }
-                let parentNote = getNoteDetails(props, props.note.parent_id)
-                let targetId = null
-                let pocket_items_attached = null
-                let slack_items_attached = null
-                let total_items_attached = null
-                if(parentNote){
-                    targetId = parentNote.id
-                    pocket_items_attached = parentNote.pocket_items_attached;
-                    slack_items_attached = parentNote.slack_items_attached;
-                    total_items_attached = parentNote.total_items_attached;
-                }
+                // let parentNote = getNoteDetails(props, props.note.parent_id)
+                // let targetId = null
+                // let pocket_items_attached = null
+                // let slack_items_attached = null
+                // let total_items_attached = null
+                // if(parentNote){
+                //     targetId = parentNote.id
+                //     pocket_items_attached = parentNote.pocket_items_attached;
+                //     slack_items_attached = parentNote.slack_items_attached;
+                //     total_items_attached = parentNote.total_items_attached;
+                // }
                 // const targetId = parentNote.id || null;
                 const type = props.type;
                 return ({
-                    targetId, 
+                    // targetId, 
                     type, 
-                    pocket_items_attached, 
-                    slack_items_attached,
-                    total_items_attached,
+                    // pocket_items_attached, 
+                    // slack_items_attached,
+                    // total_items_attached,
                 });
         }
     }

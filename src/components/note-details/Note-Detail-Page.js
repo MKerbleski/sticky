@@ -21,12 +21,20 @@ class NoteDetailPage extends Component {
         this.props.getSingleNote(this.props.note_id)
     }
 
+    componentWillReceiveProps(nextProps){
+        console.log(this.props)
+        console.log(nextProps)
+        if(this.props.note_id !== nextProps.note_id){
+            this.props.getSingleNote(nextProps.note_id)
+        }
+    }
+
     render(){
         // console.log(this.props.store.notes)
         const note = this.props.store.notes.notes
         // console.log(note)
         if(note && note.length > 0){
-            return(
+            return (
                 <NoteDetailPageDiv> 
                     <NoteDetailParent note={note[0]} />    
                 </NoteDetailPageDiv>

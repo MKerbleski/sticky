@@ -236,7 +236,7 @@ export const getSingleNote = (note_id) =>  {
 			const authHeader = {
 				headers: { Authorization: token }
 			}
-			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${note_id}`, authHeader).then(res => {
+			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/note/${note_id}`, authHeader).then(res => {
 				console.log(res.data)
     			dispatch({type: SINGLE_NOTE_RECIEVED, payload: res.data})
 			}).catch(err => {
