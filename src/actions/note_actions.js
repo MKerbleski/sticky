@@ -248,6 +248,7 @@ export const getSingleNote = (note_id) =>  {
     }
 }
 
+//will delete eventually
 export const getChildren = (ids) =>  {
     return function(dispatch){
         if(localStorage.getItem('JWT')){

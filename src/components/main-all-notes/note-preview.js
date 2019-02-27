@@ -33,24 +33,25 @@ class NotePreview extends React.Component {
   //       }
 	// }
 
-	componentDidMount(){
-		if(this.props.note.has_children){
-			let children = this.props.note.children_attached
-			if(localStorage.getItem('JWT')){
-				const token = localStorage.getItem('JWT')
-				const authHeader = {
-					headers: { Authorization: token }
-				}
-				axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({children}), authHeader).then(res => {
-					this.setState({ children: res.data.children })
-				}).catch(err => {
-					console.log(err)
-				})
-			} else {
-				console.log('there was no token found')      
-			}
-		}
-	}
+	// componentDidMount(){
+	// 	if(this.props.note.has_children){
+	// 		let children = this.props.note.children_attached
+	// 		if(localStorage.getItem('JWT')){
+	// 			const token = localStorage.getItem('JWT')
+	// 			const authHeader = {
+	// 				headers: { Authorization: token }
+	// 			}
+	// 			axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({children}), authHeader).then(res => {
+	// 				this.setState({ children: res.data.children })
+	// 			}).catch(err => {
+	// 				console.log(err)
+	// 			})
+	// 		} else {
+	// 			console.log('there was no token found')      
+	// 		}
+	// 	}
+	// }
+
 
     goToNote = (e) => {
         e.preventDefault()
@@ -74,6 +75,7 @@ class NotePreview extends React.Component {
     }
 
     render(){
+		console.log(this.props)
         if (this.props.note){
             return (
                 this.props.connectDragSource &&
@@ -107,7 +109,7 @@ class NotePreview extends React.Component {
                                 {ReactHTMLParser(this.props.note.text_body)}
                             </div>
                             <div className="layerTwoContainerAll"  >
-                                {this.state.children ? this.state.children.map(layerTwo => {
+                                {this.props.note.children ? this.props.note.children.map(layerTwo => {
 									if(layerTwo.is_deleted){
 										return null
 									} else {

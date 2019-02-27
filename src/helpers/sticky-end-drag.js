@@ -44,7 +44,7 @@ export const sharedStickyNoteDrop = (props, monitor) => {
                             children_attached: old_parent_children  }]
 
                 } else {
-                    return 'do nothing'
+                    return "do nothing"
                 }
             case 'deleteBin':
                 return [
@@ -53,7 +53,7 @@ export const sharedStickyNoteDrop = (props, monitor) => {
             case 'note':
                 const targetId = target.note.id
                 if(targetId === draggedNoteId){
-                    return 'do nothing'
+                    return "do nothing"
                 }
                 let new_parent_children = [];
                 //set up new parent list
