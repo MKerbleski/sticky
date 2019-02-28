@@ -128,10 +128,10 @@ const targetObj = {
   drop(props, monitor) {
       const hover =  monitor.isOver({shallow:true})
       if(hover){//this disables layer one droping if there is a nested child
-		const note = props.store.notes.notes[0];
+		console.log('note-detail-child', props)
+			const note = props.note
 			const target_type = 'note'
-			const parent = props.store.notes.notes[0].parent_note
-			console.log(note)
+			const parent = props.parent
 			return ({
 				note, 
 				target_type,

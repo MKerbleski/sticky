@@ -58,14 +58,13 @@ class NoteDetailSelf extends React.Component {
                             <p>{note.text_body}</p>
                             <div className="note-detail-children">
                                 {note.has_children ? note.children.map(child => {
-                                        console.log(child)
                                         return <NoteDetailChild
-                                            type="note"
-                                            // onDrop={this.props.onDrop}
-                                            // changeParent={this.props.changeParent}
                                             key={child.id}
+                                            type="note"
                                             note={child}
                                             parent={note}
+                                            // onDrop={this.props.onDrop}
+                                            // changeParent={this.props.changeParent}
                                             
                                             // allNotes={this.props.allNotes}
                                             // redirect={this.props.redirect}
@@ -75,7 +74,7 @@ class NoteDetailSelf extends React.Component {
                             </div>{/* noted-detail-children */}
                         </div>{/* note-detail-left */}
                         <div className="note-detail-right">
-                            <AttachedList stickyNote={this.props.note} />
+                            {/* <AttachedList stickyNote={this.props.note} /> */}
                         </div>{/* note-detail-right */}
                     </div>{/* note-detail-main */}
                     <div className="note-detail-settings">

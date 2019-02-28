@@ -77,6 +77,7 @@ export const sharedStickyNoteDrop = (props, monitor) => {
                     const oldParentNoteId = oldParent.id
                     return [
                         {   id: target.note.id,
+                            has_children: true,
                             children_attached: new_parent_children },
                         {   id: draggedNoteId,
                             has_parent_note: true  },
