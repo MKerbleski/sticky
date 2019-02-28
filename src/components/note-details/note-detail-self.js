@@ -24,27 +24,28 @@ class NoteDetailSelf extends React.Component {
 
     componentDidMount(){
         //Get children for notes
-        if(this.props.note.has_children){
-            let children = this.props.note.children_attached
-            if(localStorage.getItem('JWT')){
-                const token = localStorage.getItem('JWT')
-                const authHeader = {
-                    headers: { Authorization: token }
-                }
-                axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({children}), authHeader).then(res => {
-                    this.setState({children: res.data.children})
-                }).catch(err => {
-                    console.log(err)
-                })
-            } else {
-                console.log('there was no token found')      
-            }
-        }
+        // if(this.props.note.has_children){
+        //     let children = this.props.note.children_attached
+        //     if(localStorage.getItem('JWT')){
+        //         const token = localStorage.getItem('JWT')
+        //         const authHeader = {
+        //             headers: { Authorization: token }
+        //         }
+        //         axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({children}), authHeader).then(res => {
+        //             this.setState({children: res.data.children})
+        //         }).catch(err => {
+        //             console.log(err)
+        //         })
+        //     } else {
+        //         console.log('there was no token found')      
+        //     }
+        // }
     }
 
     render(){
-        console.log("note detail self", this.props)
-        if(this.props.note){
+        const note = this.props.store.notes.notes[0]
+        console.log("note detail self", note)
+        if(note){
             return (
                 <NoteDetailSelfDiv 
                     innerRef={instance => this.props.connectDropTarget(instance)}
@@ -54,15 +55,17 @@ class NoteDetailSelf extends React.Component {
                     <div className="note-detail-main">
                         <div className="note-detail-left">
                             {/* <NoteQuill note={this.props.note} /> */}
-                            <p>{this.props.note.text_body}</p>
+                            <p>{note.text_body}</p>
                             <div className="note-detail-children">
-                                {this.props.store.notes.children ? this.props.store.notes.children.map(child => {
+                                {note.has_children ? note.children.map(child => {
                                         return <NoteDetailChild
                                             type="note"
                                             // onDrop={this.props.onDrop}
                                             // changeParent={this.props.changeParent}
                                             key={child.id}
-                                            layerOne={child}
+                                            note={child}
+                                            parent={this.props.note}
+                                            
                                             // allNotes={this.props.allNotes}
                                             // redirect={this.props.redirect}
                                             // color={child.note_color}
@@ -95,6 +98,7 @@ const targetObj = {
         const hover = monitor.isOver({shallow: false})
         
         if(hover){
+            console.log(props)
             const { type, targetId } = props;
             const pocket_items_attached = props.note.pocket_items_attached;
             const total_items_attached = props.note.total_items_attached;

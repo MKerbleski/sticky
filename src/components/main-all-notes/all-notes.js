@@ -38,34 +38,38 @@ class AllNotes extends Component {
                 <AllNotesDiv
                     type="top" 
                     innerRef={instance => this.props.connectDropTarget(instance)}
-                    style={{background: this.props.hover ? 'lightgreen' : this.props.deleteBin ? 'red' : null}}>
-                
-                {this.props.store.notes.notes.length > 0 
-                    ? null 
-                    :   this.props.deleteBin 
-                            ?   <div>Delete Bin is empty</div>
-                            :   <div>
-                                    <h3>Welcome!</h3>
-                                    <p>Click the plus to the left to create a new note</p>
-                                </div> }
-                {this.props.showNewNote && !this.props.deleteBin 
-                    ?   <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> 
-                    :   null}        
-                {this.props.store.notes.notes.map(layerOne => {
-                    return <NotePreview
-                        type="note"
-                        // onDrop={this.props.onDrop}
-                        siblings={this.props.store.notes.notes}
-                        changeParent={this.props.changeParent}
-                        key={layerOne.id}
-                        note={layerOne}
-                        allNotes={this.props.store.notes.notes}
-                        redirect={this.props.redirect}
-                        deleteBin={this.props.deleteBin ? true : false}
-                        />
-                })}
-            </AllNotesDiv>
-        )
+                    style={{background: this.props.hover 
+                        ?   'lightgreen' 
+                        :   this.props.deleteBin 
+                            ?   'red' 
+                            :   null}}>
+                    {this.props.store.notes.notes.length > 0 
+                        ? null 
+                        :   this.props.deleteBin 
+                                ?   <div>Delete Bin is empty</div>
+                                :   <div>
+                                        <h3>Welcome!</h3>
+                                        <p>Click the plus to the left to create a new note</p>
+                                    </div> }
+                    {this.props.showNewNote && !this.props.deleteBin 
+                        ?   <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> 
+                        :   null}        
+                    {this.props.store.notes.notes.map(note => {
+                        return <NotePreview
+                            type="note"
+                            parent={null}
+                            note={note}
+                            key={note.id}
+                            redirect={this.props.redirect}
+                            deleteBin={this.props.deleteBin ? true : false}
+                            // onDrop={this.props.onDrop}
+                            // siblings={this.props.store.notes.notes}
+                            // changeParent={this.props.changeParent}
+                            // allNotes={this.props.store.notes.notes}
+                            />
+                    })}
+                </AllNotesDiv>
+            )
         } else {
             return <p>loading all notes</p>
         }

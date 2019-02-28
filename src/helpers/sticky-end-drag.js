@@ -1,24 +1,28 @@
 export const sharedStickyNoteDrop = (props, monitor) => {
+    
+    //must return array
+
     console.log(props)
     const draggedNote = props.note
-    const draggedNoteId = draggedNote.id
-    const oldParentNoteId = draggedNote.parent_id
     const target = monitor.getDropResult()
-    console.log("target", target)
     
-    
+    const draggedNoteId = draggedNote.id
     const oldParent = props.parent
-    console.log(oldParent)
+    
     let old_parent_children;
+
+    console.log("sharedStickyNoteDrop", target, props)
+    console.log(oldParent)
+        
+
     if(oldParent){
-        console.log(oldParent)
         if(oldParent.children_attached.length === 1){
             old_parent_children = null
+            console.log(old_parent_children)
         } else {
             old_parent_children = oldParent.children_attached.split(',')
-            console.log(old_parent_children)
             old_parent_children = old_parent_children.filter(noteId => {
-                return parseInt(noteId) !== draggedNoteId
+                return parseInt(noteId, 10) !== draggedNoteId
             })
             old_parent_children = old_parent_children.join(',')
             console.log(old_parent_children)
@@ -26,10 +30,6 @@ export const sharedStickyNoteDrop = (props, monitor) => {
     } else {
         console.log(oldParent)
     }
-    // const current_note_id = props.layerOne.id;
-    // const old_parent_note_id = props.layerOne.parent_id;
-    // const drop_result = monitor.getDropResult();
-    // const new_parent_id = drop_result.targetId;
     
     if(draggedNoteId !== target.targetId){
         switch(target.target_type){
@@ -58,6 +58,9 @@ export const sharedStickyNoteDrop = (props, monitor) => {
                 if(targetId === draggedNoteId){
                     return "do nothing"
                 }
+                if(target.note.id === draggedNoteId){
+                    return "do nothing"
+                }
                 let new_parent_children = [];
                 //set up new parent list
                 if(target.note.children_attached){
@@ -65,17 +68,19 @@ export const sharedStickyNoteDrop = (props, monitor) => {
                 } else {
                     new_parent_children = `${draggedNoteId}`
                 }
-
-
+                
+                
+                
                 if(draggedNote.has_parent_note){
                     //incomplete need to modify old_parent_children
                     //incomplete need to modify new_parent_children
+                    const oldParentNoteId = oldParent.id
                     return [
-                        {   id: target.targetId,
+                        {   id: target.note.id,
                             children_attached: new_parent_children },
                         {   id: draggedNoteId,
                             has_parent_note: true  },
-                        {   id: oldParentNoteId,
+                        {   id: oldParent.id,
                             children_attached: old_parent_children }
                     ]
                 } else {

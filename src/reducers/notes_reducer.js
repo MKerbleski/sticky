@@ -128,8 +128,8 @@ export const notesReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 fetchingNotes: false,
                 notesRecieved: true,
-                notes: action.payload.note,
-                children: action.payload.children,
+                notes: action.payload,
+                // children: action.payload.children,
                 // username: action.payload.username,
                 status: "Note Recieved"
             })

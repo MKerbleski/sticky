@@ -27,11 +27,12 @@ class NoteDetailPage extends Component {
     }
 
     render(){
+        console.log(this.props)
         const note = this.props.store.notes.notes
-        if(note && note.length > 0){
+        if(note){
             return (
                 <NoteDetailPageDiv> 
-                    <NoteDetailParent note={note[0]} />    
+                    <NoteDetailParent note={note} />    
                 </NoteDetailPageDiv>
             )
         } else {

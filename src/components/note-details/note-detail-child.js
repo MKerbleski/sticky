@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import { connect } from 'react-redux';
-import { getSingleNote, editNote } from '../../actions'
+import { getSingleNote, editNote, noteToNote } from '../../actions'
 import { flex, start } from '../../styles/styl-utils.js'
 import { NoteDetailGrandChild } from './index';
 import { sharedStickyNoteDrop } from '../../helpers'
@@ -42,8 +42,8 @@ class NoteDetailChild extends React.Component {
 	}
 	
 	fetchChildren(){
-		if(this.props.layerOne.has_children){
-            let children = this.props.layerOne.children_attached
+		if(this.props.note.has_children){
+            let children = this.props.note.children_attached
             if(localStorage.getItem('JWT')){
                 const token = localStorage.getItem('JWT')
                 const authHeader = {
@@ -71,7 +71,7 @@ class NoteDetailChild extends React.Component {
     }
 
     render(){
-        if (this.props.layerOne){
+        if (this.props.note){
             return (
                 this.props.connectDragSource &&
                 this.props.connectDropTarget &&
@@ -79,29 +79,29 @@ class NoteDetailChild extends React.Component {
                     innerRef={instance => {
 						this.props.connectDragSource(instance);
 						this.props.connectDropTarget(instance);}}
-                    onClick={(e) => this.refreshNotes(e, this.props.layerOne.id)}
+                    onClick={(e) => this.refreshNotes(e, this.props.note.id)}
                     color={this.props.color} >
                 <Link
                     key={this.props.key}
                     index={this.props.index}
                     className="note-link"
-                    id={this.props.layerOne.id}
-                    to={`/${this.props.layerOne.sticky_user_id}/note/${this.props.layerOne.id}`}
+                    id={this.props.note.id}
+                    to={`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`}
                     style={{background: this.props.hover ? 'lightgreen' : null}}>
                         <div className="note-content-header">
                             <h3 className="note-preview-title">
-								{this.getFirstWord(this.props.layerOne.text_body)}
+								{this.getFirstWord(this.props.note.text_body)}
 							</h3>
-                            {this.props.layerOne.total_items_attached 
+                            {this.props.note.total_items_attached 
 								?	<div className="note-content-link-count"> 
-										{this.props.layerOne.total_items_attached}
+										{this.props.note.total_items_attached}
 									</div> 
 								:	null }
                         </div>
-                        {/* <p>{this.getFirstSen(this.props.layerOne.text_body)}</p>  */}
+                        {/* <p>{this.getFirstSen(this.props.note.text_body)}</p>  */}
                         <div className="layerTwoContainerAll">
                             {this.state.children ? this.state.children.map(layerTwo => {
-                                if (layerTwo.parent_id === this.props.layerOne.id){
+                                if (layerTwo.parent_id === this.props.note.id){
                                     return <NoteDetailGrandChild
                                                 key={layerTwo.id}
                                                 type="note"
@@ -128,18 +128,14 @@ const targetObj = {
   drop(props, monitor) {
       const hover =  monitor.isOver({shallow:true})
       if(hover){//this disables layer one droping if there is a nested child
-        const target = props.layerOne;
-        const target_type = props.type;
-        // const pocket_items_attached = props.layerOne.pocket_items_attached;
-        // const slack_items_attached = props.layerOne.slack_items_attached;
-        // const total_items_attached = props.layerOne.total_items_attached;
-        return ({
-            target, 
-            target_type, 
-            // pocket_items_attached, 
-            // slack_items_attached,
-            // total_items_attached,
-        });
+        const note = props.note;
+		const target_type = props.type
+		const parent = props.parent
+		return ({
+			note, 
+			target_type,
+			parent
+		});
     }
   },
   hover(props, monitor){
@@ -148,7 +144,7 @@ const targetObj = {
 
 const sourceObj = {
     beginDrag(props) {
-        const { source_id } = props.layerOne; 
+        // const { source_id } = props.layerOne; 
         return ({
             props
         });
@@ -169,8 +165,8 @@ const sourceObj = {
 			// props.editNote(noteEdit)
 		console.log(props)
 		let noteEdit = sharedStickyNoteDrop(props, monitor);
-		if(noteEdit.length <= 1){
-			props.editNote(noteEdit[0])
+		if(noteEdit === 'do nothing'){
+			console.log("noteEdit", noteEdit)
 		} else {
 			props.noteToNote(noteEdit)
 		}
@@ -183,7 +179,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
 	getSingleNote,
-  editNote,
+  	editNote,
+  	noteToNote
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(flow(

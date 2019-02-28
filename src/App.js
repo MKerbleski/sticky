@@ -192,7 +192,7 @@ class App extends Component {
                                 return <NoteDetailPage
                                     note_id={note.match.params.note_id}
                                     user_id={note.match.params.user_id}
-                                    // redirect={this.redirect}
+                                    redirect={this.redirect}
                                     // allNotes={this.props.store.notes.notes}
                                     // allLinks={this.props.store.notes.links}
                                     // note={this.getNoteDetails(note.match.params.note_id)} 

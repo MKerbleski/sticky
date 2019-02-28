@@ -62,43 +62,14 @@ const targetObj = {
     drop(props, monitor) {
         const hover =  monitor.isOver({shallow:true})
             if(hover){//this disables layer one droping if there is a nested child
-                // if(props.note.parent_id === null){
-                //     window.alert("There is no parent note")
-                // } else {
-                //     let parentNote = getNoteDetails(props, props.note.parent_id)
-                //     const targetId = parentNote.id;
-                //     const type = props.type;
-                //     const pocket_items_attached = parentNote.pocket_items_attached;
-                //     const slack_items_attached = parentNote.slack_items_attached;
-                //     const total_items_attached = parentNote.total_items_attached;
-                //     return ({
-                //         targetId, 
-                //         type, 
-                //         pocket_items_attached, 
-                //         slack_items_attached,
-                //         total_items_attached,
-                //     });
-                // }
-                // let parentNote = getNoteDetails(props, props.note.parent_id)
-                // let targetId = null
-                // let pocket_items_attached = null
-                // let slack_items_attached = null
-                // let total_items_attached = null
-                // if(parentNote){
-                //     targetId = parentNote.id
-                //     pocket_items_attached = parentNote.pocket_items_attached;
-                //     slack_items_attached = parentNote.slack_items_attached;
-                //     total_items_attached = parentNote.total_items_attached;
-                // }
-                // const targetId = parentNote.id || null;
-                const type = props.type;
-                return ({
-                    // targetId, 
-                    type, 
-                    // pocket_items_attached, 
-                    // slack_items_attached,
-                    // total_items_attached,
-                });
+            const note = props.note.has_parent_note ? props.note : null
+            const target_type = props.note.has_parent_note ? 'note' : 'top'
+            const parent = props.note.has_parent_note ? props.parent : null
+            return ({
+                note,
+                target_type,
+                parent
+            });
         }
     }
 }

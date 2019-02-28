@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import React from 'react';
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
-import { Link } from 'react-router-dom';
 import { LayerThreeSource } from "./index"
 import { sharedStickyNoteDrop } from '../../helpers'
 import { editNote, noteToNote } from '../../actions'
@@ -10,10 +9,10 @@ import { connect } from 'react-redux'
 
 class LayerTwoTargetSource extends React.Component {
     
-    // goToNote = (e) => {
-    //     e.stopPropagation();
-    //     this.props.redirect(`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`)
-    // }
+    goToNote = (e) => {
+        e.stopPropagation();
+        this.props.redirect(`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`)
+    }
 
     render(){
         const {
@@ -25,16 +24,12 @@ class LayerTwoTargetSource extends React.Component {
             return (
                 connectDragSource &&
                 connectDropTarget &&
-                // <Link onClick={e => { e.preventDefault(); console.log('Your log'); window.location.href = 'new/url'; }} />
-                <Link onClick={e => {
-                    e.preventDefault();
-                    }} to={`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`}>
                     <LayerTwoDiv 
                         innerRef={instance => {
                             this.props.connectDragSource(instance)
                             this.props.connectDropTarget(instance)}}
                         type="note"
-                        // onClick={this.goToNote}
+                        onClick={this.goToNote}
                         style={{background: this.props.hover ? 'lightgreen' : null}}>
                         <h4>{this.props.note.text_body}</h4>
                         {/* <div className="layerThreeContainerAll">
@@ -59,7 +54,6 @@ class LayerTwoTargetSource extends React.Component {
                             })}
                         </div>                        */}
                     </LayerTwoDiv>       
-                </Link>
                 )
         } else {
             return (null)
@@ -69,15 +63,13 @@ class LayerTwoTargetSource extends React.Component {
 
 const targetObj = {
     drop(props) {
-        const note = props.layerTwo;
+        const note = props.note;
         const target_type = props.type
-        // const pocket_items_attached = props.layerTwo.pocket_items_attached;
-        // const slack_items_attached = props.layerTwo.slack_items_attached;
+        const parent = props.parent
         return ({
-            note,
+            note, 
             target_type,
-            // slack_items_attached,
-            // pocket_items_attached,
+            parent
         });
     }
 }

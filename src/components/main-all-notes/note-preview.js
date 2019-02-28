@@ -8,50 +8,9 @@ import { flex } from '../../styles/styl-utils.js'
 import { deleteNote, editNote, getChildren, noteToNote } from '../../actions'
 import { sharedStickyNoteDrop } from '../../helpers'
 import ReactHTMLParser from 'react-html-parser'
-import axios from 'axios'
 
 class NotePreview extends React.Component {
 	state = {}
-
-  //   getFirstWord = (text, words=2) => {
-  //       let firstWord = text.split(" ").slice(0,words).join(' ');
-  //       if(firstWord.length > 0){
-  //         return firstWord
-  //       } else {
-  //         return text
-  //       }
-  //   }
-
-  //   getFirstSen = (text) => {
-  //       let firstSen = text
-  //       let firstWord = this.getFirstWord(text)
-  //       firstSen = firstSen.replace(firstWord, '')
-  //       if(firstSen !== firstWord){
-  //           return firstSen
-  //       } else{
-  //           return null
-  //       }
-	// }
-
-	// componentDidMount(){
-	// 	if(this.props.note.has_children){
-	// 		let children = this.props.note.children_attached
-	// 		if(localStorage.getItem('JWT')){
-	// 			const token = localStorage.getItem('JWT')
-	// 			const authHeader = {
-	// 				headers: { Authorization: token }
-	// 			}
-	// 			axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({children}), authHeader).then(res => {
-	// 				this.setState({ children: res.data.children })
-	// 			}).catch(err => {
-	// 				console.log(err)
-	// 			})
-	// 		} else {
-	// 			console.log('there was no token found')      
-	// 		}
-	// 	}
-	// }
-
 
     goToNote = (e) => {
         e.preventDefault()
@@ -70,16 +29,15 @@ class NotePreview extends React.Component {
     }
     
     renderText(){
-      let doc = new DOMParser().parseFromString(this.props.note.text_body, 'text/html')
-      return doc
+		let doc = new DOMParser().parseFromString(this.props.note.text_body, 'text/html')
+		return doc
     }
 
     render(){
-		console.log(this.props)
         if (this.props.note){
             return (
                 this.props.connectDragSource &&
-                this.props.connectDropTarget &&
+				this.props.connectDropTarget &&
                 <NotePreviewDiv 
 					onClick={this.goToNote}
 					innerRef={instance => {
@@ -119,10 +77,10 @@ class NotePreview extends React.Component {
 												key={layerTwo.id}>
 												<LayerTwoTargetSource  
 													type="note"
-													// onDrop={this.props.onDrop}
+													redirect={this.props.redirect}
 													note={layerTwo} 
 													parent={this.props.note}
-													// redirect={this.props.redirect}
+													// onDrop={this.props.onDrop}
 													// allNotes={this.props.allNotes}
 													// getFirstWord={this.getFirstWord}
 													 />
@@ -145,16 +103,13 @@ const targetObj = {
 		//so this somehow allows other items to be dropped in a nested child component
 		const hover =  monitor.isOver({shallow:true})
 		if(hover){//this disables layer one droping if there is a nested child
-			console.log(props)
-			// const targetId = props.note.id;
 			const note = props.note;
-			const target_type = props.type;
-			// const pocket_items_attached = props.note.pocket_items_attached;
-			// const slack_items_attached = props.note.slack_items_attached;
-			// const total_items_attached = props.note.total_items_attached;
+			const target_type = props.type
+			const parent = props.parent
 			return ({
-				note,
+				note, 
 				target_type,
+				parent
 			});
 		}
 	},
@@ -178,18 +133,11 @@ const sourceObj = {
         if (!monitor.didDrop()) {
           	return;
 		}
-		// console.log(props)
 		let noteEdit = sharedStickyNoteDrop(props, monitor);
-		// console.log(noteEdit)
 		if(noteEdit === 'do nothing'){
 			console.log("noteEdit", noteEdit)
-			// props.editNote(noteEdit[0])
 		} else {
-			//pass array of 2-3 notes
 			props.noteToNote(noteEdit)
-			// noteEdit.forEach(note => {
-			// 	props.editNote(note)
-			// })
 		}
     },
 };
