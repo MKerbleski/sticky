@@ -58,13 +58,14 @@ class NoteDetailSelf extends React.Component {
                             <p>{note.text_body}</p>
                             <div className="note-detail-children">
                                 {note.has_children ? note.children.map(child => {
+                                        console.log(child)
                                         return <NoteDetailChild
                                             type="note"
                                             // onDrop={this.props.onDrop}
                                             // changeParent={this.props.changeParent}
                                             key={child.id}
                                             note={child}
-                                            parent={this.props.note}
+                                            parent={note}
                                             
                                             // allNotes={this.props.allNotes}
                                             // redirect={this.props.redirect}
@@ -93,23 +94,20 @@ const targetObj = {
         if(props.hoverShallow){
             // console.log('hoverShallow')
         }
+        // console.log(props)
     },
     drop(props, monitor) {
         const hover = monitor.isOver({shallow: false})
         
         if(hover){
-            console.log(props)
-            const { type, targetId } = props;
-            const pocket_items_attached = props.note.pocket_items_attached;
-            const total_items_attached = props.note.total_items_attached;
-            const slack_items_attached = props.note.slack_items_attached;
-            return ({
-                type, 
-                targetId, 
-                pocket_items_attached, 
-                slack_items_attached,
-                total_items_attached
-            });
+            const note = props.store.notes.notes[0];
+			const target_type = 'note'
+			const parent = props.store.notes.notes[0].parent_note
+			return ({
+				note, 
+				target_type,
+				parent
+			});
         }
     }
 }

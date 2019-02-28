@@ -12,10 +12,10 @@ export const sharedStickyNoteDrop = (props, monitor) => {
     let old_parent_children;
 
     console.log("sharedStickyNoteDrop", target, props)
-    console.log(oldParent)
-        
-
+    
+    
     if(oldParent){
+        console.log(oldParent)
         if(oldParent.children_attached.length === 1){
             old_parent_children = null
             console.log(old_parent_children)

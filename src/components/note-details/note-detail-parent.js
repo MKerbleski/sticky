@@ -33,15 +33,18 @@ class NoteDetailParent extends React.Component{
                         {this.props.note.has_parent_note ? `back to parent (note #${this.props.note.parent})`: `back to All notes`}
                 </Link>
                 <NoteDetailSelf
+                    type="note"
+                    note={this.props.note}
+                    parent={this.props.note.parent_note}
                     // allNotes={this.props.allNotes}
                     // allLinks={this.props.allLinks}
-                    note={this.props.note}
                     // onDrop={this.props.onDrop} 
                     // changeParent={this.props.changeParent}
                     // targetId={this.props.note.id}
                     // editNote={this.props.editNote}
                     // redirect={this.props.redirect}
-                    type="note"/>
+                    
+                    />
             </NoteDetailParentDiv>
         )
     }
@@ -62,14 +65,15 @@ const targetObj = {
     drop(props, monitor) {
         const hover =  monitor.isOver({shallow:true})
             if(hover){//this disables layer one droping if there is a nested child
-            const note = props.note.has_parent_note ? props.note : null
-            const target_type = props.note.has_parent_note ? 'note' : 'top'
-            const parent = props.note.has_parent_note ? props.parent : null
-            return ({
-                note,
-                target_type,
-                parent
-            });
+                const note = props.store.notes.notes[0];
+                const target_type = props.note.has_parent_note ? 'note' : 'top'
+                // const parent = props.note.has_parent_note ? props.store.notes.notes[0].parent_note : null
+                // console.log("note-detail-parent", parent)
+                return ({
+                    note, 
+                    target_type,
+                    // parent
+                });
         }
     }
 }
