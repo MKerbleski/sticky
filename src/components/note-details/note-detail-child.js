@@ -8,7 +8,6 @@ import { getSingleNote, editNote, noteToNote } from '../../actions'
 import { flex, start } from '../../styles/styl-utils.js'
 import { NoteDetailGrandChild } from './index';
 import { sharedStickyNoteDrop } from '../../helpers'
-import axios from 'axios'
 
 class NoteDetailChild extends React.Component {
 	constructor(){
@@ -17,58 +16,17 @@ class NoteDetailChild extends React.Component {
 
 		}
 	}
-  //   getFirstWord = (text, words=2) => {
-  //       let firstWord = text.split(" ").slice(0,words).join(' ');
-  //       if(firstWord.length > 0){
-  //         return firstWord
-  //       } else {
-  //         return text
-  //       }
-  //   }
-
-  //   getFirstSen = (text) => {
-  //       let firstSen = text
-  //       let firstWord = this.getFirstWord(text)
-  //       firstSen = firstSen.replace(firstWord, '')
-  //       if(firstSen !== firstWord){
-  //         return firstSen
-  //       } else{
-  //         return null
-  //       }
-	// }
-	
-	// componentDidMount(){
-  //       this.fetchChildren()
-	// }
-	
-	// fetchChildren(){
-	// 	if(this.props.note.has_children){
-  //           let children = this.props.note.children_attached
-  //           if(localStorage.getItem('JWT')){
-  //               const token = localStorage.getItem('JWT')
-  //               const authHeader = {
-  //                   headers: { Authorization: token }
-  //               }
-  //               axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({children}), authHeader).then(res => {
-  //                   this.setState({children: res.data.children})
-  //               }).catch(err => {
-  //                   console.log(err)
-  //               })
-  //           } else {
-  //               console.log('there was no token found')      
-  //           }
-  //       }
-	// }
   
-    refreshNotes = (e, id) => {
-        e.preventDefault()
-		e.stopPropagation()
-		this.setState({
-			children: null
-		})
-		this.props.getSingleNote(id)
-		// this.fetchChildren()
-    }
+    // refreshNotes = (e, id) => {
+    //     e.preventDefault()
+	// 	e.stopPropagation()
+	// 	console.log("refreshNotes")
+	// 	this.setState({
+	// 		children: null
+	// 	})
+	// 	this.props.getSingleNote(id)
+	// 	// this.fetchChildren()
+    // }
 
     render(){
         if (this.props.note && !this.props.note.is_deleted){
@@ -79,7 +37,7 @@ class NoteDetailChild extends React.Component {
                     innerRef={instance => {
 						this.props.connectDragSource(instance);
 						this.props.connectDropTarget(instance);}}
-                    onClick={(e) => this.refreshNotes(e, this.props.note.id)}
+                    // onClick={(e) => this.refreshNotes(e, this.props.note.id)}
                     color={this.props.color} >
                 <Link
                     key={this.props.key}

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
-import { LayerThreeSource } from "./index"
+// import { LayerThreeSource } from "./index"
 import { sharedStickyNoteDrop } from '../../helpers'
 import { editNote, noteToNote } from '../../actions'
 import { connect } from 'react-redux'
@@ -98,14 +98,14 @@ const sourceObj = {
 
 const mapStateToProps = store => {
     return {store: store};
-  }
+}
   
-  const mapDispatchToProps = {
+const mapDispatchToProps = {
     editNote,
     noteToNote
-  }
+}
   
-  export default connect(mapStateToProps, mapDispatchToProps)(flow(
+export default connect(mapStateToProps, mapDispatchToProps)(flow(
 
     DropTarget('item', targetObj, (connect, monitor) => ({
         connectDropTarget: connect.dropTarget(),

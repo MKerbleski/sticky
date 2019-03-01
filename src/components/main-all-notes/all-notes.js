@@ -57,10 +57,10 @@ class AllNotes extends Component {
                         :   null}        
                     {this.props.store.notes.notes.map(note => {
                         return <NotePreview
+                            key={note.id}
                             type="note"
                             parent={null}
                             note={note}
-                            key={note.id}
                             redirect={this.props.redirect}
                             deleteBin={this.props.deleteBin ? true : false}
                             // onDrop={this.props.onDrop}
