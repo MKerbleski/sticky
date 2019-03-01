@@ -72,6 +72,7 @@ export const editNote = (noteEdit, fetchDeleted=false) => {
     }
 }
 
+//THIS IS TO ACTUALLY DELETE A NOTE NOT JUST FLAG IT AS DELETED
 export const deleteNote = (id) => {
   	return function(dispatch){
       	if(localStorage.getItem('JWT')){

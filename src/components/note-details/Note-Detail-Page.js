@@ -28,7 +28,7 @@ class NoteDetailPage extends Component {
 
     render(){
         console.log(this.props)
-        const note = this.props.store.notes.notes
+        const note = this.props.store.notes.notes[0]
         if(note){
             return (
                 <NoteDetailPageDiv> 

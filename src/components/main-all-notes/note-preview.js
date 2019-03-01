@@ -77,9 +77,9 @@ class NotePreview extends React.Component {
 												key={layerTwo.id}>
 												<LayerTwoTargetSource  
 													type="note"
-													redirect={this.props.redirect}
 													note={layerTwo} 
 													parent={this.props.note}
+													redirect={this.props.redirect}
 													// onDrop={this.props.onDrop}
 													// allNotes={this.props.allNotes}
 													// getFirstWord={this.getFirstWord}
@@ -120,7 +120,6 @@ const targetObj = {
 
 const sourceObj = {
     beginDrag(props) {
-		// console.log(props)
         const { source_id, parent_id } = props.note; 
         return ({
 			source_id,
@@ -134,8 +133,8 @@ const sourceObj = {
           	return;
 		}
 		let noteEdit = sharedStickyNoteDrop(props, monitor);
-		if(noteEdit === 'do nothing'){
-			console.log("noteEdit", noteEdit)
+		if(noteEdit === null){
+			console.log("sharedStickyNoteDrop returned", noteEdit)
 		} else {
 			props.noteToNote(noteEdit)
 		}

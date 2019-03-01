@@ -28,6 +28,7 @@ class AllNotes extends Component {
                 this.props.getNotes();
             }
         } else {
+            console.log("NO JWT")
             this.props.history.push('/welcome/login')
         }
     }

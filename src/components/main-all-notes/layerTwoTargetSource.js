@@ -63,6 +63,7 @@ class LayerTwoTargetSource extends React.Component {
 
 const targetObj = {
     drop(props) {
+        //these always should come from where they are created as the parent or children will be dependent on the props passed not the global state, 
         const note = props.note;
         const target_type = props.type
         const parent = props.parent
@@ -86,21 +87,12 @@ const sourceObj = {
         if(!monitor.didDrop()){
             return ;
         }
-        // const sourceId = props.layerTwo.id;
-        // const dropResult = monitor.getDropResult({shallow: true}); 
-
-        // const sticky_source_id = props.layerTwo.id;
-        // const target = monitor.getDropResult({shallow: true});
-        // const target_id = target.targetId;
-        // let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
-        // props.editNote(noteEdit)
-    console.log(props)
         let noteEdit = sharedStickyNoteDrop(props, monitor);
-        props.noteToNote(noteEdit)
-		// if(noteEdit.length <= 1){
-		// 	props.editNote(noteEdit[0])
-		// } else {
-		// }
+        if(noteEdit === null){
+			console.log("sharedStickyNoteDrop returned", noteEdit)
+		} else {
+			props.noteToNote(noteEdit)
+		}
     }
 };
 

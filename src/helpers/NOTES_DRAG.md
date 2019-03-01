@@ -13,7 +13,7 @@ Props
         preview 2 -> preview 2
         preview 3 -> top_level
 
-        detail 2 -> detail parent
+        *detail 2 -> detail parent
         detail 2 -> detail 2
         detail 2 -> detail 3
         detail 3 -> detail parent

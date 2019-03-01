@@ -57,7 +57,7 @@ class NoteDetailSelf extends React.Component {
                             {/* <NoteQuill note={this.props.note} /> */}
                             <p>{note.text_body}</p>
                             <div className="note-detail-children">
-                                {note.has_children ? note.children.map(child => {
+                                {note.children ? note.children.map(child => {
                                         return <NoteDetailChild
                                             key={child.id}
                                             type="note"

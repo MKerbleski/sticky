@@ -16,7 +16,9 @@ class NoteDetailParent extends React.Component{
     }
 
     render(){
-        console.log(this.props)
+        const note = this.props.store.notes.notes[0]
+        const parent = note.parent_note
+        console.log("note-detail-parent", note, parent)
         return (
             <NoteDetailParentDiv 
                 innerRef={instance => this.props.connectDropTarget(instance)}
@@ -27,15 +29,17 @@ class NoteDetailParent extends React.Component{
                 <Link 
                     // onClick={() => this.refreshNotes(this.props.note.parent_id)}
                     className="link"
-                    to={this.props.note.has_parent_note 
-                        ?   `/${this.props.note.sticky_user_id}/note/${this.props.note.parent}` 
+                    to={note.has_parent_note 
+                        ?   `/${note.sticky_user_id}/note/${note.parent}` 
                         :   `/all-notes/`}>
-                        {this.props.note.has_parent_note ? `back to parent (note #${this.props.note.parent})`: `back to All notes`}
+                        {note.has_parent_note 
+                            ? `back to parent (note #${note.parent})`
+                            : `back to All notes`}
                 </Link>
                 <NoteDetailSelf
                     type="note"
-                    note={this.props.note}
-                    parent={this.props.note.parent_note}
+                    note={note}
+                    parent={note.parent_note}
                     // allNotes={this.props.allNotes}
                     // allLinks={this.props.allLinks}
                     // onDrop={this.props.onDrop} 
@@ -50,10 +54,6 @@ class NoteDetailParent extends React.Component{
     }
 }
 
-// const getNoteDetails = (props, id) => {
-//     return props.allNotes.find(note => {return note.id === +id})
-// }
-
 const targetObj = {
     hover(props, component){
         //   if(props.hoverShallow){
@@ -66,13 +66,13 @@ const targetObj = {
         const hover =  monitor.isOver({shallow:true})
             if(hover){//this disables layer one droping if there is a nested child
                 const note = props.store.notes.notes[0];
+                console.log(props.note.has_parent_note)
                 const target_type = props.note.has_parent_note ? 'note' : 'top'
-                // const parent = props.note.has_parent_note ? props.store.notes.notes[0].parent_note : null
-                // console.log("note-detail-parent", parent)
+                const parent = props.note.has_parent_note ? props.note.parent_note : null
                 return ({
                     note, 
                     target_type,
-                    // parent
+                    parent
                 });
         }
     }

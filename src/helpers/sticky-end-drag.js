@@ -2,23 +2,19 @@ export const sharedStickyNoteDrop = (props, monitor) => {
     
     //must return array
 
-    console.log(props)
-    const draggedNote = props.note
     const target = monitor.getDropResult()
+    console.log("sharedStickyNoteDrop", '\ntarget:',target,'\nprops:', props)
     
+    const draggedNote = props.note
     const draggedNoteId = draggedNote.id
     const oldParent = props.parent
-    
-    let old_parent_children;
-
-    console.log("sharedStickyNoteDrop", target, props)
+    let old_parent_children; 
     
     
     if(oldParent){
-        console.log(oldParent)
+        console.log(target.note)
         if(oldParent.children_attached.length === 1){
             old_parent_children = null
-            console.log(old_parent_children)
         } else {
             old_parent_children = oldParent.children_attached.split(',')
             old_parent_children = old_parent_children.filter(noteId => {
@@ -28,7 +24,7 @@ export const sharedStickyNoteDrop = (props, monitor) => {
             console.log(old_parent_children)
         }
     } else {
-        console.log(oldParent)
+        console.log("dragged not has no parent")
     }
     
     if(draggedNoteId !== target.targetId){
@@ -44,7 +40,8 @@ export const sharedStickyNoteDrop = (props, monitor) => {
                             children_attached: old_parent_children  }]
 
                 } else {
-                    return "do nothing"
+                    console.log("note already has no parent")
+                    return null
                 }
             case 'deleteBin':
                 return [
@@ -55,15 +52,22 @@ export const sharedStickyNoteDrop = (props, monitor) => {
                     }]
             case 'note':
                 const targetId = target.note.id
+                if(oldParent && target.note.id === +oldParent.id){
+                    console.log("attempting to add already established child to parent")
+                    return null
+                }
                 if(targetId === draggedNoteId){
-                    return "do nothing"
+                    console.log("dragging onto itself")
+                    return null
                 }
                 if(target.note.id === draggedNoteId){
-                    return "do nothing"
+                    return null
                 }
+
                 let new_parent_children = [];
                 //set up new parent list
                 if(target.note.children_attached){
+                    //check if already on note
                     new_parent_children = target.note.children_attached + `,${draggedNoteId}`
                 } else {
                     new_parent_children = `${draggedNoteId}`
