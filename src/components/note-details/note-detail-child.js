@@ -17,16 +17,6 @@ class NoteDetailChild extends React.Component {
 		}
 	}
   
-    // refreshNotes = (e, id) => {
-    //     e.preventDefault()
-	// 	e.stopPropagation()
-	// 	console.log("refreshNotes")
-	// 	this.setState({
-	// 		children: null
-	// 	})
-	// 	this.props.getSingleNote(id)
-	// 	// this.fetchChildren()
-    // }
 
     render(){
         if (this.props.note && !this.props.note.is_deleted){
@@ -37,11 +27,10 @@ class NoteDetailChild extends React.Component {
                     innerRef={instance => {
 						this.props.connectDragSource(instance);
 						this.props.connectDropTarget(instance);}}
-                    // onClick={(e) => this.refreshNotes(e, this.props.note.id)}
                     color={this.props.color} >
                 <Link
                     key={this.props.key}
-                    index={this.props.index}
+                    // index={this.props.index}
                     className="note-link"
                     id={this.props.note.id}
                     to={`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`}

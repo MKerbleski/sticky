@@ -189,7 +189,7 @@ class App extends Component {
                                 exact={!this.state.deleteEnabled}
                                 path="/:user_id/note/:note_id"
                                 render={ (note) => {
-                                return <NoteDetailPage
+                                return <NoteDetailParent
                                     note_id={note.match.params.note_id}
                                     user_id={note.match.params.user_id}
                                     redirect={this.redirect}

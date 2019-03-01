@@ -142,7 +142,7 @@ const sourceObj = {
 };
 
 const mapStateToProps = store => {
-  	return { store: store }
+	return { store: store }
 }
 
 const mapDispatchToProps = {

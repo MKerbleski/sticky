@@ -4,71 +4,91 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { NoteDetailSelf } from '../index.js';
-import { getAttachedItems, getNotes } from '../../actions'
+import { getAttachedItems, getNotes, getSingleNote } from '../../actions'
 
 class NoteDetailParent extends React.Component{
-    // refreshNotes = (id) => {
-    //     this.props.getAttachedItems(id)
-    // }
+    constructor(props){
+        super(props)
+        this.state = {
+
+        }
+    }
 
     componentDidMount(){
-        // this.props.getNotes(this.props.note_id)
+        this.props.getSingleNote(this.props.note_id)
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(this.props.note_id !== nextProps.note_id){
+            this.props.getSingleNote(nextProps.note_id)
+        }
     }
 
     render(){
         const note = this.props.store.notes.notes[0]
-        const parent = note.parent_note
-        console.log("note-detail-parent", note, parent)
-        return (
-            <NoteDetailParentDiv 
-                innerRef={instance => this.props.connectDropTarget(instance)}
-                // color={this.props.parentColor} 
-                style={{background: this.props.hover 
-                    ? 'lightgreen' 
-                    : null}}>
-                <Link 
-                    // onClick={() => this.refreshNotes(this.props.note.parent_id)}
-                    className="link"
-                    to={note.has_parent_note 
-                        ?   `/${note.sticky_user_id}/note/${note.parent}` 
-                        :   `/all-notes/`}>
-                        {note.has_parent_note 
-                            ? `back to parent (note #${note.parent})`
-                            : `back to All notes`}
-                </Link>
-                <NoteDetailSelf
-                    type="note"
-                    note={note}
-                    parent={note.parent_note}
-                    // allNotes={this.props.allNotes}
-                    // allLinks={this.props.allLinks}
-                    // onDrop={this.props.onDrop} 
-                    // changeParent={this.props.changeParent}
-                    // targetId={this.props.note.id}
-                    // editNote={this.props.editNote}
-                    // redirect={this.props.redirect}
-                    
-                    />
-            </NoteDetailParentDiv>
-        )
+        if(note){
+            let parent
+            if(note.has_parent_note){
+                parent = note.parent_note
+            } else {
+                parent = null
+            }
+            console.log("note-detail-parent", "\nnote:", note, "\nparent", parent)
+            return (
+                <NoteDetailParentDiv 
+                    innerRef={instance => this.props.connectDropTarget(instance)}
+                    // color={this.props.parentColor} 
+                    style={{background: this.props.hover 
+                        ? 'lightgreen' 
+                        : null}}>
+                    <Link 
+                        // onClick={() => this.refreshNotes(this.props.note.parent_id)}
+                        className="link"
+                        to={parent 
+                            ?   `/${note.sticky_user_id}/note/${parent.id}` 
+                            :   `/all-notes/`}
+                    >
+                        {this.props.hover 
+                            ?   `Drop to send to main page`
+                            :   parent
+                                ? `back to parent (note #${parent.id})`
+                                : `back to All notes`}
+                    </Link>
+                    <NoteDetailSelf
+                        type="note"
+                        note={note}
+                        parent={note.parent_note}
+                        // allNotes={this.props.allNotes}
+                        // allLinks={this.props.allLinks}
+                        // onDrop={this.props.onDrop} 
+                        // changeParent={this.props.changeParent}
+                        // targetId={this.props.note.id}
+                        // editNote={this.props.editNote}
+                        // redirect={this.props.redirect}
+                        
+                        />
+                </NoteDetailParentDiv>
+            )
+        } else {
+            return (<h1>loading note-detail-page</h1>)
+        }
     }
 }
 
 const targetObj = {
     hover(props, component){
         //   if(props.hoverShallow){
-        //       console.log('hoverShallow')
-        //   }
-        return
-    },
-
-    drop(props, monitor) {
-        const hover =  monitor.isOver({shallow:true})
+            //       console.log('hoverShallow')
+            //   }
+            return
+        },
+        
+        drop(props, monitor) {
+            const hover =  monitor.isOver({shallow:true})
             if(hover){//this disables layer one droping if there is a nested child
                 const note = props.store.notes.notes[0];
-                console.log(props.note.has_parent_note)
-                const target_type = props.note.has_parent_note ? 'note' : 'top'
-                const parent = props.note.has_parent_note ? props.note.parent_note : null
+                const parent = note.parent_note
+                const target_type = 'top'
                 return ({
                     note, 
                     target_type,
@@ -91,7 +111,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
     getAttachedItems,
-    getNotes
+    getNotes,
+    getSingleNote
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailParent))

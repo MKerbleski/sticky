@@ -53,8 +53,12 @@ export const sharedStickyNoteDrop = (props, monitor) => {
             case 'note':
                 const targetId = target.note.id
                 if(oldParent && target.note.id === +oldParent.id){
-                    console.log("attempting to add already established child to parent")
-                    return null
+                    // if(target.parent.id !== props.parent.id){
+                    //     console.log("moving note to a grand parent or higher relationship")
+                    // } else {                      
+                        console.log("attempting to add already established child to parent")
+                        return null
+                    // }
                 }
                 if(targetId === draggedNoteId){
                     console.log("dragging onto itself")
