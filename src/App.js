@@ -14,7 +14,6 @@ import {
     RightMenu,
     Settings,
     Header,
-    NoteDetailPage
 } from './components';
 import {
     getNotes,

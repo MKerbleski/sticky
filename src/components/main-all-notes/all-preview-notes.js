@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
 import { 
     NotePreviewNew,
-    NotePreview
+    NotePreviewSelf
 } from './index';
 import { 
-  getNotes,
-  getDeletedNotes,
+    getNotes,
+    getDeletedNotes,
 } from '../../actions'
 
 class AllNotes extends Component {
@@ -56,7 +56,7 @@ class AllNotes extends Component {
                         ?   <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> 
                         :   null}        
                     {this.props.store.notes.notes.map(note => {
-                        return <NotePreview
+                        return <NotePreviewSelf
                             key={note.id}
                             type="note"
                             parent={null}
@@ -86,14 +86,13 @@ const targetObj = {
     drop(props, monitor) {
         const hover = monitor.isOver({shallow:false})
         if(hover){
-            // const { type } = props;
-            // return ({
-            //     type,
-            // });
-            return {
-                target_type: 'top',
-                parent: null
-            }
+
+            //This is only ever a target
+            return ({
+                type: 'top',
+                parent: null,
+                note: null,
+            })
         }
     }
 }

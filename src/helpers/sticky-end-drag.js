@@ -1,113 +1,134 @@
-export const sharedStickyNoteDrop = (props, monitor) => {
-    
-    //must return array
+import { noteToNote } from '../actions/index.js'
 
-    const target = monitor.getDropResult()
-    console.log("sharedStickyNoteDrop", '\ntarget:',target,'\nprops:', props)
-    
-    const draggedNote = props.note
-    const draggedNoteId = draggedNote.id
-    const oldParent = props.parent
-    let old_parent_children; 
-    
-    
-    if(oldParent){
-        console.log(target.note)
-        if(oldParent.children_attached.length === 1){
-            old_parent_children = null
+//must return array
+export const sharedStickyNoteDrop = (sourceObj, targetObj) => {
+    targetObj = targetObj.getDropResult()
+
+    const target = targetObj.note
+    const source = sourceObj.note
+    const sourceNoteId = sourceObj.note.id
+    const targetParent = targetObj.parent
+    const sourceParent = sourceObj.parent
+    // const sourceParentId = sourceObj.parent.id
+    let sourceParentChildren;
+    let targetParentChildren;
+
+    if(sourceParent){
+        console.log(sourceParent)
+        if(sourceParent.children.length === 1){
+            sourceParentChildren = null
+            console.log(sourceParentChildren)
         } else {
-            old_parent_children = oldParent.children_attached.split(',')
-            old_parent_children = old_parent_children.filter(noteId => {
-                return parseInt(noteId, 10) !== draggedNoteId
+            sourceParentChildren = sourceParent.children_attached.split(',')
+            console.log(sourceParentChildren)
+            sourceParentChildren = sourceParentChildren.filter(noteId => {
+                return parseInt(noteId, 10) !== sourceNoteId
             })
-            old_parent_children = old_parent_children.join(',')
-            console.log(old_parent_children)
+            console.log(sourceParentChildren)
+            sourceParentChildren = sourceParentChildren.join(',')
+            console.log(sourceParentChildren)
         }
     } else {
-        console.log("dragged not has no parent")
+        console.log("Note has no parent.")
+        sourceParentChildren = null
     }
+
+    console.log("\n ==sharedStickyNoteDrop== \n",
+        '\ntarget:',target,
+        '\nsource:', source,
+        '\ntargetParent:', targetParent,
+        '\nsourceParent:', sourceParent,
+        '\nsourceParentChildren:', sourceParentChildren,
+    )
+
     
-    if(draggedNoteId !== target.targetId){
-        switch(target.target_type){
-            case 'top':
-                if(oldParent){
-                    return [
-                        {   id: draggedNoteId,
-                            has_parent_note: false,
-                            parent: null     },
-                        {   id: oldParent.id,
-                            has_children: old_parent_children ? true : false, 
-                            children_attached: old_parent_children  }]
 
-                } else {
-                    console.log("note already has no parent")
-                    return null
-                }
-            case 'deleteBin':
+    switch(targetObj.type){
+        case 'top':
+            console.log('target is top')
+            if(sourceParent){
+                console.log("note will be moved to top")
                 return [
-                    {   id: draggedNoteId, 
-                        is_deleted: true,
-                        // has_parent_note: false,
-                        // parent: null
-                    }]
-            case 'note':
-                const targetId = target.note.id
-                if(oldParent && target.note.id === +oldParent.id){
-                    // if(target.parent.id !== props.parent.id){
-                    //     console.log("moving note to a grand parent or higher relationship")
-                    // } else {                      
-                        console.log("attempting to add already established child to parent")
-                        return null
-                    // }
-                }
-                if(targetId === draggedNoteId){
-                    console.log("dragging onto itself")
-                    return null
-                }
-                if(target.note.id === draggedNoteId){
-                    return null
-                }
+                    {   id: sourceNoteId,
+                        has_parent_note: false,
+                        parent: null     },
+                    {   id: sourceParent.id,
+                        has_children: sourceParentChildren ? true : false, 
+                        children_attached: sourceParentChildren  }]
+            } else {
+                console.log("note is already at top")
+                return null
+            }
+        case 'trash':
+            console.log('target is trash')
+            console.log('note will be flagged as is_deleted, location will remain stored')
+            return [
+                {   id: sourceNoteId, 
+                    is_deleted: true   }]
+        case 'note':
+            console.log('target is note')
+            const targetNoteId = targetObj.note.id
+            let new_parent_children;
+            
+            //EDGE CASES
+            if(target && sourceNoteId === targetNoteId){
+                console.log("Dropped note on self.")
+                return null
+            }
+            if(sourceParent && targetNoteId === sourceParent.id){             
+                console.log("Dropped note on parent.")
+                return null
+            }
+            //wierd edge but might need to check if already a child
+            
+            if(target.children_attached){
+                new_parent_children = target.children_attached + `,${sourceNoteId}`
+            } else {
+                new_parent_children = `${sourceNoteId}`
+            }
 
-                let new_parent_children = [];
-                //set up new parent list
-                if(target.note.children_attached){
-                    //check if already on note
-                    new_parent_children = target.note.children_attached + `,${draggedNoteId}`
-                } else {
-                    new_parent_children = `${draggedNoteId}`
-                }
-                
-                
-                
-                if(draggedNote.has_parent_note){
-                    //incomplete need to modify old_parent_children
-                    //incomplete need to modify new_parent_children
-                    const oldParentNoteId = oldParent.id
-                    return [
-                        {   id: target.note.id,
-                            has_children: true,
-                            children_attached: new_parent_children },
-                        {   id: draggedNoteId,
-                            has_parent_note: true  },
-                        {   id: oldParent.id,
-                            children_attached: old_parent_children }
-                    ]
-                } else {
-                    return [
-                        {   id: targetId,
-                            children_attached: new_parent_children,
-                            has_children: true  },
-                        // current child needs the true flag on parent
-                        {   id: draggedNoteId,
-                            has_parent_note: true,
-                            parent: targetId    }
-                    ]
-                }
+            if(targetParent && sourceParent){
+                return [
+                    //dragged note
+                    {   id: sourceNoteId,
+                        has_parent_note: true,
+                        parent: targetNoteId  },
+                    //new parent
+                    {   id: targetNoteId,
+                        has_children: true,
+                        children_attached: new_parent_children },
+                    //old parent
+                    {   id: sourceParent.id,
+                        has_children: sourceParentChildren.length > 0 ? true : false,
+                        children_attached: sourceParentChildren }
+                ]
+            } else {
+                //note has NO parent
+                return [
+                   //dragged note
+                   {   id: sourceNoteId,
+                        has_parent_note: true,
+                        parent: targetNoteId    },
+                    //new parent
+                    {   id: targetNoteId,
+                        has_children: true,
+                        children_attached: new_parent_children    }
+                ]
+            // } else if (sourceParent && !targetParent){
+            //     //target has NO parent
+            //     return [
+            //         //dragged note
+            //         {   id: sourceNoteId,
+            //             has_parent_note: true,
+            //             parent: targetNoteId    },
+            //         //old parent
+            //         {   id: sourceParent.id,
+            //             has_children: sourceParentChildren.length > 0 ? true : false,
+            //             children_attached: sourceParentChildren }
+            //     ]
+            }
             default: 
                 console.log("retured null, there was no type on target object")
                 return null
         }
-    } else {
-        return null
-    }
 }

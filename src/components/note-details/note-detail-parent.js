@@ -24,6 +24,10 @@ class NoteDetailParent extends React.Component{
         }
     }
 
+    handleClick(url){
+        this.props.redirect(url)
+    }
+
     render(){
         const note = this.props.store.notes.notes[0]
         if(note){
@@ -33,7 +37,7 @@ class NoteDetailParent extends React.Component{
             } else {
                 parent = null
             }
-            console.log("note-detail-parent", "\nnote:", note, "\nparent", parent)
+            // console.log("note-detail-parent", "\nnote:", note, "\nparent", parent)
             return (
                 <NoteDetailParentDiv 
                     innerRef={instance => this.props.connectDropTarget(instance)}
@@ -42,7 +46,10 @@ class NoteDetailParent extends React.Component{
                         ? 'lightgreen' 
                         : null}}>
                     <Link 
-                        // onClick={() => this.refreshNotes(this.props.note.parent_id)}
+                        // onClick={() => this.handleClick(
+                        //     parent 
+                        //         ?   `/${note.sticky_user_id}/note/${parent.id}` 
+                        //         :   `/all-notes/` )}
                         className="link"
                         to={parent 
                             ?   `/${note.sticky_user_id}/note/${parent.id}` 
@@ -85,14 +92,26 @@ const targetObj = {
         
         drop(props, monitor) {
             const hover =  monitor.isOver({shallow:true})
-            if(hover){//this disables layer one droping if there is a nested child
-                const note = props.store.notes.notes[0];
-                const parent = note.parent_note
-                const target_type = 'top'
+            //this disables layer one droping if there is a nested child
+            if(hover){
+
+                //WILL EVENTUALLY CONDITIONALLY BECOME A PARENT
+                    // const note = props.store.notes.notes[0]
+                    // let parent
+                    // let type
+                    // if(note.has_parent_note){
+                    //     parent = note.parent_note
+                    //     type = 'note'
+                    // } else {
+                    //     parent = null
+                    //     type = 'top'
+                    // }
+
+                //WILL DEFAULT TO 'TOP' FOR NOW
                 return ({
-                    note, 
-                    target_type,
-                    parent
+                    type: 'top',
+                    parent: null,
+                    note: null,
                 });
         }
     }

@@ -9,7 +9,7 @@ import { deleteNote, editNote, getChildren, noteToNote } from '../../actions'
 import { sharedStickyNoteDrop } from '../../helpers'
 import ReactHTMLParser from 'react-html-parser'
 
-class NotePreview extends React.Component {
+class NotePreviewSelf extends React.Component {
 	state = {}
 
     goToNote = (e) => {
@@ -38,7 +38,7 @@ class NotePreview extends React.Component {
             return (
                 this.props.connectDragSource &&
 				this.props.connectDropTarget &&
-                <NotePreviewDiv 
+                <NotePreviewSelfDiv 
 					onClick={this.goToNote}
 					innerRef={instance => {
 						this.props.connectDragSource(instance)
@@ -90,7 +90,7 @@ class NotePreview extends React.Component {
                                 }) : null}
                             </div>                     
                         </div>
-                      </NotePreviewDiv>        
+                      </NotePreviewSelfDiv>        
                 )
         } else {
             return (null)
@@ -100,39 +100,49 @@ class NotePreview extends React.Component {
 
 const targetObj = {
 	drop(props, monitor) {
-		//so this somehow allows other items to be dropped in a nested child component
 		const hover =  monitor.isOver({shallow:true})
-		if(hover){//this disables layer one droping if there is a nested child
+		//this allows other items to be dropped in a nested child component
+		if(hover){
+			//this must be from props not store
 			const note = props.note;
-			const target_type = props.type
 			const parent = props.parent
 			return ({
-				note, 
-				target_type,
-				parent
-			});
+                type: 'note',
+                parent: parent,
+                note: note,
+            });
 		}
 	},
 	hover(props, monitor){
-		//this could be used to display a warning or what not
+		//this could be used to display a warning or what not, but cannot be removed
 	}
 }
 
 const sourceObj = {
     beginDrag(props) {
-        const { source_id, parent_id } = props.note; 
-        return ({
-			source_id,
-			parent_id,
-			props
-        });
+		const note = props.note;
+		const parent = props.parent
+		return ({
+			type: 'note',
+			parent: parent,
+			note: note,
+		});
     },
 
     endDrag(props, monitor) {
         if (!monitor.didDrop()) {
           	return;
 		}
-		let noteEdit = sharedStickyNoteDrop(props, monitor);
+		//this needs to be established here as it varies _slightly_ from component to component
+		const note = props.note;
+        const parent = props.parent
+        const source = {
+            type: 'note',
+            parent: parent,
+            note: note,
+        }
+
+		let noteEdit = sharedStickyNoteDrop(source, monitor);
 		if(noteEdit === null){
 			console.log("sharedStickyNoteDrop returned", noteEdit)
 		} else {
@@ -164,140 +174,140 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 		isDragging: monitor.isDragging(),
 		isFoobar: true,
 	}))
-)(NotePreview))
+)(NotePreviewSelf))
 
-const NotePreviewDiv = styled.div`
-  ${'' /* border: 1px solid blue; */}
-  padding: 10px;
-  width: 300px;
-  height: auto;
-  display: flex;
-  flex-direction: column;  
-  .note-link{
-    ${ flex('column') }
-    padding: 10px;
-    width: 95%;
-    padding: 10px;
-    justify-content: space-around;
-    background-color: lavender;
-    background-color: ${props => props.color};
-      .note-content{
-      ${'' /* border: 1px solid green; */}
+const NotePreviewSelfDiv = styled.div`
+	${'' /* border: 1px solid blue; */}
+	padding: 10px;
+	width: 300px;
+	height: auto;
+	display: flex;
+	flex-direction: column;  
+	.note-link{
+		${ flex('column') }
+		padding: 10px;
+		width: 95%;
+		padding: 10px;
+		justify-content: space-around;
+		background-color: lavender;
+		background-color: ${props => props.color};
+		.note-content{
+			${'' /* border: 1px solid green; */}
 
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
 
-      color: black;
-      width: 250px;
-      height: auto;
-      ${'' /* flex-wrap: wrap; */}
-      max-height: 100px;
-      margin: 2% 0;
-      .note-content-header{
-        ${'' /* border: 1px solid pink; */}
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-          .note-content-title {
-            ${'' /* border: 1px solid green; */}
-            margin: 0px 10px 5px 0;
-            text-decoration: none;
-            text-align: left;
-          }
-          .note-content-link-count {
-            border: .5px solid black;
-            border-radius: 50px;
-            height: 20px;
-            width: 20px;
-            text-align: center;
-            background: lightblue;
-          }
+			color: black;
+			width: 250px;
+			height: auto;
+			${'' /* flex-wrap: wrap; */}
+			max-height: 100px;
+			margin: 2% 0;
+			.note-content-header{
+				${'' /* border: 1px solid pink; */}
+				width: 100%;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+				.note-content-title {
+					${'' /* border: 1px solid green; */}
+					margin: 0px 10px 5px 0;
+					text-decoration: none;
+					text-align: left;
+				}
+				.note-content-link-count {
+					border: .5px solid black;
+					border-radius: 50px;
+					height: 20px;
+					width: 20px;
+					text-align: center;
+					background: lightblue;
+				}
 
-      }
-      p {
-        ${'' /* border: 1px solid blue; */}
-        width: 95%;
-        height: 46px;
-        text-decoration: none;
-        margin: 0;
-        line-height: 23px;
-        font-size: 14px;
-        font: roboto;
-        white-space: normal;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-    .layerTwoContainer{
-      ${'' /* border: 1px solid red; */}
-      ${flex()}
-    }
-    .layerTwoContainerAll{
-      ${'' /* border: 1px solid blue; */}
-      width: 100%;
-      ${flex()}
-      flex-wrap: wrap;
-      justify-content: space-around;
-    }
-    .tags {
-      border: 1px solid red;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      align-items: flex-end;
-      width: 90%;
-      bottom: 0;
-      overflow: hidden;
-      ${'' /* overflow: hidden; */}
-      div {
-        border: 1px solid lightgray;
-        margin: 2px;
-        padding: 4px;
-      }
-    }
-  }  
+			}
+			p {
+				${'' /* border: 1px solid blue; */}
+				width: 95%;
+				height: 46px;
+				text-decoration: none;
+				margin: 0;
+				line-height: 23px;
+				font-size: 14px;
+				font: roboto;
+				white-space: normal;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+		.layerTwoContainer{
+			${'' /* border: 1px solid red; */}
+			${flex()}
+		}
+		.layerTwoContainerAll{
+			${'' /* border: 1px solid blue; */}
+			width: 100%;
+			${flex()}
+			flex-wrap: wrap;
+			justify-content: space-around;
+		}
+		.tags {
+			border: 1px solid red;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			align-items: flex-end;
+			width: 90%;
+			bottom: 0;
+			overflow: hidden;
+			${'' /* overflow: hidden; */}
+			div {
+				border: 1px solid lightgray;
+				margin: 2px;
+				padding: 4px;
+			}
+		}
+	}  
 `;
 
 
 
-//old way if
-// export default class NotePreview extends Component {
-//
-//   render() {
-//     // console.log(this.props)
-//     const { note, index, key } = this.props;
-//
-//     return (
-//             <NotePreviewDiv>
-//               <Link
-//                 key={key}
-//                 index={index}
-//                 className="note-link"
-//                 id={note.id}
-//                 to={`/note/${note.id}`}>
-//
-//                   <div key={index} className="note-preview">
-//
-//                     <div className="notTags">
-//                       <h3>{note.title}</h3>
-//                       <p>{note.text_body}</p>
-//                     </div>
-//
-//                     <div className="tags">
-//                       {(note.tags.length > 0) ?
-//                         note.tags.map(tag => {
-//                               return (<div key={tag}>{tag}</div>)
-//                             }
-//                         ) :
-//                         null}
-//                     </div>
-//                   </div>
-//               </Link>
-//             </NotePreviewDiv>)
-// }
-// }
+	//old way if
+	// export default class NotePreview extends Component {
+	//
+	//   render() {
+	//     // console.log(this.props)
+	//     const { note, index, key } = this.props;
+	//
+	//     return (
+	//             <NotePreviewDiv>
+	//               <Link
+	//                 key={key}
+	//                 index={index}
+	//                 className="note-link"
+	//                 id={note.id}
+	//                 to={`/note/${note.id}`}>
+	//
+	//                   <div key={index} className="note-preview">
+	//
+	//                     <div className="notTags">
+	//                       <h3>{note.title}</h3>
+	//                       <p>{note.text_body}</p>
+	//                     </div>
+	//
+	//                     <div className="tags">
+	//                       {(note.tags.length > 0) ?
+	//                         note.tags.map(tag => {
+	//                               return (<div key={tag}>{tag}</div>)
+	//                             }
+	//                         ) :
+	//                         null}
+	//                     </div>
+	//                   </div>
+	//               </Link>
+	//             </NotePreviewDiv>)
+	// }
+	// }

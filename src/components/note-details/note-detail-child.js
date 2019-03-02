@@ -76,15 +76,15 @@ class NoteDetailChild extends React.Component {
 const targetObj = {
 	drop(props, monitor) {
 		const hover =  monitor.isOver({shallow:true})
-		if(hover){//this disables layer one droping if there is a nested child
-			console.log('note-detail-child', props)
+		//this disables layer one droping if there is a nested child
+		if(hover){
+			//this MUST come from state because it is being mapped over from note-preview-self
 			const note = props.note
-			const target_type = 'note'
 			const parent = props.parent
 			return ({
-				note, 
-				target_type,
-				parent
+				type: 'note',
+				parent: parent,
+				note: note,
 			});
 		}
 	},
@@ -94,28 +94,29 @@ const targetObj = {
 
 const sourceObj = {
     beginDrag(props) {
-        // const { source_id } = props.layerOne; 
-        return ({
-            props
-        });
+        const note = props.note
+		const parent = props.parent
+		return ({
+			type: 'note',
+			parent: parent,
+			note: note,
+		});
     },
 
 	endDrag(props, monitor) {
 		if (!monitor.didDrop()) {
 			return;
 		}
-		// const sourceId= props.layerOne.id
-		// const dropResult = monitor.getDropResult();
-		// console.log(sourceId,  dropResult, dropResult.targetId)
-		// props.onDrop( sourceId, dropResult.type, dropResult.targetId  );
-			// const sticky_source_id = props.layerOne.id;
-			// const target = monitor.getDropResult();
-			// const target_id = target.targetId;
-			// let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
-			// props.editNote(noteEdit)
-		console.log(props)
-		let noteEdit = sharedStickyNoteDrop(props, monitor);
-		if(noteEdit === 'do nothing'){
+		const note = props.note;
+        const parent = props.parent
+        const source = {
+            type: 'note',
+            parent: parent,
+            note: note,
+        }
+
+		let noteEdit = sharedStickyNoteDrop(source, monitor);
+		if(noteEdit === null){
 			console.log("noteEdit", noteEdit)
 		} else {
 			props.noteToNote(noteEdit)

@@ -5,14 +5,12 @@ import { connect } from 'react-redux';
 import { 
     NoteDetailChild, 
     // NoteDetailBody,
-    AttachedList,
+    // AttachedList,
 } from '../index.js';
 import { getAttachedItems } from '../../actions'
 import { start } from '../../styles/styl-utils.js'
 // import { default as NoteQuill } from './note-detail-body-quill'
-import axios from 'axios'
-
-
+// import axios from 'axios'
 
 class NoteDetailSelf extends React.Component {
     constructor(props){
@@ -22,29 +20,9 @@ class NoteDetailSelf extends React.Component {
         }
     }
 
-    componentDidMount(){
-        //Get children for notes
-        // if(this.props.note.has_children){
-        //     let children = this.props.note.children_attached
-        //     if(localStorage.getItem('JWT')){
-        //         const token = localStorage.getItem('JWT')
-        //         const authHeader = {
-        //             headers: { Authorization: token }
-        //         }
-        //         axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({children}), authHeader).then(res => {
-        //             this.setState({children: res.data.children})
-        //         }).catch(err => {
-        //             console.log(err)
-        //         })
-        //     } else {
-        //         console.log('there was no token found')      
-        //     }
-        // }
-    }
-
     render(){
         const note = this.props.store.notes.notes[0]
-        console.log("note detail self", note)
+        // console.log("note detail self", note)
         if(note){
             return (
                 <NoteDetailSelfDiv 
@@ -93,20 +71,23 @@ const targetObj = {
         if(props.hoverShallow){
             // console.log('hoverShallow')
         }
-        // console.log(props)
     },
     drop(props, monitor) {
         const hover = monitor.isOver({shallow: false})
         
         if(hover){
             const note = props.store.notes.notes[0];
-			const target_type = 'note'
-			const parent = props.store.notes.notes[0].parent_note
+            let parent
+            if(note.has_parent){
+                parent = props.store.notes.notes[0].parent_note
+            } else {
+                parent = null
+            }
 			return ({
-				note, 
-				target_type,
-				parent
-			});
+                type: 'note',
+                parent: parent,
+                note: note,
+            });
         }
     }
 }
