@@ -12,26 +12,26 @@ import ReactHTMLParser from 'react-html-parser'
 class NotePreviewSelf extends React.Component {
 	state = {}
 
-    goToNote = (e) => {
-        e.preventDefault()
-        if(!this.props.deleteBin){
-          this.props.redirect(`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`)
-        }
-    }
+	goToNote = (e) => {
+		e.preventDefault()
+		if(!this.props.deleteBin){
+			this.props.redirect(`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`)
+		}
+	}
 
-    clickHandler = (e) => {
-        e.preventDefault()
-        if(e.target.name === "delete"){
-          this.props.deleteNote(this.props.note.id)
-        } else if (e.target.name === "restore"){
-          this.props.editNote({id: this.props.note.id, is_deleted: false}, true)
-        }
-    }
+	clickHandler = (e) => {
+		e.preventDefault()
+		if(e.target.name === "delete"){
+			this.props.deleteNote(this.props.note.id)
+		} else if (e.target.name === "restore"){
+			this.props.editNote({id: this.props.note.id, is_deleted: false}, true)
+		}
+	}
     
-    renderText(){
+	renderText(){
 		let doc = new DOMParser().parseFromString(this.props.note.text_body, 'text/html')
 		return doc
-    }
+	}
 
     render(){
         if (this.props.note){
@@ -103,6 +103,7 @@ const targetObj = {
 		const hover =  monitor.isOver({shallow:true})
 		//this allows other items to be dropped in a nested child component
 		if(hover){
+			
 			//this must be from props not store
 			const note = props.note;
 			const parent = props.parent
@@ -135,17 +136,15 @@ const sourceObj = {
 		}
 		//this needs to be established here as it varies _slightly_ from component to component
 		const note = props.note;
-        const parent = props.parent
-        const source = {
-            type: 'note',
-            parent: parent,
-            note: note,
-        }
+		const parent = props.parent
+		const source = {
+			type: 'note',
+			parent: parent,
+			note: note,
+		}
 
 		let noteEdit = sharedStickyNoteDrop(source, monitor);
-		if(noteEdit === null){
-			console.log("sharedStickyNoteDrop returned", noteEdit)
-		} else {
+		if(noteEdit !== null){
 			props.noteToNote(noteEdit)
 		}
     },

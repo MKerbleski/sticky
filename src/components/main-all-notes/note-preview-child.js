@@ -64,8 +64,8 @@ class LayerTwoTargetSource extends React.Component {
 const targetObj = {
     drop(props) {
         //these always should come from where they are created as the parent or children will be dependent on the props passed not the global state, 
+        
         //this MUST come from state because it is being mapped over from note-preview-self
-        console.log(parent)
         const note = props.note;
         const parent = props.parent
         return ({
@@ -101,9 +101,7 @@ const sourceObj = {
         }
 
         let noteEdit = sharedStickyNoteDrop(source, monitor);
-        if(noteEdit === null){
-			console.log("sharedStickyNoteDrop returned", noteEdit)
-		} else {
+        if(noteEdit !== null){
 			props.noteToNote(noteEdit)
 		}
     }

@@ -42,7 +42,8 @@ export const noteToNote = (notePackage) => {
 				dispatch(getNotes());
             }).catch(err => {
               	dispatch({ type: ERROR_EDITING_NOTE_TO_NOTE, payload: err })
-              	console.log("error in edit note redux actions", err.message)})
+                console.log("error in edit note redux actions", err.message)
+            })
         } else {
             console.log('there is note a Token or a note was dropped on itself')
         }
@@ -238,7 +239,6 @@ export const getSingleNote = (note_id) =>  {
 				headers: { Authorization: token }
 			}
 			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/note/${note_id}`, authHeader).then(res => {
-				console.log(res.data)
     			dispatch({type: SINGLE_NOTE_RECIEVED, payload: res.data})
 			}).catch(err => {
 				dispatch({type: NOTE_ERROR, payload: err})
@@ -259,7 +259,6 @@ export const getChildren = (ids) =>  {
 				headers: { Authorization: token }
 			}
 			axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/children`, ({ids}), authHeader).then(res => {
-                console.log(res.data)
                 return res.data
                 // dispatch({type: NOTES_RECIEVED, payload: res.data})
 			}).catch(err => {

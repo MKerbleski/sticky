@@ -45,22 +45,18 @@ class NoteDetailParent extends React.Component{
                     style={{background: this.props.hover 
                         ? 'lightgreen' 
                         : null}}>
-                    <Link 
-                        // onClick={() => this.handleClick(
-                        //     parent 
-                        //         ?   `/${note.sticky_user_id}/note/${parent.id}` 
-                        //         :   `/all-notes/` )}
-                        className="link"
-                        to={parent 
-                            ?   `/${note.sticky_user_id}/note/${parent.id}` 
-                            :   `/all-notes/`}
-                    >
+                    
                         {this.props.hover 
-                            ?   `Drop to send to main page`
-                            :   parent
-                                ? `back to parent (note #${parent.id})`
-                                : `back to All notes`}
-                    </Link>
+                            //this should probably all go in a div that has a fixed height to avoid any toggling with hovered
+                            ?   <h2>Drop to send to main page</h2>
+                            :   <Link 
+                                    className="link"
+                                    to={parent 
+                                        ?   `/${note.sticky_user_id}/note/${parent.id}` 
+                                        :   `/all-notes/`}
+                                    >{parent ? `back to parent (note #${parent.id})` : `back to All notes`}
+                                </Link>
+                        }
                     <NoteDetailSelf
                         type="note"
                         note={note}

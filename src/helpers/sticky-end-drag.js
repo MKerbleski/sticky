@@ -1,5 +1,3 @@
-import { noteToNote } from '../actions/index.js'
-
 //must return array
 export const sharedStickyNoteDrop = (sourceObj, targetObj) => {
     targetObj = targetObj.getDropResult()
@@ -11,7 +9,6 @@ export const sharedStickyNoteDrop = (sourceObj, targetObj) => {
     const sourceParent = sourceObj.parent
     // const sourceParentId = sourceObj.parent.id
     let sourceParentChildren;
-    let targetParentChildren;
 
     if(sourceParent){
         console.log(sourceParent)
@@ -41,7 +38,6 @@ export const sharedStickyNoteDrop = (sourceObj, targetObj) => {
         '\nsourceParentChildren:', sourceParentChildren,
     )
 
-    
 
     switch(targetObj.type){
         case 'top':
@@ -68,7 +64,7 @@ export const sharedStickyNoteDrop = (sourceObj, targetObj) => {
         case 'note':
             console.log('target is note')
             const targetNoteId = targetObj.note.id
-            let new_parent_children;
+            let targetParentChildren;
             
             //EDGE CASES
             if(target && sourceNoteId === targetNoteId){
@@ -79,12 +75,12 @@ export const sharedStickyNoteDrop = (sourceObj, targetObj) => {
                 console.log("Dropped note on parent.")
                 return null
             }
-            //wierd edge but might need to check if already a child
+            //wierd edge but might need to check if already listed as child on targetNote
             
             if(target.children_attached){
-                new_parent_children = target.children_attached + `,${sourceNoteId}`
+                targetParentChildren = target.children_attached + `,${sourceNoteId}`
             } else {
-                new_parent_children = `${sourceNoteId}`
+                targetParentChildren = `${sourceNoteId}`
             }
 
             if(targetParent && sourceParent){
@@ -96,7 +92,7 @@ export const sharedStickyNoteDrop = (sourceObj, targetObj) => {
                     //new parent
                     {   id: targetNoteId,
                         has_children: true,
-                        children_attached: new_parent_children },
+                        children_attached: targetParentChildren },
                     //old parent
                     {   id: sourceParent.id,
                         has_children: sourceParentChildren.length > 0 ? true : false,
@@ -112,20 +108,8 @@ export const sharedStickyNoteDrop = (sourceObj, targetObj) => {
                     //new parent
                     {   id: targetNoteId,
                         has_children: true,
-                        children_attached: new_parent_children    }
+                        children_attached: targetParentChildren    }
                 ]
-            // } else if (sourceParent && !targetParent){
-            //     //target has NO parent
-            //     return [
-            //         //dragged note
-            //         {   id: sourceNoteId,
-            //             has_parent_note: true,
-            //             parent: targetNoteId    },
-            //         //old parent
-            //         {   id: sourceParent.id,
-            //             has_children: sourceParentChildren.length > 0 ? true : false,
-            //             children_attached: sourceParentChildren }
-            //     ]
             }
             default: 
                 console.log("retured null, there was no type on target object")

@@ -116,7 +116,6 @@ export const notesReducer = (state = initialState, action) => {
                 status: "Getting Note!"
             })
         case NOTES_RECIEVED:
-        console.log(action.payload)
             return Object.assign({}, state, {
                 fetchingNotes: false,
                 notesRecieved: true,

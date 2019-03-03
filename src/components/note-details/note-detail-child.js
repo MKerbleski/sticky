@@ -116,9 +116,7 @@ const sourceObj = {
         }
 
 		let noteEdit = sharedStickyNoteDrop(source, monitor);
-		if(noteEdit === null){
-			console.log("noteEdit", noteEdit)
-		} else {
+		if(noteEdit !== null){
 			props.noteToNote(noteEdit)
 		}
 	},
