@@ -35,29 +35,25 @@ class NoteDetailSelf extends React.Component {
                             {/* <NoteQuill note={this.props.note} /> */}
                             <p>{note.text_body}</p>
                             <div className="note-detail-children">
-                                {note.children ? note.children.map(child => {
+                                {note.children 
+                                    ? note.children.map(child => {
                                         return <NoteDetailChild
                                             key={child.id}
                                             type="note"
                                             note={child}
                                             parent={note}
-                                            // onDrop={this.props.onDrop}
-                                            // changeParent={this.props.changeParent}
-                                            
-                                            // allNotes={this.props.allNotes}
-                                            // redirect={this.props.redirect}
-                                            // color={child.note_color}
-                                                />
+                                            redirect={this.props.redirect}
+                                        />
                                 }) : null}
-                            </div>{/* noted-detail-children */}
-                        </div>{/* note-detail-left */}
+                            </div>
+                        </div>
                         <div className="note-detail-right">
                             {/* <AttachedList stickyNote={this.props.note} /> */}
-                        </div>{/* note-detail-right */}
-                    </div>{/* note-detail-main */}
+                        </div>
+                    </div>
                     <div className="note-detail-settings">
                         <i className="fas fa-cogs"></i>
-                    </div>{/* note-detail-settings */}
+                    </div>
                 </NoteDetailSelfDiv>
             )
         } else {

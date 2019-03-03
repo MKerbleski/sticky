@@ -28,7 +28,7 @@ import {
 class App extends Component {
     constructor(){
         super();
-        this.onDrop = this.onDrop.bind(this);
+        // this.onDrop = this.onDrop.bind(this);
         this.state = {
             hideDetails: true,
             main: true, 
@@ -41,99 +41,100 @@ class App extends Component {
         if (!localStorage.getItem('JWT')){
             this.props.history.push('/welcome/')
         } else {
-            // this.props.history.push('/all-notes')
+            this.props.history.push('/all-notes')
         }
     }
 
-    changeParent = (source_id, target_id) => {
-        if(source_id !== target_id){
-            this.editNote({id: source_id, parent_id: target_id})
-            this.props.getNotes();
-            // this.props.getLinks();
-        }
-    }
+    // changeParent = (source_id, target_id) => {
+    //     if(source_id !== target_id){
+    //         this.editNote({id: source_id, parent_id: target_id})
+    //         this.props.getNotes();
+    //         // this.props.getLinks();
+    //     }
+    // }
 
     disableDelete = () => {
         this.setState({
-        deleteEnabled: false,
+            deleteEnabled: false,
         })
     }
   
     //cannot move because it is used in dragging and dropping
-    editNote = (noteEdit) => {
-        console.log('editNote in APPPPPPPPP', noteEdit)
-        if(localStorage.getItem('JWT')){
-            const token = localStorage.getItem('JWT')
-            const authHeader = {
-                headers: {
-                    Authorization: token,    
-                } 
-            }
-            axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
-            .then(res => {
-                // console.log("App Edit note respons", res)
-                this.props.getNotes();
-                //this functino is now only called outside of app so no need ot 'refresh' notes
-                // this.props.history.push('/all-notes')
-                return res
-            }).catch(err => console.log(err.message))
-        } else {
-            console.log('need to include toekn in request')
-        }
-    }
+    // editNote = (noteEdit) => {
+    //     console.log('editNote in APPPPPPPPP', noteEdit)
+    //     if(localStorage.getItem('JWT')){
+    //         const token = localStorage.getItem('JWT')
+    //         const authHeader = {
+    //             headers: {
+    //                 Authorization: token,    
+    //             } 
+    //         }
+    //         axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${noteEdit.id}`, (noteEdit), authHeader)
+    //         .then(res => {
+    //             // console.log("App Edit note respons", res)
+    //             this.props.getNotes();
+    //             //this functino is now only called outside of app so no need ot 'refresh' notes
+    //             // this.props.history.push('/all-notes')
+    //             return res
+    //         }).catch(err => console.log(err.message))
+    //     } else {
+    //         console.log('need to include toekn in request')
+    //     }
+    // }
   
-    getNoteDetails = (id) => {
-        return this.props.store.notes.notes.find(note => {return note.id === +id})
-    }
+    // getNoteDetails = (id) => {
+    //     return this.props.store.notes.notes.find(note => {return note.id === +id})
+    // }
   
-    getParentId = (id) => {
-        let notee =  this.props.store.notes.notes.find(note => {return note.id === +id})
-        if(notee){
-            if(notee.parent_id){
-                return notee.parent_id
-            } else {
-                return null
-            }
-        } else {
-            return null
-        }
-    }
+    // getParentId = (id) => {
+    //     let notee =  this.props.store.notes.notes.find(note => {return note.id === +id})
+    //     if(notee){
+    //         if(notee.parent_id){
+    //             return notee.parent_id
+    //         } else {
+    //             return null
+    //         }
+    //     } else {
+    //         return null
+    //     }
+    // }
 
+    //need to unmount when this button is clicked in note detail and vis versa
     toggleNewNote = () => {
         this.setState({
             showNewNote: !this.state.showNewNote
         })
     }
 
-    onDrop(source_id, type, target_id=null){
-        if(target_id){
-            let target = this.getNoteDetails(target_id)
-            if (target.parent_id === +source_id){
-                alert('action not allowed')
-            }
-        } 
-        if(type === "deleteBin"){
-            const changes = {
-                is_deleted: true, 
-                id: source_id
-            }
-            this.editNote(changes)
-        } else if (type === "note") {
-            this.changeParent(source_id, target_id)
-        } else if (type === "top" || target_id===null){
-            this.editNote({id: source_id, parent_id: target_id})
-        } else if (type === "link" && target_id===null){
-            //do nothing
-        } else if (type === "link"){
-            //slack note sends its own type
-            let link = source_id
-            //source_id for slack notes contains all note properties
-            link.parent_id = target_id
-            this.props.addNote(link)
-        } else if (type === "pocket"){
-            console.log("pocket item dropped, and not picked up")
-        }
-    }
+    // onDrop(source_id, type, target_id=null){
+    //     if(target_id){
+    //         let target = this.getNoteDetails(target_id)
+    //         if (target.parent_id === +source_id){
+    //             alert('action not allowed')
+    //         }
+    //     } 
+    //     if(type === "deleteBin"){
+    //         const changes = {
+    //             is_deleted: true, 
+    //             id: source_id
+    //         }
+    //         this.editNote(changes)
+    //     } else if (type === "note") {
+    //         this.changeParent(source_id, target_id)
+    //     } else if (type === "top" || target_id===null){
+    //         this.editNote({id: source_id, parent_id: target_id})
+    //     } else if (type === "link" && target_id===null){
+    //         //do nothing
+    //     } else if (type === "link"){
+    //         //slack note sends its own type
+    //         let link = source_id
+    //         //source_id for slack notes contains all note properties
+    //         link.parent_id = target_id
+    //         this.props.addNote(link)
+    //     } else if (type === "pocket"){
+    //         console.log("pocket item dropped, and not picked up")
+    //     }
+    // }
 
     redirect = (route) => {
         this.props.history.push(route)

@@ -61,19 +61,18 @@ class NoteDetailParent extends React.Component{
                         type="note"
                         note={note}
                         parent={note.parent_note}
+                        redirect={this.props.redirect}
                         // allNotes={this.props.allNotes}
                         // allLinks={this.props.allLinks}
                         // onDrop={this.props.onDrop} 
                         // changeParent={this.props.changeParent}
                         // targetId={this.props.note.id}
                         // editNote={this.props.editNote}
-                        // redirect={this.props.redirect}
-                        
                         />
                 </NoteDetailParentDiv>
             )
         } else {
-            return (<h1>loading note-detail-page</h1>)
+            return <h1>loading note-detail-page</h1>
         }
     }
 }

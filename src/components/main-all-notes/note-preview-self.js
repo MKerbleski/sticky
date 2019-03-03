@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import flow from 'lodash/flow';
 import { DragSource, DropTarget } from 'react-dnd';
 import { connect } from 'react-redux';
-import { LayerTwoTargetSource } from "./index"
+import { NotePreivewChild } from "./index"
 import { flex } from '../../styles/styl-utils.js'
 import { deleteNote, editNote, getChildren, noteToNote } from '../../actions'
 import { sharedStickyNoteDrop } from '../../helpers'
@@ -75,7 +75,7 @@ class NotePreviewSelf extends React.Component {
 											<div 
 												className="layerTwoContainer" 
 												key={layerTwo.id}>
-												<LayerTwoTargetSource  
+												<NotePreivewChild  
 													type="note"
 													note={layerTwo} 
 													parent={this.props.note}

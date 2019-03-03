@@ -4,42 +4,46 @@ import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
 import { connect } from 'react-redux';
 import { LayerThreeSource } from "../index"
-import { getAttachedItems, editNote } from '../../actions'
+import { getAttachedItems, editNote, noteToNote } from '../../actions'
 import { sharedStickyNoteDrop } from '../../helpers'
 
 class NoteDetailGrandChild extends React.Component {
     clickHandler = (e, id) => {
-        e.preventDefault();
         e.stopPropagation();
+        e.preventDefault();
         this.props.getAttachedItems(id)
-        this.props.redirect(`/note/${this.props.layerTwo.id}`)
+        this.props.redirect(`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`)
     }
     
     render(){
-        if (this.props.layerTwo){
+        if (this.props.note){
             return (
                 this.props.connectDragSource &&
                 this.props.connectDropTarget &&
                     <NoteDetailGrandChildDiv 
-                        innerRef={instance => {this.props.connectDragSource(instance);this.props.connectDropTarget(instance);}}
-                        type="note"
-                        onClick={(e) => {this.clickHandler(e, this.props.layerTwo.id)}}
-                        style={{background: this.props.hover ? 'lightgreen' : null}}>
-                            <h4>{this.props.getFirstWord(this.props.layerTwo.text_body)}</h4>
-                            <div className="layerThreeContainerAll">
-                                {this.props.allNotes.map(layerThree => {
-                                    if (layerThree.parent_id === this.props.layerTwo.id){
+                        innerRef={instance => {
+                            this.props.connectDragSource(instance);
+                            this.props.connectDropTarget(instance);}}
+                        onClick={(e) => {e.stopPropagation(); this.clickHandler(e, this.props.note.id)}}
+                        style={{background: this.props.hover ? 'lightgreen' : null}}
+                    >
+                        <h4>{this.props.note.text_body}</h4>
+                        <div className="layerThreeContainerAll">
+                            {this.props.note.children > 0 
+                                ?   this.props.note.children.map(grandchild => {
                                         return <LayerThreeSource 
-                                                    key={layerThree.id}
-                                                    type="note"
-                                                    changeParent={this.props.changeParent} layerThree={layerThree} 
-                                                    onDrop={this.props.onDrop}
-                                                    getFirstWord={this.props.getFirstWord} />
-                                    } else {
-                                        return null
-                                    }
-                                })}
-                            </div>                     
+                                            key={grandchild.id}
+                                            type="note"
+                                            note={grandchild}
+                                            parent={this.props.note}
+                                            // changeParent={this.props.changeParent} 
+                                            // onDrop={this.props.onDrop}
+                                            // getFirstWord={this.props.getFirstWord}
+                                            />
+                                    }) 
+                                :   null
+                            }
+                        </div>                     
                     </NoteDetailGrandChildDiv>         
                 )
         } else {
@@ -50,10 +54,10 @@ class NoteDetailGrandChild extends React.Component {
 
 const targetObj = {
     drop(props) {
-        const targetId = props.layerTwo.id;
+        const targetId = props.note.id;
         const type = props.type
-        const pocket_items_attached = props.layerTwo.pocket_items_attached;
-        const slack_items_attached = props.layerTwo.slack_items_attached;
+        const pocket_items_attached = props.note.pocket_items_attached;
+        const slack_items_attached = props.note.slack_items_attached;
         return ({
             targetId, type, pocket_items_attached, slack_items_attached
         });
@@ -62,24 +66,39 @@ const targetObj = {
   
 const sourceObj = {
     beginDrag(props) {
-        const sourceId = props.layerTwo
-        return ({
-            sourceId //this gets sent to the drop item // is null in this example because react-dnd is overkill
-        });
+        const note = props.note
+		const parent = props.parent
+		return ({
+			type: 'note',
+			parent: parent,
+			note: note,
+		});
     },
 
     endDrag(props, monitor) {// this takes props mounted on beginDrag
         if(!monitor.didDrop()){
             return;
         }
-        // const sourceId = props.layerTwo.id;        
+        // const sourceId = props.note.id;        
         // const dropResult = monitor.getDropResult({shallow: true});
         // props.onDrop(sourceId, dropResult.type, dropResult.targetId);
-        const sticky_source_id = props.layerTwo.id;
-        const target = monitor.getDropResult({shallow: true});
-        const target_id = target.targetId;
-        let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
-        props.editNote(noteEdit)
+        // const sticky_source_id = props.note.id;
+        // const target = monitor.getDropResult({shallow: true});
+        // const target_id = target.targetId;
+        // let noteEdit = sharedStickyNoteDrop(sticky_source_id, target_id, target);
+        // props.editNote(noteEdit)
+        const note = props.note;
+        const parent = props.parent
+        const source = {
+            type: 'note',
+            parent: parent,
+            note: note,
+        }
+
+		let noteEdit = sharedStickyNoteDrop(source, monitor);
+		if(noteEdit !== null){
+			props.noteToNote(noteEdit)
+		}
     }
 };
 
@@ -89,7 +108,8 @@ const mapStateToProps = store => {
   
   const mapDispatchToProps = {
     getAttachedItems,
-    editNote
+    editNote,
+    noteToNote
   }
   
   export default connect(mapStateToProps, mapDispatchToProps)( flow(

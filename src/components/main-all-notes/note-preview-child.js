@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import React from 'react';
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
-// import { LayerThreeSource } from "./index"
+import { NotePreviewGrandChild } from "./index"
 import { sharedStickyNoteDrop } from '../../helpers'
 import { editNote, noteToNote } from '../../actions'
 import { connect } from 'react-redux'
 
-class LayerTwoTargetSource extends React.Component {
+class NotePreviewChild extends React.Component {
     
     goToNote = (e) => {
         e.stopPropagation();
@@ -19,7 +19,7 @@ class LayerTwoTargetSource extends React.Component {
             connectDragSource, 
             connectDropTarget, 
         } = this.props
-
+        console.log(this.props.note)
         if (this.props.note){
             return (
                 connectDragSource &&
@@ -32,27 +32,29 @@ class LayerTwoTargetSource extends React.Component {
                         onClick={this.goToNote}
                         style={{background: this.props.hover ? 'lightgreen' : null}}>
                         <h4>{this.props.note.text_body}</h4>
-                        {/* <div className="layerThreeContainerAll">
-                            {this.props.allNotes.map(layerThree => {
-                                if (layerThree.parent_id === this.props.layerTwo.id){
-                                    return (
-                                        <div 
-                                            className="layerThreeContainer" 
-                                            key={layerThree.id} >
-                                            <LayerThreeSource 
-                                                type="note"
-                                                changeParent={this.props.changeParent} layerThree={layerThree} 
-                                                redirect={this.props.redirect}
-                                                // onDrop={this.props.onDrop}
-                                                getFirstWord={this.props.getFirstWord}
-                                                />
-                                        </div>
-                                    )
-                                } else {
-                                    return null
-                                }
-                            })}
-                        </div>                        */}
+                        {this.props.note.has_children 
+                            ?   <div className="layerThreeContainerAll">
+                                    {this.props.note.children.map(note => {
+                                            return (
+                                                <div 
+                                                    className="layerThreeContainer" 
+                                                    key={note.id} 
+                                                >
+                                                    <NotePreviewGrandChild 
+                                                        type="note"
+                                                        note={note}
+                                                        parent={this.props.note} 
+                                                        redirect={this.props.redirect}
+                                                        // changeParent={this.props.changeParent} 
+                                                        // onDrop={this.props.onDrop}
+                                                        // getFirstWord={this.props.getFirstWord}
+                                                    />
+                                                </div>
+                                            )
+                                    })}
+                                </div> 
+                            :   null
+                        }            
                     </LayerTwoDiv>       
                 )
         } else {
@@ -64,7 +66,7 @@ class LayerTwoTargetSource extends React.Component {
 const targetObj = {
     drop(props) {
         //these always should come from where they are created as the parent or children will be dependent on the props passed not the global state, 
-        
+
         //this MUST come from state because it is being mapped over from note-preview-self
         const note = props.note;
         const parent = props.parent
@@ -130,7 +132,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
         isDragging: monitor.isDragging(),
     }))
 
-)(LayerTwoTargetSource));
+)(NotePreviewChild));
 
 const LayerTwoDiv = styled.div`
     border: 2px solid black;

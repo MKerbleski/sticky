@@ -27,44 +27,43 @@ class NoteDetailChild extends React.Component {
                     innerRef={instance => {
 						this.props.connectDragSource(instance);
 						this.props.connectDropTarget(instance);}}
-                    color={this.props.color} >
-                <Link
-                    key={this.props.key}
-                    // index={this.props.index}
-                    className="note-link"
-                    id={this.props.note.id}
-                    to={`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`}
-                    style={{background: this.props.hover ? 'lightgreen' : null}}>
-                        <div className="note-content-header">
-                            <h3 className="note-preview-title">
-								{this.props.note.text_body}
-							</h3>
-                            {this.props.note.total_items_attached 
-								?	<div className="note-content-link-count"> 
-										{this.props.note.total_items_attached}
-									</div> 
-								:	null }
-                        </div>
-                        {/* <p>{this.getFirstSen(this.props.note.text_body)}</p>  */}
-                        <div className="layerTwoContainerAll">
-                            {this.state.children 
-								? 	this.state.children.map(layerTwo => {
-										if (layerTwo.parent_id === this.props.note.id){
+                    color={this.props.color} 
+				>
+					<Link
+						// key={this.props.key}
+						// index={this.props.index}
+						className="note-link"
+						id={this.props.note.id}
+						to={`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`}
+						style={{background: this.props.hover ? 'lightgreen' : null}}>
+							<div className="note-content-header">
+								<h3 className="note-preview-title">
+									{this.props.note.text_body}
+								</h3>
+								{this.props.note.total_items_attached 
+									?	<div className="note-content-link-count"> 
+											{this.props.note.total_items_attached}
+										</div> 
+									:	null }
+							</div>
+							{/* <p>{this.getFirstSen(this.props.note.text_body)}</p>  */}
+							<div className="layerTwoContainerAll">
+								{this.props.note.has_children 
+									? 	this.props.note.children.map(note => {
 											return <NoteDetailGrandChild
-												key={layerTwo.id}
+												key={note.id}
 												type="note"
-												onDrop={this.props.onDrop} 
-												layerTwo={layerTwo} 
+												note={note} 
+												parent={this.props.note}
 												redirect={this.props.redirect}
-												allNotes={this.props.allNotes}
-												getFirstWord={this.getFirstWord} />
-										} else {
-											return null
-										}
-                            		}) 
-								: null}
-                        </div>                     
-                  </Link>
+												// onDrop={this.props.onDrop} 
+												// allNotes={this.props.allNotes}
+												// getFirstWord={this.getFirstWord} 
+											/>
+										}) 
+									:	null}
+							</div>                     
+					</Link>
                 </NoteDetailChildDiv>        
             )
         } else {
