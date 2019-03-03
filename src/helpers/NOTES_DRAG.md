@@ -11,13 +11,13 @@ Props
         preview 1 -> preview 3
         *preview 2 -> top_level
         *preview 2 -> preview 2
-        preview 3 -> top_level
+        *preview 3 -> top_level
 
         *detail 2 -> detail parent
         *detail 2 -> detail 2
-        detail 2 -> detail 3
-        detail 3 -> detail parent
-        detail 3 -> detail 2 & 1
+        *detail 2 -> detail 3
+        *detail 3 -> detail parent
+        *detail 3 -> detail 2 & 1
 
 
     SINGLE NOTE CHANGES 

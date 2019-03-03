@@ -9,7 +9,6 @@ import { sharedStickyNoteDrop } from '../../helpers'
 
 class NoteDetailGrandChild extends React.Component {
     clickHandler = (e, id) => {
-        e.stopPropagation();
         e.preventDefault();
         this.props.getAttachedItems(id)
         this.props.redirect(`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`)
@@ -31,16 +30,19 @@ class NoteDetailGrandChild extends React.Component {
                         <div className="layerThreeContainerAll">
                             {this.props.note.children > 0 
                                 ?   this.props.note.children.map(grandchild => {
-                                        return <LayerThreeSource 
-                                            key={grandchild.id}
-                                            type="note"
-                                            note={grandchild}
-                                            parent={this.props.note}
-                                            // changeParent={this.props.changeParent} 
-                                            // onDrop={this.props.onDrop}
-                                            // getFirstWord={this.props.getFirstWord}
-                                            />
-                                    }) 
+                                    console.log(grandchild)
+                                        if(!grandchild.is_deleted){
+                                            return <LayerThreeSource 
+                                                key={grandchild.id}
+                                                type="note"
+                                                note={grandchild}
+                                                parent={this.props.note}
+                                                // changeParent={this.props.changeParent} 
+                                                // onDrop={this.props.onDrop}
+                                                // getFirstWord={this.props.getFirstWord}
+                                                />
+                                        } 
+                                    })
                                 :   null
                             }
                         </div>                     
@@ -54,12 +56,12 @@ class NoteDetailGrandChild extends React.Component {
 
 const targetObj = {
     drop(props) {
-        const targetId = props.note.id;
-        const type = props.type
-        const pocket_items_attached = props.note.pocket_items_attached;
-        const slack_items_attached = props.note.slack_items_attached;
+        const note = props.note;
+        const parent = props.parent
         return ({
-            targetId, type, pocket_items_attached, slack_items_attached
+            type: 'note',
+            parent: parent,
+            note: note,
         });
     }
 }

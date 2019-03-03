@@ -34,24 +34,29 @@ class NotePreviewChild extends React.Component {
                         <h4>{this.props.note.text_body}</h4>
                         {this.props.note.has_children 
                             ?   <div className="layerThreeContainerAll">
-                                    {this.props.note.children.map(note => {
-                                            return (
-                                                <div 
-                                                    className="layerThreeContainer" 
-                                                    key={note.id} 
-                                                >
-                                                    <NotePreviewGrandChild 
-                                                        type="note"
-                                                        note={note}
-                                                        parent={this.props.note} 
-                                                        redirect={this.props.redirect}
-                                                        // changeParent={this.props.changeParent} 
-                                                        // onDrop={this.props.onDrop}
-                                                        // getFirstWord={this.props.getFirstWord}
-                                                    />
-                                                </div>
-                                            )
-                                    })}
+                                    {this.props.note.children 
+                                        ?   this.props.note.children.map(grandchild => {
+                                            console.log(grandchild)
+                                                if(!grandchild.is_deleted){
+                                                    return (
+                                                        <div 
+                                                            className="layerThreeContainer" 
+                                                            key={grandchild.id} 
+                                                        >
+                                                            <NotePreviewGrandChild 
+                                                                type="note"
+                                                                note={grandchild}
+                                                                parent={this.props.note} 
+                                                                redirect={this.props.redirect}
+                                                                // changeParent={this.props.changeParent} 
+                                                                // onDrop={this.props.onDrop}
+                                                                // getFirstWord={this.props.getFirstWord}
+                                                            />
+                                                        </div>
+                                                    )
+                                                }
+                                            })
+                                    :   null    }
                                 </div> 
                             :   null
                         }            

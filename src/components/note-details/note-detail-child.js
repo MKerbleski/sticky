@@ -49,18 +49,20 @@ class NoteDetailChild extends React.Component {
 							{/* <p>{this.getFirstSen(this.props.note.text_body)}</p>  */}
 							<div className="layerTwoContainerAll">
 								{this.props.note.has_children 
-									? 	this.props.note.children.map(note => {
-											return <NoteDetailGrandChild
-												key={note.id}
-												type="note"
-												note={note} 
-												parent={this.props.note}
-												redirect={this.props.redirect}
-												// onDrop={this.props.onDrop} 
-												// allNotes={this.props.allNotes}
-												// getFirstWord={this.getFirstWord} 
-											/>
-										}) 
+									? 	this.props.note.children.map(grandchild => {
+										if(!grandchild.is_deleted){
+												return <NoteDetailGrandChild
+													key={grandchild.id}
+													type="note"
+													note={grandchild} 
+													parent={this.props.note}
+													redirect={this.props.redirect}
+													// onDrop={this.props.onDrop} 
+													// allNotes={this.props.allNotes}
+													// getFirstWord={this.getFirstWord} 
+												/>
+											} 
+										})
 									:	null}
 							</div>                     
 					</Link>

@@ -57,7 +57,7 @@ export const sharedStickyNoteDrop = (sourceObj, targetObj) => {
             }
         case 'trash':
             console.log('target is trash')
-            console.log('note will be flagged as is_deleted, location will remain stored')
+            console.log('note will be flagged as is_deleted, but it will remain a child on its parent, for resoreability until permenantly deleted')
             return [
                 {   id: sourceNoteId, 
                     is_deleted: true   }]
@@ -83,23 +83,25 @@ export const sharedStickyNoteDrop = (sourceObj, targetObj) => {
                 targetParentChildren = `${sourceNoteId}`
             }
 
-            if(targetParent && sourceParent){
+            if(sourceParent){
+                // window.alert('1')
                 return [
                     //dragged note
                     {   id: sourceNoteId,
                         has_parent_note: true,
                         parent: targetNoteId  },
-                    //new parent
-                    {   id: targetNoteId,
-                        has_children: true,
-                        children_attached: targetParentChildren },
-                    //old parent
-                    {   id: sourceParent.id,
-                        has_children: sourceParentChildren.length > 0 ? true : false,
-                        children_attached: sourceParentChildren }
-                ]
-            } else {
-                //note has NO parent
+                        //new parent
+                        {   id: targetNoteId,
+                            has_children: true,
+                            children_attached: targetParentChildren },
+                            //old parent
+                            {   id: sourceParent.id,
+                                has_children: sourceParentChildren &&sourceParentChildren.length > 0 ? true : false,
+                                children_attached: sourceParentChildren }
+                            ]
+            }  else {
+                // window.alert('2')
+                //note with no parent note to a note with a parent note
                 return [
                    //dragged note
                    {   id: sourceNoteId,
@@ -110,7 +112,7 @@ export const sharedStickyNoteDrop = (sourceObj, targetObj) => {
                         has_children: true,
                         children_attached: targetParentChildren    }
                 ]
-            }
+            } 
             default: 
                 console.log("retured null, there was no type on target object")
                 return null

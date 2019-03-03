@@ -41,7 +41,8 @@ class App extends Component {
         if (!localStorage.getItem('JWT')){
             this.props.history.push('/welcome/')
         } else {
-            this.props.history.push('/all-notes')
+            console.log(this.props.store.user.userData.username)
+            this.props.history.push(`/all-notes`)
         }
     }
 
@@ -146,8 +147,8 @@ class App extends Component {
             <div className="app-top">
                 <Header redirect={this.redirect} />
             </div>
-            {localStorage.getItem('JWT') ? 
-                <div className="app-bottom">
+            {localStorage.getItem('JWT') && this.props.store.user.userData.username
+                ? <div className="app-bottom">
                     <LeftMenu 
                         hideDetailMenu={this.hideDetailMenu}
                         toggleNewNote={this.toggleNewNote} />
@@ -155,21 +156,26 @@ class App extends Component {
                         <React.Fragment>
                             <Route exact
                                 path="/all-notes" 
-                                render={ () => {
+                                render={ (a) => {
                                     return <AllNotes
-                                            onDrop={this.onDrop} 
-                                            // changeParent={this.changeParent}
-                                            // notes={this.props.state.notes}
-                                            // links={this.props.store.notes.links}
-                                            // username={this.props.state.username}
-                                            // getNotes={this.props.getNotes}
-                                            // getLinks={this.props.getLinks}
-                                            showDetailMenu={this.showDetailMenu}
-                                            showNewNote={this.state.showNewNote}
-                                            toggleNewNote={this.toggleNewNote}
-                                            // newNote={this.newNote}
-                                            redirect={this.redirect} /> }} />
-                            <Route
+                                        redirect={this.redirect}
+                                        showNewNote={this.state.showNewNote}
+                                        showDetailMenu={this.showDetailMenu}
+                                        toggleNewNote={this.toggleNewNote}
+                                        user_name={a.match.params.user_name}
+                                        // onDrop={this.onDrop} 
+                                        // changeParent={this.changeParent}
+                                        // notes={this.props.state.notes}
+                                        // links={this.props.store.notes.links}
+                                        // username={this.props.state.username}
+                                        // getNotes={this.props.getNotes}
+                                        // getLinks={this.props.getLinks}
+                                        // newNote={this.newNote}
+                                    /> 
+                                }} 
+                            />
+                            
+                            {/* <Route
                                 exact={!this.state.deleteEnabled}
                                 path="/note/:note_id"
                                 render={ (note) => {
@@ -183,7 +189,7 @@ class App extends Component {
                                     type="note"
                                     editNote={this.editNote}
                                     targetId={this.getParentId(note.match.params.note_id)}
-                                    />}} />
+                                    />}} /> */}
                             
                             <Route
                                 exact={!this.state.deleteEnabled}
