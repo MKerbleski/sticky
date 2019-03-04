@@ -179,7 +179,7 @@ export const notesReducer = (state = initialState, action) => {
                 editingNote: true,
                 status: "Saving Note!"
             })
-            case NOTE_EDITED:
+        case NOTE_EDITED:
             return Object.assign({}, state, {
                 editingNote: false,
                 noteEdited: true,
@@ -192,9 +192,13 @@ export const notesReducer = (state = initialState, action) => {
                 notes: action.payload,
             })
         case NOTE_ERROR: 
+        console.log(action.payload)
             return Object.assign({}, state, {
+                responseCode: action.payload.response.status,
                 noteError: true,
-                noteErrMsg: action.payload
+                note: null,
+                noteErrMsg: action.payload,
+                status: `Error fetching note. Error code:${ action.payload.response.status}`
             })
         default: 
             return state;

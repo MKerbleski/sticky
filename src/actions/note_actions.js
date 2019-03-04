@@ -230,7 +230,7 @@ export const getNotes = () =>  {
 }
 
 //this is going to be seperate because I am possibly eventually going to fetch children as well. 
-export const getSingleNote = (note_id) =>  {
+export const getSingleNote = (author_id, note_id) =>  {
     return function(dispatch){
         if(localStorage.getItem('JWT')){
 			dispatch({type: FETCHING_SINGLE_NOTE});
@@ -238,7 +238,7 @@ export const getSingleNote = (note_id) =>  {
 			const authHeader = {
 				headers: { Authorization: token }
 			}
-			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/note/${note_id}`, authHeader).then(res => {
+			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${author_id}/note/${note_id}`, authHeader).then(res => {
     			dispatch({type: SINGLE_NOTE_RECIEVED, payload: res.data})
 			}).catch(err => {
 				dispatch({type: NOTE_ERROR, payload: err})

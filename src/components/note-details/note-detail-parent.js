@@ -15,12 +15,12 @@ class NoteDetailParent extends React.Component{
     }
 
     componentDidMount(){
-        this.props.getSingleNote(this.props.note_id)
+        this.props.getSingleNote(this.props.author_id, this.props.note_id)
     }
 
     componentWillReceiveProps(nextProps){
         if(this.props.note_id !== nextProps.note_id){
-            this.props.getSingleNote(nextProps.note_id)
+            this.props.getSingleNote(this.props.author_id, nextProps.note_id)
         }
     }
 
@@ -30,6 +30,10 @@ class NoteDetailParent extends React.Component{
 
     render(){
         const note = this.props.store.notes.notes[0]
+        if(this.props.store.notes.responseCode === 401){
+            //eventually will display whole format with a cool lock image over note
+            return <h1>Unauthorized</h1>
+        }
         if(note){
             let parent
             if(note.has_parent_note){

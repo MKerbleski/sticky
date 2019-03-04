@@ -42,7 +42,7 @@ class App extends Component {
             this.props.history.push('/welcome/')
         } else {
             console.log(this.props.store.user.userData.username)
-            this.props.history.push(`/all-notes`)
+            // this.props.history.push(`/all-notes`)
         }
     }
 
@@ -192,12 +192,12 @@ class App extends Component {
                                     />}} /> */}
                             
                             <Route
-                                exact={!this.state.deleteEnabled}
-                                path="/:user_id/note/:note_id"
+                                // exact={!this.state.deleteEnabled}
+                                path="/:author_id/note/:note_id"
                                 render={ (note) => {
                                 return <NoteDetailParent
                                     note_id={note.match.params.note_id}
-                                    user_id={note.match.params.user_id}
+                                    author_id={note.match.params.author_id}
                                     redirect={this.redirect}
                                     // allNotes={this.props.store.notes.notes}
                                     // allLinks={this.props.store.notes.links}

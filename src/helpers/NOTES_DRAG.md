@@ -23,9 +23,9 @@ Props
     SINGLE NOTE CHANGES 
         *preview 1 -> trash
         *preview 2 -> trash
-        preview 3 -> trash
+        *preview 3 -> trash
         *detail 2 -> trash
-        detail 3 -> trash
+        *detail 3 -> trash
 
         link -> preview 1 
         link -> preview 2
