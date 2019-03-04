@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import { connect } from 'react-redux';
-import { getSingleNote, editNote, noteToNote } from '../../actions'
+import { 
+	// getSingleNote,
+	editNote, 
+	noteToNote } from '../../actions'
 import { flex, start } from '../../styles/styl-utils.js'
 import { NoteDetailGrandChild } from './index';
 import { sharedStickyNoteDrop } from '../../helpers'
@@ -128,7 +131,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-	getSingleNote,
+	// getSingleNote,
   	editNote,
   	noteToNote
 }

@@ -14,25 +14,25 @@ class NotePreviewNew extends React.Component {
         }
     }
   
-    getFirstWord = (text, words=2) => {
-        let firstWord = text.split(" ").slice(0,words).join(' ');
-        if(firstWord.length > 0){
-            return firstWord
-        } else {
-            return text
-        }
-    }
+    // getFirstWord = (text, words=2) => {
+    //     let firstWord = text.split(" ").slice(0,words).join(' ');
+    //     if(firstWord.length > 0){
+    //         return firstWord
+    //     } else {
+    //         return text
+    //     }
+    // }
 
-    getFirstSen = (text) => {
-        let firstSen = text
-        let firstWord = this.getFirstWord(text)
-        firstSen = firstSen.replace(firstWord, '')    
-        if(firstSen !== firstWord){
-            return firstSen
-        } else{
-            return null
-        }
-    }
+    // getFirstSen = (text) => {
+    //     let firstSen = text
+    //     let firstWord = this.getFirstWord(text)
+    //     firstSen = firstSen.replace(firstWord, '')    
+    //     if(firstSen !== firstWord){
+    //         return firstSen
+    //     } else{
+    //         return null
+    //     }
+    // }
 
     addNote = (e) => {
         e.preventDefault()
@@ -51,7 +51,7 @@ class NotePreviewNew extends React.Component {
     }
     
     render(){
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div className="startObject">
                 <NotePreviewNewDiv >

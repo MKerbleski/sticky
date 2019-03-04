@@ -41,8 +41,8 @@ class App extends Component {
         if (!localStorage.getItem('JWT')){
             this.props.history.push('/welcome/')
         } else {
-            console.log(this.props.store.user.userData.username)
-            // this.props.history.push(`/all-notes`)
+            let username = localStorage.getItem('username')
+            this.props.history.push(`/${username}`)
         }
     }
 
@@ -155,7 +155,7 @@ class App extends Component {
                     <div className="app-center">
                         <React.Fragment>
                             <Route exact
-                                path="/all-notes" 
+                                path="/:username" 
                                 render={ (a) => {
                                     return <AllNotes
                                         redirect={this.redirect}
@@ -193,11 +193,11 @@ class App extends Component {
                             
                             <Route
                                 // exact={!this.state.deleteEnabled}
-                                path="/:author_id/note/:note_id"
+                                path="/:author_name/note/:note_id"
                                 render={ (note) => {
                                 return <NoteDetailParent
                                     note_id={note.match.params.note_id}
-                                    author_id={note.match.params.author_id}
+                                    author_name={note.match.params.author_name}
                                     redirect={this.redirect}
                                     // allNotes={this.props.store.notes.notes}
                                     // allLinks={this.props.store.notes.links}

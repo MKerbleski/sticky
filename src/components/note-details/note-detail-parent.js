@@ -15,12 +15,12 @@ class NoteDetailParent extends React.Component{
     }
 
     componentDidMount(){
-        this.props.getSingleNote(this.props.author_id, this.props.note_id)
+        this.props.getSingleNote(this.props.author_name, this.props.note_id)
     }
 
     componentWillReceiveProps(nextProps){
         if(this.props.note_id !== nextProps.note_id){
-            this.props.getSingleNote(this.props.author_id, nextProps.note_id)
+            this.props.getSingleNote(this.props.author_name, nextProps.note_id)
         }
     }
 
@@ -58,7 +58,7 @@ class NoteDetailParent extends React.Component{
                                     to={parent 
                                         ?   `/${note.sticky_user_id}/note/${parent.id}` 
                                         :   `/all-notes/`}
-                                    >{parent ? `back to parent (note #${parent.id})` : `back to All notes`}
+                                    >{parent ? `back to parent (note #${parent.id})` : `back to My notes`}
                                 </Link>
                         }
                     <NoteDetailSelf

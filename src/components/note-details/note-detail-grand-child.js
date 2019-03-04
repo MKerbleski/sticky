@@ -11,7 +11,7 @@ class NoteDetailGrandChild extends React.Component {
     clickHandler = (e, id) => {
         e.preventDefault();
         this.props.getAttachedItems(id)
-        this.props.redirect(`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`)
+        this.props.redirect(`/${this.props.note.sticky_username}/note/${this.props.note.id}`)
     }
     
     render(){
