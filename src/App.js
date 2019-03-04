@@ -22,7 +22,6 @@ import {
     addNote,
     sortNote,
     logout,
-    // getLinks,
     getDeletedNotes,
     getUserData,
 } from './actions';
@@ -30,7 +29,6 @@ import {
 class App extends Component {
     constructor(){
         super();
-        // this.onDrop = this.onDrop.bind(this);
         this.state = {
             hideDetails: true,
             main: true, 
@@ -47,14 +45,6 @@ class App extends Component {
             // this.props.history.push(`/${username}`)
         }
     }
-
-    // changeParent = (source_id, target_id) => {
-    //     if(source_id !== target_id){
-    //         this.editNote({id: source_id, parent_id: target_id})
-    //         this.props.getNotes();
-    //         // this.props.getLinks();
-    //     }
-    // }
 
     disableDelete = () => {
         this.setState({
@@ -80,7 +70,9 @@ class App extends Component {
                     <Header redirect={this.redirect} />
                 </div>
                 <div className="app-bottom">
-                    <Route path="/welcome/" component={Welcome} />
+                    <Route 
+                        path="/welcome/" 
+                        component={Welcome} />
                     <Route 
                         path="/:username" 
                         render={ (a) => {
@@ -117,22 +109,30 @@ const mapDispatchToProps = {
 export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 
 const AppDiv = styled.div`
+box-sizing: border-box;
+border: 1px solid red;
+margin: 2px;
     display: flex;
     flex-direction: column;
     background-color: white;
-    height: 100vh;
-    width: 100vw;
-    box-sizing: border-box;
+    height: 99vh;
+    max-height: 100vh;
+    max-width: 100vw;
     .app-top {
-        height: 5vh;
+        border: 1px solid purple;
+        margin: 2px;
+        box-sizing: border-box;
+        max-height: 5vh;
     }
     .app-bottom {
         border: 2px solid green;
+        box-sizing: border-box;
+        margin: 2px;
+        padding: 2px;
         display: flex;
         flex-direction: row;
         z-index: 0;
-        box-sizing: border-box;
-        height: 95vh;
-        
+        max-height: 95vh;
+        height: 99%;
     }
 `;

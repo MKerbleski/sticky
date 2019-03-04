@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import { 
 	// getSingleNote,
 	editNote, 
-	noteToNote } from '../../actions'
+	noteToNote
+} from '../../actions'
 import { flex, start } from '../../styles/styl-utils.js'
 import { NoteDetailGrandChild } from './index';
 import { sharedStickyNoteDrop } from '../../helpers'

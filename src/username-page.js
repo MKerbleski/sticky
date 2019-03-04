@@ -120,14 +120,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(UsernamePage);
 
 const UsernamePageDiv = styled.div`
     border: 1px solid red;
+    margin: 2px;
+    padding: 2px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    width: 100%;
     .app-center {
-            border: 2px solid blue;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            overflow: auto;
-        }
+        border: 2px solid blue;
+        box-sizing: border-box;
+        margin: 2px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        overflow: auto;
+    }
 `

@@ -29,14 +29,10 @@ class NoteDetailParent extends React.Component{
     }
 
     goToNote = (author, note_id=null) => {
-        // e.preventDefault()
-        console.log(this.props)
         if(note_id){
             this.props.redirect(`/${author}/note/${note_id}`)
-            this.props.getSingleNote(this.props.note.sticky_username, this.props.note_id)
         } else {
             this.props.redirect(`/${author}`)
-            this.props.getNotes(author)
         }
 	}
 
@@ -65,17 +61,14 @@ class NoteDetailParent extends React.Component{
                         {this.props.hover 
                             //this should probably all go in a div that has a fixed height to avoid any toggling with hovered
                             ?   <h2>Drop to send to main page</h2>
-                            :   <h2 
+                            :   <Link 
                                     className="link"
-                                    onClick={() => {
-                                        if(parent){
-                                            this.goToNote(note.sticky_username, note.parent)
-                                        } else {
-                                            this.goToNote(note.sticky_username)
-                                        }
-                                     }}
-                                    >{parent ? `back to parent (note #${parent.id})` : `back to My notes`}
-                                </h2>
+                                    to={`/${note.sticky_username}${parent ? note.parent : ''}`}
+                                >
+                                    {parent 
+                                        ?   `back to (note #${parent.id})` 
+                                        :   `back to My notes`}
+                                </Link>
                         }
                     <NoteDetailSelf
                         type="note"

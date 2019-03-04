@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import { AAA } from '../../helpers/availbleApis'
 import { RightMenuDetails } from './index'
 import { 
-  rightArrow, 
-  leftArrow, } from '../../img'
+	rightArrow, 
+	leftArrow,
+} from '../../img'
 import { getConnectedApis } from '../../actions'
 
 class RightMenu extends Component {
@@ -23,23 +24,23 @@ class RightMenu extends Component {
     eventHandler = (e) => {
         e.preventDefault();
         switch(e.target.name){
-          case "leftArrow": 
-              this.setState({
-                openDetails: true,
-                selectedApp: null
-              })
-              break;
-          case "rightArrow":
-              this.setState({
-                openDetails: false,
-                selectedApp: null
-              })
-              break;
-          default:
-              this.setState({
-                openDetails: true,
-                selectedApp: e.target.name
-              })    
+			case "leftArrow": 
+				this.setState({
+					openDetails: true,
+					selectedApp: null
+				})
+				break;
+			case "rightArrow":
+				this.setState({
+					openDetails: false,
+					selectedApp: null
+				})
+				break;
+			default:
+				this.setState({
+					openDetails: true,
+					selectedApp: e.target.name
+				})    
         }
     }
 
@@ -99,12 +100,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(RightMenu)
 
 const RightMenuDiv = styled.div`
   border: 2px solid black;
+  box-sizing: border-box;
   background: lightblue;
   display: flex;
   flex-direction: row;
   align-items: center;
-  box-sizing: border-box;
-  height: 95vh;
   .right-menu-preview{
       display: flex;
       flex-direction: column;

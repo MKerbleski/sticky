@@ -22,7 +22,6 @@ class AllNotes extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props)
         if(localStorage.getItem('JWT')){
             this.props.getUserData()
             if(this.props.deleteBin){
@@ -133,8 +132,11 @@ const mapDispatchToProps = {
 export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, mapDispatchToProps)(AllNotes))
 
 const AllNotesDiv = styled.div`
-    /* border: 1px solid green; */
+    border: 1px solid green;
+    margin: 2px;
     color: black;
+    height: 100%;
+    box-sizing: border-box;
     overflow: auto;
     display: flex;
     flex-direction: row;

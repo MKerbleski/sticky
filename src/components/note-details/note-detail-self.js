@@ -90,6 +90,9 @@ class NoteDetailSelf extends React.Component {
                                     <button name='fork' onClick={this.clickHandler}>
                                         Allow Forks
                                     </button>
+                                    <button name='clone' onClick={this.clickHandler}>
+                                        Allow Clones
+                                    </button>
                                     <button name='edit' onClick={this.clickHandler}>
                                         Allow Edits
                                     </button>
@@ -97,7 +100,10 @@ class NoteDetailSelf extends React.Component {
                                         Share
                                     </button>
                                     <button >
-                                    <i name='delete' onClick={this.clickHandler}className=" menu-item fas fa-trash-alt"></i>
+                                        <i name='delete' onClick={this.clickHandler}className=" menu-item fas fa-trash-alt"></i>
+                                    </button>
+                                    <button >
+                                       Make all children the same privacy settings
                                     </button>
                                     <i className="fas fa-cogs"></i>
                                 </div>
