@@ -15,18 +15,30 @@ class NoteDetailParent extends React.Component{
     }
 
     componentDidMount(){
-        this.props.getSingleNote(this.props.author_name, this.props.note_id)
+        this.props.getSingleNote(this.props.author, this.props.note_id)
     }
 
     componentWillReceiveProps(nextProps){
         if(this.props.note_id !== nextProps.note_id){
-            this.props.getSingleNote(this.props.author_name, nextProps.note_id)
+            this.props.getSingleNote(this.props.author, nextProps.note_id)
         }
     }
 
     handleClick(url){
         this.props.redirect(url)
     }
+
+    goToNote = (author, note_id=null) => {
+        // e.preventDefault()
+        console.log(this.props)
+        if(note_id){
+            this.props.redirect(`/${author}/note/${note_id}`)
+            this.props.getSingleNote(this.props.note.sticky_username, this.props.note_id)
+        } else {
+            this.props.redirect(`/${author}`)
+            this.props.getNotes(author)
+        }
+	}
 
     render(){
         const note = this.props.store.notes.notes[0]
@@ -53,13 +65,17 @@ class NoteDetailParent extends React.Component{
                         {this.props.hover 
                             //this should probably all go in a div that has a fixed height to avoid any toggling with hovered
                             ?   <h2>Drop to send to main page</h2>
-                            :   <Link 
+                            :   <h2 
                                     className="link"
-                                    to={parent 
-                                        ?   `/${note.sticky_user_id}/note/${parent.id}` 
-                                        :   `/all-notes/`}
+                                    onClick={() => {
+                                        if(parent){
+                                            this.goToNote(note.sticky_username, note.parent)
+                                        } else {
+                                            this.goToNote(note.sticky_username)
+                                        }
+                                     }}
                                     >{parent ? `back to parent (note #${parent.id})` : `back to My notes`}
-                                </Link>
+                                </h2>
                         }
                     <NoteDetailSelf
                         type="note"

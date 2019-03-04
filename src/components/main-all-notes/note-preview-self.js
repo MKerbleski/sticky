@@ -5,7 +5,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import { connect } from 'react-redux';
 import { NotePreivewChild } from "./index"
 import { flex } from '../../styles/styl-utils.js'
-import { deleteNote, editNote, getChildren, noteToNote } from '../../actions'
+import { deleteNote, editNote, getChildren, noteToNote, getSingleNote } from '../../actions'
 import { sharedStickyNoteDrop } from '../../helpers'
 import ReactHTMLParser from 'react-html-parser'
 
@@ -13,9 +13,11 @@ class NotePreviewSelf extends React.Component {
 	state = {}
 
 	goToNote = (e) => {
+	console.log(this.props.note.sticky_username, this.props.note.id)
 		e.preventDefault()
 		if(!this.props.deleteBin){
 			this.props.redirect(`/${this.props.note.sticky_username}/note/${this.props.note.id}`)
+			this.props.getSingleNote(this.props.note.sticky_username, this.props.note.id)
 		}
 	}
 
@@ -158,7 +160,8 @@ const mapDispatchToProps = {
 	deleteNote,
 	editNote,
 	getChildren,
-	noteToNote
+	noteToNote,
+	getSingleNote
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(flow(

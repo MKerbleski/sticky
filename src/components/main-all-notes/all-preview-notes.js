@@ -22,16 +22,18 @@ class AllNotes extends Component {
     }
 
     componentDidMount(){
+        console.log(this.props)
         if(localStorage.getItem('JWT')){
             this.props.getUserData()
             if(this.props.deleteBin){
                 this.props.getDeletedNotes();
             } else {
-                this.props.getNotes();
+                this.props.getNotes(this.props.author);
             }
         } else {
+            this.props.getNotes(this.props.author);
             console.log("NO JWT")
-            this.props.history.push('/welcome/login')
+            // this.props.history.push('/welcome/login')
         }
     }
 

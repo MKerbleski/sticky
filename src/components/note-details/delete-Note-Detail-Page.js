@@ -17,12 +17,12 @@ class NoteDetailPage extends Component {
     }
 
     componentDidMount(){
-        this.props.getSingleNote(this.props.author_id, this.props.note_id)
+        this.props.getSingleNote(this.props.author, this.props.note_id)
     }
 
     componentWillReceiveProps(nextProps){
         if(this.props.note_id !== nextProps.note_id){
-            this.props.getSingleNote(this.props.author_id, nextProps.note_id)
+            this.props.getSingleNote(this.props.author, nextProps.note_id)
         }
     }
 

@@ -6,11 +6,9 @@ import { connect } from 'react-redux';
 import {
     AllNotes,
     LeftMenu,
-    Welcome, 
     NoteDetailParent,
     RightMenu,
     Settings,
-    Header,
 } from './components';
 
 import {
@@ -44,14 +42,14 @@ class UsernamePage extends Component {
                     <div className="app-center">
                         <Route
                             exact
-                            path="/:username/" 
+                            path="/:author" 
                             render={ (a) => {
                                 return <AllNotes
                                     redirect={this.props.redirect}
                                     showNewNote={this.state.showNewNote}
                                     showDetailMenu={this.showDetailMenu}
                                     toggleNewNote={this.toggleNewNote}
-                                    user_name={a.match.params.user_name}
+                                    author={a.match.params.author}
                                     
                                 /> 
                             }} 
@@ -59,23 +57,24 @@ class UsernamePage extends Component {
                                 
                         <Route
                             // exact={!this.state.deleteEnabled}
-                            path="/:username/note/:note_id"
+                            path="/:author/note/:note_id"
                             render={ (note) => {
                                 return <NoteDetailParent
+                                    
                                     note_id={note.match.params.note_id}
-                                    author_name={note.match.params.username}
+                                    author={note.match.params.author}
                                     redirect={this.props.redirect}
                                 />
                             }} 
                         />
 
                         <Route
-                            path="/settings"
+                            path="/:username/settings"
                             component={Settings} 
                         />
                                 
                         <Route
-                            path="/deleted"
+                            path="/:username/deleted"
                             render={() => {
                                 return <AllNotes 
                                     deleteBin
@@ -88,7 +87,7 @@ class UsernamePage extends Component {
                             }}     
                         />
                     </div>
-                    {this.props.store.user.userData 
+                    {localStorage.getItem('JWT') && this.props.store.user.userData 
                         ?   <RightMenu 
                                 onDrop={this.onDrop} 
                             /> 

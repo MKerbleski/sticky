@@ -211,22 +211,27 @@ export const getDeletedNotes = () => {
     }
 }
 
-export const getNotes = () =>  {
+export const getNotes = (author) =>  {
     return function(dispatch){
+        dispatch({type: FETCHING_NOTES});
         if(localStorage.getItem('JWT')){
-			dispatch({type: FETCHING_NOTES});
 			const token = localStorage.getItem('JWT')
 			const authHeader = {
 				headers: { Authorization: token }
 			}
-			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/all`, authHeader).then(res => {
+			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${author}/all`, authHeader).then(res => {
                 // console.log(res)
                 dispatch({type: NOTES_RECIEVED, payload: res.data})
 			}).catch(err => {
 				dispatch({type: NOTE_ERROR, payload: err})
 			})
         } else {
-          	dispatch({type: ERROR, payload: 'there was no token found'})      
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${author}/all`).then(res => {
+                // console.log(res)
+                dispatch({type: NOTES_RECIEVED, payload: res.data})
+			}).catch(err => {
+				dispatch({type: NOTE_ERROR, payload: err})
+			})  
         }
     }
 }
