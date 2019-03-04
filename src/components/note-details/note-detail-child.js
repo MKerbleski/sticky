@@ -53,7 +53,7 @@ class NoteDetailChild extends React.Component {
 							<div className="layerTwoContainerAll">
 								{this.props.note.has_children 
 									? 	this.props.note.children.map(grandchild => {
-										if(!grandchild.is_deleted){
+											if(!grandchild.is_deleted){
 												return <NoteDetailGrandChild
 													key={grandchild.id}
 													type="note"
@@ -64,6 +64,8 @@ class NoteDetailChild extends React.Component {
 													// allNotes={this.props.allNotes}
 													// getFirstWord={this.getFirstWord} 
 												/>
+											} else {
+												return null
 											} 
 										})
 									:	null}

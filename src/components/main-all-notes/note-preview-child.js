@@ -19,24 +19,23 @@ class NotePreviewChild extends React.Component {
             connectDragSource, 
             connectDropTarget, 
         } = this.props
-        console.log(this.props.note)
         if (this.props.note){
             return (
                 connectDragSource &&
                 connectDropTarget &&
                     <LayerTwoDiv 
                         innerRef={instance => {
-                            this.props.connectDragSource(instance)
-                            this.props.connectDropTarget(instance)}}
+                            connectDragSource(instance)
+                            connectDropTarget(instance)}}
                         type="note"
                         onClick={this.goToNote}
-                        style={{background: this.props.hover ? 'lightgreen' : null}}>
+                        style={{background: this.props.hover ? 'lightgreen' : null}}
+                    >
                         <h4>{this.props.note.text_body}</h4>
                         {this.props.note.has_children 
                             ?   <div className="layerThreeContainerAll">
                                     {this.props.note.children 
                                         ?   this.props.note.children.map(grandchild => {
-                                            console.log(grandchild)
                                                 if(!grandchild.is_deleted){
                                                     return (
                                                         <div 
@@ -54,6 +53,8 @@ class NotePreviewChild extends React.Component {
                                                             />
                                                         </div>
                                                     )
+                                                } else {
+                                                    return null
                                                 }
                                             })
                                     :   null    }

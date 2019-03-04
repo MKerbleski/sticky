@@ -20,9 +20,24 @@ class NoteDetailSelf extends React.Component {
         }
     }
 
-    clickHandler = (note) => {
-        console.log('click detail self', note)
-        this.props.editNote({id: this.props.store.notes.notes[0].id, is_public: !this.props.store.notes.notes[0].is_public})
+    clickHandler = (e) => {
+        switch(e.target.name){
+            case "public":
+                this.props.editNote({id: this.props.store.notes.notes[0].id, is_public: !this.props.store.notes.notes[0].is_public})
+                break;
+            case "fork": 
+                console.log("fork settings are coming soon!")
+                break;
+            case "edit": 
+                console.log("edit settings are coming soon!")
+                break;
+            case "share": 
+                console.log("edit settings are coming soon!")
+                break;
+            default:
+                console.log("button has no name") 
+
+        }
     }
 
     render(){
@@ -57,19 +72,30 @@ class NoteDetailSelf extends React.Component {
                         </div>
                     </div>
                     <div className="note-detail-settings">
-                    <p>From user: {this.props.note.sticky_username}</p>
+                    <p>Author: {this.props.note.sticky_username}</p>
                         {localStorage.getItem('username') === this.props.note.sticky_username 
                             ? 
                                 <div>
                                     {this.props.note.is_public 
                                         ? <i className="fas fa-unlock"></i> 
                                         : <i className="fas fa-lock"></i>}
-                                <button onClick={this.clickHandler}>{this.props.note.is_public 
-                                    ? 'Make note Private' 
-                                    : 'make note PUBLIC'}</button>
-                            <i className="fas fa-cogs"></i>
-                            </div>
-                        : null}
+                                    <button name='public' onClick={this.clickHandler}>
+                                        {this.props.note.is_public 
+                                            ? 'Make note Private' 
+                                            : 'make note PUBLIC'}
+                                    </button>
+                                    <button name='fork' onClick={this.clickHandler}>
+                                        Allow Forks
+                                    </button>
+                                    <button name='edit' onClick={this.clickHandler}>
+                                        Allow Edits
+                                    </button>
+                                    <button name='share' onClick={this.clickHandler}>
+                                        Share
+                                    </button>
+                                    <i className="fas fa-cogs"></i>
+                                </div>
+                            :   <button onClick={this.clickHandler}>Pin Note</button>}
                     </div>
                 </NoteDetailSelfDiv>
             )

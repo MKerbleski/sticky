@@ -11,10 +11,12 @@ import { Link } from 'react-router-dom';
 // import Header from './header';
 // import { flex } from '../../styles/styl-utils.js'
 
-// import {
-//     createUser,
-//     loginUser,
-//     } from '../../actions';
+import {
+    createUser,
+    loginUser,
+    getUserData,
+    addNote,
+} from '../../actions';
     
 class Welcome extends Component{
     constructor(props){
@@ -60,33 +62,33 @@ class Welcome extends Component{
             localStorage.setItem('username', res.data.username)
             localStorage.setItem('sticky_user_id', res.data.sticky_user_id)
             if(localStorage.getItem('text_body')){
-                this.newNote({text_body: localStorage.getItem('text_body')})
-            } else {
-                this.props.history.push('/all-notes')
+                this.props.addNote({text_body: localStorage.getItem('text_body')})
             }
+            this.props.history.push(`/${res.data.username}`)
+            this.props.getUserData()
         }).catch(err => {console.log(err.message)})
     }
     
     // this is a repeated 3 times 
-    newNote = (newNote) => {
-        if(localStorage.getItem('JWT')){
-            const token = localStorage.getItem('JWT')
-            const authHeader = {
-                headers: {
-                Authorization: token,    
-                } 
-            }
-            axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/`, (newNote), authHeader)
-            .then(res => {
-                localStorage.removeItem('text_body')
-                this.props.history.push('/all-notes')
-                // this.props.getNotes();
-                //this is not necessary because it is called on a different route than /all notes
-            }).catch(err => console.log(err.message))
-        } else {
-            console.log('need to include token in request')
-        }
-    }
+    // newNote = (newNote) => {
+    //     if(localStorage.getItem('JWT')){
+    //         const token = localStorage.getItem('JWT')
+    //         const authHeader = {
+    //             headers: {
+    //             Authorization: token,    
+    //             } 
+    //         }
+    //         axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/`, (newNote), authHeader)
+    //         .then(res => {
+    //             localStorage.removeItem('text_body')
+    //             this.props.history.push('/all-notes')
+    //             // this.props.getNotes();
+    //             //this is not necessary because it is called on a different route than /all notes
+    //         }).catch(err => console.log(err.message))
+    //     } else {
+    //         console.log('need to include token in request')
+    //     }
+    // }
 
     inputHandler = (e) => {
         e.preventDefault();
@@ -101,7 +103,7 @@ class Welcome extends Component{
         this.setState({
             entryNote: '',
         })
-        this.props.history.push('/welcome/register')
+        this.props.history.push('/welcome/login')
         alert('Note was saved locally. Please login or register to save note permenantly.')
       }
 
@@ -137,12 +139,14 @@ class Welcome extends Component{
 
 const mapStateToProps = store => {
     return {state: store};//state is really props & store is store
-  }
+}
   
-  const mapDispatchToProps = {
+const mapDispatchToProps = {
     // createUser,
     // loginUser
-  }
+    getUserData,
+    addNote,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
 

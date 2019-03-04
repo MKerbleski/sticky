@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { 
-    addNote } from '../../actions'
+    addNote
+ } from '../../actions'
 
 import { connect } from 'react-redux';
 

@@ -41,7 +41,9 @@ class NoteDetailGrandChild extends React.Component {
                                                 // onDrop={this.props.onDrop}
                                                 // getFirstWord={this.props.getFirstWord}
                                                 />
-                                        } 
+                                        } else {
+                                            return null
+                                        }
                                     })
                                 :   null
                             }

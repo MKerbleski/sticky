@@ -9,6 +9,7 @@ import {
 import { 
     getNotes,
     getDeletedNotes,
+    getUserData,
 } from '../../actions'
 
 class AllNotes extends Component {
@@ -22,6 +23,7 @@ class AllNotes extends Component {
 
     componentDidMount(){
         if(localStorage.getItem('JWT')){
+            this.props.getUserData()
             if(this.props.deleteBin){
                 this.props.getDeletedNotes();
             } else {
@@ -98,19 +100,20 @@ const targetObj = {
 }
 
 const collect = (connect,  monitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  highlighted: monitor.canDrop(),
-  hover: monitor.isOver({shallow: true}),
-  hoverFalse: monitor.isOver()
+    connectDropTarget: connect.dropTarget(),
+    highlighted: monitor.canDrop(),
+    hover: monitor.isOver({shallow: true}),
+    hoverFalse: monitor.isOver()
 });
 
 const mapStateToProps = store => {
-  return {store: store};
+    return {store: store};
 }
 
 const mapDispatchToProps = {
-  getNotes,
-  getDeletedNotes
+    getNotes,
+    getDeletedNotes,
+    getUserData
 }
 
 export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, mapDispatchToProps)(AllNotes))

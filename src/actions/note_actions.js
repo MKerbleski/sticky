@@ -153,6 +153,8 @@ export const addNote = (newNote) => {
             }
             dispatch({type: SENDING_NEW_NOTE})
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/`, (newNote), authHeader).then(res => {
+                //Only want to delete from storage after it is added
+                localStorage.removeItem('text_body');
 				dispatch({type: NEW_NOTE_ADDED})
 				dispatch(getNotes());
             }).catch(err => {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import axios from 'axios';
+
 import {
     AllNotes,
     LeftMenu,
@@ -15,6 +15,7 @@ import {
     Settings,
     Header,
 } from './components';
+
 import {
     getNotes,
     addNote,
@@ -41,8 +42,8 @@ class App extends Component {
         if (!localStorage.getItem('JWT')){
             this.props.history.push('/welcome/')
         } else {
-            // let username = localStorage.getItem('username')
-            // this.props.history.push(`/${username}`)
+            let username = localStorage.getItem('username')
+            this.props.history.push(`/${username}`)
         }
     }
 

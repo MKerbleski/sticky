@@ -21,8 +21,8 @@ class Header extends Component{
             <HeaderDiv>
                 <Link 
                     to={localStorage.getItem('JWT') 
-                        ? '/all-notes' 
-                        : '/welcome'} 
+                        ?   `/${localStorage.getItem('username')}` 
+                        :   '/welcome'} 
                     className="headerTitle-link">
                     <h1 className="headerTitle">Stic.ky</h1>
                 </Link>
