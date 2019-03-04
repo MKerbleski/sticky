@@ -39,7 +39,7 @@ export const noteToNote = (notePackage) => {
             dispatch({ type: NOTE_TO_NOTE, payload: notePackage })
             axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/note/ToNote`, (notePackage), authHeader).then(res => {
                 dispatch({ type: NOTE_TO_NOTE_COMPLETE })
-				dispatch(getNotes());
+				dispatch(getNotes(localStorage.getItem('username')));
             }).catch(err => {
               	dispatch({ type: ERROR_EDITING_NOTE_TO_NOTE, payload: err })
                 console.log("error in edit note redux actions", err.message)

@@ -90,6 +90,7 @@ class App extends Component {
                                 showDetailMenu={this.showDetailMenu}
                                 toggleNewNote={this.toggleNewNote}
                                 username={a.match.params.username}
+                                match={a.match}
                             />
                         }} 
                     />                           

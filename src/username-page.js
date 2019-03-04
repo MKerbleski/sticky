@@ -1,6 +1,6 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import {
@@ -35,63 +35,68 @@ class UsernamePage extends Component {
             <UsernamePageDiv> 
                 {localStorage.getItem('JWT') && this.props.store.user.userData.username
                     ?   <LeftMenu 
+                            redirect={this.props.redirect}
+                            username={this.props.store.user.userData.username}
                             hideDetailMenu={this.hideDetailMenu}
                             toggleNewNote={this.toggleNewNote} 
                         />
                     :   null}
-                    <div className="app-center">
-                        <Route
-                            exact
-                            path="/:author" 
-                            render={ (a) => {
-                                return <AllNotes
-                                    redirect={this.props.redirect}
-                                    showNewNote={this.state.showNewNote}
-                                    showDetailMenu={this.showDetailMenu}
-                                    toggleNewNote={this.toggleNewNote}
-                                    author={a.match.params.author}
-                                    
-                                /> 
-                            }} 
-                        />
-                                
-                        <Route
-                            // exact={!this.state.deleteEnabled}
-                            path="/:author/note/:note_id"
-                            render={ (note) => {
-                                return <NoteDetailParent
-                                    
-                                    note_id={note.match.params.note_id}
-                                    author={note.match.params.author}
-                                    redirect={this.props.redirect}
-                                />
-                            }} 
-                        />
+                <div className="app-center">
+                    <Switch>
 
-                        <Route
-                            path="/:username/settings"
-                            component={Settings} 
-                        />
-                                
-                        <Route
-                            path="/:username/deleted"
-                            render={() => {
-                                return <AllNotes 
-                                    deleteBin
-                                    onDrop={this.onDrop} 
-                                    showDetailMenu={this.showDetailMenu}
-                                    showNewNote={this.state.showNewNote}
-                                    toggleNewNote={this.toggleNewNote}
-                                    redirect={this.redirect}         
-                                />
-                            }}     
-                        />
-                    </div>
-                    {localStorage.getItem('JWT') && this.props.store.user.userData 
-                        ?   <RightMenu 
-                                onDrop={this.onDrop} 
+                    <Route
+                        exact
+                        path={`${this.props.match.url}/`} 
+                        render={ (a) => {
+                            return <AllNotes
+                                sdeleteBin={false}
+                                redirect={this.props.redirect}
+                                showNewNote={this.state.showNewNote}
+                                showDetailMenu={this.showDetailMenu}
+                                toggleNewNote={this.toggleNewNote}
+                                author={this.props.username}
                             /> 
-                        :   null}
+                        }} 
+                    />
+                           
+                    <Route
+                        // exact={!this.state.deleteEnabled}
+                        path={`${this.props.match.url}/note/:note_id`}
+                        render={ (note) => {
+                            return <NoteDetailParent
+                                
+                                note_id={note.match.params.note_id}
+                                author={note.match.params.author}
+                                redirect={this.props.redirect}
+                            />
+                        }} 
+                    />
+
+                    <Route
+                        path={`${this.props.match.url}/settings`}
+                        component={Settings} 
+                    />
+                            
+                    <Route
+                        path={`${this.props.match.url}/trash`}
+                        render={() => {
+                            return <AllNotes 
+                            deleteBin
+                                onDrop={this.onDrop} 
+                                showDetailMenu={this.showDetailMenu}
+                                showNewNote={this.state.showNewNote}
+                                toggleNewNote={this.toggleNewNote}
+                                redirect={this.redirect}         
+                            />
+                        }}     
+                    />
+                    </Switch>
+                </div>
+                {localStorage.getItem('JWT') && this.props.store.user.userData 
+                    ?   <RightMenu 
+                            onDrop={this.onDrop} 
+                        /> 
+                    :   null}
             </UsernamePageDiv>
         )
     }

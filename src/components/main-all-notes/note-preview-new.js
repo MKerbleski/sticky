@@ -6,7 +6,6 @@ import {
 
 import { connect } from 'react-redux';
 
-
 class NotePreviewNew extends React.Component {
     constructor(props){
         super(props)

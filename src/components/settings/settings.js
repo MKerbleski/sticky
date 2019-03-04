@@ -5,50 +5,50 @@ import { connect } from 'react-redux';
 import { ApiSettings } from '../settings';
 
 class Settings extends Component {
-    constructor(props){
-      super(props);
-      this.state = {
-        hello: false,
-      }
-    }
+	constructor(props){
+		super(props);
+		this.state = {
+		hello: false,
+		}
+	}
 
-    componentDidMount(){
-      this.props.getUserData()
-    }    
+	componentDidMount(){
+		this.props.getUserData()
+	}    
 
-    componentWillReceiveProps(){
-      console.log("settings updated, should eventually rerender and trigger redux action for initializing api")
-    }
+	componentWillReceiveProps(){
+		console.log("settings updated, should eventually rerender and trigger redux action for initializing api")
+	}
 
-    render() {
-      // console.log("settings", this.props)
-      const { userData } = this.props.store.user
-      return (
-        <SettingsDiv>
-              <h1>settings</h1>
-              {userData ? 
-                  <div>
-                    <p>username: <span>{userData.username}</span></p>
-                    <p>first: <span>{userData.firstname}</span></p>
-                    <p>last: <span>{userData.lastname}</span></p>
-                    <h4>Apps</h4>
-                    <ApiSettings userData={userData} /> 
-                  </div> :
-                  <h6>loading...</h6>
-              } 
-              <p>by default api items will be redundent, they can appear on multiple notes and will remain in the list. click button to turn off redudency and each note will be only appear throughout sticky once. There will be a flag on the note that says whether it is used or not.</p>
-              <button>toggle redundency</button>
-            </SettingsDiv>
-      );
-    }
+	render() {
+		// console.log("settings", this.props)
+		const { userData } = this.props.store.user
+		return (
+			<SettingsDiv>
+				<h1>settings</h1>
+				{userData 
+					? 	<div>
+							<p>username: <span>{userData.username}</span></p>
+							<p>first: <span>{userData.firstname}</span></p>
+							<p>last: <span>{userData.lastname}</span></p>
+							<h4>Apps</h4>
+							<ApiSettings userData={userData} /> 
+						</div>
+					:	<h6>loading...</h6>
+				} 
+				<p>by default api items will be redundent, they can appear on multiple notes and will remain in the list. click button to turn off redudency and each note will be only appear throughout sticky once. There will be a flag on the note that says whether it is used or not.</p>
+				<button>toggle redundency</button>
+				</SettingsDiv>
+		);
+	}
 }
 
 const mapStateToProps = store => {
-  return {store: store};
+  	return {store: store};
 }
 
 const mapDispatchToProps = {
-  getUserData,
+  	getUserData,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings)

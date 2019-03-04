@@ -36,8 +36,20 @@ class AllNotes extends Component {
             // this.props.history.push('/welcome/login')
         }
     }
+    
+    componentWillReceiveProps(nextProps){
+        if(this.props.deleteBin !== nextProps.deleteBin){
+            console.log('delete bins arnt the same')
+            if(nextProps.deleteBin){
+                this.props.getDeletedNotes();
+            } else {
+                this.props.getNotes(nextProps.author);
+            }
+        }
+    }
 
     render() {
+        console.log('all notes')
         if(this.props.store.notes.notes){
             return (
                 <AllNotesDiv
