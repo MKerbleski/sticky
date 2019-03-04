@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { DragDropContext } from 'react-dnd';
@@ -38,12 +38,12 @@ class App extends Component {
 
     componentDidMount = () => {
         this.props.getUserData()
-        if (!localStorage.getItem('JWT')){
-            this.props.history.push('/welcome/')
-        } else {
+        // if (!localStorage.getItem('JWT')){
+        //     this.props.history.push('/welcome/')
+        // } else {
             // let username = localStorage.getItem('username')
             // this.props.history.push(`/${username}`)
-        }
+        // }
     }
 
     disableDelete = () => {
@@ -70,22 +70,24 @@ class App extends Component {
                     <Header redirect={this.redirect} />
                 </div>
                 <div className="app-bottom">
-                    <Route 
-                        path="/welcome/" 
-                        component={Welcome} />
-                    <Route 
-                        path="/:username" 
-                        render={ (a) => {
-                            return <UsernamePage
-                                redirect={this.redirect}
-                                showNewNote={this.state.showNewNote}
-                                showDetailMenu={this.showDetailMenu}
-                                toggleNewNote={this.toggleNewNote}
-                                username={a.match.params.username}
-                                match={a.match}
-                            />
-                        }} 
-                    />                           
+                    <Switch>
+                        <Route 
+                            path="/welcome/" 
+                            component={Welcome} />
+                        <Route 
+                            path="/:username" 
+                            render={ (a) => {
+                                return <UsernamePage
+                                    redirect={this.redirect}
+                                    showNewNote={this.state.showNewNote}
+                                    showDetailMenu={this.showDetailMenu}
+                                    toggleNewNote={this.toggleNewNote}
+                                    username={a.match.params.username}
+                                    match={a.match}
+                                />
+                            }} 
+                        />                           
+                    </Switch>
                 </div>
             </AppDiv>
         )
@@ -109,9 +111,9 @@ const mapDispatchToProps = {
 export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
 
 const AppDiv = styled.div`
-box-sizing: border-box;
-border: 1px solid red;
-margin: 2px;
+    box-sizing: border-box;
+        border: 1px solid red;
+        margin: 2px;
     display: flex;
     flex-direction: column;
     background-color: white;

@@ -125,14 +125,16 @@ const UsernamePageDiv = styled.div`
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    width: 100%;
+    max-width: 100%;
     .app-center {
         border: 2px solid blue;
         box-sizing: border-box;
         margin: 2px;
-        width: 100%;
+        max-width: 99%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        /* align-items: center; */
+        /* justify-content: center; */
         flex-wrap: wrap;
         overflow: auto;
     }
