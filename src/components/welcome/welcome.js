@@ -41,9 +41,9 @@ class Welcome extends Component{
             if(localStorage.getItem('text_body')){
                 this.newNote({text_body: localStorage.getItem('text_body')})
             } else {
-                this.props.history.push('/all-notes')
+                this.props.history.push(`/${res.data.username}`)
             }
-            this.props.history.push('/all-notes')
+            this.props.history.push(`/${res.data.username}`)
         }).catch(err => {console.log(err.message)})
     }
 

@@ -7,7 +7,7 @@ import {
     // NoteDetailBody,
     // AttachedList,
 } from '../index.js';
-import { getAttachedItems } from '../../actions'
+import { getAttachedItems, editNote } from '../../actions'
 import { start } from '../../styles/styl-utils.js'
 // import { default as NoteQuill } from './note-detail-body-quill'
 // import axios from 'axios'
@@ -18,6 +18,11 @@ class NoteDetailSelf extends React.Component {
         this.state = {
 
         }
+    }
+
+    clickHandler = (note) => {
+        console.log('click detail self', note)
+        this.props.editNote({id: this.props.store.notes.notes[0].id, is_public: !this.props.store.notes.notes[0].is_public})
     }
 
     render(){
@@ -52,7 +57,19 @@ class NoteDetailSelf extends React.Component {
                         </div>
                     </div>
                     <div className="note-detail-settings">
-                        <i className="fas fa-cogs"></i>
+                    <p>From user: {this.props.note.sticky_username}</p>
+                        {localStorage.getItem('username') === this.props.note.sticky_username 
+                            ? 
+                                <div>
+                                    {this.props.note.is_public 
+                                        ? <i className="fas fa-unlock"></i> 
+                                        : <i className="fas fa-lock"></i>}
+                                <button onClick={this.clickHandler}>{this.props.note.is_public 
+                                    ? 'Make note Private' 
+                                    : 'make note PUBLIC'}</button>
+                            <i className="fas fa-cogs"></i>
+                            </div>
+                        : null}
                     </div>
                 </NoteDetailSelfDiv>
             )
@@ -101,6 +118,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
     getAttachedItems,
+    editNote
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailSelf));
