@@ -32,7 +32,10 @@ class NoteDetailSelf extends React.Component {
                 console.log("edit settings are coming soon!")
                 break;
             case "share": 
-                console.log("edit settings are coming soon!")
+                console.log("share settings are coming soon!")
+                break;
+            case "delete": 
+                console.log("delete settings are coming soon!")
                 break;
             default:
                 console.log("button has no name") 
@@ -92,6 +95,9 @@ class NoteDetailSelf extends React.Component {
                                     </button>
                                     <button name='share' onClick={this.clickHandler}>
                                         Share
+                                    </button>
+                                    <button >
+                                    <i name='delete' onClick={this.clickHandler}className=" menu-item fas fa-trash-alt"></i>
                                     </button>
                                     <i className="fas fa-cogs"></i>
                                 </div>

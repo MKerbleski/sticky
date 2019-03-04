@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import UsernamePage from './username-page.js'
 
 import {
     AllNotes,
@@ -42,8 +43,8 @@ class App extends Component {
         if (!localStorage.getItem('JWT')){
             this.props.history.push('/welcome/')
         } else {
-            let username = localStorage.getItem('username')
-            this.props.history.push(`/${username}`)
+            // let username = localStorage.getItem('username')
+            // this.props.history.push(`/${username}`)
         }
     }
 
@@ -144,101 +145,28 @@ class App extends Component {
 
     render() {
         return (
-        <AppDiv>
-            <div className="app-top">
-                <Header redirect={this.redirect} />
-            </div>
-            {localStorage.getItem('JWT') && this.props.store.user.userData.username
-                    ? <div className="app-bottom">
-                        <LeftMenu 
-                            hideDetailMenu={this.hideDetailMenu}
-                            toggleNewNote={this.toggleNewNote} />
-                        <div className="app-center">
-                            <React.Fragment>
-                                <Route exact
-                                    path="/:username" 
-                                    render={ (a) => {
-                                        return <AllNotes
-                                            redirect={this.redirect}
-                                            showNewNote={this.state.showNewNote}
-                                            showDetailMenu={this.showDetailMenu}
-                                            toggleNewNote={this.toggleNewNote}
-                                            user_name={a.match.params.user_name}
-                                            // onDrop={this.onDrop} 
-                                            // changeParent={this.changeParent}
-                                            // notes={this.props.state.notes}
-                                            // links={this.props.store.notes.links}
-                                            // username={this.props.state.username}
-                                            // getNotes={this.props.getNotes}
-                                            // getLinks={this.props.getLinks}
-                                            // newNote={this.newNote}
-                                        /> 
-                                    }} 
-                                />
-                                
-                                {/* <Route
-                                    exact={!this.state.deleteEnabled}
-                                    path="/note/:note_id"
-                                    render={ (note) => {
-                                    return <NoteDetailParent
-                                        redirect={this.redirect}
-                                        allNotes={this.props.store.notes.notes}
-                                        // allLinks={this.props.store.notes.links}
-                                        note={this.getNoteDetails(note.match.params.note_id)} 
-                                        onDrop={this.onDrop} 
-                                        changeParent={this.changeParent}
-                                        type="note"
-                                        editNote={this.editNote}
-                                        targetId={this.getParentId(note.match.params.note_id)}
-                                        />}} /> */}
-                                
-                                <Route
-                                    // exact={!this.state.deleteEnabled}
-                                    path="/:author_name/note/:note_id"
-                                    render={ (note) => {
-                                    return <NoteDetailParent
-                                        note_id={note.match.params.note_id}
-                                        author_name={note.match.params.author_name}
-                                        redirect={this.redirect}
-                                        // allNotes={this.props.store.notes.notes}
-                                        // allLinks={this.props.store.notes.links}
-                                        // note={this.getNoteDetails(note.match.params.note_id)} 
-                                        // onDrop={this.onDrop} 
-                                        // changeParent={this.changeParent}
-                                        // type="note"
-                                        // editNote={this.editNote}
-                                        // targetId={this.getParentId(note.match.params.note_id)}
-                                        />}} />
-
-                                <Route
-                                    path="/settings"
-                                    component={Settings} />
-                                
-                                <Route
-                                    path="/deleted"
-                                    render={() => {
-                                    return <AllNotes 
-                                        deleteBin
-                                        onDrop={this.onDrop} 
-                                        showDetailMenu={this.showDetailMenu}
-                                        showNewNote={this.state.showNewNote}
-                                        toggleNewNote={this.toggleNewNote}
-                                        redirect={this.redirect} />
-                                    }} />
-
-                            </React.Fragment> 
-                        </div> {/*   app-center    */}
-                        
-                        {this.props.store.user.userData ? 
-                            <RightMenu 
-                                onDrop={this.onDrop} 
-                                /> : null}
-                    </div> 
-                :   <Route path="/welcome/" component={Welcome} />
-            }    
-        </AppDiv>
-        );//return
-    }//render
+            <AppDiv>
+                <div className="app-top">
+                    <Header redirect={this.redirect} />
+                </div>
+                <div className="app-bottom">
+                    <Route path="/welcome/" component={Welcome} />
+                    <Route 
+                        path="/:username" 
+                        render={ (a) => {
+                            return <UsernamePage
+                                redirect={this.redirect}
+                                showNewNote={this.state.showNewNote}
+                                showDetailMenu={this.showDetailMenu}
+                                toggleNewNote={this.toggleNewNote}
+                                username={a.match.params.username}
+                            />
+                        }} 
+                    />                           
+                </div>
+            </AppDiv>
+        )
+    }
 }
 
 const mapStateToProps = store => {
@@ -268,17 +196,12 @@ const AppDiv = styled.div`
         height: 5vh;
     }
     .app-bottom {
+        border: 2px solid green;
         display: flex;
         flex-direction: row;
         z-index: 0;
         box-sizing: border-box;
         height: 95vh;
-        .app-center {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            overflow: auto;
-        }
+        
     }
 `;
