@@ -66,7 +66,7 @@ class UsernamePage extends Component {
                             return <NoteDetailParent
                                 
                                 note_id={note.match.params.note_id}
-                                author={note.match.params.author}
+                                author={this.props.match.url}
                                 redirect={this.props.redirect}
                             />
                         }} 

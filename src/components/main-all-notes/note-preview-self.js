@@ -13,7 +13,7 @@ class NotePreviewSelf extends React.Component {
 	state = {}
 
 	goToNote = (e) => {
-	// console.log(this.props.note.sticky_username, this.props.note.id)
+	console.log(this.props, this.props.note.id)
 		e.preventDefault()
 		if(!this.props.deleteBin){
 			this.props.redirect(`/${this.props.note.sticky_username}/note/${this.props.note.id}`)
