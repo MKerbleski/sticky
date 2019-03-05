@@ -5,22 +5,28 @@ import { DragSource, DropTarget } from 'react-dnd';
 import { connect } from 'react-redux';
 import { NotePreivewChild } from "./index"
 import { flex } from '../../styles/styl-utils.js'
-import { deleteNote, editNote, getChildren, noteToNote, getSingleNote } from '../../actions'
 import { sharedStickyNoteDrop } from '../../helpers'
 import ReactHTMLParser from 'react-html-parser'
+import { 
+	deleteNote, 
+	editNote, 
+	getChildren, 
+	noteToNote, 
+	getSingleNote
+} from '../../actions'
 
 class NotePreviewSelf extends React.Component {
 	state = {}
 
+	//Necessary to avoid nested <a>tag warning</a>
 	goToNote = (e) => {
-	console.log(this.props, this.props.note.id)
 		e.preventDefault()
 		if(!this.props.deleteBin){
 			this.props.redirect(`/${this.props.note.sticky_username}/note/${this.props.note.id}`)
-			this.props.getSingleNote(this.props.note.sticky_username, this.props.note.id)
 		}
 	}
 
+	//This is for when 'all-preview-notes' becomes the delete bin
 	clickHandler = (e) => {
 		e.preventDefault()
 		if(e.target.name === "delete"){
@@ -29,7 +35,8 @@ class NotePreviewSelf extends React.Component {
 			this.props.editNote({id: this.props.note.id, is_deleted: false}, true)
 		}
 	}
-    
+	
+	//Converts a string of HTML saved on the server into useable HTML
 	renderText(){
 		let doc = new DOMParser().parseFromString(this.props.note.text_body, 'text/html')
 		return doc
@@ -159,7 +166,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = {
 	deleteNote,
 	editNote,
-	getChildren,
+	// getChildren,
 	noteToNote,
 	getSingleNote
 }
@@ -179,7 +186,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 )(NotePreviewSelf))
 
 const NotePreviewSelfDiv = styled.div`
-	${'' /* border: 1px solid blue; */}
+	border: 1px solid blue;
 	padding: 10px;
 	width: 300px;
 	height: auto;
