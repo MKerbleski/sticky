@@ -60,7 +60,9 @@ export default class LeftMenu extends Component {
 				</div>
 				<div className="leftMenuBottom">
 					<Link 
-						to={`/${this.props.username}/trash`}>
+						to={`/${this.props.username}/trash`}
+						>
+						
 						{/* // onClick={() => this.clickHandler("trash")}> */}
 						<DeleteTarget
 							type='deleteBin' 

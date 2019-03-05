@@ -25,74 +25,93 @@ class UsernamePage extends Component {
     constructor(props){
         super(props)
         this.state = {
-
+            showNewNote: false,
+            showRightMenu: false,
         }
     }
 
+    componentWillUnmount(){
+        this.setState({
+            showNewNote: false,
+            showRightMenu: false,
+        })
+    }
+
+    //need to unmount when this button is clicked in note detail and vis versa
+    toggleNewNote = () => {
+        this.setState({
+            showNewNote: !this.state.showNewNote
+        })
+    }
+
+    //need to unmount when this button is clicked in note detail and vis versa
+    toggleRightMenu = () => {
+        this.setState({
+            showRightMenu: !this.state.showRightMenu
+        })
+    }
+
     render(){
-        console.log(this.props)
         return(
             <UsernamePageDiv> 
                 {localStorage.getItem('JWT') && this.props.store.user.userData.username
-                    ?   <LeftMenu 
+                    ?   <LeftMenu
                             redirect={this.props.redirect}
                             username={this.props.store.user.userData.username}
-                            hideDetailMenu={this.hideDetailMenu}
+                            toggleRightMenu={this.toggleRightMenu} 
+                            showRightMenu={this.state.showRightMenu}
                             toggleNewNote={this.toggleNewNote} 
+                            showNewNote={this.state.showNewNote}
                         />
                     :   null}
                 <div className="app-center">
                     <Switch>
-
-                    <Route
-                        exact
-                        path={`${this.props.match.url}/`} 
-                        render={ (a) => {
-                            return <AllNotes
-                                sdeleteBin={false}
-                                redirect={this.props.redirect}
-                                showNewNote={this.state.showNewNote}
-                                showDetailMenu={this.showDetailMenu}
-                                toggleNewNote={this.toggleNewNote}
-                                author={this.props.username}
-                            /> 
-                        }} 
-                    />
-                           
-                    <Route
-                        // exact={!this.state.deleteEnabled}
-                        path={`${this.props.match.url}/note/:note_id`}
-                        render={ (note) => {
-                            return <NoteDetailParent
-                                
-                                note_id={note.match.params.note_id}
-                                author={this.props.match.url}
-                                redirect={this.props.redirect}
-                            />
-                        }} 
-                    />
-
-                    <Route
-                        path={`${this.props.match.url}/settings`}
-                        component={Settings} 
-                    />
-                            
-                    <Route
-                        path={`${this.props.match.url}/trash`}
-                        render={() => {
-                            return <AllNotes 
-                            deleteBin
-                                onDrop={this.onDrop} 
-                                showDetailMenu={this.showDetailMenu}
-                                showNewNote={this.state.showNewNote}
-                                toggleNewNote={this.toggleNewNote}
-                                redirect={this.redirect}         
-                            />
-                        }}     
-                    />
+                        <Route
+                            exact
+                            path={`${this.props.match.url}/`} 
+                            render={ () => {
+                                return <AllNotes
+                                    sdeleteBin={false}
+                                    redirect={this.props.redirect}
+                                    showNewNote={this.state.showNewNote}
+                                    showDetailMenu={this.showDetailMenu}
+                                    toggleNewNote={this.toggleNewNote}
+                                    author={this.props.username}
+                                /> 
+                            }} 
+                        />
+                        <Route
+                            // exact={!this.state.deleteEnabled}
+                            path={`${this.props.match.url}/note/:note_id`}
+                            render={ (note) => {
+                                return <NoteDetailParent
+                                    
+                                    note_id={note.match.params.note_id}
+                                    author={this.props.match.url}
+                                    redirect={this.props.redirect}
+                                />
+                            }} 
+                        />
+                        <Route
+                            path={`${this.props.match.url}/settings`}
+                            component={Settings} 
+                        /> 
+                        <Route
+                            path={`${this.props.match.url}/trash`}
+                            render={() => {
+                                return <AllNotes 
+                                    deleteBin
+                                    onDrop={this.onDrop} 
+                                    showDetailMenu={this.showDetailMenu}
+                                    showNewNote={this.state.showNewNote}
+                                    toggleNewNote={this.toggleNewNote}
+                                    redirect={this.redirect}         
+                                />
+                            }}     
+                        />
                     </Switch>
                 </div>
-                {localStorage.getItem('JWT') && this.props.store.user.userData 
+                {localStorage.getItem('JWT') && this.props.store.user.userData
                     ?   <RightMenu 
                             onDrop={this.onDrop} 
                         /> 
@@ -125,12 +144,15 @@ const UsernamePageDiv = styled.div`
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     max-width: 100%;
+    width: 100%;
     .app-center {
         border: 2px solid blue;
         box-sizing: border-box;
         margin: 2px;
         max-width: 99%;
+        width: 100%;
         display: flex;
         flex-direction: row;
         /* align-items: center; */

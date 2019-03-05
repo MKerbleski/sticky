@@ -49,7 +49,7 @@ class Welcome extends Component{
         }).catch(err => {console.log(err.message)})
     }
 
-    loginUser2 = (creds) => {
+    loginUser = (creds) => {
         this.setState({
             sendingData: false,
             entryNote: ''
@@ -69,27 +69,6 @@ class Welcome extends Component{
         }).catch(err => {console.log(err.message)})
     }
     
-    // this is a repeated 3 times 
-    // newNote = (newNote) => {
-    //     if(localStorage.getItem('JWT')){
-    //         const token = localStorage.getItem('JWT')
-    //         const authHeader = {
-    //             headers: {
-    //             Authorization: token,    
-    //             } 
-    //         }
-    //         axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/`, (newNote), authHeader)
-    //         .then(res => {
-    //             localStorage.removeItem('text_body')
-    //             this.props.history.push('/all-notes')
-    //             // this.props.getNotes();
-    //             //this is not necessary because it is called on a different route than /all notes
-    //         }).catch(err => console.log(err.message))
-    //     } else {
-    //         console.log('need to include token in request')
-    //     }
-    // }
-
     inputHandler = (e) => {
         e.preventDefault();
         this.setState({
@@ -104,30 +83,55 @@ class Welcome extends Component{
             entryNote: '',
         })
         this.props.history.push('/welcome/login')
-        alert('Note was saved locally. Please login or register to save note permenantly.')
+        // alert('Note was saved locally. Please login or register to save note permenantly.')asdf
       }
 
     render(){
         return(
             <WelcomeDiv>
-                <Route path="/welcome/login" render={() => {
-                    return <Login failed={(this.props.state.failedLoginAttempt)? true : false} 
-                    sendingData={this.state.sendingData}
-                    loginUser={this.loginUser2} />}} />
-                <Route path="/welcome/register" render={() => {
-                    return <Register failed={this.props.state.failedRegistrationAttempt} 
-                    sendingData={this.state.sendingData}
-                    createUser={this.createUser} />}} />
-                <Route exact path="/welcome/" render={() => {
-                    return <form onSubmit={this.saveLocalNote}>
+                <Route 
+                    path="/welcome/login" 
+                    render={() => {
+                        return <Login 
+                            failed={(this.props.store.failedLoginAttempt)
+                                ? true 
+                                : false} 
+                            sendingData={this.state.sendingData}
+                            loginUser={this.loginUser} 
+                        />
+                    }} 
+                />
+                <Route 
+                    path="/welcome/register" 
+                    render={() => {
+                        return <Register 
+                            failed={this.props.store.failedRegistrationAttempt} 
+                            sendingData={this.state.sendingData}
+                            createUser={this.createUser} 
+                        />
+                    }}
+                />
+                <Route 
+                    exact 
+                    path="/welcome/" 
+                    render={() => {
+                        return  (
+                            <form onSubmit={this.saveLocalNote}>
                                 <textarea 
                                     type="text" 
-                                    name="entryNote" placeholder='have an idea? start typing...' 
+                                    name="entryNote" 
+                                    placeholder='have an idea? start typing...' 
                                     onChange={this.inputHandler} 
-                                    value={this.state.entryNote} autoFocus>{this.value}</textarea>
+                                    value={this.state.entryNote} 
+                                    autoFocus
+                                >
+                                    {this.value}
+                                </textarea>
                                 <input type="submit" name="Save note" />
                             </form>
-                    }} />
+                        )
+                    }} 
+                />
                 <footer>
                     <Link to="/about">About</Link>
                     <a href="https://mikerble.ski">Made by Mike</a>
@@ -138,40 +142,41 @@ class Welcome extends Component{
 }
 
 const mapStateToProps = store => {
-    return {state: store};//state is really props & store is store
+    return {store: store};//state is really props & store is store
 }
   
 const mapDispatchToProps = {
-    // createUser,
-    // loginUser
     getUserData,
     addNote,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
 
-//379 dope picture
-
 const WelcomeDiv = styled.div`
-    /* border: 1px solid blue; */
+    border: 1px solid blue;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    ${'' /* background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)}); */}
-    ${'' /* width: 100%; */}
-    height: 90vh;
+    /* background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)}); */
+    max-width: 99%;
+    width: 99%;
+    overflow: auto;
+    max-height: 100%;
+    margin: 2px;
+    /* height: 90vh; */
     ${'' /* ${flex('column')} */}
     form{
-        ${'' /* border: 1px solid green; */}
+        border: 1px solid green;
+        margin: 2px;
         textarea{
             ${'' /* border: 1px solid green; */}
             background: rgba(255,255,255,0.15);
             border: none;
-            padding: 20px;
+            /* padding: 20px; */
             font-size: 20px;
             color: black;
-            margin: 100px;
+            margin: 50px;
             width: 400px;
             height: 200px;
             ::placeholder{
@@ -185,12 +190,15 @@ const WelcomeDiv = styled.div`
         ${'' /* z-index: 100; */}
     }
     footer {
-        width: 90%;
+        border: 1px solid black;
+        max-width: 99%;
+        width: 98%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-content: center;
-        border: 1px solid red;
         text-align: baseline;
+        padding: 3px;
+        margin: 2px;
     }
 `;

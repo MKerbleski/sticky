@@ -20,16 +20,19 @@ class Header extends Component{
         return(
             <HeaderDiv>
                 <Link 
+                    className="headerTitle-link"
                     to={localStorage.getItem('JWT') 
                         ?   `/${localStorage.getItem('username')}` 
                         :   '/welcome'} 
-                    className="headerTitle-link">
+                >
                     <h1 className="headerTitle">Stic.ky</h1>
                 </Link>
-                {this.props.store.notes.status ? this.props.store.notes.status : <p>status</p>}
+                {this.props.store.notes.status 
+                    ? this.props.store.notes.status 
+                    : <p>status</p>}
                 {localStorage.getItem('username') 
                     ?   <div className="linkss">
-                            <h3>{` Hello ${localStorage.getItem('username')},`}</h3>
+                            <h3>{`Hello ${localStorage.getItem('username')},`}</h3>
                             <div className="headerLink" onClick={this.logout} >Logout</div> 
                         </div> 
                     :   <div className="linkss">
@@ -50,10 +53,9 @@ const mapDispatchToProps = {
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
-  
 
 const HeaderDiv = styled.div`
-    ${'' /* border: 1px solid red; */}
+    border: 1px solid red;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -71,7 +73,7 @@ const HeaderDiv = styled.div`
             color: black;
             text-decoration: none;
         }
-        .headerTitle{
+        .headerTitle {
             ${'' /* border: 1px solid green; */}
             color: black;
             -webkit-text-stroke-width: .1px;
@@ -82,6 +84,9 @@ const HeaderDiv = styled.div`
             margin-left: 20px;
             text-decoration: none;
         }
+    }
+    p {
+        margin: 0
     }
     .linkss{
         ${'' /* border: 1px solid green; */}

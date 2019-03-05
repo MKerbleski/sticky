@@ -59,9 +59,9 @@ export const editNote = (noteEdit, fetchDeleted=false) => {
             dispatch({ type: EDITING_NOTE })
             axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${noteEdit.id}`, (noteEdit), authHeader).then(res => {
 				if(fetchDeleted){
-					dispatch(getDeletedNotes())
+					dispatch(getDeletedNotes(localStorage.getItem('username')))
 				} else {
-					dispatch(getNotes());
+					dispatch(getNotes(localStorage.getItem('username')));
 				}   
               	dispatch({ type: NOTE_EDITED })
             }).catch(err => {
@@ -156,7 +156,7 @@ export const addNote = (newNote) => {
                 //Only want to delete from storage after it is added
                 localStorage.removeItem('text_body');
 				dispatch({type: NEW_NOTE_ADDED})
-				dispatch(getNotes());
+				dispatch(getNotes(localStorage.getItem('username')));
             }).catch(err => {
 				console.log(err.message)
 				dispatch({type: ERROR_ADDING_NEW_NOTE})
@@ -212,6 +212,7 @@ export const getDeletedNotes = () => {
 }
 
 export const getNotes = (author) =>  {
+    console.log("getNotes", author)
     return function(dispatch){
         dispatch({type: FETCHING_NOTES});
         if(localStorage.getItem('JWT')){

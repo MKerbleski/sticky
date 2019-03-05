@@ -11,6 +11,7 @@ import {
     getDeletedNotes,
     getUserData,
 } from '../../actions'
+import { RightMenu } from '../right-menu'
 
 class AllNotes extends Component {
     constructor(props){
@@ -49,7 +50,8 @@ class AllNotes extends Component {
 
     render() {
         console.log('all notes')
-        if(this.props.store.notes.notes){
+        const notes = this.props.store.notes.notes
+        if(notes){
             return (
                 <AllNotesDiv
                     type="top" 
@@ -59,7 +61,7 @@ class AllNotes extends Component {
                         :   this.props.deleteBin 
                             ?   'red' 
                             :   null}}>
-                    {this.props.store.notes.notes.length > 0 
+                    {notes.length > 0 
                         ? null 
                         :   this.props.deleteBin 
                                 ?   <div>Delete Bin is empty</div>
@@ -70,7 +72,7 @@ class AllNotes extends Component {
                     {this.props.showNewNote && !this.props.deleteBin 
                         ?   <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> 
                         :   null}        
-                    {this.props.store.notes.notes.map(note => {
+                    {notes.map(note => {
                         return <NotePreviewSelf
                             key={note.id}
                             type="note"
@@ -78,12 +80,9 @@ class AllNotes extends Component {
                             note={note}
                             redirect={this.props.redirect}
                             deleteBin={this.props.deleteBin ? true : false}
-                            // onDrop={this.props.onDrop}
-                            // siblings={this.props.store.notes.notes}
-                            // changeParent={this.props.changeParent}
-                            // allNotes={this.props.store.notes.notes}
                             />
                     })}
+
                 </AllNotesDiv>
             )
         } else {
@@ -136,19 +135,24 @@ const AllNotesDiv = styled.div`
     margin: 4px;
     color: black;
     /* height: 100%; */
+
     max-width: 99%;
-    box-sizing: border-box;
-    overflow: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    padding: 15px;
-    &::-webkit-scrollbar {
-        width: 6px;
-        &-thumb{
-            background-color: gray;
-            border-radius: 25px;
+
+        border: 1px solid green;
+        box-sizing: border-box;
+        overflow: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: flex-start;
+        padding: 15px;
+        margin: 2px;
+        width: 100%;
+        &::-webkit-scrollbar {
+            width: 6px;
+            &-thumb{
+                background-color: gray;
+                border-radius: 25px;
+            }
         }
-    }
 `;

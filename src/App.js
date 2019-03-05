@@ -8,12 +8,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import UsernamePage from './username-page.js'
 
 import {
-    AllNotes,
-    LeftMenu,
     Welcome, 
-    NoteDetailParent,
-    RightMenu,
-    Settings,
     Header,
 } from './components';
 
@@ -32,33 +27,22 @@ class App extends Component {
         this.state = {
             hideDetails: true,
             main: true, 
-            showNewNote: false,
         }
     }
 
     componentDidMount = () => {
         this.props.getUserData()
-        // if (!localStorage.getItem('JWT')){
-        //     this.props.history.push('/welcome/')
-        // } else {
-            // let username = localStorage.getItem('username')
-            // this.props.history.push(`/${username}`)
-        // }
     }
 
+    //No idea what this is currently
     disableDelete = () => {
         this.setState({
             deleteEnabled: false,
         })
     }
 
-    //need to unmount when this button is clicked in note detail and vis versa
-    toggleNewNote = () => {
-        this.setState({
-            showNewNote: !this.state.showNewNote
-        })
-    }
-
+    //This is necessary to get around the nested 
+    //<a>tag</a> prediciment when selecting a grandchild note
     redirect = (route) => {
         this.props.history.push(route)
     }
@@ -79,9 +63,6 @@ class App extends Component {
                             render={ (a) => {
                                 return <UsernamePage
                                     redirect={this.redirect}
-                                    showNewNote={this.state.showNewNote}
-                                    showDetailMenu={this.showDetailMenu}
-                                    toggleNewNote={this.toggleNewNote}
                                     username={a.match.params.username}
                                     match={a.match}
                                 />
@@ -113,18 +94,22 @@ export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps,
 const AppDiv = styled.div`
     box-sizing: border-box;
         border: 1px solid red;
-        margin: 2px;
+        /* margin: 2px; */
     display: flex;
     flex-direction: column;
     background-color: white;
-    height: 99vh;
-    max-height: 100vh;
+    height: 100vh;
+    max-height: 99vh;
     max-width: 100vw;
+    overflow: hidden;
     .app-top {
         border: 1px solid purple;
         margin: 2px;
         box-sizing: border-box;
-        max-height: 5vh;
+        height: 5vh;
+        overflow: hidden;
+        /* min-height: 100px; */
+        min-height: 30px;
     }
     .app-bottom {
         border: 2px solid green;
