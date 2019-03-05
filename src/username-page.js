@@ -54,7 +54,7 @@ class UsernamePage extends Component {
     render(){
         return(
             <UsernamePageDiv> 
-                {localStorage.getItem('JWT') && this.props.store.user.userData.username
+                {localStorage.getItem('JWT') && this.props.store.user.userData
                     ?   <LeftMenu
                             redirect={this.props.redirect}
                             username={this.props.store.user.userData.username}
@@ -63,7 +63,8 @@ class UsernamePage extends Component {
                             toggleNewNote={this.toggleNewNote} 
                             showNewNote={this.state.showNewNote}
                         />
-                    :   null}
+                    :   null
+                }
                 <div className="app-center">
                     <Switch>
                         <Route
@@ -115,7 +116,8 @@ class UsernamePage extends Component {
                     ?   <RightMenu 
                             onDrop={this.onDrop} 
                         /> 
-                    :   null}
+                    :   null
+                }
             </UsernamePageDiv>
         )
     }

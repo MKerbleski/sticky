@@ -24,7 +24,6 @@ class AllNotes extends Component {
 
     componentDidMount(){
         if(localStorage.getItem('JWT')){
-            this.props.getUserData()
             if(this.props.deleteBin){
                 this.props.getDeletedNotes();
             } else {

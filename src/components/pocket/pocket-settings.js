@@ -22,6 +22,7 @@ export default class PocketSettings extends Component {
         e.preventDefault();
         let userid = this.props.userData.id
         let redirect_uri = `${process.env.REACT_APP_BACKEND_URL}/api/pocket/incoming/${userid}`
+        // let redirect_uri = `${process.env.REACT_APP_FRONTEND_URL}/${localStorage.getItem('username')}/settings/pocket/complete/${userid}`
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/auth/${userid}`).then(res => {
             if(res.data){
                 window.open(`https://getpocket.com/auth/authorize?request_token=${res.data}&redirect_uri=${redirect_uri}`)
@@ -64,17 +65,21 @@ export default class PocketSettings extends Component {
         //need a status button that says saving everything to server while it is initializing
         return(
             <PocketSettingsDiv> 
-                {this.state.isApiConnected ?
-                    <div style={{background: "lightgreen"}}>
-                        <p>pocket is connected </p><button onClick={this.clickHandler}>revoke access button goes here eventually </button>
-                        <button name="list" onClick={this.getPocketInfo}>notes</button>
-                        <p>Last accessed list: {}</p>
-                    
-                    </div> : 
-                    <div>
-                        <p>pocket is NOT connected</p><button onClick={this.connectPocket}>Connect to Pocket</button>
-                    </div>}
-                    {/* what I want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read... */}
+                {this.state.isApiConnected 
+                    ?   <div style={{background: "lightgreen"}}>
+                            <p>pocket is connected </p><button onClick={this.clickHandler}>revoke access button goes here eventually </button>
+                            <button name="list" onClick={this.getPocketInfo}>notes</button>
+                            <p>Last accessed list: {}</p>
+                        
+                        </div> 
+                    :   <div>
+                            <p>pocket is NOT connected</p><button onClick={this.connectPocket}>Connect to Pocket</button>
+                        </div>
+                }
+                <div>
+                            <p>pocket is NOT connected</p><button onClick={this.connectPocket}>Connect to Pocket</button>
+                        </div>
+                {/* what I want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read... */}
             </PocketSettingsDiv>
         )
     }

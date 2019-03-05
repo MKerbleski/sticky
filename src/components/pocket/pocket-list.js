@@ -6,16 +6,21 @@ import { PocketChannel } from './index.js';
 
 class PocketList extends Component {
     componentDidMount(){
-        this.props.getPocketList();
+        if(!this.props.store.pocket.pocketList){
+            this.props.getPocketList();
+        } 
     }
 
     render(){
-        console.log(this.props)
+        // console.log(this.props)
         return(
             <PocketListDiv> 
-            {this.props.store.pocket.fetchingPocketList ? <p>fetching pocket list. The first time connecting can take up to a couple minutes.</p> : null }
-                {this.props.store.pocket.pocketList ? 
-                <PocketChannel onDrop={this.props.onDrop} pocketList={this.props.store.pocket.pocketList} editAttachedItems={this.props.editAttachedItems}/>: <p>loading...</p>} 
+                {this.props.store.pocket.fetchingPocketList 
+                    ?   <p>fetching pocket list. The first time connecting can take up to a couple minutes.</p> 
+                    :   null }
+                {this.props.store.pocket.pocketList 
+                    ?   <PocketChannel onDrop={this.props.onDrop} pocketList={this.props.store.pocket.pocketList} editAttachedItems={this.props.editAttachedItems}/>
+                    :   <p>loading...</p>} 
             </PocketListDiv>
         )
     }
