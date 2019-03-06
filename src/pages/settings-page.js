@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { getUserData } from '../../actions'
+import { getUserData } from '../actions'
 import { connect } from 'react-redux';
-import { ApiSettings } from '../settings';
+import { ApiSettings } from '../components/settings';
 
-class Settings extends Component {
+class SettingsPage extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -24,7 +24,7 @@ class Settings extends Component {
 		// console.log("settings", this.props)
 		const { userData } = this.props.store.user
 		return (
-			<SettingsDiv>
+			<SettingsPageDiv>
 				<h1>settings</h1>
 				{userData 
 					? 	<div>
@@ -38,7 +38,7 @@ class Settings extends Component {
 				} 
 				<p>by default api items will be redundent, they can appear on multiple notes and will remain in the list. click button to turn off redudency and each note will be only appear throughout sticky once. There will be a flag on the note that says whether it is used or not.</p>
 				<button>toggle redundency</button>
-				</SettingsDiv>
+				</SettingsPageDiv>
 		);
 	}
 }
@@ -51,9 +51,9 @@ const mapDispatchToProps = {
   	getUserData,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Settings)
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage)
 
-const SettingsDiv = styled.div`
+const SettingsPageDiv = styled.div`
   border: 1px solid green;
   display: flex;
   flex-direction: column;

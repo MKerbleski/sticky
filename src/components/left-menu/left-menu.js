@@ -60,8 +60,9 @@ export default class LeftMenu extends Component {
 				</div>
 				<div className="leftMenuBottom">
 					<Link 
+						// onClick={this.props.toggleRightMenu}
 						to={`/${this.props.username}/trash`}
-						>
+					>
 						
 						{/* // onClick={() => this.clickHandler("trash")}> */}
 						<DeleteTarget

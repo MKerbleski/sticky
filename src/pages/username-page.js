@@ -9,7 +9,7 @@ import {
     NoteDetailParent,
     RightMenu,
     Settings,
-} from './components';
+} from '../components';
 
 import {
     getNotes,
@@ -19,7 +19,7 @@ import {
     // getLinks,
     getDeletedNotes,
     getUserData,
-} from './actions';
+} from '../actions';
 
 class UsernamePage extends Component {
     constructor(props){
@@ -30,10 +30,13 @@ class UsernamePage extends Component {
         }
     }
 
-    componentWillUnmount(){
+    componentWillMount(){
         if(localStorage.getItem('JWT')){
             this.props.getUserData()
         }
+    }
+
+    componentWillUnmount(){
         this.setState({
             showNewNote: false,
             showRightMenu: false,
@@ -57,7 +60,8 @@ class UsernamePage extends Component {
     render(){
         return(
             <UsernamePageDiv> 
-                {localStorage.getItem('JWT') && this.props.store.user.userData
+                {localStorage.getItem('JWT') 
+                && this.props.store.user.userData
                     ?   <LeftMenu
                             redirect={this.props.redirect}
                             username={this.props.store.user.userData.username}

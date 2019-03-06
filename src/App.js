@@ -5,12 +5,16 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import UsernamePage from './username-page.js'
 
 import {
     Welcome, 
     Header,
 } from './components';
+
+import {
+    AboutPage,
+    UsernamePage,
+} from './pages'
 
 import {
     getNotes,
@@ -66,6 +70,9 @@ class App extends Component {
                         <Route 
                             path="/welcome/" 
                             component={Welcome} />
+                        <Route 
+                            path="/about/" 
+                            component={AboutPage} />
                         <Route 
                             path="/:username" 
                             render={ (a) => {

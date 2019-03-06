@@ -5,13 +5,14 @@ import { DropTarget } from 'react-dnd';
 import { 
     NotePreviewNew,
     NotePreviewSelf
-} from './index';
+} from '../components/main-all-notes/index';
 import { 
     getNotes,
     getDeletedNotes,
     getUserData,
-} from '../../actions'
-import { RightMenu } from '../right-menu'
+} from '../actions'
+// import { RightMenu } from '../right-menu'
+import { Link } from 'react-router-dom';
 
 class AllNotes extends Component {
     constructor(props){
@@ -48,7 +49,7 @@ class AllNotes extends Component {
     }
 
     render() {
-        console.log('all notes')
+        // console.log('all notes', this.props)
         const notes = this.props.store.notes.notes
         if(notes){
             return (
@@ -64,10 +65,16 @@ class AllNotes extends Component {
                         ? null 
                         :   this.props.deleteBin 
                                 ?   <div>Delete Bin is empty</div>
-                                :   <div>
-                                        <h3>Welcome!</h3>
-                                        <p>Click the plus to the left to create a new note</p>
-                                    </div> }
+                                :   this.props.store.user.userData 
+                                    ?   <div>
+                                            <h3>Welcome!</h3>
+                                            <p>Click the plus to the left to create a new note</p>
+                                        </div> 
+                                    :   <div>
+                                            <h3>{this.props.author} has not published any notes yet. Please check back later.</h3>
+                                            <Link to="welcome">Welcome Page</Link>
+                                        </div>
+                    }
                     {this.props.showNewNote && !this.props.deleteBin 
                         ?   <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> 
                         :   null}        

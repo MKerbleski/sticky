@@ -3,10 +3,11 @@ import { DropTarget } from 'react-dnd';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { NoteDetailSelf } from '../index.js';
-import { getAttachedItems, getNotes, getSingleNote } from '../../actions'
+import { NoteDetailSelf } from '../components/index.js';
+import { getAttachedItems, getNotes, getSingleNote } from '../actions'
 
-class NoteDetailParent extends React.Component{
+//Formorly NoteDetialParent
+class NoteDetailPage extends React.Component{
     constructor(props){
         super(props)
         this.state = {
@@ -51,7 +52,7 @@ class NoteDetailParent extends React.Component{
             }
             // console.log("note-detail-parent", "\nnote:", note, "\nparent", parent)
             return (
-                <NoteDetailParentDiv 
+                <NoteDetailPageDiv 
                     innerRef={instance => this.props.connectDropTarget(instance)}
                     // color={this.props.parentColor} 
                     style={{background: this.props.hover 
@@ -82,7 +83,7 @@ class NoteDetailParent extends React.Component{
                         // targetId={this.props.note.id}
                         // editNote={this.props.editNote}
                         />
-                </NoteDetailParentDiv>
+                </NoteDetailPageDiv>
             )
         } else {
             return <h1>loading note-detail-page</h1>
@@ -142,9 +143,9 @@ const mapDispatchToProps = {
     getSingleNote
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailParent))
+export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailPage))
 
-const NoteDetailParentDiv = styled.div`
+const NoteDetailPageDiv = styled.div`
     background-color: ${props => props.color};
     ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
     background-color: white;

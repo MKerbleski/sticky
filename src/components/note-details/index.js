@@ -1,4 +1,4 @@
-export {default as NoteDetailParent} from './note-detail-parent.js';
+// export {default as NoteDetailParent} from '../../pages/note-detail-page.js/index.js';
 export {default as NoteDetailSelf} from './note-detail-self.js';
 export {default as NoteDetailSettings} from './note-detail-settings.js';
 export {default as NoteDetailChild} from './note-detail-child.js';
