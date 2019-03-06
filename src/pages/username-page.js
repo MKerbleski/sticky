@@ -6,14 +6,12 @@ import { connect } from 'react-redux';
 import {
     AllNotesPage,
     NoteDetailPage,
+    SettingsPage
 } from '../pages'
 
 import {
-    // AllNotes,
     LeftMenu,
-    NoteDetailParent,
     RightMenu,
-    Settings,
 } from '../components';
 
 import {
@@ -25,6 +23,16 @@ import {
     getDeletedNotes,
     getUserData,
 } from '../actions';
+
+                        {/* <LeftMenu
+                            redirect={this.props.redirect}
+                            username={this.props.store.user.userData.username}
+                            toggleRightMenu={this.toggleRightMenu} 
+                            showRightMenu={this.state.showRightMenu}
+                            toggleNewNote={this.toggleNewNote} 
+                            showNewNote={this.state.showNewNote}
+                            match={this.props.match}
+                        /> */}
 
 class UsernamePage extends Component {
     constructor(props){
@@ -61,19 +69,34 @@ class UsernamePage extends Component {
             showRightMenu: !this.state.showRightMenu
         })
     }
+    
+    toggleTrash = () => {
+        this.setState({
+            showTrash: !this.state.showTrash
+        })
+    }
 
     render(){
+        // console.log(this.props)
         return(
             <UsernamePageDiv> 
                 {localStorage.getItem('JWT') 
                 && this.props.store.user.userData
-                    ?   <LeftMenu
-                            redirect={this.props.redirect}
-                            username={this.props.store.user.userData.username}
-                            toggleRightMenu={this.toggleRightMenu} 
-                            showRightMenu={this.state.showRightMenu}
-                            toggleNewNote={this.toggleNewNote} 
-                            showNewNote={this.state.showNewNote}
+                    ?   <Route
+                            path={`${this.props.match.url}/`} 
+                            render={ (e) => {
+                                console.log(e)
+                                return <LeftMenu
+                                    redirect={this.props.redirect}
+                                    username={this.props.store.user.userData.username}
+                                    toggleRightMenu={this.toggleRightMenu} 
+                                    showRightMenu={this.state.showRightMenu}
+                                    toggleNewNote={this.toggleNewNote} 
+                                    showNewNote={this.state.showNewNote}
+                                    location={e.location}
+                                    match={e.match}
+                                    />
+                            }} 
                         />
                     :   null
                 }
@@ -82,9 +105,10 @@ class UsernamePage extends Component {
                         <Route
                             exact
                             path={`${this.props.match.url}/`} 
-                            render={ () => {
+                            render={ (e) => {
+                                console.log(e)
                                 return <AllNotesPage
-                                    sdeleteBin={false}
+                                    deleteBin={false}
                                     redirect={this.props.redirect}
                                     showNewNote={this.state.showNewNote}
                                     showDetailMenu={this.showDetailMenu}
@@ -98,7 +122,6 @@ class UsernamePage extends Component {
                             path={`${this.props.match.url}/note/:note_id`}
                             render={ (note) => {
                                 return <NoteDetailPage
-                                    
                                     note_id={note.match.params.note_id}
                                     author={this.props.match.url}
                                     redirect={this.props.redirect}
@@ -107,7 +130,7 @@ class UsernamePage extends Component {
                         />
                         <Route
                             path={`${this.props.match.url}/settings`}
-                            component={Settings} 
+                            component={SettingsPage} 
                         /> 
                         <Route
                             path={`${this.props.match.url}/trash`}

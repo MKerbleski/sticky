@@ -32,6 +32,7 @@ export default class LeftMenu extends Component {
 	}
 
 	render(){
+		console.log(this.props)
 		return (
 			<LeftMenuDiv>
 				<div className='leftMenuTop'>
@@ -59,16 +60,21 @@ export default class LeftMenu extends Component {
 					</div>
 				</div>
 				<div className="leftMenuBottom">
-					<Link 
-						// onClick={this.props.toggleRightMenu}
-						to={`/${this.props.username}/trash`}
-					>
-						
-						{/* // onClick={() => this.clickHandler("trash")}> */}
-						<DeleteTarget
-							type='deleteBin' 
-							className="menu-item red" />
-					</Link>
+					{this.props.location.pathname === `${this.props.match.url}/trash`
+						? <Link 
+							to={`/${this.props.username}/`}>
+							<DeleteTarget
+								type='deleteBin' 
+								className="menu-item red" />
+							</Link>
+						: 	<Link 
+								to={`/${this.props.username}/trash`}>
+								<DeleteTarget
+									type='deleteBin' 
+									className="menu-item red" />
+							</Link>
+					}
+
 					<Link 
 						to={`/${this.props.username}/settings`}
 						// onClick={() => this.clickHandler("settings")}
