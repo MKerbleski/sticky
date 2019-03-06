@@ -1,5 +1,10 @@
-export { getPocketList } from './pocket_actions'
-export { getSlackStars } from './slack_actions'
+export { 
+    getPocketList 
+} from './pocket_actions'
+
+export { 
+    getSlackStars 
+} from './slack_actions'
 
 export { 
     sortNote,

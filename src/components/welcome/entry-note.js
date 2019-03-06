@@ -38,8 +38,13 @@ export default class EntryNote extends Component {
                         {this.value}
                     </textarea>
                 </form> 
-                <Link to="/welcome/login">Login</Link>
-                <Link to="/welcome/register">Register</Link>
+                {this.state.entryNote  
+                    ?    <div className="links">
+                            <Link className="link" to="/welcome/login">Login</Link>
+                            <Link className="link" to="/welcome/register">Register</Link>
+                        </div>
+                    :   null
+                }
             </EntryNoteDiv>
         )
     }
@@ -65,6 +70,14 @@ const EntryNoteDiv = styled.div`
                 color: black;
                 font-size: 35px;
             }
+        }
+    }
+    .links{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        .link{
+            margin: 4px;
         }
     }
 `
