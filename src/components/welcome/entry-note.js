@@ -11,7 +11,9 @@ export default class EntryNote extends Component {
     }
 
     componentWillUnmount(){
-        localStorage.setItem(`text_body`, this.state.entryNote)
+        if(this.state.entryNote){
+            localStorage.setItem(`text_body`, this.state.entryNote)
+        }
     }
 
     inputHandler = (e) => {

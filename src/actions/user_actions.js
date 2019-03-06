@@ -92,7 +92,7 @@ export const loginUser = (creds, redirect) => {
 	return function(dispatch){
 		dispatch({type: SENDING_CREDENTIALS})
 		axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/login`, creds).then(res => {
-			dispatch({type: VALID_CREDENTIALS})
+			dispatch({type: VALID_CREDENTIALS, payload: res.data})
             localStorage.setItem('JWT', res.data.token)
             localStorage.setItem('username', res.data.username)
             localStorage.setItem('sticky_user_id', res.data.sticky_user_id)
@@ -101,18 +101,38 @@ export const loginUser = (creds, redirect) => {
             }
             redirect(`/${res.data.username}`)
         }).catch(err => {
-			console.log(err)
 			if(err.response){
-				dispatch({type: ERROR, payload: err.response})
+				switch(err.response.status){
+					case 404: 
+						dispatch({type: ERROR, payload: {
+							data: {
+								message: "404 Error with endpoint.",
+								},
+							status: 404
+						}})
+						break;
+					case 400: 
+						dispatch({type: ERROR, payload: err.response})
+						break;
+					case 401: 
+						dispatch({type: ERROR, payload: err.response})
+						break;
+					case 500: 
+						dispatch({type: ERROR, payload: err.response})
+						break;
+					default: 
+						console.log("UNEXPECTED ERROR", err.response)
+						dispatch({type: ERROR, payload: err.response})
+						break;
+				}
 			} else {
 				dispatch({type: ERROR, payload: {
 					data: {
-						message: "There was a problem communicating with the server.",
+						message: "Error communicating with the server.",
 						},
 					status: 503
 				}})
 			}
-
 		})
 	}
 }

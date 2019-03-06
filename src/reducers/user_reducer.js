@@ -89,17 +89,14 @@ export const userReducer = (state = initialState, action) => {
                 userErrMsg: action.payload
             })
         case ERROR:
-            if(action.payload){
+            if(action.payload.data.message){
                 return Object.assign({}, state, {
                     status: action.payload.data.message,
                     code: action.payload.status
                 })
             } else {
-                return Object.assign({}, state, {
-                    status: action.payload.data.message,
-                    code: action.payload.status
-                })
-            }
+                break;
+            } 
        default: 
            return state;
    }
