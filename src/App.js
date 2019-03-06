@@ -70,7 +70,13 @@ class App extends Component {
                     <Switch>
                         <Route 
                             path="/welcome/" 
-                            component={WelcomePage} />
+                            render={ (a) => {
+                                return <WelcomePage
+                                    match={a.match}
+                                    redirect={this.redirect}
+                                />
+                            }}  
+                        />
                         <Route 
                             path="/about/" 
                             component={AboutPage} />

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { addNote } from './note_actions'
 
 export const API_LIST_RECIEVED = 'API_LIST_RECIEVED';
 export const CREDENTIALS_ACCEPTED = 'CREDENTIALS_ACCEPTED';
@@ -9,6 +10,7 @@ export const FETCHING_API_LIST = 'FETCHING_API_LIST';
 export const FETCHING_USERDATA = 'FETCHING_USER';
 export const LOGOUT = 'LOGOUT';
 export const SENDING_CREDENTIALS = 'SENDING_CREDENTIALS';
+export const VALID_CREDENTIALS = 'VALID_CREDENTIALS';
 export const SENDING_NEW_USERDATA = 'SENDING_NEW_USERDATA';
 export const USERDATA_RECIEVED = 'USER_RECIEVED';
 export const USER_CREATED = 'USER_CREATED';
@@ -63,5 +65,41 @@ export const logout = () => {
         localStorage.removeItem('username');
         localStorage.removeItem('sticky_user_id');
 		dispatch({type: LOGOUT})
+	}
+}
+
+export const createUser = (newUser, redirect) => {
+	return function(dispatch){
+		dispatch({type: SENDING_NEW_USERDATA})
+		axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/register/`, newUser).then(res => {
+			// console.log("create user in welcome route", res.data)
+            localStorage.setItem('JWT', res.data.token)
+            localStorage.setItem('username', res.data.username)
+            localStorage.setItem('sticky_user_id', res.data.sticky_user_id)
+            if(localStorage.getItem('text_body')){
+				dispatch(addNote({text_body: localStorage.getItem('text_body')}))
+            } 
+            redirect(`/${res.data.username}`)
+        }).catch(err => {
+			console.log(err.message)
+		})
+	}
+}
+
+export const loginUser = (creds, redirect) => {
+	return function(dispatch){
+		dispatch({type: SENDING_CREDENTIALS})
+		axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/login`, creds).then(res => {
+			dispatch({type: VALID_CREDENTIALS})
+            localStorage.setItem('JWT', res.data.token)
+            localStorage.setItem('username', res.data.username)
+            localStorage.setItem('sticky_user_id', res.data.sticky_user_id)
+            if(localStorage.getItem('text_body')){
+				dispatch(addNote({text_body: localStorage.getItem('text_body')}))
+            }
+            redirect(`/${res.data.username}`)
+        }).catch(err => {
+			console.log(err.message)
+		})
 	}
 }
