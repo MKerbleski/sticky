@@ -26,28 +26,39 @@ class Register extends Component{
             axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/isthis/${event.target.value}/availble`).then(res => {
                 console.log(res.data.message)
                 // dispatch({type: USERNAME_AVAILIBLE, payload: res.data})
-                this.setState({
-                    usernameAvailblity: " :) Avalible!"
-                })
+                if(res.data.availble){
+                    this.setState({
+                        cool: true,
+                        usernameAvailblity: " :) Avalible!"
+                    })
+                } else {
+                    this.setState({
+                        cool: false,
+                        usernameAvailblity: "  :( This username has been claimed"
+                    })
+                }
             }).catch(err => {
                 console.log(err)
-                this.setState({
-                    usernameAvailblity: "  :( This username has been claimed"
-                })
-                // dispatch({type: USERNAME_TAKEN, payload: err})
+                // dispatch({type: ERROR, payload: err})
             })
         }
     }
 
     submit = (e) => {
         e.preventDefault();
-        this.props.createUser(this.state)
-        this.setState({
-            username: '',
-            password: '',
-        })
+        if(this.state.password === this.state.password2 && this.state.cool){
+            this.props.createUser({username: this.state.username, password: this.state.password}, this.props.redirect)
+            this.setState({
+                username: '',
+                password: '',
+                password2: '',
+            })
+        } else {
+            this.setState({
+                fixForm: true
+            })
+        }
     }
-
     render(){
         return(
             <RegisterDiv>
@@ -57,6 +68,7 @@ class Register extends Component{
                         ?   'registration failed, please try again. Most likley the username is not availible'
                         : null}
                 </p>
+                {this.state.fixForm ? <p>You need to fix the form</p> : null}
                 <form onSubmit={this.submit}>
                     <div>
                         <input 
@@ -101,7 +113,9 @@ class Register extends Component{
                                     ? 'Passwords Match!' 
                                     : "password must match" : null}</label>
                         </div>
-                    {this.props.sendingData ? <p>sending credentials</p> : <input type="submit" />}
+                        <div>
+                            {this.props.sendingData ? <p>sending credentials</p> : <input type="submit" />}
+                        </div>
                 </form>
                 <p>
                     Registration is currently disabled. Please 
