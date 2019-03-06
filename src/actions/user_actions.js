@@ -59,6 +59,9 @@ export const getUserData = (username) =>  {
   
 export const logout = () => {
 	return function(dispatch){
+		localStorage.removeItem('JWT');
+        localStorage.removeItem('username');
+        localStorage.removeItem('sticky_user_id');
 		dispatch({type: LOGOUT})
 	}
 }
