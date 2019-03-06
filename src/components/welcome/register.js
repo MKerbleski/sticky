@@ -15,6 +15,7 @@ class Register extends Component{
             username: '',
             password: '',
             password2: '',
+            key: '',
         };
     }
 
@@ -41,7 +42,7 @@ class Register extends Component{
                 console.log(err)
                 // dispatch({type: ERROR, payload: err})
             })
-        }
+        } 
     }
 
     submit = (e) => {
@@ -58,74 +59,105 @@ class Register extends Component{
                 fixForm: true
             })
         }
+        
     }
+    
+    check = (e) => {
+        e.preventDefault();
+        if(process.env.REACT_APP_REGISTRATION_KEY === this.state.key){
+            this.setState({
+                key: true,
+            })
+        } else {
+            console.log("no")
+            this.setState({
+                invalidKey: true
+            })
+        }
+    }
+
     render(){
         return(
             <RegisterDiv>
-                <h1>Register</h1>
-                <p>
-                    {this.props.failed 
-                        ?   'registration failed, please try again. Most likley the username is not availible'
-                        : null}
-                </p>
-                {this.state.fixForm ? <p>You need to fix the form</p> : null}
-                <form onSubmit={this.submit}>
-                    <div>
-                        <input 
-                            autoFocus
-                            required
-                            type="text"
-                            name="username" 
-                            placeholder="username" 
-                            onChange={this.inputHandler}
-                            value={this.state.username}>{this.value}</input>
-                            <label>{this.state.username.length > 0 ? this.state.usernameAvailblity : null }</label>
-                    </div>
-                    {/* <div>
-                        <input 
-                            required
-                            type="text"
-                            name="email" 
-                            placeholder="email" 
-                            onChange={this.inputHandler}
-                            value={this.state.email}>{this.value}</input>
-                    </div> */}
-                    <div>
-                        <input 
-                            required
-                            type="password"
-                            name="password" 
-                            placeholder="password" 
-                            onChange={this.inputHandler}
-                            value={this.state.password}>{this.value}</input>
-                            {/* <label>password</label> */}
-                    </div>
-                    <div>
-                        <input 
-                            required
-                            type="password"
-                            name="password2" 
-                            placeholder="password" 
-                            onChange={this.inputHandler}
-                            value={this.state.password2}>{this.value}</input>
-                            <label>{this.state.password ? this.state.password &&
-                                this.state.password === this.state.password2 
-                                    ? 'Passwords Match!' 
-                                    : "password must match" : null}</label>
+                <h1>Registration</h1>
+                {this.state.accessKey 
+                    ?   <div>
+                            {this.state.fixForm 
+                                ?   <p>You need to fix the form</p> 
+                                :   null
+                            }
+                            <form onSubmit={this.submit}>
+                                <div>
+                                    <input 
+                                        autoFocus
+                                        required
+                                        type="text"
+                                        name="username" 
+                                        placeholder="username" 
+                                        onChange={this.inputHandler}
+                                        value={this.state.username}>{this.value}</input>
+                                        <label>{this.state.username.length > 0 ? this.state.usernameAvailblity : null }</label>
+                                </div>
+                                {/* <div>
+                                    <input 
+                                        required
+                                        type="text"
+                                        name="email" 
+                                        placeholder="email" 
+                                        onChange={this.inputHandler}
+                                        value={this.state.email}>{this.value}</input>
+                                </div> */}
+                                <div>
+                                    <input 
+                                        required
+                                        type="password"
+                                        name="password" 
+                                        placeholder="password" 
+                                        onChange={this.inputHandler}
+                                        value={this.state.password}>{this.value}</input>
+                                        {/* <label>password</label> */}
+                                </div>
+                                <div>
+                                    <input 
+                                        required
+                                        type="password"
+                                        name="password2" 
+                                        placeholder="password" 
+                                        onChange={this.inputHandler}
+                                        value={this.state.password2}>{this.value}</input>
+                                        <label>{this.state.password ? this.state.password &&
+                                            this.state.password === this.state.password2 
+                                                ? 'Passwords Match!' 
+                                                : "password must match" : null}</label>
+                                    </div>
+                                    <div>
+                                        {this.props.sendingData ? <p>sending credentials</p> : <input type="submit" />}
+                                    </div>
+                            </form>
                         </div>
-                        <div>
-                            {this.props.sendingData ? <p>sending credentials</p> : <input type="submit" />}
+                    :   <div>
+                            <p>Registration is open to users willing to give feedback.</p>
+                            <p>Please <Link to="/welcome/login">
+                                Login</Link> or email Mike at <a href="mailto:resume@kerble.ski">resume@kerble.ski</a> to request an key help test the site!
+                            </p>
+                            <form onSubmit={this.check}>
+                                <div>
+                                    <label>Access Key: </label>
+                                    <input 
+                                        name="key" 
+                                        placeholder="Access Key" 
+                                        onChange={this.inputHandler}
+                                        value={this.state.key}>{this.value}</input>
+                                        <input type="submit" />
+                                </div>
+                                {this.state.invalidKey 
+                                    ?   <p>Invalid key, try or request again</p> 
+                                    :   null
+                                }
+                            </form>
                         </div>
-                </form>
-                <p>
-                    Registration is currently disabled. Please 
-                    <Link to="/welcome/login">
-                        Login
-                    </Link>
-                     or contact Mike at 
-                     <a href="mailto:resume@kerble.ski">resume@kerble.ski</a>
-                     for demo credentials.
-                </p>
+                       
+                }
             </RegisterDiv>
         );
     };
@@ -143,9 +175,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(Register)
 
 const RegisterDiv = styled.div`
     form{
-        border: 1px solid red;
+        /* border: 1px solid red; */
         display: flex;
         flex-direction: column;
-
     }
 `;
+
