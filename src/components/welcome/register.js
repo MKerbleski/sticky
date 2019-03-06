@@ -14,6 +14,7 @@ class Register extends Component{
         this.state = {
             username: '',
             password: '',
+            email: '',
             password2: '',
             key: '',
         };
@@ -23,7 +24,7 @@ class Register extends Component{
         this.setState({
             [event.target.name]: event.target.value
         })
-        if(event.target.name === 'username'){
+        if(event.target.name === 'username' && event.target.value.length > 0){
             axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/isthis/${event.target.value}/availble`).then(res => {
                 console.log(res.data.message)
                 // dispatch({type: USERNAME_AVAILIBLE, payload: res.data})
@@ -35,7 +36,7 @@ class Register extends Component{
                 } else {
                     this.setState({
                         cool: false,
-                        usernameAvailblity: "  :( This username has been claimed"
+                        usernameAvailblity: " :( This username has been claimed"
                     })
                 }
             }).catch(err => {
@@ -48,9 +49,10 @@ class Register extends Component{
     submit = (e) => {
         e.preventDefault();
         if(this.state.password === this.state.password2 && this.state.cool){
-            this.props.createUser({username: this.state.username, password: this.state.password}, this.props.redirect)
+            this.props.createUser({username: this.state.username, password: this.state.password, email: this.state.email}, this.props.redirect)
             this.setState({
                 username: '',
+                email: '',
                 password: '',
                 password2: '',
             })
@@ -67,6 +69,8 @@ class Register extends Component{
         if(process.env.REACT_APP_REGISTRATION_KEY === this.state.key){
             this.setState({
                 key: true,
+                accessKey: true
+
             })
         } else {
             console.log("no")
@@ -98,15 +102,15 @@ class Register extends Component{
                                         value={this.state.username}>{this.value}</input>
                                         <label>{this.state.username.length > 0 ? this.state.usernameAvailblity : null }</label>
                                 </div>
-                                {/* <div>
+                                <div>
                                     <input 
                                         required
-                                        type="text"
+                                        type="email"
                                         name="email" 
                                         placeholder="email" 
                                         onChange={this.inputHandler}
                                         value={this.state.email}>{this.value}</input>
-                                </div> */}
+                                </div>
                                 <div>
                                     <input 
                                         required
@@ -138,7 +142,7 @@ class Register extends Component{
                     :   <div>
                             <p>Registration is open to users willing to give feedback.</p>
                             <p>Please <Link to="/welcome/login">
-                                Login</Link> or email Mike at <a href="mailto:resume@kerble.ski">resume@kerble.ski</a> to request an key help test the site!
+                                Login</Link> or email Mike at <a href="mailto:resume@kerble.ski">resume@kerble.ski</a> to request an key and help test the site!
                             </p>
                             <form onSubmit={this.check}>
                                 <div>
