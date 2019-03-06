@@ -227,6 +227,7 @@ export const getNotes = (author) =>  {
 				dispatch({type: NOTE_ERROR, payload: err})
 			})
         } else {
+            console.log("fetching public ")
             axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${author}/all`).then(res => {
                 // console.log(res)
                 dispatch({type: NOTES_RECIEVED, payload: res.data})

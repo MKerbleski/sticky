@@ -31,6 +31,9 @@ class UsernamePage extends Component {
     }
 
     componentWillUnmount(){
+        if(localStorage.getItem('JWT')){
+            this.props.getUserData()
+        }
         this.setState({
             showNewNote: false,
             showRightMenu: false,

@@ -31,7 +31,15 @@ class App extends Component {
     }
 
     componentDidMount = () => {
-        this.props.getUserData()
+        if(this.props.match.isExact){
+            if(localStorage.getItem('username')){
+                this.props.history.push(`/${localStorage.getItem('username')}`)
+            } else {
+                this.props.history.push(`/welcome`)
+            }
+        } else {
+            //do nothing
+        }
     }
 
     //No idea what this is currently
