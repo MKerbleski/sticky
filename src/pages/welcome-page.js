@@ -22,6 +22,12 @@ export default class WelcomePage extends Component{
         }
     }
 
+    componentDidMount(){
+        if(localStorage.getItem('username')){
+            this.props.redirect(`/${localStorage.getItem('username')}`)
+        }
+    }
+
     render(){
         return(
             <WelcomePageDiv>

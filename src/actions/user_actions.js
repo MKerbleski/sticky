@@ -19,6 +19,21 @@ export const USER_ERROR = 'USER_ERROR';
 export const CLEAR_USER_STATUS = 'CLEAR_USER_STATUS';
 
 
+// export const USERNAME_AVAILIBLE = 'USERNAME_AVAILIBLE';
+// export const USERNAME_TAKEN = 'USERNAME_TAKEN';
+
+// export const checkUsername = (username) =>  {
+//     return function(dispatch){
+// 		axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/isthis/${username}/availble`).then(res => {
+// 			console.log(res.data.message)
+//             dispatch({type: USERNAME_AVAILIBLE, payload: res.data})
+//         }).catch(err => {
+//             console.log(err)
+//             dispatch({type: USERNAME_TAKEN, payload: err})
+//         })
+// 	}
+// }
+
 export const getConnectedApis = () =>  {
     return function(dispatch){
 		if(localStorage.getItem('JWT')){

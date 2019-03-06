@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import {
     createUser,
@@ -13,6 +14,7 @@ class Register extends Component{
         this.state = {
             username: '',
             password: '',
+            password2: '',
         };
     }
 
@@ -20,6 +22,21 @@ class Register extends Component{
         this.setState({
             [event.target.name]: event.target.value
         })
+        if(event.target.name === 'username'){
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/isthis/${event.target.value}/availble`).then(res => {
+                console.log(res.data.message)
+                // dispatch({type: USERNAME_AVAILIBLE, payload: res.data})
+                this.setState({
+                    usernameAvailblity: " :) Avalible!"
+                })
+            }).catch(err => {
+                console.log(err)
+                this.setState({
+                    usernameAvailblity: "  :( This username has been claimed"
+                })
+                // dispatch({type: USERNAME_TAKEN, payload: err})
+            })
+        }
     }
 
     submit = (e) => {
@@ -41,38 +58,60 @@ class Register extends Component{
                         : null}
                 </p>
                 <form onSubmit={this.submit}>
-                    <input 
-                        autoFocus
-                        required
-                        type="text"
-                        name="username" 
-                        placeholder="username" 
-                        onChange={this.inputHandler}
-                        value={this.state.username}>{this.value}</input>
-                    {/* <input 
-                        required
-                        type="text"
-                        name="email" 
-                        placeholder="email" 
-                        onChange={this.inputHandler}
-                        value={this.state.email}>{this.value}</input>
-                    <input 
-                        required
-                        type="password"
-                        name="password" 
-                        placeholder="password" 
-                        onChange={this.inputHandler}
-                        value={this.state.password}>{this.value}</input> */}
-                    <input 
-                        required
-                        type="password"
-                        name="password" 
-                        placeholder="password" 
-                        onChange={this.inputHandler}
-                        value={this.state.password}>{this.value}</input>
+                    <div>
+                        <input 
+                            autoFocus
+                            required
+                            type="text"
+                            name="username" 
+                            placeholder="username" 
+                            onChange={this.inputHandler}
+                            value={this.state.username}>{this.value}</input>
+                            <label>{this.state.username.length > 0 ? this.state.usernameAvailblity : null }</label>
+                    </div>
+                    {/* <div>
+                        <input 
+                            required
+                            type="text"
+                            name="email" 
+                            placeholder="email" 
+                            onChange={this.inputHandler}
+                            value={this.state.email}>{this.value}</input>
+                    </div> */}
+                    <div>
+                        <input 
+                            required
+                            type="password"
+                            name="password" 
+                            placeholder="password" 
+                            onChange={this.inputHandler}
+                            value={this.state.password}>{this.value}</input>
+                            {/* <label>password</label> */}
+                    </div>
+                    <div>
+                        <input 
+                            required
+                            type="password"
+                            name="password2" 
+                            placeholder="password" 
+                            onChange={this.inputHandler}
+                            value={this.state.password2}>{this.value}</input>
+                            <label>{this.state.password ? this.state.password &&
+                                this.state.password === this.state.password2 
+                                    ? 'Passwords Match!' 
+                                    : "password must match" : null}</label>
+                        </div>
                     {this.props.sendingData ? <p>sending credentials</p> : <input type="submit" />}
                 </form>
-                <p>Registration is currently disabled. Please <Link to="/welcome/login">Login</Link> or contact Mike at <a href="mailto:resume@kerble.ski">resume@kerble.ski</a> for demo credentials.</p>
+                <p>
+                    Registration is currently disabled. Please 
+                    <Link to="/welcome/login">
+                        Login
+                    </Link>
+                     or contact Mike at 
+                     <a href="mailto:resume@kerble.ski">resume@kerble.ski</a>
+                     for demo credentials.
+                </p>
             </RegisterDiv>
         );
     };
@@ -89,5 +128,10 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(Register)
 
 const RegisterDiv = styled.div`
-    ${'' /* border: 1px solid red; */}
+    form{
+        border: 1px solid red;
+        display: flex;
+        flex-direction: column;
+
+    }
 `;
