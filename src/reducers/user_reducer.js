@@ -11,7 +11,8 @@ import {
     USER_CREATED,
     USERDATA_RECIEVED,
     USER_ERROR,
-    ERROR
+    ERROR,
+    CLEAR_USER_STATUS
     // INVALID_CREDENTIALS
 } from '../actions/user_actions';
 
@@ -97,6 +98,10 @@ export const userReducer = (state = initialState, action) => {
             } else {
                 break;
             } 
+        case CLEAR_USER_STATUS:
+            return Object.assign({}, state, {
+                status: null,
+            })
        default: 
            return state;
    }

@@ -1,5 +1,6 @@
 export { getPocketList } from './pocket_actions'
 export { getSlackStars } from './slack_actions'
+
 export { 
     sortNote,
     getLinks, 
@@ -14,10 +15,12 @@ export {
     getSingleNote, 
     noteToNote 
 } from './note_actions'
+
 export { 
     logout, 
     getUserData, 
     getConnectedApis, 
     createUser, 
-    loginUser 
+    loginUser,
+    clearUserStatus
 } from './user_actions'

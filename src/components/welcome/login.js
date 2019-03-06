@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import {
     loginUser,
+    clearUserStatus,
 } from '../../actions';
 
 class Login extends Component{
@@ -13,6 +14,10 @@ class Login extends Component{
             username: '',
             password: '',
         };
+    }
+
+    componentWillUnmount(){
+        this.props.clearUserStatus()
     }
 
     inputHandler = (event) => {
@@ -67,7 +72,8 @@ const mapStateToProps = store => {
 }
   
 const mapDispatchToProps = {
-    loginUser
+    loginUser,
+    clearUserStatus
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

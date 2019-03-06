@@ -16,6 +16,7 @@ export const SENDING_NEW_USERDATA = 'SENDING_NEW_USERDATA';
 export const USERDATA_RECIEVED = 'USER_RECIEVED';
 export const USER_CREATED = 'USER_CREATED';
 export const USER_ERROR = 'USER_ERROR';
+export const CLEAR_USER_STATUS = 'CLEAR_USER_STATUS';
 
 
 export const getConnectedApis = () =>  {
@@ -70,6 +71,12 @@ export const logout = () => {
 	}
 }
 
+export const clearUserStatus = () => {
+	return function(dispatch){
+		dispatch({type: CLEAR_USER_STATUS})
+	}
+}
+
 export const createUser = (newUser, redirect) => {
 	return function(dispatch){
 		dispatch({type: SENDING_NEW_USERDATA})
@@ -102,6 +109,7 @@ export const loginUser = (creds, redirect) => {
             redirect(`/${res.data.username}`)
         }).catch(err => {
 			if(err.response){
+				console.log(err.response)
 				switch(err.response.status){
 					case 404: 
 						dispatch({type: ERROR, payload: {
