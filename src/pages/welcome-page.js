@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -78,12 +78,6 @@ const WelcomePageDiv = styled.div`
     overflow: auto;
     max-height: 100%;
     margin: 2px;
-    /* height: 90vh; */
-    ${'' /* ${flex('column')} */}
-
-    .sign-in{
-        ${'' /* z-index: 100; */}
-    }
     footer {
         border: 1px solid black;
         max-width: 99%;

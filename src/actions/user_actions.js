@@ -11,10 +11,12 @@ export const FETCHING_USERDATA = 'FETCHING_USER';
 export const LOGOUT = 'LOGOUT';
 export const SENDING_CREDENTIALS = 'SENDING_CREDENTIALS';
 export const VALID_CREDENTIALS = 'VALID_CREDENTIALS';
+export const INVALID_CREDENTIALS = 'INVALID_CREDENTIALS';
 export const SENDING_NEW_USERDATA = 'SENDING_NEW_USERDATA';
 export const USERDATA_RECIEVED = 'USER_RECIEVED';
 export const USER_CREATED = 'USER_CREATED';
 export const USER_ERROR = 'USER_ERROR';
+
 
 export const getConnectedApis = () =>  {
     return function(dispatch){
@@ -99,7 +101,18 @@ export const loginUser = (creds, redirect) => {
             }
             redirect(`/${res.data.username}`)
         }).catch(err => {
-			console.log(err.message)
+			console.log(err)
+			if(err.response){
+				dispatch({type: ERROR, payload: err.response})
+			} else {
+				dispatch({type: ERROR, payload: {
+					data: {
+						message: "There was a problem communicating with the server.",
+						},
+					status: 503
+				}})
+			}
+
 		})
 	}
 }

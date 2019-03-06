@@ -17,6 +17,7 @@ class Header extends Component{
     }
     
     render(){
+        console.log(this.props)
         return(
             <HeaderDiv>
                 <Link 
@@ -27,9 +28,11 @@ class Header extends Component{
                 >
                     <h1 className="headerTitle">Stic.ky</h1>
                 </Link>
-                {this.props.store.notes.status 
+                {localStorage.getItem('username') && this.props.store.notes.status 
                     ? this.props.store.notes.status 
-                    : null}
+                    : this.props.store.user.status 
+                        ? this.props.store.user.status
+                        : null}
                 {localStorage.getItem('username') 
                     ?   <div className="linkss">
                             <h3>

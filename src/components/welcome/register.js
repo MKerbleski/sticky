@@ -90,5 +90,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(Register)
 
 const RegisterDiv = styled.div`
     ${'' /* border: 1px solid red; */}
-    
 `;

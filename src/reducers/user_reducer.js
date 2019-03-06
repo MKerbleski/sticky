@@ -10,7 +10,9 @@ import {
     SENDING_NEW_USERDATA,
     USER_CREATED,
     USERDATA_RECIEVED,
-    USER_ERROR
+    USER_ERROR,
+    ERROR
+    // INVALID_CREDENTIALS
 } from '../actions/user_actions';
 
 const initialState = {    
@@ -86,6 +88,18 @@ export const userReducer = (state = initialState, action) => {
                 userError: true,
                 userErrMsg: action.payload
             })
+        case ERROR:
+            if(action.payload){
+                return Object.assign({}, state, {
+                    status: action.payload.data.message,
+                    code: action.payload.status
+                })
+            } else {
+                return Object.assign({}, state, {
+                    status: action.payload.data.message,
+                    code: action.payload.status
+                })
+            }
        default: 
            return state;
    }
