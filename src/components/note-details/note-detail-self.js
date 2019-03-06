@@ -45,7 +45,7 @@ class NoteDetailSelf extends React.Component {
 
     render(){
         const note = this.props.store.notes.notes[0]
-        // console.log("note detail self", note)
+        console.log("note detail self", note)
         if(note){
             return (
                 <NoteDetailSelfDiv 

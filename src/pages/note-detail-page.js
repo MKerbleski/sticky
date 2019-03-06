@@ -50,7 +50,7 @@ class NoteDetailPage extends React.Component{
             } else {
                 parent = null
             }
-            // console.log("note-detail-parent", "\nnote:", note, "\nparent", parent)
+            console.log("note-detail-parent", "\nnote:", note, "\nparent", parent)
             return (
                 <NoteDetailPageDiv 
                     innerRef={instance => this.props.connectDropTarget(instance)}

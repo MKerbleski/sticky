@@ -51,17 +51,18 @@ export const noteToNote = (notePackage) => {
 }
 
 export const editNote = (noteEdit, fetchDeleted=false) => {
-    console.log(noteEdit)
+    console.log("noteEdit", noteEdit)
     return function(dispatch){
         if(localStorage.getItem('JWT') && noteEdit){
             const token = localStorage.getItem('JWT')
             const authHeader = { headers: { Authorization: token } }
             dispatch({ type: EDITING_NOTE })
             axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${noteEdit.id}`, (noteEdit), authHeader).then(res => {
+                console.log(res)
 				if(fetchDeleted){
 					dispatch(getDeletedNotes(localStorage.getItem('username')))
 				} else {
-					dispatch(getNotes(localStorage.getItem('username')));
+					dispatch(getSingleNote(localStorage.getItem('username'), noteEdit.id));
 				}   
               	dispatch({ type: NOTE_EDITED })
             }).catch(err => {
@@ -212,7 +213,7 @@ export const getDeletedNotes = () => {
 }
 
 export const getNotes = (author) =>  {
-    console.log("getNotes", author)
+    // console.log("getNotes", author)
     return function(dispatch){
         dispatch({type: FETCHING_NOTES});
         if(localStorage.getItem('JWT')){
@@ -240,6 +241,7 @@ export const getNotes = (author) =>  {
 
 //this is going to be seperate because I am possibly eventually going to fetch children as well. 
 export const getSingleNote = (author_name, note_id) =>  {
+    console.log(note_id, "actions")
     return function(dispatch){
         if(localStorage.getItem('JWT')){
 			dispatch({type: FETCHING_SINGLE_NOTE, payload:{ author_name, note_id} });

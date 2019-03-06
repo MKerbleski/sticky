@@ -4,7 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import {
-    AllNotesPage
+    AllNotesPage,
+    NoteDetailPage,
 } from '../pages'
 
 import {
@@ -96,7 +97,7 @@ class UsernamePage extends Component {
                             // exact={!this.state.deleteEnabled}
                             path={`${this.props.match.url}/note/:note_id`}
                             render={ (note) => {
-                                return <NoteDetailParent
+                                return <NoteDetailPage
                                     
                                     note_id={note.match.params.note_id}
                                     author={this.props.match.url}

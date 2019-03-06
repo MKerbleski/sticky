@@ -73,7 +73,6 @@ class Register extends Component{
 
             })
         } else {
-            console.log("no")
             this.setState({
                 invalidKey: true
             })
@@ -155,7 +154,7 @@ class Register extends Component{
                                         <input type="submit" />
                                 </div>
                                 {this.state.invalidKey 
-                                    ?   <p>Invalid key, try or request again</p> 
+                                    ?   <p>Invalid key, try again.</p> 
                                     :   null
                                 }
                             </form>
