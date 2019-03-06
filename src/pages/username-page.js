@@ -4,7 +4,11 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import {
-    AllNotes,
+    AllNotesPage
+} from '../pages'
+
+import {
+    // AllNotes,
     LeftMenu,
     NoteDetailParent,
     RightMenu,
@@ -78,7 +82,7 @@ class UsernamePage extends Component {
                             exact
                             path={`${this.props.match.url}/`} 
                             render={ () => {
-                                return <AllNotes
+                                return <AllNotesPage
                                     sdeleteBin={false}
                                     redirect={this.props.redirect}
                                     showNewNote={this.state.showNewNote}
@@ -107,7 +111,7 @@ class UsernamePage extends Component {
                         <Route
                             path={`${this.props.match.url}/trash`}
                             render={() => {
-                                return <AllNotes 
+                                return <AllNotesPage
                                     deleteBin
                                     onDrop={this.onDrop} 
                                     showDetailMenu={this.showDetailMenu}

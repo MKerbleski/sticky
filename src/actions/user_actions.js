@@ -16,54 +16,49 @@ export const USER_ERROR = 'USER_ERROR';
 
 export const getConnectedApis = () =>  {
     return function(dispatch){
-      if(localStorage.getItem('JWT')){
-        dispatch({type: FETCHING_API_LIST});
-        const token = localStorage.getItem('JWT')
-        const authHeader = {
-          headers: {
-            Authorization: token, 
-          }
-        }
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/apis`, authHeader)
-        .then(res => {
-          // let apiStr = res.data.connected_apis 
-          // let apiArr = turnToArr(apiStr);
-          dispatch({type: API_LIST_RECIEVED, payload: res.data})
-        })
-        .catch(err => {
-          dispatch({type: ERROR, payload: err})
-        })
-      } else {
-        dispatch({type: ERROR, payload: 'there was no token found'})      
-      }
-    }
-  }
+		if(localStorage.getItem('JWT')){
+			dispatch({type: FETCHING_API_LIST});
+			const token = localStorage.getItem('JWT')
+			const authHeader = {
+			headers: {
+					Authorization: token, 
+				}
+			}
+			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/apis`, authHeader).then(res => {
+				dispatch({type: API_LIST_RECIEVED, payload: res.data})
+			})
+			.catch(err => {
+				dispatch({type: ERROR, payload: err})
+			})
+		} else {
+			dispatch({type: ERROR, payload: 'there was no token found'})      
+		}
+	}
+}
   
-  export const getUserData = (username) =>  {
+export const getUserData = (username) =>  {
     return function(dispatch){
-      if(localStorage.getItem('JWT')){
-        dispatch({type: FETCHING_USERDATA});
-        const token = localStorage.getItem('JWT')
-        const authHeader = {
-          headers: {
-            Authorization: token, 
-          }
-        }
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/settings`, authHeader)
-        .then(res => {
-          dispatch({type: USERDATA_RECIEVED, payload: res.data})
-        })
-        .catch(err => {
-          dispatch({type: USER_ERROR, payload: err})
-        })
-      } else {
-        dispatch({type: ERROR, payload: 'there was no token found'})      
-      }
+		if(localStorage.getItem('JWT')){
+			dispatch({type: FETCHING_USERDATA});
+			const token = localStorage.getItem('JWT')
+			const authHeader = {
+				headers: {
+					Authorization: token, 
+				}
+			}
+			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/settings`, authHeader).then(res => {
+				dispatch({type: USERDATA_RECIEVED, payload: res.data})
+			}).catch(err => {
+				dispatch({type: USER_ERROR, payload: err})
+			})
+		} else {
+			dispatch({type: ERROR, payload: 'there was no token found'})      
+		}
     }
-  }
+}
   
-  export const logout = () => {
-    return function(dispatch){
-      dispatch({type: LOGOUT})
-    }
-  }
+export const logout = () => {
+	return function(dispatch){
+		dispatch({type: LOGOUT})
+	}
+}

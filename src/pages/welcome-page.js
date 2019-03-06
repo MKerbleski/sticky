@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 
-import Login from './login';
-import Register from './register';
+import Login from '../components/welcome/login';
+import Register from '../components/welcome/register';
 import { Link } from 'react-router-dom';
 
 // import Header from './header';
@@ -16,9 +16,9 @@ import {
     loginUser,
     getUserData,
     addNote,
-} from '../../actions';
+} from '../actions';
     
-class Welcome extends Component{
+class WelcomePage extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -88,7 +88,7 @@ class Welcome extends Component{
 
     render(){
         return(
-            <WelcomeDiv>
+            <WelcomePageDiv>
                 <Route 
                     path="/welcome/login" 
                     render={() => {
@@ -136,7 +136,7 @@ class Welcome extends Component{
                     <Link to="/about">About</Link>
                     <a href="https://mikerble.ski">Made by Mike</a>
                 </footer>
-            </WelcomeDiv>
+            </WelcomePageDiv>
         )
     }
 }
@@ -150,9 +150,9 @@ const mapDispatchToProps = {
     addNote,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomePage)
 
-const WelcomeDiv = styled.div`
+const WelcomePageDiv = styled.div`
     border: 1px solid blue;
     display: flex;
     flex-direction: column;

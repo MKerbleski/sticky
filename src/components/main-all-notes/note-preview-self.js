@@ -7,10 +7,11 @@ import { NotePreivewChild } from "./index"
 import { flex } from '../../styles/styl-utils.js'
 import { sharedStickyNoteDrop } from '../../helpers'
 import ReactHTMLParser from 'react-html-parser'
+
 import { 
 	deleteNote, 
 	editNote, 
-	getChildren, 
+	// getChildren, 
 	noteToNote, 
 	getSingleNote
 } from '../../actions'
@@ -192,7 +193,7 @@ const NotePreviewSelfDiv = styled.div`
 	height: auto;
 	display: flex;
 	flex-direction: column;  
-	.note-link{
+	.note-link {
 		${ flex('column') }
 		padding: 10px;
 		width: 95%;
@@ -281,42 +282,3 @@ const NotePreviewSelfDiv = styled.div`
 		}
 	}  
 `;
-
-
-
-	//old way if
-	// export default class NotePreview extends Component {
-	//
-	//   render() {
-	//     // console.log(this.props)
-	//     const { note, index, key } = this.props;
-	//
-	//     return (
-	//             <NotePreviewDiv>
-	//               <Link
-	//                 key={key}
-	//                 index={index}
-	//                 className="note-link"
-	//                 id={note.id}
-	//                 to={`/note/${note.id}`}>
-	//
-	//                   <div key={index} className="note-preview">
-	//
-	//                     <div className="notTags">
-	//                       <h3>{note.title}</h3>
-	//                       <p>{note.text_body}</p>
-	//                     </div>
-	//
-	//                     <div className="tags">
-	//                       {(note.tags.length > 0) ?
-	//                         note.tags.map(tag => {
-	//                               return (<div key={tag}>{tag}</div>)
-	//                             }
-	//                         ) :
-	//                         null}
-	//                     </div>
-	//                   </div>
-	//               </Link>
-	//             </NotePreviewDiv>)
-	// }
-	// }

@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { flex, menu } from '../../styles/styl-utils.js'
-import { logout } from '../../actions'
 import { connect } from 'react-redux';
+
+import { 
+    logout
+ } from '../../actions'
 
 class Header extends Component{
 
@@ -14,7 +17,7 @@ class Header extends Component{
         localStorage.removeItem('sticky_user_id');
         this.props.logout();
         this.props.redirect('/welcome')
-      }
+    }
     
     render(){
         return(
@@ -29,16 +32,25 @@ class Header extends Component{
                 </Link>
                 {this.props.store.notes.status 
                     ? this.props.store.notes.status 
-                    : <p>status</p>}
+                    : null}
                 {localStorage.getItem('username') 
                     ?   <div className="linkss">
-                            <h3>{`Hello ${localStorage.getItem('username')},`}</h3>
-                            <div className="headerLink" onClick={this.logout} >Logout</div> 
+                            <h3>
+                                {`Hello ${localStorage.getItem('username')},`}
+                            </h3>
+                            <div className="headerLink" onClick={this.logout} >
+                                Logout
+                            </div> 
                         </div> 
                     :   <div className="linkss">
-                            <Link className="headerLink" to="/welcome/login" >Login</Link>
-                            <Link className="headerLink" to="/welcome/register">Register</Link>
-                        </div>}
+                            <Link className="headerLink" to="/welcome/login" >
+                                Login
+                            </Link>
+                            <Link className="headerLink" to="/welcome/register">
+                                Register
+                            </Link>
+                        </div>
+                }
             </HeaderDiv>
         )
     }

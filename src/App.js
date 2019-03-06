@@ -7,13 +7,14 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 import {
-    Welcome, 
+    // Welcome, 
     Header,
 } from './components';
 
 import {
     AboutPage,
     UsernamePage,
+    WelcomePage
 } from './pages'
 
 import {
@@ -69,7 +70,7 @@ class App extends Component {
                     <Switch>
                         <Route 
                             path="/welcome/" 
-                            component={Welcome} />
+                            component={WelcomePage} />
                         <Route 
                             path="/about/" 
                             component={AboutPage} />

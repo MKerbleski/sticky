@@ -14,7 +14,7 @@ import {
 // import { RightMenu } from '../right-menu'
 import { Link } from 'react-router-dom';
 
-class AllNotes extends Component {
+class AllNotesPage extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -53,7 +53,7 @@ class AllNotes extends Component {
         const notes = this.props.store.notes.notes
         if(notes){
             return (
-                <AllNotesDiv
+                <AllNotesPageDiv
                     type="top" 
                     innerRef={instance => this.props.connectDropTarget(instance)}
                     style={{background: this.props.hover 
@@ -89,7 +89,7 @@ class AllNotes extends Component {
                             />
                     })}
 
-                </AllNotesDiv>
+                </AllNotesPageDiv>
             )
         } else {
             return <p>loading all notes</p>
@@ -134,9 +134,9 @@ const mapDispatchToProps = {
     getUserData
 }
 
-export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, mapDispatchToProps)(AllNotes))
+export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, mapDispatchToProps)(AllNotesPage))
 
-const AllNotesDiv = styled.div`
+const AllNotesPageDiv = styled.div`
     border: 1px solid pink;
     margin: 4px;
     color: black;
