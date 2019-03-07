@@ -24,16 +24,6 @@ import {
     getUserData,
 } from '../actions';
 
-                        {/* <LeftMenu
-                            redirect={this.props.redirect}
-                            username={this.props.store.user.userData.username}
-                            toggleRightMenu={this.toggleRightMenu} 
-                            showRightMenu={this.state.showRightMenu}
-                            toggleNewNote={this.toggleNewNote} 
-                            showNewNote={this.state.showNewNote}
-                            match={this.props.match}
-                        /> */}
-
 class UsernamePage extends Component {
     constructor(props){
         super(props)
@@ -85,7 +75,7 @@ class UsernamePage extends Component {
                     ?   <Route
                             path={`${this.props.match.url}/`} 
                             render={ (e) => {
-                                console.log(e)
+                                // console.log(e)
                                 return <LeftMenu
                                     redirect={this.props.redirect}
                                     username={this.props.store.user.userData.username}

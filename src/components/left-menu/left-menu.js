@@ -61,11 +61,11 @@ export default class LeftMenu extends Component {
 				</div>
 				<div className="leftMenuBottom">
 					{this.props.location.pathname === `${this.props.match.url}/trash`
-						? <Link 
-							to={`/${this.props.username}/`}>
-							<DeleteTarget
-								type='deleteBin' 
-								className="menu-item red" />
+						? 	<Link 
+								to={`/${this.props.username}/`}>
+								<DeleteTarget
+									type='deleteBin' 
+									className="menu-item red" />
 							</Link>
 						: 	<Link 
 								to={`/${this.props.username}/trash`}>

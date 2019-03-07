@@ -8,12 +8,12 @@ class SettingsPage extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-		hello: false,
+			hello: false,
 		}
 	}
 
 	componentDidMount(){
-		this.props.getUserData()
+		// this.props.getUserData()
 	}    
 
 	componentWillReceiveProps(){
@@ -25,7 +25,7 @@ class SettingsPage extends Component {
 		const { userData } = this.props.store.user
 		return (
 			<SettingsPageDiv>
-				<h1>settings</h1>
+				<h1>Settings</h1>
 				{userData 
 					? 	<div>
 							<p>username: <span>{userData.username}</span></p>
@@ -38,8 +38,8 @@ class SettingsPage extends Component {
 				} 
 				<p>by default api items will be redundent, they can appear on multiple notes and will remain in the list. click button to turn off redudency and each note will be only appear throughout sticky once. There will be a flag on the note that says whether it is used or not.</p>
 				<button>toggle redundency</button>
-				</SettingsPageDiv>
-		);
+			</SettingsPageDiv>
+		)
 	}
 }
 
@@ -54,11 +54,11 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage)
 
 const SettingsPageDiv = styled.div`
-  border: 1px solid green;
-  display: flex;
-  flex-direction: column;
-  padding: 25px;
-  height: 100vh;
+	border: 1px solid green;
+	display: flex;
+	flex-direction: column;
+	padding: 25px;
+	height: 100vh;
 `;
 
   // pocketTokenRequest = (consumer_key, redirect_uri) => {

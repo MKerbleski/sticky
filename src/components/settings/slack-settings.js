@@ -59,22 +59,23 @@ export default class SlackSettings extends Component {
     render(){
         return(
             <SlackSettingsDiv> 
-                {this.state.isApiConnected ?
-                     <div style={{background: "lightgreen"}}>
-                        <h3>slack is connected!</h3>
-                        <h3>should have huge button saying initialize workplace or a redux event or dispatch that triggers in on sucessful authorization</h3>
-                        <button name="revokeAccess" onClick={this.clickHandler}>revoke access button goes here eventually </button>
-                        <button name="pins" onClick={this.getSlackInfo}>pins</button>
-                        <button name="channels" onClick={this.getSlackInfo}>channels</button>
-                        <button name="users" onClick={this.getSlackInfo}>users</button>
-                        <button name="stars" onClick={this.getSlackInfo}>stars</button>
-                        <button name="team" onClick={this.getSlackInfo}>team</button>
-                        <button name="sync" onClick={this.getSlackInfo}>sync</button>
-                        <button name="list" onClick={this.getSlackInfo}>list</button>
-                    </div> :
-                    <div>
-                        <p>slack is NOT connected</p><button onClick={this.connectSlack}>Connect to Slack</button>
-                    </div>}
+                {this.state.isApiConnected 
+                    ?   <div style={{background: "lightgreen"}}>
+                            <h3>slack is connected!</h3>
+                            <h3>should have huge button saying initialize workplace or a redux event or dispatch that triggers in on sucessful authorization</h3>
+                            <button name="revokeAccess" onClick={this.clickHandler}>revoke access button goes here eventually </button>
+                            <button name="pins" onClick={this.getSlackInfo}>pins</button>
+                            <button name="channels" onClick={this.getSlackInfo}>channels</button>
+                            <button name="users" onClick={this.getSlackInfo}>users</button>
+                            <button name="stars" onClick={this.getSlackInfo}>stars</button>
+                            <button name="team" onClick={this.getSlackInfo}>team</button>
+                            <button name="sync" onClick={this.getSlackInfo}>sync</button>
+                            <button name="list" onClick={this.getSlackInfo}>list</button>
+                        </div> 
+                    :   <div>
+                            <p>slack is NOT connected</p><button onClick={this.connectSlack}>Connect to Slack</button>
+                        </div>
+                }
             </SlackSettingsDiv>
         )
     }
@@ -82,5 +83,8 @@ export default class SlackSettings extends Component {
 
 const SlackSettingsDiv = styled.div`
     border: 1px solid red;
+    background: white;
     padding: 2px;
+    margin: 2px;
+    margin-top: 0;
 `

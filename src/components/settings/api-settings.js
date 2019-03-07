@@ -33,7 +33,7 @@ export default class ApiSettings extends Component {
     }
 
     render(){
-        console.log(this.props)
+        // console.log(this.props)
         return(
             <ApiSettingsDiv> 
                 <div className="settingApiTabs">
@@ -52,7 +52,9 @@ export default class ApiSettings extends Component {
                     })}
                 </div>
                 <div className="settingApiDetails">
-                    {this.state.selectedApp != null ? (this.renderSelectedApp()) : null}    
+                    {this.state.selectedApp != null 
+                        ?   (this.renderSelectedApp()) 
+                        :   null}    
                 </div>               
             </ApiSettingsDiv>
         )
@@ -61,13 +63,18 @@ export default class ApiSettings extends Component {
 
 const ApiSettingsDiv = styled.div`
     border: 1px solid red;
+    padding: 10px;
+    background: lightgray;
     .settingApiTabs{
         border: 1px solid blue;
+        margin: 2px;
+        margin-bottom: 0;
         background: lightgray;
         display: flex;
         flex-direction: row;
         .settingApiTab{
-            margin: 2px;
+            /* margin: 2px; */
+            margin-bottom: 0;
             border: 2px solid green;
             width: 100%;
             display: flex;

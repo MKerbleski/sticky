@@ -1,5 +1,6 @@
 export { 
-    getPocketList 
+    getPocketList,
+    getPocketSettings
 } from './pocket_actions'
 
 export { 
