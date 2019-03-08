@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { addNote } from './note_actions'
+import { handleErrorCodes } from './index'
 
 export const API_LIST_RECIEVED = 'API_LIST_RECIEVED';
 export const CREDENTIALS_ACCEPTED = 'CREDENTIALS_ACCEPTED';
@@ -129,39 +130,3 @@ export const loginUser = (creds, redirect) => {
 	}
 }
 
-export const handleErrorCodes = (err) => {
-	return function(dispatch){
-		if(err.response){
-			switch(err.response.status){
-				case 404: 
-					dispatch({type: ERROR, payload: {
-						data: {
-							message: "404 Error with endpoint.",
-							},
-						status: 404
-					}})
-					break;
-				case 400: 
-					dispatch({type: ERROR, payload: err.response})
-					break;
-				case 401: 
-					dispatch({type: ERROR, payload: err.response})
-					break;
-				case 500: 
-					dispatch({type: ERROR, payload: err.response})
-					break;
-				default: 
-					console.log("UNEXPECTED ERROR", err.response)
-					dispatch({type: ERROR, payload: err.response})
-					break;
-			}
-		} else {
-			dispatch({type: ERROR, payload: {
-				data: {
-					message: "Error communicating with the server.",
-					},
-				status: 503
-			}})
-		}
-	}
-}

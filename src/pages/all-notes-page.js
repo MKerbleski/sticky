@@ -51,6 +51,7 @@ class AllNotesPage extends Component {
     render() {
         // console.log('all notes', this.props)
         const notes = this.props.store.notes.notes
+        console.log('all notes', notes)
         if(notes){
             return (
                 <AllNotesPageDiv
@@ -61,23 +62,48 @@ class AllNotesPage extends Component {
                         :   this.props.deleteBin 
                             ?   'red' 
                             :   null}}>
-                    {notes.length > 0 
-                        ? null 
-                        :   this.props.deleteBin 
-                                ?   <div>Delete Bin is empty</div>
-                                :   this.props.store.user.userData 
+                    <h1> @{this.props.author}'s Notes</h1>
+
+                    {notes.length == 0 && this.props.deleteBin === false
+                        ?   <div>
+                                {/* USER PRIVATE PAGE */}
+                                {localStorage.getItem('username') === this.props.author
                                     ?   <div>
                                             <h3>Welcome!</h3>
                                             <p>Click the plus to the left to create a new note</p>
                                         </div> 
-                                    :   <div>
+                                    :   null
+                                }
+                                
+                                {/* USER PUBLIC PAGE */}
+                                {this.props.store.user.userData 
+                                && this.props.store.user.userData.username !== this.props.author
+                                    ?   <div>
                                             <h3>{this.props.author} has not published any notes yet. Please check back later.</h3>
-                                            <Link to="welcome">Welcome Page</Link>
+                                            <Link to={`/${this.props.store.user.userData.username}`}>My Notes</Link>
                                         </div>
+                                    :   null
+                                    
+                                }
+                            </div>
+                        :   null
                     }
+
+                    {this.props.deleteBin 
+                        ?   <div>
+                                {/* USER PRIVATE PAGE VS Private page */}
+                                {localStorage.getItem('username') === this.props.author
+                                    ?   <div>Delete Bin is empty</div>
+                                    :   <div>Page Protected</div> 
+                                }
+                            </div>
+                        :   null
+                    }
+                    
                     {this.props.showNewNote && !this.props.deleteBin 
                         ?   <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> 
-                        :   null}        
+                        :   null} 
+
                     {notes.map(note => {
                         return <NotePreviewSelf
                             key={note.id}
@@ -141,24 +167,22 @@ const AllNotesPageDiv = styled.div`
     margin: 4px;
     color: black;
     /* height: 100%; */
-
     max-width: 99%;
-
-        border: 1px solid green;
-        box-sizing: border-box;
-        overflow: auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        align-items: flex-start;
-        padding: 15px;
-        margin: 2px;
-        width: 100%;
-        &::-webkit-scrollbar {
-            width: 6px;
-            &-thumb{
-                background-color: gray;
-                border-radius: 25px;
-            }
+    border: 1px solid green;
+    box-sizing: border-box;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 15px;
+    margin: 2px;
+    width: 100%;
+    &::-webkit-scrollbar {
+        width: 6px;
+        &-thumb{
+            background-color: gray;
+            border-radius: 25px;
         }
+    }
 `;

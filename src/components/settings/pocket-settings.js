@@ -36,7 +36,7 @@ class PocketSettings extends Component {
 
     convertTime(unixTimeStamp){
         let time = +unixTimeStamp*1000
-        time = format(time, 'MMM Do YYYY')
+        time = format(time, 'MMM Do, YYYY - hh:mma')
         return time
     }
 
@@ -79,7 +79,7 @@ class PocketSettings extends Component {
                             <button name="list" onClick={this.getPocketInfo}>Refresh Notes</button> */}
                             {this.props.store.pocket.pocketSettings
                                 ?   <div>
-                                        <p>Pocket List last accessed: { this.convertTime(this.props.store.pocket.pocketSettings.last_accessed)}</p>
+                                        <p>Pocket List last accessed at: { this.convertTime(this.props.store.pocket.pocketSettings.last_accessed)}</p>
                                         <p>Connected as: {this.props.store.pocket.pocketSettings.pocket_username}</p>
                                     </div>
                                 : null

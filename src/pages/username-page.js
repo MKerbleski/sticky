@@ -127,8 +127,9 @@ class UsernamePage extends Component {
                             render={() => {
                                 return <AllNotesPage
                                     deleteBin
-                                    onDrop={this.onDrop} 
-                                    showDetailMenu={this.showDetailMenu}
+                                    // onDrop={this.onDrop} 
+                                    author={this.props.match.url}
+                                    // showDetailMenu={this.showDetailMenu}
                                     showNewNote={this.state.showNewNote}
                                     toggleNewNote={this.toggleNewNote}
                                     redirect={this.redirect}         

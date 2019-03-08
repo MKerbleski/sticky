@@ -33,7 +33,6 @@ export default class ApiSettings extends Component {
     }
 
     render(){
-        // console.log(this.props)
         return(
             <ApiSettingsDiv> 
                 <div className="settingApiTabs">
@@ -75,7 +74,7 @@ const ApiSettingsDiv = styled.div`
         .settingApiTab{
             /* margin: 2px; */
             margin-bottom: 0;
-            border: 2px solid green;
+            /* border: 2px solid green; */
             width: 100%;
             display: flex;
             justify-content: center;

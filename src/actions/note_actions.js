@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { handleErrorCodes } from './index'
 
 export const ATTACHED_ITEMS_RECIEVED = 'ATTACHED_ITEMS_RECIEVED';
 export const CREDENTIAL_ERROR = 'CREDENTIAL_ERROR';
@@ -190,7 +191,7 @@ export const getAttachedItems = (sticky_note_id) => {
     }
 }
 
-export const getDeletedNotes = () => {
+export const getDeletedNotes = (author) => {
     return function(dispatch){
         if(localStorage.getItem('JWT')){
           dispatch({type: FETCHING_DEL_NOTES})
@@ -200,10 +201,10 @@ export const getDeletedNotes = () => {
 					Authorization: token,    
 				} 
             }
-            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/del`, authHeader).then(res => {
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/del/${author}`, authHeader).then(res => {
               	dispatch({type: DEL_NOTES_RECIEVED, payload: res.data})
             }).catch(err => {
-              	dispatch({type: NOTE_ERROR, payload:err.message})
+              	dispatch(handleErrorCodes(err))
               	console.log(err.message)
             })
         } else {
