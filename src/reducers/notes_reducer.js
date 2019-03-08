@@ -27,7 +27,8 @@ import {
     FETCHING_SINGLE_NOTE,
     NOTE_TO_NOTE,
     NOTE_TO_NOTE_COMPLETE,
-    ERROR_EDITING_NOTE_TO_NOTE
+    ERROR_EDITING_NOTE_TO_NOTE,
+    ERROR
  } from '../actions/note_actions';
 
 
@@ -200,6 +201,15 @@ export const notesReducer = (state = initialState, action) => {
                 noteErrMsg: action.payload,
                 status: `Error fetching note. Error code:${ action.payload.response.status}`
             })
+        case ERROR:
+            if(action.payload.data.message){
+                return Object.assign({}, state, {
+                    status: action.payload.data.message,
+                    code: action.payload.status
+                })
+            } else {
+                return state
+            } 
         default: 
             return state;
     }

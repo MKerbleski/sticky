@@ -11,7 +11,7 @@ import {
     getDeletedNotes,
     getUserData,
 } from '../actions'
-// import { RightMenu } from '../right-menu'
+
 import { Link } from 'react-router-dom';
 
 class AllNotesPage extends Component {
@@ -26,7 +26,7 @@ class AllNotesPage extends Component {
     componentDidMount(){
         if(localStorage.getItem('JWT')){
             if(this.props.deleteBin){
-                this.props.getDeletedNotes();
+                this.props.getDeletedNotes(this.props.author);
             } else {
                 this.props.getNotes(this.props.author);
             }
@@ -41,7 +41,7 @@ class AllNotesPage extends Component {
         if(this.props.deleteBin !== nextProps.deleteBin){
             console.log('delete bins arnt the same')
             if(nextProps.deleteBin){
-                this.props.getDeletedNotes();
+                this.props.getDeletedNotes(nextProps.author);
             } else {
                 this.props.getNotes(nextProps.author);
             }
@@ -51,7 +51,7 @@ class AllNotesPage extends Component {
     render() {
         // console.log('all notes', this.props)
         const notes = this.props.store.notes.notes
-        console.log('all notes', notes)
+        console.log('all notes', this.props)
         if(notes){
             return (
                 <AllNotesPageDiv
@@ -62,7 +62,8 @@ class AllNotesPage extends Component {
                         :   this.props.deleteBin 
                             ?   'red' 
                             :   null}}>
-                    <h1> @{this.props.author}'s Notes</h1>
+                    
+                    <h1> @{this.props.author}'s {this.props.deleteBin ? 'deleted' : null } Notes</h1>
 
                     {notes.length == 0 && this.props.deleteBin === false
                         ?   <div>
@@ -78,7 +79,7 @@ class AllNotesPage extends Component {
                                 {/* USER PUBLIC PAGE */}
                                 {this.props.store.user.userData 
                                 && this.props.store.user.userData.username !== this.props.author
-                                    ?   <div>
+                                    ?   <div className='noNotes'>
                                             <h3>{this.props.author} has not published any notes yet. Please check back later.</h3>
                                             <Link to={`/${this.props.store.user.userData.username}`}>My Notes</Link>
                                         </div>
@@ -89,7 +90,7 @@ class AllNotesPage extends Component {
                         :   null
                     }
 
-                    {this.props.deleteBin 
+                    {this.props.deleteBin && notes.length == 0
                         ?   <div>
                                 {/* USER PRIVATE PAGE VS Private page */}
                                 {localStorage.getItem('username') === this.props.author
@@ -132,7 +133,6 @@ const targetObj = {
     drop(props, monitor) {
         const hover = monitor.isOver({shallow:false})
         if(hover){
-
             //This is only ever a target
             return ({
                 type: 'top',
@@ -172,9 +172,10 @@ const AllNotesPageDiv = styled.div`
     box-sizing: border-box;
     overflow: auto;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-items: flex-start;
+    align-items: center;
     padding: 15px;
     margin: 2px;
     width: 100%;
@@ -184,5 +185,11 @@ const AllNotesPageDiv = styled.div`
             background-color: gray;
             border-radius: 25px;
         }
+    }
+    .noNotes{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 `;

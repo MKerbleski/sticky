@@ -67,7 +67,7 @@ class UsernamePage extends Component {
     }
 
     render(){
-        // console.log(this.props)
+        console.log(this.props.match.url, localStorage.getItem('username'))
         return(
             <UsernamePageDiv> 
                 {localStorage.getItem('JWT') 
@@ -118,24 +118,36 @@ class UsernamePage extends Component {
                                 />
                             }} 
                         />
-                        <Route
-                            path={`${this.props.match.url}/settings`}
-                            component={SettingsPage} 
-                        /> 
-                        <Route
-                            path={`${this.props.match.url}/trash`}
-                            render={() => {
-                                return <AllNotesPage
-                                    deleteBin
-                                    // onDrop={this.onDrop} 
-                                    author={this.props.match.url}
-                                    // showDetailMenu={this.showDetailMenu}
-                                    showNewNote={this.state.showNewNote}
-                                    toggleNewNote={this.toggleNewNote}
-                                    redirect={this.redirect}         
-                                />
-                            }}     
-                        />
+                        {this.props.username === localStorage.getItem('username') 
+                            ?   <React.Fragment>
+                                    <Route
+                                        path={`${this.props.match.url}/settings`}
+                                        component={SettingsPage} 
+                                    /> 
+                                    <Route
+                                        path={`${this.props.match.url}/trash`}
+                                        render={() => {
+                                            return <AllNotesPage
+                                                deleteBin
+                                                // onDrop={this.onDrop} 
+                                                author={this.props.username}
+                                                // showDetailMenu={this.showDetailMenu}
+                                                showNewNote={this.state.showNewNote}
+                                                toggleNewNote={this.toggleNewNote}
+                                                redirect={this.redirect}         
+                                            />
+                                        }}     
+                                    />
+                                </React.Fragment>
+                            :   <React.Fragment>
+                                    <div className="unAuth">
+                                        <h1>
+                                            <i className="fas fa-ban"></i>
+                                        </h1>
+                                        Unauthorized
+                                    </div> 
+                                </React.Fragment>
+                            }
                     </Switch>
                 </div>
                 {localStorage.getItem('JWT') && this.props.store.user.userData
@@ -187,5 +199,14 @@ const UsernamePageDiv = styled.div`
         /* justify-content: center; */
         flex-wrap: wrap;
         overflow: auto;
+    }
+    .unAuth{
+        border: 1px solid red;
+        margin: 2px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 `

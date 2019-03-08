@@ -96,7 +96,7 @@ export const userReducer = (state = initialState, action) => {
                     code: action.payload.status
                 })
             } else {
-                break;
+                return state
             } 
         case CLEAR_USER_STATUS:
             return Object.assign({}, state, {
