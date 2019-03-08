@@ -65,11 +65,11 @@ class AllNotesPage extends Component {
                     
                     <h1> @{this.props.author}'s {this.props.deleteBin ? 'deleted' : null } Notes</h1>
 
-                    {notes.length == 0 && this.props.deleteBin === false
+                    {notes.length === 0 && this.props.deleteBin === false
                         ?   <div>
                                 {/* USER PRIVATE PAGE */}
                                 {localStorage.getItem('username') === this.props.author
-                                    ?   <div>
+                                    ?   <div className='noNotes'>
                                             <h3>Welcome!</h3>
                                             <p>Click the plus to the left to create a new note</p>
                                         </div> 
@@ -90,7 +90,7 @@ class AllNotesPage extends Component {
                         :   null
                     }
 
-                    {this.props.deleteBin && notes.length == 0
+                    {this.props.deleteBin && notes.length === 0
                         ?   <div>
                                 {/* USER PRIVATE PAGE VS Private page */}
                                 {localStorage.getItem('username') === this.props.author
@@ -174,7 +174,7 @@ const AllNotesPageDiv = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
     padding: 15px;
     margin: 2px;
@@ -187,9 +187,10 @@ const AllNotesPageDiv = styled.div`
         }
     }
     .noNotes{
+        /* border: 1px solid red; */
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
     }
 `;

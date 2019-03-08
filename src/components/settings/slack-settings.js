@@ -45,7 +45,7 @@ export default class SlackSettings extends Component {
               console.log(res.data)
             })
               .catch(err => {
-              console.log("error!")
+              console.log("error!", err)
             })
           } else {
             console.log("no token found.")
@@ -63,17 +63,24 @@ export default class SlackSettings extends Component {
                     ?   <div style={{background: "lightgreen"}}>
                             <h3>slack is connected!</h3>
                             <h3>should have huge button saying initialize workplace or a redux event or dispatch that triggers in on sucessful authorization</h3>
-                            <button name="revokeAccess" onClick={this.clickHandler}>revoke access button goes here eventually </button>
-                            <button name="pins" onClick={this.getSlackInfo}>pins</button>
+                            {/* <button name="sync" onClick={this.getSlackInfo}>Initilize</button> */}
+                            <p>team -> channels -> users -> </p>
+                            <button name="team" onClick={this.getSlackInfo}>team</button>
                             <button name="channels" onClick={this.getSlackInfo}>channels</button>
                             <button name="users" onClick={this.getSlackInfo}>users</button>
-                            <button name="stars" onClick={this.getSlackInfo}>stars</button>
-                            <button name="team" onClick={this.getSlackInfo}>team</button>
+                            <p>sync is combo of above 3</p>
                             <button name="sync" onClick={this.getSlackInfo}>sync</button>
+                            {/* <button name="revokeAccess" onClick={this.clickHandler}>revoke access button goes here eventually </button> */}
+                            <p>stars include channels so that must come before pins</p>
+                            <button name="stars" onClick={this.getSlackInfo}>stars</button>
+                            <p>pins cannot be channels so that comes second</p>
+                            <button name="pins" onClick={this.getSlackInfo}>pins</button>
+                            <p>list is what gets rendered in blue menu</p>
                             <button name="list" onClick={this.getSlackInfo}>list</button>
                         </div> 
                     :   <div>
-                            <p>slack is NOT connected</p><button onClick={this.connectSlack}>Connect to Slack</button>
+                            <p>slack is NOT connected</p>
+                            <button onClick={this.connectSlack}>Connect to Slack</button>
                         </div>
                 }
             </SlackSettingsDiv>

@@ -52,6 +52,7 @@ export default class EntryNote extends Component {
 
 const EntryNoteDiv = styled.div`
     border: 1px solid red;
+    margin: 2px;
     form{
         border: 1px solid green;
         margin: 2px;

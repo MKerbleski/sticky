@@ -73,14 +73,14 @@ class PocketSettings extends Component {
             <PocketSettingsDiv> 
                 {this.props.store.user.userData.pocket 
                     ?   <div>
-                            <p style={{background: "lightgreen"}}>Pocket is connected!</p>
-                            <p>Use the blue menu to the right to view your list and attach your notes!</p>
+                            <h3 style={{background: "lightgreen"}}>Pocket is connected!</h3>
+                            <p>Use the blue menu to the right to view your list and attach pocket items to your notes!</p>
                             {/* <button onClick={this.clickHandler}>Revoke access</button>
                             <button name="list" onClick={this.getPocketInfo}>Refresh Notes</button> */}
                             {this.props.store.pocket.pocketSettings
                                 ?   <div>
-                                        <p>Pocket List last accessed at: { this.convertTime(this.props.store.pocket.pocketSettings.last_accessed)}</p>
-                                        <p>Connected as: {this.props.store.pocket.pocketSettings.pocket_username}</p>
+                                        <p><strong>Last Update: </strong>{ this.convertTime(this.props.store.pocket.pocketSettings.last_accessed)}</p>
+                                        <p><strong>Connected as: </strong> {this.props.store.pocket.pocketSettings.pocket_username}</p>
                                     </div>
                                 : null
                             }
@@ -91,7 +91,7 @@ class PocketSettings extends Component {
                         </div>
                 }
 
-                {/* what I want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read... */}
+                {/* what I want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read..., or delete button.  */}
             </PocketSettingsDiv>
         )
     }
