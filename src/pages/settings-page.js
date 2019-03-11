@@ -35,9 +35,9 @@ class SettingsPage extends Component {
 							<ApiSettings userData={userData} /> 
 						</div>
 					:	<h6>loading...</h6>
-				} 
-				<p>by default api items will be redundent, they can appear on multiple notes and will remain in the list. click button to turn off redudency and each note will be only appear throughout sticky once. There will be a flag on the note that says whether it is used or not.</p>
-				<button>toggle redundency</button>
+				}
+				{/* <p>by default api items will be redundent, they can appear on multiple notes and will remain in the list. click button to turn off redudency and each note will be only appear throughout sticky once. There will be a flag on the note that says whether it is used or not.</p> */}
+				{/* <button>toggle redundency</button> */}
 			</SettingsPageDiv>
 		)
 	}
@@ -58,7 +58,8 @@ const SettingsPageDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 25px;
-	height: 100vh;
+	width: 100%;
+	/* height: 100vh; */
 `;
 
   // pocketTokenRequest = (consumer_key, redirect_uri) => {

@@ -13,7 +13,8 @@ export const getPocketList = () =>  {
             const authHeader = { headers: { Authorization: token } }
             axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/list`, authHeader)
             .then(res => {
-              dispatch({type: POCKET_LIST_RECIEVED, payload: res.data})})
+                localStorage.setItem('pocketList', res.data)
+                dispatch({type: POCKET_LIST_RECIEVED, payload: res.data})})
             .catch(err => {
               dispatch({type: POCKET_ERROR, payload: err})})
         } else {

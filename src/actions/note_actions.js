@@ -226,7 +226,7 @@ export const getNotes = (author) =>  {
                 // console.log(res)
                 dispatch({type: NOTES_RECIEVED, payload: res.data})
 			}).catch(err => {
-				dispatch({type: NOTE_ERROR, payload: err})
+				dispatch(handleErrorCodes(err))
 			})
         } else {
             console.log("fetching public ")

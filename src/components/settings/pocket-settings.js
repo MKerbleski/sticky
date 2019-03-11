@@ -1,7 +1,7 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
-import { getPocketSettings } from '../../actions'
+import { getPocketSettings, getUserData } from '../../actions'
 import { connect } from 'react-redux';
 import format from 'date-fns/format'
 
@@ -22,12 +22,17 @@ class PocketSettings extends Component {
         e.preventDefault();
         let userid = this.props.userData.id
         let redirect_uri = `${process.env.REACT_APP_BACKEND_URL}/api/pocket/incoming/${userid}`
-        // let redirect_uri = `${process.env.REACT_APP_FRONTEND_URL}/${localStorage.getItem('username')}/settings`
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/auth/${userid}`).then(res => {
             if(res.data){
                 window.open(`https://getpocket.com/auth/authorize?request_token=${res.data}&redirect_uri=${redirect_uri}`)
+                this.setState({
+                    refresh: true
+                })
             } else {
                 console.log("did not get code back")
+                this.setState({
+                    error: true
+                })
             }
         }).catch(err => {
             console.log(err)
@@ -65,15 +70,12 @@ class PocketSettings extends Component {
         e.preventDefault();
     }
 
-    render(){ 
-        console.log(this.props)
-        //need a status button that says saving everything to server while it is initializing
-        
+    render(){        
         return(
             <PocketSettingsDiv> 
                 {this.props.store.user.userData.pocket 
-                    ?   <div>
-                            <h3 style={{background: "lightgreen"}}>Pocket is connected!</h3>
+                    ?   <div style={{background: "lightgreen"}}>
+                            <h3>Pocket is connected!</h3>
                             <p>Use the blue menu to the right to view your list and attach pocket items to your notes!</p>
                             {/* <button onClick={this.clickHandler}>Revoke access</button>
                             <button name="list" onClick={this.getPocketInfo}>Refresh Notes</button> */}
@@ -88,6 +90,20 @@ class PocketSettings extends Component {
                     :   <div>
                             <p>pocket is NOT connected</p>
                             <button onClick={this.connectPocket}>Connect to Pocket</button>
+                            {this.state.err
+                                ?   <p>error connectiong, please try again later</p>
+                                :   null
+                            }
+                            {this.state.refresh
+                                ?   <button 
+                                        onClick={() => {
+                                            this.props.getUserData(); 
+                                            this.props.getPocketSettings(this.props.store.user.userData.id)}}
+                                    >
+                                    Success?
+                                    </button>
+                                :   null
+                            }
                         </div>
                 }
 
@@ -103,6 +119,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
     getPocketSettings,
+    getUserData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PocketSettings)

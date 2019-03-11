@@ -12,10 +12,15 @@ class SlackList extends Component {
         const { slackStars } = this.props.store.slack
         return(
             <SlackListDiv> 
-                {slackStars ? Object.keys(slackStars).map(channelName => {
-                    const channel = slackStars[channelName]
-                    return <SlackChannel key={channel.name} editAttachedItems={this.props.editAttachedItems} channel={channel} />
-                }): <p>loading...</p>} 
+                {slackStars 
+                    ? Object.keys(slackStars).map(channelName => {
+                            const channel = slackStars[channelName]
+                            return <SlackChannel 
+                                key={channel.name} 
+                                editAttachedItems={this.props.editAttachedItems} 
+                                channel={channel} />
+                        })
+                    :   <p>loading...</p>} 
             </SlackListDiv>
         )
     }

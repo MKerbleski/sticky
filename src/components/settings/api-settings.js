@@ -97,5 +97,10 @@ const ApiSettingsDiv = styled.div`
             }
       }
     }
+    .settingApiDetails{
+        h3{
+            margin-top: 0;
+        }
+    }
     
 `
