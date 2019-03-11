@@ -11,6 +11,7 @@ import format from 'date-fns/format'
 const PocketNote = (props) => {
     let time = +props.item.time_added*1000
     time = format(time, 'MMM Do YYYY')
+    console.log(this)
     if(props.item){
         return <PocketNoteDiv 
                     innerRef={instance => props.connectDragSource(instance)}
@@ -48,6 +49,7 @@ const PocketNote = (props) => {
         if (!monitor.didDrop()){
             return;
         }
+
         const item = props.item;
 		const parent = props.parent
 		const source = {
@@ -57,7 +59,11 @@ const PocketNote = (props) => {
 		}
 
         let noteEdit = sharedStickyNoteDrop(source, monitor);
+
         if(noteEdit !== null){
+            console.log(props, monitor)
+            // if(props.store.notes.notes.length)
+            ///here check to see if singleNote on store is true and then pass in the note author name and id to noteToNot
 			props.noteToNote(noteEdit)
 		}
     },

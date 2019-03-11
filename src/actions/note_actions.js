@@ -32,7 +32,7 @@ export const NOTE_TO_NOTE = 'NOTE_TO_NOTE';
 export const NOTE_TO_NOTE_COMPLETE = 'NOTE_TO_NOTE_COMPLETE';
 export const ERROR_EDITING_NOTE_TO_NOTE = 'ERROR_EDITING_NOTE_TO_NOTE';
 
-export const noteToNote = (notePackage) => {
+export const noteToNote = (notePackage, single=false) => {
     return function(dispatch){
         if(localStorage.getItem('JWT') && notePackage){
             const token = localStorage.getItem('JWT')
@@ -40,7 +40,11 @@ export const noteToNote = (notePackage) => {
             dispatch({ type: NOTE_TO_NOTE, payload: notePackage })
             axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/note/ToNote`, (notePackage), authHeader).then(res => {
                 dispatch({ type: NOTE_TO_NOTE_COMPLETE })
-				dispatch(getNotes(localStorage.getItem('username')));
+                if(single){
+                    dispatch(getSingleNote(single.author, single.note_id ))
+                } else {
+                    dispatch(getNotes(localStorage.getItem('username')))
+                }
             }).catch(err => {
               	dispatch({ type: ERROR_EDITING_NOTE_TO_NOTE, payload: err })
                 console.log("error in edit note redux actions", err.message)
@@ -242,7 +246,7 @@ export const getNotes = (author) =>  {
 
 //this is going to be seperate because I am possibly eventually going to fetch children as well. 
 export const getSingleNote = (author_name, note_id) =>  {
-    console.log(note_id, "actions")
+    // console.log(props, "actions")
     return function(dispatch){
         if(localStorage.getItem('JWT')){
 			dispatch({type: FETCHING_SINGLE_NOTE, payload:{ author_name, note_id} });

@@ -18,16 +18,16 @@ class AttachedList extends Component {
     render(){
         console.log(this.props)
         return <AttachedListDiv> 
-                    {this.props.note.slack_items_attached ? 
-                        this.props.note.slack_items_attached.map(item => {
+                    {this.props.note.slack_items ? 
+                        this.props.note.slack_items.map(item => {
                             return <SlackNote
                                 parent={this.props.note}
                                 key={item.uuid} 
                                 item={item} 
                                 stickyNote={this.props.stickyNote} />
                     }) :  null}
-                    {this.props.note.pocket_items_attached ? 
-                        this.props.note.pocket_items_attached.map(item => {
+                    {this.props.note.pocket_items ? 
+                        this.props.note.pocket_items.map(item => {
                             return <PocketNote 
                                 parent={this.props.note}
                                 key={item.item_id} 
