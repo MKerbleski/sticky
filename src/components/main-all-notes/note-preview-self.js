@@ -59,7 +59,8 @@ class NotePreviewSelf extends React.Component {
                             index={this.props.index}
                             className="note-link"
 							id={this.props.note.id}
-							style={{background: this.props.hover ? 'lightgreen' : null}} >
+							style={{background: this.props.hover ? 'lightgreen' : null}} 
+						>
                             {/* {this.renderText()} */}
                             {/* <ReactQuill preview value={this.props.note} /> */}
                             <div className="note-content">
@@ -208,7 +209,6 @@ const NotePreviewSelfDiv = styled.div`
 			flex-direction: column;
 			justify-content: space-between;
 			align-items: center;
-
 			color: black;
 			width: 250px;
 			height: auto;
@@ -216,11 +216,11 @@ const NotePreviewSelfDiv = styled.div`
 			max-height: 100px;
 			margin: 2% 0;
 			.note-content-header{
-				${'' /* border: 1px solid pink; */}
+				/* border: 1px solid pink; */
 				width: 100%;
 				display: flex;
 				flex-direction: row;
-				justify-content: space-between;
+				justify-content: flex-end;
 				align-items: center;
 				.note-content-title {
 					${'' /* border: 1px solid green; */}

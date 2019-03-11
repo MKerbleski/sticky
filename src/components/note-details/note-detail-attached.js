@@ -12,27 +12,27 @@ import {
 
 class AttachedList extends Component {
     componentDidMount(){
-        this.props.getAttachedItems(this.props.stickyNote.id);
+        // this.props.getAttachedItems(this.props.stickyNote.id);
     }
     
     render(){
-        if(this.props.store.notes.triggerAttached){
-            this.props.getAttachedItems(this.props.stickyNote.id);
-        }
+        console.log(this.props)
         return <AttachedListDiv> 
-                    {this.props.store.notes.attachedItems ? 
-                        this.props.store.notes.attachedItems.map(item => {
-                        if(item.slack_user_id){
+                    {this.props.note.slack_items_attached ? 
+                        this.props.note.slack_items_attached.map(item => {
                             return <SlackNote
-                                    key={item.uuid} 
-                                    item={item} 
-                                    stickyNote={this.props.stickyNote} />
-                        } else {
+                                parent={this.props.note}
+                                key={item.uuid} 
+                                item={item} 
+                                stickyNote={this.props.stickyNote} />
+                    }) :  null}
+                    {this.props.note.pocket_items_attached ? 
+                        this.props.note.pocket_items_attached.map(item => {
                             return <PocketNote 
-                                    key={item.id} 
-                                    stickyNote={this.props.stickyNote}
-                                    item={item} />
-                        }
+                                parent={this.props.note}
+                                key={item.item_id} 
+                                stickyNote={this.props.stickyNote}
+                                item={item} />
                     }) :  null}
             </AttachedListDiv>
     }

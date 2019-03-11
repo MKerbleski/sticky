@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { 
     NoteDetailChild, 
     // NoteDetailBody,
-    // AttachedList,
+    AttachedList,
 } from '../index.js';
 import { getAttachedItems, editNote } from '../../actions'
 import { start } from '../../styles/styl-utils.js'
@@ -71,7 +71,11 @@ class NoteDetailSelf extends React.Component {
                             </div>
                         </div>
                         <div className="note-detail-right">
-                            {/* <AttachedList stickyNote={this.props.note} /> */}
+                            {this.props.note.total_items_attached 
+                                ?   <AttachedList 
+                                        note={note}
+                                    />
+                                :   null}
                         </div>
                     </div>
                     <div className="note-detail-settings">
