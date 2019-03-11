@@ -17,6 +17,7 @@ const SlackChannel = (props) => {
                 <h3 className="slack-channel-title">#{props.channel.name}</h3>
                 {props.channel.notes.map(note => {
                     return <SlackNote 
+                        parent={null}
                         key={note.uuid} 
                         item={note} />
                 })}

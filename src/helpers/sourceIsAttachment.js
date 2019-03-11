@@ -1,4 +1,9 @@
 export const sourceIsAttachment = (sourceObj, targetObj) => {
+    const target = targetObj.note
+    const source = sourceObj
+    const targetParent = targetObj.parent
+    // const sourceNoteId = sourceObj.item.permalink
+    const sourceParent = sourceObj.parent
 
     //from note
     let total_items_attached;
@@ -10,4 +15,10 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
 
     //from slack
     let permalink
+    console.log("\n ==sharedStickyNoteDrop== \n",
+        '\ntarget:',target,
+        '\nsource:', source,
+        '\ntargetParent:', targetParent,
+        '\nsourceParent:', sourceParent,
+    )
 }

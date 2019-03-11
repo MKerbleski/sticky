@@ -35,22 +35,22 @@ const PocketNote = (props) => {
  const sourceObj = {
     
     beginDrag(props) {
-        const note = props.note;
+        const item = props.item;
 		const parent = props.parent
 		return ({
 			type: 'attachment',
 			parent: parent,
-			note: note,
+			item: item,
 		});
     },
     
     endDrag(props, monitor) {
-        const note = props.note;
+        const item = props.item;
 		const parent = props.parent
 		const source = {
 			type: 'attachment',
 			parent: parent,
-			note: note,
+			item: item,
 		}
 
 		let noteEdit = sharedStickyNoteDrop(source, monitor);

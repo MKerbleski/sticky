@@ -7,6 +7,7 @@ import format from 'date-fns/format'
 import { editAttachedItems } from '../../actions'
 import { connect } from 'react-redux';
 import { sharedEndDrag } from '../../helpers/api-end-drag'
+import { sharedStickyNoteDrop } from '../../helpers'
 
 const SlackNote = (props) => {
     let time = props.item.ts.slice(0, 10)*1000
@@ -18,22 +19,23 @@ const SlackNote = (props) => {
                 type="slack"
                 style={{
                     opacity: props.isDragging ? '0.25' : '1',
-                    border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
-                <div className="slack-note-top">
-                    <strong>{props.item.slack_user_name}</strong>
-                    <div className="status">
-                        <span>{props.item.is_pinned ? "pin" : null}</span>
-                        <span>{props.item.is_starred ? "star" : null}</span>
-                    </div>
-                </div> 
-                <div className="slack-note-middle">
-                    <ReactMarkdown className="slack-text">{props.item.type === "message" ? props.item.text : "error at note text"}</ReactMarkdown>
-                </div> 
-                <span className="slack-note-bottom">
-                    <p className="slack-time">{time}</p>
-                    <a target="_blank" href={props.item.permalink}>Link to Slack</a>
-                </span>
-            </SlackNoteDiv>
+                    border: props.isDragging ? '1px dashed gray': '1px solid black'}}
+                >
+                    <div className="slack-note-top">
+                        <strong>{props.item.slack_user_name}</strong>
+                        <div className="status">
+                            <span>{props.item.is_pinned ? "pin" : null}</span>
+                            <span>{props.item.is_starred ? "star" : null}</span>
+                        </div>
+                    </div> 
+                    <div className="slack-note-middle">
+                        <ReactMarkdown className="slack-text">{props.item.type === "message" ? props.item.text : "error at note text"}</ReactMarkdown>
+                    </div> 
+                    <span className="slack-note-bottom">
+                        <p className="slack-time">{time}</p>
+                        <a target="_blank" href={props.item.permalink}>Link to Slack</a>
+                    </span>
+                </SlackNoteDiv>
     } else {
         return null
     }
@@ -41,18 +43,25 @@ const SlackNote = (props) => {
 
  const sourceObj = {
     beginDrag(props) {
-        const slack_note_id = props.item.id;
-        const type = "slack"
-        return ({ slack_note_id, type })
+        const note = props.item;
+		const parent = props.parent
+		return ({
+			type: 'attachment',
+			parent: parent,
+			note: note,
+		});
     },
-
+    
     endDrag(props, monitor) {
-        let obj = sharedEndDrag(props, monitor, 'slack_items_attached');
-        if(obj.sticky_target.sticky_target_id !== null){
-            props.editAttachedItems(obj)
-        } else {
-            window.alert("There is no parent note availible to put the item")
-        }
+        const note = props.item;
+		const parent = props.parent
+		const source = {
+			type: 'attachment',
+			parent: parent,
+			note: note,
+		}
+
+		let noteEdit = sharedStickyNoteDrop(source, monitor);
     },
 };
 
