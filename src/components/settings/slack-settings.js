@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getSlackSettings, getUserData } from '../../actions'
+import format from 'date-fns/format'
 
 class SlackSettings extends Component {
     constructor(props){
@@ -51,6 +52,12 @@ class SlackSettings extends Component {
         }
     }
 
+    convertTime(unixTimeStamp){
+        let time = +unixTimeStamp
+        time = format(time, 'MMM Do, YYYY - hh:mm a')
+        return time
+    }
+
     clickHandler = (e) => {
         e.preventDefault();
     }
@@ -65,7 +72,7 @@ class SlackSettings extends Component {
                                 ?   <div>
                                         <p>
                                             <strong>Last Updated: </strong> 
-                                            {this.props.store.slack.slackSettings.last_updated}
+                                            {this.convertTime(this.props.store.slack.slackSettings.last_updated)}
                                         </p>
                                         <p>
                                             <strong>Workplace connected: </strong> 
@@ -98,7 +105,12 @@ class SlackSettings extends Component {
                             <p>slack is NOT connected</p>
                             <button onClick={this.connectSlack}>Connect to Slack</button>
                             {this.state.refresh
-                                ?   <button onClick={() => {this.props.getUserData()}}>Success?</button>
+                                ?   <button 
+                                        onClick={() => {
+                                            this.props.getUserData()}}
+                                    >
+                                        Success?
+                                    </button>
                                 :   null}
                         </div>
                 }

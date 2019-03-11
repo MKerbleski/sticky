@@ -16,7 +16,8 @@ const PocketNote = (props) => {
                     type="pocket" 
                     style={{
                         opacity: props.isDragging ? '0.25' : '1',
-                        border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
+                        border: props.isDragging ? '1px dashed gray': '1px solid black'}}
+                >
                     <div className="pocket-note-text">
                         {props.item.given_title === "" ? <p>{props.item.resolved_title}</p> : <p>{props.item.given_title}</p>}
                     </div> 
