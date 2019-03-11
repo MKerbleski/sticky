@@ -7,7 +7,6 @@ export const sharedStickyNoteDrop = (sourceObj, targetObj) => {
     if(sourceObj.type === 'note'){
         return sourceIsNote(sourceObj, targetObj)
     } else {
-        console.log("attachment")
         return sourceIsAttachment(sourceObj, targetObj)
     }
 }

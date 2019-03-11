@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import React from 'react';
 import { DragSource } from 'react-dnd';
 import { apiNote } from '../../styles/styl-utils'
-import { sharedEndDrag } from '../../helpers/api-end-drag'
+// import { sharedEndDrag } from '../../helpers/delete--api-end-drag'
 import { sharedStickyNoteDrop } from '../../helpers'
-import { editAttachedItems } from '../../actions'
+import { editAttachedItems, noteToNote } from '../../actions'
 import { connect } from 'react-redux';
 import format from 'date-fns/format'
 
@@ -38,22 +38,28 @@ const PocketNote = (props) => {
         const item = props.item;
 		const parent = props.parent
 		return ({
-			type: 'attachment',
+			type: 'pocket',
 			parent: parent,
-			item: item,
+			note: item,
 		});
     },
     
     endDrag(props, monitor) {
+        if (!monitor.didDrop()){
+            return;
+        }
         const item = props.item;
 		const parent = props.parent
 		const source = {
-			type: 'attachment',
+			type: 'pocket',
 			parent: parent,
-			item: item,
+			note: item,
 		}
 
-		let noteEdit = sharedStickyNoteDrop(source, monitor);
+        let noteEdit = sharedStickyNoteDrop(source, monitor);
+        if(noteEdit !== null){
+			props.noteToNote(noteEdit)
+		}
     },
 };
 
@@ -68,7 +74,8 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    editAttachedItems
+    editAttachedItems,
+    noteToNote
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DragSource('item', sourceObj, collect)(PocketNote));

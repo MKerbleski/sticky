@@ -17,6 +17,7 @@ const PocketChannel = (props) => {
                 <h3 className="pocket-channel-title">All Pocket Notes</h3>
                 {props.pocketList.map(pocketItem => {
                             return <PocketNote 
+                            parent={null}
                             type="pocket" 
                             editAttachedItems={props.editAttachedItems} 
                             key={pocketItem.item_id} 

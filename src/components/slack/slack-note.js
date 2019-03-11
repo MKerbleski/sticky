@@ -6,7 +6,7 @@ import { apiNote } from '../../styles/styl-utils'
 import format from 'date-fns/format'
 import { editAttachedItems } from '../../actions'
 import { connect } from 'react-redux';
-import { sharedEndDrag } from '../../helpers/api-end-drag'
+import { sharedEndDrag } from '../../helpers/delete--api-end-drag'
 import { sharedStickyNoteDrop } from '../../helpers'
 
 const SlackNote = (props) => {
@@ -53,6 +53,10 @@ const SlackNote = (props) => {
     },
     
     endDrag(props, monitor) {
+        if (!monitor.didDrop()){
+            return;
+        }
+
         const note = props.item;
 		const parent = props.parent
 		const source = {
@@ -61,7 +65,8 @@ const SlackNote = (props) => {
 			note: note,
 		}
 
-		let noteEdit = sharedStickyNoteDrop(source, monitor);
+        let noteEdit = sharedStickyNoteDrop(source, monitor);
+        console.log("noteEdit", noteEdit)
     },
 };
 
