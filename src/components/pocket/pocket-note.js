@@ -3,6 +3,7 @@ import React from 'react';
 import { DragSource } from 'react-dnd';
 import { apiNote } from '../../styles/styl-utils'
 import { sharedEndDrag } from '../../helpers/api-end-drag'
+import { sharedStickyNoteDrop } from '../../helpers'
 import { editAttachedItems } from '../../actions'
 import { connect } from 'react-redux';
 import format from 'date-fns/format'
@@ -34,39 +35,35 @@ const PocketNote = (props) => {
  const sourceObj = {
     
     beginDrag(props) {
-        if(props.type === "pocket"){
-            const pocketId = props.item.item_id
-            const type = props.type
-            return ({
-                pocketId, type //this gets sent to the drop item 
-            });
-        } 
-        else {
-            const pocketId = props.item.item_id
-            const type = props.type
-            return ({
-                pocketId, type //this gets sent to the drop item 
-            });
-        }
+        const note = props.note;
+		const parent = props.parent
+		return ({
+			type: 'attachment',
+			parent: parent,
+			note: note,
+		});
     },
     
-    endDrag(props, monitor) {// this takes props mounted on beginDrags
-        let obj = sharedEndDrag(props, monitor, 'pocket_items_attached');
-        if(obj.sticky_target.sticky_target_id !== null){
-            props.editAttachedItems(obj)
-        } else {
-            window.alert("There is no parent note availible to put the item")
-        }
-    },
-  };
+    endDrag(props, monitor) {
+        const note = props.note;
+		const parent = props.parent
+		const source = {
+			type: 'attachment',
+			parent: parent,
+			note: note,
+		}
 
-  const collect = (connect, monitor) => ({
+		let noteEdit = sharedStickyNoteDrop(source, monitor);
+    },
+};
+
+const collect = (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging(),
     // didDrop: monitor.didDrop(),
-  });
+});
 
-  const mapStateToProps = store => {
+const mapStateToProps = store => {
     return {store: store};
 }
 
