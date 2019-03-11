@@ -11,7 +11,7 @@ export const getPocketList = () =>  {
             dispatch({type: FETCHING_POCKET_LIST});
             const token = localStorage.getItem('JWT')
             const authHeader = { headers: { Authorization: token } }
-            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/list`, authHeader)
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/quick`, authHeader)
             .then(res => {
                 localStorage.setItem('pocketList', res.data)
                 dispatch({type: POCKET_LIST_RECIEVED, payload: res.data})})
