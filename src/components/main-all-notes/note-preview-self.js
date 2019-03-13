@@ -65,11 +65,13 @@ class NotePreviewSelf extends React.Component {
                             {/* <ReactQuill preview value={this.props.note} /> */}
                             <div className="note-content">
                                 <div className="note-content-header">
-                                    {this.props.note.is_deleted ?
-                                      <div>
-                                        <button name="restore" onClick={this.clickHandler}>RESTORE</button>
-                                        <button name="delete" onClick={this.clickHandler}>DELETE</button>
-                                      </div> : null}
+                                    {this.props.note.is_deleted 
+										?	<div>
+												<button name="restore" onClick={this.clickHandler}>RESTORE</button>
+												<button name="delete" onClick={this.clickHandler}>DELETE</button>
+											</div> 
+									  	: 	null}
+                                      
                                     {this.props.note.num_slack_items_attached ||  this.props.note.num_pocket_items_attached
 										? 	<div className="note-content-link-count">
 												{this.props.note.num_pocket_items_attached + this.props.note.num_slack_items_attached}

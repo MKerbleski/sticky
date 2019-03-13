@@ -41,15 +41,15 @@ class NoteDetailChild extends React.Component {
 						to={`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`}
 						style={{background: this.props.hover ? 'lightgreen' : null}}>
 							<div className="note-content-header">
-								<h3 className="note-preview-title">
-									{this.props.note.text_body}
-								</h3>
-								{this.props.note.total_items_attached 
-									?	<div className="note-content-link-count"> 
-											{this.props.note.total_items_attached}
-										</div> 
-									:	null }
+								{this.props.note.num_slack_items_attached ||  this.props.note.num_pocket_items_attached
+										? 	<div className="note-content-link-count">
+												{this.props.note.num_pocket_items_attached + this.props.note.num_slack_items_attached}
+											</div> 
+										:   null }
 							</div>
+							<h3 className="note-preview-title">
+								{this.props.note.text_body}
+							</h3>
 							{/* <p>{this.getFirstSen(this.props.note.text_body)}</p>  */}
 							<div className="layerTwoContainerAll">
 								{this.props.note.has_children 

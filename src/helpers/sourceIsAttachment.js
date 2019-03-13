@@ -100,7 +100,7 @@ const removeSlackItem = (note, permalink) => {
     return {
         id: note.id,
         slack_items_attached: temp ? temp.join(",") : null,
-        total_items_attached: note.total_items_attached-= 1,
+        num_slack_items_attached: note.num_slack_items_attached-=1,
     }
 }
 
@@ -115,6 +115,6 @@ const removePocketItem = (note, item_id) => {
     return {
         id: note.id,
         pocket_items_attached: temp ? temp.join(",") : null,
-        total_items_attached: note.total_items_attached-= 1,
+        num_pocket_items_attached: note.num_pocket_items_attached-=1,
     }
 }

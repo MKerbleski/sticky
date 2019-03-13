@@ -31,6 +31,11 @@ class NotePreviewChild extends React.Component {
                         onClick={this.goToNote}
                         style={{background: this.props.hover ? 'lightgreen' : null}}
                     >
+                         {this.props.note.num_slack_items_attached ||  this.props.note.num_pocket_items_attached
+										? 	<div className="note-content-link-count">
+												{this.props.note.num_pocket_items_attached + this.props.note.num_slack_items_attached}
+											</div> 
+										:   null }
                         <h4>{this.props.note.text_body}</h4>
                         {this.props.note.has_children 
                             ?   <div className="layerThreeContainerAll">
