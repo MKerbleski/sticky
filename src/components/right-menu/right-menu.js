@@ -18,13 +18,22 @@ class RightMenu extends Component {
 		pocket: this.props.store.user.userData.pocket,
     }
 
-    componentDidMount(){
-		// this.props.getConnectedApis()
-		// console.log(this.props.store.user.userData)
-		// console.log(this.props.store.user.userData)
-		// this.setState({
-		// 	connectedApis: 
-		// })
+    // componentDidMount(){
+	// 	this.setState({
+	// 		slack: this.props.store.user.userData.slack,
+	// 		pocket: this.props.store.user.userData.pocket,
+	// 	})
+	// }
+	
+	componentWillReceiveProps(nextProps){
+		console.log(this.props, nextProps)
+        if(this.props.store.user.userData !== nextProps.store.user.userData){
+			console.log("DIFFERENT PROPS IN RIGHT MENU")
+            this.setState({
+				slack: nextProps.store.user.userData.slack,
+				pocket: nextProps.store.user.userData.pocket,
+			})
+        }
     }
 
     eventHandler = (e) => {
@@ -52,7 +61,7 @@ class RightMenu extends Component {
     }
 
     render(){
-    //   console.log(this.props.store.user.connectedApis)
+      console.log(this.props)
 		return (
 			<RightMenuDiv>
 				{this.state.openDetails 

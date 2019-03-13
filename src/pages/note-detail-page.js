@@ -29,17 +29,17 @@ class NoteDetailPage extends React.Component{
         }
     }
 
-    handleClick(url){
-        this.props.redirect(url)
-    }
+    // handleClick(url){
+    //     this.props.redirect(url)
+    // }
 
-    goToNote = (author, note_id=null) => {
-        if(note_id){
-            this.props.redirect(`/${author}/note/${note_id}`)
-        } else {
-            this.props.redirect(`/${author}`)
-        }
-	}
+    // goToNote = (author, note_id=null) => {
+    //     if(note_id){
+    //         this.props.redirect(`/${author}/note/${note_id}`)
+    //     } else {
+    //         this.props.redirect(`/${author}`)
+    //     }
+	// }
 
     render(){
         const note = this.props.store.notes.notes[0]
@@ -136,10 +136,10 @@ const targetObj = {
 }
 
 const collect = (connect,  monitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  highlighted: monitor.canDrop(),
-  hover: monitor.isOver({shallow: true}),
-  hoverFalse: monitor.isOver()
+    connectDropTarget: connect.dropTarget(),
+    highlighted: monitor.canDrop(),
+    hover: monitor.isOver({shallow: true}),
+    hoverFalse: monitor.isOver()
 });
 
 const mapStateToProps = store => {

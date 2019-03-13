@@ -103,10 +103,14 @@ class SlackSettings extends Component {
                         </div> 
                     :   <div>
                             <p>slack is NOT connected</p>
-                            <button onClick={this.connectSlack}>Connect to Slack</button>
+                            <button onClick={(e) => {
+                                this.connectSlack(e)
+                            }}>Connect to Slack</button>
                             {this.state.refresh
                                 ?   <button 
-                                        onClick={() => {
+                                        name="sync" 
+                                        onClick={(e) => {
+                                            // this.getSlackInfo(e)
                                             this.props.getUserData()}}
                                     >
                                         Success?

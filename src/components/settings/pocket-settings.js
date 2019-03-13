@@ -55,7 +55,7 @@ class PocketSettings extends Component {
                     Authorization: token, 
                 }
             }
-            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/list`, authHeader).then(res => {
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/sync`, authHeader).then(res => {
                 //stop spinning wheel here...
                 // console.log(res.data)
             }).catch(err => {
@@ -77,8 +77,8 @@ class PocketSettings extends Component {
                     ?   <div style={{background: "lightgreen"}}>
                             <h3>Pocket is connected!</h3>
                             <p>Use the blue menu to the right to view your list and attach pocket items to your notes!</p>
-                            {/* <button onClick={this.clickHandler}>Revoke access</button>
-                            <button name="list" onClick={this.getPocketInfo}>Refresh Notes</button> */}
+                            {/* <button onClick={this.clickHandler}>Revoke access</button> */}
+                            <button name="list" onClick={(e) => this.syncPocket(e)}>Refresh Notes</button>
                             {this.props.store.pocket.pocketSettings
                                 ?   <div>
                                         <p><strong>Last Update: </strong>{ this.convertTime(this.props.store.pocket.pocketSettings.last_accessed)}</p>
@@ -96,10 +96,12 @@ class PocketSettings extends Component {
                             }
                             {this.state.refresh
                                 ?   <button 
-                                        onClick={() => {
+                                        name="sync"
+                                        onClick={(e) => {
                                             this.props.getUserData(); 
-                                            this.syncPocket();
-                                            this.props.getPocketSettings(this.props.store.user.userData.id)}}
+                                            this.props.getPocketSettings(this.props.store.user.userData.id)
+                                            // this.syncPocket(e);
+                                        }}
                                     >
                                     Success?
                                     </button>
@@ -107,15 +109,6 @@ class PocketSettings extends Component {
                             }
                         </div>
                 }
-                            <button 
-                                        onClick={(e) => {
-                                            this.props.getUserData(); 
-                                            this.syncPocket(e);
-                                            this.props.getPocketSettings(this.props.store.user.userData.id)}}
-                                    >
-                                    Success?
-                                    </button>
-
                 {/* what I want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read..., or delete button.  */}
             </PocketSettingsDiv>
         )

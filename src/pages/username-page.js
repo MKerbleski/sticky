@@ -67,7 +67,7 @@ class UsernamePage extends Component {
     }
 
     render(){
-        console.log(this.props.match.url, localStorage.getItem('username'))
+        // console.log(this.props.match.url, localStorage.getItem('username'))
         return(
             <UsernamePageDiv> 
                 {localStorage.getItem('JWT') 
@@ -150,9 +150,9 @@ class UsernamePage extends Component {
                             }
                     </Switch>
                 </div>
-                {localStorage.getItem('JWT') && this.props.store.user.userData
+                {localStorage.getItem('JWT') && this.props.store.user.userData && this.props.store.user.userData.pocket || this.props.store.user.userData.slack
                     ?   <RightMenu 
-                            onDrop={this.onDrop} 
+                            // onDrop={this.onDrop} 
                         /> 
                     :   null
                 }

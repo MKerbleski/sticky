@@ -46,13 +46,10 @@ const NotePreviewGrandChild = (props) => {
         });
     },
 
-    endDrag(props, monitor) {// this takes props mounted on beginDrag
+    endDrag(props, monitor) {
         if(!monitor.didDrop()){
             return ;
         }
-        // const childId = props.layerThree.id;
-        // const parentId = monitor.getDropResult();
-        // props.onDrop(childId, parentId.type, parentId.targetId);
 
         const note = props.note;
         const parent = props.parent

@@ -18,7 +18,7 @@ import {
 
 const initialState = {    
    failedLoginAttempt: false,
-//    userData: {}
+   userData: {}
 }
 
 export const userReducer = (state = initialState, action) => {
