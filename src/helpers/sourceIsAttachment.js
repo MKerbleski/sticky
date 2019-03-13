@@ -10,11 +10,12 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
     let pocket_items_attached;
     let source_id;
 
-    if(target){
+    if(targetObj.type === 'note'){
         total_items_attached = target.total_items_attached;
         sticky_items_attached = target.sticky_items_attached;
         pocket_items_attached = target.pocket_items_attached;
     }
+ 
     if(source.type === "pocket"){
         //from pocket 
         source_id = source.note.item_id
@@ -37,33 +38,28 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
             alert('cannot do that, yet')
             return null
         }  
-        if(total_items_attached === 0){
-            //first item added 
-            if(source.type === "pocket"){
-                return [{
-                    id: target.id,
-                    total_items_attached: 1,
-                    pocket_items_attached: source_id
-                }]
-            } else if(source.type === "slack"){
-                return [{
-                    id: target.id,
-                    total_items_attached: 1,
-                    slack_items_attached: source_id
-                }]
-            }
-        } else {
-            //there are items on the target already
-            if(source.type === "pocket"){
+
+        if(source.type === "pocket"){
+            if(target.pocket_items.length > 0){
                 pocket_items_attached+= `,${source_id}`
                 return [{
                     id: target.id,
                     total_items_attached: total_items_attached+=1,
                     pocket_items_attached: pocket_items_attached
                 }]
-            } else if(source.type === "slack"){
-                
+            } else {
+                return [{
+                    id: target.id,
+                    total_items_attached: 1,
+                    pocket_items_attached: source_id
+                }]
             }
+        } else if(source.type === "slack"){
+            return [{
+                id: target.id,
+                total_items_attached: 1,
+                slack_items_attached: source_id
+            }]
         }
     } else {
         //make sure that it is not being dropped on current parent
@@ -72,6 +68,7 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
         if(targetObj.type === "trash"){
             if(source.type === "pocket"){
                 let oldParent = removePocketItem(source.parent, source.note.item_id)
+                console.log(oldParent)
                 return [oldParent]
             } else if( source.type === "slack"){
                 let oldParent = removeSlackItem(source.parent, source.note.item_id)
@@ -89,11 +86,27 @@ const removeSlackItem = (note, permalink) => {
         total_items_attached: note.total_items_attached-= 1,
     }
 }
+
 const removePocketItem = (note, item_id) => {
-    let temp = note.pocket_items_attached.split(',')
+    console.log(note)
+    
+    let temp =  note.pocket_items_attached.split(',')
+    console.log(temp)
+    let index = temp.indexOf(item_id)
+    if(temp.length === 1){
+        temp = null
+    } else {
+        temp.splice(index, 1)
+        console.log(temp)
+    }
+    console.log(temp)
+    
+
+    // let foo =  temp.splice(temp.indexOf(item_id), 1)
+    // let answer =  temp.join(',')
     return {
         id: note.id,
-        pocket_items_attached: temp.splice(temp.indexOf(item_id), 1),
+        pocket_items_attached: temp.join(","),
         total_items_attached: note.total_items_attached-= 1,
     }
 }
