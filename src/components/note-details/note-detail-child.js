@@ -38,7 +38,7 @@ class NoteDetailChild extends React.Component {
 						// index={this.props.index}
 						className="note-link"
 						id={this.props.note.id}
-						to={`/${this.props.note.sticky_user_id}/note/${this.props.note.id}`}
+						to={`/${this.props.note.sticky_username}/note/${this.props.note.id}`}
 						style={{background: this.props.hover ? 'lightgreen' : null}}>
 							<div className="note-content-header">
 								{this.props.note.num_slack_items_attached ||  this.props.note.num_pocket_items_attached

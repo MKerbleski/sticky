@@ -4,13 +4,18 @@ import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
 import { connect } from 'react-redux';
 import { LayerThreeSource } from "../index"
-import { getAttachedItems, editNote, noteToNote } from '../../actions'
+import { 
+    // getAttachedItems, 
+    editNote, 
+    noteToNote 
+} from '../../actions'
 import { sharedStickyNoteDrop } from '../../helpers'
 
 class NoteDetailGrandChild extends React.Component {
     clickHandler = (e, id) => {
+        console.log(this.props)
         e.preventDefault();
-        this.props.getAttachedItems(id)
+        // this.props.getAttachedItems(id)
         this.props.redirect(`/${this.props.note.sticky_username}/note/${this.props.note.id}`)
     }
     
@@ -108,15 +113,15 @@ const sourceObj = {
 
 const mapStateToProps = store => {
     return {store: store};
-  }
+}
   
-  const mapDispatchToProps = {
-    getAttachedItems,
+const mapDispatchToProps = {
+    // getAttachedItems,
     editNote,
     noteToNote
-  }
+}
   
-  export default connect(mapStateToProps, mapDispatchToProps)( flow(
+export default connect(mapStateToProps, mapDispatchToProps)( flow(
 
     DropTarget('item', targetObj, (connect, monitor) => ({
         connectDropTarget: connect.dropTarget(),

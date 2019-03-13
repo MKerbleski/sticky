@@ -29,12 +29,12 @@ Props
 
         *link -> preview 1 
         *link -> preview 2
-        link -> preview 3
+        !* link -> preview 3
         *link -> detail 1
-        link from detail 1 -> detail 2
+        *link from detail 1 -> detail 2
         *link -> detail 2
-        link from detail 1 -> detail parent
-        link -> detail 3
+        !* link from detail 1 -> detail parent
+        *link -> detail 3
         link -> tags
         *link -> trash
 

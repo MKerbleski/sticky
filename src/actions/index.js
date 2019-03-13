@@ -16,7 +16,7 @@ export {
     getNotes, 
     addNote, 
     getDeletedNotes, 
-    getAttachedItems, 
+    // getAttachedItems, 
     editAttachedItems, 
     deleteNote, 
     editNote, 

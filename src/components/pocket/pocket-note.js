@@ -61,9 +61,9 @@ const PocketNote = (props) => {
 		}
 
         let noteEdit = sharedStickyNoteDrop(source, monitor);
+        console.log("noteEdit", noteEdit)
 
-        if(noteEdit !== null && noteEdit[0] !== null){
-            console.log("noteEdit", noteEdit)
+        if(!noteEdit.includes(null)){
 
             if(props.store.notes.singleNote){
                 props.noteToNote(noteEdit, {

@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 
 const NotePreviewGrandChild = (props) => {
     const goToNote = (e) => {
-        props.redirect(`/${props.note.sticky_user_id}/note/${props.note.id}`)
+        props.redirect(`/${props.note.sticky_username}/note/${props.note.id}`)
     }
 
     if (props.note){

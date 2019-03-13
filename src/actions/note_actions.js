@@ -11,7 +11,7 @@ export const EDITING_NOTE = 'EDITING_NOTE';
 export const ERROR_EDITING_NOTE = 'ERROR_EDITING_NOTE';
 export const ERROR_ADDING_NEW_NOTE = 'ERROR_ADDING_NEW_NOTE';
 export const ERROR_DELETING_NOTE = 'ERROR_DELETING_NOTE';
-export const FETCHING_ATTACHED_ITEMS = 'FETCHING_ATTACHED_ITEMS';
+// export const FETCHING_ATTACHED_ITEMS = 'FETCHING_ATTACHED_ITEMS';
 export const FETCHING_DEL_NOTES = 'FETCHING_DEL_NOTES';
 export const FETCHING_LINKS = 'FETCHING_LINKS';
 export const FETCHING_NOTES = 'FETCHING_NOTES';
@@ -173,27 +173,27 @@ export const addNote = (newNote) => {
     }
 }
 
-export const getAttachedItems = (sticky_note_id) => {
-    return function(dispatch){
-        if(localStorage.getItem('JWT')){
-          	dispatch({type: FETCHING_ATTACHED_ITEMS})
-            const token = localStorage.getItem('JWT')
-            const authHeader = {
-				headers: {
-					Authorization: token,    
-				} 
-            }
-            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/attached/${sticky_note_id}`, authHeader).then(res => {
-              	dispatch({type: ATTACHED_ITEMS_RECIEVED, payload: res.data})
-            }).catch(err => {
-              	dispatch({type: NOTE_ERROR, payload: err.message})
-              	console.log(err.message)
-            })
-        } else {
-          	console.log('need to include toekn in request')
-        }
-    }
-}
+// export const getAttachedItems = (sticky_note_id) => {
+//     return function(dispatch){
+//         if(localStorage.getItem('JWT')){
+//           	dispatch({type: FETCHING_ATTACHED_ITEMS})
+//             const token = localStorage.getItem('JWT')
+//             const authHeader = {
+// 				headers: {
+// 					Authorization: token,    
+// 				} 
+//             }
+//             axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/attached/${sticky_note_id}`, authHeader).then(res => {
+//               	dispatch({type: ATTACHED_ITEMS_RECIEVED, payload: res.data})
+//             }).catch(err => {
+//               	dispatch({type: NOTE_ERROR, payload: err.message})
+//               	console.log(err.message)
+//             })
+//         } else {
+//           	console.log('need to include toekn in request')
+//         }
+//     }
+// }
 
 export const getDeletedNotes = (author) => {
     return function(dispatch){

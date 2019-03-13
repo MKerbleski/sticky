@@ -6,7 +6,7 @@ import {
     PocketNote, 
 } from './../index.js';
 import { 
-    getAttachedItems,
+    // getAttachedItems,
     editAttachedItems, 
 } from '../../actions'
 
@@ -43,7 +43,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    getAttachedItems,
+    // getAttachedItems,
     editAttachedItems
 }
   

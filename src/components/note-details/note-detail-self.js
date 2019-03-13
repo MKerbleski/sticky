@@ -7,7 +7,10 @@ import {
     // NoteDetailBody,
     AttachedList,
 } from '../index.js';
-import { getAttachedItems, editNote } from '../../actions'
+import { 
+    // getAttachedItems, 
+    editNote 
+} from '../../actions'
 import { start } from '../../styles/styl-utils.js'
 // import { default as NoteQuill } from './note-detail-body-quill'
 // import axios from 'axios'
@@ -159,7 +162,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    getAttachedItems,
+    // getAttachedItems,
     editNote
 }
 

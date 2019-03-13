@@ -8,7 +8,7 @@ import {
     ERROR_ADDING_NEW_NOTE,
     ERROR_DELETING_NOTE,
     ERROR_EDITING_NOTE,
-    FETCHING_ATTACHED_ITEMS,
+    // FETCHING_ATTACHED_ITEMS,
     FETCHING_DEL_NOTES,
     FETCHING_NOTES,
     FETCHING_LINKS,
@@ -73,11 +73,11 @@ export const notesReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 credentialError: true,
             })
-        case FETCHING_ATTACHED_ITEMS:
-            return Object.assign({}, state, {
-                fetchingAttachedItems: true,
-                triggerAttached: false
-            })
+        // case FETCHING_ATTACHED_ITEMS:
+        //     return Object.assign({}, state, {
+        //         fetchingAttachedItems: true,
+        //         triggerAttached: false
+        //     })
         case ATTACHED_ITEMS_RECIEVED:
             return Object.assign({}, state, {
                 fetchingAttachedItems: false,

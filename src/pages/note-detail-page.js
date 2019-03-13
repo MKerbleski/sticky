@@ -4,7 +4,11 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { NoteDetailSelf } from '../components/index.js';
-import { getAttachedItems, getNotes, getSingleNote } from '../actions'
+import { 
+    // getAttachedItems, 
+    getNotes, 
+    getSingleNote 
+} from '../actions'
 
 //Formorly NoteDetialParent
 class NoteDetailPage extends React.Component{
@@ -62,14 +66,19 @@ class NoteDetailPage extends React.Component{
                         {this.props.hover 
                             //this should probably all go in a div that has a fixed height to avoid any toggling with hovered
                             ?   <h2>Drop to send to main page</h2>
-                            :   <Link 
-                                    className="link"
-                                    to={`/${note.sticky_username}${parent ? note.parent : ''}`}
-                                >
-                                    {parent 
-                                        ?   `back to (note #${parent.id})` 
-                                        :   `back to My notes`}
-                                </Link>
+                            :   parent 
+                                    ?   <Link 
+                                            className="link"
+                                            to={`/${parent.sticky_username}/note/${parent.id}`}
+                                        >
+                                            {`back to (note #${parent.id})`}
+                                        </Link>
+                                    :   <Link 
+                                            className="link"
+                                            to={`/${localStorage.getItem('username')}`}
+                                        >
+                                            {`back to My notes`}
+                                        </Link>
                         }
                     <NoteDetailSelf
                         type="note"
@@ -138,7 +147,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    getAttachedItems,
+    // getAttachedItems,
     getNotes,
     getSingleNote
 }
