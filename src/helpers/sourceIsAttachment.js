@@ -84,14 +84,14 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
         } else if (targetObj.type === "note"){
             //note -> note  
             if(source.type === "pocket"){
-                console.log("note to note")
                 let oldParent = removePocketItem(source.parent, source.note.item_id)
                 let newParent = addPocketItem(target, source.note.item_id)
-                console.log(oldParent, newParent)
                 return [oldParent, newParent]
             } else if (source.type === "slack"){
-                console.log("note to note slack not setup")
-                return null
+                console.log("note to note slack")
+                let oldParent = removeSlackItem(source.parent, source.note.item_id)
+                let newParent = addSlackItem(target, source.note.permalink)
+                return [oldParent, newParent]
             }
             
         }
@@ -112,6 +112,23 @@ const addPocketItem = (note, item_id) => {
             id: note.id,
             num_pocket_items_attached: note.num_pocket_items_attached+=1,
             pocket_items_attached: item_id
+        }
+    }
+}
+const addSlackItem = (note, permalink) => {
+    console.log(note, permalink)
+    if(note.num_slack_items_attached > 0){
+        note.slack_items_attached+= `,${permalink}`
+        return {
+            id: note.id,
+            num_slack_items_attached: note.num_slack_items_attached+=1,
+            slack_items_attached: note.slack_items_attached
+        }
+    } else {
+        return {
+            id: note.id,
+            num_slack_items_attached: note.num_slack_items_attached+=1,
+            slack_items_attached: permalink
         }
     }
 }
