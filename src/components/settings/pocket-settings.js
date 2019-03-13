@@ -45,25 +45,25 @@ class PocketSettings extends Component {
         return time
     }
 
-    getPocketInfo = (e) => {
+    syncPocket = (e) => {
         e.preventDefault()
         //start spinning wheel or something... 
-        // if(localStorage.getItem('JWT')){
-        //     const token = localStorage.getItem('JWT')
-        //     const authHeader = {
-        //         headers: {
-        //             Authorization: token, 
-        //         }
-        //     }
-        //     axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/${e.target.name}`, authHeader).then(res => {
-        //         //stop spinning wheel here...
-        //         console.log(res.data)
-        //     }).catch(err => {
-        //         console.log("error!")
-        //     })
-        // } else {
-        //     console.log("no token found.")
-        // }
+        if(localStorage.getItem('JWT')){
+            const token = localStorage.getItem('JWT')
+            const authHeader = {
+                headers: {
+                    Authorization: token, 
+                }
+            }
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/list`, authHeader).then(res => {
+                //stop spinning wheel here...
+                // console.log(res.data)
+            }).catch(err => {
+                console.log("error!")
+            })
+        } else {
+            console.log("no token found.")
+        }
     }
 
     clickHandler = (e) => {
@@ -98,6 +98,7 @@ class PocketSettings extends Component {
                                 ?   <button 
                                         onClick={() => {
                                             this.props.getUserData(); 
+                                            this.syncPocket();
                                             this.props.getPocketSettings(this.props.store.user.userData.id)}}
                                     >
                                     Success?
@@ -106,6 +107,14 @@ class PocketSettings extends Component {
                             }
                         </div>
                 }
+                            <button 
+                                        onClick={(e) => {
+                                            this.props.getUserData(); 
+                                            this.syncPocket(e);
+                                            this.props.getPocketSettings(this.props.store.user.userData.id)}}
+                                    >
+                                    Success?
+                                    </button>
 
                 {/* what I want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read..., or delete button.  */}
             </PocketSettingsDiv>

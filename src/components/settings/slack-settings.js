@@ -86,8 +86,8 @@ class SlackSettings extends Component {
                             <li>All starred messages will show up regardless of what the channel they are in.</li>
                             <li>Any messages starred in a Private or DM channel will be in a 'Private Channel or DM' container.</li>
                             <li>Sticky will show pinned messages from channels that you have <strong>starred</strong>.</li>
-                            {/* <div>
                                 <button name="sync" onClick={this.getSlackInfo}>Initialize Workplace</button>
+                            {/* <div>
                                 <p>team -> channels -> users -> </p>
                                 <button name="team" onClick={this.getSlackInfo}>team</button>
                                 <button name="channels" onClick={this.getSlackInfo}>channels</button>

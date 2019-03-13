@@ -70,10 +70,12 @@ class NotePreviewSelf extends React.Component {
                                         <button name="restore" onClick={this.clickHandler}>RESTORE</button>
                                         <button name="delete" onClick={this.clickHandler}>DELETE</button>
                                       </div> : null}
-                                    {this.props.note.total_items_attached ? 
-										<div className="note-content-link-count">
-											{this.props.note.total_items_attached}
-										</div> : null }
+                                    {this.props.note.num_slack_items_attached ||  this.props.note.num_pocket_items_attached
+										? 	<div className="note-content-link-count">
+												{this.props.note.num_pocket_items_attached + this.props.note.num_slack_items_attached}
+											</div> 
+										:   null }
+										
                                 </div>
                                 {ReactHTMLParser(this.props.note.text_body)}
                             </div>

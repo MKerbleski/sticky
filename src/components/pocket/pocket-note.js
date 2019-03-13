@@ -8,6 +8,7 @@ import { editAttachedItems, noteToNote } from '../../actions'
 import { connect } from 'react-redux';
 import format from 'date-fns/format'
 
+
 const PocketNote = (props) => {
     let time = +props.item.time_added*1000
     time = format(time, 'MMM Do YYYY')
@@ -20,7 +21,9 @@ const PocketNote = (props) => {
                         border: props.isDragging ? '1px dashed gray': '1px solid black'}}
                 >
                     <div className="pocket-note-text">
-                        {props.item.given_title === "" ? <p>{props.item.resolved_title}</p> : <p>{props.item.given_title}</p>}
+                        {props.item.given_title === "" 
+                            ? <p>{props.item.resolved_title}</p> 
+                            : <p>{props.item.given_title}</p>}
                     </div> 
                     <span className="pocket-note-bottom">
                         <p className="pocket-time">{time}</p>
@@ -63,7 +66,10 @@ const PocketNote = (props) => {
             console.log(props, monitor)
 
             if(props.store.notes.singleNote){
-                props.noteToNote(noteEdit, {author_name: props.store.notes.notes[0].sticky_username, note_id: props.store.notes.notes[0].id })
+                props.noteToNote(noteEdit, {
+                    author_name: props.store.notes.notes[0].sticky_username, 
+                    note_id: props.store.notes.notes[0].id 
+                })
             } else {
                 props.noteToNote(noteEdit)
             }

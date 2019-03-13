@@ -68,7 +68,10 @@ const SlackNote = (props) => {
         let noteEdit = sharedStickyNoteDrop(source, monitor);
         console.log("noteEdit", noteEdit)
         if(noteEdit !== null){
-			props.noteToNote(noteEdit)
+			props.noteToNote(noteEdit, {
+                author_name: props.store.notes.notes[0].sticky_username, 
+                note_id: props.store.notes.notes[0].id 
+            })
 		}
     },
 };
