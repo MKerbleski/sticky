@@ -5,16 +5,7 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
     const targetParent = targetObj.parent
     const sourceParent = sourceObj.parent
     // const sourceNoteId = sourceObj.item.permalink
-    let total_items_attached;
-    let sticky_items_attached;
-    let pocket_items_attached;
     let source_id;
-
-    if(targetObj.type === 'note'){
-        total_items_attached = target.total_items_attached;
-        sticky_items_attached = target.sticky_items_attached;
-        pocket_items_attached = target.pocket_items_attached;
-    }
  
     if(source.type === "pocket"){
         //from pocket 
@@ -25,7 +16,9 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
     }
 
     console.log("\n ==sharedStickyNoteDrop== \n",
-        '\ntarget:',target,
+        '\ntarget:', target,
+        '\ntargetObj:', targetObj,
+        '\nsourceObj:', sourceObj,
         '\nsource:', source,
         '\nsource_id:', source_id,
         '\ntargetParent:', targetParent,
@@ -40,19 +33,23 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
         }  
 
         if(source.type === "pocket"){
-            if(target.num_pocket_items_attached > 0){
-                target.pocket_items_attached+= `,${source_id}`
-                return [{
-                    id: target.id,
-                    num_pocket_items_attached: target.num_pocket_items_attached+=1,
-                    pocket_items_attached: target.pocket_items_attached
-                }]
-            } else {
-                return [{
-                    id: target.id,
-                    num_pocket_items_attached: target.num_pocket_items_attached+=1,
-                    pocket_items_attached: source_id
-                }]
+            if(targetObj.type === "note"){
+                //came from pocket list
+
+                if(target.num_pocket_items_attached > 0){
+                    target.pocket_items_attached+= `,${source_id}`
+                    return [{
+                        id: target.id,
+                        num_pocket_items_attached: target.num_pocket_items_attached+=1,
+                        pocket_items_attached: target.pocket_items_attached
+                    }]
+                } else {
+                    return [{
+                        id: target.id,
+                        num_pocket_items_attached: target.num_pocket_items_attached+=1,
+                        pocket_items_attached: source_id
+                    }]
+                }
             }
         } else if(source.type === "slack"){
             if(target.num_slack_items_attached > 0){
@@ -79,11 +76,43 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
                 let oldParent = removePocketItem(source.parent, source.note.item_id)
                 console.log(oldParent)
                 return [oldParent]
+                
             } else if( source.type === "slack"){
                 let oldParent = removeSlackItem(source.parent, source.note.permalink)
                 return [oldParent]
             }
-        }   
+        } else if (targetObj.type === "note"){
+            //note -> note  
+            if(source.type === "pocket"){
+                console.log("note to note")
+                let oldParent = removePocketItem(source.parent, source.note.item_id)
+                let newParent = addPocketItem(target, source.note.item_id)
+                console.log(oldParent, newParent)
+                return [oldParent, newParent]
+            } else if (source.type === "slack"){
+                console.log("note to note slack not setup")
+                return null
+            }
+            
+        }
+    }
+}
+
+const addPocketItem = (note, item_id) => {
+    console.log(note, item_id)
+    if(note.num_pocket_items_attached > 0){
+        note.pocket_items_attached+= `,${item_id}`
+        return {
+            id: note.id,
+            num_pocket_items_attached: note.num_pocket_items_attached+=1,
+            pocket_items_attached: note.pocket_items_attached
+        }
+    } else {
+        return {
+            id: note.id,
+            num_pocket_items_attached: note.num_pocket_items_attached+=1,
+            pocket_items_attached: item_id
+        }
     }
 }
 

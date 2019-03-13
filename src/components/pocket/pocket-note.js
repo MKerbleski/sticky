@@ -63,7 +63,7 @@ const PocketNote = (props) => {
         let noteEdit = sharedStickyNoteDrop(source, monitor);
 
         if(noteEdit !== null){
-            console.log(props, monitor)
+            console.log("noteEdit", noteEdit)
 
             if(props.store.notes.singleNote){
                 props.noteToNote(noteEdit, {
