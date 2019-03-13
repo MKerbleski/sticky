@@ -35,21 +35,22 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
         if(source.type === "pocket"){
             if(targetObj.type === "note"){
                 //came from pocket list
-
-                if(target.num_pocket_items_attached > 0){
-                    target.pocket_items_attached+= `,${source_id}`
-                    return [{
-                        id: target.id,
-                        num_pocket_items_attached: target.num_pocket_items_attached+=1,
-                        pocket_items_attached: target.pocket_items_attached
-                    }]
-                } else {
-                    return [{
-                        id: target.id,
-                        num_pocket_items_attached: target.num_pocket_items_attached+=1,
-                        pocket_items_attached: source_id
-                    }]
-                }
+                let newParent = addPocketItem(target, source_id)
+                return [newParent]
+                // if(target.num_pocket_items_attached > 0){
+                //     target.pocket_items_attached+= `,${source_id}`
+                //     return [{
+                //         id: target.id,
+                //         num_pocket_items_attached: target.num_pocket_items_attached+=1,
+                //         pocket_items_attached: target.pocket_items_attached
+                //     }]
+                // } else {
+                //     return [{
+                //         id: target.id,
+                //         num_pocket_items_attached: target.num_pocket_items_attached+=1,
+                //         pocket_items_attached: source_id
+                //     }]
+                // }
             }
         } else if(source.type === "slack"){
             if(target.num_slack_items_attached > 0){
@@ -74,7 +75,6 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
         if(targetObj.type === "trash"){
             if(source.type === "pocket"){
                 let oldParent = removePocketItem(source.parent, source.note.item_id)
-                console.log(oldParent)
                 return [oldParent]
                 
             } else if( source.type === "slack"){
@@ -88,7 +88,6 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
                 let newParent = addPocketItem(target, source.note.item_id)
                 return [oldParent, newParent]
             } else if (source.type === "slack"){
-                console.log("note to note slack")
                 let oldParent = removeSlackItem(source.parent, source.note.item_id)
                 let newParent = addSlackItem(target, source.note.permalink)
                 return [oldParent, newParent]
@@ -99,7 +98,12 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
 }
 
 const addPocketItem = (note, item_id) => {
-    console.log(note, item_id)
+    if(note.pocket_items_attached.split(',').includes(item_id)){
+        window.alert('item is already attached')
+        return null
+    } else {
+        console.log(note.pocket_items_attached.split(','))
+    }
     if(note.num_pocket_items_attached > 0){
         note.pocket_items_attached+= `,${item_id}`
         return {
