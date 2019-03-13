@@ -20,7 +20,8 @@ class SlackList extends Component {
                                 editAttachedItems={this.props.editAttachedItems} 
                                 channel={channel} />
                         })
-                    :   <p>loading...</p>} 
+                    :   <p>loading...</p>
+                } 
             </SlackListDiv>
         )
     }

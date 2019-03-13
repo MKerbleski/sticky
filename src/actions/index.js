@@ -2,12 +2,14 @@ export const ERROR = 'ERROR';
 
 export { 
     getPocketList,
-    getPocketSettings
+    getPocketSettings,
+    syncPocketList
 } from './pocket_actions'
 
 export { 
     getSlackStars,
-    getSlackSettings 
+    getSlackSettings,
+    syncSlack
 } from './slack_actions'
 
 export { 

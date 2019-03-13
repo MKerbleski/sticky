@@ -8,7 +8,12 @@ import {
 	rightArrow, 
 	leftArrow,
 } from '../../img'
-import { getConnectedApis } from '../../actions'
+
+import { 
+	getConnectedApis,
+	syncPocketList,
+	// syncSlack,
+} from '../../actions'
 
 class RightMenu extends Component {
     state = {
@@ -25,25 +30,36 @@ class RightMenu extends Component {
 	// 	})
 	// }
 	
-	componentWillReceiveProps(nextProps){
-		console.log(this.props, nextProps)
-        if(this.props.store.user.userData !== nextProps.store.user.userData){
-			console.log("DIFFERENT PROPS IN RIGHT MENU")
-            this.setState({
-				slack: nextProps.store.user.userData.slack,
-				pocket: nextProps.store.user.userData.pocket,
-			})
-        }
-    }
+	// componentWillReceiveProps(nextProps){
+	// 	console.log(this.props, nextProps)
+    //     if(this.props.store.user.userData.slack !== nextProps.store.user.userData.slack){
+	// 		// console.log("DIFFERENT PROPS IN RIGHT MENU-slack")
+	// 		// this.props.syncSlack(nextProps.store.user.userData.id)
+    //         this.setState({
+	// 			slack: nextProps.store.user.userData.slack,
+	// 		})
+    //     }
+    //     if(this.props.store.user.userData.pocket !== nextProps.store.user.userData.pocket){
+	// 		// console.log("DIFFERENT PROPS IN RIGHT MENU-pocket")
+	// 		// //initialise
+	// 		// this.props.syncPocketList(this.props.store.user.userData.id)
+    //         this.setState({
+	// 			pocket: nextProps.store.user.userData.pocket,
+	// 		})
+    //     }
+    // }
 
     eventHandler = (e) => {
         e.preventDefault();
         switch(e.target.name){
 			case "leftArrow": 
-				let fallback = this.props.store.user.userData.pocket ? 'pocket' : this.props.store.user.userData.slack ? 'slack' : null
 				this.setState({
 					openDetails: true,
-					selectedApp: fallback
+					selectedApp: this.props.store.user.userData.pocket 
+						? 	'pocket' 
+						: 	this.props.store.user.userData.slack 
+							? 	'slack' 
+							: 	null
 				})
 				break;
 			case "rightArrow":
@@ -54,14 +70,14 @@ class RightMenu extends Component {
 				break;
 			default:
 				this.setState({
-					openDetails: true,
+					openDetails: !this.state.openDetails,
 					selectedApp: e.target.name
 				})    
         }
     }
 
     render(){
-      console.log(this.props)
+      	console.log(this.props)
 		return (
 			<RightMenuDiv>
 				{this.state.openDetails 
@@ -75,13 +91,16 @@ class RightMenu extends Component {
 				<div className="right-menu-preview">
 					{ AAA.map(apiName => {
 						if(this.state[apiName.name]){
-							return <img 
-							alt={apiName.alt} 
-							key={apiName.name} 
-							name={apiName.name} 
-							src={apiName.icon} 
-							onClick={this.eventHandler} 
-							className="menu-item" />
+							return (
+								<img 
+									alt={apiName.alt} 
+									key={apiName.name} 
+									name={apiName.name} 
+									src={apiName.icon} 
+									onClick={this.eventHandler} 
+									className="menu-item" 
+								/>
+							)
 						} else {
 							return null
 						}
@@ -112,7 +131,9 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-  	getConnectedApis,
+	getConnectedApis,
+	syncPocketList,
+	// syncSlack,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu)

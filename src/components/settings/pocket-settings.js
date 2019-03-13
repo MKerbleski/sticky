@@ -1,7 +1,7 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
-import { getPocketSettings, getUserData } from '../../actions'
+import { getPocketSettings, getUserData, syncPocketList } from '../../actions'
 import { connect } from 'react-redux';
 import format from 'date-fns/format'
 
@@ -48,22 +48,7 @@ class PocketSettings extends Component {
     syncPocket = (e) => {
         e.preventDefault()
         //start spinning wheel or something... 
-        if(localStorage.getItem('JWT')){
-            const token = localStorage.getItem('JWT')
-            const authHeader = {
-                headers: {
-                    Authorization: token, 
-                }
-            }
-            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/sync`, authHeader).then(res => {
-                //stop spinning wheel here...
-                // console.log(res.data)
-            }).catch(err => {
-                console.log("error!")
-            })
-        } else {
-            console.log("no token found.")
-        }
+        this.props.syncPocketList(this.props.store.user.userData.id)
     }
 
     clickHandler = (e) => {
@@ -121,7 +106,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
     getPocketSettings,
-    getUserData
+    getUserData,
+    syncPocketList
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PocketSettings)

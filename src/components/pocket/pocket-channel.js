@@ -16,14 +16,24 @@ const PocketChannel = (props) => {
                     border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
                 <h3 className="pocket-channel-title">All Pocket Notes</h3>
                 {props.pocketList.map(pocketItem => {
-                            return <PocketNote 
+                    return (
+                        <PocketNote 
                             parent={null}
                             type="pocket" 
                             editAttachedItems={props.editAttachedItems} 
                             key={pocketItem.item_id} 
-                            item={pocketItem} />
-                    
-                    })}
+                            item={pocketItem} 
+                        />
+                    )
+                })}
+                {props.pocketList && props.pocketList.length === 0 
+                    ?   <div>
+                            <h5>Empty pocket list</h5>
+                            <p>either</p>
+                            <button>Sync</button>
+                            <p>or add items to your pocket List</p>
+                        </div>
+                    :   null} 
             </PocketChannelDiv>
         )
     } else {

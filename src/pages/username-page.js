@@ -22,6 +22,8 @@ import {
     // getLinks,
     getDeletedNotes,
     getUserData,
+    syncSlack,
+    syncPocketList
 } from '../actions';
 
 class UsernamePage extends Component {
@@ -46,6 +48,17 @@ class UsernamePage extends Component {
         })
     }
 
+    componentWillReceiveProps(nextProps){
+
+            if(!this.props.store.user.userData.slack_initial_sync && this.props.store.user.userData.slack){
+                this.props.syncSlack(this.props.store.user.userData.id)
+            }
+            if(!this.props.store.user.userData.pocket_initial_sync && this.props.store.user.userData.pocket){
+                this.props.syncPocketList(this.props.store.user.userData.id)
+            }
+
+    }
+
     //need to unmount when this button is clicked in note detail and vis versa
     toggleNewNote = () => {
         this.setState({
@@ -67,7 +80,7 @@ class UsernamePage extends Component {
     }
 
     render(){
-        // console.log(this.props.match.url, localStorage.getItem('username'))
+        console.log(this.props)
         return(
             <UsernamePageDiv> 
                 {localStorage.getItem('JWT') 
@@ -150,7 +163,8 @@ class UsernamePage extends Component {
                             }
                     </Switch>
                 </div>
-                {localStorage.getItem('JWT') && this.props.store.user.userData && this.props.store.user.userData.pocket || this.props.store.user.userData.slack
+                {localStorage.getItem('JWT') && this.props.store.user.userData && this.props.store.user.userData.pocket_initial_sync ||
+                this.props.store.user.userData.slack_initial_sync 
                     ?   <RightMenu 
                             // onDrop={this.onDrop} 
                         /> 
@@ -173,6 +187,8 @@ const mapDispatchToProps = {
     // getLinks,
     getDeletedNotes,
     getUserData, 
+    syncSlack,
+    syncPocketList
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsernamePage);

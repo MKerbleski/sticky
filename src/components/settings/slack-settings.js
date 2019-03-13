@@ -2,7 +2,7 @@ import React , { Component } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { getSlackSettings, getUserData } from '../../actions'
+import { getSlackSettings, getUserData , syncSlack} from '../../actions'
 import format from 'date-fns/format'
 
 class SlackSettings extends Component {
@@ -33,23 +33,24 @@ class SlackSettings extends Component {
 
     getSlackInfo = (e) => {
         e.preventDefault()
-        if(localStorage.getItem('JWT')){
-            const token = localStorage.getItem('JWT')
-            const authHeader = {
-              headers: {
-                Authorization: token, 
-              }
-            }
-            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/slack/${e.target.name}`, authHeader)
-              .then(res => {
-              console.log(res.data)
-            })
-              .catch(err => {
-              console.log("error!", err)
-            })
-        } else {
-            console.log("no token found.")
-        }
+        this.props.syncSlack()
+        // if(localStorage.getItem('JWT')){
+        //     const token = localStorage.getItem('JWT')
+        //     const authHeader = {
+        //       headers: {
+        //         Authorization: token, 
+        //       }
+        //     }
+        //     axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/slack/${e.target.name}`, authHeader)
+        //       .then(res => {
+        //       console.log(res.data)
+        //     })
+        //       .catch(err => {
+        //       console.log("error!", err)
+        //     })
+        // } else {
+        //     console.log("no token found.")
+        // }
     }
 
     convertTime(unixTimeStamp){
@@ -86,7 +87,8 @@ class SlackSettings extends Component {
                             <li>All starred messages will show up regardless of what the channel they are in.</li>
                             <li>Any messages starred in a Private or DM channel will be in a 'Private Channel or DM' container.</li>
                             <li>Sticky will show pinned messages from channels that you have <strong>starred</strong>.</li>
-                                <button name="sync" onClick={this.getSlackInfo}>Initialize Workplace</button>
+                            <br></br>
+                                <label>Slack will sync automatically. If things havn't synced and it has been more than a minute, click manual sync</label><button name="sync" onClick={this.getSlackInfo}>Manually Sync Slack</button>
                             {/* <div>
                                 <p>team -> channels -> users -> </p>
                                 <button name="team" onClick={this.getSlackInfo}>team</button>
@@ -129,7 +131,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
     getSlackSettings,
-    getUserData
+    getUserData,
+    syncSlack
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SlackSettings)
