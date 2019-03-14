@@ -31,7 +31,6 @@ class UsernamePage extends Component {
         super(props)
         this.state = {
             showNewNote: false,
-            showRightMenu: false,
         }
     }
 
@@ -44,24 +43,8 @@ class UsernamePage extends Component {
     componentWillUnmount(){
         this.setState({
             showNewNote: false,
-            showRightMenu: false,
-        })
-    }
 
-    componentWillReceiveProps(nextProps){
-        // console.log("CWRP", this.props)
-        // if(this.props.store.user.userData !== nextProps.store.user.userData){
-        //     console.log("NEW PROPS", this.props.store.user.userData.slack_initial_sync, this.props.store.user.userData.slack, this.props.store.user.userData.pocket_initial_sync,  this.props.store.user.userData.pocket)
-        //     if(!this.props.store.user.userData.slack_initial_sync && this.props.store.user.userData.slack){
-        //         this.props.syncSlack(this.props.store.user.userData.id)
-        //     }
-    
-        //     if(!this.props.store.user.userData.pocket_initial_sync && this.props.store.user.userData.pocket){
-        //         this.props.syncPocketList(this.props.store.user.userData.id)
-        //     }
-        // } else {
-        //     console.log(this.props.store.user.userData, nextProps.store.user.userData)
-        // }
+        })
     }
 
     //need to unmount when this button is clicked in note detail and vis versa
@@ -71,21 +54,7 @@ class UsernamePage extends Component {
         })
     }
 
-    //need to unmount when this button is clicked in note detail and vis versa
-    toggleRightMenu = () => {
-        this.setState({
-            showRightMenu: !this.state.showRightMenu
-        })
-    }
-    
-    toggleTrash = () => {
-        this.setState({
-            showTrash: !this.state.showTrash
-        })
-    }
-
     render(){
-        console.log(this.props)
         return(
             <UsernamePageDiv> 
                 {localStorage.getItem('JWT') 
@@ -114,7 +83,6 @@ class UsernamePage extends Component {
                             exact
                             path={`${this.props.match.url}/`} 
                             render={ (e) => {
-                                console.log(e)
                                 return <AllNotesPage
                                     deleteBin={false}
                                     redirect={this.props.redirect}
@@ -170,9 +138,7 @@ class UsernamePage extends Component {
                 </div>
                 {this.props.store.user.userData.pocket_initial_sync ||
                 this.props.store.user.userData.slack_initial_sync 
-                    ?   <RightMenu 
-                            // onDrop={this.onDrop} 
-                        /> 
+                    ?   <RightMenu /> 
                     :   null
                 }
             </UsernamePageDiv>

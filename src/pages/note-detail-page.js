@@ -54,7 +54,7 @@ class NoteDetailPage extends React.Component{
             } else {
                 parent = null
             }
-            console.log("note-detail-parent", "\nnote:", note, "\nparent", parent)
+            // console.log("note-detail-parent", "\nnote:", note, "\nparent", parent)
             return (
                 <NoteDetailPageDiv 
                     innerRef={instance => this.props.connectDropTarget(instance)}
@@ -85,13 +85,7 @@ class NoteDetailPage extends React.Component{
                         note={note}
                         parent={note.parent_note}
                         redirect={this.props.redirect}
-                        // allNotes={this.props.allNotes}
-                        // allLinks={this.props.allLinks}
-                        // onDrop={this.props.onDrop} 
-                        // changeParent={this.props.changeParent}
-                        // targetId={this.props.note.id}
-                        // editNote={this.props.editNote}
-                        />
+                    />
                 </NoteDetailPageDiv>
             )
         } else {
@@ -102,9 +96,6 @@ class NoteDetailPage extends React.Component{
 
 const targetObj = {
     hover(props, component){
-        //   if(props.hoverShallow){
-            //       console.log('hoverShallow')
-            //   }
             return
         },
         
