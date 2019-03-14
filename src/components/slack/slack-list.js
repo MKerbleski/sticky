@@ -1,6 +1,9 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
-import { getSlackStars, editAttachedItems } from '../../actions'
+import { 
+    getSlackStars, 
+    // editAttachedItems 
+} from '../../actions'
 import { connect } from 'react-redux';
 import { SlackChannel, Loading  } from '../index.js';
 
@@ -36,7 +39,7 @@ const mapStateToProps = store => {
   
 const mapDispatchToProps = {
     getSlackStars,
-    editAttachedItems
+    // editAttachedItems
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(SlackList)

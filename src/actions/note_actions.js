@@ -7,8 +7,11 @@ export const NOTE_ERROR = 'NOTE_ERROR';
 export const CREDENTIAL_ERROR = 'CREDENTIAL_ERROR';
 
 export const TOGGLE_NEW_NOTE = 'TOGGLE_NEW_NOTE'
-export const toggleNewNote = (dispatch) => {
-    dispatch({type: TOGGLE_NEW_NOTE})
+//bool is optional, if ommited it will toggle
+export const toggleNewNote = (bool=null) => {
+    return function(dispatch){
+        dispatch({type: TOGGLE_NEW_NOTE, payload: bool})
+    }
 }
 
 export const NOTE_TO_NOTE = 'NOTE_TO_NOTE';

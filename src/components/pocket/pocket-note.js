@@ -4,9 +4,12 @@ import { DragSource } from 'react-dnd';
 import { apiNote } from '../../styles/styl-utils'
 // import { sharedEndDrag } from '../../helpers/delete--api-end-drag'
 import { sharedStickyNoteDrop } from '../../helpers'
-import { editAttachedItems, noteToNote } from '../../actions'
 import { connect } from 'react-redux';
 import format from 'date-fns/format'
+import { 
+    // editAttachedItems, 
+    noteToNote 
+} from '../../actions'
 
 
 const PocketNote = (props) => {
@@ -64,7 +67,6 @@ const PocketNote = (props) => {
         console.log("noteEdit", noteEdit)
 
         if(!noteEdit.includes(null)){
-
             if(props.store.notes.singleNote){
                 props.noteToNote(noteEdit, {
                     author_name: props.store.notes.notes[0].sticky_username, 
@@ -73,23 +75,22 @@ const PocketNote = (props) => {
             } else {
                 props.noteToNote(noteEdit)
             }
-            ///here check to see if singleNote on store is true and then pass in the note author name and id to noteToNot
 		}
     },
-};
+}
 
 const collect = (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging(),
     // didDrop: monitor.didDrop(),
-});
+})
 
 const mapStateToProps = store => {
     return {store: store};
 }
 
 const mapDispatchToProps = {
-    editAttachedItems,
+    // editAttachedItems,
     noteToNote
 }
 

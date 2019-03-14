@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { flex, menu } from '../../styles/styl-utils.js'
 import DeleteTarget from './delete-target.js';
+import { connect } from 'react-redux';
+import { toggleNewNote } from '../../actions'
 
-
-export default class LeftMenu extends Component {
+class LeftMenu extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -16,16 +17,21 @@ export default class LeftMenu extends Component {
 
 	clickHandler = (name) => {
 		switch(name){
-			case "home":
-				console.log('hey', name)
-				this.props.redirect(`/${this.props.username}`)
+			case "newNote":
+				console.log("newNote")
+				this.props.toggleNewNote();
 				break;
-			case "trash":
-				this.props.redirect(`/${this.props.username}/deleted`)
-				break;
-			case "settings":
-				this.props.redirect(`/${this.props.username}/settings`)
-				break;
+			
+			// case "home":
+			// 	console.log('hey', name)
+			// 	this.props.redirect(`/${this.props.username}`)
+			// 	break;
+			// case "trash":
+			// 	this.props.redirect(`/${this.props.username}/deleted`)
+			// 	break;
+			// case "settings":
+			// 	this.props.redirect(`/${this.props.username}/settings`)
+			// 	break;
 			default:
 				console.log("no name")
 		}
@@ -47,7 +53,8 @@ export default class LeftMenu extends Component {
 
 					</Link>
 					<div 
-						onClick={this.props.toggleNewNote} 
+						// name="newNote"
+						onClick={() => this.clickHandler("newNote")} 
 						className="menu-item">
 						<i className="fas fa-plus-square"></i>
 					</div>
@@ -91,6 +98,18 @@ export default class LeftMenu extends Component {
 		)
 	}
 }
+
+
+const mapStateToProps = store => {
+	return {store: store};
+}
+
+const mapDispatchToProps = {
+	toggleNewNote
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeftMenu)
+
 
 const LeftMenuDiv = styled.div`
     ${ menu() }

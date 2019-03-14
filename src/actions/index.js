@@ -13,18 +13,19 @@ export {
 } from './slack_actions'
 
 export { 
-    sortNote,
-    getLinks, 
+    // sortNote,
+    // getLinks, 
     getNotes, 
     addNote, 
     getDeletedNotes, 
     // getAttachedItems, 
-    editAttachedItems, 
+    // editAttachedItems, 
     deleteNote, 
     editNote, 
-    getChildren, 
+    // getChildren, 
     getSingleNote, 
-    noteToNote 
+    noteToNote,
+    toggleNewNote
 } from './note_actions'
 
 export { 

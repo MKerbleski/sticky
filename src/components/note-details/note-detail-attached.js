@@ -7,7 +7,7 @@ import {
 } from './../index.js';
 import { 
     // getAttachedItems,
-    editAttachedItems, 
+    // editAttachedItems, 
 } from '../../actions'
 
 class AttachedList extends Component {
@@ -16,24 +16,30 @@ class AttachedList extends Component {
     }
     
     render(){
-        console.log(this.props)
+        // console.log(this.props)
         return <AttachedListDiv> 
-                    {this.props.note.slack_items ? 
-                        this.props.note.slack_items.map(item => {
-                            return <SlackNote
-                                parent={this.props.note}
-                                key={item.uuid} 
-                                item={item} 
-                                stickyNote={this.props.stickyNote} />
-                    }) :  null}
-                    {this.props.note.pocket_items ? 
-                        this.props.note.pocket_items.map(item => {
-                            return <PocketNote 
-                                parent={this.props.note}
-                                key={item.item_id} 
-                                stickyNote={this.props.stickyNote}
-                                item={item} />
-                    }) :  null}
+                    {this.props.note.slack_items 
+                        ?    this.props.note.slack_items.map(item => {
+                                return <SlackNote
+                                    parent={this.props.note}
+                                    key={item.uuid} 
+                                    item={item} 
+                                    stickyNote={this.props.stickyNote} />
+                                }) 
+                        :   null
+                    }
+                       
+                    {this.props.note.pocket_items 
+                        ?   this.props.note.pocket_items.map(item => {
+                                return <PocketNote 
+                                    parent={this.props.note}
+                                    key={item.item_id} 
+                                    stickyNote={this.props.stickyNote}
+                                    item={item} 
+                                />
+                            }) 
+                        :   null
+                    }
             </AttachedListDiv>
     }
 }
@@ -44,7 +50,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
     // getAttachedItems,
-    editAttachedItems
+    // editAttachedItems
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(AttachedList)

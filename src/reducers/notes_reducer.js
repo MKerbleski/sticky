@@ -1,36 +1,36 @@
 import {   
-    ATTACHED_ITEMS_RECIEVED,
+    // ATTACHED_ITEMS_RECIEVED,
     CREDENTIAL_ERROR,
-    DEL_NOTES_RECIEVED,
+    // DEL_NOTES_RECIEVED,
     DELETING_NOTE,
     EDITING_NOTE,
-    EDITING_LIST,
+    // EDITING_LIST,
     ERROR_ADDING_NEW_NOTE,
     ERROR_DELETING_NOTE,
     ERROR_EDITING_NOTE,
     // FETCHING_ATTACHED_ITEMS,
     FETCHING_DEL_NOTES,
     FETCHING_NOTES,
-    FETCHING_LINKS,
+    // FETCHING_LINKS,
     // LINKS_RECIEVED,
-    LIST_EDIT_ERROR,
-    LIST_EDITED,
+    // LIST_EDIT_ERROR,
+    // LIST_EDITED,
     NEW_NOTE_ADDED,
     NOTE_DELETED,
     NOTE_EDITED,
     NOTE_ERROR,
     NOTES_RECIEVED,
     SENDING_NEW_NOTE,
-    SORT_NOTE,
+    // SORT_NOTE,
     SINGLE_NOTE_RECIEVED,
-    NOTE_RECIEVED,
+    // NOTE_RECIEVED,
     FETCHING_SINGLE_NOTE,
     NOTE_TO_NOTE,
     NOTE_TO_NOTE_COMPLETE,
     ERROR_EDITING_NOTE_TO_NOTE,
-    ERROR
+    ERROR,
+    TOGGLE_NEW_NOTE,
  } from '../actions/note_actions';
-
 
 const initialState = {    
     notes: [],
@@ -40,8 +40,12 @@ const initialState = {
     notesRecieved: false,
 }
 
-export const notesReducer = (state = initialState, action) => {
+export const notesReducer = (state=initialState, action) => {
     switch(action.type) {
+        case TOGGLE_NEW_NOTE:
+            return Object.assign({}, state, {
+                showNewNote: action.payload || !state.showNewNote,
+            })
         case NOTE_TO_NOTE:
             return Object.assign({}, state, {
                 editingNotes: true,

@@ -4,7 +4,10 @@ import { DragSource } from 'react-dnd';
 import ReactMarkdown from 'react-markdown';
 import { apiNote } from '../../styles/styl-utils'
 import format from 'date-fns/format'
-import { editAttachedItems, noteToNote } from '../../actions'
+import { 
+    // editAttachedItems, 
+    noteToNote 
+} from '../../actions'
 import { connect } from 'react-redux';
 // import { sharedEndDrag } from '../../helpers/delete--api-end-drag'
 import { sharedStickyNoteDrop } from '../../helpers'
@@ -66,7 +69,7 @@ const SlackNote = (props) => {
 		}
 
         let noteEdit = sharedStickyNoteDrop(source, monitor);
-        console.log("noteEdit", noteEdit)
+        // console.log("noteEdit", noteEdit)
         if(noteEdit !== null && !noteEdit.includes(null)){
             if(props.store.notes.singleNote){
                 props.noteToNote(noteEdit, {
@@ -91,7 +94,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    editAttachedItems,
+    // editAttachedItems,
     noteToNote
 }
 
