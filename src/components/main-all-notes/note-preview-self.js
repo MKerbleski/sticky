@@ -194,7 +194,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 const NotePreviewSelfDiv = styled.div`
 	border: 1px solid blue;
 	padding: 10px;
-	width: 300px;
+	margin: 2px;
+	min-width: 300px;
 	height: auto;
 	display: flex;
 	flex-direction: column;  

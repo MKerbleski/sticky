@@ -32,7 +32,6 @@ export default class LeftMenu extends Component {
 	}
 
 	render(){
-		console.log(this.props)
 		return (
 			<LeftMenuDiv>
 				<div className='leftMenuTop'>
@@ -59,7 +58,7 @@ export default class LeftMenu extends Component {
 						<i className="fas fa-book-open"></i>
 					</div>
 					<div className="menu-item">
-					<i class="fas fa-list-ul"></i>
+						<i className="fas fa-list-ul"></i>
 					</div>
 				</div>
 				<div className="leftMenuBottom">

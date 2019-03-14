@@ -51,7 +51,7 @@ class AllNotesPage extends Component {
     render() {
         // console.log('all notes', this.props)
         const notes = this.props.store.notes.notes
-        console.log('all notes', this.props)
+        // console.log('all notes', this.props)
         if(notes){
             return (
                 <AllNotesPageDiv
@@ -81,7 +81,7 @@ class AllNotesPage extends Component {
                                 && this.props.store.user.userData.username !== this.props.author
                                     ?   <div className='noNotes'>
                                             <h3>{this.props.author} has not published any notes yet. Please check back later.</h3>
-                                            <Link to={`/${this.props.store.user.userData.username}`}>My Notes</Link>
+                                            <Link to={`/${this.props.store.user.userData.username}/`}>My Notes</Link>
                                         </div>
                                     :   null
                                     
@@ -103,19 +103,25 @@ class AllNotesPage extends Component {
                     
                     {this.props.showNewNote && !this.props.deleteBin 
                         ?   <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> 
-                        :   null} 
+                        :   null
+                    } 
 
-                    {notes.map(note => {
-                        return <NotePreviewSelf
-                            key={note.id}
-                            type="note"
-                            parent={null}
-                            note={note}
-                            redirect={this.props.redirect}
-                            deleteBin={this.props.deleteBin ? true : false}
-                            />
-                    })}
-
+                    {this.props.store.user.userData.username === this.props.author
+                        ?   <div className="all-note-preview-container">
+                                {notes.map(note => {
+                                    return <NotePreviewSelf
+                                        key={note.id}
+                                        type="note"
+                                        parent={null}
+                                        note={note}
+                                        redirect={this.props.redirect}
+                                        deleteBin={this.props.deleteBin ? true : false}
+                                        />
+                                })}
+                            </div>
+                        :   null
+                    }
+                    
                 </AllNotesPageDiv>
             )
         } else {
@@ -176,9 +182,13 @@ const AllNotesPageDiv = styled.div`
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
-    padding: 15px;
+    padding: 10px;
+    padding-top: 0;
     margin: 2px;
     width: 100%;
+    h1{
+        margin: 5px;
+    }
     &::-webkit-scrollbar {
         width: 6px;
         &-thumb{
@@ -192,5 +202,13 @@ const AllNotesPageDiv = styled.div`
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+    }
+    .all-note-preview-container{
+        border: 1px solid green;
+        padding: 2px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
     }
 `;

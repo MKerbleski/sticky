@@ -31,11 +31,13 @@ class NotePreviewChild extends React.Component {
                         onClick={this.goToNote}
                         style={{background: this.props.hover ? 'lightgreen' : null}}
                     >
-                         {this.props.note.num_slack_items_attached ||  this.props.note.num_pocket_items_attached
-										? 	<div className="note-content-link-count">
-												{this.props.note.num_pocket_items_attached + this.props.note.num_slack_items_attached}
-											</div> 
-										:   null }
+                        {this.props.note.num_slack_items_attached ||  this.props.note.num_pocket_items_attached
+                            ? 	<div className="note-content-link-count">
+                                   {/* {this.props.note.num_pocket_items_attached + this.props.note.num_slack_items_attached} */}
+                                </div> 
+                            :   null 
+                        }
+                        
                         <h4>{this.props.note.text_body}</h4>
                         {this.props.note.has_children 
                             ?   <div className="layerThreeContainerAll">
@@ -44,7 +46,7 @@ class NotePreviewChild extends React.Component {
                                                 if(!grandchild.is_deleted){
                                                     return (
                                                         <div 
-                                                            className="layerThreeContainer" 
+                                                            className="layerThreeContainer"
                                                             key={grandchild.id} 
                                                         >
                                                             <NotePreviewGrandChild 
@@ -52,9 +54,6 @@ class NotePreviewChild extends React.Component {
                                                                 note={grandchild}
                                                                 parent={this.props.note} 
                                                                 redirect={this.props.redirect}
-                                                                // changeParent={this.props.changeParent} 
-                                                                // onDrop={this.props.onDrop}
-                                                                // getFirstWord={this.props.getFirstWord}
                                                             />
                                                         </div>
                                                     )
@@ -69,7 +68,7 @@ class NotePreviewChild extends React.Component {
                     </LayerTwoDiv>       
                 )
         } else {
-            return (null)
+            return null
         }
     }
 }
@@ -78,7 +77,7 @@ const targetObj = {
     drop(props) {
         //these always should come from where they are created as the parent or children will be dependent on the props passed not the global state, 
 
-        //this MUST come from state because it is being mapped over from note-preview-self
+        //this MUST come from state (note store) because it is being mapped over from note-preview-self
         const note = props.note;
         const parent = props.parent
         return ({
@@ -160,6 +159,17 @@ const LayerTwoDiv = styled.div`
     h4 {
         ${'' /* border: 1px solid orange; */}
         margin: 0px;
+    }
+    .note-content-link-count{
+        border:1px solid black;
+        border-radius: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background: lightblue;
+        height: 10px;
+        width: 10px;
     }
     .layerThreeContainerAll{
         ${'' /* border: 1px solid red; */}

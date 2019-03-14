@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 export const Loading = () => {
     return (
         <iframe 
+            title="bubble-rings-loading-icon"
             src="https://giphy.com/embed/8UI85273lC1VzEgkyW" 
             width="40" 
             height="40"

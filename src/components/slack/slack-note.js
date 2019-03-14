@@ -6,7 +6,7 @@ import { apiNote } from '../../styles/styl-utils'
 import format from 'date-fns/format'
 import { editAttachedItems, noteToNote } from '../../actions'
 import { connect } from 'react-redux';
-import { sharedEndDrag } from '../../helpers/delete--api-end-drag'
+// import { sharedEndDrag } from '../../helpers/delete--api-end-drag'
 import { sharedStickyNoteDrop } from '../../helpers'
 
 const SlackNote = (props) => {

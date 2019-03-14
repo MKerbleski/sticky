@@ -1,6 +1,6 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
-import axios from 'axios';
+// import axios from 'axios';
 import { connect } from 'react-redux';
 import { getSlackSettings, getUserData , syncSlack} from '../../actions'
 import format from 'date-fns/format'

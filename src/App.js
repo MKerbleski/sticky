@@ -123,7 +123,7 @@ const AppDiv = styled.div`
     flex-direction: column;
     background-color: white;
     height: 100vh;
-    max-height: 99vh;
+    /* max-height: 99vh; */
     max-width: 100vw;
     overflow: hidden;
     .app-top {
