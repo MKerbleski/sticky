@@ -10,8 +10,8 @@ import {
 } from '../../img'
 
 import { 
-	getConnectedApis,
-	syncPocketList,
+	// getConnectedApis,
+	// syncPocketList,
 	// syncSlack,
 } from '../../actions'
 
@@ -31,18 +31,12 @@ class RightMenu extends Component {
 	// }
 	
 	componentWillReceiveProps(nextProps){
-		console.log(this.props, nextProps)
         if(this.props.store.user.userData.slack_initial_sync !== nextProps.store.user.userData.slack_initial_sync){
-			// console.log("DIFFERENT PROPS IN RIGHT MENU-slack")
-			// this.props.syncSlack(nextProps.store.user.userData.id)
             this.setState({
 				slack: nextProps.store.user.userData.slack_initial_sync,
 			})
         }
         if(this.props.store.user.userData.pocket_initial_sync !== nextProps.store.user.userData.pocket_initial_sync){
-			// console.log("DIFFERENT PROPS IN RIGHT MENU-pocket")
-			// //initialise
-			// this.props.syncPocketList(this.props.store.user.userData.id)
             this.setState({
 				pocket: nextProps.store.user.userData.pocket_initial_sync,
 			})
@@ -77,7 +71,6 @@ class RightMenu extends Component {
     }
 
     render(){
-      	console.log(this.props)
 		return (
 			<RightMenuDiv>
 				{this.state.openDetails 
@@ -131,8 +124,8 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-	getConnectedApis,
-	syncPocketList,
+	// getConnectedApis,
+	// syncPocketList,
 	// syncSlack,
 }
 

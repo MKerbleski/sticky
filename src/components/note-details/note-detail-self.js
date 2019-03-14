@@ -48,7 +48,7 @@ class NoteDetailSelf extends React.Component {
 
     render(){
         const note = this.props.store.notes.notes[0]
-        console.log("note detail self", note)
+        // console.log("note detail self", note)
         if(note){
             return (
                 <NoteDetailSelfDiv 
@@ -60,18 +60,20 @@ class NoteDetailSelf extends React.Component {
                         <div className="note-detail-left">
                             {/* <NoteQuill note={this.props.note} /> */}
                             <p>{note.text_body}</p>
-                            <div className="note-detail-children">
-                                {note.children 
-                                    ? note.children.map(child => {
-                                        return <NoteDetailChild
-                                            key={child.id}
-                                            type="note"
-                                            note={child}
-                                            parent={note}
-                                            redirect={this.props.redirect}
-                                        />
-                                }) : null}
-                            </div>
+                            
+                            {note.children 
+                                ?   <div className="note-detail-children">
+                                        {note.children.map(child => {
+                                            return <NoteDetailChild
+                                                key={child.id}
+                                                type="note"
+                                                note={child}
+                                                parent={note}
+                                                redirect={this.props.redirect}
+                                            />})}
+                                    </div>
+                                :   null}
+                            
                         </div>
                         <div className="note-detail-right">
                             {this.props.note.num_slack_items_attached || this.props.note.num_pocket_items_attached
