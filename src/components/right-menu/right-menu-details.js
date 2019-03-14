@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { menu, start } from '../../styles/styl-utils.js'
 import { SlackList, PocketList } from './index'
-import { getSlackStars } from '../../actions'
+import { getSlackStars, syncSlack } from '../../actions'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AAO } from '../../helpers/availbleApis'
+import { Loading } from '../loading'
 
 class RightMenuDetails extends Component {
     getCorrectListComponent(){
@@ -19,26 +20,49 @@ class RightMenuDetails extends Component {
         }
     }
 
+    syncHandler(selectedApp){
+        // e.preventDefault()
+        if(this.props.selectedApp === 'pocket'){
+            console.log("pocket")
+
+        } else if (this.props.selectedApp === 'slack'){
+            console.log("slack")
+            this.props.syncSlack()
+        }
+        // console.log(selectedApp, this.props.selectedApp)
+    }
+
     render(){
         const { selectedApp } = this.props;
+        console.log(selectedApp)
         return (
             <RightMenuDetailsDiv>
-                {selectedApp ?
-                        <React.Fragment>
+                {selectedApp 
+                    ?    <React.Fragment>
                             <div className="app-title">
                                 <img 
                                     alt={AAO[selectedApp].alt} 
                                     name={AAO[selectedApp].name} 
                                     onClick={this.eventHandler} className="rm-details-name" 
-                                    src={AAO[selectedApp].logo}></img>
-                                    <button><i className="fas fa-sync"></i></button>
+                                    src={AAO[selectedApp].logo}
+                                ></img>
+                                {this.props.store.pocket.fetchingPocketList || this.props.store.slack.gettingSlackStars 
+                                    ?   <Loading />
+                                    :   <button
+                                            onClick={() => {this.syncHandler()}}
+                                        >
+                                            <i className="fas fa-sync"></i>
+                                        </button>
+                                }
                             </div>
                             <div className="app-list">
                                 {this.getCorrectListComponent()}
                             </div>
-                        </React.Fragment> :
+                        </React.Fragment>
                     
-                        <div className="connect-apis"><Link to='/settings'>connect app in settings</Link></div>
+                    :   <div className="connect-apis">
+                            <Link to='/settings'>connect app in settings</Link>
+                        </div>
                 }
             </RightMenuDetailsDiv>           
         )
@@ -51,6 +75,7 @@ const mapStateToProps = store => {
   
 const mapDispatchToProps = {
     getSlackStars,
+    syncSlack,
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenuDetails)

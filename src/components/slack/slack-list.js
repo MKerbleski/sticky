@@ -3,11 +3,14 @@ import styled from 'styled-components'
 import { getSlackStars, editAttachedItems } from '../../actions'
 import { connect } from 'react-redux';
 import { SlackChannel } from '../index.js';
-
+import { Loading } from '../loading.js'
 class SlackList extends Component {
     componentDidMount(){
-        this.props.getSlackStars()
+        if(!this.props.store.slack.slackStars){
+            this.props.getSlackStars()
+        }
     }
+    
     render(){
         const { slackStars } = this.props.store.slack
         return(
@@ -20,7 +23,7 @@ class SlackList extends Component {
                                 editAttachedItems={this.props.editAttachedItems} 
                                 channel={channel} />
                         })
-                    :   <p>loading...</p>
+                    :   <Loading />
                 } 
             </SlackListDiv>
         )

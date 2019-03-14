@@ -50,7 +50,7 @@ export const getSlackSettings = (sticky_user_id) =>  {
 	}
 }
 
-export const syncSlack = (sticky_user_id) =>  {
+export const syncSlack = () =>  {
 	return function(dispatch){
 		if(localStorage.getItem('JWT')){
 			dispatch({type: START_SYNC});

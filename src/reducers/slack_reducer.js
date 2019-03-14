@@ -2,7 +2,9 @@ import {
     FETCHING_SLACK_STARS,
     SLACK_STARS_RECIEVED,
     SLACK_SETTINGS_RECIEVED,
-    SLACK_ERROR
+    SLACK_ERROR,
+    START_SYNC,
+    SLACK_INITIALIZED
 } from '../actions/slack_actions';
 
 const initialState = {    
@@ -28,6 +30,14 @@ export const slackReducer = (state = initialState, action) => {
                 gettingSlackStars: false,
                 slackError: true,
                 slackErrMsg: action.payload
+            })
+        case START_SYNC:
+            return Object.assign({}, state, {
+                gettingSlackStars: true,
+            })
+        case SLACK_INITIALIZED:
+            return Object.assign({}, state, {
+                gettingSlackStars: false,
             })
         default: 
             return state;
