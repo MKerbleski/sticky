@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { addNote } from './note_actions'
 import { handleErrorCodes, syncSlack, syncPocketList } from './index'
+import { getAuthHeader } from '../helpers/getAuthHeader'
 
 export const API_LIST_RECIEVED = 'API_LIST_RECIEVED';
 export const CREDENTIALS_ACCEPTED = 'CREDENTIALS_ACCEPTED';
@@ -35,39 +36,27 @@ export const CLEAR_USER_STATUS = 'CLEAR_USER_STATUS';
 // 	}
 // }
 
-export const getConnectedApis = () =>  {
-    return function(dispatch){
-		if(localStorage.getItem('JWT')){
-			dispatch({type: FETCHING_API_LIST});
-			const token = localStorage.getItem('JWT')
-			const authHeader = {
-			headers: {
-					Authorization: token, 
-				}
-			}
-			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/apis`, authHeader).then(res => {
-				dispatch({type: API_LIST_RECIEVED, payload: res.data})
-			})
-			.catch(err => {
-				dispatch({type: ERROR, payload: err})
-			})
-		} else {
-			dispatch({type: ERROR, payload: 'there was no token found'})      
-		}
-	}
-}
+// export const getConnectedApis = () =>  {
+//     return function(dispatch){
+// 		if(localStorage.getItem('JWT')){
+// 			dispatch({type: FETCHING_API_LIST});
+			
+// 			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/apis`, authHeader).then(res => {
+// 				dispatch({type: API_LIST_RECIEVED, payload: res.data})
+// 			}).catch(err => {
+// 				dispatch({type: ERROR, payload: err})
+// 			})
+// 		} else {
+// 			dispatch({type: ERROR, payload: 'there was no token found'})      
+// 		}
+// 	}
+// }
   
-export const getUserData = (username) =>  {
+export const getUserData = () =>  {
     return function(dispatch){
 		if(localStorage.getItem('JWT')){
 			dispatch({type: FETCHING_USERDATA});
-			const token = localStorage.getItem('JWT')
-			const authHeader = {
-				headers: {
-					Authorization: token, 
-				}
-			}
-			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/settings`, authHeader).then(res => {
+			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/settings`, getAuthHeader()).then(res => {
 				dispatch({type: USERDATA_RECIEVED, payload: res.data})
 				if(!res.data.slack_initial_sync && res.data.slack){
 						dispatch(syncSlack(res.data.id))
@@ -117,7 +106,6 @@ export const createUser = (newUser, redirect) => {
 	}
 }
 
-
 export const loginUser = (creds, redirect) => {
 	return function(dispatch){
 		dispatch({type: SENDING_CREDENTIALS})
@@ -135,4 +123,3 @@ export const loginUser = (creds, redirect) => {
 		})
 	}
 }
-

@@ -56,19 +56,19 @@ export const notesReducer = (state = initialState, action) => {
                 errorEditingNotes: true,
                 error: action.payload
             })
-        case LIST_EDIT_ERROR:
-            return Object.assign({}, state, {
+        // case LIST_EDIT_ERROR:
+        //     return Object.assign({}, state, {
                 
-            })
-        case EDITING_LIST:
-            return Object.assign({}, state, {
-                attachingPocketItem: true,
-            })
-        case LIST_EDITED:
-            return Object.assign({}, state, {
-                attachingPocketItem: false,
-                triggerGetNotes: true
-            })
+        //     })
+        // case EDITING_LIST:
+        //     return Object.assign({}, state, {
+        //         attachingPocketItem: true,
+        //     })
+        // case LIST_EDITED:
+        //     return Object.assign({}, state, {
+        //         attachingPocketItem: false,
+        //         triggerGetNotes: true
+        //     })
         case CREDENTIAL_ERROR:
             return Object.assign({}, state, {
                 credentialError: true,
@@ -78,24 +78,24 @@ export const notesReducer = (state = initialState, action) => {
         //         fetchingAttachedItems: true,
         //         triggerAttached: false
         //     })
-        case ATTACHED_ITEMS_RECIEVED:
-            return Object.assign({}, state, {
-                fetchingAttachedItems: false,
-                attachedItems: action.payload,
-            })
+        // case ATTACHED_ITEMS_RECIEVED:
+        //     return Object.assign({}, state, {
+        //         fetchingAttachedItems: false,
+        //         attachedItems: action.payload,
+        //     })
         case FETCHING_DEL_NOTES:
             return Object.assign({}, state, {
                 fetchingDelNotes: true,
             })
-        case DEL_NOTES_RECIEVED:
-            return Object.assign({}, state, {
-                fetchingDelNotes: false,
-                notes: action.payload.allUserDelNotes
-            })       
-        case FETCHING_LINKS:
-            return Object.assign({}, state, {
-                fetchingLinks: true,
-            })
+        // case DEL_NOTES_RECIEVED:
+        //     return Object.assign({}, state, {
+        //         fetchingDelNotes: false,
+        //         notes: action.payload.allUserDelNotes
+        //     })       
+        // case FETCHING_LINKS:
+        //     return Object.assign({}, state, {
+        //         fetchingLinks: true,
+        //     })
         // case LINKS_RECIEVED:
         //     return Object.assign({}, state, {
         //         fetchingLinks: false,
@@ -135,14 +135,14 @@ export const notesReducer = (state = initialState, action) => {
                 // username: action.payload.username,
                 status: "Note Recieved"
             })
-        case NOTE_RECIEVED:
-            return Object.assign({}, state, {
-                fetchingNotes: false,
-                notesRecieved: true,
-                note: action.payload,
-                username: action.payload.username,
-                status: "Got Notes!"
-            })
+        // case NOTE_RECIEVED:
+        //     return Object.assign({}, state, {
+        //         fetchingNotes: false,
+        //         notesRecieved: true,
+        //         note: action.payload,
+        //         username: action.payload.username,
+        //         status: "Got Notes!"
+        //     })
         case SENDING_NEW_NOTE:
             return Object.assign({}, state, {
                 sendingNewNote: true,
@@ -189,13 +189,13 @@ export const notesReducer = (state = initialState, action) => {
                 // status: action.payload,
                 status: "Note Saved!"
             })
-        case SORT_NOTE:
-            return Object.assign({}, state, {
-                customSort: true,
-                notes: action.payload,
-            })
+        // case SORT_NOTE:
+        //     return Object.assign({}, state, {
+        //         customSort: true,
+        //         notes: action.payload,
+        //     })
         case NOTE_ERROR: 
-        console.log(action.payload)
+            console.log(action.payload)
             return Object.assign({}, state, {
                 responseCode: action.payload.response.status,
                 noteError: true,
