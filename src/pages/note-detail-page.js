@@ -153,11 +153,12 @@ const NoteDetailPageDiv = styled.div`
     ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
     background-color: white;
     border: 1px solid green;
+    margin: 2px;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    height: 95vh;
+    /* height: 95vh; */
     overflow: auto;
     padding-bottom: 10px;
     .link {
@@ -177,7 +178,7 @@ const NoteDetailPageDiv = styled.div`
         }
     }
     .top-part{
-        border: 1px solid red;
+        /* border: 1px solid red; */
         height: 75px;
         display: flex;
         flex-direction: column;
