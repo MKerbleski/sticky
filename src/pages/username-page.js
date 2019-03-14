@@ -49,14 +49,19 @@ class UsernamePage extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-
-            if(!this.props.store.user.userData.slack_initial_sync && this.props.store.user.userData.slack){
-                this.props.syncSlack(this.props.store.user.userData.id)
-            }
-            if(!this.props.store.user.userData.pocket_initial_sync && this.props.store.user.userData.pocket){
-                this.props.syncPocketList(this.props.store.user.userData.id)
-            }
-
+        // console.log("CWRP", this.props)
+        // if(this.props.store.user.userData !== nextProps.store.user.userData){
+        //     console.log("NEW PROPS", this.props.store.user.userData.slack_initial_sync, this.props.store.user.userData.slack, this.props.store.user.userData.pocket_initial_sync,  this.props.store.user.userData.pocket)
+        //     if(!this.props.store.user.userData.slack_initial_sync && this.props.store.user.userData.slack){
+        //         this.props.syncSlack(this.props.store.user.userData.id)
+        //     }
+    
+        //     if(!this.props.store.user.userData.pocket_initial_sync && this.props.store.user.userData.pocket){
+        //         this.props.syncPocketList(this.props.store.user.userData.id)
+        //     }
+        // } else {
+        //     console.log(this.props.store.user.userData, nextProps.store.user.userData)
+        // }
     }
 
     //need to unmount when this button is clicked in note detail and vis versa
@@ -163,7 +168,7 @@ class UsernamePage extends Component {
                             }
                     </Switch>
                 </div>
-                {localStorage.getItem('JWT') && this.props.store.user.userData && this.props.store.user.userData.pocket_initial_sync ||
+                {this.props.store.user.userData.pocket_initial_sync ||
                 this.props.store.user.userData.slack_initial_sync 
                     ?   <RightMenu 
                             // onDrop={this.onDrop} 
@@ -215,6 +220,13 @@ const UsernamePageDiv = styled.div`
         /* justify-content: center; */
         flex-wrap: wrap;
         overflow: auto;
+        &::-webkit-scrollbar {
+        width: 6px;
+            &-thumb{
+                background-color: gray;
+                border-radius: 25px;
+            }
+        }
     }
     .unAuth{
         border: 1px solid red;

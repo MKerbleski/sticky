@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { getUserData } from '../actions'
 import { connect } from 'react-redux';
 import { ApiSettings } from '../components/settings';
+import { Loading } from '../components/loading'
 
 class SettingsPage extends Component {
 	constructor(props){
@@ -14,7 +15,7 @@ class SettingsPage extends Component {
 
 	componentDidMount(){
 		// this.props.getUserData()
-	}    
+	}
 
 	componentWillReceiveProps(){
 		console.log("settings updated, should eventually rerender and trigger redux action for initializing api")
@@ -34,7 +35,7 @@ class SettingsPage extends Component {
 							<h4>Apps</h4>
 							<ApiSettings userData={userData} /> 
 						</div>
-					:	<h6>loading...</h6>
+					:	<Loading />
 				}
 				{/* <p>by default api items will be redundent, they can appear on multiple notes and will remain in the list. click button to turn off redudency and each note will be only appear throughout sticky once. There will be a flag on the note that says whether it is used or not.</p> */}
 				{/* <button>toggle redundency</button> */}

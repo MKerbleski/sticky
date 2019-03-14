@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getUserData } from './index'
 
 export const FETCHING_SLACK_STARS = 'FETCHING_SLACK_STARS';
 export const SLACK_STARS_RECIEVED = 'SLACK_STARS_RECIEVED';
@@ -57,6 +58,7 @@ export const syncSlack = (sticky_user_id) =>  {
 			const authHeader = { headers: { Authorization: token } }
 			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/slack/sync`, authHeader).then(res => {
 				dispatch({type: SLACK_INITIALIZED, payload: res.data})
+				dispatch(getUserData())
 			})
 			.catch(err => {
 				dispatch({type: SLACK_ERROR, payload: err})})

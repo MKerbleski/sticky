@@ -30,24 +30,24 @@ class RightMenu extends Component {
 	// 	})
 	// }
 	
-	// componentWillReceiveProps(nextProps){
-	// 	console.log(this.props, nextProps)
-    //     if(this.props.store.user.userData.slack !== nextProps.store.user.userData.slack){
-	// 		// console.log("DIFFERENT PROPS IN RIGHT MENU-slack")
-	// 		// this.props.syncSlack(nextProps.store.user.userData.id)
-    //         this.setState({
-	// 			slack: nextProps.store.user.userData.slack,
-	// 		})
-    //     }
-    //     if(this.props.store.user.userData.pocket !== nextProps.store.user.userData.pocket){
-	// 		// console.log("DIFFERENT PROPS IN RIGHT MENU-pocket")
-	// 		// //initialise
-	// 		// this.props.syncPocketList(this.props.store.user.userData.id)
-    //         this.setState({
-	// 			pocket: nextProps.store.user.userData.pocket,
-	// 		})
-    //     }
-    // }
+	componentWillReceiveProps(nextProps){
+		console.log(this.props, nextProps)
+        if(this.props.store.user.userData.slack_initial_sync !== nextProps.store.user.userData.slack_initial_sync){
+			// console.log("DIFFERENT PROPS IN RIGHT MENU-slack")
+			// this.props.syncSlack(nextProps.store.user.userData.id)
+            this.setState({
+				slack: nextProps.store.user.userData.slack_initial_sync,
+			})
+        }
+        if(this.props.store.user.userData.pocket_initial_sync !== nextProps.store.user.userData.pocket_initial_sync){
+			// console.log("DIFFERENT PROPS IN RIGHT MENU-pocket")
+			// //initialise
+			// this.props.syncPocketList(this.props.store.user.userData.id)
+            this.setState({
+				pocket: nextProps.store.user.userData.pocket_initial_sync,
+			})
+        }
+    }
 
     eventHandler = (e) => {
         e.preventDefault();
@@ -70,7 +70,7 @@ class RightMenu extends Component {
 				break;
 			default:
 				this.setState({
-					openDetails: !this.state.openDetails,
+					openDetails: true,
 					selectedApp: e.target.name
 				})    
         }

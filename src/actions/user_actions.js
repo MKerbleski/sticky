@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { addNote } from './note_actions'
-import { handleErrorCodes } from './index'
+import { handleErrorCodes, syncSlack, syncPocketList } from './index'
 
 export const API_LIST_RECIEVED = 'API_LIST_RECIEVED';
 export const CREDENTIALS_ACCEPTED = 'CREDENTIALS_ACCEPTED';
@@ -69,6 +69,12 @@ export const getUserData = (username) =>  {
 			}
 			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/settings`, authHeader).then(res => {
 				dispatch({type: USERDATA_RECIEVED, payload: res.data})
+				if(!res.data.slack_initial_sync && res.data.slack){
+						dispatch(syncSlack(res.data.id))
+				}
+				if(!res.data.pocket_initial_sync && res.data.pocket){
+						dispatch(syncPocketList(res.data.id))
+				}
 			}).catch(err => {
 				dispatch({type: USER_ERROR, payload: err})
 			})

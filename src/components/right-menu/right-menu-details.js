@@ -31,6 +31,7 @@ class RightMenuDetails extends Component {
                                     name={AAO[selectedApp].name} 
                                     onClick={this.eventHandler} className="rm-details-name" 
                                     src={AAO[selectedApp].logo}></img>
+                                    <button><i className="fas fa-sync"></i></button>
                             </div>
                             <div className="app-list">
                                 {this.getCorrectListComponent()}
@@ -65,8 +66,28 @@ const RightMenuDetailsDiv = styled.div`
     background-color: white;
     flex-direction: column;
     .app-title {
-        max-width: 100px;
+        border: 1px solid red;
+        /* max-width: 100px; */
         color: black;
+        width: 100%;
+        min-height: 75px;
+        height: 75px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        button{
+            margin: 10px;
+            i{
+                /* border: 1px solid gray; */
+                margin: 3px;
+                /* padding: 10px; */
+                &:hover{
+                    cursor: pointer;
+                }
+                /* background: lightgray */
+            }
+        }
     }
     .app-list {
         /* border: 1px solid black; */

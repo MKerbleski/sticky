@@ -4,6 +4,7 @@ import axios from 'axios';
 import { getPocketSettings, getUserData, syncPocketList } from '../../actions'
 import { connect } from 'react-redux';
 import format from 'date-fns/format'
+import { Loading } from '../loading'
 
 class PocketSettings extends Component {
     constructor(props){
@@ -63,7 +64,10 @@ class PocketSettings extends Component {
                             <h3>Pocket is connected!</h3>
                             <p>Use the blue menu to the right to view your list and attach pocket items to your notes!</p>
                             {/* <button onClick={this.clickHandler}>Revoke access</button> */}
-                            <button name="list" onClick={(e) => this.syncPocket(e)}>Refresh Notes</button>
+                            {this.props.store.pocket.fetchingPocketList 
+                                ?   <Loading />
+                                :   <button name="list" onClick={(e) => this.syncPocket(e)}>Refresh Notes</button>
+                            }
                             {this.props.store.pocket.pocketSettings
                                 ?   <div>
                                         <p><strong>Last Update: </strong>{ this.convertTime(this.props.store.pocket.pocketSettings.last_accessed)}</p>

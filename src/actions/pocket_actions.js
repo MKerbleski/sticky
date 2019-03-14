@@ -63,6 +63,7 @@ export const syncPocketList = (sticky_user_id) =>  {
                 // console.log(res.data)
                 dispatch({type: POCKET_INITIALIZED, payload: res.data})
                 dispatch(getUserData())
+                dispatch(getPocketList())
             }).catch(err => {
                 dispatch({type: POCKET_ERROR, payload: err})
                 console.log("error!")
