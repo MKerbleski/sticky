@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { menu, start } from '../../styles/styl-utils.js'
 import { SlackList, PocketList } from './index'
-import { getSlackStars, syncSlack } from '../../actions'
+import { getSlackStars, syncSlack, syncPocketList } from '../../actions'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AAO } from '../../helpers/availbleApis'
@@ -23,10 +23,11 @@ class RightMenuDetails extends Component {
     syncHandler(selectedApp){
         // e.preventDefault()
         if(this.props.selectedApp === 'pocket'){
-            console.log("pocket")
+            // console.log("pocket")
+            this.props.syncPocketList()
 
         } else if (this.props.selectedApp === 'slack'){
-            console.log("slack")
+            // console.log("slack")
             this.props.syncSlack()
         }
         // console.log(selectedApp, this.props.selectedApp)
@@ -34,7 +35,7 @@ class RightMenuDetails extends Component {
 
     render(){
         const { selectedApp } = this.props;
-        console.log(selectedApp)
+        // console.log(selectedApp)
         return (
             <RightMenuDetailsDiv>
                 {selectedApp 
@@ -76,6 +77,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = {
     getSlackStars,
     syncSlack,
+    syncPocketList,
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenuDetails)
