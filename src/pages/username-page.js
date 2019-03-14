@@ -15,15 +15,7 @@ import {
 } from '../components';
 
 import {
-    getNotes,
-    addNote,
-    sortNote,
-    logout,
-    // getLinks,
-    getDeletedNotes,
     getUserData,
-    syncSlack,
-    syncPocketList
 } from '../actions';
 
 class UsernamePage extends Component {
@@ -151,15 +143,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    getNotes,
-    addNote,
-    sortNote,
-    logout,
-    // getLinks,
-    getDeletedNotes,
     getUserData, 
-    syncSlack,
-    syncPocketList
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsernamePage);
@@ -183,7 +167,7 @@ const UsernamePageDiv = styled.div`
         display: flex;
         flex-direction: row;
         /* align-items: center; */
-        /* justify-content: center; */
+        justify-content: center;
         flex-wrap: wrap;
         overflow: auto;
         &::-webkit-scrollbar {

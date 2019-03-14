@@ -2,15 +2,15 @@ import React , { Component } from 'react'
 import styled from 'styled-components'
 import { getSlackStars, editAttachedItems } from '../../actions'
 import { connect } from 'react-redux';
-import { SlackChannel } from '../index.js';
-import { Loading } from '../loading.js'
+import { SlackChannel, Loading  } from '../index.js';
+
 class SlackList extends Component {
     componentDidMount(){
         if(!this.props.store.slack.slackStars){
             this.props.getSlackStars()
         }
     }
-    
+
     render(){
         const { slackStars } = this.props.store.slack
         return(

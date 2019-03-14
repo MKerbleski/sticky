@@ -1,8 +1,13 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
-import { getPocketList, editAttachedItems } from '../../actions'
 import { connect } from 'react-redux';
 import { PocketChannel } from './index.js';
+import { Loading } from '../index.js'
+
+import { 
+    getPocketList, 
+    // editAttachedItems 
+} from '../../actions'
 
 class PocketList extends Component {
     componentDidMount(){
@@ -12,7 +17,6 @@ class PocketList extends Component {
     }
 
     render(){
-        // console.log(this.props)
         return(
             <PocketListDiv> 
                 {this.props.store.pocket.fetchingPocketList 
@@ -22,10 +26,10 @@ class PocketList extends Component {
                     ?   <PocketChannel 
                             onDrop={this.props.onDrop} 
                             pocketList={this.props.store.pocket.pocketList} 
-                            editAttachedItems={this.props.editAttachedItems}    
+                            // editAttachedItems={this.props.editAttachedItems}    
                         />
-                    :   <p>loading...</p>} 
-
+                    :   <Loading />
+                }
             </PocketListDiv>
         )
     }
@@ -37,7 +41,7 @@ const mapStateToProps = store => {
   
 const mapDispatchToProps = {
     getPocketList,
-    editAttachedItems
+    // editAttachedItems
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(PocketList)

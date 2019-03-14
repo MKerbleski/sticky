@@ -53,3 +53,7 @@ export {
     SlackSettings,
     SlackList
 } from './slack';
+
+export { 
+    Loading 
+} from './loading.js'

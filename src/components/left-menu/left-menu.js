@@ -58,6 +58,9 @@ export default class LeftMenu extends Component {
 					<div className="menu-item">
 						<i className="fas fa-book-open"></i>
 					</div>
+					<div className="menu-item">
+					<i class="fas fa-list-ul"></i>
+					</div>
 				</div>
 				<div className="leftMenuBottom">
 					{this.props.location.pathname === `${this.props.match.url}/trash`

@@ -1,23 +1,28 @@
 import React from 'react';
-import { DropTarget } from 'react-dnd';
 import styled from 'styled-components';
+import { DropTarget } from 'react-dnd';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { NoteDetailSelf } from '../components/index.js';
+
+import { 
+    NoteDetailSelf, 
+    Loading 
+} from '../components/index.js';
+
 import { 
     // getAttachedItems, 
-    getNotes, 
+    // getNotes, 
     getSingleNote 
 } from '../actions'
 
 //Formorly NoteDetialParent
 class NoteDetailPage extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
+    // constructor(props){
+    //     super(props)
+    //     this.state = {
 
-        }
-    }
+    //     }
+    // }
 
     componentDidMount(){
         this.props.getSingleNote(this.props.author, this.props.note_id)
@@ -54,17 +59,14 @@ class NoteDetailPage extends React.Component{
             } else {
                 parent = null
             }
-            // console.log("note-detail-parent", "\nnote:", note, "\nparent", parent)
             return (
                 <NoteDetailPageDiv 
                     innerRef={instance => this.props.connectDropTarget(instance)}
                     // color={this.props.parentColor} 
-                    style={{background: this.props.hover 
-                        ? 'lightgreen' 
-                        : null}}>
-                    
+                    style={{background: this.props.hover ? 'lightgreen' : null}}
+                >
+                    <div className="top-part">
                         {this.props.hover 
-                            //this should probably all go in a div that has a fixed height to avoid any toggling with hovered
                             ?   <h2>Drop to send to main page</h2>
                             :   parent 
                                     ?   <Link 
@@ -80,6 +82,7 @@ class NoteDetailPage extends React.Component{
                                             {`back to My notes`}
                                         </Link>
                         }
+                    </div>
                     <NoteDetailSelf
                         type="note"
                         note={note}
@@ -89,7 +92,7 @@ class NoteDetailPage extends React.Component{
                 </NoteDetailPageDiv>
             )
         } else {
-            return <h1>loading note-detail-page</h1>
+            return <Loading />
         }
     }
 }
@@ -139,7 +142,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = {
     // getAttachedItems,
-    getNotes,
+    // getNotes,
     getSingleNote
 }
 
@@ -172,5 +175,12 @@ const NoteDetailPageDiv = styled.div`
                 background-color: gray;
                 border-radius: 25px;
         }
+    }
+    .top-part{
+        border: 1px solid red;
+        height: 75px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 `;

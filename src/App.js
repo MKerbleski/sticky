@@ -18,11 +18,11 @@ import {
 } from './pages'
 
 import {
-    getNotes,
-    addNote,
-    sortNote,
-    logout,
-    getDeletedNotes,
+    // getNotes,
+    // addNote,
+    // sortNote,
+    // logout,
+    // getDeletedNotes,
     getUserData,
 } from './actions';
 
@@ -30,8 +30,8 @@ class App extends Component {
     constructor(){
         super();
         this.state = {
-            hideDetails: true,
-            main: true, 
+            // hideDetails: true,
+            // main: true, 
         }
     }
 
@@ -48,13 +48,13 @@ class App extends Component {
     }
 
     //No idea what this is currently
-    disableDelete = () => {
-        this.setState({
-            deleteEnabled: false,
-        })
-    }
+    // disableDelete = () => {
+    //     this.setState({
+    //         deleteEnabled: false,
+    //     })
+    // }
 
-    //This is necessary to get around the nested 
+    //This is to get around the nested 
     //<a>tag</a> prediciment when selecting a grandchild note
     redirect = (route) => {
         this.props.history.push(route)
@@ -83,11 +83,13 @@ class App extends Component {
                         <Route 
                             path="/:username" 
                             render={ (a) => {
-                                return <UsernamePage
-                                    redirect={this.redirect}
-                                    username={a.match.params.username}
-                                    match={a.match}
-                                />
+                                return (
+                                    <UsernamePage
+                                        redirect={this.redirect}
+                                        username={a.match.params.username}
+                                        match={a.match}
+                                    />
+                                )
                             }} 
                         />                           
                     </Switch>
@@ -102,12 +104,12 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    getNotes,
-    addNote,
-    sortNote,
-    logout,
+    // getNotes,
+    // addNote,
+    // sortNote,
+    // logout,
     // getLinks,
-    getDeletedNotes,
+    // getDeletedNotes,
     getUserData, 
 }
 
@@ -115,8 +117,8 @@ export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps,
 
 const AppDiv = styled.div`
     box-sizing: border-box;
-        border: 1px solid red;
-        /* margin: 2px; */
+    border: 1px solid red;
+    /* margin: 2px; */
     display: flex;
     flex-direction: column;
     background-color: white;
