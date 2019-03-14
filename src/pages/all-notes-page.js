@@ -10,6 +10,7 @@ import {
     getNotes,
     getDeletedNotes,
     getUserData,
+    toggleNewNote
 } from '../actions'
 
 import { Link } from 'react-router-dom';
@@ -39,7 +40,7 @@ class AllNotesPage extends Component {
     
     componentWillReceiveProps(nextProps){
         if(this.props.deleteBin !== nextProps.deleteBin){
-            console.log('delete bins arnt the same')
+            // console.log('delete bins arnt the same')
             if(nextProps.deleteBin){
                 this.props.getDeletedNotes(nextProps.author);
             } else {
@@ -101,8 +102,8 @@ class AllNotesPage extends Component {
                         :   null
                     }
                     
-                    {this.props.showNewNote && !this.props.deleteBin 
-                        ?   <NotePreviewNew toggleNewNote={this.props.toggleNewNote} /> 
+                    {this.props.store.notes.showNewNote && !this.props.deleteBin 
+                        ?   <NotePreviewNew /> 
                         :   null
                     } 
 
@@ -163,7 +164,8 @@ const mapStateToProps = store => {
 const mapDispatchToProps = {
     getNotes,
     getDeletedNotes,
-    getUserData
+    getUserData,
+    toggleNewNote,
 }
 
 export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, mapDispatchToProps)(AllNotesPage))

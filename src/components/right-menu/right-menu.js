@@ -62,6 +62,18 @@ class RightMenu extends Component {
 					selectedApp: null
 				})
 				break;
+			case "slack":
+				this.setState({
+					openDetails: !this.state.openDetails,
+					selectedApp: "slack"
+				})
+				break;
+			case "pocket":
+				this.setState({
+					openDetails: !this.state.openDetails,
+					selectedApp: "pocket"
+				})
+				break;
 			default:
 				this.setState({
 					openDetails: true,
@@ -105,13 +117,15 @@ class RightMenu extends Component {
 								name="rightArrow" 
 								onClick={this.eventHandler} 
 								className="menu-item" 
-								src={rightArrow} />
+								src={rightArrow} 
+							/>
 						:	<img 
 								alt="leftArrow" 
 								name="leftArrow" 
 								onClick={this.eventHandler} 
 								className="menu-item" 
-								src={leftArrow} />
+								src={leftArrow} 
+							/>
 					}
 				</div>
 			</RightMenuDiv>

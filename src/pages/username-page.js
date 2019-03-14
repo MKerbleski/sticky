@@ -78,9 +78,9 @@ class UsernamePage extends Component {
                                 return <AllNotesPage
                                     deleteBin={false}
                                     redirect={this.props.redirect}
-                                    showNewNote={this.state.showNewNote}
-                                    showDetailMenu={this.showDetailMenu}
-                                    toggleNewNote={this.toggleNewNote}
+                                    // showNewNote={this.state.showNewNote}
+                                    // showDetailMenu={this.showDetailMenu}
+                                    // toggleNewNote={this.toggleNewNote}
                                     author={this.props.username}
                                 /> 
                             }} 

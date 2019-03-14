@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { 
-    addNote
+    addNote,
+    toggleNewNote
  } from '../../actions'
 
 import { connect } from 'react-redux';
@@ -18,9 +19,14 @@ class NotePreviewNew extends React.Component {
         e.preventDefault()
         this.props.addNote({text_body: this.state.text_body})
         this.setState({
-            text_body: ""
+            text_body: ''
         })
-        this.props.toggleNewNote();
+    }
+
+    componentWillUnmount(){
+        if(this.state.text_body !== ''){
+            this.props.addNote({text_body: this.state.text_body})
+        }
     }
 
     changeHandler = (e) => {
@@ -44,7 +50,7 @@ class NotePreviewNew extends React.Component {
                         >
                             {this.value}
                         </input>
-                        <button>save note</button>
+                        <button>Save Note</button>
                     </form>
                 </NotePreviewNewDiv>        
             </div>
@@ -57,7 +63,8 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    addNote
+    addNote,
+    toggleNewNote,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotePreviewNew)

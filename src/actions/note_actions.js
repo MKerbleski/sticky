@@ -101,7 +101,8 @@ export const addNote = (newNote) => {
                 //Only want to delete from storage after it is for sure added
                 localStorage.removeItem('text_body');
 				dispatch({type: NEW_NOTE_ADDED})
-				dispatch(getNotes(localStorage.getItem('username')));
+                dispatch(getNotes(localStorage.getItem('username')));
+                dispatch(toggleNewNote(false))
             }).catch(err => {
 				console.log(err.message)
 				dispatch({type: ERROR_ADDING_NEW_NOTE})
