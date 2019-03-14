@@ -161,15 +161,15 @@ const LayerTwoDiv = styled.div`
         margin: 0px;
     }
     .note-content-link-count{
-        border:1px solid black;
+        border: .5px solid black;
         border-radius: 50px;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         background: lightblue;
-        height: 10px;
-        width: 10px;
+        height: 5px;
+        width: 5px;
     }
     .layerThreeContainerAll{
         ${'' /* border: 1px solid red; */}

@@ -60,7 +60,7 @@ class AllNotesPage extends Component {
                     style={{background: this.props.hover 
                         ?   'lightgreen' 
                         :   this.props.deleteBin 
-                            ?   'red' 
+                            ?   'lightpink' 
                             :   null}}>
                     
                     <h1> @{this.props.author}'s {this.props.deleteBin ? 'deleted' : null } Notes</h1>
@@ -106,7 +106,7 @@ class AllNotesPage extends Component {
                         :   null
                     } 
 
-                    {this.props.store.user.userData.username === this.props.author
+                    {this.props.store.user.userData.username === this.props.author && notes.length > 0
                         ?   <div className="all-note-preview-container">
                                 {notes.map(note => {
                                     return <NotePreviewSelf

@@ -55,8 +55,10 @@ export const noteToNote = (notePackage, single=false) => {
     }
 }
 
+//this is to edit one note only.
+//can eventually merge to noteToNote
 export const editNote = (noteEdit, fetchDeleted=false) => {
-    console.log("noteEdit", noteEdit)
+    // console.log("noteEdit", noteEdit)
     return function(dispatch){
         if(localStorage.getItem('JWT') && noteEdit){
             const token = localStorage.getItem('JWT')
@@ -101,52 +103,52 @@ export const deleteNote = (id) => {
   	}
 }
 
-export const editAttachedItems = (obj) => {
-    let {sticky_source, sticky_target} = obj
-    return function(dispatch){
-        if(localStorage.getItem('JWT') && obj.sticky_target !== null){
-            dispatch({type: EDITING_LIST});
-            const token = localStorage.getItem('JWT')
-            const authHeader = {
-              headers: {
-                Authorization: token,
-              }
-            }
-            if(sticky_target && sticky_source){
-                let sticky_target_id = obj.sticky_target.sticky_target_id
-                axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${sticky_target_id}`, (obj.sticky_target.sticky_target_edit), authHeader).then(res => {
-                    let sticky_source_id = obj.sticky_source.sticky_source_id
-                    axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${sticky_source_id}`, (obj.sticky_source.sticky_source_edit), authHeader).then(res1 => {
-                        dispatch({type: LIST_EDITED, payload: res1.data})
-                        dispatch(getNotes())})
-                    .catch(err => {
-                        console.log("error returnd from notes/edit endpoint", err)
-                        dispatch({type: LIST_EDIT_ERROR, payload: err})})})
-                .catch(err => {
-                    console.log("error returnd from notes/edit endpoint", err)
-                    dispatch({type: LIST_EDIT_ERROR, payload: err})})
-            } else if (sticky_target){
-                let sticky_target_id = obj.sticky_target.sticky_target_id
-                axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${sticky_target_id}`, (obj.sticky_target.sticky_target_edit), authHeader).then(res => {
-                    dispatch({type: LIST_EDITED, payload: res.data})
-                    dispatch(getNotes())})
-                .catch(err => {
-                    console.log("error returnd from edit attached items", err)
-                    dispatch({type: LIST_EDIT_ERROR, payload: err})})
-            } else if (sticky_source){
-                let sticky_source_id = obj.sticky_source.sticky_source_id
-                axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${sticky_source_id}`, (obj.sticky_source.sticky_source_edit), authHeader).then(res1 => {
-                    dispatch({type: LIST_EDITED, payload: res1.data})
-                    dispatch(getNotes())})
-                .catch(err => {
-                    console.log("error returnd from notes/edit endpoint", err)
-                    dispatch({type: LIST_EDIT_ERROR, payload: err})})
-            }
-        } else {
-          	dispatch({type: ERROR, payload: 'there was no token found'})      
-        }
-    }
-}
+// export const editAttachedItems = (obj) => {
+//     let {sticky_source, sticky_target} = obj
+//     return function(dispatch){
+//         if(localStorage.getItem('JWT') && obj.sticky_target !== null){
+//             dispatch({type: EDITING_LIST});
+//             const token = localStorage.getItem('JWT')
+//             const authHeader = {
+//               headers: {
+//                 Authorization: token,
+//               }
+//             }
+//             if(sticky_target && sticky_source){
+//                 let sticky_target_id = obj.sticky_target.sticky_target_id
+//                 axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${sticky_target_id}`, (obj.sticky_target.sticky_target_edit), authHeader).then(res => {
+//                     let sticky_source_id = obj.sticky_source.sticky_source_id
+//                     axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${sticky_source_id}`, (obj.sticky_source.sticky_source_edit), authHeader).then(res1 => {
+//                         dispatch({type: LIST_EDITED, payload: res1.data})
+//                         dispatch(getNotes())})
+//                     .catch(err => {
+//                         console.log("error returnd from notes/edit endpoint", err)
+//                         dispatch({type: LIST_EDIT_ERROR, payload: err})})})
+//                 .catch(err => {
+//                     console.log("error returnd from notes/edit endpoint", err)
+//                     dispatch({type: LIST_EDIT_ERROR, payload: err})})
+//             } else if (sticky_target){
+//                 let sticky_target_id = obj.sticky_target.sticky_target_id
+//                 axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${sticky_target_id}`, (obj.sticky_target.sticky_target_edit), authHeader).then(res => {
+//                     dispatch({type: LIST_EDITED, payload: res.data})
+//                     dispatch(getNotes())})
+//                 .catch(err => {
+//                     console.log("error returnd from edit attached items", err)
+//                     dispatch({type: LIST_EDIT_ERROR, payload: err})})
+//             } else if (sticky_source){
+//                 let sticky_source_id = obj.sticky_source.sticky_source_id
+//                 axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${sticky_source_id}`, (obj.sticky_source.sticky_source_edit), authHeader).then(res1 => {
+//                     dispatch({type: LIST_EDITED, payload: res1.data})
+//                     dispatch(getNotes())})
+//                 .catch(err => {
+//                     console.log("error returnd from notes/edit endpoint", err)
+//                     dispatch({type: LIST_EDIT_ERROR, payload: err})})
+//             }
+//         } else {
+//           	dispatch({type: ERROR, payload: 'there was no token found'})      
+//         }
+//     }
+// }
 
 export const addNote = (newNote) => {
     return function(dispatch){
@@ -159,7 +161,7 @@ export const addNote = (newNote) => {
             }
             dispatch({type: SENDING_NEW_NOTE})
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/`, (newNote), authHeader).then(res => {
-                //Only want to delete from storage after it is added
+                //Only want to delete from storage after it is for sure added
                 localStorage.removeItem('text_body');
 				dispatch({type: NEW_NOTE_ADDED})
 				dispatch(getNotes(localStorage.getItem('username')));

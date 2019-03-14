@@ -195,12 +195,15 @@ const NotePreviewSelfDiv = styled.div`
 	border: 1px solid blue;
 	padding: 10px;
 	margin: 2px;
+	/* width: 100%; */
 	min-width: 300px;
+	/* max-width: 50%; */
 	height: auto;
 	display: flex;
 	flex-direction: column;  
 	.note-link {
-		${ flex('column') }
+		/* ${ flex('column') } */
+		height: 100%;
 		padding: 10px;
 		width: 95%;
 		padding: 10px;
