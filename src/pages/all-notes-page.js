@@ -116,8 +116,11 @@ class AllNotesPage extends Component {
                                         parent={null}
                                         note={note}
                                         redirect={this.props.redirect}
-                                        deleteBin={this.props.deleteBin ? true : false}
-                                        />
+                                        deleteBin={this.props.deleteBin 
+                                            ? true 
+                                            : false
+                                        }
+                                    />
                                 })}
                             </div>
                         :   null

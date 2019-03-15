@@ -2,11 +2,18 @@ import React from 'react';
 import { DropTarget } from 'react-dnd';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+
 import { 
     NoteDetailChild, 
     // NoteDetailBody,
     AttachedList,
-} from '../index.js';
+
+} from '../index.js'
+
+import {
+    NotePreviewNew 
+} from './../main-all-notes/index'
+
 import { 
     // getAttachedItems, 
     editNote 
@@ -60,16 +67,22 @@ class NoteDetailSelf extends React.Component {
                         <div className="note-detail-left">
                             {/* <NoteQuill note={this.props.note} /> */}
                             <p>{note.text_body}</p>
-                            {note.children 
+                            {note.children || this.props.store.notes.showNewNote
                                 ?   <div className="note-detail-children">
-                                        {note.children.map(child => {
-                                            return <NoteDetailChild
-                                                key={child.id}
-                                                type="note"
-                                                note={child}
-                                                parent={note}
-                                                redirect={this.props.redirect}
-                                            />})}
+                                        {this.props.store.notes.showNewNote 
+                                            ?   <NotePreviewNew parent={note} /> 
+                                            :   null}
+                                        {note.children 
+                                            ?   note.children.map(child => {
+                                                    return <NoteDetailChild
+                                                        key={child.id}
+                                                        type="note"
+                                                        note={child}
+                                                        parent={note}
+                                                        redirect={this.props.redirect}
+                                                    />})
+                                            :   null 
+                                        }
                                     </div>
                                 :   null}
                             

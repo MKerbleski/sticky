@@ -93,11 +93,13 @@ export const deleteNote = (id) => {
 export const ERROR_ADDING_NEW_NOTE = 'ERROR_ADDING_NEW_NOTE';
 export const NEW_NOTE_ADDED = 'NEW_NOTE_ADDED';
 export const SENDING_NEW_NOTE = 'SENDING_NEW_NOTE';
-export const addNote = (newNote) => {
+//parent note is for notes added that will immeditally be a child note
+export const addNote = (newNote, parentNote=null) => {
     return function(dispatch){
         if(localStorage.getItem('JWT')){
             dispatch({type: SENDING_NEW_NOTE})
-            axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/`, (newNote), getAuthHeader()).then(res => {
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/notes/`, ([newNote, parentNote]), getAuthHeader()).then(res => {
+
                 //Only want to delete from storage after it is for sure added
                 localStorage.removeItem('text_body');
 				dispatch({type: NEW_NOTE_ADDED})

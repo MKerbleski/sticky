@@ -15,9 +15,21 @@ class NotePreviewNew extends React.Component {
         }
     }
 
-    addNote = (e) => {
+    clickHandler = (e) => {
         e.preventDefault()
-        this.props.addNote({text_body: this.state.text_body})
+        this.addNote()
+    }
+
+    addNote = (note) => {
+        if(this.props.parent){
+            this.props.addNote(
+                {   text_body: this.state.text_body },
+                //will attach children on backend when new note gets id
+                {   id: this.props.parent.id, children_attached: this.props.parent.children_attached  }
+            )
+        } else {
+            this.props.addNote({text_body: this.state.text_body})
+        }
         this.setState({
             text_body: ''
         })
@@ -25,7 +37,7 @@ class NotePreviewNew extends React.Component {
 
     componentWillUnmount(){
         if(this.state.text_body !== ''){
-            this.props.addNote({text_body: this.state.text_body})
+            this.addNote()
         }
     }
 
@@ -40,7 +52,7 @@ class NotePreviewNew extends React.Component {
         return (
             <div className="startObject">
                 <NotePreviewNewDiv >
-                    <form onSubmit={this.addNote}>
+                    <form onSubmit={this.clickHandler}>
                         <input 
                             autoFocus 
                             onChange={this.changeHandler} 
