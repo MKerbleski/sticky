@@ -91,16 +91,7 @@ class AllNotesPage extends Component {
                         :   null
                     }
 
-                    {this.props.deleteBin && notes.length === 0
-                        ?   <div>
-                                {/* USER PRIVATE PAGE VS Private page */}
-                                {localStorage.getItem('username') === this.props.author
-                                    ?   <div>Delete Bin is empty</div>
-                                    :   <div>Page Protected</div> 
-                                }
-                            </div>
-                        :   null
-                    }
+
                     
                     {this.props.store.notes.showNewNote && !this.props.deleteBin 
                         ?   <NotePreviewNew /> 
@@ -217,3 +208,14 @@ const AllNotesPageDiv = styled.div`
         justify-content: space-around;
     }
 `;
+
+// {this.props.deleteBin && notes.length === 0
+//     ?   <div>
+//             {/* USER PRIVATE PAGE VS Private page */}
+//             {localStorage.getItem('username') === this.props.author
+//                 ?   <div>Delete Bin is empty</div>
+//                 :   <div>Page Protected</div> 
+//             }
+//         </div>
+//     :   null
+// }

@@ -1,7 +1,7 @@
 import {   
     // ATTACHED_ITEMS_RECIEVED,
     CREDENTIAL_ERROR,
-    // DEL_NOTES_RECIEVED,
+    DEL_NOTES_RECIEVED,
     DELETING_NOTE,
     EDITING_NOTE,
     // EDITING_LIST,
@@ -91,11 +91,11 @@ export const notesReducer = (state=initialState, action) => {
             return Object.assign({}, state, {
                 fetchingDelNotes: true,
             })
-        // case DEL_NOTES_RECIEVED:
-        //     return Object.assign({}, state, {
-        //         fetchingDelNotes: false,
-        //         notes: action.payload.allUserDelNotes
-        //     })       
+        case DEL_NOTES_RECIEVED:
+            return Object.assign({}, state, {
+                fetchingDelNotes: false,
+                notes: action.payload.allUserDelNotes
+            })       
         // case FETCHING_LINKS:
         //     return Object.assign({}, state, {
         //         fetchingLinks: true,
