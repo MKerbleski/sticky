@@ -15,6 +15,7 @@ export default class AboutPage extends Component {
                 <h2>About Page</h2>
                 <li>This is Sticky's about page!</li>
                 <p>lambda school link</p>
+                <a href="http://fbuy.me/mi5Gf">Lambda School</a>
             </AboutPageDiv>
         )
     }
