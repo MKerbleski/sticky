@@ -13,7 +13,7 @@ export default class AboutPage extends Component {
         return(
             <AboutPageDiv> 
                 <h2>About Page</h2>
-                <li>This is Sticky's about page!</li>
+                <h4>This is Sticky's about page!</h4>
                 <p>lambda school link</p>
                 <a href="http://fbuy.me/mi5Gf">Lambda School</a>
             </AboutPageDiv>
