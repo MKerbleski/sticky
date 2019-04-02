@@ -64,7 +64,7 @@ class AllNotesPage extends Component {
                             ?   'lightpink' 
                             :   null}}>
                     
-                    <h1> @{this.props.author}'s {this.props.deleteBin ? 'deleted' : null } Notes</h1>
+                    <h1>{this.props.author}'s {this.props.deleteBin ? 'deleted' : null } Notes</h1>
 
                     {notes.length === 0 && this.props.deleteBin === false
                         ?   <div>

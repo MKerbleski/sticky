@@ -137,7 +137,7 @@ const AppDiv = styled.div`
         height: 5vh;
         overflow: hidden;
         /* min-height: 100px; */
-        min-height: 30px;
+        min-height: 40px;
     }
     .app-bottom {
         border: 2px solid green;
@@ -148,6 +148,6 @@ const AppDiv = styled.div`
         flex-direction: row;
         z-index: 0;
         max-height: 95vh;
-        height: 99%;
+        /* height: 99%; */
     }
 `;

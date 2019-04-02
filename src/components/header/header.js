@@ -66,15 +66,15 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
 
 const HeaderDiv = styled.div`
+${menu()}
     border: 1px solid red;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 5vh;
+    /* height: 5vh; */
     padding: 0;
-    ${menu()}
     .headerTitle-link {
         text-decoration: none;
         :active {
