@@ -12,7 +12,7 @@ export default class BugsPage extends Component {
     render(){
         return(
             <BugsPageDiv> 
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfzY1mF3viPZW6ZKJWTmY7f4hhJ_R9VeTbfZSu-CqK2F9nupA/viewform?embedded=true" width="640" height="751" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+                <iframe title="bugForm" src="https://docs.google.com/forms/d/e/1FAIpQLSfzY1mF3viPZW6ZKJWTmY7f4hhJ_R9VeTbfZSu-CqK2F9nupA/viewform?embedded=true" width="640" height="751" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
             </BugsPageDiv>
         )
     }

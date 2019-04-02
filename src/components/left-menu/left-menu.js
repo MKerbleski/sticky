@@ -83,7 +83,6 @@ class LeftMenu extends Component {
 									className="menu-item red" />
 							</Link>
 					}
-
 					<Link 
 						to={`/${this.props.username}/settings`}
 						// onClick={() => this.clickHandler("settings")}
@@ -107,7 +106,6 @@ class LeftMenu extends Component {
 	}
 }
 
-
 const mapStateToProps = store => {
 	return {store: store};
 }
@@ -118,11 +116,11 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeftMenu)
 
-
 const LeftMenuDiv = styled.div`
     ${ menu() }
     color: white;
     width: 5%;
+	min-width: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
