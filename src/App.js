@@ -14,7 +14,8 @@ import {
 import {
     AboutPage,
     UsernamePage,
-    WelcomePage
+    WelcomePage,
+    BugsPage
 } from './pages'
 
 import {
@@ -80,6 +81,9 @@ class App extends Component {
                         <Route 
                             path="/about/" 
                             component={AboutPage} />
+                        <Route 
+                            path="/bugs/"
+                            component={BugsPage} />
                         <Route 
                             path="/:username" 
                             render={ (a) => {

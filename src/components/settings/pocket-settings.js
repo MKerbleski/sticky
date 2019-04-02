@@ -62,6 +62,7 @@ class PocketSettings extends Component {
                 {this.props.store.user.userData.pocket 
                     ?   <div style={{background: "lightgreen"}}>
                             <h3>Pocket is connected!</h3>
+                            <p>Your pocket saves will automatically be synced, and will be displayed in the blue menu to the right.</p>
                             <p>Use the blue menu to the right to view your list and attach pocket items to your notes!</p>
                             {/* <button onClick={this.clickHandler}>Revoke access</button> */}
                             {this.props.store.pocket.fetchingPocketList 
@@ -98,6 +99,7 @@ class PocketSettings extends Component {
                             }
                         </div>
                 }
+               
                 {/* what I want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read..., or delete button.  */}
             </PocketSettingsDiv>
         )

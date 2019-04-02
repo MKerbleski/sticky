@@ -47,6 +47,7 @@ class NoteDetailPage extends React.Component{
 	// }
 
     render(){
+        console.log(this.props)
         const note = this.props.store.notes.notes[0]
         if(this.props.store.notes.responseCode === 401){
             //eventually will display whole format with a cool lock image over note
@@ -158,6 +159,7 @@ const NoteDetailPageDiv = styled.div`
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
+    width: 100%;
     /* height: 95vh; */
     overflow: auto;
     padding-bottom: 10px;

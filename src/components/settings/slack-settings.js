@@ -104,7 +104,11 @@ class SlackSettings extends Component {
                             </div> */}
                         </div> 
                     :   <div>
-                            <p>slack is NOT connected</p>
+                            <p> Sticky gives you the ability to acces slack notes that have been starred or pinned in your workplace. Click the link below to add the app to your slack workplace.</p> 
+                            <a href="https://slack.com/oauth/authorize?client_id=465374768868.465546770546&scope=stars:read,pins:read,channels:read,users:read,team:read,im:read">
+                                <img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" />    
+                            </a>
+                            <p>App already on workplace? You will need to give permissions to view your messages.</p>
                             <button onClick={(e) => {
                                 this.connectSlack(e)
                             }}>Connect to Slack</button>
@@ -118,8 +122,11 @@ class SlackSettings extends Component {
                                         Success?
                                     </button>
                                 :   null}
+
+                               
                         </div>
                 }
+
             </SlackSettingsDiv>
         )
     }

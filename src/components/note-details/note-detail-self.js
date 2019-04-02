@@ -63,6 +63,7 @@ class NoteDetailSelf extends React.Component {
                     // color={this.props.note.note_color}
                     className="note-detail" 
                     style={{background: this.props.hover ? 'lightgreen' : null}}>
+                    <div>Author: {this.props.note.sticky_username}</div>
                     <div className="note-detail-main">
                         <div className="note-detail-left">
                             {/* <NoteQuill note={this.props.note} /> */}
@@ -98,39 +99,44 @@ class NoteDetailSelf extends React.Component {
                         
                     </div>
                     <div className="note-detail-settings">
-                    <p>Author: {this.props.note.sticky_username}</p>
                         {localStorage.getItem('username') === this.props.note.sticky_username 
                             ? 
                                 <div>
                                     {this.props.note.is_public 
-                                        ? <i className="fas fa-unlock"></i> 
-                                        : <i className="fas fa-lock"></i>}
+                                        ?   <i className="fas fa-unlock"></i> 
+                                        :   <i className="fas fa-lock"></i>}
                                     <button name='public' onClick={this.clickHandler}>
                                         {this.props.note.is_public 
-                                            ? 'Make note Private' 
-                                            : 'make note PUBLIC'}
+                                            ?   'Make note Private' 
+                                            :   'make note PUBLIC'}
                                     </button>
-                                    <button name='fork' onClick={this.clickHandler}>
+                                    {/* <button name='fork' onClick={this.clickHandler}>
                                         Allow Forks
-                                    </button>
-                                    <button name='clone' onClick={this.clickHandler}>
+                                    </button> */}
+                                    {/* <button name='clone' onClick={this.clickHandler}>
                                         Allow Clones
-                                    </button>
-                                    <button name='edit' onClick={this.clickHandler}>
+                                    </button> */}
+                                    {/* <button name='edit' onClick={this.clickHandler}>
                                         Allow Edits
-                                    </button>
-                                    <button name='share' onClick={this.clickHandler}>
-                                        Share
-                                    </button>
-                                    <button >
+                                    </button> */}
+                                    {/* <button 
+                                        id='copyLink'
+                                        name='share' 
+                                        onClick={this.clickHandler}
+                                        value={`${process.env.REACT_APP_FRONTEND_URL}/${this.props.note.sticky_username}/note/${this.props.note.id}`}
+                                    >
+                                        Copy link to note to clipboard
+                                    </button> */}
+                                    {/* <button >
                                         <i name='delete' onClick={this.clickHandler}className=" menu-item fas fa-trash-alt"></i>
-                                    </button>
-                                    <button >
+                                    </button> */}
+                                    {/* <button >
                                        Make all children the same privacy settings
-                                    </button>
-                                    <i className="fas fa-cogs"></i>
+                                    </button> */}
+                                    {/* <i className="fas fa-cogs"></i> */}
                                 </div>
-                            :   <button onClick={this.clickHandler}>Pin Note</button>}
+                            :   null //<button onClick={this.clickHandler}>Pin Note</button>
+                        }
                     </div>
                 </NoteDetailSelfDiv>
             )
