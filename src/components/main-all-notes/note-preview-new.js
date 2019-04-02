@@ -25,7 +25,8 @@ class NotePreviewNew extends React.Component {
             this.props.addNote(
                 {   text_body: this.state.text_body },
                 //will attach children on backend when new note gets id
-                {   id: this.props.parent.id, children_attached: this.props.parent.children_attached  }
+                {   id: this.props.parent.id, 
+                    children_attached: this.props.parent.children_attached  }
             )
         } else {
             this.props.addNote({text_body: this.state.text_body})

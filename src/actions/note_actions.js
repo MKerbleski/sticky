@@ -102,8 +102,12 @@ export const addNote = (newNote, parentNote=null) => {
 
                 //Only want to delete from storage after it is for sure added
                 localStorage.removeItem('text_body');
-				dispatch({type: NEW_NOTE_ADDED})
-                dispatch(getNotes(localStorage.getItem('username')));
+                dispatch({type: NEW_NOTE_ADDED})
+                if(parentNote){
+                    dispatch(getSingleNote(localStorage.getItem('username'), parentNote.id))
+                } else {
+                    dispatch(getNotes(localStorage.getItem('username')));
+                }
                 dispatch(toggleNewNote(false))
             }).catch(err => {
 				console.log(err.message)

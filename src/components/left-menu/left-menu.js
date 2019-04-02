@@ -93,9 +93,6 @@ class LeftMenu extends Component {
 					</Link>
 					<Link 
 						to={`/bugs`}
-						// onClick={() => this.clickHandler("settings")}
-						// onClick={this.props.hideDetailMenu} 
-						 
 						className="menu-item">
 						<i class="fas fa-bug"></i>
 					</Link>
