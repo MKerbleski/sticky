@@ -5,7 +5,6 @@ export default class AboutPage extends Component {
     constructor(props){
         super(props)
         this.state = {
-
         }
     }
 
