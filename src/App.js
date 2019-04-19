@@ -18,11 +18,6 @@ import {
 } from './pages'
 
 import {
-    // getNotes,
-    // addNote,
-    // sortNote,
-    // logout,
-    // getDeletedNotes,
     getUserData,
 } from './actions';
 
