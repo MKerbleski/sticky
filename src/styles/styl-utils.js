@@ -6,6 +6,14 @@ export function picture(){
     `;
 }
 
+export function border(){
+    return`
+        border: 1px solid #${Math.floor(Math.random()*16777215).toString(16)};
+        margin: 2px;
+        padding: 2px;
+    `;
+}
+
 export function scrollBar(){
     return`
         overflow: auto;
@@ -43,7 +51,7 @@ export function flex(direction='row'){
 
 export function start(color){
     return `
-    border: 1px solid ${color? color: null}
+    border: 1px solid ${color ? color : null}
     display: flex;
     box-sizing: border-box;
     padding: 1px;

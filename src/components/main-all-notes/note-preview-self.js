@@ -16,6 +16,10 @@ import {
 	getSingleNote
 } from '../../actions'
 
+import {
+	border
+} from '../../styles/styl-utils.js'
+
 class NotePreviewSelf extends React.Component {
 	state = {}
 
@@ -61,10 +65,9 @@ class NotePreviewSelf extends React.Component {
 							id={this.props.note.id}
 							style={{background: this.props.hover ? 'lightgreen' : null}} 
 						>
-                            {/* {this.renderText()} */}
-                            {/* <ReactQuill preview value={this.props.note} /> */}
                             <div className="note-content">
                                 <div className="note-content-header">
+									{/* EVENTUAL TITLE WILL GO HERE */}
                                     {this.props.note.is_deleted 
 										?	<div>
 												<button name="restore" onClick={this.clickHandler}>RESTORE</button>
@@ -79,6 +82,8 @@ class NotePreviewSelf extends React.Component {
 										:   null }
 										
                                 </div>
+								{/* {this.renderText()} */}
+								{/* <ReactQuill preview value={this.props.note} /> */}
                                 {ReactHTMLParser(this.props.note.text_body)}
                             </div>
                             <div className="layerTwoContainerAll"  >
@@ -90,7 +95,7 @@ class NotePreviewSelf extends React.Component {
 											<div 
 												className="layerTwoContainer" 
 												key={layerTwo.id}>
-												<NotePreivewChild  
+												<NotePreivewChild
 													type="note"
 													note={layerTwo} 
 													parent={this.props.note}
@@ -103,12 +108,12 @@ class NotePreviewSelf extends React.Component {
 										)
 									}
                                 }) : null}
-                            </div>                     
+                            </div> 
                         </div>
-                      </NotePreviewSelfDiv>        
+                      </NotePreviewSelfDiv>
                 )
         } else {
-            return (null)
+            return null
         }
     }
 }
@@ -119,7 +124,7 @@ const targetObj = {
 		//this allows other items to be dropped in a nested child component
 		if(hover){
 			
-			//this must be from props not store
+			//this MUST be from props not store
 			const note = props.note;
 			const parent = props.parent
 			return ({
@@ -202,6 +207,7 @@ const NotePreviewSelfDiv = styled.div`
 	display: flex;
 	flex-direction: column;  
 	.note-link {
+		${border()}
 		/* ${ flex('column') } */
 		height: 100%;
 		padding: 10px;
@@ -211,27 +217,25 @@ const NotePreviewSelfDiv = styled.div`
 		background-color: lavender;
 		background-color: ${props => props.color};
 		.note-content{
-			${'' /* border: 1px solid green; */}
-
+			${border()}
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
 			align-items: center;
 			color: black;
-			width: 250px;
+			min-width: 250px;
 			height: auto;
-			${'' /* flex-wrap: wrap; */}
 			max-height: 100px;
 			margin: 2% 0;
 			.note-content-header{
-				/* border: 1px solid pink; */
+				${border()}
 				width: 100%;
 				display: flex;
 				flex-direction: row;
 				justify-content: flex-end;
 				align-items: center;
 				.note-content-title {
-					${'' /* border: 1px solid green; */}
+					${border()}
 					margin: 0px 10px 5px 0;
 					text-decoration: none;
 					text-align: left;
@@ -247,7 +251,7 @@ const NotePreviewSelfDiv = styled.div`
 
 			}
 			p {
-				${'' /* border: 1px solid blue; */}
+				${border()}
 				width: 95%;
 				height: 46px;
 				text-decoration: none;
@@ -261,32 +265,15 @@ const NotePreviewSelfDiv = styled.div`
 			}
 		}
 		.layerTwoContainer{
-			${'' /* border: 1px solid red; */}
+			${border()}
 			${flex()}
 		}
 		.layerTwoContainerAll{
-			${'' /* border: 1px solid blue; */}
-			width: 100%;
+			${border()}
 			${flex()}
+			width: 100%;
 			flex-wrap: wrap;
 			justify-content: space-around;
-		}
-		.tags {
-			border: 1px solid red;
-			display: flex;
-			flex-direction: row;
-			flex-wrap: wrap;
-			justify-content: flex-start;
-			align-items: flex-end;
-			width: 90%;
-			bottom: 0;
-			overflow: hidden;
-			${'' /* overflow: hidden; */}
-			div {
-				border: 1px solid lightgray;
-				margin: 2px;
-				padding: 4px;
-			}
 		}
 	}  
 `;
