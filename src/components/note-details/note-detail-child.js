@@ -1,17 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { DragSource, DropTarget } from 'react-dnd';
+import {Link} from 'react-router-dom';
+import {DragSource, DropTarget} from 'react-dnd';
 import flow from 'lodash/flow';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+
 import { 
-	// getSingleNote,
 	editNote, 
 	noteToNote
 } from '../../actions'
-import { flex, start } from '../../styles/styl-utils.js'
-import { NoteDetailGrandChild } from './index';
-import { sharedStickyNoteDrop } from '../../helpers'
+
+import { 
+	flexCenter, 
+	start 
+} from '../../styles/styl-utils.js'
+
+import { 
+	NoteDetailGrandChild
+} from './index';
+
+import { 
+	sharedStickyNoteDrop 
+} from '../../helpers'
 
 class NoteDetailChild extends React.Component {
 	constructor(){
@@ -234,12 +244,12 @@ const NoteDetailChildDiv = styled.div`
 			flex-wrap: wrap;
 			justify-content: space-around;
 			.layerTwoContainer{
-			${'' /* located on next page */}
-			border: 1px solid red;
-			width: 100%;
-			margin: 2px;
-			${flexCenter()}
-		}
+				${'' /* located on next page */}
+				border: 1px solid red;
+				width: 100%;
+				margin: 2px;
+				${flexCenter()}
+			}
 		}
 	}  
 `;

@@ -17,7 +17,8 @@ import {
 } from '../../actions'
 
 import {
-	border
+	border,
+	flexCenter
 } from '../../styles/styl-utils.js'
 
 class NotePreviewSelf extends React.Component {
