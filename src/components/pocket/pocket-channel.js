@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 import React from 'react';
 import { DragSource } from 'react-dnd';
-import { PocketNote }from '../index.js'
-import { apiChannel } from '../../styles/styl-utils'
+
+import { 
+    PocketNote 
+} from '../index.js'
+
+import { 
+    apiChannel 
+} from '../../styles/styl-utils'
 
 const PocketChannel = (props) => {
     if (props){
-        //probably need an unpin/unstar button
+        // eventually need an unpin/unstar button
         return (
             <PocketChannelDiv 
                 innerRef={instance => props.connectDragSource(instance)}
@@ -42,6 +48,8 @@ const PocketChannel = (props) => {
  }
 
  const sourceObj = {
+     // NOT IMMEDITALLY SURE WHAT THIS IS DOING TO WHY IT WAS COMMENTED OUT
+     // TODO - THIS SHOULD NOT BE A DRAGGABLE OBJECT
     beginDrag(props) {
         // if(props.type === "link"){
         //     const {link} = props.star
@@ -105,8 +113,8 @@ const PocketChannelDiv = styled.div`
         box-sizing: border-box;
         width: 100%;
         display: flex;
-        flex-wrap: wrap;
         align-items: flex-start;
+        flex-wrap: wrap;
         overflow: hidden;
         margin-bottom: 2px;
         margin-top: 0;

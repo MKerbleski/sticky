@@ -1,16 +1,20 @@
 import styled from 'styled-components';
 import React from 'react';
 import { DragSource } from 'react-dnd';
-import { apiNote } from '../../styles/styl-utils'
-// import { sharedEndDrag } from '../../helpers/delete--api-end-drag'
-import { sharedStickyNoteDrop } from '../../helpers'
 import { connect } from 'react-redux';
 import format from 'date-fns/format'
+
 import { 
-    // editAttachedItems, 
+    apiNote 
+} from '../../styles/styl-utils'
+
+import { 
+    sharedStickyNoteDrop 
+} from '../../helpers'
+
+import { 
     noteToNote 
 } from '../../actions'
-
 
 const PocketNote = (props) => {
     let time = +props.item.time_added*1000
@@ -90,7 +94,6 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    // editAttachedItems,
     noteToNote
 }
 

@@ -16,7 +16,9 @@ import {
 } from '../actions'
 
 import {
-    scrollBar
+    scrollBar,
+    flexCenter,
+    border,
 } from '../styles/styl-utils.js'
 
 import { Link } from 'react-router-dom';
@@ -172,19 +174,14 @@ const mapDispatchToProps = {
 export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, mapDispatchToProps)(AllNotesPage))
 
 const AllNotesPageDiv = styled.div`
-    border: 1px solid pink;
+    ${border()}
     margin: 4px;
     color: black;
-    /* height: 100%; */
     max-width: 99%;
-    border: 1px solid green;
     box-sizing: border-box;
-    
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    ${flexCenter('column')}
     justify-content: flex-start;
-    align-items: center;
+    flex-wrap: wrap;
     padding: 10px;
     padding-top: 0;
     margin: 2px;
@@ -193,23 +190,13 @@ const AllNotesPageDiv = styled.div`
         margin: 5px;
     }
     ${scrollBar()}
-    overflow: auto;
-    &::-webkit-scrollbar {
-        width: 6px;
-        &-thumb{
-            background-color: gray;
-            border-radius: 25px;
-        }
-    }
     .noNotes{
-        /* border: 1px solid red; */
-        display: flex;
-        flex-direction: column;
+        ${border()}
+        ${flexCenter()}
         justify-content: flex-start;
-        align-items: center;
     }
     .all-note-preview-container{
-        border: 1px solid green;
+        ${border()}
         padding: 2px;
         display: flex;
         flex-direction: row;
