@@ -28,10 +28,10 @@ export function scrollBar(){
 }
 
 export function menu(){
-    return `
-        background-color: rgba(0,0,0,.3);
-        background-color: #00ffb55c;
-    `;
+    // return `
+    //     background-color: rgba(0,0,0,.3);
+    //     background-color: #00ffb55c;
+    // `;
 }
 
 export function bg(color){

@@ -3,17 +3,20 @@ import styled from 'styled-components';
 import flow from 'lodash/flow';
 import { DragSource, DropTarget } from 'react-dnd';
 import { connect } from 'react-redux';
-import { NotePreivewChild } from "./index"
-import { flex } from '../../styles/styl-utils.js'
-import { sharedStickyNoteDrop } from '../../helpers'
 import ReactHTMLParser from 'react-html-parser'
+
+import { 
+	sharedStickyNoteDrop 
+} from '../../helpers'
+
+import { 
+	NotePreivewChild 
+} from "./index"
 
 import { 
 	deleteNote, 
 	editNote, 
-	// getChildren, 
 	noteToNote, 
-	getSingleNote
 } from '../../actions'
 
 import {
@@ -24,7 +27,7 @@ import {
 class NotePreviewSelf extends React.Component {
 	state = {}
 
-	//Necessary to avoid nested <a>tag warning</a>
+	// Necessary to avoid nested <a>tag warning</a>
 	goToNote = (e) => {
 		e.preventDefault()
 		if(!this.props.deleteBin){
@@ -32,7 +35,7 @@ class NotePreviewSelf extends React.Component {
 		}
 	}
 
-	//This is for when 'all-preview-notes' becomes the delete bin
+	// This is for when 'all-preview-notes' becomes the delete bin
 	clickHandler = (e) => {
 		e.preventDefault()
 		if(e.target.name === "delete"){
@@ -42,7 +45,8 @@ class NotePreviewSelf extends React.Component {
 		}
 	}
 	
-	//Converts a string of HTML saved on the server into useable HTML
+	// Converts a string of HTML saved on the server into useable HTML
+	// This is probably a security risk
 	renderText(){
 		let doc = new DOMParser().parseFromString(this.props.note.text_body, 'text/html')
 		return doc
@@ -60,8 +64,8 @@ class NotePreviewSelf extends React.Component {
 						this.props.connectDropTarget(instance)}}
 					color={this.props.note.note_color} >
                         <div 
-                            key={this.props.key}
-                            index={this.props.index}
+                            // key={this.props.key}
+                            // index={this.props.index}
                             className="note-link"
 							id={this.props.note.id}
 							style={{background: this.props.hover ? 'lightgreen' : null}} 
@@ -88,30 +92,29 @@ class NotePreviewSelf extends React.Component {
                                 {ReactHTMLParser(this.props.note.text_body)}
                             </div>
                             <div className="layerTwoContainerAll"  >
-                                {this.props.note.children ? this.props.note.children.map(layerTwo => {
-									if(layerTwo.is_deleted){
-										return null
-									} else {
-                                        return (
-											<div 
-												className="layerTwoContainer" 
-												key={layerTwo.id}>
-												<NotePreivewChild
-													type="note"
-													note={layerTwo} 
-													parent={this.props.note}
-													redirect={this.props.redirect}
-													// onDrop={this.props.onDrop}
-													// allNotes={this.props.allNotes}
-													// getFirstWord={this.getFirstWord}
-													 />
-											</div>
-										)
-									}
-                                }) : null}
+                                {this.props.note.children 
+									? 	this.props.note.children.map(layerTwo => {
+											if(layerTwo.is_deleted){
+												return null
+											} else {
+												return (
+													<div 
+														className="layerTwoContainer" 
+														key={layerTwo.id}>
+														<NotePreivewChild
+															type="note"
+															note={layerTwo} 
+															parent={this.props.note}
+															redirect={this.props.redirect}
+															/>
+													</div>
+												)
+											}
+										}) 
+									: 	null}
                             </div> 
                         </div>
-                      </NotePreviewSelfDiv>
+                    </NotePreviewSelfDiv>
                 )
         } else {
             return null
@@ -178,9 +181,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = {
 	deleteNote,
 	editNote,
-	// getChildren,
 	noteToNote,
-	getSingleNote
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(flow(
@@ -198,18 +199,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 )(NotePreviewSelf))
 
 const NotePreviewSelfDiv = styled.div`
-	border: 1px solid blue;
+	${border()}
 	padding: 10px;
-	margin: 2px;
-	/* width: 100%; */
 	min-width: 300px;
-	/* max-width: 50%; */
 	height: auto;
 	display: flex;
 	flex-direction: column;  
 	.note-link {
 		${border()}
-		/* ${ flexCenter('column') } */
 		height: 100%;
 		padding: 10px;
 		width: 95%;
@@ -219,10 +216,8 @@ const NotePreviewSelfDiv = styled.div`
 		background-color: ${props => props.color};
 		.note-content{
 			${border()}
-			display: flex;
-			flex-direction: column;
+			${flexCenter('column')}
 			justify-content: space-between;
-			align-items: center;
 			color: black;
 			min-width: 250px;
 			height: auto;
@@ -230,11 +225,9 @@ const NotePreviewSelfDiv = styled.div`
 			margin: 2% 0;
 			.note-content-header{
 				${border()}
+				${flexCenter()}
 				width: 100%;
-				display: flex;
-				flex-direction: row;
 				justify-content: flex-end;
-				align-items: center;
 				.note-content-title {
 					${border()}
 					margin: 0px 10px 5px 0;
@@ -249,7 +242,6 @@ const NotePreviewSelfDiv = styled.div`
 					text-align: center;
 					background: lightblue;
 				}
-
 			}
 			p {
 				${border()}

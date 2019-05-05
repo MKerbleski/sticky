@@ -15,6 +15,10 @@ import {
 	border
 } from '../../styles/styl-utils.js'
 
+import {
+	turquise,
+} from '../../styles/colors.js'
+
 class LeftMenu extends Component {
 	constructor(props){
 		super(props);
@@ -104,7 +108,6 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(LeftMenu)
 
 const LeftMenuDiv = styled.div`
-    ${menu()}
 	${flexCenter('column')}
 	${scrollBar()};
 	overflow-x: hidden;
@@ -112,8 +115,10 @@ const LeftMenuDiv = styled.div`
     width: 5%;
 	min-width: 40px;
     justify-content: space-between;
+	background-color: ${turquise};
     .menu-item{
-        ${'' /* border: 1px solid red; */}
+        ${flexCenter()}
+		${border()}
         height: 50px;
         text-align: center;
         text-decoration: none;
@@ -121,15 +126,16 @@ const LeftMenuDiv = styled.div`
         font-weight: bold;
         margin: 10px;
         font-size: 22px;
-        ${flexCenter()}
         &:hover {
             cursor: pointer;
             text-decoration: underline;
         }
     }
+	/* I DONT CURRENTLY KNOW WHAT THIS IS DOING */
     .current {
         background-color: orange;
     }
+	/* THIS IS FOR THE DELETE BIN WHEN IT TURNS RED */
     .red {
         background-color: red;
         color: black;
