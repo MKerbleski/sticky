@@ -15,6 +15,12 @@ import {
     getSingleNote 
 } from '../actions'
 
+import { 
+    scrollBar,
+    border,
+    flexCenter
+} from '../styles/styl-utils.js'
+
 //Formorly NoteDetialParent
 class NoteDetailPage extends React.Component{
     // constructor(props){
@@ -71,13 +77,13 @@ class NoteDetailPage extends React.Component{
                             ?   <h2>Drop to send to main page</h2>
                             :   parent 
                                     ?   <Link 
-                                            className="link"
+                                            className="return-link"
                                             to={`/${parent.sticky_username}/note/${parent.id}`}
                                         >
                                             {`back to (note #${parent.id})`}
                                         </Link>
                                     :   <Link 
-                                            className="link"
+                                            className="return-link"
                                             to={`/${localStorage.getItem('username')}`}
                                         >
                                             {`back to My notes`}
@@ -150,40 +156,25 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailPage))
 
 const NoteDetailPageDiv = styled.div`
+    box-sizing: border-box;
     background-color: ${props => props.color};
     ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
     background-color: white;
-    border: 1px solid green;
+    ${border('red')}
+    ${flexCenter('column')}
+    justify-content: flex-start;
     margin: 2px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
     width: 100%;
-    /* height: 95vh; */
-    overflow: auto;
     padding-bottom: 10px;
-    .link {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+    .return-link {
+        ${flexCenter()}
         padding: 15px;
-        margin: 8px;
         color: gray;
     }
-    &::-webkit-scrollbar {
-        width: 6px;
-            &-thumb{
-                background-color: gray;
-                border-radius: 25px;
-        }
-    }
+    ${scrollBar()}
     .top-part{
-        /* border: 1px solid red; */
-        height: 75px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        ${border()}
+        ${flexCenter('column')}
+        height: 10%;
     }
 `;
