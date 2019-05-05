@@ -21,6 +21,10 @@ import {
     getUserData,
 } from './actions';
 
+import {
+    border,
+} from './styles/styl-utils.js';
+
 class App extends Component {
     constructor(){
         super();
@@ -110,8 +114,6 @@ export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps,
 
 const AppDiv = styled.div`
     box-sizing: border-box;
-    border: 1px solid red;
-    /* margin: 2px; */
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -120,23 +122,18 @@ const AppDiv = styled.div`
     max-width: 100vw;
     overflow: hidden;
     .app-top {
-        border: 1px solid purple;
-        margin: 2px;
+        ${border('red')}
         box-sizing: border-box;
-        height: 5vh;
+        /* height: 5vh; */
         overflow: hidden;
-        /* min-height: 100px; */
-        min-height: 40px;
+        min-height: 50px;
     }
     .app-bottom {
-        border: 2px solid green;
+        /* ${border()} */
         box-sizing: border-box;
-        margin: 2px;
-        padding: 2px;
         display: flex;
         flex-direction: row;
         z-index: 0;
         height: 95vh;
-        /* height: 99%; */
     }
 `;
