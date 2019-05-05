@@ -10,9 +10,6 @@ import {
 } from '../../img'
 
 import { 
-	// getConnectedApis,
-	// syncPocketList,
-	// syncSlack,
 } from '../../actions'
 
 import { 
@@ -142,9 +139,6 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-	// getConnectedApis,
-	// syncPocketList,
-	// syncSlack,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu)
@@ -153,11 +147,7 @@ const RightMenuDiv = styled.div`
 	border: 2px solid black;
 	background: lightblue;
 	box-sizing: border-box;
-
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	
+	${flexCenter()}
 	.right-menu-preview{
 		display: flex;
 		flex-direction: column;
