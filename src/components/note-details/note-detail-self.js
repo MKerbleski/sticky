@@ -2,32 +2,33 @@ import React from 'react';
 import { DropTarget } from 'react-dnd';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+// import { default as NoteQuill } from './note-detail-body-quill'
+// import axios from 'axios'
 
 import { 
     NoteDetailChild, 
-    // NoteDetailBody,
     AttachedList,
-
 } from '../index.js'
 
 import {
     NotePreviewNew 
 } from './../main-all-notes/index'
 
-import { 
-    // getAttachedItems, 
+import {  
     editNote 
 } from '../../actions'
-import { start } from '../../styles/styl-utils.js'
-// import { default as NoteQuill } from './note-detail-body-quill'
-// import axios from 'axios'
+
+import { 
+    start,
+    scrollBar,
+    border,
+    flexCenter
+} from '../../styles/styl-utils.js'
 
 class NoteDetailSelf extends React.Component {
     constructor(props){
         super(props)
-        this.state = {
-
-        }
+        this.state = {}
     }
 
     clickHandler = (e) => {
@@ -49,10 +50,10 @@ class NoteDetailSelf extends React.Component {
                 break;
             default:
                 console.log("button has no name") 
-
         }
     }
 
+    
     render(){
         const note = this.props.store.notes.notes[0]
         console.log("note detail self", note)
@@ -69,7 +70,7 @@ class NoteDetailSelf extends React.Component {
                             {/* <NoteQuill note={this.props.note} /> */}
                             <p>{note.text_body}</p>
                             {note.children || this.props.store.notes.showNewNote
-                                ?   <div className="note-detail-children">
+                                ?   <div id="note-detail-children" className="note-detail-children">
                                         {this.props.store.notes.showNewNote 
                                             ?   <NotePreviewNew parent={note} /> 
                                             :   null}
@@ -184,30 +185,24 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    // getAttachedItems,
     editNote
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailSelf));
 
 const NoteDetailSelfDiv = styled.div`
-    /* ${start('red')} */
-    border: 1px solid purple;
+    ${border()}
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    /* height: auto; */
     width: 92%;
     background-color: lightgray;
     padding: 5px;
     height: 80%;
     /* height: 1000px; */
     .note-detail-main{
-        /* ${start('green')} */
-        border: 1px solid green;
-        margin: 1px;
-        padding: 1px;
+        ${border()}
         box-sizing: border-box;
         display: flex;
         flex-direction: row;
@@ -228,23 +223,14 @@ const NoteDetailSelfDiv = styled.div`
             height: 98%;
             padding: 1px;
             .note-detail-children{
-                /* ${start('purple')} */
-                border: 1px solid purple;
-                margin: 2px;
-                padding: 1px;
+                ${border()}
+                ${scrollBar()}
                 display: flex;
                 flex-direction: row;
                 justify-content: safe space-around;
                 overflow: auto;
                 max-height: 40%;
                 min-height: 100px;
-                &::-webkit-scrollbar {
-                    width: 6px;
-                        &-thumb{
-                            background-color: gray;
-                            border-radius: 25px;
-                    }
-                }
                 /* .note-detail-child-container{
                     ${start('blue')}
                     min-width: 24%;
@@ -263,31 +249,20 @@ const NoteDetailSelfDiv = styled.div`
             width: 30%;
             margin: 5px;
             height: 98%;
-            overflow: auto;
-            &::-webkit-scrollbar {
-            width: 6px;
-                &-thumb{
-                    background-color: gray;
-                    border-radius: 25px;
-                }
-            }
+            ${scrollBar()}
             .link-source-container{
                 margin-bottom: 2px;
                 width: 99%;
-                overflow: hidden;   
+                overflow: hidden; 
             }
         } 
     }
     .note-detail-settings{
-        /* ${start('blue')} */
-        border: 1px solid blue;
         box-sizing: border-box;
-        margin: 1px;
         width: 100%;
-        display: flex;
-        flex-direction: row;
+        ${border()}
+        ${flexCenter()}
         justify-content: flex-end;
-        align-items: center;
         .settings-link, i{
             margin: 0 10px;
             text-decoration: none;

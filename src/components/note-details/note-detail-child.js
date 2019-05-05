@@ -12,7 +12,8 @@ import {
 
 import { 
 	flexCenter, 
-	start 
+	start,
+	border,
 } from '../../styles/styl-utils.js'
 
 import { 
@@ -27,7 +28,6 @@ class NoteDetailChild extends React.Component {
 	constructor(){
 		super()
 		this.state = {
-
 		}
 	}
   
@@ -80,12 +80,12 @@ class NoteDetailChild extends React.Component {
 											} 
 										})
 									:	null}
-							</div>                     
+							</div>
 					</Link>
-                </NoteDetailChildDiv>        
+                </NoteDetailChildDiv>
             )
         } else {
-            return (null)
+            return null
         }
     }
 }
@@ -94,8 +94,10 @@ const targetObj = {
 	drop(props, monitor) {
 		const hover =  monitor.isOver({shallow:true})
 		//this disables layer one droping if there is a nested child
+
 		if(hover){
-			//this MUST come from state because it is being mapped over from note-preview-self
+			//	this MUST come from component state (props) because it is being mapped over from note-preview-self
+			// as opposed to store
 			const note = props.note
 			const parent = props.parent
 			return ({
@@ -133,6 +135,7 @@ const sourceObj = {
         }
 
 		let noteEdit = sharedStickyNoteDrop(source, monitor);
+
 		if(noteEdit !== null){
 			props.noteToNote(noteEdit)
 		}
@@ -144,7 +147,6 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-	// getSingleNote,
   	editNote,
   	noteToNote
 }
@@ -165,34 +167,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 	)(NoteDetailChild));
 
 const NoteDetailChildDiv = styled.div`
-/* similarities to note preview */
-	${start('pink')}
-	/* height: 99%; */
+	/* similarities to note preview */
+	${border('blue')}
+	${flexCenter('column')}
 	width: 100%;
-	display: flex;
-	flex-direction: column;  
-	justify-content: center;
-	align-items: center;
 	.note-link{
-		${start('red')}
+		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
-		align-items: center;
+		align-items: space-around;
+		justify-content: flex-start;
 		width: 95%;
 		height: 100%;
 		padding: 10px;
-		align-items: space-around;
-		justify-content: flex-start;
 		background-color: wheat;
 		text-decoration: none;
 		.note-content-header{
-			border: 1px solid pink;
+			${border()}
 			width: 100%;
-			display: flex;
-			flex-direction: row;
+			${flexCenter()}
 			justify-content: space-between;
-			align-items: center;
 			.note-content-title {
 				border: 1px solid green;
 				margin: 0px 10px 5px 0;
@@ -207,48 +201,51 @@ const NoteDetailChildDiv = styled.div`
 				text-align: center;
 				background: lightblue;
 			}
-		.noteContent{
-		${start()}
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: flex-start;
-		color: black;
-		height: auto;
-		margin: 2% 0;
-		max-width: 100%;
-		overflow: hidden;
-		.note-preview-title {
-			${'' /* border: 1px solid green; */}
-			margin: 0px 10px 5px 0;
-			text-decoration: none;
-			text-align: left;
-		}
-		p {
-			${'' /* border: 1px solid blue; */}
-			width: 95%;
-			height: 46px;
-			text-decoration: none;
-			margin: 0;
-			line-height: 23px;
-			font-size: 14px;
-			font: roboto;
-			white-space: normal;
-			overflow: hidden;
-			text-overflow: ellipsis;
+			.noteContent{
+				/* ${start()} */
+				${border()}
+				box-sizing: border-box;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: flex-start;
+				color: black;
+				height: auto;
+				margin: 2% 0;
+				max-width: 100%;
+				overflow: hidden;
+				.note-preview-title {
+					${'' /* border: 1px solid green; */}
+					margin: 0px 10px 5px 0;
+					text-decoration: none;
+					text-align: left;
+				}
+				p {
+					${'' /* border: 1px solid blue; */}
+					width: 95%;
+					height: 46px;
+					text-decoration: none;
+					margin: 0;
+					line-height: 23px;
+					font-size: 14px;
+					font: roboto;
+					white-space: normal;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
 			}
-		}
-		.layerTwoContainerAll{
-			border: 1px solid blue;
-			width: 100%;
-			${flexCenter('row')}
-			flex-wrap: wrap;
-			justify-content: space-around;
-			.layerTwoContainer{
-				${'' /* located on next page */}
-				border: 1px solid red;
+			.layerTwoContainerAll{
+				border: 1px solid blue;
 				width: 100%;
-				margin: 2px;
-				${flexCenter()}
+				${flexCenter('row')}
+				flex-wrap: wrap;
+				justify-content: space-around;
+				.layerTwoContainer{
+					${'' /* located on next page */}
+					border: 1px solid red;
+					width: 100%;
+					margin: 2px;
+					${flexCenter()}
+				}
 			}
 		}
 	}  

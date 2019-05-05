@@ -51,38 +51,38 @@ export function flexCenter(direction='row', justify='center', align='center'){
 
 export function start(color){
     return `
-    border: 1px solid ${color ? color : null}
-    display: flex;
-    box-sizing: border-box;
-    padding: 1px;
-    margin: 1px;
+        border: 1px solid ${color ? color : null}
+        display: flex;
+        box-sizing: border-box;
+        padding: 1px;
+        margin: 1px;
     `
 }
 
 export function apiNote(){
     return `
-    border: 3px solid green;
-    font-size: 13px;
-    box-sizing: border-box;
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 3px;
-    color: black;
-    margin: 2px;
+        border: 3px solid green;
+        font-size: 13px;
+        box-sizing: border-box;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 3px;
+        color: black;
+        margin: 2px;
     `
 }
 
 export function apiChannel(){
     return `
-    border: 13px solid green;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 3px;
-    margin: 3px;
-    color: black;
-    background: white;
+        border: 13px solid green;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 3px;
+        margin: 3px;
+        color: black;
+        background: white;
     `
 }
