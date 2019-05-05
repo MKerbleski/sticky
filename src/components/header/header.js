@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { flex, menu } from '../../styles/styl-utils.js'
 import { connect } from 'react-redux';
 
 import { 
     logout
- } from '../../actions'
+} from '../../actions'
+
+import { 
+    flexCenter,
+    menu 
+} from '../../styles/styl-utils.js'
 
 class Header extends Component{
 
@@ -115,7 +119,7 @@ ${menu()}
             color: black;
             ${'' /* background-color: rgba(0,0,0,.1); */}
             text-decoration: none;
-            ${flex()}
+            ${flexCenter()}
             :hover{
                 background-color: rgba(0,0,0,.3);
             }

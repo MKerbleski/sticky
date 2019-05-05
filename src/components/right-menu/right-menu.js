@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { flex } from '../../styles/styl-utils.js'
 import { connect } from 'react-redux';
 import { AAA } from '../../helpers/availbleApis'
 import { RightMenuDetails } from './index'
@@ -15,6 +14,10 @@ import {
 	// syncPocketList,
 	// syncSlack,
 } from '../../actions'
+
+import { 
+	flexCenter
+} from '../../styles/styl-utils.js'
 
 class RightMenu extends Component {
     state = {
@@ -160,7 +163,7 @@ const RightMenuDiv = styled.div`
 		flex-direction: column;
 		justify-content: center;
 		.menu-item{
-			${ flex('row') }
+			${ flexCenter('row') }
 			text-align: center;
 			text-decoration: none;
 			color: black;

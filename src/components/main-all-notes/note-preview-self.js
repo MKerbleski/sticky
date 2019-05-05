@@ -208,7 +208,7 @@ const NotePreviewSelfDiv = styled.div`
 	flex-direction: column;  
 	.note-link {
 		${border()}
-		/* ${ flex('column') } */
+		/* ${ flexCenter('column') } */
 		height: 100%;
 		padding: 10px;
 		width: 95%;
@@ -264,16 +264,15 @@ const NotePreviewSelfDiv = styled.div`
 				text-overflow: ellipsis;
 			}
 		}
-		.layerTwoContainer{
-			${border()}
-			${flex()}
-		}
 		.layerTwoContainerAll{
 			${border()}
-			${flex()}
+			${flexCenter(undefined, undefined ,'space-around')}
 			width: 100%;
 			flex-wrap: wrap;
-			justify-content: space-around;
+			.layerTwoContainer{
+				${border()}
+				${flexCenter()}
+			}
 		}
 	}  
 `;

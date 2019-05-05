@@ -6,9 +6,9 @@ export function picture(){
     `;
 }
 
-export function border(){
+export function border(color){
     return`
-        border: 1px solid #${Math.floor(Math.random()*16777215).toString(16)};
+        border: 1px solid ${color ? color : `#${Math.floor(Math.random()*16777215).toString(16)}`};
         margin: 2px;
         padding: 2px;
     `;
@@ -40,12 +40,12 @@ export function bg(color){
     `;
 }
 
-export function flex(direction='row'){
+export function flexCenter(direction='row', justify='center', align='center'){
     return `
         display: flex;
         flex-direction: ${direction};
-        align-items: center;
-        justify-content: center;
+        justify-content: ${justify};
+        align-items: ${align};
     `;
 }
 

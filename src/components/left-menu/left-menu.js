@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { flex, menu } from '../../styles/styl-utils.js'
 import DeleteTarget from './delete-target.js';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 import { 
 	toggleNewNote
  } from '../../actions'
 
 import {
-    scrollBar
+	scrollBar,
+	flexCenter,
+	menu,
+	border
 } from '../../styles/styl-utils.js'
 
 class LeftMenu extends Component {
@@ -25,20 +27,8 @@ class LeftMenu extends Component {
 	clickHandler = (name) => {
 		switch(name){
 			case "newNote":
-				console.log("newNote")
 				this.props.toggleNewNote();
 				break;
-			
-			// case "home":
-			// 	console.log('hey', name)
-			// 	this.props.redirect(`/${this.props.username}`)
-			// 	break;
-			// case "trash":
-			// 	this.props.redirect(`/${this.props.username}/deleted`)
-			// 	break;
-			// case "settings":
-			// 	this.props.redirect(`/${this.props.username}/settings`)
-			// 	break;
 			default:
 				console.log("no name")
 		}
@@ -52,15 +42,12 @@ class LeftMenu extends Component {
 						className={this.state.allNotesSelected 
 							? "current menu-item" 
 							: "menu-item"}  
-						// onClick={() => this.clickHandler("home")}
 						style={this.props}
 						to={`/${this.props.username}`}>
-						{/* // onClick={() => this.clickHandler("trash")}> */}
 						<i className="fab fa-stack-overflow"></i>
 
 					</Link>
 					<div 
-						// name="newNote"
 						onClick={() => this.clickHandler("newNote")} 
 						className="menu-item">
 						<i className="fas fa-plus-square"></i>
@@ -92,9 +79,6 @@ class LeftMenu extends Component {
 					}
 					<Link 
 						to={`/${this.props.username}/settings`}
-						// onClick={() => this.clickHandler("settings")}
-						// onClick={this.props.hideDetailMenu} 
-						 
 						className="menu-item">
 						<i className="fas fa-cogs"></i>
 					</Link>
@@ -103,7 +87,6 @@ class LeftMenu extends Component {
 						className="menu-item">
 						<i class="fas fa-bug"></i>
 					</Link>
-							
 				</div>
 			</LeftMenuDiv>
 		)
@@ -121,16 +104,14 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(LeftMenu)
 
 const LeftMenuDiv = styled.div`
-    ${ menu() }
+    ${menu()}
+	${flexCenter('column')}
+	${scrollBar()};
+	overflow-x: hidden;
     color: white;
     width: 5%;
 	min-width: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: space-between;
-	${scrollBar()};
-	overflow-x: hidden;
     .menu-item{
         ${'' /* border: 1px solid red; */}
         height: 50px;
@@ -140,7 +121,7 @@ const LeftMenuDiv = styled.div`
         font-weight: bold;
         margin: 10px;
         font-size: 22px;
-        ${ flex('row') }
+        ${flexCenter()}
         &:hover {
             cursor: pointer;
             text-decoration: underline;

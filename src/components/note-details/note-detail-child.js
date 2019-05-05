@@ -230,7 +230,7 @@ const NoteDetailChildDiv = styled.div`
 		.layerTwoContainerAll{
 			border: 1px solid blue;
 			width: 100%;
-			${flex('row')}
+			${flexCenter('row')}
 			flex-wrap: wrap;
 			justify-content: space-around;
 			.layerTwoContainer{
@@ -238,7 +238,7 @@ const NoteDetailChildDiv = styled.div`
 			border: 1px solid red;
 			width: 100%;
 			margin: 2px;
-			${flex()}
+			${flexCenter()}
 		}
 		}
 	}  
