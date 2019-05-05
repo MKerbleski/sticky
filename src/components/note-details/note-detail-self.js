@@ -200,7 +200,6 @@ const NoteDetailSelfDiv = styled.div`
     background-color: lightgray;
     padding: 5px;
     height: 80%;
-    /* height: 1000px; */
     .note-detail-main{
         ${border()}
         box-sizing: border-box;
@@ -211,17 +210,15 @@ const NoteDetailSelfDiv = styled.div`
         width: 99%;
         height: 100%;
         .note-detail-left{
-            /* ${start('white')} */
-            border: 1px solid red;
-            display: flex;
             box-sizing: border-box;
+            ${border()}
+            display: flex;
             flex-direction: column;
             align-items: space-between;
             justify-content: space-between;
             width: 80%;
             margin: 5px;
             height: 98%;
-            padding: 1px;
             .note-detail-children{
                 ${border()}
                 ${scrollBar()}
@@ -231,16 +228,11 @@ const NoteDetailSelfDiv = styled.div`
                 overflow: auto;
                 max-height: 40%;
                 min-height: 100px;
-                /* .note-detail-child-container{
-                    ${start('blue')}
-                    min-width: 24%;
-                    margin: 0 3px;
-                } */
             }
         }
         .note-detail-right{
-            /* ${start('red')} */
-            border: 1px solid gray;
+            ${border()}
+            ${scrollBar()}
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -249,7 +241,6 @@ const NoteDetailSelfDiv = styled.div`
             width: 30%;
             margin: 5px;
             height: 98%;
-            ${scrollBar()}
             .link-source-container{
                 margin-bottom: 2px;
                 width: 99%;
@@ -258,10 +249,10 @@ const NoteDetailSelfDiv = styled.div`
         } 
     }
     .note-detail-settings{
-        box-sizing: border-box;
-        width: 100%;
         ${border()}
         ${flexCenter()}
+        box-sizing: border-box;
+        width: 100%;
         justify-content: flex-end;
         .settings-link, i{
             margin: 0 10px;

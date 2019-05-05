@@ -33,47 +33,50 @@ class NoteDetailChild extends React.Component {
   
 
     render(){
-        if (this.props.note && !this.props.note.is_deleted){
+		const {
+			note,
+			connectDragSource,
+			connectDropTarget,
+			color,
+			hover,
+			redirect
+		} = this.props
+        if (note && !note.is_deleted){
             return (
-                this.props.connectDragSource &&
-                this.props.connectDropTarget &&
+                connectDragSource &&
+                connectDropTarget &&
                 <NoteDetailChildDiv 
                     innerRef={instance => {
-						this.props.connectDragSource(instance);
-						this.props.connectDropTarget(instance);}}
-                    color={this.props.color} 
+						connectDragSource(instance);
+						connectDropTarget(instance);}}
+                    color={color} 
 				>
 					<Link
-						// key={this.props.key}
-						// index={this.props.index}
 						className="note-link"
-						id={this.props.note.id}
-						to={`/${this.props.note.sticky_username}/note/${this.props.note.id}`}
-						style={{background: this.props.hover ? 'lightgreen' : null}}>
+						id={note.id}
+						to={`/${note.sticky_username}/note/${note.id}`}
+						style={{background: hover ? 'lightgreen' : null}}>
 							<div className="note-content-header">
-								{this.props.note.num_slack_items_attached ||  this.props.note.num_pocket_items_attached
+								{note.num_slack_items_attached ||  note.num_pocket_items_attached
 										? 	<div className="note-content-link-count">
-												{this.props.note.num_pocket_items_attached + this.props.note.num_slack_items_attached}
+												{note.num_pocket_items_attached + note.num_slack_items_attached}
 											</div> 
 										:   null }
 							</div>
 							<h3 className="note-preview-title">
-								{this.props.note.text_body}
+								{note.text_body}
 							</h3>
-							{/* <p>{this.getFirstSen(this.props.note.text_body)}</p>  */}
+							{/* <p>{this.getFirstSen(note.text_body)}</p>  */}
 							<div className="layerTwoContainerAll">
-								{this.props.note.has_children 
-									? 	this.props.note.children.map(grandchild => {
+								{note.has_children 
+									? 	note.children.map(grandchild => {
 											if(!grandchild.is_deleted){
 												return <NoteDetailGrandChild
 													key={grandchild.id}
 													type="note"
 													note={grandchild} 
-													parent={this.props.note}
-													redirect={this.props.redirect}
-													// onDrop={this.props.onDrop} 
-													// allNotes={this.props.allNotes}
-													// getFirstWord={this.getFirstWord} 
+													parent={note}
+													redirect={redirect}
 												/>
 											} else {
 												return null
@@ -93,7 +96,7 @@ class NoteDetailChild extends React.Component {
 const targetObj = {
 	drop(props, monitor) {
 		const hover =  monitor.isOver({shallow:true})
-		//this disables layer one droping if there is a nested child
+		//this disables layer one dropping if there is a nested child
 
 		if(hover){
 			//	this MUST come from component state (props) because it is being mapped over from note-preview-self
