@@ -16,21 +16,23 @@ class AttachedList extends Component {
     }
     
     render(){
-        // console.log(this.props)
+        console.log('note-detailattached', this.props);
         return <AttachedListDiv> 
                     {this.props.note.slack_items 
-                        ?    this.props.note.slack_items.map(item => {
+                        ?   this.props.note.slack_items.map(item => {
+                            console.log('item', item)
                                 return <SlackNote
                                     parent={this.props.note}
                                     key={item.uuid} 
                                     item={item} 
                                     stickyNote={this.props.stickyNote} />
                                 }) 
-                        :   null
+                        :   <h1>atta</h1>
                     }
                        
                     {this.props.note.pocket_items 
                         ?   this.props.note.pocket_items.map(item => {
+                            console.log('item', item)                                
                                 return <PocketNote 
                                     parent={this.props.note}
                                     key={item.item_id} 
@@ -38,7 +40,7 @@ class AttachedList extends Component {
                                     item={item} 
                                 />
                             }) 
-                        :   null
+                        :   <h1>atta</h1>
                     }
             </AttachedListDiv>
     }
@@ -56,11 +58,11 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(AttachedList)
 
 const AttachedListDiv = styled.div`
-    /* border: 1px solid red; */
+    border: 1px solid red;
     color: black;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    /* background: green; */
+    background: green;
 
 `

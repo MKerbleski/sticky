@@ -2,16 +2,22 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
+
 import { 
     NotePreviewNew,
     NotePreviewSelf
 } from '../components/main-all-notes/index';
+
 import { 
     getNotes,
     getDeletedNotes,
     getUserData,
     toggleNewNote
 } from '../actions'
+
+import {
+    scrollBar
+} from '../styles/styl-utils.js'
 
 import { Link } from 'react-router-dom';
 
@@ -127,6 +133,7 @@ class AllNotesPage extends Component {
 
 const targetObj = {
     hover(props, component){
+        // Pretty sure this is necessay as it is a requierment 
         if(props.hoverShallow){
         }
     },
@@ -134,7 +141,7 @@ const targetObj = {
     drop(props, monitor) {
         const hover = monitor.isOver({shallow:false})
         if(hover){
-            //This is only ever a target
+            //'all-notes-page' is only ever a target so type is hardcoded to top
             return ({
                 type: 'top',
                 parent: null,
@@ -172,7 +179,7 @@ const AllNotesPageDiv = styled.div`
     max-width: 99%;
     border: 1px solid green;
     box-sizing: border-box;
-    overflow: auto;
+    
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -185,6 +192,8 @@ const AllNotesPageDiv = styled.div`
     h1{
         margin: 5px;
     }
+    ${scrollBar()}
+    overflow: auto;
     &::-webkit-scrollbar {
         width: 6px;
         &-thumb{

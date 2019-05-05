@@ -4,7 +4,14 @@ import styled from 'styled-components';
 import { flex, menu } from '../../styles/styl-utils.js'
 import DeleteTarget from './delete-target.js';
 import { connect } from 'react-redux';
-import { toggleNewNote } from '../../actions'
+
+import { 
+	toggleNewNote
+ } from '../../actions'
+
+import {
+    scrollBar
+} from '../../styles/styl-utils.js'
 
 class LeftMenu extends Component {
 	constructor(props){
@@ -122,6 +129,8 @@ const LeftMenuDiv = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+	${scrollBar()};
+	overflow-x: hidden;
     .menu-item{
         ${'' /* border: 1px solid red; */}
         height: 50px;

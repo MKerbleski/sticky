@@ -20,11 +20,11 @@ class SlackSettings extends Component {
     connectSlack = (e) => {
         e.preventDefault();
         // console.log('connect to slack', this.props.userData.id)
-        let client_id = '465374768868.465546770546'
-        let scope = 'stars:read stars:write'
-        let userid = this.props.userData.id
-        let redirect_uri = `${process.env.REACT_APP_BACKEND_URL}/api/slack/auth/${userid}`
-        let codeRequestUrl = `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${userid}`
+        const client_id = '465374768868.465546770546'
+        const scope = 'stars:read stars:write'
+        const userid = this.props.userData.id
+        const redirect_uri = `${process.env.REACT_APP_BACKEND_URL}/api/slack/auth/${userid}`
+        const codeRequestUrl = `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${userid}`
         window.open(codeRequestUrl)
         this.setState({
             refresh: true

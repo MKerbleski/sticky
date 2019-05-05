@@ -4,6 +4,7 @@ import { flex } from '../../styles/styl-utils.js'
 import { connect } from 'react-redux';
 import { AAA } from '../../helpers/availbleApis'
 import { RightMenuDetails } from './index'
+
 import { 
 	rightArrow, 
 	leftArrow,
@@ -147,11 +148,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(RightMenu)
 
 const RightMenuDiv = styled.div`
 	border: 2px solid black;
-	box-sizing: border-box;
 	background: lightblue;
+	box-sizing: border-box;
+
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	
 	.right-menu-preview{
 		display: flex;
 		flex-direction: column;

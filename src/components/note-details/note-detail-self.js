@@ -55,7 +55,7 @@ class NoteDetailSelf extends React.Component {
 
     render(){
         const note = this.props.store.notes.notes[0]
-        // console.log("note detail self", note)
+        console.log("note detail self", note)
         if(note){
             return (
                 <NoteDetailSelfDiv 
@@ -89,13 +89,13 @@ class NoteDetailSelf extends React.Component {
                             
                         </div>
                         
-                        {this.props.note.num_slack_items_attached || this.props.note.num_pocket_items_attached
+                        {note.slack_items || note.pocket_items
                             ?   <div className="note-detail-right">
                                     <AttachedList 
                                         note={note}
                                     />
                                 </div>
-                            :   null}
+                            :   <p>nothing attached</p>}
                         
                     </div>
                     <div className="note-detail-settings">
@@ -192,7 +192,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', t
 
 const NoteDetailSelfDiv = styled.div`
     /* ${start('red')} */
-    border: 1px solid red;
+    border: 1px solid purple;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -213,7 +213,7 @@ const NoteDetailSelfDiv = styled.div`
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
+        width: 99%;
         height: 100%;
         .note-detail-left{
             /* ${start('white')} */
@@ -223,7 +223,7 @@ const NoteDetailSelfDiv = styled.div`
             flex-direction: column;
             align-items: space-between;
             justify-content: space-between;
-            width: 100%;
+            width: 80%;
             margin: 5px;
             height: 98%;
             padding: 1px;

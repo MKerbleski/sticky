@@ -49,8 +49,9 @@ class App extends Component {
     //     })
     // }
 
-    //This is to get around the nested 
-    //<a>tag</a> prediciment when selecting a grandchild note
+    //redirect function is to get around the nested 
+    //<a>tag</a> prediciment when selecting a nested link.
+    // i.e. clicking on a grandchild note
     redirect = (route) => {
         this.props.history.push(route)
     }
@@ -102,12 +103,6 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    // getNotes,
-    // addNote,
-    // sortNote,
-    // logout,
-    // getLinks,
-    // getDeletedNotes,
     getUserData, 
 }
 

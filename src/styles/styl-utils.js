@@ -6,6 +6,19 @@ export function picture(){
     `;
 }
 
+export function scrollBar(){
+    return`
+        overflow: auto;
+        &::-webkit-scrollbar {
+            width: 6px;
+            &-thumb{
+                background-color: gray;
+                border-radius: 25px;
+            }
+        }
+    `;
+}
+
 export function menu(){
     return `
         background-color: rgba(0,0,0,.3);

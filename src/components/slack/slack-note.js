@@ -16,7 +16,7 @@ const SlackNote = (props) => {
     let time = props.item.ts.slice(0, 10)*1000
     time = format(time, 'MMM Do YYYY')
     if (props){
-        // console.log(props)
+        console.log('slackNote', props)
         return <SlackNoteDiv 
                 innerRef={instance => props.connectDragSource(instance)}
                 type="slack"
@@ -32,7 +32,10 @@ const SlackNote = (props) => {
                         </div>
                     </div> 
                     <div className="slack-note-middle">
-                        <ReactMarkdown className="slack-text">{props.item.type === "message" ? props.item.text : "error at note text"}</ReactMarkdown>
+                        <ReactMarkdown className="slack-text">{props.item.type === "message" 
+                            ? props.item.text 
+                            : "error at note text"}
+                        </ReactMarkdown>
                     </div> 
                     <span className="slack-note-bottom">
                         <p className="slack-time">{time}</p>
