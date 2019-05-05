@@ -1,10 +1,18 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
-import { getPocketSettings, getUserData, syncPocketList } from '../../actions'
 import { connect } from 'react-redux';
 import format from 'date-fns/format'
-import { Loading } from '../loading'
+
+import { 
+    Loading 
+} from '../loading'
+
+import { 
+    getPocketSettings, 
+    getUserData, 
+    syncPocketList 
+} from '../../actions'
 
 class PocketSettings extends Component {
     constructor(props){
@@ -100,7 +108,7 @@ class PocketSettings extends Component {
                         </div>
                 }
                
-                {/* what I want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read..., or delete button.  */}
+                {/* what I eventually want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read..., or delete button.  */}
             </PocketSettingsDiv>
         )
     }

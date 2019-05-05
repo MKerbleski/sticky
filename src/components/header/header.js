@@ -9,8 +9,12 @@ import {
 
 import { 
     flexCenter,
-    menu 
+    border
 } from '../../styles/styl-utils.js'
+
+import { 
+    turquise,
+} from '../../styles/colors.js'
 
 class Header extends Component{
 
@@ -70,14 +74,11 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
 
 const HeaderDiv = styled.div`
-${menu()}
-    border: 1px solid red;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    background-color: ${turquise};
+    ${border()}
+    ${flexCenter()}
     justify-content: space-between;
     width: 100%;
-    /* height: 5vh; */
     padding: 0;
     .headerTitle-link {
         text-decoration: none;
@@ -104,22 +105,17 @@ ${menu()}
         margin: 0
     }
     .linkss{
-        ${'' /* border: 1px solid green; */}
+        ${flexCenter()}
+        /* ${border()} */
         height: 30px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
         margin: 0;
         .headerLink{
-            ${'' /* border: 1px solid blue; */}
-            ${'' /* padding: 15px; */}
+            ${flexCenter()}
+            ${border()}
             height: 100%;
             width: 75px;
             color: black;
-            ${'' /* background-color: rgba(0,0,0,.1); */}
             text-decoration: none;
-            ${flexCenter()}
             :hover{
                 background-color: rgba(0,0,0,.3);
             }
