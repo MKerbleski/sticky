@@ -63,9 +63,7 @@ class App extends Component {
     render() {
         return (
             <AppDiv>
-                <div className="app-top">
-                    <Header redirect={this.redirect} />
-                </div>
+                <Header className="app-top" redirect={this.redirect} />
                 <div className="app-bottom">
                     <Switch>
                         <Route 
