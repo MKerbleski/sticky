@@ -219,39 +219,5 @@ const NoteDetailChildDiv = styled.div`
 				${flexCenter()}
 			}
 		}
-
 	}  
 `;
-
-// .noteContent{
-// 	/* ${start()} */
-// 	${border()}
-// 	box-sizing: border-box;
-// 	flex-direction: column;
-// 	justify-content: space-between;
-// 	align-items: flex-start;
-// 	color: black;
-// 	height: auto;
-// 	margin: 2% 0;
-// 	max-width: 100%;
-// 	overflow: hidden;
-// 	.note-preview-title {
-// 		border: 1px solid green;
-// 		margin: 0px 10px 5px 0;
-// 		text-decoration: none;
-// 		text-align: left;
-// 	}
-// 	p {
-// 		${'' /* border: 1px solid blue; */}
-// 		width: 95%;
-// 		height: 46px;
-// 		text-decoration: none;
-// 		margin: 0;
-// 		line-height: 23px;
-// 		font-size: 14px;
-// 		font: roboto;
-// 		white-space: normal;
-// 		overflow: hidden;
-// 		text-overflow: ellipsis;
-// 	}
-// }
