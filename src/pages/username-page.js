@@ -18,6 +18,12 @@ import {
     getUserData,
 } from '../actions';
 
+import {
+    border,
+    scrollBar,
+    flexCenter,
+} from '../styles/styl-utils.js';
+
 class UsernamePage extends Component {
     constructor(props){
         super(props)
@@ -149,9 +155,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(UsernamePage);
 
 const UsernamePageDiv = styled.div`
-    border: 1px solid red;
-    margin: 2px;
-    padding: 2px;
+    ${border('red')}
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -159,32 +163,18 @@ const UsernamePageDiv = styled.div`
     max-width: 100%;
     width: 100%;
     .app-center {
-        border: 2px solid blue;
-        box-sizing: border-box;
-        margin: 2px;
-        max-width: 99%;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        /* align-items: center; */
-        justify-content: center;
+        ${border()}
+        ${flexCenter()}
+        align-items: flex-start;
         flex-wrap: wrap;
-        overflow: auto;
-        &::-webkit-scrollbar {
-        width: 6px;
-            &-thumb{
-                background-color: gray;
-                border-radius: 25px;
-            }
-        }
+        ${scrollBar()}
+        box-sizing: border-box;
+        /* max-width: 99%; */
+        width: 100%;
     }
     .unAuth{
-        border: 1px solid red;
-        margin: 2px;
+        ${border()}
+        ${flexCenter('column')}
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
     }
 `

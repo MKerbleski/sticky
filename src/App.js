@@ -116,22 +116,21 @@ const AppDiv = styled.div`
     flex-direction: column;
     background-color: white;
     height: 100vh;
-    /* max-height: 99vh; */
     max-width: 100vw;
     overflow: hidden;
     .app-top {
         ${border('red')}
         box-sizing: border-box;
-        /* height: 5vh; */
+        height: 5vh;
         overflow: hidden;
         min-height: 50px;
     }
     .app-bottom {
-        /* ${border()} */
+        ${border()}
         box-sizing: border-box;
         display: flex;
         flex-direction: row;
         z-index: 0;
-        height: 95vh;
+        height: 100%;
     }
 `;
