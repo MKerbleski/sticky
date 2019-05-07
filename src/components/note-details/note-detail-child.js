@@ -12,7 +12,6 @@ import {
 
 import { 
 	flexCenter, 
-	start,
 	border,
 } from '../../styles/styl-utils.js'
 
@@ -63,7 +62,7 @@ class NoteDetailChild extends React.Component {
 											</div> 
 										:   null }
 							</div>
-							<h3 className="note-preview-title">
+							<h3 className="note-content-title">
 								{note.text_body}
 							</h3>
 							{/* <p>{this.getFirstSen(note.text_body)}</p>  */}
@@ -186,16 +185,11 @@ const NoteDetailChildDiv = styled.div`
 		background-color: wheat;
 		text-decoration: none;
 		.note-content-header{
-			${border()}
+			${border('red')}
 			width: 100%;
 			${flexCenter()}
+			flex-direction: row-reverse;
 			justify-content: space-between;
-			.note-content-title {
-				border: 1px solid green;
-				margin: 0px 10px 5px 0;
-				text-decoration: none;
-				text-align: left;
-			}
 			.note-content-link-count {
 				border: .5px solid black;
 				border-radius: 50px;
@@ -204,52 +198,60 @@ const NoteDetailChildDiv = styled.div`
 				text-align: center;
 				background: lightblue;
 			}
-			.noteContent{
-				/* ${start()} */
-				${border()}
-				box-sizing: border-box;
-				flex-direction: column;
-				justify-content: space-between;
-				align-items: flex-start;
-				color: black;
-				height: auto;
-				margin: 2% 0;
-				max-width: 100%;
-				overflow: hidden;
-				.note-preview-title {
-					${'' /* border: 1px solid green; */}
-					margin: 0px 10px 5px 0;
-					text-decoration: none;
-					text-align: left;
-				}
-				p {
-					${'' /* border: 1px solid blue; */}
-					width: 95%;
-					height: 46px;
-					text-decoration: none;
-					margin: 0;
-					line-height: 23px;
-					font-size: 14px;
-					font: roboto;
-					white-space: normal;
-					overflow: hidden;
-					text-overflow: ellipsis;
-				}
-			}
-			.layerTwoContainerAll{
-				border: 1px solid blue;
+		}
+		.note-content-title {
+			${border('green')}
+			/* margin: 0px 10px 5px 0; */
+			text-decoration: none;
+			text-align: left;
+		}
+		.layerTwoContainerAll{
+			border: 1px solid blue;
+			width: 100%;
+			${flexCenter('row')}
+			flex-wrap: wrap;
+			justify-content: space-around;
+			.layerTwoContainer{
+				${'' /* located on next page */}
+				border: 1px solid red;
 				width: 100%;
-				${flexCenter('row')}
-				flex-wrap: wrap;
-				justify-content: space-around;
-				.layerTwoContainer{
-					${'' /* located on next page */}
-					border: 1px solid red;
-					width: 100%;
-					margin: 2px;
-					${flexCenter()}
-				}
+				margin: 2px;
+				${flexCenter()}
 			}
 		}
+
 	}  
 `;
+
+// .noteContent{
+// 	/* ${start()} */
+// 	${border()}
+// 	box-sizing: border-box;
+// 	flex-direction: column;
+// 	justify-content: space-between;
+// 	align-items: flex-start;
+// 	color: black;
+// 	height: auto;
+// 	margin: 2% 0;
+// 	max-width: 100%;
+// 	overflow: hidden;
+// 	.note-preview-title {
+// 		border: 1px solid green;
+// 		margin: 0px 10px 5px 0;
+// 		text-decoration: none;
+// 		text-align: left;
+// 	}
+// 	p {
+// 		${'' /* border: 1px solid blue; */}
+// 		width: 95%;
+// 		height: 46px;
+// 		text-decoration: none;
+// 		margin: 0;
+// 		line-height: 23px;
+// 		font-size: 14px;
+// 		font: roboto;
+// 		white-space: normal;
+// 		overflow: hidden;
+// 		text-overflow: ellipsis;
+// 	}
+// }

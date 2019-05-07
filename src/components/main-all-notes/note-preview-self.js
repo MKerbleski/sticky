@@ -207,6 +207,7 @@ const NotePreviewSelfDiv = styled.div`
 	flex-direction: column;  
 	.note-link {
 		${border()}
+		border-radius: 4px;
 		height: 100%;
 		padding: 10px;
 		width: 95%;

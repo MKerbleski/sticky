@@ -191,7 +191,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailSelf));
 
 const NoteDetailSelfDiv = styled.div`
-    /* ${border()} */
+    /* ${border('green')} */
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -200,28 +200,28 @@ const NoteDetailSelfDiv = styled.div`
     width: 92%;
     background-color: lightgray;
     padding: 5px;
-    height: 80%;
+    height: 90%;
     .note-detail-main{
-        ${border()}
+        /* ${border()} */
         box-sizing: border-box;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        /* align-items: center; */
         width: 99%;
         height: 100%;
         .note-detail-left{
             box-sizing: border-box;
-            ${border()}
+            ${border('red')}
             display: flex;
             flex-direction: column;
             align-items: space-between;
             justify-content: space-between;
             width: 80%;
             margin: 5px;
-            height: 98%;
+            min-height: 98%;
             .note-detail-children{
-                ${border()}
+                /* ${border()} */
                 ${scrollBar()}
                 display: flex;
                 flex-direction: row;
@@ -232,7 +232,7 @@ const NoteDetailSelfDiv = styled.div`
             }
         }
         .note-detail-right{
-            ${border()}
+            /* ${border()} */
             ${scrollBar()}
             box-sizing: border-box;
             display: flex;
@@ -252,6 +252,7 @@ const NoteDetailSelfDiv = styled.div`
     .note-detail-settings{
         ${border()}
         ${flexCenter()}
+        border: 1px solid gray;
         box-sizing: border-box;
         width: 100%;
         justify-content: flex-end;
