@@ -155,7 +155,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(UsernamePage);
 
 const UsernamePageDiv = styled.div`
-    ${border('red')}
+    /* ${border()} */
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -163,7 +163,7 @@ const UsernamePageDiv = styled.div`
     max-width: 100%;
     width: 100%;
     .app-center {
-        ${border()}
+        /* ${border()} */
         ${flexCenter()}
         align-items: flex-start;
         flex-wrap: wrap;
@@ -173,7 +173,7 @@ const UsernamePageDiv = styled.div`
         width: 100%;
     }
     .unAuth{
-        ${border()}
+        /* ${border()} */
         ${flexCenter('column')}
         width: 100%;
     }

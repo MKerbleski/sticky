@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { AAA } from '../../helpers/availbleApis'
+
 import { RightMenuDetails } from './index'
+
+import { AAA } from '../../helpers/availbleApis'
 
 import { 
 	rightArrow, 

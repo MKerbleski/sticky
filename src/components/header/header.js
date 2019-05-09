@@ -75,7 +75,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Header)
 
 const HeaderDiv = styled.div`
     background-color: ${turquise};
-    ${border()}
+    /* ${border()} */
     ${flexCenter()}
     justify-content: space-between;
     width: 100%;

@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 // import { default as NoteQuill } from './note-detail-body-quill'
 // import axios from 'axios'
 
+import {linksBlue} from '../../styles/colors'
+
 import { 
     NoteDetailChild, 
     AttachedList,
@@ -64,8 +66,8 @@ class NoteDetailSelf extends React.Component {
                     // color={this.props.note.note_color}
                     className="note-detail" 
                     style={{background: this.props.hover ? 'lightgreen' : null}}>
-                    <div>Author: {this.props.note.sticky_username}</div>
-                    <div className="note-detail-main">
+                    <div className="noteDetailHeader">Author: {this.props.note.sticky_username}</div>
+                    <div className="noteDetailMain">
                         <div className="note-detail-left">
                             {/* <NoteQuill note={this.props.note} /> */}
                             <p>{note.text_body}</p>
@@ -191,18 +193,23 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailSelf));
 
 const NoteDetailSelfDiv = styled.div`
-    ${border('green')}
+    /* ${border('green')} */
     border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     width: 92%;
     background-color: lightgray;
     padding: 5px;
     height: 90%;
-    .note-detail-main{
+    .noteDetailHeader{
         /* ${border()} */
+        width: 98%;
+        margin: 3px;
+    }
+    .noteDetailMain{
+        /* ${border('red')} */
         box-sizing: border-box;
         display: flex;
         flex-direction: row;
@@ -217,15 +224,23 @@ const NoteDetailSelfDiv = styled.div`
             flex-direction: column;
             align-items: space-between;
             justify-content: space-between;
-            width: 80%;
-            margin: 5px;
+            width: 74%;
+            /* border: 1px solid gray; */
+            /* background: white; */
+            /* margin: 5px; */
             min-height: 98%;
-            p{background: white}
+            p {
+                background: white;
+                margin-top: 0;
+                margin: 1px;
+                padding: 3px;
+                height: 66%;
+            }
             .note-detail-children{
-                /* ${border('red')} */
+                ${border()}
                 ${scrollBar('6')}
-                border: 2px solid gray;
-                box-shadow: 2px 1px 4px 1px gray;
+                border: 1px solid gray;
+                box-shadow:  0px 0px 4px 1px gray;
                 padding: 3px;
                 display: flex;
                 flex-direction: row;
@@ -241,15 +256,16 @@ const NoteDetailSelfDiv = styled.div`
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            background: skyblue;
+            border: 1px solid gray;
+            background: ${linksBlue};
             color: white;
-            width: 30%;
-            margin: 5px;
-            height: 98%;
+            width: 25%;
+            /* margin: 5px; */
+            /* min-height: 98%; */
             .link-source-container{
                 margin-bottom: 2px;
                 width: 99%;
-                overflow: hidden; 
+                overflow: auto; 
             }
         } 
     }
@@ -258,7 +274,8 @@ const NoteDetailSelfDiv = styled.div`
         ${flexCenter()}
         border: 1px solid gray;
         box-sizing: border-box;
-        width: 100%;
+        width: 99%;
+        margin: 8px;
         justify-content: flex-end;
         .settings-link, i{
             margin: 0 10px;

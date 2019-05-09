@@ -16,7 +16,7 @@ class AttachedList extends Component {
     }
     
     render(){
-        console.log('note-detailattached', this.props);
+        // console.log('note-detailattached', this.props);
         return <AttachedListDiv> 
                     {this.props.note.slack_items 
                         ?   this.props.note.slack_items.map(item => {
@@ -58,11 +58,11 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(AttachedList)
 
 const AttachedListDiv = styled.div`
-    border: 1px solid red;
+    /* border: 1px solid red; */
     color: black;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    background: green;
+    /* background: green; */
 
 `

@@ -21,6 +21,7 @@ import {
 } from '../styles/styl-utils.js'
 
 //Formorly NoteDetialParent
+// also mislabeled as a page as it is now 'under' username page
 class NoteDetailPage extends React.Component{
 
     componentDidMount(){
@@ -152,21 +153,26 @@ const NoteDetailPageDiv = styled.div`
     background-color: ${props => props.color};
     ${'' /* above is for custom colors. below is a placeholder until I can figure out how to make them look good and custom */}
     background-color: white;
-    ${border('red')}
+    /* ${border()} */
     ${flexCenter('column')}
+    ${scrollBar()}
     justify-content: flex-start;
     margin: 2px;
     width: 100%;
     padding-bottom: 10px;
-    .return-link {
-        ${flexCenter()}
-        padding: 15px;
-        color: gray;
-    }
-    ${scrollBar()}
+    max-height: 85%;
+
     .top-part{
-        ${border()}
+        /* ${border()} */
         ${flexCenter('column')}
         height: 10%;
+        width: 50%;
+        .return-link {
+            /* ${border()} */
+            ${flexCenter()}
+            padding: 15px;
+            color: gray;
+            width: 80%;
+        }
     }
 `;

@@ -119,14 +119,14 @@ const AppDiv = styled.div`
     max-width: 100vw;
     overflow: hidden;
     .app-top {
-        ${border()}
+        /* ${border()} */
         box-sizing: border-box;
         /* min-height: 50px; */
         height: 5vh;
         overflow: hidden;
     }
     .app-bottom {
-        ${border()}
+        /* ${border()} */
         box-sizing: border-box;
         display: flex;
         flex-direction: row;

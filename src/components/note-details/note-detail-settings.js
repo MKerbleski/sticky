@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 
-
 export default class NoteDetailSettings extends Component{
     constructor(props){
         super(props);
@@ -12,7 +11,6 @@ export default class NoteDetailSettings extends Component{
 
     inputHandler = (event) => {
         event.preventDefault();
-        console.log('input handler')
         this.setState({
             [event.target.name]: event.target.value,
             id: this.props.id
@@ -21,12 +19,10 @@ export default class NoteDetailSettings extends Component{
 
     submit = (e) => {
         e.preventDefault();
-        console.log('submit', this.state)
         this.props.editNote(this.state)
     }
     
-    render(props){
-        console.log(this.props.id)
+    render(){
         return(
             <NoteDetailSettingsDiv>
                 <form onSubmit={this.submit}>
