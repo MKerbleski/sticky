@@ -7,11 +7,11 @@ export function picture(){
 }
 
 export function border(color){
-    return`
-        border: 1px solid ${color ? color : `#${Math.floor(Math.random()*16777215).toString(16)}`};
-        margin: 2px;
-        padding: 2px;
-    `;
+    // return`
+    //     border: 1px solid ${color ? color : `#${Math.floor(Math.random()*16777215).toString(16)}`};
+    //     margin: 2px;
+    //     padding: 2px;
+    // `;
 }
 
 export function scrollBar(){

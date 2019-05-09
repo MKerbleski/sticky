@@ -10,8 +10,7 @@ import {
 } from '../components/index.js';
 
 import { 
-    // getAttachedItems, 
-    // getNotes, 
+
     getSingleNote 
 } from '../actions'
 
@@ -23,12 +22,6 @@ import {
 
 //Formorly NoteDetialParent
 class NoteDetailPage extends React.Component{
-    // constructor(props){
-    //     super(props)
-    //     this.state = {
-
-    //     }
-    // }
 
     componentDidMount(){
         this.props.getSingleNote(this.props.author, this.props.note_id)
@@ -53,7 +46,6 @@ class NoteDetailPage extends React.Component{
 	// }
 
     render(){
-        console.log(this.props)
         const note = this.props.store.notes.notes[0]
         if(this.props.store.notes.responseCode === 401){
             //eventually will display whole format with a cool lock image over note
@@ -114,7 +106,7 @@ const targetObj = {
             //this disables layer one droping if there is a nested child
             if(hover){
 
-                //WILL EVENTUALLY CONDITIONALLY BECOME A PARENT
+                // TODO WILL EVENTUALLY CONDITIONALLY BECOME A PARENT
                     // const note = props.store.notes.notes[0]
                     // let parent
                     // let type

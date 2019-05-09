@@ -92,6 +92,7 @@ class NoteDetailChild extends React.Component {
     }
 }
 
+// TODO this code is repeated
 const targetObj = {
 	drop(props, monitor) {
 		const hover =  monitor.isOver({shallow:true})
@@ -113,6 +114,7 @@ const targetObj = {
 	}
 }
 
+// TODO this code is repeated
 const sourceObj = {
     beginDrag(props) {
         const note = props.note
@@ -170,9 +172,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 const NoteDetailChildDiv = styled.div`
 	/* similarities to note preview */
-	${border('blue')}
+	/* ${border('blue')} */
 	${flexCenter('column')}
 	width: 100%;
+	border: 1px solid black;
 	.note-link{
 		box-sizing: border-box;
 		display: flex;
@@ -218,6 +221,6 @@ const NoteDetailChildDiv = styled.div`
 				margin: 2px;
 				${flexCenter()}
 			}
-		}
+		}	
 	}  
 `;

@@ -191,7 +191,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailSelf));
 
 const NoteDetailSelfDiv = styled.div`
-    /* ${border('green')} */
+    ${border('green')}
     border: 1px solid black;
     display: flex;
     flex-direction: column;
