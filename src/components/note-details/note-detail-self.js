@@ -212,7 +212,7 @@ const NoteDetailSelfDiv = styled.div`
         height: 100%;
         .note-detail-left{
             box-sizing: border-box;
-            ${border('red')}
+            /* ${border('red')} */
             display: flex;
             flex-direction: column;
             align-items: space-between;
@@ -220,9 +220,13 @@ const NoteDetailSelfDiv = styled.div`
             width: 80%;
             margin: 5px;
             min-height: 98%;
+            p{background: white}
             .note-detail-children{
-                /* ${border()} */
-                ${scrollBar()}
+                /* ${border('red')} */
+                ${scrollBar('6')}
+                border: 2px solid gray;
+                box-shadow: 2px 1px 4px 1px gray;
+                padding: 3px;
                 display: flex;
                 flex-direction: row;
                 justify-content: safe space-around;

@@ -55,14 +55,14 @@ class NoteDetailChild extends React.Component {
 						id={note.id}
 						to={`/${note.sticky_username}/note/${note.id}`}
 						style={{background: hover ? 'lightgreen' : null}}>
-							<div className="note-content-header">
+							<div className="noteDetailChildHeader">
 								{note.num_slack_items_attached ||  note.num_pocket_items_attached
 										? 	<div className="note-content-link-count">
 												{note.num_pocket_items_attached + note.num_slack_items_attached}
 											</div> 
 										:   null }
 							</div>
-							<h3 className="note-content-title">
+							<h3 className="noteDetailChildText">
 								{note.text_body}
 							</h3>
 							{/* <p>{this.getFirstSen(note.text_body)}</p>  */}
@@ -176,6 +176,7 @@ const NoteDetailChildDiv = styled.div`
 	${flexCenter('column')}
 	width: 100%;
 	border: 1px solid black;
+	margin: 3px;
 	.note-link{
 		box-sizing: border-box;
 		display: flex;
@@ -183,12 +184,13 @@ const NoteDetailChildDiv = styled.div`
 		align-items: space-around;
 		justify-content: flex-start;
 		width: 95%;
+		min-width: 100px;
 		height: 100%;
 		padding: 10px;
 		background-color: wheat;
 		text-decoration: none;
-		.note-content-header{
-			${border('red')}
+		.noteDetailChildHeader{
+			/* ${border('red')} */
 			width: 100%;
 			${flexCenter()}
 			flex-direction: row-reverse;
@@ -202,8 +204,8 @@ const NoteDetailChildDiv = styled.div`
 				background: lightblue;
 			}
 		}
-		.note-content-title {
-			${border('green')}
+		.noteDetailChildText {
+			/* ${border('green')} */
 			/* margin: 0px 10px 5px 0; */
 			text-decoration: none;
 			text-align: left;

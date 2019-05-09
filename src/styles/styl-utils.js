@@ -7,21 +7,23 @@ export function picture(){
 }
 
 export function border(color){
-    // return`
-    //     border: 1px solid ${color ? color : `#${Math.floor(Math.random()*16777215).toString(16)}`};
-    //     margin: 2px;
-    //     padding: 2px;
-    // `;
+    return`
+        border: 1px solid ${color ? color : `#${Math.floor(Math.random()*16777215).toString(16)}`};
+        margin: 2px;
+        padding: 2px;
+    `;
 }
 
-export function scrollBar(){
+export function scrollBar(height=6){
     return`
         overflow: auto;
         &::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
+            height: ${height}px;
             &-thumb{
-                background-color: gray;
+                background-color: black;
                 border-radius: 25px;
+                width: 2px;
             }
         }
     `;
