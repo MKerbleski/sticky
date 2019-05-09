@@ -6,12 +6,18 @@ the best notes app
 
 a notes app that doesn't suck
 
+SECURITY
+ -- portions of this site are publicly asscessable, the idea is that you can share notes with people that can view without making an accound. Much like twitter, youtube, or google docs. Viewing is the only action that can be taken without a security token, all other actions need a security token. 
+
 KNOWN BUGS / TODO
     -- note cannot be dropped on itself or the channel that it is on 
     -- when user starts sign in process, start counter to query api every 1 second and refresh page when authenticated
     -- modify user api settings to create sync buttonn. step 1 , step 2 
     -- add user email and two passwords to sign up and name 
     -- make everything redux
+    -- theme settings with styled components 
+    -- enable quill
+    -- build out documentation
 
 FUTURE FEATURES 
     -- colors for notes     
