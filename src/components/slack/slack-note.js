@@ -1,22 +1,18 @@
 import styled from 'styled-components';
 import React from 'react';
-import { DragSource } from 'react-dnd';
+import {DragSource} from 'react-dnd';
 import ReactMarkdown from 'react-markdown';
-import { apiNote } from '../../styles/styl-utils'
 import format from 'date-fns/format'
-import { 
-    // editAttachedItems, 
-    noteToNote 
-} from '../../actions'
-import { connect } from 'react-redux';
-// import { sharedEndDrag } from '../../helpers/delete--api-end-drag'
-import { sharedStickyNoteDrop } from '../../helpers'
+import {connect} from 'react-redux';
+
+import {apiNote} from '../../styles/styl-utils'
+import {noteToNote} from '../../actions'
+import {sharedStickyNoteDrop} from '../../helpers'
 
 const SlackNote = (props) => {
     let time = props.item.ts.slice(0, 10)*1000
     time = format(time, 'MMM Do YYYY')
     if (props){
-        console.log('slackNote', props)
         return <SlackNoteDiv 
                 innerRef={instance => props.connectDragSource(instance)}
                 type="slack"

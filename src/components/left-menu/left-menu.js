@@ -1,20 +1,17 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import DeleteTarget from './delete-target.js';
 import {connect} from 'react-redux';
 
+import DeleteTarget from './delete-target.js';
 import { 
 	toggleNewNote
  } from '../../actions'
-
 import {
 	scrollBar,
 	flexCenter,
-	menu,
 	border
 } from '../../styles/styl-utils.js'
-
 import {
 	turquise,
 } from '../../styles/colors.js'
@@ -34,7 +31,7 @@ class LeftMenu extends Component {
 				this.props.toggleNewNote();
 				break;
 			default:
-				console.log("no name")
+				console.log("no name in left menu")
 		}
 	}
 
@@ -56,7 +53,7 @@ class LeftMenu extends Component {
 						className="menu-item">
 						<i className="fas fa-plus-square"></i>
 					</div>
-					<div className="menu-item">
+					{/* <div className="menu-item">
 						<i className="fas fa-tv"></i>
 					</div>
 					<div className="menu-item">
@@ -64,7 +61,7 @@ class LeftMenu extends Component {
 					</div>
 					<div className="menu-item">
 						<i className="fas fa-list-ul"></i>
-					</div>
+					</div> */}
 				</div>
 				<div className="leftMenuBottom">
 					{this.props.location.pathname === `${this.props.match.url}/trash`
@@ -89,7 +86,7 @@ class LeftMenu extends Component {
 					<Link 
 						to={`/bugs`}
 						className="menu-item">
-						<i class="fas fa-bug"></i>
+						<i className="fas fa-bug"></i>
 					</Link>
 				</div>
 			</LeftMenuDiv>
@@ -118,7 +115,7 @@ const LeftMenuDiv = styled.div`
 	background-color: ${turquise};
     .menu-item{
         ${flexCenter()}
-		${border()}
+		/* ${border()} */
         height: 50px;
         text-align: center;
         text-decoration: none;

@@ -47,3 +47,30 @@ POCKET PROPERTIES
     // time_updated: "1503940166"
     // top_image_url: "https://www.farnamstreetblog.com/wp-content/uploads/2013/04/The-Work-Required.png"
     // word_count: "675"
+
+/// noteDetail future features 
+        <!-- {/* <button name='fork' onClick={this.clickHandler}>
+        Allow Forks
+    </button> */}
+    {/* <button name='clone' onClick={this.clickHandler}>
+        Allow Clones
+    </button> */}
+    {/* <button name='edit' onClick={this.clickHandler}>
+        Allow Edits
+    </button> */}
+    {/* <button 
+        id='copyLink'
+        name='share' 
+        onClick={this.clickHandler}
+        value={`${process.env.REACT_APP_FRONTEND_URL}/${this.props.note.sticky_username}/note/${this.props.note.id}`}
+    >
+        Copy link to note to clipboard
+    </button> */}
+    {/* <button >
+        <i name='delete' onClick={this.clickHandler}className=" menu-item fas fa-trash-alt"></i>
+    </button> */}
+    {/* <button >
+        Make all children the same privacy settings
+    </button> */}
+    {/* <i className="fas fa-cogs"></i> */} -->
+    <!-- //<button onClick={this.clickHandler}>Pin Note</button> -->

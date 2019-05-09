@@ -20,7 +20,6 @@ class AttachedList extends Component {
         return <AttachedListDiv> 
                     {this.props.note.slack_items 
                         ?   this.props.note.slack_items.map(item => {
-                            console.log('item', item)
                                 return <SlackNote
                                     parent={this.props.note}
                                     key={item.uuid} 
@@ -32,7 +31,6 @@ class AttachedList extends Component {
                        
                     {this.props.note.pocket_items 
                         ?   this.props.note.pocket_items.map(item => {
-                            console.log('item', item)                                
                                 return <PocketNote 
                                     parent={this.props.note}
                                     key={item.item_id} 

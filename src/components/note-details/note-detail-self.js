@@ -21,7 +21,6 @@ import {
 } from '../../actions'
 
 import { 
-    start,
     scrollBar,
     border,
     flexCenter
@@ -38,27 +37,13 @@ class NoteDetailSelf extends React.Component {
             case "public":
                 this.props.editNote({id: this.props.store.notes.notes[0].id, is_public: !this.props.store.notes.notes[0].is_public})
                 break;
-            case "fork": 
-                console.log("fork settings are coming soon!")
-                break;
-            case "edit": 
-                console.log("edit settings are coming soon!")
-                break;
-            case "share": 
-                console.log("share settings are coming soon!")
-                break;
-            case "delete": 
-                console.log("delete settings are coming soon!")
-                break;
             default:
                 console.log("button has no name") 
         }
     }
-
     
     render(){
         const note = this.props.store.notes.notes[0]
-        console.log("note detail self", note)
         if(note){
             return (
                 <NoteDetailSelfDiv 
@@ -103,8 +88,7 @@ class NoteDetailSelf extends React.Component {
                     </div>
                     <div className="note-detail-settings">
                         {localStorage.getItem('username') === this.props.note.sticky_username 
-                            ? 
-                                <div>
+                            ?   <div>
                                     {this.props.note.is_public 
                                         ?   <i className="fas fa-unlock"></i> 
                                         :   <i className="fas fa-lock"></i>}
@@ -113,32 +97,8 @@ class NoteDetailSelf extends React.Component {
                                             ?   'Make note Private' 
                                             :   'make note PUBLIC'}
                                     </button>
-                                    {/* <button name='fork' onClick={this.clickHandler}>
-                                        Allow Forks
-                                    </button> */}
-                                    {/* <button name='clone' onClick={this.clickHandler}>
-                                        Allow Clones
-                                    </button> */}
-                                    {/* <button name='edit' onClick={this.clickHandler}>
-                                        Allow Edits
-                                    </button> */}
-                                    {/* <button 
-                                        id='copyLink'
-                                        name='share' 
-                                        onClick={this.clickHandler}
-                                        value={`${process.env.REACT_APP_FRONTEND_URL}/${this.props.note.sticky_username}/note/${this.props.note.id}`}
-                                    >
-                                        Copy link to note to clipboard
-                                    </button> */}
-                                    {/* <button >
-                                        <i name='delete' onClick={this.clickHandler}className=" menu-item fas fa-trash-alt"></i>
-                                    </button> */}
-                                    {/* <button >
-                                       Make all children the same privacy settings
-                                    </button> */}
-                                    {/* <i className="fas fa-cogs"></i> */}
                                 </div>
-                            :   null //<button onClick={this.clickHandler}>Pin Note</button>
+                            :   null 
                         }
                     </div>
                 </NoteDetailSelfDiv>
@@ -203,6 +163,7 @@ const NoteDetailSelfDiv = styled.div`
     background-color: lightgray;
     padding: 5px;
     height: 90%;
+    min-height: 90%;
     .noteDetailHeader{
         /* ${border()} */
         width: 98%;

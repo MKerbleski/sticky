@@ -41,7 +41,7 @@ class Header extends Component{
                         ? this.props.store.user.status
                         : null}
                 {localStorage.getItem('username') 
-                    ?   <div className="linkss">
+                    ?   <div className="headerLinks">
                             <h3>
                                 {`Hello ${localStorage.getItem('username')},`}
                             </h3>
@@ -49,7 +49,7 @@ class Header extends Component{
                                 Logout
                             </div> 
                         </div> 
-                    :   <div className="linkss">
+                    :   <div className="headerLinks">
                             <Link className="headerLink" to="/welcome/login" >
                                 Login
                             </Link>
@@ -104,14 +104,14 @@ const HeaderDiv = styled.div`
     p {
         margin: 0
     }
-    .linkss{
+    .headerLinks{
         ${flexCenter()}
         /* ${border()} */
         height: 30px;
         margin: 0;
         .headerLink{
             ${flexCenter()}
-            ${border()}
+            /* ${border()} */
             height: 100%;
             width: 75px;
             color: black;
