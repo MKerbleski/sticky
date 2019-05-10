@@ -97,18 +97,13 @@ class NotePreviewSelf extends React.Component {
 											if(layerTwo.is_deleted){
 												return null
 											} else {
-												return (
-													<div 
-														className="layerTwoContainer" 
-														key={layerTwo.id}>
-														<NotePreivewChild
+												return 	<NotePreivewChild
+															key={layerTwo.id}
 															type="note"
 															note={layerTwo} 
 															parent={this.props.note}
 															redirect={this.props.redirect}
 															/>
-													</div>
-												)
 											}
 										}) 
 									: 	null}
@@ -199,14 +194,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 )(NotePreviewSelf))
 
 const NotePreviewSelfDiv = styled.div`
-	${border()}
+	/* ${border('red')} */
 	padding: 10px;
-	min-width: 300px;
+	/* min-width: 300px; */
 	height: auto;
 	display: flex;
 	flex-direction: column;  
 	.note-link {
-		${border()}
+		/* ${border()} */
+		border: 1px solid gray;
 		border-radius: 4px;
 		height: 100%;
 		padding: 10px;
@@ -216,7 +212,7 @@ const NotePreviewSelfDiv = styled.div`
 		background-color: lavender;
 		background-color: ${props => props.color};
 		.note-content{
-			${border()}
+			/* ${border()} */
 			${flexCenter('column')}
 			justify-content: space-between;
 			color: black;
@@ -225,12 +221,12 @@ const NotePreviewSelfDiv = styled.div`
 			max-height: 100px;
 			margin: 2% 0;
 			.note-content-header{
-				${border()}
+				/* ${border()} */
 				${flexCenter()}
 				width: 100%;
 				justify-content: flex-end;
 				.note-content-title {
-					${border()}
+					/* ${border()} */
 					margin: 0px 10px 5px 0;
 					text-decoration: none;
 					text-align: left;
@@ -244,29 +240,13 @@ const NotePreviewSelfDiv = styled.div`
 					background: lightblue;
 				}
 			}
-			p {
-				${border()}
-				width: 95%;
-				height: 46px;
-				text-decoration: none;
-				margin: 0;
-				line-height: 23px;
-				font-size: 14px;
-				font: roboto;
-				white-space: normal;
-				overflow: hidden;
-				text-overflow: ellipsis;
-			}
 		}
 		.layerTwoContainerAll{
-			${border()}
-			${flexCenter(undefined, undefined ,'space-around')}
+			/* ${border()} */
+			${flexCenter()}
+			align-items: space-around;
 			width: 100%;
 			flex-wrap: wrap;
-			.layerTwoContainer{
-				${border()}
-				${flexCenter()}
-			}
 		}
 	}  
 `;

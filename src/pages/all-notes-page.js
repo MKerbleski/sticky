@@ -90,7 +90,7 @@ class AllNotesPage extends Component {
                                 && this.props.store.user.userData.username !== this.props.author
                                     ?   <div className='noNotes'>
                                             <h3>{this.props.author} has not published any notes yet. Please check back later.</h3>
-                                            <Link to={`/${this.props.store.user.userData.username}/`}>My Notes</Link>
+                                            <Link to={`/${this.props.store.user.userData.username}`}>My Notes</Link>
                                         </div>
                                     :   null
                                     
@@ -99,8 +99,6 @@ class AllNotesPage extends Component {
                         :   null
                     }
 
-
-                    
                     {this.props.store.notes.showNewNote && !this.props.deleteBin 
                         ?   <NotePreviewNew /> 
                         :   null
@@ -174,7 +172,7 @@ const mapDispatchToProps = {
 export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, mapDispatchToProps)(AllNotesPage))
 
 const AllNotesPageDiv = styled.div`
-    ${border()}
+    /* ${border()} */
     margin: 4px;
     color: black;
     max-width: 99%;
@@ -191,12 +189,12 @@ const AllNotesPageDiv = styled.div`
     }
     ${scrollBar()}
     .noNotes{
-        ${border()}
-        ${flexCenter()}
+        /* ${border()} */
+        ${flexCenter('column')}
         justify-content: flex-start;
     }
     .all-note-preview-container{
-        ${border()}
+        /* ${border()} */
         padding: 2px;
         display: flex;
         flex-direction: row;

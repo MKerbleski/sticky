@@ -18,6 +18,12 @@ KNOWN BUGS / TODO
     -- theme settings with styled components 
     -- enable quill
     -- build out documentation
+    -- create tests 
+    -- consolidate drag and drop functions 
+    -- comment redux actions 
+    -- move backend code to this repo
+    -- css classes naming to camelCase
+    -- hover on grandchild note expands real slick like
 
 FUTURE FEATURES 
     -- colors for notes     
