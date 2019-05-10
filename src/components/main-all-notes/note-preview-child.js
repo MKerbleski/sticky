@@ -2,10 +2,14 @@ import styled from 'styled-components';
 import React from 'react';
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
+import { connect } from 'react-redux'
+
 import { NotePreviewGrandChild } from "./index"
 import { sharedStickyNoteDrop } from '../../helpers'
-import { editNote, noteToNote } from '../../actions'
-import { connect } from 'react-redux'
+import { 
+    // editNote, 
+    noteToNote 
+} from '../../actions'
 
 class NotePreviewChild extends React.Component {
     
@@ -18,6 +22,8 @@ class NotePreviewChild extends React.Component {
         const {
             connectDragSource, 
             connectDropTarget, 
+            note,
+            hover,
         } = this.props
         if (this.props.note){
             return (
@@ -45,17 +51,13 @@ class NotePreviewChild extends React.Component {
                                         ?   this.props.note.children.map(grandchild => {
                                                 if(!grandchild.is_deleted){
                                                     return (
-                                                        <div 
-                                                            className="layerThreeContainer"
-                                                            key={grandchild.id} 
-                                                        >
                                                             <NotePreviewGrandChild 
+                                                                key={grandchild.id} 
                                                                 type="note"
                                                                 note={grandchild}
                                                                 parent={this.props.note} 
                                                                 redirect={this.props.redirect}
                                                             />
-                                                        </div>
                                                     )
                                                 } else {
                                                     return null
@@ -124,7 +126,7 @@ const mapStateToProps = store => {
 }
   
 const mapDispatchToProps = {
-    editNote,
+    // editNote,
     noteToNote
 }
   
@@ -146,7 +148,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 
 const LayerTwoDiv = styled.div`
     border: 2px solid black;
-    border-radius: 20px;
+    border-radius: 15px;
     margin: 10px;
     padding: 10px;
     ${'' /* height: 90px; */}
@@ -172,7 +174,7 @@ const LayerTwoDiv = styled.div`
         width: 5px;
     }
     .layerThreeContainerAll{
-        ${'' /* border: 1px solid red; */}
+        /* border: 1px solid red; */
         ${'' /* border: 1px solid green; */}
         ${'' /* height: 500px; */}
         ${'' /* background: gray; */}
@@ -183,9 +185,14 @@ const LayerTwoDiv = styled.div`
         justify-content: center;
         align-items: space-around;
         ${'' /* overflow: hidden; */}
+
+        /* think i can delete below */
         .layerThreeContainer{
-            ${'' /* border: 1px solid red; */}
-            height: 25px;
+            border: 1px solid red;
+            /* height: 25px;
+            :hover{
+                height: 50px;
+            } */
         }
     }
 `;

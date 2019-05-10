@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { DropTarget } from 'react-dnd';
+import {connect} from 'react-redux';
+import {DropTarget} from 'react-dnd';
+import {Link} from 'react-router-dom';
 
 import { 
     NotePreviewNew,
@@ -21,14 +22,10 @@ import {
     border,
 } from '../styles/styl-utils.js'
 
-import { Link } from 'react-router-dom';
-
 class AllNotesPage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            // stateNotes: false,
-            // notes: [],
         }
     }
 
@@ -58,9 +55,7 @@ class AllNotesPage extends Component {
     }
 
     render() {
-        // console.log('all notes', this.props)
-        const notes = this.props.store.notes.notes
-        // console.log('all notes', this.props)
+        const {notes} = this.props.store.notes
         if(notes){
             return (
                 <AllNotesPageDiv
