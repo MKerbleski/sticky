@@ -153,7 +153,7 @@ const LayerTwoDiv = styled.div`
     flex-direction: column;
     align-content: flex-start;
     justify-content: flex-start;
-    overflow: visible;
+    overflow: hidden;
     h4 {
         ${'' /* border: 1px solid orange; */}
         margin: 0px;

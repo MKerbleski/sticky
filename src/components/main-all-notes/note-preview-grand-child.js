@@ -98,13 +98,12 @@ const NotePreviewGrandChildDiv = styled.div`
     align-items: center;
     overflow: hidden;
     :hover{
-        transition: 2s height, width, font-size;
-        transition-delay: .5s;
+        transition: .25s height, .25s width, .25s font-size;
+        transition-delay: 1s;
         transition-timing-function: ease-out;
 
         height: 50px;
         width: 50px;
         font-size: 15px;
-        /* overflow: visible; */
     }
 `;
