@@ -45,6 +45,7 @@ class NotePreviewChild extends React.Component {
                         }
                         
                         <h4>{this.props.note.text_body}</h4>
+
                         {this.props.note.has_children && this.props.note.children 
                             ?   <div className="layerThreeContainerAll">
                                     {this.props.note.children.map(grandchild => {
@@ -157,6 +158,7 @@ const LayerTwoDiv = styled.div`
         ${'' /* border: 1px solid orange; */}
         margin: 0px;
     }
+    width: 100px;
     .note-content-link-count{
         border: .5px solid black;
         border-radius: 50px;
@@ -170,24 +172,11 @@ const LayerTwoDiv = styled.div`
     }
     .layerThreeContainerAll{
         /* border: 1px solid red; */
-        ${'' /* border: 1px solid green; */}
-        ${'' /* height: 500px; */}
-        ${'' /* background: gray; */}
-        ${'' /* height: 90px; */}
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
         justify-content: center;
+        flex-wrap: wrap;
         align-items: space-around;
         ${'' /* overflow: hidden; */}
-
-        /* think i can delete below */
-        .layerThreeContainer{
-            border: 1px solid red;
-            /* height: 25px;
-            :hover{
-                height: 50px;
-            } */
-        }
     }
 `;

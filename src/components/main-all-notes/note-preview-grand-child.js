@@ -85,7 +85,7 @@ export default connect(
         DragSource('item', sourceObj, collect)(NotePreviewGrandChild))
 
 const NotePreviewGrandChildDiv = styled.div`
-    border: 1px solid green;
+    border: 2px solid green;
     background: black;
     color: white;
     font-size: 10px;
@@ -96,4 +96,15 @@ const NotePreviewGrandChildDiv = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    :hover{
+        transition: 2s height, width, font-size;
+        transition-delay: .5s;
+        transition-timing-function: ease-out;
+
+        height: 50px;
+        width: 50px;
+        font-size: 15px;
+        /* overflow: visible; */
+    }
 `;
