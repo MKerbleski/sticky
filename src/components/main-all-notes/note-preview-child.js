@@ -45,25 +45,20 @@ class NotePreviewChild extends React.Component {
                         }
                         
                         <h4>{this.props.note.text_body}</h4>
-                        {this.props.note.has_children 
+                        {this.props.note.has_children && this.props.note.children 
                             ?   <div className="layerThreeContainerAll">
-                                    {this.props.note.children 
-                                        ?   this.props.note.children.map(grandchild => {
-                                                if(!grandchild.is_deleted){
-                                                    return (
-                                                            <NotePreviewGrandChild 
-                                                                key={grandchild.id} 
-                                                                type="note"
-                                                                note={grandchild}
-                                                                parent={this.props.note} 
-                                                                redirect={this.props.redirect}
-                                                            />
-                                                    )
-                                                } else {
-                                                    return null
-                                                }
-                                            })
-                                    :   null    }
+                                    {this.props.note.children.map(grandchild => {
+                                        return (!grandchild.is_deleted 
+                                            ?   <NotePreviewGrandChild 
+                                                        key={grandchild.id} 
+                                                        type="note"
+                                                        note={grandchild}
+                                                        parent={this.props.note} 
+                                                        redirect={this.props.redirect}
+                                                    />
+                                            :   null)
+                                        })
+                                    }
                                 </div> 
                             :   null
                         }            
