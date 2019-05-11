@@ -30,7 +30,6 @@ class NoteDetailChild extends React.Component {
 		}
 	}
   
-
     render(){
 		const {
 			note,
@@ -177,6 +176,7 @@ const NoteDetailChildDiv = styled.div`
 	width: 100%;
 	border: 1px solid black;
 	margin: 3px;
+	box-shadow:  0px 0px 4px 1px gray;
 	.note-link{
 		box-sizing: border-box;
 		display: flex;

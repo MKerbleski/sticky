@@ -24,6 +24,7 @@ KNOWN BUGS / TODO
     -- move backend code to this repo
     -- css classes naming to camelCase
     -- hover on grandchild note expands real slick like
+    -- in note-detail put the drop shadow on individual notes instead of the group
 
 FUTURE FEATURES 
     -- colors for notes     

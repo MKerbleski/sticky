@@ -38,23 +38,16 @@
     -->
   </body>
 </html>
-  <script>
-(function() {
-    function scrollHorizontally(e) {
-        e = window.event || e;
-        var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-        document.getElementById('note-detail-children').scrollLeft -= (delta*40); // Multiplied by 40
-        e.preventDefault();
-    }
-    if (document.getElementById('note-detail-children').addEventListener) {
-        // IE9, Chrome, Safari, Opera
-        document.getElementById('note-detail-children').addEventListener("mousewheel", scrollHorizontally, false);
-        // Firefox
-        document.getElementById('note-detail-children').addEventListener("DOMMouseScroll", scrollHorizontally, false);
-    } else {
-        // IE 6/7/8
-        document.getElementById('note-detail-children').attachEvent("onmousewheel", scrollHorizontally);
-    }
-})();
-</script>
+
+<!-- FONT AWESOME -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+<!-- FOR HORIZONTAL SCROLL -->
+<!-- $(function() {
+  $("noteDetailChildren").mousewheel(function(event, delta) {
+  this.scrollLeft -= (delta * 30);
+  event.preventDefault();
+  });
+})
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>
+<script type='text/javascript' src='/js/jquery.mousewheel.min.js'></script> -->

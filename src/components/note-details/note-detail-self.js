@@ -26,6 +26,8 @@ import {
     flexCenter
 } from '../../styles/styl-utils.js'
 
+
+
 class NoteDetailSelf extends React.Component {
     constructor(props){
         super(props)
@@ -35,13 +37,20 @@ class NoteDetailSelf extends React.Component {
     clickHandler = (e) => {
         switch(e.target.name){
             case "public":
-                this.props.editNote({id: this.props.store.notes.notes[0].id, is_public: !this.props.store.notes.notes[0].is_public})
+                this.props.editNote({
+                    id: this.props.store.notes.notes[0].id, 
+                    is_public: !this.props.store.notes.notes[0].is_public})
                 break;
             default:
                 console.log("button has no name") 
         }
     }
-    
+
+    scrollLeft = (e) => {
+        const left = document.getElementById('noteDetailChildren') 
+        left.scrollLeft -= e.deltaY *-.5
+    }
+
     render(){
         const note = this.props.store.notes.notes[0]
         if(note){
@@ -57,7 +66,11 @@ class NoteDetailSelf extends React.Component {
                             {/* <NoteQuill note={this.props.note} /> */}
                             <p>{note.text_body}</p>
                             {note.children || this.props.store.notes.showNewNote
-                                ?   <div id="note-detail-children" className="note-detail-children">
+                                ?   <div 
+                                        onWheel={(e) => this.scrollLeft(e)} 
+                                        className="noteDetailChildren" 
+                                        id="noteDetailChildren" 
+                                    >
                                         {this.props.store.notes.showNewNote 
                                             ?   <NotePreviewNew parent={note} /> 
                                             :   null}
@@ -74,7 +87,6 @@ class NoteDetailSelf extends React.Component {
                                         }
                                     </div>
                                 :   null}
-                            
                         </div>
                         
                         {note.slack_items || note.pocket_items
@@ -104,7 +116,7 @@ class NoteDetailSelf extends React.Component {
                 </NoteDetailSelfDiv>
             )
         } else {
-            return  <p>note-detail-self</p>
+            return  <p>note-detail-self is not displaying</p>
         }
     }
 }
@@ -134,6 +146,8 @@ const targetObj = {
         }
     }
 }
+
+
 
 const collect = (connect,  monitor) => ({
     connectDropTarget: connect.dropTarget(),
@@ -197,11 +211,10 @@ const NoteDetailSelfDiv = styled.div`
                 padding: 3px;
                 height: 66%;
             }
-            .note-detail-children{
-                ${border()}
+            .noteDetailChildren {
+                /* ${border()} */
                 ${scrollBar('6')}
-                border: 1px solid gray;
-                box-shadow:  0px 0px 4px 1px gray;
+                /* border: 1px solid gray; */
                 padding: 3px;
                 display: flex;
                 flex-direction: row;
@@ -247,4 +260,34 @@ const NoteDetailSelfDiv = styled.div`
             }
         }
     }
+    .test{
+            border: 3px solid green;
+            box-sizing: border-box;
+            /* ${border()} */
+                ${scrollBar('6')}
+                /* border: 1px solid gray; */
+                /* box-shadow:  0px 0px 4px 1px gray; */
+                /* padding: 3px; */
+                /* display: flex;
+                flex-direction: column;
+                align-items: safe space-around; */
+                overflow: auto;
+            /* margin: 0; */
+            max-width: 130px;
+            width: 100%;
+            min-height: 99%;
+            transform: rotate(-90deg);
+            transform-origin: right top; 
+            .testChild{
+                transform: rotate(90deg);
+                transform: right top;
+                max-height: 100px;
+                height: 100%;
+                margin: 5px;
+                /* width: 100%; */
+                max-width: 100px;
+                border: 1px solid green;
+                ${flexCenter}
+            }
+        }
 `;
