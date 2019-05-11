@@ -6,6 +6,6 @@ export {default as NoteDetailGrandChild} from './note-detail-grand-child.js';
 export {default as NoteDetailGreatGrandChild} from './note-detail-great-grand-child.js';
 export {default as NoteDetailBody} from './note-detail-body.js';
 export {default as NoteDetailBodyEdit} from './note-detail-body-edit.js';
-export {default as AttachedList} from './note-detail-attached.js';
+export {default as NoteDetailAttachedList} from './noteDetailAttachedList.js';
 export {default as NoteDetailNewChild} from './noteDetailNewChild.js';
 // export {default as NoteDetailPage} from './delete-Note-Detail-Page.js/index.js';

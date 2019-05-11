@@ -1,32 +1,24 @@
 import React , { Component } from 'react'
-import { connect } from 'react-redux';
 import styled from 'styled-components'
+
 import { 
     SlackNote, 
     PocketNote, 
-} from './../index.js';
-import { 
-    // getAttachedItems,
-    // editAttachedItems, 
-} from '../../actions'
+} from '../index.js';
+
 import { 
     scrollBar,
     border,
     flexCenter
 } from '../../styles/styl-utils.js'
+
 import {
     linksBlue
 } from '../../styles/colors'
 
-
-class AttachedList extends Component {
-    componentDidMount(){
-        // this.props.getAttachedItems(this.props.stickyNote.id);
-    }
-    
+class NoteDetailAttachedList extends Component {    
     render(){
-        // console.log('note-detailattached', this.props);
-        return <AttachedListDiv> 
+        return <NoteDetailAttachedListDiv> 
                     {this.props.note.slack_items 
                         ?   this.props.note.slack_items.map(item => {
                                 return <SlackNote
@@ -35,7 +27,7 @@ class AttachedList extends Component {
                                     item={item} 
                                     stickyNote={this.props.stickyNote} />
                                 }) 
-                        :   <h1>atta</h1>
+                        :   null
                     }
                        
                     {this.props.note.pocket_items 
@@ -47,45 +39,24 @@ class AttachedList extends Component {
                                     item={item} 
                                 />
                             }) 
-                        :   <h1>atta</h1>
+                        :   null
                     }
-            </AttachedListDiv>
+            </NoteDetailAttachedListDiv>
     }
 }
 
-const mapStateToProps = store => {
-    return {store: store};
-}
+export default NoteDetailAttachedList
 
-const mapDispatchToProps = {
-    // getAttachedItems,
-    // editAttachedItems
-}
-  
-export default connect(mapStateToProps, mapDispatchToProps)(AttachedList)
-
-const AttachedListDiv = styled.div`
-    /* border: 1px solid red; */
+const NoteDetailAttachedListDiv = styled.div`
+    /* ${border()} */
+    ${scrollBar()}
+    box-sizing: border-box;
     color: black;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    /* background: green; */
-
-    /* ${border()} */
-    ${scrollBar()}
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
+    padding: 5px;
     border: 1px solid gray;
     background: ${linksBlue};
-    color: white;
     min-width: 30%;
-    /* margin: 5px; */
-    /* min-height: 98%; */
-    .link-source-container{
-        margin-bottom: 2px;
-        width: 99%;
-        overflow: auto; 
-    }
 `

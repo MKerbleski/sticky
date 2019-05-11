@@ -33,8 +33,8 @@ class NoteDetailChild extends React.Component {
   
 	scrollDown = (e) => {
 		e.stopPropagation()
-        const el = document.getElementsByClassName('noteDetailGrandchildrenContainer')
-		el.scrollDown -= e.deltaY
+        const div = document.getElementsByClassName('noteDetailGrandchildrenContainer')
+		div.scrollDown -= e.deltaY
     }
 
     render(){
@@ -226,20 +226,13 @@ const NoteDetailChildDiv = styled.div`
 			text-align: left;
 		}
 		.noteDetailGrandchildrenContainer{
-			border: 1px solid blue;
-			width: 100%;
+			/* ${border()} */
 			${flexCenter('row')}
 			${scrollBar()}
+			width: 100%;
 			flex-wrap: wrap;
 			justify-content: space-around;
 			overflow: auto;
-			.layerTwoContainer{
-				${'' /* located on next page */}
-				border: 1px solid red;
-				width: 100%;
-				margin: 2px;
-				${flexCenter()}
-			}
 		}	
 	}  
 `;

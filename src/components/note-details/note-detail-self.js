@@ -9,7 +9,7 @@ import {linksBlue} from '../../styles/colors'
 
 import { 
     NoteDetailChild, 
-    AttachedList,
+    NoteDetailAttachedList,
     NoteDetailNewChild
 } from './index.js'
 
@@ -102,7 +102,7 @@ class NoteDetailSelf extends React.Component {
                         </div>
                         
                         {note.num_pocket_items_attached || note.num_pocket_items_attached
-                            ?   <AttachedList 
+                            ?   <NoteDetailAttachedList 
                                     note={note}
                                 />
                             :   null }

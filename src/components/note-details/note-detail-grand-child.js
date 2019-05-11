@@ -16,8 +16,9 @@ import {
     sharedStickyNoteDrop 
 } from '../../helpers'
 
+
 class NoteDetailGrandChild extends React.Component {
-    clickHandler = (e, id) => {
+    clickHandler = (e) => {
         e.preventDefault();
         this.props.redirect(`/${this.props.note.sticky_username}/note/${this.props.note.id}`)
     }
@@ -88,7 +89,7 @@ const sourceObj = {
 		});
     },
 
-    endDrag(props, monitor) {// this takes props mounted on beginDrag
+    endDrag(props, monitor) {
         if(!monitor.didDrop()){
             return;
         }
