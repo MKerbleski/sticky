@@ -25,7 +25,7 @@ class NotePreviewChild extends React.Component {
             note,
             hover,
         } = this.props
-        if (this.props.note){
+        if (note){
             return (
                 connectDragSource &&
                 connectDropTarget &&

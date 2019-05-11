@@ -6,9 +6,11 @@ export {
     AllNotes, 
     AllNotesBin,
     NotePreview,
+    NotePreviewNew,
+    NotePreviewSelf,
     LayerTwoTargetSource,
     LayerThreeSource
-} from './main-all-notes';
+} from './notePreview';
 
 export {
     NoteDetailParent,

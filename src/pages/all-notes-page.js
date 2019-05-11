@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import { 
     NotePreviewNew,
     NotePreviewSelf
-} from '../components/main-all-notes/index';
+} from '../components/index';
 
 import { 
     getNotes,

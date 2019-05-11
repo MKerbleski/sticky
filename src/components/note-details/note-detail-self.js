@@ -15,7 +15,7 @@ import {
 
 import {
     NotePreviewNew 
-} from './../main-all-notes/index'
+} from '../notePreview/index'
 
 import {  
     editNote 
