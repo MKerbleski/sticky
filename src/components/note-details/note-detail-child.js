@@ -13,6 +13,7 @@ import {
 import { 
 	flexCenter, 
 	border,
+	scrollBar
 } from '../../styles/styl-utils.js'
 
 import { 
@@ -30,6 +31,12 @@ class NoteDetailChild extends React.Component {
 		}
 	}
   
+	scrollDown = (e) => {
+		e.stopPropagation()
+        const el = document.getElementsByClassName('noteDetailGrandchildrenContainer')
+		el.scrollDown -= e.deltaY
+    }
+
     render(){
 		const {
 			note,
@@ -39,6 +46,7 @@ class NoteDetailChild extends React.Component {
 			hover,
 			redirect
 		} = this.props
+
         if (note && !note.is_deleted){
             return (
                 connectDragSource &&
@@ -47,41 +55,47 @@ class NoteDetailChild extends React.Component {
                     innerRef={instance => {
 						connectDragSource(instance);
 						connectDropTarget(instance);}}
-                    color={color} 
+                    color={color}
 				>
 					<Link
 						className="note-link"
 						id={note.id}
 						to={`/${note.sticky_username}/note/${note.id}`}
-						style={{background: hover ? 'lightgreen' : null}}>
-							<div className="noteDetailChildHeader">
-								{note.num_slack_items_attached ||  note.num_pocket_items_attached
-										? 	<div className="note-content-link-count">
-												{note.num_pocket_items_attached + note.num_slack_items_attached}
-											</div> 
-										:   null }
-							</div>
-							<h3 className="noteDetailChildText">
-								{note.text_body}
-							</h3>
-							{/* <p>{this.getFirstSen(note.text_body)}</p>  */}
-							<div className="layerTwoContainerAll">
-								{note.has_children 
-									? 	note.children.map(grandchild => {
-											if(!grandchild.is_deleted){
-												return <NoteDetailGrandChild
-													key={grandchild.id}
-													type="note"
-													note={grandchild} 
-													parent={note}
-													redirect={redirect}
-												/>
-											} else {
-												return null
-											} 
-										})
-									:	null}
-							</div>
+						style={{background: hover ? 'lightgreen' : null}}
+					>
+						<div 
+							className="noteDetailChildHeader" 
+						>
+							{note.num_slack_items_attached ||  note.num_pocket_items_attached
+									? 	<div className="note-content-link-count">
+											{note.num_pocket_items_attached + note.num_slack_items_attached}
+										</div> 
+									:   null }
+						</div>
+						<h3 className="noteDetailChildText">
+							{note.text_body}
+						</h3>
+						{/* <p>{this.getFirstSen(note.text_body)}</p>  */}
+						<div 
+							className="noteDetailGrandchildrenContainer"
+							onWheel={(e) => this.scrollDown(e)} 
+						>
+							{note.has_children 
+								? 	note.children.map(grandchild => {
+										if(!grandchild.is_deleted){
+											return <NoteDetailGrandChild
+												key={grandchild.id}
+												type="note"
+												note={grandchild} 
+												parent={note}
+												redirect={redirect}
+											/>
+										} else {
+											return null
+										} 
+									})
+								:	null}
+						</div>
 					</Link>
                 </NoteDetailChildDiv>
             )
@@ -176,14 +190,15 @@ const NoteDetailChildDiv = styled.div`
 	width: 100%;
 	border: 1px solid black;
 	margin: 3px;
-	box-shadow:  0px 0px 4px 1px gray;
+	box-shadow:  0px 0px 2px .5px gray;
+	max-height: 150px;
 	.note-link{
 		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
 		align-items: space-around;
 		justify-content: flex-start;
-		width: 95%;
+		width: 100%;
 		min-width: 100px;
 		height: 100%;
 		padding: 10px;
@@ -210,12 +225,14 @@ const NoteDetailChildDiv = styled.div`
 			text-decoration: none;
 			text-align: left;
 		}
-		.layerTwoContainerAll{
+		.noteDetailGrandchildrenContainer{
 			border: 1px solid blue;
 			width: 100%;
 			${flexCenter('row')}
+			${scrollBar()}
 			flex-wrap: wrap;
 			justify-content: space-around;
+			overflow: auto;
 			.layerTwoContainer{
 				${'' /* located on next page */}
 				border: 1px solid red;

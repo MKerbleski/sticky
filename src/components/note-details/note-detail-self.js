@@ -31,7 +31,9 @@ import {
 class NoteDetailSelf extends React.Component {
     constructor(props){
         super(props)
-        this.state = {}
+        this.state = {
+            scrollDown: false
+        }
     }
 
     clickHandler = (e) => {
@@ -47,8 +49,16 @@ class NoteDetailSelf extends React.Component {
     }
 
     scrollLeft = (e) => {
-        const left = document.getElementById('noteDetailChildren') 
-        left.scrollLeft -= e.deltaY *-.5
+        e.preventDefault()
+        e.stopPropagation()
+        if(!this.state.scrollDown){
+            const el = document.getElementById('noteDetailChildren') 
+            el.scrollLeft -= e.deltaY *-.5
+        }
+    }
+
+    updateState(update){
+        this.setState(update)
     }
 
     render(){
@@ -77,6 +87,7 @@ class NoteDetailSelf extends React.Component {
                                         {note.children 
                                             ?   note.children.map(child => {
                                                     return <NoteDetailChild
+                                                        updateState={this.updateState}
                                                         key={child.id}
                                                         type="note"
                                                         note={child}
@@ -176,7 +187,7 @@ const NoteDetailSelfDiv = styled.div`
     width: 92%;
     background-color: lightgray;
     padding: 5px;
-    height: 90%;
+    height: 80vh;
     min-height: 90%;
     .noteDetailHeader{
         /* ${border()} */

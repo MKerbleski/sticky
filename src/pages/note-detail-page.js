@@ -53,12 +53,12 @@ class NoteDetailPage extends React.Component{
             return <h1>Unauthorized</h1>
         }
         if(note){
-            let parent
-            if(note.has_parent_note){
-                parent = note.parent_note
-            } else {
-                parent = null
-            }
+            let parent = note.has_parent_note ? note.parent_note : null
+            // if(note.has_parent_note){
+            //     parent = note.parent_note
+            // } else {
+            //     parent = null
+            // }
             return (
                 <NoteDetailPageDiv 
                     innerRef={instance => this.props.connectDropTarget(instance)}

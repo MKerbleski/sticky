@@ -25,6 +25,7 @@ KNOWN BUGS / TODO
     -- css classes naming to camelCase
     -- hover on grandchild note expands real slick like
     -- in note-detail put the drop shadow on individual notes instead of the group
+    -- remove link in grandchild detail element
 
 FUTURE FEATURES 
     -- colors for notes     
