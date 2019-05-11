@@ -32,7 +32,6 @@ class NoteDetailSelf extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            scrollDown: false
         }
     }
 
@@ -57,22 +56,20 @@ class NoteDetailSelf extends React.Component {
         }
     }
 
-    updateState(update){
-        this.setState(update)
-    }
-
     render(){
         const note = this.props.store.notes.notes[0]
+        console.log('note', note)
         if(note){
             return (
                 <NoteDetailSelfDiv 
+                    note={note}
                     innerRef={instance => this.props.connectDropTarget(instance)}
                     // color={this.props.note.note_color}
                     className="note-detail" 
                     style={{background: this.props.hover ? 'lightgreen' : null}}>
                     <div className="noteDetailHeader">Author: {this.props.note.sticky_username}</div>
                     <div className="noteDetailMain">
-                        <div className="note-detail-left">
+                        <div className="note-detail-left" >
                             {/* <NoteQuill note={this.props.note} /> */}
                             <p>{note.text_body}</p>
                             {note.children || this.props.store.notes.showNewNote
@@ -100,13 +97,11 @@ class NoteDetailSelf extends React.Component {
                                 :   null}
                         </div>
                         
-                        {note.slack_items || note.pocket_items
-                            ?   <div className="note-detail-right">
-                                    <AttachedList 
-                                        note={note}
-                                    />
-                                </div>
-                            :   <p>nothing attached</p>}
+                        {note.num_pocket_items_attached || note.num_pocket_items_attached
+                            ?   <AttachedList 
+                                    note={note}
+                                />
+                            :   null }
                         
                     </div>
                     <div className="note-detail-settings">
@@ -187,7 +182,7 @@ const NoteDetailSelfDiv = styled.div`
     width: 92%;
     background-color: lightgray;
     padding: 5px;
-    height: 80vh;
+    height: 85vh;
     min-height: 90%;
     .noteDetailHeader{
         /* ${border()} */
@@ -210,7 +205,9 @@ const NoteDetailSelfDiv = styled.div`
             flex-direction: column;
             align-items: space-between;
             justify-content: space-between;
-            width: 74%;
+            /* max-width: 100%; */
+            width: ${props => props.note.num_pocket_items_attached || props.note.num_pocket_items_attached ? '70%': '100%' 
+            };
             /* border: 1px solid gray; */
             /* background: white; */
             /* margin: 5px; */
@@ -218,9 +215,10 @@ const NoteDetailSelfDiv = styled.div`
             p {
                 background: white;
                 margin-top: 0;
-                margin: 1px;
+                margin: 4px;
                 padding: 3px;
-                height: 66%;
+                height: 100%;
+                max-width: 100%;
             }
             .noteDetailChildren {
                 /* ${border()} */
@@ -231,28 +229,12 @@ const NoteDetailSelfDiv = styled.div`
                 flex-direction: row;
                 justify-content: safe space-around;
                 overflow: auto;
-                max-height: 40%;
+                height: 40%;
                 min-height: 100px;
+                width: 98%;
             }
         }
-        .note-detail-right{
-            /* ${border()} */
-            ${scrollBar()}
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid gray;
-            background: ${linksBlue};
-            color: white;
-            width: 25%;
-            /* margin: 5px; */
-            /* min-height: 98%; */
-            .link-source-container{
-                margin-bottom: 2px;
-                width: 99%;
-                overflow: auto; 
-            }
-        } 
+        
     }
     .note-detail-settings{
         ${border()}
@@ -271,34 +253,23 @@ const NoteDetailSelfDiv = styled.div`
             }
         }
     }
-    .test{
-            border: 3px solid green;
-            box-sizing: border-box;
-            /* ${border()} */
-                ${scrollBar('6')}
-                /* border: 1px solid gray; */
-                /* box-shadow:  0px 0px 4px 1px gray; */
-                /* padding: 3px; */
-                /* display: flex;
-                flex-direction: column;
-                align-items: safe space-around; */
-                overflow: auto;
-            /* margin: 0; */
-            max-width: 130px;
-            width: 100%;
-            min-height: 99%;
-            transform: rotate(-90deg);
-            transform-origin: right top; 
-            .testChild{
-                transform: rotate(90deg);
-                transform: right top;
-                max-height: 100px;
-                height: 100%;
-                margin: 5px;
-                /* width: 100%; */
-                max-width: 100px;
-                border: 1px solid green;
-                ${flexCenter}
-            }
-        }
 `;
+
+// .note-detail-right{
+//     /* ${border()} */
+//     ${scrollBar()}
+//     box-sizing: border-box;
+//     display: flex;
+//     flex-direction: column;
+//     border: 1px solid gray;
+//     background: ${linksBlue};
+//     color: white;
+//     width: 25%;
+//     /* margin: 5px; */
+//     /* min-height: 98%; */
+//     .link-source-container{
+//         margin-bottom: 2px;
+//         width: 99%;
+//         overflow: auto; 
+//     }
+// } 

@@ -9,6 +9,15 @@ import {
     // getAttachedItems,
     // editAttachedItems, 
 } from '../../actions'
+import { 
+    scrollBar,
+    border,
+    flexCenter
+} from '../../styles/styl-utils.js'
+import {
+    linksBlue
+} from '../../styles/colors'
+
 
 class AttachedList extends Component {
     componentDidMount(){
@@ -63,4 +72,20 @@ const AttachedListDiv = styled.div`
     align-items: flex-end;
     /* background: green; */
 
+    /* ${border()} */
+    ${scrollBar()}
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    background: ${linksBlue};
+    color: white;
+    min-width: 30%;
+    /* margin: 5px; */
+    /* min-height: 98%; */
+    .link-source-container{
+        margin-bottom: 2px;
+        width: 99%;
+        overflow: auto; 
+    }
 `
