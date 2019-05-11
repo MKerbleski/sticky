@@ -10,6 +10,9 @@ import {
     // editNote, 
     noteToNote 
 } from '../../actions'
+import { 
+    border
+} from '../../styles/styl-utils.js'
 
 class NotePreviewChild extends React.Component {
     
@@ -29,32 +32,35 @@ class NotePreviewChild extends React.Component {
             return (
                 connectDragSource &&
                 connectDropTarget &&
-                    <LayerTwoDiv 
+                    <NotePreviewChildDiv 
                         innerRef={instance => {
                             connectDragSource(instance)
                             connectDropTarget(instance)}}
                         type="note"
                         onClick={this.goToNote}
-                        style={{background: this.props.hover ? 'lightgreen' : null}}
+                        style={{background: hover ? 'lightgreen' : null}}
                     >
-                        {this.props.note.num_slack_items_attached ||  this.props.note.num_pocket_items_attached
-                            ? 	<div className="note-content-link-count">
-                                   {/* {this.props.note.num_pocket_items_attached + this.props.note.num_slack_items_attached} */}
-                                </div> 
-                            :   null 
-                        }
+                        <div className="notePreviewChildHeader">
+                            {note.num_slack_items_attached ||  note.num_pocket_items_attached
+                                ? 	<div className="note-content-link-count">
+                                    {/* {this.props.note.num_pocket_items_attached + this.props.note.num_slack_items_attached} */}
+                                    </div> 
+                                :   null 
+                            }
+                        </div>
                         
-                        <h4>{this.props.note.text_body}</h4>
+                        <h4>{note.text_body}</h4>
 
-                        {this.props.note.has_children && this.props.note.children 
+                        {note.has_children && note.children 
                             ?   <div className="layerThreeContainerAll">
-                                    {this.props.note.children.map(grandchild => {
+                                    {
+                                        note.children.map(grandchild => {
                                         return (!grandchild.is_deleted 
                                             ?   <NotePreviewGrandChild 
                                                         key={grandchild.id} 
                                                         type="note"
                                                         note={grandchild}
-                                                        parent={this.props.note} 
+                                                        parent={note} 
                                                         redirect={this.props.redirect}
                                                     />
                                             :   null)
@@ -63,7 +69,7 @@ class NotePreviewChild extends React.Component {
                                 </div> 
                             :   null
                         }            
-                    </LayerTwoDiv>       
+                    </NotePreviewChildDiv>       
                 )
         } else {
             return null
@@ -122,7 +128,6 @@ const mapStateToProps = store => {
 }
   
 const mapDispatchToProps = {
-    // editNote,
     noteToNote
 }
   
@@ -142,7 +147,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 
 )(NotePreviewChild));
 
-const LayerTwoDiv = styled.div`
+const NotePreviewChildDiv = styled.div`
     border: 2px solid black;
     border-radius: 15px;
     margin: 10px;
@@ -154,11 +159,16 @@ const LayerTwoDiv = styled.div`
     align-content: flex-start;
     justify-content: flex-start;
     overflow: hidden;
+    width: 100px;
+    .notePreviewChildHeader{
+        /* ${border()} */
+        display: flex;
+        justify-content: flex-end;
+    }
     h4 {
         ${'' /* border: 1px solid orange; */}
         margin: 0px;
     }
-    width: 100px;
     .note-content-link-count{
         border: .5px solid black;
         border-radius: 50px;
