@@ -204,6 +204,7 @@ const NoteDetailChildDiv = styled.div`
 		padding: 10px;
 		background-color: wheat;
 		text-decoration: none;
+		color: black;
 		.noteDetailChildHeader{
 			/* ${border('red')} */
 			width: 100%;
@@ -228,7 +229,7 @@ const NoteDetailChildDiv = styled.div`
 		.noteDetailGrandchildrenContainer{
 			/* ${border()} */
 			${flexCenter('row')}
-			${scrollBar()}
+			${scrollBar(undefined, 'gray')}
 			width: 100%;
 			flex-wrap: wrap;
 			justify-content: space-around;

@@ -44,7 +44,7 @@ class NoteDetailSelf extends React.Component {
                     is_public: !this.props.store.notes.notes[0].is_public})
                 break;
             default:
-                console.log("button has no name") 
+                console.log("a button has no name") 
         }
     }
 
@@ -53,7 +53,7 @@ class NoteDetailSelf extends React.Component {
         e.stopPropagation()
         if(!this.state.scrollDown){
             const el = document.getElementById('noteDetailChildren') 
-            el.scrollLeft -= e.deltaY *-.5
+            el.scrollLeft -= e.deltaY *-.3
         }
     }
 
@@ -226,8 +226,7 @@ const NoteDetailSelfDiv = styled.div`
             }
             .noteDetailChildren {
                 /* ${border()} */
-                ${scrollBar('6')}
-                /* border: 1px solid gray; */
+                ${scrollBar('6', 'gray')}
                 padding: 3px;
                 display: flex;
                 flex-direction: row;

@@ -14,14 +14,14 @@ export function border(color){
     `;
 }
 
-export function scrollBar(height=6){
+export function scrollBar(height=6, color='black'){
     return`
         overflow: auto;
         &::-webkit-scrollbar {
             width: 5px;
             height: ${height}px;
             &-thumb{
-                background-color: black;
+                background-color: ${color};
                 border-radius: 25px;
                 width: 2px;
             }
