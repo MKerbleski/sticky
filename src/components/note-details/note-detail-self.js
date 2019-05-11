@@ -10,7 +10,8 @@ import {linksBlue} from '../../styles/colors'
 import { 
     NoteDetailChild, 
     AttachedList,
-} from '../index.js'
+    NoteDetailNewChild
+} from './index.js'
 
 import {
     NotePreviewNew 
@@ -58,28 +59,31 @@ class NoteDetailSelf extends React.Component {
 
     render(){
         const note = this.props.store.notes.notes[0]
-        console.log('note', note)
         if(note){
             return (
                 <NoteDetailSelfDiv 
                     note={note}
                     innerRef={instance => this.props.connectDropTarget(instance)}
-                    // color={this.props.note.note_color}
                     className="note-detail" 
-                    style={{background: this.props.hover ? 'lightgreen' : null}}>
-                    <div className="noteDetailHeader">Author: {this.props.note.sticky_username}</div>
+                    style={{background: this.props.hover 
+                        ?   'lightgreen' 
+                        :   null}}
+                >
+                    <div className="noteDetailHeader">
+                        Author: {this.props.note.sticky_username}
+                    </div>
                     <div className="noteDetailMain">
                         <div className="note-detail-left" >
                             {/* <NoteQuill note={this.props.note} /> */}
                             <p>{note.text_body}</p>
                             {note.children || this.props.store.notes.showNewNote
                                 ?   <div 
-                                        onWheel={(e) => this.scrollLeft(e)} 
+                                        onWheel={this.scrollLeft} 
                                         className="noteDetailChildren" 
                                         id="noteDetailChildren" 
                                     >
                                         {this.props.store.notes.showNewNote 
-                                            ?   <NotePreviewNew parent={note} /> 
+                                            ?   <NoteDetailNewChild parent={note} /> 
                                             :   null}
                                         {note.children 
                                             ?   note.children.map(child => {
