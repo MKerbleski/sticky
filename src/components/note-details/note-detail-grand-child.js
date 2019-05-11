@@ -4,14 +4,14 @@ import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
 import { connect } from 'react-redux';
 
+// import { 
+//     LayerThreeSource 
+// } from "../index"
 import { 
-    LayerThreeSource 
-} from "../index"
-import { 
-    // getAttachedItems, 
     editNote, 
     noteToNote 
 } from '../../actions'
+
 import { 
     sharedStickyNoteDrop 
 } from '../../helpers'
@@ -35,7 +35,8 @@ class NoteDetailGrandChild extends React.Component {
                         style={{background: this.props.hover ? 'lightgreen' : null}}
                     >
                         <h4>{this.props.note.text_body}</h4>
-                        <div className="layerThreeContainerAll">
+                        {/* CURRENTLY DISABLED BECASUE NOT BEING FETCHED FROM DB ANYWAYS AND PROBABLY DOESN'T NEED TO GO THIS DEEP */}
+                        {/* <div className="layerThreeContainerAll">
                             {this.props.note.children > 0 
                                 ?   this.props.note.children.map(grandchild => {
                                     console.log(grandchild)
@@ -55,7 +56,7 @@ class NoteDetailGrandChild extends React.Component {
                                     })
                                 :   null
                             }
-                        </div>                     
+                        </div>                      */}
                     </NoteDetailGrandChildDiv>         
                 )
         } else {
@@ -119,7 +120,6 @@ const mapStateToProps = store => {
 }
   
 const mapDispatchToProps = {
-    // getAttachedItems,
     editNote,
     noteToNote
 }
@@ -143,6 +143,7 @@ export default connect(mapStateToProps, mapDispatchToProps)( flow(
 
 const NoteDetailGrandChildDiv = styled.div`
     border: 2px solid black;
+    margin: 1px;
     border-radius: 5px;
     background: black;
     display: flex;
@@ -152,12 +153,11 @@ const NoteDetailGrandChildDiv = styled.div`
     width: 100%;
     overflow: visible;
     h4 {
-        border: 1px solid orange;
         margin: 0px;
         width: 100%;
         color: white;
     }
-    .layerThreeContainerAll{
+    /* .layerThreeContainerAll{
         width: 100%;
         border: 1px solid green;
         display: flex;
@@ -165,12 +165,10 @@ const NoteDetailGrandChildDiv = styled.div`
         flex-wrap: wrap;
         justify-content: space-around;
         align-items: safe flex-start;
-        ${'' /* overflow: hidden; */}
         .layerThreeContainer{
             border: 1px solid red;
             height: 25px;
-            ${'' /* padding: 0 4px; */}
             width: 25px;
         }
-    }
+    } */
 `;
