@@ -101,7 +101,6 @@ const NotePreviewGrandChildDiv = styled.div`
         transition: .25s height, .25s width, .25s font-size;
         transition-delay: 1s;
         transition-timing-function: ease-out;
-
         height: 50px;
         width: 50px;
         font-size: 15px;
