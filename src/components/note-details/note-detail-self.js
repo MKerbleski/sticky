@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 // import { default as NoteQuill } from './note-detail-body-quill'
 // import axios from 'axios'
 
-import {linksBlue} from '../../styles/colors'
-
 import { 
     NoteDetailChild, 
     NoteDetailAttachedList,
@@ -24,8 +22,9 @@ import {
 import { 
     scrollBar,
     border,
-    flexCenter
-} from '../../styles/styl-utils.js'
+    flexCenter,
+    linksBlue
+} from '../../styles'
 
 
 

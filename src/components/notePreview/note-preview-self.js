@@ -22,7 +22,7 @@ import {
 import {
 	border,
 	flexCenter
-} from '../../styles/styl-utils.js'
+} from '../../styles'
 
 class NotePreviewSelf extends React.Component {
 	state = {}

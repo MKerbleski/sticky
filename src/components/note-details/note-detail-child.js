@@ -14,7 +14,7 @@ import {
 	flexCenter, 
 	border,
 	scrollBar
-} from '../../styles/styl-utils.js'
+} from '../../styles'
 
 import { 
 	NoteDetailGrandChild
@@ -221,13 +221,13 @@ const NoteDetailChildDiv = styled.div`
 			}
 		}
 		.noteDetailChildText {
-			${border('green')}
+			/* ${border('green')} */
 			/* margin: 0px 10px 5px 0; */
 			text-decoration: none;
 			text-align: left;
 		}
 		.noteDetailGrandchildrenContainer{
-			${border()}
+			/* ${border()} */
 			${flexCenter('row')}
 			${scrollBar(undefined, 'gray')}
 			width: 100%;

@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import { 
     NotePreviewNew,
     NotePreviewSelf
-} from '../components/index';
+} from '../components';
 
 import { 
     getNotes,
@@ -20,7 +20,7 @@ import {
     scrollBar,
     flexCenter,
     border,
-} from '../styles/styl-utils.js'
+} from '../styles'
 
 class AllNotesPage extends Component {
     constructor(props){

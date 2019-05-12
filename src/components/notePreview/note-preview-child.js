@@ -12,7 +12,7 @@ import {
 } from '../../actions'
 import { 
     border
-} from '../../styles/styl-utils.js'
+} from '../../styles'
 
 class NotePreviewChild extends React.Component {
     

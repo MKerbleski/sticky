@@ -5,9 +5,15 @@ import ReactMarkdown from 'react-markdown';
 import format from 'date-fns/format'
 import {connect} from 'react-redux';
 
-import {apiNote} from '../../styles/styl-utils'
-import {noteToNote} from '../../actions'
-import {sharedStickyNoteDrop} from '../../helpers'
+import {
+    apiNote
+} from '../../styles'
+import {
+    noteToNote
+} from '../../actions'
+import {
+    sharedStickyNoteDrop
+} from '../../helpers'
 
 const SlackNote = (props) => {
     let time = props.item.ts.slice(0, 10)*1000

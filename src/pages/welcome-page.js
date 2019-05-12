@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-// import { flex } from '../../styles/styl-utils.js'
-
 import { 
     EntryNote,
     Login,

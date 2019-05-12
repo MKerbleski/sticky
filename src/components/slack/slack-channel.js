@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 import React from 'react';
 import {DragSource} from 'react-dnd';
-import { SlackNote }from '../index.js'
-import { apiChannel } from '../../styles/styl-utils'
+import { 
+    SlackNote 
+} from '../index.js'
+import { 
+    apiChannel 
+} from '../../styles'
 
 const SlackChannel = (props) => {
     if (props){

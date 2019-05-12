@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import { 
     logout
@@ -9,12 +9,10 @@ import {
 
 import { 
     flexCenter,
-    border
-} from '../../styles/styl-utils.js'
+    border,
 
-import { 
-    turquise,
-} from '../../styles/colors.js'
+    turquise
+} from '../../styles'
 
 class Header extends Component{
 

@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { menu, start } from '../../styles/styl-utils.js'
-import { SlackList, PocketList } from './index'
-import { getSlackStars, syncSlack, syncPocketList } from '../../actions'
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { 
+    getSlackStars, 
+    syncSlack, 
+    syncPocketList 
+} from '../../actions'
+import { 
+    SlackList, 
+    PocketList 
+} from './index'
 import { AAO } from '../../helpers/availbleApis'
 import { Loading } from '../loading'
+import { 
+    menu, 
+    start 
+} from '../../styles'
 
 class RightMenuDetails extends Component {
     getCorrectListComponent(){

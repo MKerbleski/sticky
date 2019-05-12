@@ -23,7 +23,7 @@ import {
 
 import {
     border,
-} from './styles/styl-utils.js';
+} from './styles';
 
 class App extends Component {
     constructor(){

@@ -6,7 +6,7 @@ import format from 'date-fns/format'
 
 import { 
     apiNote 
-} from '../../styles/styl-utils'
+} from '../../styles'
 
 import { 
     sharedStickyNoteDrop 

@@ -22,7 +22,7 @@ import {
     border,
     scrollBar,
     flexCenter,
-} from '../styles/styl-utils.js';
+} from '../styles';
 
 class UsernamePage extends Component {
     constructor(props){

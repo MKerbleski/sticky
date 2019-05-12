@@ -8,7 +8,7 @@ import {
 
 import { 
     apiChannel 
-} from '../../styles/styl-utils'
+} from '../../styles'
 
 const PocketChannel = (props) => {
     if (props){

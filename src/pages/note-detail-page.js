@@ -18,7 +18,7 @@ import {
     scrollBar,
     border,
     flexCenter
-} from '../styles/styl-utils.js'
+} from '../styles'
 
 //Formorly NoteDetialParent
 // also mislabeled as a page as it is now 'under' username page

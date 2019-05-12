@@ -4,17 +4,17 @@ import styled from 'styled-components';
 import {connect} from 'react-redux';
 
 import DeleteTarget from './delete-target.js';
+
 import { 
 	toggleNewNote
- } from '../../actions'
+} from '../../actions'
+
 import {
 	scrollBar,
 	flexCenter,
-	border
-} from '../../styles/styl-utils.js'
-import {
-	turquise,
-} from '../../styles/colors.js'
+	border,
+	turquise
+} from '../../styles'
 
 class LeftMenu extends Component {
 	constructor(props){

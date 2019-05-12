@@ -1,5 +1,3 @@
-//import { flex } from '../../styles/styl-utils.js's
-
 export function picture(){
     return`
         background-image: url("https://picsum.photos/1200");

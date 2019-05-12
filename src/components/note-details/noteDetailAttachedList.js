@@ -9,12 +9,9 @@ import {
 import { 
     scrollBar,
     border,
-    flexCenter
-} from '../../styles/styl-utils.js'
-
-import {
+    flexCenter,
     linksBlue
-} from '../../styles/colors'
+} from '../../styles'
 
 class NoteDetailAttachedList extends Component {    
     render(){

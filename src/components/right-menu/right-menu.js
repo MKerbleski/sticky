@@ -16,7 +16,7 @@ import {
 
 import { 
 	flexCenter
-} from '../../styles/styl-utils.js'
+} from '../../styles'
 
 class RightMenu extends Component {
     state = {
