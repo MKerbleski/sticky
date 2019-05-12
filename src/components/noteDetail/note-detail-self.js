@@ -95,7 +95,7 @@ class NoteDetailSelf extends React.Component {
                                 :   null}
                         </div>
                         
-                        {note.num_pocket_items_attached || note.num_pocket_items_attached
+                        {note.num_pocket_items_attached || note.num_slack_items_attached
                             ?   <NoteDetailAttachedList 
                                     note={note}
                                 />
