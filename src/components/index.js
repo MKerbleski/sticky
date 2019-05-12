@@ -13,19 +13,19 @@ export {
 } from './notePreview';
 
 export {
+    AttachedList,
+    DeleteNote,
+    EditNote,
     NoteDetailParent,
     NoteDetailSelf,
+    NoteDetailBody,
+    NoteDetailBodyEdit,
     NoteDetailChild,
     NoteDetailGrandChild,
     NoteDetailGreatGrandChild,
     NoteDetailSettings,
-    NoteDetailBody,
-    NoteDetailBodyEdit,
-    AttachedList,
-    EditNote,
-    DeleteNote,
-    NoteDetailPage
-} from './note-details';
+    // NoteDetailPage
+} from './noteDetail';
 
 export { 
     RightMenu,

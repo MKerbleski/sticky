@@ -1,7 +1,7 @@
 // import React , { Component } from 'react'
 // import styled from 'styled-components'
 // import ReactMarkdown from 'react-markdown';
-// import { start } from '../../styles/styl-utils.js'
+// import { start } from '../../styles'
 // import { withRouter } from 'react-router'
 // import { default as NoteQuill } from './note-detail-body-quill'
 // import NoteDetailBodyEdit from './note-detail-body-edit.js';
