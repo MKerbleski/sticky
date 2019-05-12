@@ -157,15 +157,14 @@ const NoteDetailPageDiv = styled.div`
     ${flexCenter('column')}
     ${scrollBar()}
     justify-content: flex-start;
-    margin: 2px;
+    /* margin: 2px; */
     width: 100%;
     padding-bottom: 10px;
-    max-height: 85%;
-
+    height: 100%;
     .top-part{
         /* ${border()} */
         ${flexCenter('column')}
-        height: 10%;
+        height: 8%;
         width: 50%;
         .return-link {
             /* ${border()} */

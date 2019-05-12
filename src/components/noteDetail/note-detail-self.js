@@ -180,8 +180,8 @@ const NoteDetailSelfDiv = styled.div`
     width: 92%;
     background-color: lightgray;
     padding: 5px;
-    height: 85vh;
-    min-height: 90%;
+    height: 80%;
+    /* min-height: 90%; */
     .noteDetailHeader{
         /* ${border()} */
         width: 98%;

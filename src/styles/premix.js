@@ -22,6 +22,7 @@ export function scrollBar(height=6, color='black'){
                 background-color: ${color};
                 border-radius: 25px;
                 width: 2px;
+                border: 1px solid transparent;
             }
         }
     `;
