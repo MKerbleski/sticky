@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {DragSource, DropTarget} from 'react-dnd';
 import flow from 'lodash/flow';
 import {connect} from 'react-redux';
+import ReactHTMLParser from 'react-html-parser'
 
 import { 
 	editNote, 
@@ -74,9 +75,9 @@ class NoteDetailChild extends React.Component {
 										</div> 
 									:   null }
 						</div>
-						<h3 className="noteDetailChildText">
-							{note.text_body}
-						</h3>
+						<div className="noteDetailChildText">
+							{ReactHTMLParser(note.text_body)}
+						</div>
 						{/* <p>{this.getFirstSen(note.text_body)}</p>  */}
 						<div 
 							className="noteDetailGrandchildrenContainer"
@@ -231,6 +232,9 @@ const NoteDetailChildDiv = styled.div`
 			/* margin: 0px 10px 5px 0; */
 			text-decoration: none;
 			text-align: left;
+			>*{
+				margin: 0
+			}
 		}
 		.noteDetailGrandchildrenContainer{
 			/* ${border()} */
