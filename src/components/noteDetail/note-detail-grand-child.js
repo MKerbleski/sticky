@@ -112,8 +112,11 @@ const sourceObj = {
 
 		let noteEdit = sharedStickyNoteDrop(source, monitor);
 		if(noteEdit !== null){
-            console.log('props', props)
-            props.noteToNote(noteEdit)
+            // console.log('props', props)
+            props.noteToNote(noteEdit, {
+                author_name: props.grandParent.sticky_username,
+                note_id: props.grandParent.id
+            })
 		}
     }
 };
