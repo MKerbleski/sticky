@@ -21,7 +21,7 @@ class NoteQuill extends React.Component {
     constructor (props) {
         super(props)
         this.state = { 
-            text_body: this.props.note.text_body 
+            // text_body: this.props.note.text_body 
         } // You can also pass a Quill Delta here
     }
     
@@ -29,19 +29,28 @@ class NoteQuill extends React.Component {
         this.setState({ text_body: e })
     }
 
+    componentDidMount(){
+        this.setState({
+            text_body: this.props.note.text_body
+        })
+    }
+
     componentWillUnmount(){
         this.saveNote(false)
     }
 
-    componentDidUpdate(prevProps){
+    componentDidUpdate(prevProps, prevState){
         if(prevProps.note.id !== this.props.note.id){
             console.log(
-                "\n\nCHANGE\n\n"
+                "\n\nNOTE CHANGE\n\n"
             )
-            //TODO save previouse state
             this.setState({
                 text_body: this.props.note.text_body
             })
+            this.props.editNote({
+                text_body: prevState.text_body,
+                id: prevProps.note.id
+            }, false, false)
         }
 
     }
