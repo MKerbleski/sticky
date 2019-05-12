@@ -27,6 +27,7 @@ export const noteToNote = (notePackage, single=false) => {
             axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/notes/note/ToNote`, (notePackage), getAuthHeader()).then(res => {
                 dispatch({ type: NOTE_TO_NOTE_COMPLETE })
                 if(single){
+                    console.log('single')
                     dispatch(getSingleNote(single.author_name, single.note_id ))
                 } else {
                     dispatch(getNotes(localStorage.getItem('username')))

@@ -15,6 +15,10 @@ import {
 
 class NoteDetailAttachedList extends Component {    
     render(){
+        console.log(
+            'attached', 
+            this.props.note
+        )
         return <NoteDetailAttachedListDiv> 
                     {this.props.note.slack_items 
                         ?   this.props.note.slack_items.map(item => {
