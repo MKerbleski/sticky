@@ -128,6 +128,7 @@ export const notesReducer = (state=initialState, action) => {
                 username: action.payload.username,
                 status: "Got Notes!",
                 singleNote: false,
+                responseCode: null,
             })
         case SINGLE_NOTE_RECIEVED:
             return Object.assign({}, state, {
@@ -135,6 +136,7 @@ export const notesReducer = (state=initialState, action) => {
                 notesRecieved: true,
                 notes: action.payload,
                 singleNote: true,
+                responseCode: null,
                 // children: action.payload.children,
                 // username: action.payload.username,
                 status: "Note Recieved"

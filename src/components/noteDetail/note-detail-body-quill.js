@@ -33,6 +33,20 @@ class NoteQuill extends React.Component {
         this.saveNote(false)
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.note.id !== this.props.note.id){
+            console.log(
+                "\n\nCHANGE\n\n"
+            )
+            //TODO save previouse state
+            this.setState({
+                text_body: this.props.note.text_body
+            })
+        }
+
+    }
+    
+
     saveNote = (fetchSingle=true) => {
         const edit = {
             text_body: this.state.text_body,
@@ -59,6 +73,7 @@ class NoteQuill extends React.Component {
     ]    
 
     render () {
+        console.log('Quill', this.props.note)
       return (
           <NoteQuillDiv>
             <ReactQuill 

@@ -66,7 +66,10 @@ class NoteDetailSelf extends React.Component {
                     </div>
                     <div className="noteDetailMain">
                         <div className="noteDetailLeft" >
-                            <NoteQuill className="noteDetailQuill" note={this.props.note} />
+                            <NoteQuill 
+                                className="noteDetailQuill" 
+                                note={this.props.note}
+                            />
                             {/* <p>{note.text_body}</p> */}
                             {note.children || this.props.store.notes.showNewNote
                                 ?   <div 

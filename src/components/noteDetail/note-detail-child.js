@@ -50,6 +50,7 @@ class NoteDetailChild extends React.Component {
 			redirect,
 			parent
 		} = this.props
+		console.log('note-detail-child', note)
         if (note && !note.is_deleted){
             return (
                 connectDragSource &&
