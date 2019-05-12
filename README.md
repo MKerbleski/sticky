@@ -15,29 +15,29 @@ REFACTOR AS I GO
     -- build out documentation
     -- comment on any mildly complex functions
     -- comment redux actions 
+    -- change component names to camel case
 
 KNOWN BUGS / TODO
     -- infinite scroll on pocket
-    -- fix parent drop zone on note detail page
-    -- render quill on preview child
+    -- fix flash of previous component in preview mode when moving from detail to preview page
+
     -- render quill on preview grandchild
-    -- render quill on detail child
+    -- make login page sexy
+        -- add user email and two passwords to sign up and name 
     -- render quill on detail grandchild
     -- right menu is still funky
     -- show only grandChild first like 6characters
-    -- show only child first word or so
     -- when user starts sign in process, start counter to query api every 1 second and refresh page when authenticated
     -- css classes naming to camelCase
-    -- change component names to camel case
-    -- combine shared css into premixes i.e. similarities between note-preview and note-detail
+    -- combine shared css into premixes
+        -- renderedHTML similarities among all notes
+        -- note-preview and note-detail similarities
     -- put components in pages folder
     -- modify user api settings to create sync buttonn. step 1 , step 2 
-    -- add user email and two passwords to sign up and name 
     -- theme settings with styled components 
     -- create tests 
     -- consolidate drag and drop functions 
     -- move backend code to this repo
-    -- remove link in grandchild detail element
     -- custom colors for notes     
         ``background-color: ${props => props.color};
         props need to be in the styled component
@@ -58,3 +58,8 @@ COMPLETED
     -- hover on grandchild note expands real slick like
     -- enable quill on note detail 
     -- enable quill on note preview 
+    -- fix parent drop zone on note detail page
+    -- render quill on preview child
+    -- render quill on detail child
+    -- show only child first word or so
+    -- remove link in grandchild detail element

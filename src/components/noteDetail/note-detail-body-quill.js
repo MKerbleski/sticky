@@ -35,15 +35,17 @@ class NoteQuill extends React.Component {
         })
     }
 
+    //This saves when leaving page
     componentWillUnmount(){
         this.saveNote(false)
     }
 
+    //This checks if the note has changed since the component doesn't technically unmount. 
+    //Assign state to new props 
+    //save previous note 
+    //this is jenky but different from attached and children because it needs to be editable so this keeps the edit function contained within this component
     componentDidUpdate(prevProps, prevState){
         if(prevProps.note.id !== this.props.note.id){
-            console.log(
-                "\n\nNOTE CHANGE\n\n"
-            )
             this.setState({
                 text_body: this.props.note.text_body
             })
@@ -54,7 +56,6 @@ class NoteQuill extends React.Component {
         }
 
     }
-    
 
     saveNote = (fetchSingle=true) => {
         const edit = {
