@@ -11,10 +11,6 @@ import {
     NoteDetailNewChild
 } from './index.js'
 
-import {
-    NotePreviewNew 
-} from '../notePreview/index'
-
 import {  
     editNote 
 } from '../../actions'
@@ -23,10 +19,7 @@ import {
     scrollBar,
     border,
     flexCenter,
-    linksBlue
 } from '../../styles'
-
-
 
 class NoteDetailSelf extends React.Component {
     constructor(props){
@@ -82,7 +75,9 @@ class NoteDetailSelf extends React.Component {
                                         id="noteDetailChildren" 
                                     >
                                         {this.props.store.notes.showNewNote 
-                                            ?   <NoteDetailNewChild parent={note} /> 
+                                            ?   <NoteDetailNewChild 
+                                                    parent={note} 
+                                                /> 
                                             :   null}
                                         {note.children 
                                             ?   note.children.map(child => {

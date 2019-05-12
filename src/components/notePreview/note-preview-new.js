@@ -7,6 +7,10 @@ import {
 
 import { connect } from 'react-redux';
 
+import {
+    notePreviewColor
+} from '../../styles/'
+
 class NotePreviewNew extends React.Component {
     constructor(props){
         super(props)
@@ -91,7 +95,7 @@ const NotePreviewNewDiv = styled.div`
     flex-direction: column;  
     input{
         width: 100%;
-        background-color: lavender;
+        background-color: ${notePreviewColor};
         margin: 0;
         min-height: 169px;
         border: none;

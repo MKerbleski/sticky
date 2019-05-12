@@ -15,7 +15,8 @@ import {
 } from '../../actions'
 
 import { 
-	flexCenter
+	flexCenter,
+	linksBlue
 } from '../../styles'
 
 class RightMenu extends Component {
@@ -148,7 +149,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(RightMenu)
 const RightMenuDiv = styled.div`
 	border-left: 2px solid black;
 	padding: 1px;
-	background: lightblue;
+	background: ${linksBlue};
 	box-sizing: border-box;
 	${flexCenter()}
 	.right-menu-preview{

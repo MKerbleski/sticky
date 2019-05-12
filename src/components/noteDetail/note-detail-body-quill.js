@@ -94,7 +94,6 @@ const NoteQuillDiv = styled.div`
         background:white;
         background:#f3f3fd;
         overflow: auto;
-        /* background: lavender; */
         &::-webkit-scrollbar {
         width: 6px;
             &-thumb{

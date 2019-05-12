@@ -19,6 +19,7 @@ REFACTOR AS I GO
 KNOWN BUGS / TODO
     -- infinite scroll on pocket
     -- enable quill
+    -- right menu is still funky
     -- show only grandChild first like 6characters
     -- show only child first word or so
     -- when user starts sign in process, start counter to query api every 1 second and refresh page when authenticated

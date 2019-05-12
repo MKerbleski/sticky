@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+
 import { 
     addNote,
     toggleNewNote
  } from '../../actions'
 
-import { connect } from 'react-redux';
+ import {
+    childNoteColor
+} from '../../styles/'
 
 class NoteDetailNewChild extends React.Component {
     constructor(props){
@@ -83,8 +87,6 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(NoteDetailNewChild)
 
 const NoteDetailNewChildDiv = styled.div`
-    ${'' /* border: 1px solid blue; */}
-    /* padding: 10px; */
     width: 200px;
     height: 140px;
     display: flex;
@@ -93,10 +95,9 @@ const NoteDetailNewChildDiv = styled.div`
     input{
         width: 100%;
         height: 140px;
-        background-color: wheat;
+        background-color: ${childNoteColor};
         margin: 0;
         /* min-height: 169px; */
         border: none;
-        ${'' /* border: 1px solid green; */}
     }
 `;

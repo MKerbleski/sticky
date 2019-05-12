@@ -13,7 +13,9 @@ import {
 import { 
 	flexCenter, 
 	border,
-	scrollBar
+	scrollBar,
+	linksBlue,
+	childNoteColor
 } from '../../styles'
 
 import { 
@@ -202,7 +204,7 @@ const NoteDetailChildDiv = styled.div`
 		min-width: 100px;
 		height: 100%;
 		padding: 10px;
-		background-color: wheat;
+		background-color: ${childNoteColor};
 		text-decoration: none;
 		color: black;
 		.noteDetailChildHeader{
@@ -217,7 +219,7 @@ const NoteDetailChildDiv = styled.div`
 				height: 20px;
 				width: 20px;
 				text-align: center;
-				background: lightblue;
+				background: ${linksBlue};
 			}
 		}
 		.noteDetailChildText {

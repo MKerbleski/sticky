@@ -6,12 +6,16 @@ import { connect } from 'react-redux'
 
 import { NotePreviewGrandChild } from "./index"
 import { sharedStickyNoteDrop } from '../../helpers'
+
 import { 
     // editNote, 
     noteToNote 
 } from '../../actions'
+
 import { 
-    border
+    border,
+    linksBlue,
+    childNoteColor,
 } from '../../styles'
 
 class NotePreviewChild extends React.Component {
@@ -153,7 +157,7 @@ const NotePreviewChildDiv = styled.div`
     margin: 10px;
     padding: 10px;
     ${'' /* height: 90px; */}
-    background: wheat;
+    background: ${childNoteColor};
     display: flex;
     flex-direction: column;
     align-content: flex-start;
@@ -176,7 +180,7 @@ const NotePreviewChildDiv = styled.div`
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        background: lightblue;
+        background: ${linksBlue};
         height: 5px;
         width: 5px;
     }

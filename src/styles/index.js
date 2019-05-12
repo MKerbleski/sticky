@@ -1,6 +1,9 @@
 export {
-    turquise,
-    linksBlue
+    mainThemePrimary,
+    linksBlue,
+    notePreviewColor,
+    childNoteColor,
+    slackNoteColor
 } from './colors.js'
 
 export {

@@ -13,7 +13,7 @@ import {
 	scrollBar,
 	flexCenter,
 	border,
-	turquise
+	mainThemePrimary
 } from '../../styles'
 
 class LeftMenu extends Component {
@@ -112,7 +112,7 @@ const LeftMenuDiv = styled.div`
     width: 5%;
 	min-width: 40px;
     justify-content: space-between;
-	background-color: ${turquise};
+	background-color: ${mainThemePrimary};
     .menu-item{
         ${flexCenter()}
 		/* ${border()} */

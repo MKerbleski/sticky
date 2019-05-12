@@ -6,7 +6,8 @@ import format from 'date-fns/format'
 import {connect} from 'react-redux';
 
 import {
-    apiNote
+    apiNote,
+    slackNoteColor
 } from '../../styles'
 import {
     noteToNote
@@ -107,7 +108,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(DragSource('item', s
 
 const SlackNoteDiv = styled.div`
     ${apiNote()}
-    background: #FFD700;
+    background: ${slackNoteColor};
     .slack-note-top{
         /* border: 1px solid green; */
         width: 100%;

@@ -21,7 +21,9 @@ import {
 
 import {
 	border,
-	flexCenter
+	flexCenter,
+	linksBlue,
+	notePreviewColor
 } from '../../styles'
 
 class NotePreviewSelf extends React.Component {
@@ -209,7 +211,7 @@ const NotePreviewSelfDiv = styled.div`
 		width: 95%;
 		padding: 10px;
 		justify-content: space-around;
-		background-color: lavender;
+		background-color: ${notePreviewColor};
 		background-color: ${props => props.color};
 		.note-content{
 			/* ${border()} */
@@ -237,7 +239,7 @@ const NotePreviewSelfDiv = styled.div`
 					height: 20px;
 					width: 20px;
 					text-align: center;
-					background: lightblue;
+					background: ${linksBlue};
 				}
 			}
 		}

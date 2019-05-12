@@ -10,8 +10,8 @@ import {
 import { 
     flexCenter,
     border,
+    mainThemePrimary
 
-    turquise
 } from '../../styles'
 
 class Header extends Component{
@@ -72,8 +72,8 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
 
 const HeaderDiv = styled.div`
-    background-color: ${turquise};
     /* ${border()} */
+    background-color: ${mainThemePrimary};
     ${flexCenter()}
     justify-content: space-between;
     width: 100%;
@@ -88,11 +88,10 @@ const HeaderDiv = styled.div`
             text-decoration: none;
         }
         .headerTitle {
-            ${'' /* border: 1px solid green; */}
+            /* ${border()} */
             color: black;
             -webkit-text-stroke-width: .1px;
             -webkit-text-stroke-color: black;
-            ${'' /* width: 80%; */}
             font-size: 35px;
             margin: 0;
             margin-left: 20px;
