@@ -49,7 +49,6 @@ class NoteDetailChild extends React.Component {
 			redirect,
 			parent
 		} = this.props
-		console.log('note-detail-child props', this.props)
         if (note && !note.is_deleted){
             return (
                 connectDragSource &&
@@ -158,7 +157,6 @@ const sourceObj = {
 		let noteEdit = sharedStickyNoteDrop(source, monitor);
 
 		if(noteEdit !== null){
-			console.log('child propss', props)
 			props.noteToNote(noteEdit, {
 				author_name: props.parent.sticky_username,
 				note_id: props.parent.id

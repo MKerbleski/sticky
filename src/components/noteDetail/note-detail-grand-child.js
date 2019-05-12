@@ -24,7 +24,6 @@ class NoteDetailGrandChild extends React.Component {
     }
     
     render(){
-        console.log('note-detail-grand-child props', this.props)
         if (this.props.note){
             return (
                 this.props.connectDragSource &&
@@ -112,7 +111,6 @@ const sourceObj = {
 
 		let noteEdit = sharedStickyNoteDrop(source, monitor);
 		if(noteEdit !== null){
-            // console.log('props', props)
             props.noteToNote(noteEdit, {
                 author_name: props.grandParent.sticky_username,
                 note_id: props.grandParent.id

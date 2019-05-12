@@ -68,7 +68,9 @@ class NoteQuill extends React.Component {
                 modules={this.props.preview ? {} : this.modules}
                 formats={this.props.preview ? {} : this.formats}
             />
-            <button onClick={this.saveNote}>Save</button>
+            <div className="buttonRow">
+                <button onClick={this.saveNote}>Save</button>
+            </div>
             {/* this button is more psychological than necessary, it will save when unmounted, as well */}
           </NoteQuillDiv>
        )
@@ -110,6 +112,7 @@ const NoteQuillDiv = styled.div`
         width: 100%;
         margin: 0;
     }
+    /* THE SPACING HERE IS FUCKED CAUSE OF QUILL JUST BE ZEN UNTIL IT IS RELACEABLE */
     .ql-container {
         /* display: none; */
         /* margin-top: 100px; */
@@ -135,11 +138,18 @@ const NoteQuillDiv = styled.div`
             ${scrollBar()}
         }
     }
-    button {
+    .buttonRow{
         /* ${border()} */
+        width: 100%;
         box-sizing: border-box;
-        height: 5%;
-        color: black;
-        margin: 5px;
+        display: flex;
+        justify-content: flex-end;
+        button {
+            /* ${border()} */
+            box-sizing: border-box;
+            /* height: 5%; */
+            color: black;
+            margin: 5px;
+        }
     }
 `

@@ -65,8 +65,8 @@ class NoteDetailSelf extends React.Component {
                         Author: {this.props.note.sticky_username}
                     </div>
                     <div className="noteDetailMain">
-                        <div className="note-detail-left" >
-                            <NoteQuill note={this.props.note} />
+                        <div className="noteDetailLeft" >
+                            <NoteQuill className="noteDetailQuill" note={this.props.note} />
                             {/* <p>{note.text_body}</p> */}
                             {note.children || this.props.store.notes.showNewNote
                                 ?   <div 
@@ -196,7 +196,7 @@ const NoteDetailSelfDiv = styled.div`
         /* align-items: center; */
         width: 99%;
         height: 100%;
-        .note-detail-left{
+        .noteDetailLeft{
             box-sizing: border-box;
             /* ${border('red')} */
             display: flex;
@@ -211,17 +211,21 @@ const NoteDetailSelfDiv = styled.div`
             /* margin: 5px; */
             min-height: 98%;
             /* THIS FROM THE OLD WAY */
+            .noteDetailQuill {
+                ${border()}
+            }
             .noteDetailChildren {
-                /* ${border()} */
+                /* ${border('red')} */
                 ${scrollBar('6', 'gray')}
+                box-sizing: border-box;
                 padding: 3px;
                 display: flex;
                 flex-direction: row;
                 justify-content: safe space-around;
                 overflow: auto;
                 height: 40%;
-                min-height: 100px;
-                width: 98%;
+                /* min-height: 100px; */
+                width: 98.5%;
             }
         }
         

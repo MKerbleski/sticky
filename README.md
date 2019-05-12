@@ -18,7 +18,11 @@ REFACTOR AS I GO
 
 KNOWN BUGS / TODO
     -- infinite scroll on pocket
-    -- enable quill
+    -- fix parent drop zone on note detail page
+    -- render quill on preview child
+    -- render quill on preview grandchild
+    -- render quill on detail child
+    -- render quill on detail grandchild
     -- right menu is still funky
     -- show only grandChild first like 6characters
     -- show only child first word or so
@@ -52,3 +56,5 @@ COMPLETED
     -- note cannot be dropped on itself or the channel that it is on 
     -- in note-detail put the drop shadow on individual notes instead of the group
     -- hover on grandchild note expands real slick like
+    -- enable quill on note detail 
+    -- enable quill on note preview 
