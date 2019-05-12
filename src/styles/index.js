@@ -3,7 +3,8 @@ export {
     linksBlue,
     notePreviewColor,
     childNoteColor,
-    slackNoteColor
+    slackNoteColor,
+    notePreviewSecondary
 } from './colors.js'
 
 export {

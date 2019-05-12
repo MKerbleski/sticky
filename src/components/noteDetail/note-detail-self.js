@@ -2,9 +2,9 @@ import React from 'react';
 import { DropTarget } from 'react-dnd';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-// import { default as NoteQuill } from './note-detail-body-quill'
 // import axios from 'axios'
 
+import NoteQuill from './note-detail-body-quill'
 import { 
     NoteDetailChild, 
     NoteDetailAttachedList,
@@ -66,8 +66,8 @@ class NoteDetailSelf extends React.Component {
                     </div>
                     <div className="noteDetailMain">
                         <div className="note-detail-left" >
-                            {/* <NoteQuill note={this.props.note} /> */}
-                            <p>{note.text_body}</p>
+                            <NoteQuill note={this.props.note} />
+                            {/* <p>{note.text_body}</p> */}
                             {note.children || this.props.store.notes.showNewNote
                                 ?   <div 
                                         onWheel={this.scrollLeft} 
@@ -210,14 +210,7 @@ const NoteDetailSelfDiv = styled.div`
             /* background: white; */
             /* margin: 5px; */
             min-height: 98%;
-            p {
-                background: white;
-                margin-top: 0;
-                margin: 4px;
-                padding: 3px;
-                height: 100%;
-                max-width: 100%;
-            }
+            /* THIS FROM THE OLD WAY */
             .noteDetailChildren {
                 /* ${border()} */
                 ${scrollBar('6', 'gray')}

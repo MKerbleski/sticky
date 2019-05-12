@@ -9,7 +9,7 @@ import {
 import { 
     scrollBar,
     border,
-    flexCenter,
+    // flexCenter,
     linksBlue
 } from '../../styles'
 

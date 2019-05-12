@@ -23,7 +23,8 @@ import {
 	border,
 	flexCenter,
 	linksBlue,
-	notePreviewColor
+	notePreviewColor,
+	notePreviewSecondary
 } from '../../styles'
 
 class NotePreviewSelf extends React.Component {
@@ -217,11 +218,18 @@ const NotePreviewSelfDiv = styled.div`
 			/* ${border()} */
 			${flexCenter('column')}
 			justify-content: space-between;
+			background: ${notePreviewSecondary};
+			box-shadow: 0 0 15px 10px ${notePreviewSecondary};
 			color: black;
 			min-width: 250px;
 			height: auto;
 			max-height: 100px;
 			margin: 2% 0;
+			overflow: hidden;
+			/* ALL CHILDREN */
+			> * {
+				margin: 0;
+			}
 			.note-content-header{
 				/* ${border()} */
 				${flexCenter()}

@@ -82,7 +82,7 @@ const HeaderDiv = styled.div`
         text-decoration: none;
         :active {
             text-decoration: none;
-            }
+        }
         :visited {
             color: black;
             text-decoration: none;
@@ -101,12 +101,12 @@ const HeaderDiv = styled.div`
     p {
         margin: 0
     }
-    .headerLinks{
+    .headerLinks {
         ${flexCenter()}
         /* ${border()} */
         height: 30px;
         margin: 0;
-        .headerLink{
+        .headerLink {
             ${flexCenter()}
             /* ${border()} */
             height: 100%;

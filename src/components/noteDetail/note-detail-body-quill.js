@@ -2,9 +2,16 @@ import React from 'react';
 import ReactQuill from 'react-quill';
 import styled from 'styled-components'
 import hljs from 'highlight.js'
-import 'react-quill/dist/quill.snow.css';
-import { editNote } from '../../actions'
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+
+import { 
+    editNote 
+} from '../../actions'
+
+import {
+    scrollBar,
+    border
+} from '../../styles'
 
 hljs.configure({   // optionally configure hljs
     languages: ['javascript', 'ruby', 'python']
@@ -79,27 +86,60 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(NoteQuill)
 
 const NoteQuillDiv = styled.div`
-    height: 100%;
-    background: lavender;
+    /* min-height: 99%; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin: 9px;
+    border: 1px solid gray;
+    height: 98%;
+    box-shadow: 0px 0px 5px 1px; 
+    /* background: white; */
+    /* .editor IS THE ELEMENT */
     .editor {
+        box-sizing: border-box;
+        /* ${border('red')} */
+        margin: 20px;
+        ${scrollBar()}
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 90%;
+        width: 100%;
+        margin: 0;
+    }
+    .ql-container {
+        /* display: none; */
+        /* margin-top: 100px; */
+        /* ${border('purple')} */
+        /* max-height: 100%; */
+        /* height: 50%; */
         overflow: hidden;
-        max-height: 300px;
+        /* THERE IS AN IMPORTED CLASS CALLED QL-SNOW THAT WILL APPLY  */
+        /* COMES WITH THE LIBRARY */
+        /* border-top: 5px solid green !important; */
+        padding-bottom: 0 !important;
+        /* THIS IS THE SPACE TO TYPE STUFF */
+        .ql-editor {
+            /* react 16 opened this bug and this is the inherited class name for the editor container inside ReactQuill */
+            /* ${border('green')} */
+            border: 1px solid gray;
+            max-height: 90%;
+            /* height: auto; */
+            /* min-height: 100%; */
+            background: white;
+            /* margin: 0; */
+            padding: 5px;
+            ${scrollBar()}
+        }
     }
     button {
+        /* ${border()} */
+        box-sizing: border-box;
+        height: 5%;
         color: black;
-    }
-    .ql-editor {
-        /* react 16 opened this bug and this is the inherited class name for the editor container inside ReactQuill */
-        max-height: 400px;
-        background:white;
-        background:#f3f3fd;
-        overflow: auto;
-        &::-webkit-scrollbar {
-        width: 6px;
-            &-thumb{
-                background-color: gray;
-                border-radius: 25px;
-            }
-        }
+        margin: 5px;
     }
 `
