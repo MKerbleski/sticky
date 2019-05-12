@@ -146,7 +146,8 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu)
 
 const RightMenuDiv = styled.div`
-	border: 2px solid black;
+	border-left: 2px solid black;
+	padding: 1px;
 	background: lightblue;
 	box-sizing: border-box;
 	${flexCenter()}

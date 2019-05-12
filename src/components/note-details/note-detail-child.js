@@ -221,19 +221,22 @@ const NoteDetailChildDiv = styled.div`
 			}
 		}
 		.noteDetailChildText {
-			/* ${border('green')} */
+			${border('green')}
 			/* margin: 0px 10px 5px 0; */
 			text-decoration: none;
 			text-align: left;
 		}
 		.noteDetailGrandchildrenContainer{
-			/* ${border()} */
+			${border()}
 			${flexCenter('row')}
 			${scrollBar(undefined, 'gray')}
 			width: 100%;
 			flex-wrap: wrap;
+			align-items: flex-start;
 			justify-content: space-around;
 			overflow: auto;
+			min-height: 50px;
+			height: 100%;
 		}	
 	}  
 `;
