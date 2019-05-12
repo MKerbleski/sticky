@@ -49,7 +49,7 @@ export const NOTE_EDITED = 'NOTE_EDITED';
 export const ERROR_EDITING_NOTE = 'ERROR_EDITING_NOTE';
 //this is to edit one note only.
 //can eventually merge to noteToNote
-export const editNote = (noteEdit, fetchDeleted=false) => {
+export const editNote = (noteEdit, fetchDeleted=false, fetchSingle=true) => {
     return function(dispatch){
         if(localStorage.getItem('JWT') && noteEdit){
             dispatch({ type: EDITING_NOTE })
@@ -57,9 +57,11 @@ export const editNote = (noteEdit, fetchDeleted=false) => {
                 // console.log(res)
 				if(fetchDeleted){
 					dispatch(getDeletedNotes(localStorage.getItem('username')))
-				} else {
+				} else if (fetchSingle){
 					dispatch(getSingleNote(localStorage.getItem('username'), noteEdit.id));
-				}   
+				}  else {
+                    //do nothing
+                }
               	dispatch({ type: NOTE_EDITED })
             }).catch(err => {
               	dispatch({ type: ERROR_EDITING_NOTE })
@@ -169,7 +171,6 @@ export const FETCHING_SINGLE_NOTE = 'FETCHING_SINGLE_NOTE';
 export const SINGLE_NOTE_RECIEVED = 'SINGLE_NOTE_RECIEVED';
 //this is going to be seperate because I am possibly eventually going to fetch children as well. 
 export const getSingleNote = (author_name, note_id) =>  {
-    // console.log(props, "actions")
     return function(dispatch){
         if(localStorage.getItem('JWT')){
 			dispatch({type: FETCHING_SINGLE_NOTE, payload:{ author_name, note_id} });

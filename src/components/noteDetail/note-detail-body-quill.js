@@ -30,15 +30,15 @@ class NoteQuill extends React.Component {
     }
 
     componentWillUnmount(){
-        this.saveNote()
+        this.saveNote(false)
     }
 
-    saveNote = () => {
+    saveNote = (fetchSingle=true) => {
         const edit = {
             text_body: this.state.text_body,
             id: this.props.note.id
         }
-        this.props.editNote(edit)
+        this.props.editNote(edit, false, fetchSingle)
     }
 
     modules = {
