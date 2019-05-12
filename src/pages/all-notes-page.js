@@ -167,7 +167,7 @@ const mapDispatchToProps = {
 export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, mapDispatchToProps)(AllNotesPage))
 
 const AllNotesPageDiv = styled.div`
-    ${border()}
+    /* ${border()} */
     height: 95vh;
     margin: 4px;
     color: black;

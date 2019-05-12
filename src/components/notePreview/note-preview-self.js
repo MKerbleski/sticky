@@ -50,10 +50,10 @@ class NotePreviewSelf extends React.Component {
 	
 	// Converts a string of HTML saved on the server into useable HTML
 	// This is probably a security risk
-	renderText(){
-		let doc = new DOMParser().parseFromString(this.props.note.text_body, 'text/html')
-		return doc
-	}
+	// renderText(){
+	// 	let doc = new DOMParser().parseFromString(this.props.note.text_body, 'text/html')
+	// 	return doc
+	// }
 
     render(){
         if (this.props.note){

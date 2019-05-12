@@ -3,6 +3,7 @@ import React from 'react';
 import { DragSource, DropTarget, } from 'react-dnd';
 import flow from 'lodash/flow'
 import { connect } from 'react-redux'
+import ReactHTMLParser from 'react-html-parser'
 
 import { NotePreviewGrandChild } from "./index"
 import { sharedStickyNoteDrop } from '../../helpers'
@@ -53,7 +54,7 @@ class NotePreviewChild extends React.Component {
                             }
                         </div>
                         
-                        <h4>{note.text_body}</h4>
+                        <div className="notePreviewChildContent">{ReactHTMLParser(note.text_body)}</div>
 
                         {note.has_children && note.children 
                             ?   <div className="layerThreeContainerAll">
@@ -169,9 +170,13 @@ const NotePreviewChildDiv = styled.div`
         display: flex;
         justify-content: flex-end;
     }
-    h4 {
-        ${'' /* border: 1px solid orange; */}
-        margin: 0px;
+    .notePreviewChildContent{
+        /* ${border()} */
+        max-height: 70px;
+        overflow: hidden;
+        > * {
+            margin: 0
+        }
     }
     .note-content-link-count{
         border: .5px solid black;
