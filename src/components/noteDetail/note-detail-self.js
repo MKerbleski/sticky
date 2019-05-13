@@ -71,7 +71,8 @@ class NoteDetailSelf extends React.Component {
                                 note={this.props.note}
                             />
                             {/* <p>{note.text_body}</p> */}
-                            {note.children || this.props.store.notes.showNewNote
+                            {note.children 
+                            || this.props.store.notes.showNewNote
                                 ?   <div 
                                         onWheel={this.scrollLeft} 
                                         className="noteDetailChildren" 
@@ -98,7 +99,8 @@ class NoteDetailSelf extends React.Component {
                                 :   null}
                         </div>
                         
-                        {note.num_pocket_items_attached || note.num_slack_items_attached
+                        {note.num_pocket_items_attached 
+                        || note.num_slack_items_attached
                             ?   <NoteDetailAttachedList 
                                     note={note}
                                 />
@@ -154,8 +156,6 @@ const targetObj = {
     }
 }
 
-
-
 const collect = (connect,  monitor) => ({
     connectDropTarget: connect.dropTarget(),
     highlighted: monitor.canDrop(),
@@ -207,7 +207,7 @@ const NoteDetailSelfDiv = styled.div`
             align-items: space-between;
             justify-content: space-between;
             /* max-width: 100%; */
-            width: ${props => props.note.num_pocket_items_attached || props.note.num_pocket_items_attached ? '70%': '100%' 
+            width: ${props => props.note.num_pocket_items_attached || props.note.num_slack_items_attached ? '70%': '100%' 
             };
             /* border: 1px solid gray; */
             /* background: white; */
@@ -218,7 +218,7 @@ const NoteDetailSelfDiv = styled.div`
                 ${border()}
             }
             .noteDetailChildren {
-                /* ${border('red')} */
+                ${border('red')}
                 ${scrollBar('6', 'gray')}
                 box-sizing: border-box;
                 padding: 3px;
@@ -228,7 +228,7 @@ const NoteDetailSelfDiv = styled.div`
                 overflow: auto;
                 height: 40%;
                 /* min-height: 100px; */
-                width: 98.5%;
+                /* max-width: 98.5%; */
             }
         }
         

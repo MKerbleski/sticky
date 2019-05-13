@@ -7,6 +7,7 @@ REFACTOR AS I GO
     -- change component names to camel case
 
 KNOWN BUGS / TODO
+    -- linter
     -- google tracking 
     -- infinite scroll on pocketList
     -- fix flash of previous component in preview mode when moving from detail to preview page
