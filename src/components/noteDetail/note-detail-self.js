@@ -84,7 +84,7 @@ class NoteDetailSelf extends React.Component {
                                                 /> 
                                             :   null}
                                         {note.children 
-                                            ?   note.children.map(child => {
+                                            &&  note.children.map(child => {
                                                     return <NoteDetailChild
                                                         updateState={this.updateState}
                                                         key={child.id}
@@ -93,7 +93,6 @@ class NoteDetailSelf extends React.Component {
                                                         parent={note}
                                                         redirect={this.props.redirect}
                                                     />})
-                                            :   null 
                                         }
                                     </div>
                                 :   null}
@@ -218,7 +217,7 @@ const NoteDetailSelfDiv = styled.div`
                 ${border()}
             }
             .noteDetailChildren {
-                ${border('red')}
+                /* ${border('red')} */
                 ${scrollBar('6', 'gray')}
                 box-sizing: border-box;
                 padding: 3px;
@@ -228,7 +227,7 @@ const NoteDetailSelfDiv = styled.div`
                 overflow: auto;
                 height: 40%;
                 /* min-height: 100px; */
-                /* max-width: 98.5%; */
+                max-width: 98.5%;
             }
         }
         

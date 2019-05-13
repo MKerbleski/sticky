@@ -116,18 +116,21 @@ const AppDiv = styled.div`
     flex-direction: column;
     background-color: white;
     height: 100vh;
-    max-width: 100vw;
-    overflow: hidden;
-    .app-top {
-        /* ${border()} */
+    width: 100vw;
+    /* overflow: hidden; */
+    >*{
         box-sizing: border-box;
+    }
+    .app-top {
+        ${border()}
+        /* box-sizing: border-box; */
         /* min-height: 50px; */
         height: 5vh;
         overflow: hidden;
     }
     .app-bottom {
         /* ${border()} */
-        box-sizing: border-box;
+        /* box-sizing: border-box; */
         display: flex;
         flex-direction: row;
         z-index: 0;
