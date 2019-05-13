@@ -52,7 +52,8 @@ export default class WelcomePage extends Component{
                 />
                 <footer>
                     <Link to="/about">About</Link>
-                    <a href="https://mikerble.ski">Made by Mike</a>
+                    <Link to="/team">Team</Link>
+                    {/* <a href="https://mikerble.ski">Made by Mike</a> */}
                 </footer>
             </WelcomePageDiv>
         )

@@ -5,3 +5,4 @@ export { default as SettingsPage } from './settings-page.js';
 export { default as UsernamePage } from './username-page.js';
 export { default as WelcomePage } from './welcome-page.js';
 export { default as BugsPage } from './bugs-page.js';
+export { default as TeamPage } from './teamPage.js';

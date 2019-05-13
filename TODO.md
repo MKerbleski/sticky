@@ -8,6 +8,7 @@ REFACTOR AS I GO
 
 KNOWN BUGS / TODO
     -- linter
+    -- fake developers bios page
     -- google tracking 
     -- infinite scroll on pocketList
     -- fix flash of previous component in preview mode when moving from detail to preview page
