@@ -15,7 +15,8 @@ import {
     UsernamePage,
     WelcomePage,
     BugsPage,
-    TeamPage
+    TeamPage,
+    CareersPage,
 } from './pages'
 
 import {
@@ -77,14 +78,9 @@ class App extends Component {
                             }}  
                         />
                         <Route 
-                            path="/about/" 
-                            component={AboutPage} />
-                        <Route 
                             path="/bugs/"
                             component={BugsPage} />
-                        <Route 
-                            path="/team/"
-                            component={TeamPage} />
+                        
                         <Route 
                             path="/:username" 
                             render={ (a) => {

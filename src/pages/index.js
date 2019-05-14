@@ -6,3 +6,6 @@ export { default as UsernamePage } from './username-page.js';
 export { default as WelcomePage } from './welcome-page.js';
 export { default as BugsPage } from './bugs-page.js';
 export { default as TeamPage } from './teamPage.js';
+export { default as CareersPage } from './careersPage.js';
+export { default as MissionPage } from './missionPage.js';
+export { default as AdvertisePage } from './advertisePage.js';

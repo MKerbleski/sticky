@@ -25,10 +25,10 @@ export default class AboutPage extends Component {
 }
 
 const AboutPageDiv = styled.div`
-    border: 1px solid red;
-    width: 100%;
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    width: 50%;
+    height: 100%;
 `
