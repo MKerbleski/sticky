@@ -13,7 +13,12 @@ export default class MissionPage extends Component {
         return(
             <MissionPageDiv> 
                 <h1>Our Mission</h1>
-                <p>One of the biggest issues facing humanity at the moment is the organization of your menatal thoughts. With the advancement of technology we are still stuck with stickynotes or convoluted layers of folders.</p><br></br> We aim to change that.<br></br> Organize your mind. <p>Bring ideas to reality, whether that is a book, blog, website, or a mission to mars.</p>
+                <p>Enabling people to solve humanities biggest challenges, quicker. One of the biggest issues with the exponential growth is the organization of your menatal thoughts and digital encounters. With the advancement of technology we are still stuck with stickynotes or convoluted layers of folders.</p>
+                <br/> 
+                <p>We aim to change that.</p>
+                <br/>
+                <p>Organize your mind.</p>
+                <p>Bring ideas to reality, whether that is a book, blog, website, or a mission to mars.</p>
                 <p>collect</p>
                 <p>organize</p>
                 <p>do</p>
