@@ -1,0 +1,1 @@
+export const DEFAULT_POCKET_ITEMS_TO_FETCH = 20

@@ -4,6 +4,10 @@ import {
     getUserData
 } from "./user_actions"
 
+import {
+    DEFAULT_POCKET_ITEMS_TO_FETCH
+} from "../helpers/defaultVariables.js"
+
 export const FETCHING_POCKET_LIST = 'FETCHING_POCKET_LISTS';
 export const POCKET_LIST_RECIEVED = 'POCKET_LIST_RECIEVED';
 export const POCKET_ERROR = 'POCKET_ERROR';
@@ -13,13 +17,13 @@ export const INIT_POCKET = 'INIT_POCKET';
 export const ERROR = 'ERROR';
 
 
-export const getPocketList = () =>  {
+export const getPocketList = (howMany=DEFAULT_POCKET_ITEMS_TO_FETCH) =>  {
     return function(dispatch){
         if(localStorage.getItem('JWT')){
             dispatch({type: FETCHING_POCKET_LIST});
             const token = localStorage.getItem('JWT')
             const authHeader = { headers: { Authorization: token } }
-            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/quick`, authHeader)
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/quick/${howMany}`, authHeader)
             .then(res => {
                 localStorage.setItem('pocketList', res.data)
                 dispatch({type: POCKET_LIST_RECIEVED, payload: res.data})})

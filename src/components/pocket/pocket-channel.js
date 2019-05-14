@@ -50,6 +50,7 @@ class PocketChannel extends Component {
                                 <p>or add items to your pocket List</p>
                             </div>
                         :   null} 
+                        <button onClick={this.props.getMorePocketItems}>Mas</button>
                 </PocketChannelDiv>
             )
         } else {

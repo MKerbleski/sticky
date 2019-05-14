@@ -15,6 +15,10 @@ class PocketList extends Component {
         }
     }
 
+    getMorePocketItems = () => {
+        this.props.getPocketList(this.props.store.pocket.pocketList.length + 20)
+    }
+
     render(){
         return(
             <PocketListDiv> 
@@ -25,6 +29,7 @@ class PocketList extends Component {
                     ?   <PocketChannel 
                             onDrop={this.props.onDrop} 
                             pocketList={this.props.store.pocket.pocketList} 
+                            getMorePocketItems={this.getMorePocketItems}
                             // editAttachedItems={this.props.editAttachedItems}    
                         />
                     :   <Loading />
