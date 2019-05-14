@@ -13,7 +13,8 @@ import {
 } from '../../actions'
 
 import { 
-    sharedStickyNoteDrop 
+    sharedStickyNoteDrop,
+    getNLetters
 } from '../../helpers'
 
 
@@ -35,7 +36,7 @@ class NoteDetailGrandChild extends React.Component {
                         onClick={(e) => {e.stopPropagation(); this.clickHandler(e, this.props.note.id)}}
                         style={{background: this.props.hover ? 'lightgreen' : null}}
                     >
-                        <h4>{this.props.note.text_body}</h4>
+                        <h4>{getNLetters(this.props.note.text_body)}</h4>
                         {/* CURRENTLY DISABLED BECASUE NOT BEING FETCHED FROM DB ANYWAYS AND PROBABLY DOESN'T NEED TO GO THIS DEEP */}
                         {/* <div className="layerThreeContainerAll">
                             {this.props.note.children > 0 
