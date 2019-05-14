@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 import React from 'react';
 import { DragSource } from 'react-dnd';
-import { sharedStickyNoteDrop } from '../../helpers'
-import { noteToNote } from '../../actions'
 import { connect } from 'react-redux'
+import { 
+    sharedStickyNoteDrop, 
+    getNLetters 
+} from '../../helpers'
+import { noteToNote } from '../../actions'
 
 const NotePreviewGrandChild = (props) => {
     const goToNote = (e) => {
         props.redirect(`/${props.note.sticky_username}/note/${props.note.id}`)
     }
-
     if (props.note){
+        console.log('grandchild', props.note.text_body)
         return (
             props.connectDragSource(
                 <div 
@@ -25,7 +28,8 @@ const NotePreviewGrandChild = (props) => {
                             //  color: props.didDrop ? "red" : "green"
                         }}
                     >
-                       <p>{props.note.text_body}</p>
+                       <div className="textBody">{getNLetters(props.note.text_body, 2)}</div>
+                       
                     </NotePreviewGrandChildDiv>
                 </div>
             )
@@ -104,5 +108,12 @@ const NotePreviewGrandChildDiv = styled.div`
         height: 50px;
         width: 50px;
         font-size: 15px;
+    }
+    .textBody {
+        display: flex;
+        /* justify-content: flex-start;
+        align-content: flex-start;
+        margin-left: 13px;*/
+        font-size: 20px; 
     }
 `;

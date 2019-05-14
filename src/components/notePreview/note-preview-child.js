@@ -54,7 +54,9 @@ class NotePreviewChild extends React.Component {
                             }
                         </div>
                         
-                        <div className="notePreviewChildContent">{ReactHTMLParser(note.text_body)}</div>
+                        <div className="notePreviewChildContent">
+                            {ReactHTMLParser(note.text_body)}
+                        </div>
 
                         {note.has_children && note.children 
                             ?   <div className="layerThreeContainerAll">

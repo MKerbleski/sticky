@@ -58,8 +58,8 @@ class NoteDetailSelf extends React.Component {
                     innerRef={instance => this.props.connectDropTarget(instance)}
                     className="note-detail" 
                     style={{background: this.props.hover 
-                        ?   'lightgreen' 
-                        :   null}}
+                        && 'lightgreen' 
+                    }}
                 >
                     <div className="noteDetailHeader">
                         Author: {this.props.note.sticky_username}
@@ -79,10 +79,10 @@ class NoteDetailSelf extends React.Component {
                                         id="noteDetailChildren" 
                                     >
                                         {this.props.store.notes.showNewNote 
-                                            ?   <NoteDetailNewChild 
+                                            &&  <NoteDetailNewChild 
                                                     parent={note} 
                                                 /> 
-                                            :   null}
+                                        }
                                         {note.children 
                                             &&  note.children.map(child => {
                                                     return <NoteDetailChild
