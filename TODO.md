@@ -8,14 +8,11 @@ REFACTOR AS I GO
 
 KNOWN BUGS / TODO
     -- linter
-    -- fake developers bios page
     -- google tracking 
     -- infinite scroll on pocketList
     -- fix flash of previous component in preview mode when moving from detail to preview page
-    -- render quill on preview grandchild
     -- make login page sexy
         -- add user email and two passwords to sign up and name 
-    -- render quill on detail grandchild
     -- right menu is still funky
     -- show only grandChild first like 6characters
     -- when user starts sign in process, start counter to query api every 1 second and refresh page when authenticated
@@ -54,3 +51,6 @@ COMPLETED
     -- render quill on detail child
     -- show only child first word or so
     -- remove link in grandchild detail element
+    -- render quill on preview grandchild
+    -- render quill on detail grandchild
+    -- fake developers bios page

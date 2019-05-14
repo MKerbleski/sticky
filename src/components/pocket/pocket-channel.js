@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import React from 'react';
+import React , { Component } from 'react'
+import styled from 'styled-components'
 import { DragSource } from 'react-dnd';
 
 import { 
@@ -10,42 +10,53 @@ import {
     apiChannel 
 } from '../../styles'
 
-const PocketChannel = (props) => {
-    if (props){
-        // eventually need an unpin/unstar button
-        return (
-            <PocketChannelDiv 
-                innerRef={instance => props.connectDragSource(instance)}
-                type="channel" 
-                style={{
-                    opacity: props.isDragging ? '0.25' : '1',
-                    border: props.isDragging ? '1px dashed gray': '1px solid black'}}>
-                <h3 className="pocket-channel-title">All Pocket Notes</h3>
-                {props.pocketList.map(pocketItem => {
-                    return (
-                        <PocketNote 
-                            parent={null}
-                            type="pocket" 
-                            editAttachedItems={props.editAttachedItems} 
-                            key={pocketItem.item_id} 
-                            item={pocketItem} 
-                        />
-                    )
-                })}
-                {props.pocketList && props.pocketList.length === 0 
-                    ?   <div>
-                            <h5>Empty pocket list</h5>
-                            <p>either</p>
-                            <button>Sync</button>
-                            <p>or add items to your pocket List</p>
-                        </div>
-                    :   null} 
-            </PocketChannelDiv>
-        )
-    } else {
-        return null
+class PocketChannel extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+
+        }
     }
- }
+
+    // infinite scroll
+
+    render(){
+        if (this.props){
+            // eventually need an unpin/unstar button
+            return(
+                    <PocketChannelDiv 
+                    innerRef={instance => this.props.connectDragSource(instance)}
+                    type="channel" 
+                    style={{
+                        opacity: this.props.isDragging ? '0.25' : '1',
+                        border: this.props.isDragging ? '1px dashed gray': '1px solid black'}}>
+                    <h3 className="pocket-channel-title">All Pocket Notes</h3>
+                    {this.props.pocketList.map(pocketItem => {
+                        return (
+                            <PocketNote 
+                                parent={null}
+                                type="pocket" 
+                                editAttachedItems={this.props.editAttachedItems} 
+                                key={pocketItem.item_id} 
+                                item={pocketItem} 
+                            />
+                        )
+                    })}
+                    {this.props.pocketList && this.props.pocketList.length === 0 
+                        ?   <div>
+                                <h5>Empty pocket list</h5>
+                                <p>either</p>
+                                <button>Sync</button>
+                                <p>or add items to your pocket List</p>
+                            </div>
+                        :   null} 
+                </PocketChannelDiv>
+            )
+        } else {
+            return null
+        }
+    }
+}
 
  const sourceObj = {
      // NOT IMMEDITALLY SURE WHAT THIS IS DOING TO WHY IT WAS COMMENTED OUT
