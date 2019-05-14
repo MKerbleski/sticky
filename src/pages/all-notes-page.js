@@ -64,13 +64,14 @@ class AllNotesPage extends Component {
                     style={{background: this.props.hover 
                         ?   'lightgreen' 
                         :   this.props.deleteBin 
-                            ?   'lightpink' 
-                            :   null}}>
+                            &&  'lightpink' 
+                    }}>
                     
-                    <h1>{this.props.author}'s {this.props.deleteBin ? 'deleted' : null } Notes</h1>
+                    <h1>{this.props.author}'s {this.props.deleteBin && 'deleted'} Notes</h1>
 
-                    {notes.length === 0 && this.props.deleteBin === false
-                        ?   <div>
+                    {notes.length === 0 
+                        && this.props.deleteBin === false
+                        &&  <div>
                                 {/* USER PRIVATE PAGE */}
                                 {localStorage.getItem('username') === this.props.author
                                     ?   <div className='noNotes'>
@@ -91,16 +92,16 @@ class AllNotesPage extends Component {
                                     
                                 }
                             </div>
-                        :   null
                     }
 
-                    {this.props.store.notes.showNewNote && !this.props.deleteBin 
-                        ?   <NotePreviewNew /> 
-                        :   null
+                    {this.props.store.notes.showNewNote 
+                        &&  !this.props.deleteBin 
+                        &&  <NotePreviewNew /> 
                     } 
 
-                    {this.props.store.user.userData.username === this.props.author && notes.length > 0
-                        ?   <div className="all-note-preview-container">
+                    {this.props.store.user.userData.username === this.props.author 
+                        &&  notes.length > 0
+                        &&  <div className="all-note-preview-container">
                                 {notes.map(note => {
                                     return <NotePreviewSelf
                                         key={note.id}
@@ -115,7 +116,6 @@ class AllNotesPage extends Component {
                                     />
                                 })}
                             </div>
-                        :   null
                     }
                     
                 </AllNotesPageDiv>
