@@ -13,7 +13,7 @@ KNOWN BUGS / TODO
     -- BACKEND
         -- send total length of array with pocket list and slack list to calculate when infinite scroll is complete. or a message at the end of infinite scroll. 
     -- google tracking 
-    -- infinite scroll on pocketList
+
     -- fix flash of previous component in preview mode when moving from detail to preview page
     -- make login page sexy
         -- add user email and two passwords to sign up and name 
@@ -58,3 +58,4 @@ COMPLETED
     -- render quill on preview grandchild
     -- render quill on detail grandchild
     -- fake developers bios page
+    -- infinite scroll on pocketList

@@ -1,11 +1,20 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux';
+
+import { 
+    SlackChannel, 
+    Loading  
+} from '../index.js';
+
 import { 
     getSlackStars, 
     // editAttachedItems 
 } from '../../actions'
-import { connect } from 'react-redux';
-import { SlackChannel, Loading  } from '../index.js';
+
+import { 
+    scrollBar
+} from '../../styles'
 
 class SlackList extends Component {
     componentDidMount(){
@@ -51,4 +60,5 @@ const SlackListDiv = styled.div`
     height: 100%;
     overflow: auto;
     /* background: yellow; */
+    ${scrollBar()}
 `

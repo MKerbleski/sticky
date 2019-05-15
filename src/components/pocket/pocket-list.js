@@ -1,12 +1,19 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux';
-import { PocketChannel } from './index.js';
-import { Loading } from '../index.js'
+
+import { 
+    Loading,
+    PocketChannel
+ } from '../index.js'
 
 import { 
     getPocketList, 
 } from '../../actions'
+
+import { 
+    scrollBar
+} from '../../styles'
 
 class PocketList extends Component {
     componentDidMount(){
@@ -16,18 +23,13 @@ class PocketList extends Component {
 
             const target = document.getElementById('scroll');
             target.addEventListener('wheel', (e) => {
-                // console.log('scrollTop - ', target.scrollTop)
-                // console.log('scrollHeight -', target.scrollHeight)
-                // console.log('clientHeight -', target.clientHeight)
                 if(target.scrollTop >= target.scrollHeight - target.clientHeight){
-                    console.log("BOTTOM BITCH!", this.props)
+                    // YOUR AT THE BOTTOM BITCH!
                     if(!this.props.store.pocket.fetchingPocketList){
                         this.getMorePocketItems()
                     }
                 }
             });
-    
-
     }
 
     getMorePocketItems = () => {
@@ -68,4 +70,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(PocketList)
 const PocketListDiv = styled.div`
     height: 100%;
     overflow: auto;
+    ${scrollBar()}
 `

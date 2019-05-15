@@ -46,7 +46,8 @@ export {
 export {
     PocketNote,
     PocketSettings,
-    PocketList
+    PocketList,
+    PocketChannel
 } from './pocket';
 
 export {
