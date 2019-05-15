@@ -25,6 +25,7 @@ class NoteDetailGrandChild extends React.Component {
     }
     
     render(){
+
         if (this.props.note){
             return (
                 this.props.connectDragSource &&

@@ -33,6 +33,8 @@ class NotePreviewChild extends React.Component {
             note,
             hover,
         } = this.props
+        // let scroll = document.getElementsByClassName("scroll")
+        // console.log('scroll', scroll)
         if (note){
             return (
                 connectDragSource &&
@@ -42,6 +44,7 @@ class NotePreviewChild extends React.Component {
                             connectDragSource(instance)
                             connectDropTarget(instance)}}
                         type="note"
+                        // className="scroll"
                         onClick={this.goToNote}
                         style={{background: hover ? 'lightgreen' : null}}
                     >

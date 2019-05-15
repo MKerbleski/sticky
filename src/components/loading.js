@@ -29,7 +29,6 @@ const LoadingDiv = styled.div`
         box-sizing: border-box;
         border-radius: 100px;
     }
-
 `
 
 

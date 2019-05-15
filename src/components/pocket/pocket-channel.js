@@ -17,16 +17,22 @@ class PocketChannel extends Component {
 
         }
     }
-
     // infinite scroll
 
+    // will need event trigger because i need to listen for scroll in a div and not a window as the window holds no scroll bar. 
+    // something like this 
+    // -> https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
     render(){
+        console.log(window.innerHeight)
+
         if (this.props){
             // eventually need an unpin/unstar button
             return(
-                    <PocketChannelDiv 
+                <PocketChannelDiv 
                     innerRef={instance => this.props.connectDragSource(instance)}
                     type="channel" 
+                    className="scroll"
+                    // onScroll={(e) => {console.log('onscroll', e)}}
                     style={{
                         opacity: this.props.isDragging ? '0.25' : '1',
                         border: this.props.isDragging ? '1px dashed gray': '1px solid black'}}>

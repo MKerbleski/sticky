@@ -8,6 +8,10 @@ REFACTOR AS I GO
 
 KNOWN BUGS / TODO
     -- linter
+    -- STYLE
+        -- drop shadows go a long way 
+    -- BACKEND
+        -- send total length of array with pocket list and slack list to calculate when infinite scroll is complete. or a message at the end of infinite scroll. 
     -- google tracking 
     -- infinite scroll on pocketList
     -- fix flash of previous component in preview mode when moving from detail to preview page
