@@ -19,6 +19,7 @@ import {
 } from '../../styles'
 
 class RightMenuDetails extends Component {
+
     getCorrectListComponent(){
         switch(this.props.selectedApp){
             case "slack":
@@ -66,7 +67,7 @@ class RightMenuDetails extends Component {
                                         </button>
                                 }
                             </div>
-                            <div className="app-list">
+                            <div className="app-list" id="hey">
                                 {this.getCorrectListComponent()}
                             </div>
                         </React.Fragment>
@@ -102,6 +103,7 @@ const RightMenuDetailsDiv = styled.div`
     display: flex;
     background-color: white;
     flex-direction: column;
+    max-height: 100%;
     .app-title {
         border: 1px solid red;
         /* max-width: 100px; */
@@ -127,16 +129,17 @@ const RightMenuDetailsDiv = styled.div`
         }
     }
     .app-list {
-        /* border: 1px solid black; */
-        overflow: auto;
+        border: 1px solid black;
+        overflow: hidden;
         width: 100%;
-        &::-webkit-scrollbar {
+        max-height: 100%;
+        /* &::-webkit-scrollbar {
         width: 6px;
             &-thumb{
                 background-color: gray;
                 border-radius: 25px;
             }
-        }
+        } */
     }
     .connect-apis {
         border: 1px solid purple;

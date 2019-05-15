@@ -6,32 +6,21 @@ import {
     PocketNote 
 } from '../index.js'
 
+import { Loading } from '../loading'
+
 import { 
     apiChannel 
 } from '../../styles'
 
 class PocketChannel extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-
-        }
-    }
-    // infinite scroll
-
-    // will need event trigger because i need to listen for scroll in a div and not a window as the window holds no scroll bar. 
-    // something like this 
-    // -> https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
     render(){
-        console.log(window.innerHeight)
-
         if (this.props){
             // eventually need an unpin/unstar button
             return(
                 <PocketChannelDiv 
                     innerRef={instance => this.props.connectDragSource(instance)}
                     type="channel" 
-                    className="scroll"
+                    // id="scroll"
                     // onScroll={(e) => {console.log('onscroll', e)}}
                     style={{
                         opacity: this.props.isDragging ? '0.25' : '1',
@@ -55,8 +44,9 @@ class PocketChannel extends Component {
                                 <button>Sync</button>
                                 <p>or add items to your pocket List</p>
                             </div>
-                        :   null} 
-                        <button onClick={this.props.getMorePocketItems}>Mas</button>
+                        :   null}
+                    {this.props.fetching ? <Loading /> : null}
+                        {/* <button onClick={this.props.getMorePocketItems}>Mas</button> */}
                 </PocketChannelDiv>
             )
         } else {
