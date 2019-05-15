@@ -52,7 +52,7 @@ export default class Bios extends Component {
                     <div className="bio">
                         <h2>Michael Kerbleski</h2>
                         <img src={headshot} ></img>
-                        <p>The mind behind all our ideas. Award winning person Michael leads the vision for the product and dabbles in various web development aspects of the project.</p>
+                        <p>The mind behind all our ideas. Award winning person Michael leads the vision for the product and dabbles in various web development aspects of the project. D1 NCAA athlete. Entreprenuer.</p>
                     </div>
                     <div className="bio">
                         <h2>You?</h2>
