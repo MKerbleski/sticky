@@ -19,6 +19,7 @@ import {
     scrollBar,
     border,
     flexCenter,
+    notePreviewColor
 } from '../../styles'
 
 class NoteDetailSelf extends React.Component {
@@ -180,7 +181,7 @@ const NoteDetailSelfDiv = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 92%;
-    background-color: lightgray;
+    background-color: ${notePreviewColor};
     padding: 5px;
     height: 80%;
     /* min-height: 90%; */
@@ -223,11 +224,12 @@ const NoteDetailSelfDiv = styled.div`
                 padding: 3px;
                 display: flex;
                 flex-direction: row;
-                justify-content: safe space-around;
+                justify-content: safe space-between;
                 overflow: auto;
                 height: 40%;
                 /* min-height: 100px; */
-                max-width: 98.5%;
+                max-width: 99.5%;
+                /* margin-left: 3px; */
             }
         }
         
@@ -240,6 +242,7 @@ const NoteDetailSelfDiv = styled.div`
         width: 99%;
         margin: 8px;
         justify-content: flex-end;
+        background: rgba(1,1,1,.05);
         .settings-link, i{
             margin: 0 10px;
             text-decoration: none;

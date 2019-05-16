@@ -53,6 +53,6 @@ const NoteDetailAttachedListDiv = styled.div`
     align-items: flex-end;
     padding: 5px;
     border: 1px solid gray;
-    background: ${linksBlue};
+    background: rgba(1,1,1,.05);
     min-width: 30%;
 `

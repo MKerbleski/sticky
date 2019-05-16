@@ -37,6 +37,7 @@ export default class NoteDetailSettings extends Component{
 
 const NoteDetailSettingsDiv = styled.div`
     ${'' /* border: 1px solid red; */}
+    background: rgba(1,1,1,.05);
     form{
         display: flex;
         flex-direction: column;

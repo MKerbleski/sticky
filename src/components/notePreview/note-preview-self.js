@@ -216,8 +216,8 @@ const NotePreviewSelfDiv = styled.div`
 			/* ${border()} */
 			${flexCenter('column')}
 			justify-content: space-between;
-			background: ${notePreviewSecondary};
-			box-shadow: 0 0 15px 10px ${notePreviewSecondary};
+			/* background: ${notePreviewSecondary}; */
+			/* box-shadow: 0 0 15px 10px ${notePreviewSecondary}; */
 			color: black;
 			min-width: 250px;
 			height: auto;

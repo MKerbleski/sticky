@@ -41,19 +41,15 @@ class RightMenuDetails extends Component {
     syncHandler(selectedApp){
         // e.preventDefault()
         if(this.props.selectedApp === 'pocket'){
-            // console.log("pocket")
             this.props.syncPocketList()
 
         } else if (this.props.selectedApp === 'slack'){
-            // console.log("slack")
             this.props.syncSlack()
         }
-        // console.log(selectedApp, this.props.selectedApp)
     }
 
     render(){
-        const { selectedApp } = this.props;
-        // console.log(selectedApp)
+        const {selectedApp} = this.props;
         return (
             <RightMenuDetailsDiv>
                 {selectedApp 
@@ -78,7 +74,6 @@ class RightMenuDetails extends Component {
                                 {this.getCorrectListComponent()}
                             </div>
                         </React.Fragment>
-                    
                     :   <div className="connect-apis">
                             <Link to='/settings'>connect app in settings</Link>
                         </div>
@@ -101,7 +96,6 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenuDetails)
 
 const RightMenuDetailsDiv = styled.div`
-    /* ${start('purple')} */
     margin: 5px;
     ${ menu() }
     color: white;
@@ -125,13 +119,10 @@ const RightMenuDetailsDiv = styled.div`
         button{
             margin: 10px;
             i{
-                /* border: 1px solid gray; */
                 margin: 3px;
-                /* padding: 10px; */
                 &:hover{
                     cursor: pointer;
                 }
-                /* background: lightgray */
             }
         }
     }
@@ -140,13 +131,6 @@ const RightMenuDetailsDiv = styled.div`
         overflow: hidden;
         width: 100%;
         max-height: 100%;
-        /* &::-webkit-scrollbar {
-        width: 6px;
-            &-thumb{
-                background-color: gray;
-                border-radius: 25px;
-            }
-        } */
     }
     .connect-apis {
         border: 1px solid purple;

@@ -123,7 +123,7 @@ const NoteQuillDiv = styled.div`
     border: 1px solid gray;
     height: 98%;
     box-shadow: 0px 0px 5px 1px; 
-    /* background: white; */
+    background: white;
     /* .editor IS THE ELEMENT */
     .editor {
         box-sizing: border-box;
@@ -136,6 +136,7 @@ const NoteQuillDiv = styled.div`
         height: 90%;
         width: 100%;
         margin: 0;
+        background: white;
     }
     /* THE SPACING HERE IS FUCKED CAUSE OF QUILL JUST BE ZEN UNTIL IT IS RELACEABLE */
     .ql-container {
@@ -149,6 +150,7 @@ const NoteQuillDiv = styled.div`
         /* COMES WITH THE LIBRARY */
         /* border-top: 5px solid green !important; */
         padding-bottom: 0 !important;
+        background: white;
         /* THIS IS THE SPACE TO TYPE STUFF */
         .ql-editor {
             /* react 16 opened this bug and this is the inherited class name for the editor container inside ReactQuill */

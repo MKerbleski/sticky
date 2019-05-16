@@ -195,10 +195,11 @@ const NoteDetailChildDiv = styled.div`
 	${flexCenter('column')}
 	width: 100%;
 	border: 1px solid black;
-	margin: 3px;
+	/* margin: 3px; */
 	box-shadow:  0px 0px 2px .5px gray;
 	/* max-height: 150px; */
 	/* height: 95%; */
+	padding: 0;
 	:hover{
 		box-shadow:  0px 0px 4px 1px gray;
 	}
@@ -211,12 +212,13 @@ const NoteDetailChildDiv = styled.div`
 		width: 100%;
 		min-width: 100px;
 		height: 100%;
-		/* padding: 10px; */
+		padding: 5px;
 		background-color: ${childNoteColor};
 		text-decoration: none;
 		color: black;
+		margin: 0;
 		.noteDetailChildHeader{
-			${border('red')}
+			/* ${border('red')} */
 			/* width: 100%; */
 			${flexCenter()}
 			height: 10%;
@@ -232,7 +234,7 @@ const NoteDetailChildDiv = styled.div`
 			}
 		}
 		.noteDetailChildText {
-			${border('green')}
+			/* ${border('green')} */
 			/* margin: 0px 10px 5px 0; */
 			max-height: 40%;
 			text-decoration: none;
@@ -243,7 +245,7 @@ const NoteDetailChildDiv = styled.div`
 			}
 		}
 		.noteDetailGrandchildrenContainer{
-			${border()}
+			/* ${border()} */
 			${flexCenter()}
 			${scrollBar(undefined, 'gray')}
 			/* width: 100%; */
