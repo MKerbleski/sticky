@@ -195,7 +195,6 @@ const NoteDetailChildDiv = styled.div`
 	${flexCenter('column')}
 	width: 100%;
 	border: 1px solid black;
-	/* margin: 3px; */
 	box-shadow:  0px 0px 2px .5px gray;
 	/* max-height: 150px; */
 	/* height: 95%; */
@@ -216,7 +215,7 @@ const NoteDetailChildDiv = styled.div`
 		background-color: ${childNoteColor};
 		text-decoration: none;
 		color: black;
-		margin: 0;
+		margin: 1px;
 		.noteDetailChildHeader{
 			/* ${border('red')} */
 			/* width: 100%; */

@@ -119,9 +119,10 @@ const NoteQuillDiv = styled.div`
     align-items: flex-end;
     justify-content: space-between;
     box-sizing: border-box;
-    margin: 9px;
+    /* margin: 9px; */
     border: 1px solid gray;
     height: 98%;
+    margin: 2px;
     box-shadow: 0px 0px 5px 1px; 
     background: white;
     /* .editor IS THE ELEMENT */

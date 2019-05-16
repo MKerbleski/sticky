@@ -98,7 +98,6 @@ class NoteDetailSelf extends React.Component {
                                     </div>
                                 :   null}
                         </div>
-                        
                         {note.num_pocket_items_attached 
                         || note.num_slack_items_attached
                             ?   <NoteDetailAttachedList 
@@ -211,24 +210,24 @@ const NoteDetailSelfDiv = styled.div`
             };
             /* border: 1px solid gray; */
             /* background: white; */
-            /* margin: 5px; */
+            margin: 5px;
             min-height: 98%;
-            /* THIS FROM THE OLD WAY */
             .noteDetailQuill {
-                ${border()}
+                /* NEEDS TO BE EDITED ON COMPONENT */
             }
             .noteDetailChildren {
                 /* ${border('red')} */
                 ${scrollBar('6', 'gray')}
-                box-sizing: border-box;
-                padding: 3px;
+                /* box-sizing: border-box; */
+                /* padding: 3px; */
                 display: flex;
                 flex-direction: row;
                 justify-content: safe space-between;
                 overflow: auto;
                 height: 40%;
+                margin-top: 6px;
                 /* min-height: 100px; */
-                max-width: 99.5%;
+                max-width: 100%;
                 /* margin-left: 3px; */
             }
         }

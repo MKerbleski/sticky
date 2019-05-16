@@ -51,7 +51,7 @@ const NoteDetailAttachedListDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    padding: 5px;
+    margin: 5px;
     border: 1px solid gray;
     background: rgba(1,1,1,.05);
     min-width: 30%;
