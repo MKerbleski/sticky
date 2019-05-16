@@ -39,7 +39,7 @@ class AllNotesPage extends Component {
         } else {
             this.props.getNotes(this.props.author);
             console.log("NO JWT")
-            // this.props.history.push('/welcome/login')
+            this.props.history.push('/welcome/login')
         }
     }
     
@@ -175,7 +175,6 @@ const AllNotesPageDiv = styled.div`
     box-sizing: border-box;
     ${flexCenter('column')}
     justify-content: flex-start;
-    flex-wrap: wrap;
     padding: 10px;
     padding-top: 0;
     margin: 2px;
@@ -190,11 +189,12 @@ const AllNotesPageDiv = styled.div`
         justify-content: flex-start;
     }
     .all-note-preview-container{
-        /* ${border()} */
+        ${border()}
         padding: 2px;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        align-items: center;
         justify-content: space-around;
     }
 `;

@@ -36,6 +36,10 @@ KNOWN BUGS / TODO
     -- consolidate drag and drop functions 
     -- move backend code to this repo
     -- clean up settings style
+    -- todo grid has no nesting
+        --takes any marked note and displays it in the catagory.
+    -- pay for ad free 
+        -- pick your price 
     -- custom colors for notes     
         ``background-color: ${props => props.color};
         props need to be in the styled component

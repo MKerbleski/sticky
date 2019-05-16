@@ -207,7 +207,6 @@ const NotePreviewSelfDiv = styled.div`
 		}
 		height: 100%;
 		padding: 10px;
-		width: 95%;
 		padding: 10px;
 		justify-content: space-around;
 		background-color: ${notePreviewColor};
