@@ -4,7 +4,8 @@ export {
     notePreviewColor,
     childNoteColor,
     slackNoteColor,
-    notePreviewSecondary
+    notePreviewSecondary,
+    pocketNoteColor
 } from './colors.js'
 
 export {

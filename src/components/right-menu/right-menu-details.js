@@ -1,21 +1,28 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+
 import { 
     getSlackStars, 
     syncSlack, 
     syncPocketList 
 } from '../../actions'
+
 import { 
     SlackList, 
-    PocketList 
-} from './index'
-import { AAO } from '../../helpers/availbleApis'
-import { Loading } from '../loading'
+    PocketList,
+    Loading
+} from '../../components'
+
+import { 
+    AAO 
+} from '../../helpers'
+
 import { 
     menu, 
-    start 
+    start,
+    border,
 } from '../../styles'
 
 class RightMenuDetails extends Component {
@@ -105,7 +112,7 @@ const RightMenuDetailsDiv = styled.div`
     flex-direction: column;
     max-height: 100%;
     .app-title {
-        border: 1px solid red;
+        ${border()}
         /* max-width: 100px; */
         color: black;
         width: 100%;

@@ -35,6 +35,7 @@ KNOWN BUGS / TODO
     -- create tests 
     -- consolidate drag and drop functions 
     -- move backend code to this repo
+    -- clean up settings style
     -- custom colors for notes     
         ``background-color: ${props => props.color};
         props need to be in the styled component

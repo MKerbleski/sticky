@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import format from 'date-fns/format'
 
 import { 
-    apiNote 
+    apiNote,
+    pocketNoteColor
 } from '../../styles'
 
 import { 
@@ -101,7 +102,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(DragSource('item', s
 
 const PocketNoteDiv = styled.div`
     ${apiNote()}
-    background: lightpink;
+    background: ${pocketNoteColor};
     .pocket-note-text{
          /* border: 1px solid green; */
         width: 100%;
