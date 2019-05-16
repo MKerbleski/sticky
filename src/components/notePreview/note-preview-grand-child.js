@@ -102,6 +102,9 @@ const NotePreviewGrandChildDiv = styled.div`
     align-items: center;
     overflow: hidden;
     :hover{
+			box-shadow: 0px 3px 4px gray;
+		}
+    :hover{
         transition: .25s height, .25s width, .25s font-size;
         transition-delay: 1s;
         transition-timing-function: ease-out;

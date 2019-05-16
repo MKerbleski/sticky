@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import React from 'react';
-import { DragSource, DropTarget, } from 'react-dnd';
+import {DragSource, DropTarget} from 'react-dnd';
 import flow from 'lodash/flow'
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 // import { 
 //     LayerThreeSource 
 // } from "../index"
+
 import { 
     editNote, 
     noteToNote 
@@ -158,6 +159,9 @@ const NoteDetailGrandChildDiv = styled.div`
     justify-content: space-between;
     width: 100%;
     overflow: visible;
+    :hover{
+		box-shadow:  0px 0px 4px 1px black;
+	}
     h4 {
         margin: 0px;
         width: 100%;

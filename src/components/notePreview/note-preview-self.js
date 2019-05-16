@@ -1,9 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import flow from 'lodash/flow';
-import { DragSource, DropTarget } from 'react-dnd';
-import { connect } from 'react-redux';
+import {DragSource, DropTarget} from 'react-dnd';
+import {connect} from 'react-redux';
 import ReactHTMLParser from 'react-html-parser'
+
+import { 
+	deleteNote, 
+	editNote, 
+	noteToNote, 
+} from '../../actions'
 
 import { 
 	sharedStickyNoteDrop 
@@ -12,12 +18,6 @@ import {
 import { 
 	NotePreivewChild 
 } from "./index"
-
-import { 
-	deleteNote, 
-	editNote, 
-	noteToNote, 
-} from '../../actions'
 
 import {
 	border,
@@ -48,13 +48,6 @@ class NotePreviewSelf extends React.Component {
 		}
 	}
 	
-	// Converts a string of HTML saved on the server into useable HTML
-	// This is probably a security risk
-	// renderText(){
-	// 	let doc = new DOMParser().parseFromString(this.props.note.text_body, 'text/html')
-	// 	return doc
-	// }
-
     render(){
         if (this.props.note){
             return (
@@ -199,14 +192,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 const NotePreviewSelfDiv = styled.div`
 	/* ${border('red')} */
 	padding: 10px;
-	/* min-width: 300px; */
 	height: auto;
 	display: flex;
-	flex-direction: column;  
+	flex-direction: column;
+	box-sizing: border-box;
 	.note-link {
 		/* ${border()} */
 		border: 1px solid gray;
 		border-radius: 4px;
+		box-shadow: 0px 1px 2px gray;
+		:hover{
+			border: 2px solid gray;
+			box-shadow: 0px 1px 4px gray;
+		}
 		height: 100%;
 		padding: 10px;
 		width: 95%;
@@ -242,7 +240,7 @@ const NotePreviewSelfDiv = styled.div`
 					text-align: left;
 				}
 				.note-content-link-count {
-					border: .5px solid black;
+					border: 1px solid black;
 					border-radius: 50px;
 					height: 20px;
 					width: 20px;

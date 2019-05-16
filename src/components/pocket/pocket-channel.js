@@ -3,10 +3,9 @@ import styled from 'styled-components'
 import { DragSource } from 'react-dnd';
 
 import { 
-    PocketNote 
+    PocketNote,
+    Loading
 } from '../index.js'
-
-import { Loading } from '../loading'
 
 import { 
     apiChannel 
@@ -20,8 +19,6 @@ class PocketChannel extends Component {
                 <PocketChannelDiv 
                     innerRef={instance => this.props.connectDragSource(instance)}
                     type="channel" 
-                    // id="scroll"
-                    // onScroll={(e) => {console.log('onscroll', e)}}
                     style={{
                         opacity: this.props.isDragging ? '0.25' : '1',
                         border: this.props.isDragging ? '1px dashed gray': '1px solid black'}}>

@@ -50,7 +50,7 @@ class NoteDetailChild extends React.Component {
 			redirect,
 			parent
 		} = this.props
-		console.log('note-detail-child', note)
+
         if (note && !note.is_deleted){
             return (
                 connectDragSource &&
@@ -67,9 +67,7 @@ class NoteDetailChild extends React.Component {
 						to={`/${note.sticky_username}/note/${note.id}`}
 						style={{background: hover ? 'lightgreen' : null}}
 					>
-						<div 
-							className="noteDetailChildHeader" 
-						>
+						<div className="noteDetailChildHeader">
 							{note.num_slack_items_attached ||  note.num_pocket_items_attached
 									? 	<div className="note-content-link-count">
 											{note.num_pocket_items_attached + note.num_slack_items_attached}
@@ -193,30 +191,35 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 const NoteDetailChildDiv = styled.div`
 	/* similarities to note preview */
-	/* ${border('blue')} */
+	${border('blue')}
 	${flexCenter('column')}
 	width: 100%;
 	border: 1px solid black;
 	margin: 3px;
 	box-shadow:  0px 0px 2px .5px gray;
-	max-height: 150px;
+	/* max-height: 150px; */
+	/* height: 95%; */
+	:hover{
+		box-shadow:  0px 0px 4px 1px gray;
+	}
 	.note-link{
 		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
-		align-items: space-around;
+		align-items: space-between;
 		justify-content: flex-start;
 		width: 100%;
 		min-width: 100px;
 		height: 100%;
-		padding: 10px;
+		/* padding: 10px; */
 		background-color: ${childNoteColor};
 		text-decoration: none;
 		color: black;
 		.noteDetailChildHeader{
-			/* ${border('red')} */
-			width: 100%;
+			${border('red')}
+			/* width: 100%; */
 			${flexCenter()}
+			height: 10%;
 			flex-direction: row-reverse;
 			justify-content: space-between;
 			.note-content-link-count {
@@ -229,25 +232,28 @@ const NoteDetailChildDiv = styled.div`
 			}
 		}
 		.noteDetailChildText {
-			/* ${border('green')} */
+			${border('green')}
 			/* margin: 0px 10px 5px 0; */
+			max-height: 40%;
 			text-decoration: none;
 			text-align: left;
+			overflow: hidden;
 			>*{
 				margin: 0
 			}
 		}
 		.noteDetailGrandchildrenContainer{
-			/* ${border()} */
-			${flexCenter('row')}
+			${border()}
+			${flexCenter()}
 			${scrollBar(undefined, 'gray')}
-			width: 100%;
+			/* width: 100%; */
 			flex-wrap: wrap;
 			align-items: flex-start;
 			justify-content: space-around;
 			overflow: auto;
 			min-height: 50px;
-			height: 100%;
+			/* height: 100%; */
+			max-height: 60%;
 		}	
 	}  
 `;

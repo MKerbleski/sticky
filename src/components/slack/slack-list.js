@@ -9,7 +9,6 @@ import {
 
 import { 
     getSlackStars, 
-    // editAttachedItems 
 } from '../../actions'
 
 import { 
@@ -48,7 +47,6 @@ const mapStateToProps = store => {
   
 const mapDispatchToProps = {
     getSlackStars,
-    // editAttachedItems
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(SlackList)
@@ -59,6 +57,5 @@ const SlackListDiv = styled.div`
     width: 100%;
     height: 100%;
     overflow: auto;
-    /* background: yellow; */
     ${scrollBar()}
 `

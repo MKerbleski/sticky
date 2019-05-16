@@ -24,7 +24,7 @@ class PocketList extends Component {
             const target = document.getElementById('scroll');
             target.addEventListener('wheel', (e) => {
                 if(target.scrollTop >= target.scrollHeight - target.clientHeight){
-                    // YOUR AT THE BOTTOM BITCH!
+                    // YOU AT THE BOTTOM BITCH!
                     if(!this.props.store.pocket.fetchingPocketList){
                         this.getMorePocketItems()
                     }

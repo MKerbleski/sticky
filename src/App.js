@@ -117,7 +117,7 @@ const AppDiv = styled.div`
     background-color: white;
     height: 100vh;
     width: 100vw;
-    /* overflow: hidden; */
+    overflow: hidden;
     >*{
         box-sizing: border-box;
     }
