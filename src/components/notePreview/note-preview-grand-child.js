@@ -1,24 +1,26 @@
 import styled from 'styled-components';
 import React from 'react';
-import { DragSource } from 'react-dnd';
-import { connect } from 'react-redux'
+import {DragSource} from 'react-dnd';
+import {connect} from 'react-redux'
+
 import { 
     sharedStickyNoteDrop, 
     getNLetters 
 } from '../../helpers'
-import { noteToNote } from '../../actions'
+
+import { 
+    noteToNote 
+} from '../../actions'
 
 const NotePreviewGrandChild = (props) => {
     const goToNote = (e) => {
         props.redirect(`/${props.note.sticky_username}/note/${props.note.id}`)
     }
     if (props.note){
-        console.log('grandchild', props.note.text_body)
         return (
             props.connectDragSource(
-                <div 
-                    onClick={(e) => {e.stopPropagation();}}
-                > 
+                // You don't have to understand everything the below click function is one of these things
+                <div onClick={(e) => {e.stopPropagation();}}> 
                     <NotePreviewGrandChildDiv  
                         onClick={goToNote} 
                         type="note" 
@@ -28,8 +30,9 @@ const NotePreviewGrandChild = (props) => {
                             //  color: props.didDrop ? "red" : "green"
                         }}
                     >
-                       <div className="textBody">{getNLetters(props.note.text_body, 2)}</div>
-                       
+                    <div className="textBody">
+                        {getNLetters(props.note.text_body, 5)}
+                    </div>
                     </NotePreviewGrandChildDiv>
                 </div>
             )

@@ -22,7 +22,7 @@ KNOWN BUGS / TODO
     -- fix flash of previous component in preview mode when moving from detail to preview page
     -- make login page sexy
         -- add user email and two passwords to sign up and name 
-    -- right menu is still funky
+
     -- show only grandChild first like 6characters
     -- when user starts sign in process, start counter to query api every 1 second and refresh page when authenticated
     -- css classes naming to camelCase
@@ -64,3 +64,4 @@ COMPLETED
     -- render quill on detail grandchild
     -- fake developers bios page
     -- infinite scroll on pocketList
+    -- right menu is still funky
