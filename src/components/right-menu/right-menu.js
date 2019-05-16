@@ -67,16 +67,30 @@ class RightMenu extends Component {
 				})
 				break;
 			case "slack":
-				this.setState({
-					openDetails: !this.state.openDetails,
-					selectedApp: "slack"
-				})
+				if(this.state.selectedApp === "slack"){
+					this.setState({
+						openDetails: !this.state.openDetails,
+						selectedApp: null
+					})
+				} else {
+					this.setState({
+						openDetails: true,
+						selectedApp: "slack"
+					})
+				}
 				break;
 			case "pocket":
-				this.setState({
-					openDetails: !this.state.openDetails,
-					selectedApp: "pocket"
-				})
+				if(this.state.selectedApp === "pocket"){
+					this.setState({
+						openDetails: !this.state.openDetails,
+						selectedApp: null
+					})
+				} else {
+					this.setState({
+						openDetails: true,
+						selectedApp: "pocket"
+					})
+				}
 				break;
 			default:
 				this.setState({
