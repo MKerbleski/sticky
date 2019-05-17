@@ -2,8 +2,17 @@ import React , { Component } from 'react'
 import styled from 'styled-components'
 // import axios from 'axios';
 import { connect } from 'react-redux';
-import { getSlackSettings, getUserData , syncSlack} from '../../actions'
 import format from 'date-fns/format'
+
+import { 
+    getSlackSettings,
+    getUserData,
+    syncSlack
+} from '../../actions'
+
+import { 
+    border,
+} from '../../styles'
 
 class SlackSettings extends Component {
     constructor(props){
@@ -67,7 +76,7 @@ class SlackSettings extends Component {
         return(
             <SlackSettingsDiv> 
                 {this.props.store.user.userData.slack
-                    ?   <div style={{background: "lightgreen"}}>
+                    ?   <div className="connected" style={{background: "lightgreen"}}>
                             <h3>Slack is connected!</h3>
                             {this.props.store.slack.slackSettings 
                                 ?   <div>
@@ -89,6 +98,7 @@ class SlackSettings extends Component {
                             <li>Sticky will show pinned messages from channels that you have <strong>starred</strong>.</li>
                             <br></br>
                                 <label>Slack will sync automatically. If things havn't synced and it has been more than a minute, click manual sync</label><button name="sync" onClick={this.getSlackInfo}>Manually Sync Slack</button>
+                            {/* FOR DEVELOPMENT */}
                             {/* <div>
                                 <p>team -> channels -> users -> </p>
                                 <button name="team" onClick={this.getSlackInfo}>team</button>
@@ -146,10 +156,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(SlackSettings)
 
 
 const SlackSettingsDiv = styled.div`
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    /* ${border()} */
     background: white;
-    padding: 2px;
+    /* padding: 2px; */
     margin: 2px;
     margin-top: 0;
+    .connected {
+        padding: 10px;
+    }
     
 `

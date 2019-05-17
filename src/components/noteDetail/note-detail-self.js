@@ -183,7 +183,7 @@ const NoteDetailSelfDiv = styled.div`
     background-color: ${notePreviewColor};
     padding: 5px;
     height: 80%;
-    box-shadow: 0px 1px 0px 3px gray;
+    box-shadow: 0px 0px 0px 2px gray;
     /* min-height: 90%; */
     .noteDetailHeader{
         /* ${border('blue')} */
@@ -202,7 +202,7 @@ const NoteDetailSelfDiv = styled.div`
         height: 100%;
         .noteDetailRight {
             /* ${border('purple')} */
-            ${scrollBar()}
+            ${scrollBar('3')}
             width: 29%;
             box-sizing: border-box;
             height: 98%;
@@ -231,7 +231,7 @@ const NoteDetailSelfDiv = styled.div`
                 /* border: 1px solid gray; */
                 /* padding: 3px; */
                 /* ${border('red')} */
-                ${scrollBar('6', 'gray')}
+                ${scrollBar('3')}
                 /* box-sizing: border-box; */
                 /* padding: 3px; */
                 display: flex;

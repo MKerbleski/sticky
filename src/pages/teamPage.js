@@ -34,7 +34,7 @@ export default class Bios extends Component {
                     <div className="bio">
                         <h2>Christian Wolff</h2>
                         <img src={afflack} />
-                        <p>Once called "an accountant ahead of his time" Ceril first learned about 2 column accounting accidentally while keeping score during an intense game of cops and robbers as a kid. From that point on Ceril has been keeping score on business assets and what ever 'stacking sats' means.</p>
+                        <p>Once called "an accountant ahead of his time" Christian "Chris" first stumbled upon the concept of 2 column accounting while keeping score during an intense game of cops and robbers as a kid. From then on Chris has been keeping score on business assets.</p>
                     </div>
 
                     <div className="bio">

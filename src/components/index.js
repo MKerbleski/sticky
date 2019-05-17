@@ -37,6 +37,7 @@ export {
 
 export {
     Settings,
+    ApiSettings
 } from './settings'
 
 export {

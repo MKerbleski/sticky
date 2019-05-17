@@ -122,6 +122,7 @@ const NoteQuillDiv = styled.div`
     /* margin: 9px; */
     border: 1px solid gray;
     height: 98%;
+    margin-bottom: 0 !important;
     margin: 2px;
     box-shadow: 0px 0px 5px 1px; 
     background: white;
@@ -129,14 +130,15 @@ const NoteQuillDiv = styled.div`
     .editor {
         box-sizing: border-box;
         /* ${border('red')} */
-        margin: 20px;
+        /* margin: 20px; */
         ${scrollBar()}
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 90%;
+        height: 100%;
         width: 100%;
-        margin: 0;
+        margin: 0 !important;
+        padding: 3px;
         background: white;
     }
     /* THE SPACING HERE IS FUCKED CAUSE OF QUILL JUST BE ZEN UNTIL IT IS RELACEABLE */
@@ -144,9 +146,9 @@ const NoteQuillDiv = styled.div`
         /* display: none; */
         /* margin-top: 100px; */
         /* ${border('purple')} */
-        /* max-height: 100%; */
-        /* height: 50%; */
-        overflow: hidden;
+        max-height: 100%;
+        /* height: 100%; */
+        /* overflow: hidden; */
         /* THERE IS AN IMPORTED CLASS CALLED QL-SNOW THAT WILL APPLY  */
         /* COMES WITH THE LIBRARY */
         /* border-top: 5px solid green !important; */
