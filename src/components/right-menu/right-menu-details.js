@@ -99,8 +99,8 @@ const RightMenuDetailsDiv = styled.div`
     margin: 5px;
     ${menu()}
     color: white;
-    max-width: 250px;
-    width: 95%;
+    width: 250px;
+    /* width: 95%; */
     height: 99%;
     display: flex;
     background-color: white;

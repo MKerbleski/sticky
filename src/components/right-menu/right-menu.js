@@ -112,7 +112,7 @@ class RightMenu extends Component {
 				}
 				
 				<div className="right-menu-preview">
-					{ AAA.map(apiName => {
+					{AAA.map(apiName => {
 						if(this.state[apiName.name]){
 							return (
 								<img 
@@ -179,7 +179,7 @@ const RightMenuDiv = styled.div`
 			font-size: 35px;
 			max-width: 30px;
 			overflow: hidden;
-			&:hover {
+			:hover {
 				cursor: pointer;
 				text-decoration: underline;
 			}
