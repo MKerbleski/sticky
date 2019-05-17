@@ -7,53 +7,55 @@ REFACTOR AS I GO
     -- change component names to camel case
 
 KNOWN BUGS / TODO
-    -- linter
-    -- STYLE
-        -- drop shadows go a long way 
+    -- clean up settings style
+    -- google tracking 
     -- BACKEND
         -- send total length of array with pocket list and slack list to calculate when infinite scroll is complete. or a message at the end of infinite scroll. 
-    -- google tracking 
-    -- unpin/ unstar 
-    -- delete when dragged
-    -- advertising section.
-        -- calendar to bid 
-        -- upload image
-    -- pocket actions on note to modify pocket API
     -- fix flash of previous component in preview mode when moving from detail to preview page
     -- make login page sexy
         -- add user email and two passwords to sign up and name 
-
-    -- show only grandChild first like 6characters
-    -- when user starts sign in process, start counter to query api every 1 second and refresh page when authenticated
     -- css classes naming to camelCase
-    -- combine shared css into premixes
-        -- renderedHTML similarities among all notes
-        -- note-preview and note-detail similarities
-    -- put components in pages folder
+    -- create tests
     -- modify user api settings to create sync buttonn. step 1 , step 2 
-    -- theme settings with styled components 
-    -- create tests 
-    -- consolidate drag and drop functions 
-    -- move backend code to this repo
-    -- clean up settings style
-    -- combine .note-link class with parent div? 
+    -- when user starts sign in process, start counter to query api every 1 second and refresh page when authenticated
+    -- combine .note-link class with parent div?
     -- todo grid has no nesting
         --takes any marked note and displays it in the catagory.
-    -- pay for ad free 
+    -- PAYMENT 
+        -- pay for ad free 
         -- pick your price 
-    -- custom colors for notes     
-        ``background-color: ${props => props.color};
-        props need to be in the styled component
-    -- toggle redundancy. by default items will be redundant, they can appear on different notes in duplicates. this setting would only allow one copy. could be implemented by putting a list on the sticky user credentials
-    -- add a cache to local storage so that pocket and slack will pull immeditally and then refresh when the user clicks a button or every 5 minutes or so. 
-    --  double check dependencies to make sure they are in package.json
     -- |+| button that shows where on the eisenhower graph where it is. can click to toggle and the dot will change corridnates or drag and drop to the left menu and drop in the corrisponding square
-    -- noteDetail future features 
-            Allow Forks
-            Allow Clones
-            Allow Edits
-            Copy link to note to clipboard
-            Make all children the same privacy settings
+    -- double check dependencies to make sure they are in package.json
+    -- move backend code to this repo
+    -- put components in pages folder
+
+    -- VERSION 2
+        -- linter
+        -- delete when dragged
+        -- advertising section.
+            -- calendar to bid 
+            -- upload image
+        -- noteDetail future features
+                Allow Forks
+                Allow Clones
+                Allow Edits
+                Copy link to note to clipboard
+                Make all children the same privacy settings
+        -- combine shared css into premixes
+            -- renderedHTML similarities among all notes
+            -- note-preview and note-detail similarities
+        -- theme settings with styled components 
+        -- consolidate drag and drop functions 
+        -- custom colors for notes     
+            ``background-color: ${props => props.color};
+            props need to be in the styled component
+            -- calculate complemntary color for child
+        -- TOGGLE REDUNDANCY 
+            -- pocket actions on note to modify pocket API
+            -- unpin/ unstar
+            -- toggle redundancy. by default items will be redundant, they can appear on different notes in duplicates. this setting would only allow one copy. could be implemented by putting a list on the sticky user credentials
+        -- OPTIMIZATION 
+            -- add a cache to local storage so that pocket and slack will pull immeditally and then refresh when the user clicks a button or every 5 minutes or so. 
 
 COMPLETED 
     -- note cannot be dropped on itself or the channel that it is on 
@@ -71,3 +73,6 @@ COMPLETED
     -- fake developers bios page
     -- infinite scroll on pocketList
     -- right menu is still funky
+    -- STYLE
+        -- drop shadows go a long way
+    -- show only grandChild first like 6characters

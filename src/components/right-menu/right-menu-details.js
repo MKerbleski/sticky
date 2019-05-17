@@ -108,7 +108,6 @@ const RightMenuDetailsDiv = styled.div`
     max-height: 100%;
     .app-title {
         /* ${border()} */
-        /* max-width: 100px; */
         color: black;
         width: 95%;
         min-height: 75px;
@@ -117,9 +116,9 @@ const RightMenuDetailsDiv = styled.div`
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        button{
+        button {
             margin: 10px;
-            i{
+            i {
                 margin: 3px;
                 &:hover{
                     cursor: pointer;
@@ -129,7 +128,6 @@ const RightMenuDetailsDiv = styled.div`
     }
     .app-list {
         /* ${border()} */
-        /* border: 1px solid black; */
         overflow: hidden;
         width: 100%;
         max-height: 100%;
