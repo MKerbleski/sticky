@@ -74,7 +74,7 @@ class SlackSettings extends Component {
 
     render(){
         return(
-            <SlackSettingsDiv> 
+            <SlackSettingsDiv className="subSetting" > 
                 {this.props.store.user.userData.slack
                     ?   <div className="connected" style={{background: "lightgreen"}}>
                             <h3>Slack is connected!</h3>
@@ -160,8 +160,9 @@ const SlackSettingsDiv = styled.div`
     /* ${border()} */
     background: white;
     /* padding: 2px; */
-    margin: 2px;
-    margin-top: 0;
+    /* margin: 2px; */
+    /* margin-top: 0; */
+    /* width: 100%; */
     .connected {
         padding: 10px;
     }

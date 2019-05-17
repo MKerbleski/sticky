@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 
 import { 
 	ApiSettings,
-	Loading 
+	Loading,
+	SlackSettings,
+	PocketSettings
 } from '../components';
 
 import { 
@@ -20,7 +22,7 @@ class SettingsPage extends Component {
 				<h1>Settings</h1>
 				{userData 
 					? 	<React.Fragment>
-							<div className="userSettings">
+							<div className="subSetting">
 								<p>
 									<strong>username: </strong>
 									<span>{userData.username}</span>
@@ -39,7 +41,10 @@ class SettingsPage extends Component {
 								</p>
 								<h4>Apps</h4>
 							</div>
-							<ApiSettings userData={userData} />
+							<PocketSettings userData={this.props.userData} />
+							<SlackSettings  userData={this.props.userData} />
+							<SlackSettings  userData={this.props.userData} />
+							{/* <ApiSettings userData={userData} /> */}
 						</React.Fragment> 
 					:	<Loading />
 				}
@@ -63,16 +68,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage)
 
 const SettingsPageDiv = styled.div`
 	${border()}
-	padding: 10px;
 	display: flex;
 	flex-direction: column;
 	padding: 25px;
 	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	.userSettings{
+	/* max-height: 100%; */
+	.subSetting {
+		/* THIS CLASS IS ALSO ON 
+		POCKET_SETTINGS AND SLACK_SETTING  */
 		width: 100%;
-		${border()}
+		${border('red')}
+		padding: 3px;
 	}
 	/* height: 100vh; */
 `;

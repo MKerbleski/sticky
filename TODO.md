@@ -9,6 +9,10 @@ REFACTOR AS I GO
 KNOWN BUGS / TODO
     -- BACKEND
         -- send total length of array with pocket list and slack list to calculate when infinite scroll is complete. or a message at the end of infinite scroll. 
+        -- make the middleware log the amount of calls a user makes to the metadata table. 
+            --i.e. how many notes edited. 
+            -- how many logins  
+        -- notes that are dragged should be flagged and move to the end of the list. on pocket 
     -- STYLING 
         -- fix flash of previous component in preview mode when moving from detail to preview page
         -- css classes naming to camelCase
@@ -16,13 +20,15 @@ KNOWN BUGS / TODO
         -- combine .note-link class with parent div?
     -- LOGIN
         -- make login page sexy
-            -- add user email and two passwords to sign up and name 
+            -- add user email and two passwords to sign up and name
+        -- track login attempts, login locations
     -- PAYMENT 
         -- pay for ad free 
-        -- pick your price 
+        -- pick your price
+        -- BTC lightning network 
     -- NEW FEATURES
         -- |+| button that shows where on the eisenhower graph where it is. can click to toggle and the dot will change corridnates or drag and drop to the left menu and drop in the corrisponding square
-    
+    -- 
     -- google tracking 
     -- create tests
     -- modify user api settings to create sync buttonn. step 1 , step 2 

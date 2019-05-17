@@ -66,9 +66,9 @@ class PocketSettings extends Component {
 
     render(){        
         return(
-            <PocketSettingsDiv> 
+            <PocketSettingsDiv className="subSetting" style={{background: "lightgreen"}}> 
                 {this.props.store.user.userData.pocket 
-                    ?   <div style={{background: "lightgreen"}}>
+                    ?   <React.Fragment>
                             <h3>Pocket is connected!</h3>
                             <p>Your pocket saves will automatically be synced, and will be displayed in the blue menu to the right.</p>
                             <p>Use the blue menu to the right to view your list and attach pocket items to your notes!</p>
@@ -84,8 +84,8 @@ class PocketSettings extends Component {
                                     </div>
                                 : null
                             }
-                        </div> 
-                    :   <div>
+                        </React.Fragment>
+                    :   <React.Fragment>
                             <p>pocket is NOT connected</p>
                             <button onClick={this.connectPocket}>Connect to Pocket</button>
                             {this.state.err
@@ -105,7 +105,7 @@ class PocketSettings extends Component {
                                     </button>
                                 :   null
                             }
-                        </div>
+                        </React.Fragment>
                 }
                
                 {/* what I eventually want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read..., or delete button.  */}
@@ -127,9 +127,9 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(PocketSettings)
 
 const PocketSettingsDiv = styled.div`
-    border: 1px solid green;
-    background: white;
-    padding: 2px;
-    margin: 2px;
-    margin-top: 0;
+    /* border: 1px solid green; */
+    /* background: white; */
+    /* padding: 2px; */
+    /* margin: 2px; */
+    /* margin-top: 0; */
 `
