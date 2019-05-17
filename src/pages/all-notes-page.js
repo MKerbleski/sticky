@@ -179,17 +179,17 @@ const AllNotesPageDiv = styled.div`
     padding-top: 0;
     margin: 2px;
     width: 100%;
-    h1{
+    h1 {
         margin: 5px;
     }
     ${scrollBar()}
-    .noNotes{
+    .noNotes {
         /* ${border()} */
         ${flexCenter('column')}
         justify-content: flex-start;
     }
     .all-note-preview-container{
-        ${border()}
+        /* ${border()} */
         padding: 2px;
         display: flex;
         flex-direction: row;

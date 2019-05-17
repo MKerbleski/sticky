@@ -97,19 +97,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(RightMenuDetails)
 
 const RightMenuDetailsDiv = styled.div`
     margin: 5px;
-    ${ menu() }
+    ${menu()}
     color: white;
-    width: 250px;
+    max-width: 250px;
+    width: 95%;
     height: 99%;
     display: flex;
     background-color: white;
     flex-direction: column;
     max-height: 100%;
     .app-title {
-        ${border()}
+        /* ${border()} */
         /* max-width: 100px; */
         color: black;
-        width: 100%;
+        width: 95%;
         min-height: 75px;
         height: 75px;
         display: flex;
@@ -127,7 +128,8 @@ const RightMenuDetailsDiv = styled.div`
         }
     }
     .app-list {
-        border: 1px solid black;
+        /* ${border()} */
+        /* border: 1px solid black; */
         overflow: hidden;
         width: 100%;
         max-height: 100%;

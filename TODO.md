@@ -36,6 +36,7 @@ KNOWN BUGS / TODO
     -- consolidate drag and drop functions 
     -- move backend code to this repo
     -- clean up settings style
+    -- combine .note-link class with parent div? 
     -- todo grid has no nesting
         --takes any marked note and displays it in the catagory.
     -- pay for ad free 
