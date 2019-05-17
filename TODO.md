@@ -56,6 +56,7 @@ KNOWN BUGS / TODO
             -- toggle redundancy. by default items will be redundant, they can appear on different notes in duplicates. this setting would only allow one copy. could be implemented by putting a list on the sticky user credentials
         -- OPTIMIZATION 
             -- add a cache to local storage so that pocket and slack will pull immeditally and then refresh when the user clicks a button or every 5 minutes or so. 
+        -- channel and people names in slack
 
 COMPLETED 
     -- note cannot be dropped on itself or the channel that it is on 

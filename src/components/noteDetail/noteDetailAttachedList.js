@@ -44,15 +44,14 @@ class NoteDetailAttachedList extends Component {
 export default NoteDetailAttachedList
 
 const NoteDetailAttachedListDiv = styled.div`
-    /* ${border()} */
-    ${scrollBar()}
+
     box-sizing: border-box;
     color: black;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin: 5px;
-    border: 1px solid gray;
-    background: rgba(1,1,1,.05);
-    min-width: 30%;
+    /* border: .5px solid gray; */
+    /* background: rgba(1,1,1,.05); */
+    /* min-width: 30%; */
+    /* ${border('red')} */
 `

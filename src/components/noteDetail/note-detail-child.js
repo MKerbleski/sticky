@@ -191,31 +191,35 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 const NoteDetailChildDiv = styled.div`
 	/* similarities to note preview */
-	${border('blue')}
+	box-sizing: border-box;
+	/* ${border('blue')} */
 	${flexCenter('column')}
-	width: 100%;
-	border: 1px solid black;
-	box-shadow:  0px 0px 2px .5px gray;
+	width: 99%;
 	/* max-height: 150px; */
 	/* height: 95%; */
+	/* margin: 2px; */
 	padding: 0;
-	:hover{
-		box-shadow:  0px 0px 4px 1px gray;
-	}
+	/* margin: 2px; */
 	.note-link{
 		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
 		align-items: space-between;
 		justify-content: flex-start;
-		width: 100%;
+		width: 95%;
 		min-width: 100px;
 		height: 100%;
 		padding: 5px;
 		background-color: ${childNoteColor};
 		text-decoration: none;
 		color: black;
-		margin: 1px;
+		margin: 5px;
+		border: 1px solid black;
+		box-shadow:  0px 0px 2px .5px gray;
+		:hover{
+			/* border: 1.5px solid black; */
+			box-shadow:  1px 1px 2.5px 2px gray;
+		}
 		.noteDetailChildHeader{
 			/* ${border('red')} */
 			/* width: 100%; */

@@ -71,9 +71,7 @@ class NoteDetailSelf extends React.Component {
                                 className="noteDetailQuill" 
                                 note={this.props.note}
                             />
-                            {/* <p>{note.text_body}</p> */}
-                            {note.children 
-                            || this.props.store.notes.showNewNote
+                            {note.children || this.props.store.notes.showNewNote
                                 ?   <div 
                                         onWheel={this.scrollLeft} 
                                         className="noteDetailChildren" 
@@ -98,12 +96,14 @@ class NoteDetailSelf extends React.Component {
                                     </div>
                                 :   null}
                         </div>
-                        {note.num_pocket_items_attached 
-                        || note.num_slack_items_attached
-                            ?   <NoteDetailAttachedList 
-                                    note={note}
-                                />
-                            :   null }
+                        <div className="noteDetailRight">
+                            {note.num_pocket_items_attached 
+                            || note.num_slack_items_attached
+                                ?   <NoteDetailAttachedList 
+                                        note={note}
+                                    />
+                                :   null }
+                        </div>
                         
                     </div>
                     <div className="note-detail-settings">
@@ -173,8 +173,8 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailSelf));
 
 const NoteDetailSelfDiv = styled.div`
+    /* border: 2px solid gray; */
     /* ${border('green')} */
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -183,11 +183,13 @@ const NoteDetailSelfDiv = styled.div`
     background-color: ${notePreviewColor};
     padding: 5px;
     height: 80%;
+    box-shadow: 0px 1px 0px 3px gray;
     /* min-height: 90%; */
     .noteDetailHeader{
-        /* ${border()} */
+        /* ${border('blue')} */
         width: 98%;
         margin: 3px;
+        padding-left: 5px;
     }
     .noteDetailMain{
         /* ${border('red')} */
@@ -198,9 +200,20 @@ const NoteDetailSelfDiv = styled.div`
         /* align-items: center; */
         width: 99%;
         height: 100%;
+        .noteDetailRight {
+            /* ${border('purple')} */
+            ${scrollBar()}
+            width: 29%;
+            box-sizing: border-box;
+            height: 98%;
+            margin: 3px;
+            overflow: auto;
+        }
         .noteDetailLeft{
             box-sizing: border-box;
-            /* ${border('red')} */
+            /* ${border('purple')} */
+            margin: 3px;
+            width: 69%;
             display: flex;
             flex-direction: column;
             align-items: space-between;
@@ -210,12 +223,13 @@ const NoteDetailSelfDiv = styled.div`
             };
             /* border: 1px solid gray; */
             /* background: white; */
-            margin: 5px;
-            min-height: 98%;
+            height: 98%;
             .noteDetailQuill {
                 /* NEEDS TO BE EDITED ON COMPONENT */
             }
             .noteDetailChildren {
+                /* border: 1px solid gray; */
+                /* padding: 3px; */
                 /* ${border('red')} */
                 ${scrollBar('6', 'gray')}
                 /* box-sizing: border-box; */
@@ -238,7 +252,7 @@ const NoteDetailSelfDiv = styled.div`
         ${flexCenter()}
         border: 1px solid gray;
         box-sizing: border-box;
-        width: 99%;
+        width: 97%;
         margin: 8px;
         justify-content: flex-end;
         background: rgba(1,1,1,.05);

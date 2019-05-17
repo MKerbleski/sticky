@@ -9,9 +9,11 @@ import {
     apiNote,
     slackNoteColor
 } from '../../styles'
+
 import {
     noteToNote
 } from '../../actions'
+
 import {
     sharedStickyNoteDrop
 } from '../../helpers'
@@ -25,7 +27,8 @@ const SlackNote = (props) => {
                 type="slack"
                 style={{
                     opacity: props.isDragging ? '0.25' : '1',
-                    border: props.isDragging ? '1px dashed gray': '1px solid black'}}
+                    border: props.isDragging ? '1px dashed gray': '1px solid black'
+                }}
                 >
                     <div className="slack-note-top">
                         <strong>{props.item.slack_user_name}</strong>
@@ -35,14 +38,19 @@ const SlackNote = (props) => {
                         </div>
                     </div> 
                     <div className="slack-note-middle">
-                        <ReactMarkdown className="slack-text">{props.item.type === "message" 
-                            ? props.item.text 
-                            : "error at note text"}
+                        <ReactMarkdown className="slack-text">
+                            {props.item.type === "message" 
+                                ? props.item.text 
+                                : "error at note text"}
                         </ReactMarkdown>
                     </div> 
                     <span className="slack-note-bottom">
-                        <p className="slack-time">{time}</p>
-                        <a target="_blank" href={props.item.permalink}>Link to Slack</a>
+                        <p className="slack-time">
+                            {time}
+                        </p>
+                        <a target="_blank" href={props.item.permalink}>
+                            Link to Slack
+                        </a>
                     </span>
                 </SlackNoteDiv>
     } else {
@@ -109,6 +117,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(DragSource('item', s
 const SlackNoteDiv = styled.div`
     ${apiNote()}
     background: ${slackNoteColor};
+    border: 1px solid black;
+		/* box-shadow:  0px 0px 2px .5px gray; */
+		
     .slack-note-top{
         /* border: 1px solid green; */
         width: 100%;

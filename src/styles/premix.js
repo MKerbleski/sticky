@@ -72,6 +72,9 @@ export function apiNote(){
         padding: 3px;
         color: black;
         margin: 2px;
+        :hover{
+			box-shadow:  1px 1px .5px .5px gray;
+		}
     `
 }
 
