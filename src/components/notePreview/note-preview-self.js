@@ -12,7 +12,8 @@ import {
 } from '../../actions'
 
 import { 
-	sharedStickyNoteDrop 
+	sharedStickyNoteDrop,
+	getNElements
 } from '../../helpers'
 
 import { 
@@ -66,26 +67,26 @@ class NotePreviewSelf extends React.Component {
 							id={this.props.note.id}
 							style={{background: this.props.hover ? 'lightgreen' : null}} 
 						>
+							<div className="note-content-header">
+								{/* EVENTUAL TITLE WILL GO HERE */}
+								{this.props.note.is_deleted 
+									?	<div>
+											<button name="restore" onClick={this.clickHandler}>RESTORE</button>
+											<button name="delete" onClick={this.clickHandler}>DELETE</button>
+										</div> 
+									: 	null}
+									
+								{this.props.note.num_slack_items_attached ||  this.props.note.num_pocket_items_attached
+									? 	<div className="note-content-link-count">
+											{this.props.note.num_pocket_items_attached + this.props.note.num_slack_items_attached}
+										</div> 
+									:   null }
+									
+							</div>
                             <div className="note-content">
-                                <div className="note-content-header">
-									{/* EVENTUAL TITLE WILL GO HERE */}
-                                    {this.props.note.is_deleted 
-										?	<div>
-												<button name="restore" onClick={this.clickHandler}>RESTORE</button>
-												<button name="delete" onClick={this.clickHandler}>DELETE</button>
-											</div> 
-									  	: 	null}
-                                      
-                                    {this.props.note.num_slack_items_attached ||  this.props.note.num_pocket_items_attached
-										? 	<div className="note-content-link-count">
-												{this.props.note.num_pocket_items_attached + this.props.note.num_slack_items_attached}
-											</div> 
-										:   null }
-										
-                                </div>
 								{/* {this.renderText()} */}
 								{/* <ReactQuill preview value={this.props.note} /> */}
-                                {ReactHTMLParser(this.props.note.text_body)}
+                                {ReactHTMLParser(getNElements(this.props.note.text_body))}
                             </div>
                             <div className="layerTwoContainerAll"  >
                                 {this.props.note.children 
@@ -190,69 +191,85 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 )(NotePreviewSelf))
 
 const NotePreviewSelfDiv = styled.div`
-	/* ${border('red')} */
-	padding: 10px;
-	height: auto;
-	display: flex;
-	flex-direction: column;
+	${border('red')}
+	/* padding: 10px; */
+	/* height: auto; */
+	/* display: flex; */
+	/* flex-direction: column; */
 	box-sizing: border-box;
+	/* width: 100%; */
 	.note-link {
-		/* ${border()} */
+		box-sizing: border-box;
 		border: 1px solid gray;
+		${border('pink')}
 		border-radius: 4px;
 		box-shadow: 0px 1px 2px gray;
+		/* height: 100%; */
+		padding: 10px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+		/* width: auto; */
+		background-color: ${notePreviewColor};
+		background-color: ${props => props.color};
 		:hover{
 			border: 2px solid gray;
 			box-shadow: 0px 1px 4px gray;
 		}
-		height: 100%;
-		padding: 10px;
-		padding: 10px;
-		justify-content: space-around;
-		background-color: ${notePreviewColor};
-		background-color: ${props => props.color};
 		.note-content{
-			/* ${border()} */
+			${border()}
 			${flexCenter('column')}
 			justify-content: space-between;
 			/* background: ${notePreviewSecondary}; */
 			/* box-shadow: 0 0 15px 10px ${notePreviewSecondary}; */
 			color: black;
 			min-width: 250px;
+			max-width: 50%;
 			height: auto;
 			max-height: 100px;
 			margin: 2% 0;
-			overflow: hidden;
 			/* ALL CHILDREN */
 			> * {
+				max-width: 99%;
+				overflow: hidden;
+				${border()}
+				/* max-width: 100%; */
 				margin: 0;
 			}
-			.note-content-header{
+			> p {
+				/* THIS IS JANKY BUT FOR SOME REASON THE LENGTH OF THE WORD WAS 
+				EFFECTING THE SIZE OF THE WHOLE DIV. NOW IT HAS A MAX WHICH IS 
+				A LITTLE MORE THAN TWO CHILD DIVS SO IT WORKS.  */
+				max-width: 250px;
+				overflow-wrap: break-word;
+			}
+		}
+		.note-content-header{
+			${border()}
+			${flexCenter()}
+			/* width: 100%; */
+			justify-content: flex-end;
+			.note-content-title {
 				/* ${border()} */
-				${flexCenter()}
-				width: 100%;
-				justify-content: flex-end;
-				.note-content-title {
-					/* ${border()} */
-					margin: 0px 10px 5px 0;
-					text-decoration: none;
-					text-align: left;
-				}
-				.note-content-link-count {
-					border: 1px solid black;
-					border-radius: 50px;
-					height: 20px;
-					width: 20px;
-					text-align: center;
-					background: ${linksBlue};
-				}
+				margin: 0px 10px 5px 0;
+				text-decoration: none;
+				text-align: left;
+			}
+			.note-content-link-count {
+				border: 1px solid black;
+				border-radius: 50px;
+				height: 20px;
+				width: 20px;
+				text-align: center;
+				background: ${linksBlue};
 			}
 		}
 		.layerTwoContainerAll{
-			/* ${border()} */
+			${border()}
 			${flexCenter()}
 			align-items: space-around;
-			width: 100%;
+			/* width: 100%; */
 			flex-wrap: wrap;
 		}
 	}  
