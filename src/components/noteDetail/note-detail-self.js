@@ -201,17 +201,20 @@ const NoteDetailSelfDiv = styled.div`
         width: 99%;
         height: 100%;
         .noteDetailRight {
-            /* ${border('purple')} */
+            ${border('purple')}
             ${scrollBar('3')}
             width: 29%;
             box-sizing: border-box;
             height: 98%;
             margin: 3px;
             overflow: auto;
+            width: ${props => props.note.num_pocket_items_attached || props.note.num_slack_items_attached ? '30%': 'null'}
+            display: ${props => props.note.num_pocket_items_attached || props.note.num_slack_items_attached ? 'flex': 'none' 
+            };
         }
         .noteDetailLeft{
             box-sizing: border-box;
-            /* ${border('purple')} */
+            ${border('purple')}
             margin: 3px;
             width: 69%;
             display: flex;

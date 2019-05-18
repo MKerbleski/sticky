@@ -19,7 +19,7 @@ KNOWN BUGS / TODO
         -- clean up settings style
         -- combine .note-link class with parent div?
         -- slight transparancy fade on note preview self content  that shows more of the text but slowly fades behind the children
-        --Max width on note preview. 50%? 
+        --Max width on note preview. 50%? of note content. I think that it looks fine wide with many children.
     -- LOGIN
         -- make login page sexy
             -- add user email and two passwords to sign up and name
@@ -31,7 +31,7 @@ KNOWN BUGS / TODO
     -- NEW FEATURES
         -- |+| button that shows where on the eisenhower graph where it is. can click to toggle and the dot will change corridnates or drag and drop to the left menu and drop in the corrisponding square
         -- this can and should be a component.
-    -- 
+    -- hide edit functionality for public note viewed by others so that it looks cleaner.
     -- google tracking 
     -- create tests
     -- modify user api settings to create sync buttonn. step 1 , step 2 
@@ -63,14 +63,26 @@ KNOWN BUGS / TODO
             ``background-color: ${props => props.color};
             props need to be in the styled component
             -- calculate complemntary color for child
+                -- https://serennu.com/colour/rgbtohsl.php
+
         -- TOGGLE REDUNDANCY 
             -- pocket actions on note to modify pocket API
             -- unpin/ unstar
             -- toggle redundancy. by default items will be redundant, they can appear on different notes in duplicates. this setting would only allow one copy. could be implemented by putting a list on the sticky user credentials
             -- every api item should have a flag for is deleted so that nothing is every deleted from our database even tho we will be deleting stuff from pocket.
+        -- POCKET 
+            -- pocket tags become channels on the right menu 
+            -- add delete functionality first and then redundency 
         -- OPTIMIZATION 
             -- add a cache to local storage so that pocket and slack will pull immeditally and then refresh when the user clicks a button or every 5 minutes or so. 
         -- channel and people names in slack
+        -- youtube watch later
+        -- chrome bookmarks
+        -- twitter likes and retweets 
+        -- Backend add join to add children notes? 
+BUSINESS 
+    -- Register copyright? 
+    -- How does the LLC own the intellectual property? 
 
 COMPLETED 
     -- note cannot be dropped on itself or the channel that it is on 
@@ -91,3 +103,8 @@ COMPLETED
     -- STYLE
         -- drop shadows go a long way
     -- show only grandChild first like 6characters
+
+
+CONCEPT 
+    it is all about reducing the number of clickes and still giving the user what they want tw -> share-> pocket -> sticky 
+    tw -> sticky 
