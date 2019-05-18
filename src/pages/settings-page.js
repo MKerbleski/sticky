@@ -72,7 +72,6 @@ const SettingsPageDiv = styled.div`
 	flex-direction: column;
 	padding: 25px;
 	width: 100%;
-	/* max-height: 100%; */
 	.subSetting {
 		/* THIS CLASS IS ALSO ON 
 		POCKET_SETTINGS AND SLACK_SETTING  */

@@ -18,6 +18,8 @@ KNOWN BUGS / TODO
         -- css classes naming to camelCase
         -- clean up settings style
         -- combine .note-link class with parent div?
+        -- slight transparancy fade on note preview self content  that shows more of the text but slowly fades behind the children
+        --Max width on note preview. 50%? 
     -- LOGIN
         -- make login page sexy
             -- add user email and two passwords to sign up and name
@@ -28,6 +30,7 @@ KNOWN BUGS / TODO
         -- BTC lightning network 
     -- NEW FEATURES
         -- |+| button that shows where on the eisenhower graph where it is. can click to toggle and the dot will change corridnates or drag and drop to the left menu and drop in the corrisponding square
+        -- this can and should be a component.
     -- 
     -- google tracking 
     -- create tests
