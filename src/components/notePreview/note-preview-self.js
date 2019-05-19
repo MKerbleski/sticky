@@ -191,17 +191,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(flow(
 )(NotePreviewSelf))
 
 const NotePreviewSelfDiv = styled.div`
-	${border('red')}
-	/* padding: 10px; */
+	/* ${border('red')} */
+	padding: 10px;
 	/* height: auto; */
-	/* display: flex; */
-	/* flex-direction: column; */
+	display: flex;
+	flex-direction: column;
 	box-sizing: border-box;
 	/* width: 100%; */
+	box-sizing: border-box;
 	.note-link {
 		box-sizing: border-box;
 		border: 1px solid gray;
-		${border('pink')}
+		/* ${border('pink')} */
 		border-radius: 4px;
 		box-shadow: 0px 1px 2px gray;
 		/* height: 100%; */
@@ -218,7 +219,8 @@ const NotePreviewSelfDiv = styled.div`
 			box-shadow: 0px 1px 4px gray;
 		}
 		.note-content{
-			${border()}
+			/* ${border()} */
+			box-sizing: border-box;
 			${flexCenter('column')}
 			justify-content: space-between;
 			/* background: ${notePreviewSecondary}; */
@@ -233,11 +235,11 @@ const NotePreviewSelfDiv = styled.div`
 			> * {
 				max-width: 99%;
 				overflow: hidden;
-				${border()}
+				/* ${border()} */
 				/* max-width: 100%; */
-				margin: 0;
 			}
 			> p {
+				margin: 0;
 				/* THIS IS JANKY BUT FOR SOME REASON THE LENGTH OF THE WORD WAS 
 				EFFECTING THE SIZE OF THE WHOLE DIV. NOW IT HAS A MAX WHICH IS 
 				A LITTLE MORE THAN TWO CHILD DIVS SO IT WORKS.  */
@@ -246,9 +248,9 @@ const NotePreviewSelfDiv = styled.div`
 			}
 		}
 		.note-content-header{
-			${border()}
+			/* ${border()} */
 			${flexCenter()}
-			/* width: 100%; */
+			width: 100%;
 			justify-content: flex-end;
 			.note-content-title {
 				/* ${border()} */
@@ -266,7 +268,7 @@ const NotePreviewSelfDiv = styled.div`
 			}
 		}
 		.layerTwoContainerAll{
-			${border()}
+			/* ${border()} */
 			${flexCenter()}
 			align-items: space-around;
 			/* width: 100%; */

@@ -40,6 +40,7 @@ KNOWN BUGS / TODO
     -- move backend code to this repo
 
     -- VERSION 2
+        -- put x on new note preview
         -- put components in pages folder
         -- create tests
         -- linter

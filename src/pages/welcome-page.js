@@ -18,6 +18,10 @@ import {
     AdvertisePage
 } from '../pages'
 
+import {
+    mainThemePrimary
+} from '../styles'
+
 export default class WelcomePage extends Component{
     constructor(props){
         super(props);
@@ -110,16 +114,29 @@ const WelcomePageDiv = styled.div`
     /* margin: 2px; */
     footer {
         box-sizing: border-box;
+        background: ${mainThemePrimary};
         border-top: 1px solid black;
         /* max-width: 99%; */
         width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-around;
         align-content: center;
         text-align: baseline;
-        padding: 3px;
+        padding: 1px;
         /* margin: 2px; */
-        a {margin: 7px;}
+        a {
+            padding: 7px;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+            :hover{
+                background: white;
+                color: black;
+                text-decoration: underline;
+            }
+        }
     }
 `;
