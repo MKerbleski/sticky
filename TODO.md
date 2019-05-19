@@ -19,7 +19,6 @@ KNOWN BUGS / TODO
         -- clean up settings style
         -- combine .note-link class with parent div?
         -- slight transparancy fade on note preview self content  that shows more of the text but slowly fades behind the children
-        --Max width on note preview. 50%? of note content. I think that it looks fine wide with many children.
     -- LOGIN
         -- make login page sexy
             -- add user email and two passwords to sign up and name
@@ -33,16 +32,16 @@ KNOWN BUGS / TODO
         -- this can and should be a component.
     -- hide edit functionality for public note viewed by others so that it looks cleaner.
     -- google tracking 
-    -- create tests
     -- modify user api settings to create sync buttonn. step 1 , step 2 
-    -- when user starts sign in process, start counter to query api every 1 second and refresh page when authenticated
+    -- when user starts sign in process, start counter to query api every 1 second and refresh page when authenticated NOT SURE ABOUT THIS
     -- todo grid has no nesting
         --takes any marked note and displays it in the catagory.
     -- double check dependencies to make sure they are in package.json
     -- move backend code to this repo
-    -- put components in pages folder
 
     -- VERSION 2
+        -- put components in pages folder
+        -- create tests
         -- linter
         -- delete when dragged
         -- advertising section.
@@ -103,6 +102,7 @@ COMPLETED
     -- STYLE
         -- drop shadows go a long way
     -- show only grandChild first like 6characters
+    --Max width on note preview. 50%? of note content. I think that it looks fine wide with many children.
 
 
 CONCEPT 
