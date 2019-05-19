@@ -76,6 +76,7 @@ export const DELETING_NOTE = 'DELETING_NOTE';
 export const ERROR_DELETING_NOTE = 'ERROR_DELETING_NOTE';
 export const NOTE_DELETED = 'NOTE_DELETED';
 //THIS IS TO ACTUALLY DELETE A NOTE NOT JUST FLAG IT AS DELETED
+// WILL REMOVE FROM DATABASE
 export const deleteNote = (id) => {
   	return function(dispatch){
       	if(localStorage.getItem('JWT')){

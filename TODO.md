@@ -31,7 +31,6 @@ KNOWN BUGS / TODO
         -- |+| button that shows where on the eisenhower graph where it is. can click to toggle and the dot will change corridnates or drag and drop to the left menu and drop in the corrisponding square
         -- this can and should be a component.
     -- hide edit functionality for public note viewed by others so that it looks cleaner.
-    -- google tracking 
     -- modify user api settings to create sync buttonn. step 1 , step 2 
     -- when user starts sign in process, start counter to query api every 1 second and refresh page when authenticated NOT SURE ABOUT THIS
     -- todo grid has no nesting
@@ -40,6 +39,7 @@ KNOWN BUGS / TODO
     -- move backend code to this repo
 
     -- VERSION 2
+        -- google tracking 
         -- put x on new note preview
         -- put components in pages folder
         -- create tests
