@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-// import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
+// import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 
 import { 
@@ -101,31 +101,21 @@ export default class WelcomePage extends Component{
 // export default connect(mapStateToProps, mapDispatchToProps)(WelcomePage)
 
 const WelcomePageDiv = styled.div`
-    /* border: 1px solid blue; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    /* background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)}); */
-    /* max-width: 99%; */
     width: 100%;
-    /* overflow: hidden; */
-    /* height: 99%; */
-    /* margin: 2px; */
     footer {
         box-sizing: border-box;
         background: ${mainThemePrimary};
         border-top: 1px solid black;
-        /* max-width: 99%; */
-        /* border: 1px solid red; */
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-content: center;
         text-align: baseline;
-        /* padding: 1px; */
-        /* margin: 2px; */
         a {
             padding: 7px;
             /* height: 100%; */

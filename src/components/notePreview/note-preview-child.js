@@ -50,7 +50,7 @@ class NotePreviewChild extends React.Component {
                     >
                         <div className="notePreviewChildHeader">
                             {note.num_slack_items_attached ||  note.num_pocket_items_attached
-                                ? 	<div className="note-content-link-count">
+                                ? 	<div className="notePreviewChildLinkCount">
                                     {/* {this.props.note.num_pocket_items_attached + this.props.note.num_slack_items_attached} */}
                                     </div> 
                                 :   null 
@@ -169,6 +169,7 @@ const NotePreviewChildDiv = styled.div`
     align-content: flex-start;
     justify-content: flex-start;
     overflow: hidden;
+    box-sizing: border-box;
     width: 100px;
     :hover{
         box-shadow: 0px 1px 4px gray;
@@ -187,8 +188,8 @@ const NotePreviewChildDiv = styled.div`
             margin: 0
         }
     }
-    .note-content-link-count{
-        border: .5px solid black;
+    .notePreviewChildLinkCount{
+        border: 1px solid black;
         border-radius: 50px;
         display: flex;
         flex-direction: row;

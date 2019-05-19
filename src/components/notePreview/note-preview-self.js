@@ -214,7 +214,7 @@ const NotePreviewSelfDiv = styled.div`
 		/* width: auto; */
 		background-color: ${notePreviewColor};
 		background-color: ${props => props.color};
-		:hover{
+		&:hover{
 			border: 2px solid gray;
 			box-shadow: 0px 1px 4px gray;
 		}
