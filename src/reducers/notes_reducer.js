@@ -38,6 +38,7 @@ const initialState = {
     noteAdded: false,
     fetchingNotes: false,
     notesRecieved: false,
+    showNewNote: false,
 }
 
 export const notesReducer = (state=initialState, action) => {

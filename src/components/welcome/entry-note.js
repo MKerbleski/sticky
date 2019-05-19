@@ -2,6 +2,10 @@ import React , { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 
+import {
+    mainThemePrimary
+} from '../../styles'
+
 export default class EntryNote extends Component {
     constructor(props){
         super(props)
@@ -51,13 +55,13 @@ export default class EntryNote extends Component {
 }
 
 const EntryNoteDiv = styled.div`
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin: 2px;
     form{
-        border: 1px solid green;
+        /* border: 1px solid green; */
         margin: 2px;
         textarea{
-            ${'' /* border: 1px solid green; */}
+            border: 1px solid black;
             background: rgba(255,255,255,0.15);
             border: none;
             /* padding: 20px; */
@@ -78,7 +82,16 @@ const EntryNoteDiv = styled.div`
         flex-direction: row;
         justify-content: flex-end;
         .link{
+            background: ${mainThemePrimary};
+            padding: 15px;
+            border-radius: 20px;
             margin: 4px;
+            color: black;
+            font-size: 20px;
+            text-decoration: none;
+            :hover{
+                text-decoration: underline;
+            }
         }
     }
 `
