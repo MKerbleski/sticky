@@ -77,7 +77,7 @@ class NoteDetailPage extends React.Component{
                                         </Link>
                                     :   <Link 
                                             className="return-link"
-                                            to={`/${localStorage.getItem('username')}/`}
+                                            to={`/${localStorage.getItem('username')}`}
                                         >
                                             {`back to My notes`}
                                         </Link>

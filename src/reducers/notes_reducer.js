@@ -116,7 +116,7 @@ export const notesReducer = (state=initialState, action) => {
             })
         case FETCHING_SINGLE_NOTE:
             return Object.assign({}, state, {
-                fetchingSingleNote: true,
+                fetchingNotes: true,
                 triggerAttached: true,
                 triggerGetNotes: false,
                 status: "Getting Note!"

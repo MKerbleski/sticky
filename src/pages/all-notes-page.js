@@ -56,6 +56,7 @@ class AllNotesPage extends Component {
 
     render() {
         const {notes} = this.props.store.notes
+        console.log('notes', notes)
         if(notes){
             return (
                 <AllNotesPageDiv
@@ -69,27 +70,32 @@ class AllNotesPage extends Component {
                     
                     <h1>{this.props.author}'s {this.props.deleteBin && 'deleted'} Notes</h1>
 
-                    {notes.length === 0 
-                        && this.props.deleteBin === false
-                        &&  <div>
-                                {/* USER PRIVATE PAGE */}
-                                {localStorage.getItem('username') === this.props.author
-                                    ?   <div className='noNotes'>
-                                            <h3>Welcome!</h3>
-                                            <p>Click the plus to the left to create a new note</p>
-                                        </div> 
-                                    :   null
-                                }
-                                
-                                {/* USER PUBLIC PAGE */}
-                                {this.props.store.user.userData 
-                                && this.props.store.user.userData.username !== this.props.author
-                                    ?   <div className='noNotes'>
-                                            <h3>{this.props.author} has not published any notes yet. Please check back later.</h3>
-                                            <Link to={`/${this.props.store.user.userData.username}`}>My Notes</Link>
+                    {this.props.store.notes.fetchingNotes
+                        ?   <p>loading notes</p>
+                        :   <div>
+                                {notes.length === 0 
+                                    && this.props.deleteBin === false
+                                    &&  <div>
+                                            {/* USER PRIVATE PAGE */}
+                                            {localStorage.getItem('username') === this.props.author
+                                                ?   <div className='noNotes'>
+                                                        <h3>Welcome!</h3>
+                                                        <p>Click the plus to the left to create a new note</p>
+                                                    </div> 
+                                                :   null
+                                            }
+                                            
+                                            {/* USER PUBLIC PAGE */}
+                                            {this.props.store.user.userData 
+                                            && this.props.store.user.userData.username !== this.props.author
+                                                ?   <div className='noNotes'>
+                                                        <h3>{this.props.author} has not published any notes yet. Please check back later.</h3>
+                                                        <Link to={`/${this.props.store.user.userData.username}`}>My Notes</Link>
+                                                    </div>
+                                                :   null
+                                                
+                                            }
                                         </div>
-                                    :   null
-                                    
                                 }
                             </div>
                     }
