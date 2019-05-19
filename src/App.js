@@ -134,7 +134,7 @@ const AppDiv = styled.div`
         display: flex;
         flex-direction: row;
         z-index: 0;
-        min-height: 95vh;
         height: 100%;
+        /* max-height: 100%; */
     }
 `;

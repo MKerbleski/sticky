@@ -109,25 +109,26 @@ const WelcomePageDiv = styled.div`
     /* background-image: url(https://picsum.photos/1500/1500?image=${Math.floor((Math.random() * 1084) + 1)}); */
     /* max-width: 99%; */
     width: 100%;
-    overflow: auto;
-    max-height: 100%;
+    /* overflow: hidden; */
+    /* height: 99%; */
     /* margin: 2px; */
     footer {
         box-sizing: border-box;
         background: ${mainThemePrimary};
         border-top: 1px solid black;
         /* max-width: 99%; */
+        /* border: 1px solid red; */
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-content: center;
         text-align: baseline;
-        padding: 1px;
+        /* padding: 1px; */
         /* margin: 2px; */
         a {
             padding: 7px;
-            height: 100%;
+            /* height: 100%; */
             width: 100%;
             text-align: center;
             text-decoration: none;
