@@ -6,15 +6,17 @@ REFACTOR AS I GO
     -- comment redux actions 
     -- change component names to camel case
 
+CONCEPT 
+    it is all about reducing the number of clickes and still giving the user what they want tw -> share-> pocket -> sticky 
+    tw -> sticky 
+
 KNOWN BUGS / TODO
     -- BACKEND
-        -- send total length of array with pocket list and slack list to calculate when infinite scroll is complete. or a message at the end of infinite scroll. 
         -- make the middleware log the amount of calls a user makes to the metadata table. 
             --i.e. how many notes edited. 
             -- how many logins  
         -- notes that are dragged should be flagged and move to the end of the list. on pocket 
     -- STYLING 
-        -- fix flash of previous component in preview mode when moving from detail to preview page
         -- css classes naming to camelCase
         -- clean up settings style
         -- combine .note-link class with parent div?
@@ -30,7 +32,6 @@ KNOWN BUGS / TODO
     -- NEW FEATURES
         -- |+| button that shows where on the eisenhower graph where it is. can click to toggle and the dot will change corridnates or drag and drop to the left menu and drop in the corrisponding square
         -- this can and should be a component.
-    -- hide edit functionality for public note viewed by others so that it looks cleaner.
     -- modify user api settings to create sync buttonn. step 1 , step 2 
     -- when user starts sign in process, start counter to query api every 1 second and refresh page when authenticated NOT SURE ABOUT THIS
     -- todo grid has no nesting
@@ -39,6 +40,8 @@ KNOWN BUGS / TODO
     -- move backend code to this repo
 
     -- VERSION 2
+        -- hide edit functionality for public note viewed by others so that it looks cleaner.
+        -- send total length of array with pocket list and slack list to calculate when infinite scroll is complete. or a message at the end of infinite scroll. 
         -- google tracking 
         -- put x on new note preview
         -- put components in pages folder
@@ -104,8 +107,6 @@ COMPLETED
         -- drop shadows go a long way
     -- show only grandChild first like 6characters
     --Max width on note preview. 50%? of note content. I think that it looks fine wide with many children.
+    -- fix flash of previous component in preview mode when moving from detail to preview page
 
 
-CONCEPT 
-    it is all about reducing the number of clickes and still giving the user what they want tw -> share-> pocket -> sticky 
-    tw -> sticky 

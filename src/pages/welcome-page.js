@@ -116,7 +116,9 @@ const WelcomePageDiv = styled.div`
         justify-content: space-around;
         align-content: center;
         text-align: baseline;
+        box-sizing: border-box;
         a {
+            box-sizing: border-box;
             padding: 7px;
             /* height: 100%; */
             width: 100%;

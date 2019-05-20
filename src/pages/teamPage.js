@@ -48,7 +48,6 @@ export default class Bios extends Component {
                         <img src={charlie} />
                         <p>Without Lorriane our project would still be on notepads and in Michael's imagination. Her training in</p>
                     </div>
-
                     <div className="bio">
                         <h2>Michael Kerbleski</h2>
                         <img src={headshot} ></img>
@@ -67,17 +66,10 @@ export default class Bios extends Component {
 const BiosDiv = styled.div`
     /* border: 1px solid red; */
     width: 100%;
-    height: 95vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* ${flexCenter('column')} */
-    /* overflow: auto; */
     ${scrollBar()}
-    /* img{
-        z-index: -1
-    } */
-    
     .bios {
         display: flex;
         flex-direction: row;
