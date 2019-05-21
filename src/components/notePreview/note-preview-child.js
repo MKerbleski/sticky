@@ -161,7 +161,7 @@ const NotePreviewChildDiv = styled.div`
     border: 2px solid black;
     border-radius: 15px;
     margin: 10px;
-    padding: 10px;
+    padding: 15px;
     ${'' /* height: 90px; */}
     background: ${childNoteColor};
     display: flex;
