@@ -108,7 +108,6 @@ class PocketSettings extends Component {
                             }
                         </React.Fragment>
                 }
-               
                 {/* what I eventually want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read..., or delete button.  */}
             </PocketSettingsDiv>
         )
