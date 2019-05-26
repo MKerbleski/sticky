@@ -53,5 +53,6 @@ const NoteDetailAttachedListDiv = styled.div`
     /* border: .5px solid gray; */
     /* background: rgba(1,1,1,.05); */
     /* min-width: 30%; */
-    /* ${border('red')} */
+    ${border('red')} 
+    width: 100%;
 `

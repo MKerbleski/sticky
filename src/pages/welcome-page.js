@@ -78,11 +78,13 @@ export default class WelcomePage extends Component{
                     path={`${this.props.match.url}/advertise/`} 
                     component={AdvertisePage} />
                 <footer>
-                    <Link to="/welcome/about">About Us</Link>
-                    <Link to="/welcome/team">Team</Link>
-                    <Link to="/welcome/careers">Careers</Link>
-                    <Link to="/welcome/mission">Mission</Link>
-                    <Link to="/welcome/advertise">Advertising</Link>
+                    <div className="footerLinks">
+                        <Link to="/welcome/about">About Us</Link>
+                        <Link to="/welcome/team">Team</Link>
+                        <Link to="/welcome/careers">Careers</Link>
+                        <Link to="/welcome/mission">Mission</Link>
+                        <Link to="/welcome/advertise">Advertising</Link>
+                    </div>
                 </footer>
             </WelcomePageDiv>
         )
@@ -117,18 +119,25 @@ const WelcomePageDiv = styled.div`
         align-content: center;
         text-align: baseline;
         box-sizing: border-box;
-        a {
-            box-sizing: border-box;
-            padding: 7px;
-            /* height: 100%; */
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-            color: black;
-            :hover{
-                background: white;
+        .footerLinks{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            a {
+                box-sizing: border-box;
+                padding: 7px;
+                /* height: 100%; */
+                width: 100%;
+                text-align: center;
+                text-decoration: none;
                 color: black;
-                text-decoration: underline;
+                :hover{
+                    background: white;
+                    color: black;
+                    text-decoration: underline;
+                }
             }
         }
     }
