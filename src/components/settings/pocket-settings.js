@@ -29,7 +29,7 @@ class PocketSettings extends Component {
     //This will only ever be called here
     connectPocket = (e) => {
         e.preventDefault();
-        let userid = this.props.userData.id
+        let userid = this.props.store.user.userData.id
         let redirect_uri = `${process.env.REACT_APP_BACKEND_URL}/api/pocket/incoming/${userid}`
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/auth/${userid}`).then(res => {
             if(res.data){
@@ -57,6 +57,7 @@ class PocketSettings extends Component {
     syncPocket = (e) => {
         e.preventDefault()
         //start spinning wheel or something... 
+        console.log(this.props.store.user.userData.id)
         this.props.syncPocketList(this.props.store.user.userData.id)
     }
 
@@ -70,7 +71,7 @@ class PocketSettings extends Component {
                 {this.props.store.user.userData.pocket 
                     ?   <React.Fragment>
                             <h3>Pocket is connected!</h3>
-                            <p>Your pocket saves will automatically be synced, and will be displayed in the blue menu to the right.</p>
+                            <p>Your pocket saves will automatically be synced, and will be displayed in the blue menu to the right. (It will take a few minutes.)</p>
                             <p>Use the blue menu to the right to view your list and attach pocket items to your notes!</p>
                             {/* <button onClick={this.clickHandler}>Revoke access</button> */}
                             {this.props.store.pocket.fetchingPocketList 
@@ -107,7 +108,6 @@ class PocketSettings extends Component {
                             }
                         </React.Fragment>
                 }
-               
                 {/* what I eventually want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read..., or delete button.  */}
             </PocketSettingsDiv>
         )
