@@ -1,6 +1,7 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
 import { DragSource } from 'react-dnd';
+import { connect } from 'react-redux';
 
 import { 
     PocketNote,
@@ -11,8 +12,13 @@ import {
     apiChannel 
 } from '../../styles'
 
+import { 
+    syncPocketList
+} from '../../actions'
+
 class PocketChannel extends Component {
     render(){
+        console.log('this.props.pocketList', this.props.pocketList)
         if (this.props){
             // eventually need an unpin/unstar button
             return(
@@ -38,7 +44,7 @@ class PocketChannel extends Component {
                         ?   <div>
                                 <h5>Empty pocket list</h5>
                                 <p>either</p>
-                                <button>Sync</button>
+                                <button onClick={() => this.props.syncPocketList(this.props.store.user.userData.id)}>Sync</button>
                                 <p>or add items to your pocket List</p>
                             </div>
                         :   null}
@@ -101,15 +107,23 @@ class PocketChannel extends Component {
         }
         return
     },
-  };
+};
 
-  const collect = (connect, monitor) => ({
+const collect = (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging(),
     // didDrop: monitor.didDrop(),
-  });
+});
 
-export default DragSource('item', sourceObj, collect)(PocketChannel);
+const mapStateToProps = store => {
+    return {store: store};
+}
+
+const mapDispatchToProps = {
+    syncPocketList
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DragSource('item', sourceObj, collect)(PocketChannel));
 
 const PocketChannelDiv = styled.div`
     ${apiChannel()}

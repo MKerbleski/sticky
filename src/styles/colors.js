@@ -1,3 +1,4 @@
+
 export const mainThemePrimary = '#71b5cc';
 export const linksBlue = '#71b5cc';
 export const notePreviewColor = '#c2d6ff' //E6E6FA

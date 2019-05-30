@@ -11,6 +11,7 @@ CONCEPT
     tw -> sticky 
 
 KNOWN BUGS / TODO
+    -- when hit plus button on settings page it should route to all notes page
     -- BACKEND
         -- make the middleware log the amount of calls a user makes to the metadata table. 
             --i.e. how many notes edited. 

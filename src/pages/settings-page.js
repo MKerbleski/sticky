@@ -43,7 +43,7 @@ class SettingsPage extends Component {
 							</div>
 							<PocketSettings userData={this.props.userData} />
 							<SlackSettings  userData={this.props.userData} />
-							<SlackSettings  userData={this.props.userData} />
+							{/* <SlackSettings  userData={this.props.userData} /> */}
 							{/* <ApiSettings userData={userData} /> */}
 						</React.Fragment> 
 					:	<Loading />
@@ -67,7 +67,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage)
 
 const SettingsPageDiv = styled.div`
-	${border()}
+	/* ${border()} */
 	display: flex;
 	flex-direction: column;
 	padding: 25px;
@@ -76,7 +76,7 @@ const SettingsPageDiv = styled.div`
 		/* THIS CLASS IS ALSO ON 
 		POCKET_SETTINGS AND SLACK_SETTING  */
 		width: 100%;
-		${border('red')}
+		/* ${border('red')} */
 		padding: 3px;
 	}
 	/* height: 100vh; */

@@ -56,8 +56,8 @@ class PocketSettings extends Component {
 
     syncPocket = (e) => {
         e.preventDefault()
-        //start spinning wheel or something... 
-        console.log(this.props.store.user.userData.id)
+        //start spinning wheel or something...
+        // console.log(this.props.store.user.userData.id)
         this.props.syncPocketList(this.props.store.user.userData.id)
     }
 
@@ -65,7 +65,7 @@ class PocketSettings extends Component {
         e.preventDefault();
     }
 
-    render(){        
+    render(){
         return(
             <PocketSettingsDiv className="subSetting" style={{background: "lightgreen"}}> 
                 {this.props.store.user.userData.pocket 
@@ -76,7 +76,7 @@ class PocketSettings extends Component {
                             {/* <button onClick={this.clickHandler}>Revoke access</button> */}
                             {this.props.store.pocket.fetchingPocketList 
                                 ?   <Loading />
-                                :   <button name="list" onClick={(e) => this.syncPocket(e)}>Refresh Notes</button>
+                                :   <button name="list" onClick={(e) => this.syncPocket(e)}>Sync Pocket List</button>
                             }
                             {this.props.store.pocket.pocketSettings
                                 ?   <div>
