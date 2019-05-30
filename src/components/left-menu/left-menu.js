@@ -48,7 +48,8 @@ class LeftMenu extends Component {
 						<i className="fab fa-stack-overflow"></i>
 
 					</Link>
-					{this.props.location.pathname === `${this.props.match.url}/trash` || this.props.location.pathname === `${this.props.match.url}/settings` 
+					{this.props.location.pathname === `${this.props.match.url}/trash` 
+						|| this.props.location.pathname === `${this.props.match.url}/settings` 
 						? 	null 
 						:	<div 
 								onClick={() => this.clickHandler("newNote")} 
