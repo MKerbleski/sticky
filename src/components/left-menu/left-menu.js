@@ -48,11 +48,14 @@ class LeftMenu extends Component {
 						<i className="fab fa-stack-overflow"></i>
 
 					</Link>
-					<div 
-						onClick={() => this.clickHandler("newNote")} 
-						className="menu-item">
-						<i className="fas fa-plus-square"></i>
-					</div>
+					{this.props.location.pathname === `${this.props.match.url}/trash` || this.props.location.pathname === `${this.props.match.url}/settings` 
+						? 	null 
+						:	<div 
+								onClick={() => this.clickHandler("newNote")} 
+								className="menu-item">
+								<i className="fas fa-plus-square"></i>
+							</div>}
+					
 					{/* <div className="menu-item">
 						<i className="fas fa-tv"></i>
 					</div>
