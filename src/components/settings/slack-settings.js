@@ -31,7 +31,7 @@ class SlackSettings extends Component {
         // console.log('connect to slack', this.props.userData.id)
         const client_id = '465374768868.465546770546'
         const scope = 'stars:read stars:write'
-        const userid = this.props.userData.id
+        const userid = this.props.store.user.userData.id
         const redirect_uri = `${process.env.REACT_APP_BACKEND_URL}/api/slack/auth/${userid}`
         const codeRequestUrl = `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${userid}`
         window.open(codeRequestUrl)
@@ -156,12 +156,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(SlackSettings)
 
 
 const SlackSettingsDiv = styled.div`
-    /* border: 1px solid red; */
+    border: 1px solid black;
     /* ${border()} */
     background: white;
-    /* padding: 2px; */
+    padding: 5px;
     /* margin: 2px; */
-    /* margin-top: 0; */
+    margin-top: 5px;
     /* width: 100%; */
     .connected {
         padding: 10px;

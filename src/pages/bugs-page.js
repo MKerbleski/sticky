@@ -12,16 +12,17 @@ export default class BugsPage extends Component {
     render(){
         return(
             <BugsPageDiv> 
-                <iframe title="bugForm" src="https://docs.google.com/forms/d/e/1FAIpQLSfzY1mF3viPZW6ZKJWTmY7f4hhJ_R9VeTbfZSu-CqK2F9nupA/viewform?embedded=true" width="640" height="751" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+                <iframe title="bugForm" src="https://docs.google.com/forms/d/e/1FAIpQLSfzY1mF3viPZW6ZKJWTmY7f4hhJ_R9VeTbfZSu-CqK2F9nupA/viewform?embedded=true" width="640" height="751" frameBorder="0" marginHeight="0" marginWidth="0">Loading...</iframe>
             </BugsPageDiv>
         )
     }
 }
 
 const BugsPageDiv = styled.div`
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100%;
     display: flex;
+    align-items: center;
     justify-content: center;
     padding: 10px;
 `

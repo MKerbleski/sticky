@@ -29,14 +29,19 @@ class PocketSettings extends Component {
     //This will only ever be called here
     connectPocket = (e) => {
         e.preventDefault();
+
         let userid = this.props.store.user.userData.id
         let redirect_uri = `${process.env.REACT_APP_BACKEND_URL}/api/pocket/incoming/${userid}`
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/auth/${userid}`).then(res => {
+
             if(res.data){
                 window.open(`https://getpocket.com/auth/authorize?request_token=${res.data}&redirect_uri=${redirect_uri}`)
                 this.setState({
                     refresh: true
                 })
+                this.askDb()
+                this.props.getUserData(); 
+                this.props.getPocketSettings(this.props.store.user.userData.id)
             } else {
                 console.log("did not get code back")
                 this.setState({
@@ -48,6 +53,23 @@ class PocketSettings extends Component {
         })
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.store.user.userData.pocket !== this.props.store.user.userData.pocket){
+
+        }
+    }
+
+    // checkForSucess(){
+    //     let timeout = 0;
+    //     while(this.props.store.user.userData.pocket === false || timeout < 20){
+    //         console.log('while loop', timeout)
+    //         setTimeout(() => {
+    //             timeout++
+    //             this.props.getPocketSettings(this.props.store.user.userData.id)
+    //         }, 1000)
+    //     }
+    // }
+
     convertTime(unixTimeStamp){
         let time = +unixTimeStamp*1000
         time = format(time, 'MMM Do, YYYY - hh:mma')
@@ -56,8 +78,8 @@ class PocketSettings extends Component {
 
     syncPocket = (e) => {
         e.preventDefault()
-        //start spinning wheel or something... 
-        console.log(this.props.store.user.userData.id)
+        //start spinning wheel or something...
+        // console.log(this.props.store.user.userData.id)
         this.props.syncPocketList(this.props.store.user.userData.id)
     }
 
@@ -65,9 +87,22 @@ class PocketSettings extends Component {
         e.preventDefault();
     }
 
-    render(){        
+    askDb = () =>{
+        if(this.props.store.user.userData.pocket){
+            console.log("pocket connected")
+        } else {
+            console.log("pocket NOT connected")
+            setTimeout(() => {
+                this.props.getUserData(); 
+                this.askDb()
+            }, 1000)
+        }
+    }
+
+    render(){
+        // this.askDb()
         return(
-            <PocketSettingsDiv className="subSetting" style={{background: "lightgreen"}}> 
+            <PocketSettingsDiv className="subSetting" style={{background: `${this.props.store.user.userData.pocket ? 'lightgreen' : 'white'}`}}> 
                 {this.props.store.user.userData.pocket 
                     ?   <React.Fragment>
                             <h3>Pocket is connected!</h3>
@@ -76,7 +111,7 @@ class PocketSettings extends Component {
                             {/* <button onClick={this.clickHandler}>Revoke access</button> */}
                             {this.props.store.pocket.fetchingPocketList 
                                 ?   <Loading />
-                                :   <button name="list" onClick={(e) => this.syncPocket(e)}>Refresh Notes</button>
+                                :   <button name="list" onClick={(e) => this.syncPocket(e)}>Sync Pocket List</button>
                             }
                             {this.props.store.pocket.pocketSettings
                                 ?   <div>
@@ -127,7 +162,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(PocketSettings)
 
 const PocketSettingsDiv = styled.div`
-    /* border: 1px solid green; */
+    border: 1px solid black;
     /* background: white; */
     /* padding: 2px; */
     /* margin: 2px; */

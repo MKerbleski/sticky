@@ -79,7 +79,7 @@ export default class WelcomePage extends Component{
                     component={AdvertisePage} />
                 <footer>
                     <div className="footerLinks">
-                        <Link to="/welcome/about">About Us</Link>
+                        <Link to="/welcome/about">About</Link>
                         <Link to="/welcome/team">Team</Link>
                         <Link to="/welcome/careers">Careers</Link>
                         <Link to="/welcome/mission">Mission</Link>
