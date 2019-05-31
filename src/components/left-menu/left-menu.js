@@ -117,6 +117,9 @@ const LeftMenuDiv = styled.div`
 	min-width: 40px;
     justify-content: space-between;
 	background-color: ${mainThemePrimary};
+	.leftMenuBottom, .leftMenuTop{
+		/* border: 1px solid red; */
+	}
     .menu-item{
         ${flexCenter()}
 		/* ${border()} */
