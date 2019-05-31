@@ -39,6 +39,7 @@ class PocketSettings extends Component {
                 this.setState({
                     refresh: true
                 })
+                this.askDb()
                 this.props.getUserData(); 
                 this.props.getPocketSettings(this.props.store.user.userData.id)
             } else {
@@ -86,8 +87,20 @@ class PocketSettings extends Component {
         e.preventDefault();
     }
 
-    render(){
+    askDb = () =>{
+        if(this.props.store.user.userData.pocket){
+            console.log("pocket connected")
+        } else {
+            console.log("pocket NOT connected")
+            setTimeout(() => {
+                this.props.getUserData(); 
+                this.askDb()
+            }, 1000)
+        }
+    }
 
+    render(){
+        // this.askDb()
         return(
             <PocketSettingsDiv className="subSetting" style={{background: `${this.props.store.user.userData.pocket ? 'lightgreen' : 'white'}`}}> 
                 {this.props.store.user.userData.pocket 
