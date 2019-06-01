@@ -1,15 +1,22 @@
 export {
     Welcome,
+    WelcomePage,
+    AboutPage,
+    TeamPage,
+    CareersPage,
+    MissionPage,
+    AdvertisePage,
+    EntryNote
 } from './welcome';
 
 export {   
     AllNotes, 
     AllNotesBin,
+    LayerTwoTargetSource,
+    LayerThreeSource,
     NotePreview,
     NotePreviewNew,
     NotePreviewSelf,
-    LayerTwoTargetSource,
-    LayerThreeSource
 } from './notePreview';
 
 export {

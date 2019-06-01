@@ -101,9 +101,10 @@ class PocketSettings extends Component {
 
     render(){
         // this.askDb()
+        const isPocketConnected = this.props.store.user.userData.pocket 
         return(
-            <PocketSettingsDiv className="subSetting" style={{background: `${this.props.store.user.userData.pocket ? 'lightgreen' : 'white'}`}}> 
-                {this.props.store.user.userData.pocket 
+            <PocketSettingsDiv className="subSetting" style={{background: `${isPocketConnected ? 'lightgreen' : 'white'}`}}> 
+                {isPocketConnected
                     ?   <React.Fragment>
                             <h3>Pocket is connected!</h3>
                             <p>Your pocket saves will automatically be synced, and will be displayed in the blue menu to the right. (It will take a few minutes.)</p>
@@ -120,6 +121,7 @@ class PocketSettings extends Component {
                                     </div>
                                 : null
                             }
+                            {/* what I eventually want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read..., or delete button.  */}
                         </React.Fragment>
                     :   <React.Fragment>
                             <p>pocket is NOT connected</p>
@@ -143,7 +145,7 @@ class PocketSettings extends Component {
                             }
                         </React.Fragment>
                 }
-                {/* what I eventually want here is a sample pocket note that the user can select what is and isn't on the note. like the title or time read..., or delete button.  */}
+
             </PocketSettingsDiv>
         )
     }

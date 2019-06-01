@@ -114,7 +114,8 @@ const HeaderDiv = styled.div`
             color: black;
             text-decoration: none;
             :hover{
-                background-color: rgba(0,0,0,.3);
+                text-decoration: underline;
+                /* background-color: rgba(0,0,0,.3); */
             }
         }
     }

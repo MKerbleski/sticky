@@ -8,15 +8,12 @@ import HTML5Backend from 'react-dnd-html5-backend';
 
 import {
     Header,
+    WelcomePage,
 } from './components';
 
 import {
-    AboutPage,
     UsernamePage,
-    WelcomePage,
     BugsPage,
-    TeamPage,
-    CareersPage,
 } from './pages'
 
 import {

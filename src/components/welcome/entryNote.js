@@ -10,7 +10,6 @@ export default class EntryNote extends Component {
     constructor(props){
         super(props)
         this.state = {
-
         }
     }
 
@@ -34,7 +33,7 @@ export default class EntryNote extends Component {
                     <textarea 
                         type="text" 
                         name="entryNote" 
-                        placeholder='have an idea? start typing...' 
+                        placeholder='have an idea? start typing! worry about the account later' 
                         onChange={this.inputHandler} 
                         value={this.state.entryNote} 
                         autoFocus
@@ -44,8 +43,8 @@ export default class EntryNote extends Component {
                 </form> 
                 {this.state.entryNote  
                     ?    <div className="links">
-                            <Link className="link" to="/welcome/login">Login</Link>
                             <Link className="link" to="/welcome/register">Register</Link>
+                            <Link className="link" to="/welcome/login">Login</Link>
                         </div>
                     :   null
                 }
@@ -62,14 +61,17 @@ const EntryNoteDiv = styled.div`
         margin: 2px;
         textarea{
             border: 1px solid black;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.40);
             border: none;
             /* padding: 20px; */
             font-size: 20px;
+            border-radius: 10px;
             color: black;
             margin: 50px;
             width: 400px;
             height: 200px;
+            padding: 20px;
+            text-align: center;
             ::placeholder{
                 color: #F0EFEF;
                 color: black;
@@ -77,6 +79,7 @@ const EntryNoteDiv = styled.div`
             }
         }
     }
+
     .links{
         display: flex;
         flex-direction: row;

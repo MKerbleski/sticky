@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import { Route, Link } from 'react-router-dom';
+import bgimg from '../../img/dark-honeycomb.png'
 // import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 
@@ -8,19 +9,17 @@ import {
     EntryNote,
     Login,
     Register,
-} from '../components/welcome'
-
-import {
     AboutPage,
     TeamPage,
     CareersPage,
     MissionPage,
     AdvertisePage
-} from '../pages'
+} from './index.js'
 
 import {
-    mainThemePrimary
-} from '../styles'
+    mainThemePrimary,
+    border
+} from '../../styles'
 
 export default class WelcomePage extends Component{
     constructor(props){
@@ -54,28 +53,28 @@ export default class WelcomePage extends Component{
                         />
                     }} 
                 />
-                <Route 
-                    path="/welcome/register" 
+                <Route
+                    path="/welcome/register"
                     render={() => {
-                        return <Register 
+                        return <Register
                             redirect={this.props.redirect}
                         />
                     }}
                 />
-                <Route 
-                    path={`${this.props.match.url}/about/`} 
+                <Route
+                    path={`${this.props.match.url}/about/`}
                     component={AboutPage} />
-                <Route 
-                    path={`${this.props.match.url}/team/`} 
+                <Route
+                    path={`${this.props.match.url}/team/`}
                     component={TeamPage} />
-                <Route 
-                    path={`${this.props.match.url}/careers/`} 
+                <Route
+                    path={`${this.props.match.url}/careers/`}
                     component={CareersPage} />
-                <Route 
-                    path={`${this.props.match.url}/mission/`} 
+                <Route
+                    path={`${this.props.match.url}/mission/`}
                     component={MissionPage} />
-                <Route 
-                    path={`${this.props.match.url}/advertise/`} 
+                <Route
+                    path={`${this.props.match.url}/advertise/`}
                     component={AdvertisePage} />
                 <footer>
                     <div className="footerLinks">
@@ -103,10 +102,13 @@ export default class WelcomePage extends Component{
 // export default connect(mapStateToProps, mapDispatchToProps)(WelcomePage)
 
 const WelcomePageDiv = styled.div`
+    /* ${border()} */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    background-image: url(${bgimg});
+    /* background: red; */
     width: 100%;
     height: 96vh;
     footer {
@@ -135,7 +137,7 @@ const WelcomePageDiv = styled.div`
                 text-decoration: none;
                 color: black;
                 :hover{
-                    background: white;
+                    /* background: white; */
                     color: black;
                     text-decoration: underline;
                 }

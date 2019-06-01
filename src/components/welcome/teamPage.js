@@ -5,13 +5,14 @@ import {
     flexCenter,
     scrollBar,
     mainThemePrimary
-} from '../styles/'
+} from '../../styles'
 
-import headshot from '../img/22307921.jpg'
-import afflack from '../img/affleck.jpg'
-import sam from '../img/sam.jpg'
-import charlie from '../img/charlie.jpg'
-import canyon from '../img/canyon.jpg'
+import {
+    headshot,
+    afflack, 
+    sam,
+    charlie
+} from '../../img'
 
 export default class Bios extends Component {
     constructor(props){
