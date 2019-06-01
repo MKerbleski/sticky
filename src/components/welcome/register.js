@@ -185,7 +185,7 @@ const RegisterDiv = styled.div`
     margin: 5px;
     padding: 10px;
     height: 100%;
-    background: rgba(255,255,255,0.40);
+    /* background: rgba(255,255,255,0.40); */
     form{
         /* border: 1px solid red; */
         display: flex;

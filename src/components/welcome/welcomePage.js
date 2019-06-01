@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 import bgimg from '../../img/dark-honeycomb.png'
 // import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
@@ -40,28 +40,30 @@ export default class WelcomePage extends Component{
     render(){
         return(
             <WelcomePageDiv>
+            <Switch>
+
                 <Route 
                     exact 
                     path={`${this.props.match.url}/`} 
                     component={EntryNote}
                 />
-                <Route 
-                    path={`${this.props.match.url}/login`}
-                    render={() => {
-                        return <Login 
-                            redirect={this.props.redirect}
-                        />
-                    }} 
-                />
-                <Route
-                    path="/welcome/register"
-                    render={() => {
-                        return <Register
-                            redirect={this.props.redirect}
-                        />
-                    }}
-                />
                 <div className="welcomePages">
+                    <Route 
+                        path={`${this.props.match.url}/login`}
+                        render={() => {
+                            return <Login 
+                                redirect={this.props.redirect}
+                            />
+                        }} 
+                    />
+                    <Route
+                        path="/welcome/register"
+                        render={() => {
+                            return <Register
+                                redirect={this.props.redirect}
+                            />
+                        }}
+                    />
                     <Route
                         path={`${this.props.match.url}/about/`}
                         component={AboutPage} />
@@ -78,6 +80,7 @@ export default class WelcomePage extends Component{
                         path={`${this.props.match.url}/advertise/`}
                         component={AdvertisePage} />
                 </div>
+            </Switch>
                 <footer>
                     <div className="footerLinks">
                         <Link to="/welcome/about">About</Link>
