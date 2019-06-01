@@ -86,7 +86,7 @@ class Register extends Component{
                 {this.state.accessKey 
                     ?   <div>
                             {this.state.fixForm 
-                                ?   <p>You need to fix the form</p> 
+                                ?   <p>There was a problem submitting</p> 
                                 :   null
                             }
                             <form onSubmit={this.submit}>
@@ -98,8 +98,12 @@ class Register extends Component{
                                         name="username" 
                                         placeholder="username" 
                                         onChange={this.inputHandler}
-                                        value={this.state.username}>{this.value}</input>
-                                        <label>{this.state.username.length > 0 ? this.state.usernameAvailblity : null }</label>
+                                        value={this.state.username}>
+                                        {this.value}
+                                    </input>
+                                    <label>
+                                        {this.state.username.length > 0 ? this.state.usernameAvailblity : null }
+                                    </label>
                                 </div>
                                 <div>
                                     <input 
@@ -139,10 +143,11 @@ class Register extends Component{
                             </form>
                         </div>
                     :   <div>
-                            <p>Registration is open to users willing to give feedback.</p>
-                            <p>Please <Link to="/welcome/login">
-                                Login</Link> or email Mike at <a href="mailto:resume@kerble.ski">resume@kerble.ski</a> to request an key and help test the site!
-                            </p>
+                            <p>Things are still buggy and registration is open to users willing to give feedback.</p>
+                            <span>Please <Link to="/welcome/login">
+                                    Login
+                                </Link> or email Mike at <a href="mailto:resume@kerble.ski">resume@kerble.ski</a> to request an key and help test the site!
+                            </span>
                             <form onSubmit={this.check}>
                                 <div>
                                     <label>Access Key: </label>
@@ -177,6 +182,10 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(Register)
 
 const RegisterDiv = styled.div`
+    margin: 5px;
+    padding: 10px;
+    height: 100%;
+    background: rgba(255,255,255,0.40);
     form{
         /* border: 1px solid red; */
         display: flex;

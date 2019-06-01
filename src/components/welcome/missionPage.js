@@ -5,7 +5,6 @@ export default class MissionPage extends Component {
     constructor(props){
         super(props)
         this.state = {
-
         }
     }
 
@@ -13,16 +12,16 @@ export default class MissionPage extends Component {
         return(
             <MissionPageDiv> 
                 <h1>The Mission</h1>
-                <p>Enabling people to solve humanities biggest challenges, quicker. One of the biggest issues with the exponential growth is the organization of your menatal thoughts and digital encounters. With the advancement of technology we are still stuck with stickynotes or convoluted layers of folders.</p>
+                {/* <p>Enabling people to solve humanities biggest challenges, quicker. One of the biggest issues with the exponential growth is the organization of your menatal thoughts and digital encounters. With the advancement of technology we are still stuck with stickynotes or convoluted layers of folders.</p> */}
                 <br/> 
-                <p>We aim to change that.</p>
+                {/* <p>We aim to change that.</p> */}
                 <br/>
                 <p>Organize your mind.</p>
                 <p>Bring ideas to reality, whether that is a book, blog, website, or a mission to mars.</p>
                 <p>collect</p>
                 <p>organize</p>
                 <p>do</p>
-                <a href='/welcome/register'>Start now.</a>
+                <a href='/welcome/register'>Register</a>
             </MissionPageDiv>
         )
     }

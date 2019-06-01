@@ -18,7 +18,6 @@ export default class Bios extends Component {
     constructor(props){
         super(props)
         this.state = {
-
         }
     }
 
@@ -65,19 +64,20 @@ export default class Bios extends Component {
 }
 
 const BiosDiv = styled.div`
-    border: 1px solid white;
-    width: 100%;
+    border: 1px solid black;
+    /* width: 100%; */
     display: flex;
     flex-direction: column;
     align-items: center;
     ${scrollBar()}
+
     .bios {
         display: flex;
         flex-direction: row;
         /* border: 1px solid blue; */
         justify-content: center;
         flex-wrap: wrap;
-        width: 100%;
+        /* width: 100%; */
         height: auto;
         /* height: 100%; */
         .bio {

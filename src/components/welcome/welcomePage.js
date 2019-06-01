@@ -61,28 +61,30 @@ export default class WelcomePage extends Component{
                         />
                     }}
                 />
-                <Route
-                    path={`${this.props.match.url}/about/`}
-                    component={AboutPage} />
-                <Route
-                    path={`${this.props.match.url}/team/`}
-                    component={TeamPage} />
-                <Route
-                    path={`${this.props.match.url}/careers/`}
-                    component={CareersPage} />
-                <Route
-                    path={`${this.props.match.url}/mission/`}
-                    component={MissionPage} />
-                <Route
-                    path={`${this.props.match.url}/advertise/`}
-                    component={AdvertisePage} />
+                <div className="welcomePages">
+                    <Route
+                        path={`${this.props.match.url}/about/`}
+                        component={AboutPage} />
+                    <Route
+                        path={`${this.props.match.url}/team/`}
+                        component={TeamPage} />
+                    <Route
+                        path={`${this.props.match.url}/careers/`}
+                        component={CareersPage} />
+                    <Route
+                        path={`${this.props.match.url}/mission/`}
+                        component={MissionPage} />
+                    <Route
+                        path={`${this.props.match.url}/advertise/`}
+                        component={AdvertisePage} />
+                </div>
                 <footer>
                     <div className="footerLinks">
                         <Link to="/welcome/about">About</Link>
                         <Link to="/welcome/team">Team</Link>
-                        <Link to="/welcome/careers">Careers</Link>
+                        {/* <Link to="/welcome/careers">Careers</Link> */}
                         <Link to="/welcome/mission">Mission</Link>
-                        <Link to="/welcome/advertise">Advertising</Link>
+                        {/* <Link to="/welcome/advertise">Advertising</Link> */}
                     </div>
                 </footer>
             </WelcomePageDiv>
@@ -110,9 +112,19 @@ const WelcomePageDiv = styled.div`
     background-image: url(${bgimg});
     /* background: red; */
     width: 100%;
-    height: 96vh;
+    /* height: 95vh; */
+    box-sizing: border-box;
+    .welcomePages{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.45);
+        height: 100%;
+        max-height: 91vh;
+        width: 100%;
+    }
     footer {
-        box-sizing: border-box;
         background: ${mainThemePrimary};
         border-top: 1px solid black;
         width: 100%;
@@ -122,13 +134,18 @@ const WelcomePageDiv = styled.div`
         align-content: center;
         text-align: baseline;
         box-sizing: border-box;
+        height: auto;
+            /* ${border('red')} */
         .footerLinks{
+            /* ${border()} */
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
             width: 50%;
-            a {
+            max-width: 650px;
+            /* height: 100%; */
+            a{
                 box-sizing: border-box;
                 padding: 7px;
                 /* height: 100%; */
