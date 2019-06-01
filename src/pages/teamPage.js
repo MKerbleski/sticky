@@ -64,7 +64,7 @@ export default class Bios extends Component {
 }
 
 const BiosDiv = styled.div`
-    /* border: 1px solid red; */
+    border: 1px solid white;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -78,7 +78,7 @@ const BiosDiv = styled.div`
         flex-wrap: wrap;
         width: 100%;
         height: auto;
-        height: 100%;
+        /* height: 100%; */
         .bio {
             /* border: 1px solid green; */
             border: 1px solid gray;

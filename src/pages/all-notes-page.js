@@ -37,9 +37,9 @@ class AllNotesPage extends Component {
                 this.props.getNotes(this.props.author);
             }
         } else {
-            this.props.getNotes(this.props.author);
-            console.log("NO JWT")
-            this.props.history.push('/welcome/login')
+            // this.props.getNotes(this.props.author);
+            console.log("NO JWT, allowed now because of public ability")
+            // this.props.history.push('/welcome/login')
         }
     }
     
@@ -74,28 +74,30 @@ class AllNotesPage extends Component {
                         ?   <p>loading notes</p>
                         :   <div>
                                 {notes.length === 0 
-                                    && this.props.deleteBin === false
-                                    &&  <div>
-                                            {/* USER PRIVATE PAGE */}
-                                            {localStorage.getItem('username') === this.props.author
-                                                ?   <div className='noNotes'>
-                                                        <h3>Welcome!</h3>
-                                                        <p>Click the plus to the left to create a new note</p>
-                                                    </div> 
-                                                :   null
-                                            }
-                                            
-                                            {/* USER PUBLIC PAGE */}
-                                            {this.props.store.user.userData 
-                                            && this.props.store.user.userData.username !== this.props.author
-                                                ?   <div className='noNotes'>
-                                                        <h3>{this.props.author} has not published any notes yet. Please check back later.</h3>
-                                                        <Link to={`/${this.props.store.user.userData.username}`}>My Notes</Link>
-                                                    </div>
-                                                :   null
+                                    ? this.props.deleteBin 
+                                        ?   <p>Nothing in trash</p>
+                                        :   <div>
+                                                {/* USER PRIVATE PAGE */}
+                                                {localStorage.getItem('username') === this.props.author
+                                                    ?   <div className='noNotes'>
+                                                            <h3>Welcome!</h3>
+                                                            <p>Click the plus to the left to create a new note</p>
+                                                        </div> 
+                                                    :   null
+                                                }
                                                 
-                                            }
-                                        </div>
+                                                {/* USER PUBLIC PAGE */}
+                                                {this.props.store.user.userData 
+                                                && this.props.store.user.userData.username !== this.props.author
+                                                    ?   <div className='noNotes'>
+                                                            <h3>{this.props.author} has not published any notes yet. Please check back later.</h3>
+                                                            {localStorage.getItem('username') ? <Link to={`/${this.props.store.user.userData.username}`}>My Notes</Link> : <Link to={`/welcome/register`}>Sign Up to create your own</Link>}
+                                                        </div>
+                                                    :   null
+                                                    
+                                                }
+                                            </div>
+                                    :   null
                                 }
                             </div>
                     }
@@ -174,16 +176,16 @@ export default DropTarget('item', targetObj, collect)(connect(mapStateToProps, m
 
 const AllNotesPageDiv = styled.div`
     /* ${border()} */
-    height: 95vh;
-    margin: 4px;
+    height: 96vh;
+    /* margin: 4px; */
     color: black;
-    max-width: 99%;
+    /* max-width: 99%; */
     box-sizing: border-box;
     ${flexCenter('column')}
     justify-content: flex-start;
-    padding: 10px;
+    /* padding: 10px; */
     padding-top: 0;
-    margin: 2px;
+    /* margin: 2px; */
     width: 100%;
     h1 {
         margin: 5px;
