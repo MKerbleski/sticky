@@ -109,10 +109,10 @@ class PocketSettings extends Component {
                             <p>Your pocket saves will automatically be synced, and will be displayed in the blue menu to the right. (It will take a few minutes.)</p>
                             <p>Use the blue menu to the right to view your list and attach pocket items to your notes!</p>
                             {/* <button onClick={this.clickHandler}>Revoke access</button> */}
-                            {this.props.store.pocket.fetchingPocketList 
+                            {/* {this.props.store.pocket.fetchingPocketList 
                                 ?   <Loading />
-                                :   <button name="list" onClick={(e) => this.syncPocket(e)}>Sync Pocket List</button>
-                            }
+                                :   null
+                            } */}
                             {this.props.store.pocket.pocketSettings
                                 ?   <div>
                                         <p><strong>Last Update: </strong>{ this.convertTime(this.props.store.pocket.pocketSettings.last_accessed)}</p>
