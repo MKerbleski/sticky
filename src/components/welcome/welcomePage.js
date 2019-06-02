@@ -83,6 +83,7 @@ export default class WelcomePage extends Component{
             </Switch>
                 <footer>
                     <div className="footerLinks">
+                        <Link to="/welcome">Home</Link>
                         <Link to="/welcome/about">About</Link>
                         <Link to="/welcome/team">Team</Link>
                         {/* <Link to="/welcome/careers">Careers</Link> */}
@@ -122,7 +123,7 @@ const WelcomePageDiv = styled.div`
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: rgba(255,255,255,0.45);
+        background: rgba(255,255,255,0.85);
         height: 100%;
         max-height: 91vh;
         width: 100%;

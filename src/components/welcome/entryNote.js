@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 
 import {
-    mainThemePrimary
+    mainThemePrimary,
+    border
 } from '../../styles'
 
 export default class EntryNote extends Component {
@@ -56,6 +57,10 @@ export default class EntryNote extends Component {
 const EntryNoteDiv = styled.div`
     /* border: 1px solid red; */
     margin: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* width: 80vw; */
     form{
         /* border: 1px solid green; */
         margin: 2px;
@@ -68,8 +73,9 @@ const EntryNoteDiv = styled.div`
             border-radius: 10px;
             color: black;
             margin: 50px;
-            width: 400px;
-            height: 200px;
+            /* width: 80%; */
+            max-width: 400px;
+            min-height: 250px;
             padding: 20px;
             text-align: center;
             ::placeholder{
@@ -84,7 +90,10 @@ const EntryNoteDiv = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
+        width: 85vw;
+        /* ${border('red')} */
         .link{
+        /* ${border()} */
             background: ${mainThemePrimary};
             padding: 15px;
             border-radius: 20px;
