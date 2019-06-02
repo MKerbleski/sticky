@@ -30,13 +30,13 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
         if(targetObj.type === "trash"){
             alert('cannot do that, yet')
             return [null]
-        }  
-
+        }
         if(source.type === "pocket"){
             if(targetObj.type === "note"){
                 //came from pocket list
+                console.log('source_id', source_id)
                 let newParent = addPocketItem(target, source_id)
-                return [newParent]
+                return [newParent, {api: 'pocket', item_id: source_id, is_attached: true}]
             }
         } else if(source.type === "slack"){
             let newParent = addSlackItem(target, source_id)

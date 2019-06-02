@@ -143,11 +143,12 @@ class Register extends Component{
                             </form>
                         </div>
                     :   <div>
-                            <p>Things are still buggy and registration is open to users willing to give feedback.</p>
+                            <p>Things are still buggy but registration is open to users willing to give feedback.</p>
                             <span>Please <Link to="/welcome/login">
                                     Login
                                 </Link> or email Mike at <a href="mailto:resume@kerble.ski">resume@kerble.ski</a> to request an key and help test the site!
                             </span>
+                            <br></br>
                             <form onSubmit={this.check}>
                                 <div>
                                     <label>Access Key: </label>
@@ -174,7 +175,7 @@ class Register extends Component{
 const mapStateToProps = store => {
     return {store: store};//state is really props & store is store
 }
-  
+
 const mapDispatchToProps = {
     createUser
 }

@@ -125,7 +125,7 @@ const WelcomePageDiv = styled.div`
         justify-content: center;
         background: rgba(255,255,255,0.85);
         height: 100%;
-        max-height: 91vh;
+        max-height: 92vh;
         width: 100%;
     }
     footer {
