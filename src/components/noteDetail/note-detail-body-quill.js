@@ -84,23 +84,23 @@ class NoteQuill extends React.Component {
 
     render () {
         console.log('Quill', this.props.note)
-      return (
-          <NoteQuillDiv>
-            <ReactQuill 
-                className="editor"
-                value={this.state.text_body}
-                onChange={this.handleChange}
-                modules={this.props.preview ? {} : this.modules}
-                formats={this.props.preview ? {} : this.formats}
-            />
-            <div className="buttonRow">
-                <button onClick={this.saveNote}>Save</button>
-            </div>
-            {/* this button is more psychological than necessary, it will save when unmounted, as well */}
-          </NoteQuillDiv>
-       )
+        return (
+            <NoteQuillDiv>
+                <ReactQuill 
+                    className="editor"
+                    value={this.state.text_body}
+                    onChange={this.handleChange}
+                    modules={this.props.preview ? {} : this.modules}
+                    formats={this.props.preview ? {} : this.formats}
+                />
+                <div className="buttonRow">
+                    <button onClick={this.saveNote}>Save</button>
+                </div>
+                {/* this button is more psychological than necessary, it will save when unmounted, as well */}
+            </NoteQuillDiv>
+        )
     }
-  }
+}
   
 const mapStateToProps = store => {
     return {store: store};
@@ -126,6 +126,7 @@ const NoteQuillDiv = styled.div`
     margin: 2px;
     box-shadow: 0px 0px 5px 1px; 
     background: white;
+    /* overflow: hidden; */
     /* .editor IS THE ELEMENT */
     .editor {
         box-sizing: border-box;
@@ -154,6 +155,7 @@ const NoteQuillDiv = styled.div`
         /* border-top: 5px solid green !important; */
         padding-bottom: 0 !important;
         background: white;
+        overflow: hidden;
         /* THIS IS THE SPACE TO TYPE STUFF */
         .ql-editor {
             /* react 16 opened this bug and this is the inherited class name for the editor container inside ReactQuill */
