@@ -9,8 +9,7 @@ import {
     Loading 
 } from '../components/index.js';
 
-import { 
-
+import {
     getSingleNote 
 } from '../actions'
 
@@ -25,6 +24,7 @@ import {
 class NoteDetailPage extends React.Component{
 
     componentDidMount(){
+        console.log("query params", this)
         this.props.getSingleNote(this.props.author, this.props.note_id)
     }
 

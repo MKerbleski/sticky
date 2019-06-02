@@ -14,6 +14,8 @@ export const Loading = () => {
     )
 }
 
+/// This one is also cool https://www.quantamagazine.org/the-strange-numbers-that-birthed-modern-algebra-20180906/
+
 const LoadingDiv = styled.div`
     /* border: 1px solid red; */
     box-sizing: border-box;

@@ -53,6 +53,7 @@ class UsernamePage extends Component {
     }
 
     render(){
+        console.log('props', this.props)
         return(
             <UsernamePageDiv> 
                 {localStorage.getItem('JWT') 
@@ -91,17 +92,20 @@ class UsernamePage extends Component {
                                 /> 
                             }} 
                         />
+
                         <Route
                             // exact={!this.state.deleteEnabled}
                             path={`${this.props.match.url}/note/:note_id`}
                             render={ (note) => {
+                                console.log('note', note)
                                 return <NoteDetailPage
                                     note_id={note.match.params.note_id}
-                                    author={this.props.match.url}
+                                    author={this.props.username}
                                     redirect={this.props.redirect}
                                 />
                             }} 
                         />
+
                         {this.props.username === localStorage.getItem('username') 
                             ?   <React.Fragment>
                                     <Route

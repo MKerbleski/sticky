@@ -174,14 +174,19 @@ export const SINGLE_NOTE_RECIEVED = 'SINGLE_NOTE_RECIEVED';
 export const getSingleNote = (author_name, note_id) =>  {
     return function(dispatch){
         if(localStorage.getItem('JWT')){
-			dispatch({type: FETCHING_SINGLE_NOTE, payload:{ author_name, note_id} });
+			dispatch({type: FETCHING_SINGLE_NOTE, payload: { author_name, note_id} });
 			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${author_name}/note/${note_id}`, getAuthHeader()).then(res => {
     			dispatch({type: SINGLE_NOTE_RECIEVED, payload: res.data})
 			}).catch(err => {
 				dispatch({type: NOTE_ERROR, payload: err})
 			})
         } else {
-          	dispatch({type: ERROR, payload: 'there was no token found'})      
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/notes/${author_name}/note/${note_id}`).then(res => {
+                dispatch({type: SINGLE_NOTE_RECIEVED, payload: res.data})
+            }).catch(err => {
+                dispatch({type: NOTE_ERROR, payload: err})
+            })
+          	// dispatch({type: ERROR, payload: 'there was no token found'})      
         }
     }
 }

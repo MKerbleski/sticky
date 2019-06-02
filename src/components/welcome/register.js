@@ -146,7 +146,7 @@ class Register extends Component{
                             <p>Things are still buggy but registration is open to users willing to give feedback.</p>
                             <span>Please <Link to="/welcome/login">
                                     Login
-                                </Link> or email Mike at <a href="mailto:resume@kerble.ski">resume@kerble.ski</a> to request an key and help test the site!
+                                </Link> or email me to help test the site!
                             </span>
                             <br></br>
                             <form onSubmit={this.check}>

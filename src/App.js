@@ -66,7 +66,7 @@ class App extends Component {
                 <div className="app-bottom">
                     <Switch>
                         <Route 
-                            path="/welcome/" 
+                            path="/welcome" 
                             render={ (a) => {
                                 return <WelcomePage
                                     match={a.match}
@@ -75,11 +75,11 @@ class App extends Component {
                             }}  
                         />
                         <Route 
-                            path="/bugs/"
+                            path="/bugs"
                             component={BugsPage} />
                         
                         <Route 
-                            path="/:username" 
+                            path="/:username"
                             render={ (a) => {
                                 return (
                                     <UsernamePage
