@@ -3,7 +3,8 @@ import {
     FETCHING_POCKET_LIST,
     POCKET_ERROR,
     ERROR,
-    POCKET_SETTINGS_RECIEVED
+    POCKET_SETTINGS_RECIEVED,
+    POCKET_SYNC_SUCESS
 } from '../actions/pocket_actions';
 
 const initialState = {    
@@ -12,6 +13,11 @@ const initialState = {
 
 export const pocketReducer = (state = initialState, action) => {
     switch(action.type) {
+        case POCKET_SYNC_SUCESS:
+            return Object.assign({}, state, {
+                pocketList: action.payload,
+                fetchingPocketList: false
+            })
         case POCKET_LIST_RECIEVED:
             return Object.assign({}, state, {
                 pocketList: action.payload.pocketList,

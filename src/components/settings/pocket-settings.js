@@ -54,11 +54,11 @@ class PocketSettings extends Component {
         })
     }
 
-    componentDidUpdate(prevProps){
-        if(prevProps.store.user.userData.pocket !== this.props.store.user.userData.pocket){
+    // componentDidUpdate(prevProps){
+    //     if(prevProps.store.user.userData.pocket !== this.props.store.user.userData.pocket){
 
-        }
-    }
+    //     }
+    // }
 
     // checkForSucess(){
     //     let timeout = 0;
@@ -77,26 +77,29 @@ class PocketSettings extends Component {
         return time
     }
 
-    syncPocket = (e) => {
-        e.preventDefault()
-        //start spinning wheel or something...
-        // console.log(this.props.store.user.userData.id)
-        this.props.syncPocketList(this.props.store.user.userData.id)
-    }
-
+    // syncPocket = (e) => {
+    //     e.preventDefault()
+    //     //start spinning wheel or something...
+    //     // console.log(this.props.store.user.userData.id)
+    // }
+    
     clickHandler = (e) => {
         e.preventDefault();
     }
-
+    
     askDb = () =>{
-        if(this.props.store.user.userData.pocket){
+        let timeout = 0
+        if(this.props.store.user.userData.pocket || timeout === 20){
             console.log("pocket connected")
+            // this.syncPocket()
+            // this.props.syncPocketList(this.props.store.user.userData.id)
+            // this.props.getPocketSettings(this.props.store.user.userData.id)
         } else {
             console.log("pocket NOT connected")
             setTimeout(() => {
                 this.props.getUserData(); 
-                this.props.getPocketSettings(this.props.store.user.userData.id)
                 this.askDb()
+                timeout++
             }, 1000)
         }
     }

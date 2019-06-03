@@ -12,8 +12,8 @@ export const FETCHING_POCKET_LIST = 'FETCHING_POCKET_LISTS';
 export const POCKET_LIST_RECIEVED = 'POCKET_LIST_RECIEVED';
 export const POCKET_ERROR = 'POCKET_ERROR';
 export const POCKET_SETTINGS_RECIEVED = 'POCKET_SETTINGS_RECIEVED';
-export const POCKET_INITIALIZED = 'POCKET_INITIALIZED';
-export const INIT_POCKET = 'INIT_POCKET';
+export const POCKET_SYNC_SUCESS = 'POCKET_SYNC_SUCESS';
+export const START_POCKET_SYNC = 'START_POCKET_SYNC';
 export const ERROR = 'ERROR';
 
 
@@ -61,13 +61,13 @@ export const syncPocketList = (sticky_user_id) =>  {
                     Authorization: token, 
                 }
             }
-            dispatch({type: INIT_POCKET});
+            dispatch({type: START_POCKET_SYNC});
             axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pocket/sync`, authHeader).then(res => {
                 //stop spinning wheel here...
                 // console.log(res.data)
-                dispatch({type: POCKET_INITIALIZED, payload: res.data})
-                dispatch(getUserData())
-                dispatch(getPocketList())
+                dispatch({type: POCKET_SYNC_SUCESS, payload: res.data})
+                // dispatch(getUserData())
+                // dispatch(getPocketList())
             }).catch(err => {
                 dispatch({type: POCKET_ERROR, payload: err})
                 console.log("error!")

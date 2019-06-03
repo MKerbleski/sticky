@@ -59,10 +59,10 @@ export const getUserData = () =>  {
 			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/settings`, getAuthHeader()).then(res => {
 				dispatch({type: USERDATA_RECIEVED, payload: res.data})
 				if(!res.data.slack_initial_sync && res.data.slack){
-						dispatch(syncSlack(res.data.id))
+					dispatch(syncSlack(res.data.id))
 				}
 				if(!res.data.pocket_initial_sync && res.data.pocket){
-						dispatch(syncPocketList(res.data.id))
+					dispatch(syncPocketList(res.data.id))
 				}
 			}).catch(err => {
 				dispatch({type: USER_ERROR, payload: err})

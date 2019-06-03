@@ -17,19 +17,19 @@ import {
 
 class PocketList extends Component {
     componentDidMount(){
-        if(!this.props.store.pocket.pocketList){
+        if(!this.props.store.user.userData.pocket_initial_sync){
             this.props.getPocketList();
         }
 
-            const target = document.getElementById('scroll');
-            target.addEventListener('wheel', (e) => {
-                if(target.scrollTop >= target.scrollHeight - target.clientHeight){
-                    // YOU AT THE BOTTOM BITCH!
-                    if(!this.props.store.pocket.fetchingPocketList){
-                        this.getMorePocketItems()
-                    }
+        const target = document.getElementById('scroll');
+        target.addEventListener('wheel', (e) => {
+            if(target.scrollTop >= target.scrollHeight - target.clientHeight){
+                // YOU AT THE BOTTOM BITCH!
+                if(!this.props.store.pocket.fetchingPocketList){
+                    this.getMorePocketItems()
                 }
-            });
+            }
+        });
     }
 
     getMorePocketItems = () => {
