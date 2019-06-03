@@ -40,8 +40,9 @@ class PocketSettings extends Component {
                     refresh: true
                 })
                 this.askDb()
-                this.props.getUserData(); 
-                this.props.getPocketSettings(this.props.store.user.userData.id)
+                // this.props.getUserData(); 
+                // this.props.getPocketSettings(this.props.store.user.userData.id)
+                
             } else {
                 console.log("did not get code back")
                 this.setState({
@@ -94,6 +95,7 @@ class PocketSettings extends Component {
             console.log("pocket NOT connected")
             setTimeout(() => {
                 this.props.getUserData(); 
+                this.props.getPocketSettings(this.props.store.user.userData.id)
                 this.askDb()
             }, 1000)
         }
