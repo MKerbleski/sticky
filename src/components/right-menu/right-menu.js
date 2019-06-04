@@ -155,6 +155,7 @@ const mapStateToProps = store => {
   	return {store: store};
 }
 
+
 const mapDispatchToProps = {
 	syncPocketList
 }
