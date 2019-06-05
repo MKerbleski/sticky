@@ -13,6 +13,7 @@ export default class AboutPage extends Component {
             <AboutPageDiv> 
                 <h2>About Page</h2>
                 <h4>This is Sticky's about page!</h4>
+                <a src="https://porterroad.com/pages/rewards">PORTER ROAD</a>
                 <p>lambda school link</p>
                 <a href="http://fbuy.me/mi5Gf">Lambda School</a>
                 <p> Sticky gives you the ability to access slack notes that have been starred or pinned in your workplace. Click the link below to add the app to your slack workplace.</p>
