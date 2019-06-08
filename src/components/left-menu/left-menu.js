@@ -28,7 +28,7 @@ class LeftMenu extends Component {
 	clickHandler = (name) => {
 		switch(name){
 			case "newNote":
-				this.props.toggleNewNote();
+				this.props.toggleNewNote(!this.props.store.notes.showNewNote);
 				break;
 			default:
 				console.log("no name in left menu")

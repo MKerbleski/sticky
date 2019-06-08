@@ -30,6 +30,7 @@ class AllNotesPage extends Component {
     }
 
     componentDidMount(){
+        this.props.toggleNewNote(false)
         if(localStorage.getItem('JWT')){
             if(this.props.deleteBin){
                 this.props.getDeletedNotes(this.props.author);

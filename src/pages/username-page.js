@@ -38,19 +38,12 @@ class UsernamePage extends Component {
         }
     }
 
-    componentWillUnmount(){
-        this.setState({
-            showNewNote: false,
-
-        })
-    }
-
     //need to unmount when this button is clicked in note detail and vis versa
-    toggleNewNote = () => {
-        this.setState({
-            showNewNote: !this.state.showNewNote
-        })
-    }
+    // toggleNewNote = (bool) => {
+    //     this.setState({
+    //         showNewNote: bool || !this.state.showNewNote
+    //     })
+    // }
 
     render(){
         console.log('props', this.props)
@@ -67,7 +60,7 @@ class UsernamePage extends Component {
                                     username={this.props.store.user.userData.username}
                                     toggleRightMenu={this.toggleRightMenu} 
                                     showRightMenu={this.state.showRightMenu}
-                                    toggleNewNote={this.toggleNewNote} 
+                                    // toggleNewNote={this.toggleNewNote} 
                                     showNewNote={this.state.showNewNote}
                                     location={e.location}
                                     match={e.match}
@@ -99,6 +92,7 @@ class UsernamePage extends Component {
                             render={ (note) => {
                                 console.log('note', note)
                                 return <NoteDetailPage
+                                    // toggleNewNote={this.toggleNewNote}
                                     note_id={note.match.params.note_id}
                                     author={this.props.username}
                                     redirect={this.props.redirect}

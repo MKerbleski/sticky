@@ -45,7 +45,7 @@ export const notesReducer = (state=initialState, action) => {
     switch(action.type) {
         case TOGGLE_NEW_NOTE:
             return Object.assign({}, state, {
-                showNewNote: action.payload || !state.showNewNote,
+                showNewNote: action.payload,
             })
         case NOTE_TO_NOTE:
             return Object.assign({}, state, {

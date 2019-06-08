@@ -8,7 +8,7 @@ export const CREDENTIAL_ERROR = 'CREDENTIAL_ERROR';
 
 export const TOGGLE_NEW_NOTE = 'TOGGLE_NEW_NOTE'
 //bool is optional, if ommited it will toggle
-export const toggleNewNote = (bool=null) => {
+export const toggleNewNote = (bool) => {
     return function(dispatch){
         dispatch({type: TOGGLE_NEW_NOTE, payload: bool})
     }

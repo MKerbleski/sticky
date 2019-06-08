@@ -10,7 +10,8 @@ import {
 } from '../components/index.js';
 
 import {
-    getSingleNote 
+    getSingleNote,
+    toggleNewNote,
 } from '../actions'
 
 import { 
@@ -25,6 +26,7 @@ class NoteDetailPage extends React.Component{
 
     componentDidMount(){
         console.log("query params", this)
+        this.props.toggleNewNote(false)
         this.props.getSingleNote(this.props.author, this.props.note_id)
     }
 
@@ -143,7 +145,8 @@ const mapStateToProps = store => {
 const mapDispatchToProps = {
     // getAttachedItems,
     // getNotes,
-    getSingleNote
+    toggleNewNote,
+    getSingleNote,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('item', targetObj, collect)(NoteDetailPage))

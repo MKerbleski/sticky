@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // import axios from 'axios'
 
 import NoteQuill from './note-detail-body-quill'
+
 import { 
     NoteDetailChild, 
     NoteDetailAttachedList,
@@ -72,7 +73,7 @@ class NoteDetailSelf extends React.Component {
                                 note={this.props.note}
                             />
                             {note.children || this.props.store.notes.showNewNote
-                                ?   <div 
+                                ?   <div
                                         onWheel={this.scrollLeft} 
                                         className="noteDetailChildren" 
                                         id="noteDetailChildren" 
