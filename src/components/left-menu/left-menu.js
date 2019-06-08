@@ -115,6 +115,7 @@ const LeftMenuDiv = styled.div`
     color: white;
     width: 5%;
 	min-width: 40px;
+	max-height: 96vh;
     justify-content: space-between;
 	background-color: ${mainThemePrimary};
 	.leftMenuBottom, .leftMenuTop{

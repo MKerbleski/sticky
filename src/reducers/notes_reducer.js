@@ -43,6 +43,7 @@ const initialState = {
 
 export const notesReducer = (state=initialState, action) => {
     switch(action.type) {
+        
         case TOGGLE_NEW_NOTE:
             return Object.assign({}, state, {
                 showNewNote: action.payload,
