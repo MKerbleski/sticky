@@ -15,6 +15,7 @@ export default class AboutPage extends Component {
                 <h4>This is Sticky's about page!</h4>
                 <a src="http://rwrd.io/yiejbv5">PORTER ROAD</a>
                 <p>lambda school link</p>
+                <a src="http://fbuy.me/m4B4f">butcherbox</a>
                 <a href="http://fbuy.me/mi5Gf">Lambda School</a>
                 <p> Sticky gives you the ability to access slack notes that have been starred or pinned in your workplace. Click the link below to add the app to your slack workplace.</p>
                 <a href="https://slack.com/oauth/authorize?client_id=465374768868.465546770546&scope=stars:read,pins:read,channels:read,users:read,team:read,im:read">
