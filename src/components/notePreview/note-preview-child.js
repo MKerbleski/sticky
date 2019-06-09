@@ -170,7 +170,7 @@ const NotePreviewChildDiv = styled.div`
     justify-content: flex-start;
     overflow: hidden;
     box-sizing: border-box;
-    width: 100px;
+    max-width: 150px;
     :hover{
         box-shadow: 0px 1px 4px gray;
         border: 2.3px solid black;

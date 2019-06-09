@@ -27,13 +27,13 @@ class NoteDetailNewChild extends React.Component {
     addNote = (note) => {
         if(this.props.parent){
             this.props.addNote(
-                {   text_body: this.state.text_body },
+                {   text_body: `<p>${this.state.text_body}</p>` },
                 //will attach children on backend when new note gets id
                 {   id: this.props.parent.id, 
                     children_attached: this.props.parent.children_attached  }
             )
         } else {
-            this.props.addNote({text_body: this.state.text_body})
+            this.props.addNote({text_body: `<p>${this.state.text_body}</p>`})
         }
         this.setState({
             text_body: ''

@@ -33,7 +33,7 @@ class NotePreviewNew extends React.Component {
                     children_attached: this.props.parent.children_attached  }
             )
         } else {
-            this.props.addNote({text_body: this.state.text_body})
+            this.props.addNote({text_body: `<p>${this.state.text_body}</p>`})
         }
         this.setState({
             text_body: ''

@@ -31,7 +31,7 @@ const NotePreviewGrandChild = (props) => {
                         }}
                     >
                     <div className="textBody">
-                        {getNLetters(props.note.text_body, 5)}
+                        {getNLetters(props.note.text_body, 1)}
                     </div>
                     </NotePreviewGrandChildDiv>
                 </div>
@@ -107,14 +107,14 @@ const NotePreviewGrandChildDiv = styled.div`
     :hover{
 			box-shadow: 0px 3px 4px gray;
 		}
-    :hover{
+    /* :hover{
         transition: .25s height, .25s width, .25s font-size;
         transition-delay: 1s;
         transition-timing-function: ease-out;
         height: 50px;
         width: 50px;
         font-size: 15px;
-    }
+    } */
     .textBody {
         display: flex;
         /* justify-content: flex-start;
