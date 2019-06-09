@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { handleErrorCodes } from './index'
+import { handleErrorCodes, getPocketList } from './index'
 import { getAuthHeader } from '../helpers/getAuthHeader'
 
 export const ERROR = 'ERROR';
@@ -17,7 +17,7 @@ export const toggleNewNote = (bool) => {
 export const NOTE_TO_NOTE = 'NOTE_TO_NOTE';
 export const NOTE_TO_NOTE_COMPLETE = 'NOTE_TO_NOTE_COMPLETE';
 export const ERROR_EDITING_NOTE_TO_NOTE = 'ERROR_EDITING_NOTE_TO_NOTE';
-export const noteToNote = (notePackage, single=false) => {
+export const noteToNote = (notePackage, single=false, pocketRefresh=0) => {
     return function(dispatch){
 
         if(localStorage.getItem('JWT') && notePackage){
@@ -31,6 +31,10 @@ export const noteToNote = (notePackage, single=false) => {
                     dispatch(getSingleNote(single.author_name, single.note_id ))
                 } else {
                     dispatch(getNotes(localStorage.getItem('username')))
+                }
+                if(pocketRefresh){
+                    // Refresh pocket List
+                    dispatch(getPocketList(pocketRefresh))
                 }
             }).catch(err => {
               	dispatch({ type: ERROR_EDITING_NOTE_TO_NOTE, payload: err })

@@ -14,7 +14,8 @@ import {
 } from '../../helpers'
 
 import { 
-    noteToNote 
+    noteToNote,
+    getPocketList
 } from '../../actions'
 
 const PocketNote = (props) => {
@@ -74,19 +75,21 @@ const PocketNote = (props) => {
         if(!noteEdits.includes(null)){
             // A Note will be edited, the action is allowed
             if(props.store.notes.singleNote){
-                console.log('case A ', noteEdits)
                 // On note detail page
-                // Will add to new note and refetch the second argument
+                // Will add to new note and refetch the note detail second argument
+                //Third argument refreshes that amount of the pocket list
                 props.noteToNote(noteEdits, {
                     author_name: props.store.notes.notes[0].sticky_username, 
                     note_id: props.store.notes.notes[0].id 
-                })
+                }, props.store.pocket.pocketList.length)
             } else {
-                console.log('case B ', noteEdits)
                 // On note Preview page
-                props.noteToNote(noteEdits)
+                props.noteToNote(noteEdits, null, props.store.pocket.pocketList.length)
             }
-		}
+
+		} else {
+            // invalid action, no action taken
+        }
     },
 }
 
@@ -101,7 +104,8 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = {
-    noteToNote
+    noteToNote,
+    getPocketList
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DragSource('item', sourceObj, collect)(PocketNote));
