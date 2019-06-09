@@ -68,17 +68,23 @@ const PocketNote = (props) => {
 			note: item,
 		}
 
-        let noteEdit = sharedStickyNoteDrop(source, monitor);
-        console.log("noteEdit", noteEdit)
+        let noteEdits = sharedStickyNoteDrop(source, monitor);
+        console.log("noteEdits", noteEdits)
 
-        if(!noteEdit.includes(null)){
+        if(!noteEdits.includes(null)){
+            // A Note will be edited, the action is allowed
             if(props.store.notes.singleNote){
-                props.noteToNote(noteEdit, {
+                console.log('case A ', noteEdits)
+                // On note detail page
+                // Will add to new note and refetch the second argument
+                props.noteToNote(noteEdits, {
                     author_name: props.store.notes.notes[0].sticky_username, 
                     note_id: props.store.notes.notes[0].id 
                 })
             } else {
-                props.noteToNote(noteEdit)
+                console.log('case B ', noteEdits)
+                // On note Preview page
+                props.noteToNote(noteEdits)
             }
 		}
     },

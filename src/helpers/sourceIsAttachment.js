@@ -26,6 +26,7 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
     )
     
     if(!sourceParent){
+        // it comes from the pocket list
         //only add to target
         if(targetObj.type === "trash"){
             alert('cannot do that, yet')
@@ -36,7 +37,8 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
                 //came from pocket list
                 console.log('source_id', source_id)
                 let newParent = addPocketItem(target, source_id)
-                return [newParent, {api: 'pocket', item_id: source_id, is_attached: true}]
+                let pocketModification = {api: 'pocket', item_id: source_id, is_attached: true}
+                return [newParent,pocketModification]
             }
         } else if(source.type === "slack"){
             let newParent = addSlackItem(target, source_id)
@@ -49,7 +51,8 @@ export const sourceIsAttachment = (sourceObj, targetObj) => {
         if(targetObj.type === "trash"){
             if(source.type === "pocket"){
                 let oldParent = removePocketItem(source.parent, source.note.item_id)
-                return [oldParent]
+                let pocketModification = {api: 'pocket', item_id: source_id, is_attached: false}
+                return [oldParent, pocketModification]
                 
             } else if( source.type === "slack"){
                 let oldParent = removeSlackItem(source.parent, source.note.permalink)

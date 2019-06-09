@@ -43,6 +43,7 @@ class NotePreviewSelf extends React.Component {
 	clickHandler = (e) => {
 		e.preventDefault()
 		if(e.target.name === "delete"){
+			console.log('delete', this.props.note.id)
 			this.props.deleteNote(this.props.note.id)
 		} else if (e.target.name === "restore"){
 			this.props.editNote({id: this.props.note.id, is_deleted: false}, true)

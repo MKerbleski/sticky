@@ -240,7 +240,7 @@ const NoteDetailChildDiv = styled.div`
 			}
 		}
 		.noteDetailChildText {
-			${border('green')}
+			/* ${border('green')} */
 			/* margin: 0px 10px 5px 0; */
 			height: ${(props) => props.hasChildren ? '50%' : '95%'};
 			text-decoration: none;
