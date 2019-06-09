@@ -56,6 +56,7 @@ class NoteDetailChild extends React.Component {
                 connectDragSource &&
                 connectDropTarget &&
                 <NoteDetailChildDiv 
+					hasChildren={note.has_children}
                     innerRef={instance => {
 						connectDragSource(instance);
 						connectDropTarget(instance);}}
@@ -68,7 +69,8 @@ class NoteDetailChild extends React.Component {
 						style={{background: hover ? 'lightgreen' : null}}
 					>
 						<div className="noteDetailChildHeader">
-							{note.num_slack_items_attached ||  note.num_pocket_items_attached
+							{note.num_slack_items_attached 
+							||  note.num_pocket_items_attached
 									? 	<div className="note-content-link-count">
 											{note.num_pocket_items_attached + note.num_slack_items_attached}
 										</div> 
@@ -78,12 +80,12 @@ class NoteDetailChild extends React.Component {
 							{ReactHTMLParser(note.text_body)}
 						</div>
 						{/* <p>{this.getFirstSen(note.text_body)}</p>  */}
-						<div 
-							className="noteDetailGrandchildrenContainer"
-							onWheel={(e) => this.scrollDown(e)} 
-						>
-							{note.has_children 
-								? 	note.children.map(grandchild => {
+						{note.has_children 
+							?	<div 
+									className="noteDetailGrandchildrenContainer"
+									onWheel={(e) => this.scrollDown(e)} 
+								>
+							 	{note.children.map(grandchild => {
 										if(!grandchild.is_deleted){
 											return <NoteDetailGrandChild
 												key={grandchild.id}
@@ -97,8 +99,9 @@ class NoteDetailChild extends React.Component {
 											return null
 										} 
 									})
-								:	null}
-						</div>
+								 }
+								</div>
+							:	null}
 					</Link>
                 </NoteDetailChildDiv>
             )
@@ -237,9 +240,9 @@ const NoteDetailChildDiv = styled.div`
 			}
 		}
 		.noteDetailChildText {
-			/* ${border('green')} */
+			${border('green')}
 			/* margin: 0px 10px 5px 0; */
-			max-height: 40%;
+			height: ${(props) => props.hasChildren ? '50%' : '95%'};
 			text-decoration: none;
 			text-align: left;
 			overflow: hidden;
@@ -256,9 +259,9 @@ const NoteDetailChildDiv = styled.div`
 			align-items: flex-start;
 			justify-content: space-around;
 			overflow: auto;
-			min-height: 50px;
+			height: 50%;
 			/* height: 100%; */
-			max-height: 60%;
+			/* max-height: 60%; */
 		}	
 	}  
 `;
