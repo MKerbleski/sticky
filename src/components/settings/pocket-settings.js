@@ -100,7 +100,7 @@ class PocketSettings extends Component {
                 this.props.getUserData(); 
                 this.askDb()
                 timeout++
-            }, 1000)
+            }, 2000)
         }
     }
 

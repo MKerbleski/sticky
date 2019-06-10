@@ -30,7 +30,7 @@ class RightMenu extends Component {
 
     componentDidMount(){
 		if(this.props.store.user.userData.pocket && !this.props.store.pocket.pocketList){
-			this.props.syncPocketList()
+			// this.props.syncPocketList()
 		}
 	}
 	

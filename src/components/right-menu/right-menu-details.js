@@ -41,7 +41,7 @@ class RightMenuDetails extends Component {
     syncHandler(selectedApp){
         // e.preventDefault()
         if(this.props.selectedApp === 'pocket'){
-            this.props.syncPocketList()
+            // this.props.syncPocketList()
 
         } else if (this.props.selectedApp === 'slack'){
             this.props.syncSlack()
