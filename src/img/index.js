@@ -17,3 +17,5 @@ export {default as headshot} from './22307921.jpg'
 export {default as afflack} from './affleck.jpg'
 export {default as sam} from './sam.jpg'
 export {default as charlie} from './charlie.jpg'
+
+export {default as newLayer} from './14_layer_layers_stack_paper_add_plus-512.png'

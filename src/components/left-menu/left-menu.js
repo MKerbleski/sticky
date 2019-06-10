@@ -16,6 +16,10 @@ import {
 	mainThemePrimary
 } from '../../styles'
 
+import {
+	newLayer
+} from '../../img'
+
 class LeftMenu extends Component {
 	constructor(props){
 		super(props);
@@ -45,7 +49,8 @@ class LeftMenu extends Component {
 							: "menu-item"}  
 						style={this.props}
 						to={`/${this.props.username}`}>
-						<i className="fab fa-stack-overflow"></i>
+						{/* <i className="fab fa-layer-group"></i> */}
+						<i class="fas fa-layer-group"></i>
 
 					</Link>
 					{this.props.location.pathname === `${this.props.match.url}/trash` 
@@ -55,6 +60,8 @@ class LeftMenu extends Component {
 								onClick={() => this.clickHandler("newNote")} 
 								className="menu-item">
 								<i className="fas fa-plus-square"></i>
+								{/* <i className="fas fa-layer-plus"></i> */}
+								{/* <img src={newLayer}></img> */}
 							</div>}
 					
 					{/* <div className="menu-item">

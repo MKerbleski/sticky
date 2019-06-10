@@ -56,17 +56,21 @@ export const getUserData = () =>  {
     return function(dispatch){
 		if(localStorage.getItem('JWT')){
 			dispatch({type: FETCHING_USERDATA});
-			axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/settings`, getAuthHeader()).then(res => {
-				dispatch({type: USERDATA_RECIEVED, payload: res.data})
-				if(!res.data.slack_initial_sync && res.data.slack){
-					dispatch(syncSlack(res.data.id))
-				}
-				if(!res.data.pocket_initial_sync && res.data.pocket){
-					dispatch(syncPocketList(res.data.id))
-				}
-			}).catch(err => {
-				dispatch({type: USER_ERROR, payload: err})
-			})
+			axios
+				.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/settings`, getAuthHeader())
+				.then(res => {
+						dispatch({type: USERDATA_RECIEVED, payload: res.data})
+						if(!res.data.slack_initial_sync && res.data.slack){
+							dispatch(syncSlack(res.data.id))
+						}
+						if(!res.data.pocket_initial_sync && res.data.pocket){
+							console.log('first pocket sync')
+							dispatch(syncPocketList(res.data.id))
+						}	
+					})
+				.catch(err => {
+					dispatch({type: USER_ERROR, payload: err})
+				})
 		} else {
 			dispatch({type: ERROR, payload: 'there was no token found'})      
 		}
