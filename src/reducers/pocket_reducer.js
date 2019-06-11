@@ -11,13 +11,14 @@ const initialState = {
     fetchingPocketList: false,
 }
 
-export const pocketReducer = (state = initialState, action) => {
+export const pocketReducer = (state=initialState, action) => {
     switch(action.type) {
         case POCKET_SYNC_SUCESS:
             return Object.assign({}, state, {
                 pocketList: action.payload,
                 fetchingPocketList: false
             })
+            
         case POCKET_LIST_RECIEVED:
             return Object.assign({}, state, {
                 pocketList: action.payload.pocketList,
