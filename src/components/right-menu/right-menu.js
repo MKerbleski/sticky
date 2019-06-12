@@ -12,7 +12,8 @@ import {
 } from '../../img'
 
 import { 
-	syncPocketList
+	syncPocketList,
+	getPocketList
 } from '../../actions'
 
 import { 
@@ -28,11 +29,11 @@ class RightMenu extends Component {
 		pocket: this.props.store.user.userData.pocket,
     }
 
-    componentDidMount(){
-		if(this.props.store.user.userData.pocket && !this.props.store.pocket.pocketList){
-			// this.props.syncPocketList()
-		}
-	}
+    // componentDidMount(){
+	// 	if(this.props.store.user.userData.pocket && !this.props.store.pocket.pocketList){
+	// 		this.props.getPocketList()
+	// 	}
+	// }
 	
 	componentWillReceiveProps(nextProps){
         if(this.props.store.user.userData.slack_initial_sync !== nextProps.store.user.userData.slack_initial_sync){
@@ -157,7 +158,8 @@ const mapStateToProps = store => {
 
 
 const mapDispatchToProps = {
-	syncPocketList
+	syncPocketList,
+	getPocketList
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu)

@@ -66,7 +66,7 @@ export const syncPocketList = (sticky_user_id) =>  {
                 //stop spinning wheel here...
                 // console.log(res.data)
                 dispatch({type: POCKET_SYNC_SUCESS, payload: res.data})
-                // dispatch(getUserData())
+                dispatch(getUserData())
                 // dispatch(getPocketList())
             }).catch(err => {
                 dispatch({type: POCKET_ERROR, payload: err})

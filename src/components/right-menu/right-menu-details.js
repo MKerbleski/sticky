@@ -6,7 +6,8 @@ import {connect} from 'react-redux';
 import { 
     getSlackStars, 
     syncSlack, 
-    syncPocketList 
+    syncPocketList,
+    getPocketList
 } from '../../actions'
 
 import { 
@@ -41,7 +42,7 @@ class RightMenuDetails extends Component {
     syncHandler(selectedApp){
         // e.preventDefault()
         if(this.props.selectedApp === 'pocket'){
-            // this.props.syncPocketList()
+            this.props.getPocketList()
 
         } else if (this.props.selectedApp === 'slack'){
             this.props.syncSlack()
@@ -91,6 +92,7 @@ const mapDispatchToProps = {
     getSlackStars,
     syncSlack,
     syncPocketList,
+    getPocketList
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenuDetails)
