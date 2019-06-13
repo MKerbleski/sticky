@@ -73,7 +73,7 @@ class SlackSettings extends Component {
             console.log("slack connected")
             this.props.syncSlack(this.props.store.user.userData.id)
         } else {
-            console.log("pocket NOT connected")
+            console.log("slack NOT connected")
             setTimeout(() => {
                 this.props.getUserData(); 
                 this.askDb()

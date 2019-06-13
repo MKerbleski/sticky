@@ -128,7 +128,8 @@ class PocketSettings extends Component {
                                         <p><strong>Initial Sync: </strong> {this.props.store.pocket.syncInProgress ? 'Syncing' : 'synced'}</p>
                                         {!this.props.store.pocket.syncInProgress &&this.props.store.user.userData.pocket ?<button onClick={() => this.props.syncPocketList(this.props.store.user.userData.id)}>Sync</button> : null}
                                         </div>
-                                        : <div><Loading /><h1>Syncing</h1></div>}
+                                        : null}
+                                        {this.props.store.pocket.syncInProgress ? <div><Loading /><h1>Syncing</h1></div> : null}
                                     </div>
                                 : null
                             }
