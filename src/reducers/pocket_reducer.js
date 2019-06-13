@@ -41,7 +41,8 @@ export const pocketReducer = (state=initialState, action) => {
         case POCKET_ERROR:    
             return Object.assign({}, state, {
               pocketError: true,
-              pocketErrMsg: action.payload
+              pocketErrMsg: action.payload,
+              syncInProgress: false,
             })
         case ERROR:
             return Object.assign({}, state, {
