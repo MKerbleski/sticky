@@ -29,7 +29,8 @@ export const slackReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 gettingSlackStars: false,
                 slackError: true,
-                slackErrMsg: action.payload
+                slackErrMsg: action.payload,
+                slackSync: false,
             })
         case START_SYNC:
             return Object.assign({}, state, {
