@@ -92,8 +92,8 @@ class PocketSettings extends Component {
         if(this.props.store.user.userData.pocket || timeout === 20){
             console.log("pocket connected")
             // this.syncPocket()
-            // this.props.syncPocketList(this.props.store.user.userData.id)
-            // this.props.getPocketSettings(this.props.store.user.userData.id)
+            this.props.syncPocketList(this.props.store.user.userData.id)
+            this.props.getPocketSettings(this.props.store.user.userData.id)
         } else {
             console.log("pocket NOT connected")
             setTimeout(() => {
@@ -121,8 +121,14 @@ class PocketSettings extends Component {
                             } */}
                             {this.props.store.pocket.pocketSettings
                                 ?   <div>
+                                        {this.props.store.user.userData.pocket_initial_sync ?<div>
+
                                         <p><strong>Last Update: </strong>{ this.convertTime(this.props.store.pocket.pocketSettings.last_accessed)}</p>
                                         <p><strong>Connected as: </strong> {this.props.store.pocket.pocketSettings.pocket_username}</p>
+                                        <p><strong>Initial Sync: </strong> {this.props.store.pocket.syncInProgress ? 'Syncing' : 'synced'}</p>
+                                        {!this.props.store.pocket.syncInProgress &&this.props.store.user.userData.pocket ?<button onClick={() => this.props.syncPocketList(this.props.store.user.userData.id)}>Sync</button> : null}
+                                        </div>
+                                        : <div><Loading /><h1>Syncing</h1></div>}
                                     </div>
                                 : null
                             }

@@ -48,7 +48,7 @@ class SettingsPage extends Component {
 						</React.Fragment> 
 					:	<Loading />
 				}
-				<p>Items from Slack or Pocket will be redundent. They can appear on multiple notes and will remain in the list that they came from. Currently, they are also read-only. Deleting notes from a note will have no effect on the note in slack or pockets website.</p>
+				<p> Currently, every item from slack and pocket are read-only. Deleting notes from a note will have no effect on the note in slack or pockets website.</p>
 				{/* click button to turn off redudency and each note will be only appear throughout sticky once. There will be a flag on the note that says whether it is used or not. */}
 				{/* <button>toggle redundency</button> */}
 			</SettingsPageDiv>

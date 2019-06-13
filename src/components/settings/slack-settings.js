@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 import format from 'date-fns/format'
 
 import { 
+    Loading 
+} from '../loading'
+
+import { 
     getSlackSettings,
     getUserData,
     syncSlack
@@ -38,6 +42,7 @@ class SlackSettings extends Component {
         this.setState({
             refresh: true
         })
+        this.askDb()
     }
 
     getSlackInfo = (e) => {
@@ -60,6 +65,21 @@ class SlackSettings extends Component {
         // } else {
         //     console.log("no token found.")
         // }
+    }
+
+    askDb = () =>{
+        let timeout = 0
+        if(this.props.store.user.userData.slack || timeout === 20){
+            console.log("slack connected")
+            this.props.syncSlack(this.props.store.user.userData.id)
+        } else {
+            console.log("pocket NOT connected")
+            setTimeout(() => {
+                this.props.getUserData(); 
+                this.askDb()
+                timeout++
+            }, 2000)
+        }
     }
 
     convertTime(unixTimeStamp){
@@ -97,7 +117,9 @@ class SlackSettings extends Component {
                             <li>Any messages starred in a Private or DM channel will be in a 'Private Channel or DM' container.</li>
                             <li>Sticky will show pinned messages from channels that you have <strong>starred</strong>.</li>
                             <br></br>
-                                <label>Slack will sync automatically. If things havn't synced and it has been more than a minute, click manual sync</label><button name="sync" onClick={this.getSlackInfo}>Manually Sync Slack</button>
+                            {this.props.store.slack.slackSync 
+                                ?   <div><h1>Syncing!</h1><Loading /></div> : null   }
+                                {/* <label>Slack will sync automatically. If things havn't synced and it has been more than a minute, click manual sync</label><button name="sync" onClick={this.getSlackInfo}>Manually Sync Slack</button> */}
                             {/* FOR DEVELOPMENT */}
                             {/* <div>
                                 <p>team -> channels -> users -> </p>
@@ -122,7 +144,7 @@ class SlackSettings extends Component {
                             <button onClick={(e) => {
                                 this.connectSlack(e)
                             }}>Connect to Slack</button>
-                            {this.state.refresh
+                            {/* {this.state.refresh
                                 ?   <button 
                                         name="sync" 
                                         onClick={(e) => {
@@ -131,7 +153,7 @@ class SlackSettings extends Component {
                                     >
                                         Success?
                                     </button>
-                                :   null}
+                                :   null} */}
 
                                
                         </div>

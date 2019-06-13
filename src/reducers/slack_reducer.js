@@ -33,11 +33,11 @@ export const slackReducer = (state = initialState, action) => {
             })
         case START_SYNC:
             return Object.assign({}, state, {
-                gettingSlackStars: true,
+                slackSync: true,
             })
         case SLACK_INITIALIZED:
             return Object.assign({}, state, {
-                gettingSlackStars: false,
+                slackSync: false,
             })
         default: 
             return state;

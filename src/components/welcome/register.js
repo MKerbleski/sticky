@@ -83,7 +83,8 @@ class Register extends Component{
         return(
             <RegisterDiv>
                 <h1>Registration</h1>
-                {this.state.accessKey 
+                {/* {this.state.accessKey  */}
+                {true 
                     ?   <div>
                             {this.state.fixForm 
                                 ?   <p>There was a problem submitting</p> 

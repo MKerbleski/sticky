@@ -30,7 +30,7 @@ import {
     ERROR_EDITING_NOTE_TO_NOTE,
     ERROR,
     TOGGLE_NEW_NOTE,
- } from '../actions/note_actions';
+} from '../actions/note_actions';
 
 const initialState = {    
     notes: [],
@@ -43,7 +43,6 @@ const initialState = {
 
 export const notesReducer = (state=initialState, action) => {
     switch(action.type) {
-        
         case TOGGLE_NEW_NOTE:
             return Object.assign({}, state, {
                 showNewNote: action.payload,
