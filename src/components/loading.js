@@ -4,18 +4,18 @@ import styled from 'styled-components'
 export const Loading = () => {
     return (
         <LoadingDiv>
-            {/* <iframe 
+            <iframe 
                 title="bubble-rings-loading-icon"
                 src="https://giphy.com/embed/8UI85273lC1VzEgkyW" 
                 width="40" 
                 frameBorder="0"
-            /> */}
-            <iframe 
+            />
+            {/* <iframe 
                 title="line-twisting illusion"
                 src="https://d2r55xnwy6nx47.cloudfront.net/uploads/2018/09/belttrick_smaller.mp4" 
                 width="40" 
                 frameBorder="0"
-            />
+            /> */}
         </LoadingDiv>
     )
 }

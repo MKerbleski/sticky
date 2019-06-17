@@ -154,8 +154,6 @@ class SlackSettings extends Component {
                                         Success?
                                     </button>
                                 :   null} */}
-
-                               
                         </div>
                 }
 
