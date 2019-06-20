@@ -71,6 +71,7 @@ export const getUserData = () =>  {
 				.catch(err => {
 					dispatch({type: USER_ERROR, payload: err})
 				})
+				
 		} else {
 			dispatch({type: ERROR, payload: 'there was no token found'})      
 		}
