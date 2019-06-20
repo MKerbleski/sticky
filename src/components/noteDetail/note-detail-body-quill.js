@@ -13,6 +13,8 @@ import {
     border
 } from '../../styles'
 
+import 'react-quill/dist/quill.snow.css'
+
 hljs.configure({   // optionally configure hljs
     languages: ['javascript', 'ruby', 'python']
 });
@@ -31,7 +33,7 @@ class NoteQuill extends React.Component {
 
     componentDidMount(){
         this.setState({
-            text_body: this.props.note.text_body
+            text_body: this.props.note.text_body.substring(1, this.props.note.text_body.length)
         })
     }
 
@@ -70,7 +72,7 @@ class NoteQuill extends React.Component {
             [{ 'header': [1, 2, false] }],
             ['bold', 'italic', 'underline','strike'],
             [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-            ['link', 'image'],
+            // ['link', 'image'],
             ['clean'], ['code-block']
         ],
     }
@@ -84,21 +86,26 @@ class NoteQuill extends React.Component {
 
     render () {
         console.log('Quill', this.props.note)
-        return (
-            <NoteQuillDiv>
-                <ReactQuill 
-                    className="editor"
-                    value={this.state.text_body}
-                    onChange={this.handleChange}
-                    modules={this.props.preview ? {} : this.modules}
-                    formats={this.props.preview ? {} : this.formats}
-                />
-                <div className="buttonRow">
-                    <button onClick={this.saveNote}>Save</button>
-                </div>
-                {/* this button is more psychological than necessary, it will save when unmounted, as well */}
-            </NoteQuillDiv>
-        )
+        console.log('Quill', this.state)
+        if(this.state.text_body){
+        
+            return (
+                <NoteQuillDiv>
+                    <ReactQuill 
+                        className="editor"
+                        value={this.state.text_body}
+                        onChange={this.handleChange}
+                        modules={this.props.preview ? {} : this.modules}
+                        formats={this.props.preview ? {} : this.formats}
+                    />
+                    <div className="buttonRow">
+                        <button onClick={this.saveNote}>Save</button>
+                    </div>
+                    {/* this button is more psychological than necessary, it will save when unmounted, as well */}
+                </NoteQuillDiv>
+            )
+        } else return null
+        
     }
 }
   
