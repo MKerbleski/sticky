@@ -20,6 +20,8 @@ import {
 	newLayer
 } from '../../img'
 
+// https://www.google.com/search?q=layer+plus+icon&tbm=isch&source=iu&ictx=1&fir=kj63FfbS6OU6HM%253A%252Cn325Lt8EFAvsXM%252C_&vet=1&usg=AI4_-kRB-tNYBS-UGCb7wiGwh6436r70Tg&sa=X&ved=2ahUKEwjM-LzMm93iAhVvzlkKHZCcCxIQ9QEwAHoECAYQBA#imgrc=kj63FfbS6OU6HM:
+
 class LeftMenu extends Component {
 	constructor(props){
 		super(props);
