@@ -17,9 +17,9 @@ import {
 
 class PocketList extends Component {
     componentDidMount(){
-        if(!this.props.store.user.userData.pocket_initial_sync){
-            this.props.getPocketList();
-        }
+        // if(!this.props.store.user.userData.pocket_initial_sync){
+        // }
+        this.props.getPocketList();
 
         const target = document.getElementById('scroll');
         target.addEventListener('wheel', (e) => {

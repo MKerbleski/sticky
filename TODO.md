@@ -13,6 +13,8 @@ CONCEPT
 KNOWN BUGS / TODO
     -- need to at a minimum flag a pocket note that it is attached to a note
     -- when hit plus button on settings page it should route to all notes page
+    -- enable helmet 
+    -- use join for attaching children notes? 
     -- BACKEND
         -- make the middleware log the amount of calls a user makes to the metadata table. 
             --i.e. how many notes edited. 
