@@ -28,6 +28,7 @@ class PocketList extends Component {
                 if(!this.props.store.pocket.fetchingPocketList){
                     this.getMorePocketItems()
                 }
+                
             }
         });
     }
