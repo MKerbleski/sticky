@@ -33,7 +33,7 @@ class NoteQuill extends React.Component {
 
     componentDidMount(){
         this.setState({
-            text_body: this.props.note.text_body.substring(1, this.props.note.text_body.length)
+            text_body: this.props.note.text_body.substring(0, this.props.note.text_body.length)
         })
     }
 

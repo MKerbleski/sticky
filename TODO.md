@@ -29,7 +29,6 @@ KNOWN BUGS / TODO
         -- make login page sexy
             -- add user email and two passwords to sign up and name
         -- track login attempts, login locations
-        
     -- PAYMENT 
         -- pay for ad free 
         -- pick your price

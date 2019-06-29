@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { 
     Loading,
     PocketChannel
- } from '../index.js'
+} from '../index.js'
 
 import { 
     getPocketList, 
@@ -28,7 +28,7 @@ class PocketList extends Component {
                 if(!this.props.store.pocket.fetchingPocketList){
                     this.getMorePocketItems()
                 }
-                
+
             }
         });
     }

@@ -245,7 +245,8 @@ const NoteDetailChildDiv = styled.div`
 			height: ${(props) => props.hasChildren ? '50%' : '95%'};
 			text-decoration: none;
 			text-align: left;
-			overflow: hidden;
+			overflow: auto;
+			${scrollBar(undefined, 'gray')}
 			>*{
 				margin: 0
 			}
