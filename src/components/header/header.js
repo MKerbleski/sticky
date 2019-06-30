@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import { useAuth0 } from "../react-auth0-wrapper";
 
 import { 
     logout
@@ -23,6 +24,7 @@ class Header extends Component{
     }
     
     render(){
+        // const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
         return(
             <HeaderDiv>
                 <Link 
@@ -33,6 +35,18 @@ class Header extends Component{
                 >
                     <h1 className="headerTitle">Stic.ky</h1>
                 </Link>
+                {/* <div>
+                    {!isAuthenticated && (
+                        <button
+                        onClick={() =>
+                            loginWithRedirect({})
+                        }
+                        >
+                        Log in
+                        </button>
+                    )}
+                    {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
+                </div> */}
                 {localStorage.getItem('username') && this.props.store.notes.status 
                     ? this.props.store.notes.status 
                     : this.props.store.user.status 
