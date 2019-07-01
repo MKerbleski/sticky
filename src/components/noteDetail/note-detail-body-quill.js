@@ -75,6 +75,9 @@ class NoteQuill extends React.Component {
             // ['link', 'image'],
             ['clean'], ['code-block']
         ],
+        clipboard: {
+            matchVisual: false
+        }
     }
      
     formats = [
