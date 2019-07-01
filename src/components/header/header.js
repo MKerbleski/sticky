@@ -33,7 +33,7 @@ class Header extends Component{
                         ?   `/${localStorage.getItem('username')}` 
                         :   '/welcome'} 
                 >
-                    <h1 className="headerTitle">Stic.ky</h1>
+                    <h1 className="headerTitle">Sticky</h1>
                 </Link>
                 {/* <div>
                     {!isAuthenticated && (
@@ -47,6 +47,7 @@ class Header extends Component{
                     )}
                     {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
                 </div> */}
+
                 {localStorage.getItem('username') && this.props.store.notes.status 
                     ? this.props.store.notes.status 
                     : this.props.store.user.status 
