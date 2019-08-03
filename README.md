@@ -1,7 +1,3 @@
-https://lambda-notes-backend-mjk.herokuapp.com
+Deployed at https://notes-app.xyz/welcome
 
-gh-pages -d build
-
-
-SECURITY
- -- portions of this site are publicly asscessable, the idea is that you can share notes with people that can view without making an accound. Much like twitter, youtube, or google docs. Viewing is the only action that can be taken without a security token, all other actions need a security token. 
+This app utilizes the slack and pocket apis to import bookmarked items and integrate it into an nested document structure. 
