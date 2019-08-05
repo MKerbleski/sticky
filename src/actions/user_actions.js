@@ -114,17 +114,19 @@ export const createUser = (newUser, redirect) => {
 export const loginUser = (creds, redirect) => {
 	return function(dispatch){
 		dispatch({type: SENDING_CREDENTIALS})
-		axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/login`, creds).then(res => {
-			dispatch({type: VALID_CREDENTIALS, payload: res.data})
-            localStorage.setItem('JWT', res.data.token)
-            localStorage.setItem('username', res.data.username)
-            localStorage.setItem('sticky_user_id', res.data.sticky_user_id)
-            if(localStorage.getItem('text_body')){
-				dispatch(addNote({text_body: localStorage.getItem('text_body')}))
-            }
-            redirect(`/${res.data.username}`)
-        }).catch(err => {
-			dispatch(handleErrorCodes(err))
-		})
+		setTimeout(() => {
+			axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/welcome/login`, creds).then(res => {
+				dispatch({type: VALID_CREDENTIALS, payload: res.data})
+				localStorage.setItem('JWT', res.data.token)
+				localStorage.setItem('username', res.data.username)
+				localStorage.setItem('sticky_user_id', res.data.sticky_user_id)
+				if(localStorage.getItem('text_body')){
+					dispatch(addNote({text_body: localStorage.getItem('text_body')}))
+				}
+				redirect(`/${res.data.username}`)
+			}).catch(err => {
+				dispatch(handleErrorCodes(err))
+			})
+		}, 2000)
 	}
 }

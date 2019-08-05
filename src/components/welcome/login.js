@@ -7,6 +7,10 @@ import {
     clearUserStatus,
 } from '../../actions';
 
+import {
+    Loading
+} from './../index.js';
+
 class Login extends Component{
     constructor(props){
         super(props);
@@ -36,6 +40,7 @@ class Login extends Component{
     }
     
     render(){
+        const loggingIn = this.props.store.user.sendingCredentials
         return(
             <LoginDiv>
                 <h1>Login</h1>
@@ -44,24 +49,31 @@ class Login extends Component{
                         ?   'login failed, please try again or register'
                         :   null}
                 </p>
-                <form onSubmit={this.submit}>
-                    <input 
-                        autoFocus
-                        required
-                        type="text"
-                        name="username" 
-                        placeholder="username" 
-                        onChange={this.inputHandler}
-                        value={this.state.username}>{this.value}</input>
-                    <input 
-                        required
-                        type="password"
-                        name="password" 
-                        placeholder="password" 
-                        onChange={this.inputHandler}
-                        value={this.state.password}>{this.value}</input>
-                    {this.props.sendingData ? <p>sending credentials</p> : <input type="submit" />}
-                </form>
+                {loggingIn 
+                    ?   <div>
+                            Sending Login Credentials Please Wait.
+                            <Loading />
+                        </div>
+                    :   <form onSubmit={this.submit}>
+                            <input 
+                                autoFocus
+                                required
+                                type="text"
+                                name="username" 
+                                placeholder="username" 
+                                onChange={this.inputHandler}
+                                value={this.state.username}>{this.value}</input>
+                            <input 
+                                required
+                                type="password"
+                                name="password" 
+                                placeholder="password" 
+                                onChange={this.inputHandler}
+                                value={this.state.password}>{this.value}</input>
+                            {this.props.sendingData ? <p>sending credentials</p> : <input type="submit" />}
+                        </form>
+                    }
+                
             </LoginDiv>
         )
     }

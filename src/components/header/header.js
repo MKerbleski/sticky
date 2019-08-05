@@ -12,7 +12,6 @@ import {
     flexCenter,
     border,
     mainThemePrimary
-
 } from '../../styles'
 
 class Header extends Component{

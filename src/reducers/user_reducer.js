@@ -18,7 +18,8 @@ import {
 
 const initialState = {    
    failedLoginAttempt: false,
-   userData: {}
+   userData: {},
+   sendingCredentials: false,
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -42,10 +43,12 @@ export const userReducer = (state = initialState, action) => {
             })
         case FAILED_REGISTRATION_ATTEMPT:
             return Object.assign({}, state, {
+                sendingCredentials: false,
                 failedRegistrationAttempt: true,
             })
         case FAILED_LOGIN_ATTEMPT:
             return Object.assign({}, state, {
+                sendingCredentials: false,
                 failedLoginAttempt: true,
             })
         case SENDING_CREDENTIALS:
@@ -64,11 +67,13 @@ export const userReducer = (state = initialState, action) => {
             })
         case SENDING_NEW_USERDATA:
             return Object.assign({}, state, {
+                sendingCredentials: true,
                 sendingNewUser: true,
             })
         case USER_CREATED:
             return Object.assign({}, state, {
                 sendingNewUser: false,
+                sendingCredentials: false,
                 failedRegistrationAttempt: false,
                 userCreated: true,
                 username: action.payload.username,
@@ -93,7 +98,8 @@ export const userReducer = (state = initialState, action) => {
             if(action.payload.data.message){
                 return Object.assign({}, state, {
                     status: action.payload.data.message,
-                    code: action.payload.status
+                    code: action.payload.status,
+                    sendingCredentials: false,
                 })
             } else {
                 return state
