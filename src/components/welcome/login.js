@@ -70,10 +70,11 @@ class Login extends Component{
                                 placeholder="password" 
                                 onChange={this.inputHandler}
                                 value={this.state.password}>{this.value}</input>
-                            {this.props.sendingData ? <p>sending credentials</p> : <input type="submit" />}
+                            {this.props.sendingData 
+                                ?   <p>sending credentials</p> 
+                                :   <input type="submit" /> }
                         </form>
                     }
-                
             </LoginDiv>
         )
     }

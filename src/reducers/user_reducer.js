@@ -13,7 +13,6 @@ import {
     USER_ERROR,
     ERROR,
     CLEAR_USER_STATUS
-    // INVALID_CREDENTIALS
 } from '../actions/user_actions';
 
 const initialState = {    
