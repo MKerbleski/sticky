@@ -129,7 +129,6 @@ const HeaderDiv = styled.div`
             text-decoration: none;
             :hover{
                 text-decoration: underline;
-                /* background-color: rgba(0,0,0,.3); */
             }
         }
     }
