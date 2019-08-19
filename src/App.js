@@ -121,7 +121,6 @@ const AppDiv = styled.div`
     .app-top {
         ${border()}
         /* box-sizing: border-box; */
-        /* min-height: 50px; */
         height: 5vh;
         overflow: hidden;
     }
