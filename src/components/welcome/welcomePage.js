@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import { Route, Link, Switch } from 'react-router-dom';
 import bgimg from '../../img/dark-honeycomb.png'
-// import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
 
 import { 
     EntryNote,
@@ -81,16 +79,14 @@ export default class WelcomePage extends Component{
                         component={AdvertisePage} />
                 </div>
             </Switch>
-                <footer>
-                    <div className="footerLinks">
-                        <Link to="/welcome">Home</Link>
-                        <Link to="/welcome/about">About</Link>
-                        <Link to="/welcome/team">Team</Link>
-                        {/* <Link to="/welcome/careers">Careers</Link> */}
-                        <Link to="/welcome/mission">Mission</Link>
-                        {/* <Link to="/welcome/advertise">Advertising</Link> */}
-                    </div>
-                </footer>
+            {/* <footer>
+                <div className="footerLinks">
+                    <Link to="/welcome">Home</Link>
+                    <Link to="/welcome/about">About</Link>
+                    <Link to="/welcome/team">Team</Link>
+                    <Link to="/welcome/mission">Mission</Link>
+                </div>
+            </footer> */}
             </WelcomePageDiv>
         )
     }
