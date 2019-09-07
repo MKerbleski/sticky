@@ -11,6 +11,7 @@ export default class EntryNote extends Component {
     constructor(props){
         super(props)
         this.state = {
+
         }
     }
 
@@ -30,7 +31,7 @@ export default class EntryNote extends Component {
     render(){
         return(
             <EntryNoteDiv> 
-                <form onSubmit={this.saveLocalNote}>
+                {/* <form onSubmit={this.saveLocalNote}>
                     <textarea 
                         type="text" 
                         name="entryNote" 
@@ -48,7 +49,8 @@ export default class EntryNote extends Component {
                             <Link className="link" to="/welcome/login">Login</Link>
                         </div>
                     :   null
-                }
+                } */}
+                <iframe className="video" margin="10px" width="50%" height="50%" src="https://www.youtube.com/embed/B1XURIy2HSI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </EntryNoteDiv>
         )
     }
@@ -59,8 +61,15 @@ const EntryNoteDiv = styled.div`
     margin: 2px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 100%;
     /* width: 80vw; */
+    .video{
+        margin: 20px;
+        width: 75vw;
+        height: 75vh;
+    }
     form{
         /* border: 1px solid green; */
         margin: 2px;
