@@ -16,7 +16,6 @@ export const POCKET_SYNC_SUCESS = 'POCKET_SYNC_SUCESS';
 export const START_POCKET_SYNC = 'START_POCKET_SYNC';
 export const ERROR = 'ERROR';
 
-
 export const getPocketList = (howMany=DEFAULT_POCKET_ITEMS_TO_FETCH) =>  {
     return function(dispatch){
         if(localStorage.getItem('JWT')){

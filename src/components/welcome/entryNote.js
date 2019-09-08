@@ -50,7 +50,7 @@ export default class EntryNote extends Component {
                         </div>
                     :   null
                 } */}
-                <iframe className="video" margin="10px" width="50%" height="50%" src="https://www.youtube.com/watch?v=rweNNtFJAEk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe className="video" margin="10px" width="50%" height="50%" src="https://www.youtube.com/embed/rweNNtFJAEk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </EntryNoteDiv>
         )
     }
