@@ -141,7 +141,7 @@ export const notesReducer = (state=initialState, action) => {
                 responseCode: null,
                 // children: action.payload.children,
                 // username: action.payload.username,
-                status: "Note Recieved"
+                status: "Note Received"
             })
         // case NOTE_RECIEVED:
         //     return Object.assign({}, state, {

@@ -129,7 +129,6 @@ class RightMenu extends Component {
 							return null
 						}
 					})}
-
 					{this.state.openDetails 
 						?	<img 
 								alt="rightArrow-logo" 
@@ -153,7 +152,9 @@ class RightMenu extends Component {
 }
 
 const mapStateToProps = store => {
-  	return {store: store};
+	  return {
+		  store: store,
+	}
 }
 
 
